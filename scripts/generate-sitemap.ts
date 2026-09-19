@@ -18,6 +18,8 @@ type SeoRoute = {
 };
 
 const origin = "https://bevory.in";
+const sitemapUrlLimit = 20_000;
+const sitemapByteLimit = 50 * 1024 * 1024;
 const prisma = new PrismaClient();
 const tableNames = [
   "blog_posts",
@@ -97,6 +99,25 @@ const groupBy = (rows: DataRow[], key: (row: DataRow) => string) => {
     grouped.set(value, group);
   }
   return grouped;
+};
+
+const renderUrlSet = (entries: SitemapEntry[]) => {
+  const urls = entries.map(({ path, lastmod, images = [] }) => {
+    const imageTags = [...new Map(images.map((item) => [item.loc, item])).values()].map((item) => [
+      "    <image:image>",
+      `      <image:loc>${xmlEscape(item.loc)}</image:loc>`,
+      ...(item.title ? [`      <image:title>${xmlEscape(item.title)}</image:title>`] : []),
+      "    </image:image>",
+    ].join("\n"));
+    return [
+      "  <url>",
+      `    <loc>${xmlEscape(`${origin}${path}`)}</loc>`,
+      ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+      ...imageTags,
+      "  </url>",
+    ].join("\n");
+  }).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`;
 };
 
 const loadRows = async (): Promise<DataRow[]> => {
@@ -512,24 +533,37 @@ try {
   }
 
   const uniqueEntries = [...new Map(entries.map((entry) => [entry.path, entry])).values()];
-  if (uniqueEntries.length > 50_000) {
-    throw new Error(`Sitemap has ${uniqueEntries.length} URLs; split into a sitemap index before publishing.`);
-  }
-  const urls = uniqueEntries.map(({ path, lastmod, images = [] }) => {
-    const imageTags = [...new Map(images.map((item) => [item.loc, item])).values()].map((item) => [
-      "    <image:image>",
-      `      <image:loc>${xmlEscape(item.loc)}</image:loc>`,
-      ...(item.title ? [`      <image:title>${xmlEscape(item.title)}</image:title>`] : []),
-      "    </image:image>",
-    ].join("\n"));
-    return [
-      "  <url>",
-      `    <loc>${xmlEscape(`${origin}${path}`)}</loc>`,
+  const sitemapDirectory = new URL("../public/sitemaps/", import.meta.url);
+  await rm(sitemapDirectory, { recursive: true, force: true });
+  const sitemapChunks = Array.from(
+    { length: Math.ceil(uniqueEntries.length / sitemapUrlLimit) },
+    (_value, index) => uniqueEntries.slice(index * sitemapUrlLimit, (index + 1) * sitemapUrlLimit),
+  );
+  const sitemapFiles = sitemapChunks.length > 1 ? sitemapChunks.map((chunk, index) => {
+    const fileName = `catalog-${index + 1}.xml`;
+    const xml = renderUrlSet(chunk);
+    if (Buffer.byteLength(xml) > sitemapByteLimit) {
+      throw new Error(`${fileName} exceeds the uncompressed 50 MB sitemap limit.`);
+    }
+    return {
+      fileName,
+      xml,
+      lastmod: latestTimestamp(chunk.map((entry) => entry.lastmod)),
+    };
+  }) : [];
+  if (sitemapFiles.length) await mkdir(sitemapDirectory, { recursive: true });
+  const sitemapXml = sitemapFiles.length ? [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...sitemapFiles.map(({ fileName, lastmod }) => [
+      "  <sitemap>",
+      `    <loc>${origin}/sitemaps/${fileName}</loc>`,
       ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
-      ...imageTags,
-      "  </url>",
-    ].join("\n");
-  }).join("\n");
+      "  </sitemap>",
+    ].join("\n")),
+    "</sitemapindex>",
+    "",
+  ].join("\n") : renderUrlSet(uniqueEntries);
 
   const seoBuckets = new Map<string, Record<string, SeoRoute>>();
   for (const [path, seo] of Object.entries(seoRoutes)) {
@@ -550,8 +584,9 @@ try {
   await Promise.all([
     writeFile(
       new URL("../public/sitemap.xml", import.meta.url),
-      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`,
+      sitemapXml,
     ),
+    ...sitemapFiles.map(({ fileName, xml }) => writeFile(new URL(fileName, sitemapDirectory), xml)),
     ...seoBucketNames.map((bucket) => writeFile(
       new URL(`${bucket}.json`, seoDirectory),
       `${JSON.stringify(seoBuckets.get(bucket) ?? {})}\n`,
@@ -572,7 +607,8 @@ try {
   const imageCount = uniqueEntries.reduce((total, entry) => total + new Set((entry.images ?? []).map((item) => item.loc)).size, 0);
   const variantCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+\/[^/]+$/.test(entry.path)).length;
   const productCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+$/.test(entry.path)).length;
-  console.log(`Generated sitemap with ${uniqueEntries.length} URLs and ${imageCount} images (${productCount} city products, ${variantCount} city variants, ${Object.keys(seoRoutes).length} SEO routes)`);
+  const sitemapFormat = sitemapFiles.length ? `${sitemapFiles.length} indexed files` : "one URL set";
+  console.log(`Generated sitemap with ${uniqueEntries.length} URLs and ${imageCount} images in ${sitemapFormat} (${productCount} city products, ${variantCount} city variants, ${Object.keys(seoRoutes).length} SEO routes)`);
 } finally {
   await prisma.$disconnect();
 }

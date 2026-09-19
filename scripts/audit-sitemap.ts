@@ -13,8 +13,27 @@ const decodeXml = (value: string) => value
   .replace(/&apos;/g, "'");
 
 const sitemap = await readFile(sitemapPath, "utf8");
-const canonicalUrls = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)]
+const childSitemaps = [...sitemap.matchAll(/<sitemap>\s*<loc>([^<]+)<\/loc>/g)]
   .map((match) => decodeXml(match[1]));
+const sitemapDocuments = childSitemaps.length ? await Promise.all(childSitemaps.map(async (value) => {
+  const url = new URL(value);
+  if (url.origin !== "https://bevory.in" || !url.pathname.startsWith("/sitemaps/")) {
+    throw new Error(`Invalid child sitemap URL: ${value}`);
+  }
+  return readFile(new URL(`../public${url.pathname}`, import.meta.url), "utf8");
+})) : [sitemap];
+const canonicalUrls = sitemapDocuments.flatMap((document) => (
+  [...document.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)]
+    .map((match) => decodeXml(match[1]))
+));
+
+for (const [index, document] of sitemapDocuments.entries()) {
+  const count = [...document.matchAll(/<url>\s*<loc>/g)].length;
+  if (count > 50_000) throw new Error(`Sitemap file ${index + 1} contains ${count} URLs`);
+  if (Buffer.byteLength(document) > 50 * 1024 * 1024) {
+    throw new Error(`Sitemap file ${index + 1} exceeds 50 MB uncompressed`);
+  }
+}
 
 if (!canonicalUrls.length) throw new Error("Sitemap contains no page URLs");
 if (new Set(canonicalUrls).size !== canonicalUrls.length) {

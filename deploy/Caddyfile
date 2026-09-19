@@ -1,15 +1,35 @@
 {
-  email javapaathshala@gmail.com
+	email javapaathshala@gmail.com
 }
 
 api.bevory.in {
-  encode zstd gzip
-  reverse_proxy api:3001
+	encode zstd gzip
+	reverse_proxy api:3001
 
-  header {
-    -Server
-    Strict-Transport-Security "max-age=31536000; includeSubDomains"
-    X-Content-Type-Options "nosniff"
-    Referrer-Policy "strict-origin-when-cross-origin"
-  }
+	header {
+		-Server
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}
+
+www.bevory.in {
+	tls internal
+	redir https://bevory.in{uri} permanent
+}
+
+bevory.in {
+	tls internal
+	encode zstd gzip
+	reverse_proxy api:3001 {
+		header_up X-Bevory-Origin-Verify {$ORIGIN_VERIFY_SECRET}
+	}
+
+	header {
+		-Server
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
 }

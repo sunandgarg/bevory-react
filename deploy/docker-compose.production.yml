@@ -10,7 +10,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-      SERVE_FRONTEND: "false"
+      SERVE_FRONTEND: "true"
     expose:
       - "3001"
     healthcheck:
@@ -26,6 +26,8 @@ services:
   caddy:
     image: caddy:2.10-alpine
     restart: unless-stopped
+    env_file:
+      - ../.env.production
     depends_on:
       api:
         condition: service_healthy

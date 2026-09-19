@@ -9,12 +9,22 @@ import { LEGACY_CATALOG_CATEGORY_SLUGS, LIVCHEERS_CATEGORY_DEFINITIONS } from ".
 
 type CitySlug =
   | "bangalore"
+  | "bhopal"
   | "delhi"
   | "faridabad"
   | "goa"
   | "gurgaon"
+  | "gwalior"
   | "hubli-dharwad"
-  | "mangalore";
+  | "hyderabad"
+  | "indore"
+  | "jabalpur"
+  | "mangalore"
+  | "mysore"
+  | "nagpur"
+  | "nashik"
+  | "pune"
+  | "warangal";
 
 type SourceSpec = {
   city: string;
@@ -22,7 +32,7 @@ type SourceSpec = {
   path: string;
 };
 
-type CsvRow = {
+export type CsvRow = {
   record_id?: string;
   brand_name: string;
   product_name: string;
@@ -47,6 +57,17 @@ type CsvRow = {
   category_anomaly_reason?: string;
   category_review_flag?: string;
   category_review_reason?: string;
+  category_review_needed?: string;
+  metadata_review_needed?: string;
+  metadata_review_reason?: string;
+  identity_review_needed?: string;
+  identity_resolution_basis?: string;
+  quality_review_flag?: string;
+  quality_review_reason?: string;
+  brand_assignment_review?: string;
+  brand_missing?: string;
+  metadata_only_discovery?: string;
+  city_price_inferred?: string;
   price_missing?: string;
 };
 
@@ -56,6 +77,7 @@ type ParsedRow = CsvRow & {
   price: number;
   volumeMl: number;
   categorySlugs: string[];
+  categoryResolution?: "existing_product" | "peer_import";
   productKey: string;
   brandKey: string;
   variantKey: string;
@@ -118,6 +140,11 @@ type ImportReport = {
 
 const CATEGORY_SLUGS = new Set<string>(LIVCHEERS_CATEGORY_DEFINITIONS.map(([slug]) => slug));
 
+const CATEGORY_SLUG_ALIASES = new Map<string, string>([
+  ["ready-to-drink-recovered", "ready-to-drink"],
+  ["rose-wine-recovered", "rose-wine"],
+]);
+
 const CATEGORY_OVERRIDES = new Map<string, string>([
   ["dewars|white label", "blended-scotch"],
   ["grover|art collection cab shiraz", "red-wine"],
@@ -150,6 +177,10 @@ const PRODUCT_IMAGE_OVERRIDES = new Map<string, { imageUrl: string; sourcePage: 
     imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN00022.webp",
     sourcePage: "https://www.livcheers.com/mangalore/liquor/8-pm-whisky-750ml",
   }],
+  ["vecchiaromagna|vecchiaromagna", {
+    imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN05414.webp",
+    sourcePage: "https://www.livcheers.com/bangalore/liquor/vecchia-romagna-1820cl",
+  }],
 ]);
 
 const SOURCE_PRIORITY: Record<CitySlug, number> = {
@@ -160,6 +191,16 @@ const SOURCE_PRIORITY: Record<CitySlug, number> = {
   bangalore: 5,
   "hubli-dharwad": 6,
   mangalore: 7,
+  gwalior: 8,
+  mysore: 9,
+  jabalpur: 10,
+  hyderabad: 11,
+  warangal: 12,
+  pune: 13,
+  nashik: 14,
+  nagpur: 15,
+  indore: 16,
+  bhopal: 17,
 };
 
 const slugify = (value: string) => value
@@ -183,6 +224,7 @@ export const parseCategorySlugs = (value: string) => [...new Set(value
   .map((category) => category.trim())
   .filter(Boolean)
   .map((category) => slugify(category))
+  .map((category) => CATEGORY_SLUG_ALIASES.get(category) ?? category)
 )];
 
 export const resolveSourceCategorySlugs = (
@@ -323,6 +365,16 @@ const parseArguments = () => {
     { flag: "--bangalore", city: "Bangalore", citySlug: "bangalore" },
     { flag: "--hubli-dharwad", city: "Hubli Dharwad", citySlug: "hubli-dharwad" },
     { flag: "--mangalore", city: "Mangalore", citySlug: "mangalore" },
+    { flag: "--gwalior", city: "Gwalior", citySlug: "gwalior" },
+    { flag: "--mysore", city: "Mysore", citySlug: "mysore" },
+    { flag: "--jabalpur", city: "Jabalpur", citySlug: "jabalpur" },
+    { flag: "--hyderabad", city: "Hyderabad", citySlug: "hyderabad" },
+    { flag: "--warangal", city: "Warangal", citySlug: "warangal" },
+    { flag: "--pune", city: "Pune", citySlug: "pune" },
+    { flag: "--nashik", city: "Nashik", citySlug: "nashik" },
+    { flag: "--nagpur", city: "Nagpur", citySlug: "nagpur" },
+    { flag: "--indore", city: "Indore", citySlug: "indore" },
+    { flag: "--bhopal", city: "Bhopal", citySlug: "bhopal" },
   ];
   const sources = definitions.flatMap((definition) => {
     const path = valueFor(definition.flag);
@@ -331,7 +383,8 @@ const parseArguments = () => {
   if (!sources.length) {
     throw new Error(
       "Provide at least one source: --delhi, --goa, --gurgaon, --faridabad, --bangalore, "
-      + "--hubli-dharwad, or --mangalore <csv>.",
+      + "--hubli-dharwad, --mangalore, --gwalior, --mysore, --jabalpur, --hyderabad, "
+      + "--warangal, --pune, --nashik, --nagpur, --indore, or --bhopal <csv>.",
     );
   }
   return {
@@ -344,6 +397,25 @@ const parseArguments = () => {
 };
 
 const parseBoolean = (value: string | undefined) => value?.trim().toLowerCase() === "true";
+
+const REVIEW_FLAG_FIELDS = [
+  "price_conflict",
+  "price_anomaly_flag",
+  "size_anomaly_flag",
+  "category_anomaly_flag",
+  "category_review_flag",
+  "category_review_needed",
+  "metadata_review_needed",
+  "identity_review_needed",
+  "quality_review_flag",
+  "brand_assignment_review",
+  "brand_missing",
+  "metadata_only_discovery",
+  "city_price_inferred",
+] as const satisfies ReadonlyArray<keyof CsvRow>;
+
+export const sourceRowRequiresReview = (row: Partial<CsvRow>) =>
+  REVIEW_FLAG_FIELDS.some((field) => parseBoolean(row[field]));
 
 const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
   const csv = await readFile(source.path, "utf8");
@@ -418,12 +490,44 @@ const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
         "warning",
       );
     }
-    if (parseBoolean(row.category_anomaly_flag) || parseBoolean(row.category_review_flag)) {
+    if (
+      parseBoolean(row.category_anomaly_flag)
+      || parseBoolean(row.category_review_flag)
+      || parseBoolean(row.category_review_needed)
+    ) {
       issue(
         "source_category_review",
         row.category_anomaly_reason
           || row.category_review_reason
           || "The source row requires category review; existing verified product taxonomy will be preferred.",
+        "warning",
+      );
+    }
+    if (parseBoolean(row.metadata_review_needed)) {
+      issue(
+        "source_metadata_review",
+        row.metadata_review_reason || "The source row requires metadata review and will remain non-public.",
+        "warning",
+      );
+    }
+    if (parseBoolean(row.identity_review_needed) || parseBoolean(row.brand_assignment_review) || parseBoolean(row.brand_missing)) {
+      issue(
+        "source_identity_review",
+        row.identity_resolution_basis || "The source row requires product or brand identity review and will remain non-public.",
+        "warning",
+      );
+    }
+    if (parseBoolean(row.quality_review_flag)) {
+      issue(
+        "source_quality_review",
+        row.quality_review_reason || "The source row requires quality review and will remain non-public.",
+        "warning",
+      );
+    }
+    if (parseBoolean(row.metadata_only_discovery) || parseBoolean(row.city_price_inferred)) {
+      issue(
+        "source_evidence_review",
+        "The source row is metadata-only or uses an inferred city price and will remain non-public.",
         "warning",
       );
     }
@@ -578,7 +682,7 @@ const productPath = (value: string | undefined) => {
   if (!value) return "";
   try {
     return new URL(value).pathname.replace(
-      /^\/(?:bangalore|delhi|faridabad|goa|gurgaon|hubli-dharwad|mangalore)/,
+      /^\/(?:bangalore|bhopal|delhi|faridabad|goa|gurgaon|gwalior|hubli-dharwad|hyderabad|indore|jabalpur|mangalore|mysore|nagpur|nashik|pune|warangal)/,
       "",
     );
   } catch {
@@ -642,6 +746,17 @@ const buildRecords = async (
       );
       if (identity && identity !== "|") existingProductByIdentity.set(identity, { recordId: record.recordId, data });
     });
+  const existingBrandBySlug = new Map<string, { recordId: string; data: Prisma.JsonObject }>();
+  const existingBrandByIdentity = new Map<string, { recordId: string; data: Prisma.JsonObject }>();
+  existingRecords
+    .filter((record) => record.tableName === "brand_spotlights")
+    .forEach((record) => {
+      const data = jsonObject(record.data);
+      const slug = String(data.slug ?? "");
+      const identity = normalizeIdentity(String(data.brand_name ?? ""));
+      if (slug) existingBrandBySlug.set(slug, { recordId: record.recordId, data });
+      if (identity) existingBrandByIdentity.set(identity, { recordId: record.recordId, data });
+    });
   const records = new Map<string, PlannedRecord>();
   const setRecord = (tableName: string, recordId: string, managedData: Prisma.InputJsonObject) => {
     const key = `${tableName}:${recordId}`;
@@ -669,6 +784,13 @@ const buildRecords = async (
     }
   }
 
+  const importedCategorySlugsByProduct = new Map(
+    [...groupBy(rows, (row) => row.productKey)].map(([productKey, productRows]) => [
+      productKey,
+      [...new Set(productRows.flatMap((row) => row.categorySlugs))]
+        .filter((slug) => CATEGORY_SLUGS.has(slug)),
+    ]),
+  );
   const resolvedRows: ParsedRow[] = [];
   rows.forEach((row) => {
     if (row.categorySlugs.length) {
@@ -677,22 +799,26 @@ const buildRecords = async (
     }
 
     const existingProduct = existingProductByIdentity.get(row.productKey);
-    const existingSlugs = existingProduct
-      ? mergeUniqueStrings(existingProduct.data.category_slugs, [
-        existingCategorySlugById.get(String(existingProduct.data.category_id ?? "")),
-      ]).filter((slug) => CATEGORY_SLUGS.has(slug))
-      : [];
-    if (!existingSlugs.length) {
+    const existingSlugs = existingProduct ? mergeUniqueStrings(existingProduct.data.category_slugs, [
+      existingCategorySlugById.get(String(existingProduct.data.category_id ?? "")),
+    ]).filter((slug) => CATEGORY_SLUGS.has(slug)) : [];
+    const peerSlugs = importedCategorySlugsByProduct.get(row.productKey) ?? [];
+    const resolvedSlugs = mergeUniqueStrings(existingSlugs, peerSlugs);
+    if (!resolvedSlugs.length) {
       report.issues.push({
         level: "error",
         code: "unresolved_blank_category",
         source: row.source.path,
         recordId: row.record_id || `${row.source.citySlug}-${row.sourceIndex + 2}`,
-        message: `${row.brand_name} ${row.product_name} has no source category or verified existing category; row skipped.`,
+        message: `${row.brand_name} ${row.product_name} has no source, peer-import, or verified existing category; row skipped.`,
       });
       return;
     }
-    resolvedRows.push({ ...row, categorySlugs: existingSlugs });
+    resolvedRows.push({
+      ...row,
+      categorySlugs: resolvedSlugs,
+      categoryResolution: peerSlugs.length ? "peer_import" : "existing_product",
+    });
   });
 
   const categoryIds = new Map<string, string>();
@@ -742,12 +868,9 @@ const buildRecords = async (
   for (const [brandKey, brandRows] of rowsByBrand) {
     const brandName = brandRows[0].brand_name.trim();
     const slug = slugify(brandName);
-    const existing = existingRecords.find((record) => record.tableName === "brand_spotlights" && (
-      jsonObject(record.data).slug === slug
-      || normalizeIdentity(String(jsonObject(record.data).brand_name ?? "")) === brandKey
-    ));
+    const existing = existingBrandBySlug.get(slug) ?? existingBrandByIdentity.get(brandKey);
     const id = existing?.recordId ?? stableId("brand", brandKey);
-    const existingData = jsonObject(existing?.data);
+    const existingData = existing?.data ?? {};
     const logoUrl = brandLogos.get(brandKey);
     setRecord("brand_spotlights", id, {
       brand_name: existingData.brand_name ?? brandName,
@@ -770,6 +893,19 @@ const buildRecords = async (
     }
   }
 
+  const enrichmentsByCityVolume = groupBy(
+    enrichments,
+    (item) => `${item.citySlug}|${item.volumeMl}`,
+  );
+  const enrichmentCandidatesFor = (candidateRows: ParsedRow[]) => {
+    const candidates = candidateRows.flatMap((row) => (
+      enrichmentsByCityVolume.get(`${row.source.citySlug}|${row.volumeMl}`) ?? []
+    ));
+    return [...new Map(candidates.map((item) => [
+      `${item.productUrl}|${item.categorySlug}`,
+      item,
+    ])).values()];
+  };
   const rowsByProduct = groupBy(resolvedRows, (row) => row.productKey);
   const productIdByKey = new Map<string, string>();
   for (const [productKey, productRows] of rowsByProduct) {
@@ -784,7 +920,7 @@ const buildRecords = async (
         message: `${brandName} ${productName}: ${categorySet.join(", ")}; primary ${categorySlug}.`,
       });
     }
-    const matchedEnrichments = pickProductEnrichment(productRows, enrichments);
+    const matchedEnrichments = pickProductEnrichment(productRows, enrichmentCandidatesFor(productRows));
     const selectedEnrichment = matchedEnrichments[0];
     const typeCounts = new Map<string, number>();
     matchedEnrichments.forEach((item) => {
@@ -798,16 +934,10 @@ const buildRecords = async (
       : null;
     const productSlugBase = `${slugify(brandName)}-${slugify(productName)}`.slice(0, 110).replace(/-$/g, "");
     const productSlug = `${productSlugBase}-${createHash("sha1").update(productKey).digest("hex").slice(0, 7)}`;
-    const existing = existingRecords.find((record) => record.tableName === "products" && (
-      jsonObject(record.data).catalog_identity === productKey || jsonObject(record.data).slug === productSlug
-      || productKeyFor(
-        String(jsonObject(record.data).brand ?? ""),
-        String(jsonObject(record.data).name ?? ""),
-      ) === productKey
-    ));
+    const existing = existingProductByIdentity.get(productKey);
     const productId = existing?.recordId ?? stableId("product", productKey);
     productIdByKey.set(productKey, productId);
-    const existingData = jsonObject(existing?.data);
+    const existingData = existing?.data ?? {};
     const volumes = mergeUniqueNumbers(existingData.available_volumes_ml, productRows.map((row) => row.volumeMl));
     const defaultVolume = volumes.includes(750) ? 750 : volumes[0];
     const imageOverride = PRODUCT_IMAGE_OVERRIDES.get(productKey);
@@ -861,14 +991,14 @@ const buildRecords = async (
     const productId = productIdByKey.get(row.productKey)!;
     const cityId = cityIdByName.get(normalizeIdentity(row.source.city))!;
     const priceId = stableId("price", `${productId}|${cityId}|${row.volumeMl}`);
-    const matched = pickProductEnrichment([row], enrichments)[0];
+    const matched = pickProductEnrichment([row], enrichmentCandidatesFor([row]))[0];
     if (matched) matchedVariants += 1;
     const categoryOverrideKey = `${row.brand_name.trim().toLowerCase()}|${row.product_name.trim().toLowerCase()}`;
     const categoryResolution = row.source_category?.trim()
       ? "source"
       : CATEGORY_OVERRIDES.has(categoryOverrideKey) || RECORD_CATEGORY_OVERRIDES.has(row.record_id || "")
         ? "override"
-        : "existing_product";
+        : row.categoryResolution ?? "existing_product";
     setRecord("product_prices", priceId, {
       product_id: productId,
       city_id: cityId,
@@ -895,11 +1025,20 @@ const buildRecords = async (
       size_anomaly_reason: row.size_anomaly_reason || null,
       category_anomaly_flag: parseBoolean(row.category_anomaly_flag) || parseBoolean(row.category_review_flag),
       category_anomaly_reason: row.category_anomaly_reason || row.category_review_reason || null,
+      category_review_needed: parseBoolean(row.category_review_needed),
+      metadata_review_needed: parseBoolean(row.metadata_review_needed),
+      metadata_review_reason: row.metadata_review_reason || null,
+      identity_review_needed: parseBoolean(row.identity_review_needed),
+      identity_resolution_basis: row.identity_resolution_basis || null,
+      quality_review_flag: parseBoolean(row.quality_review_flag),
+      quality_review_reason: row.quality_review_reason || null,
+      brand_assignment_review: parseBoolean(row.brand_assignment_review),
+      brand_missing: parseBoolean(row.brand_missing),
+      metadata_only_discovery: parseBoolean(row.metadata_only_discovery),
+      city_price_inferred: parseBoolean(row.city_price_inferred),
       resolved_category: row.categorySlugs.join("|"),
       category_resolution: categoryResolution,
-      requires_review: parseBoolean(row.price_conflict)
-        || parseBoolean(row.price_anomaly_flag)
-        || parseBoolean(row.size_anomaly_flag),
+      requires_review: sourceRowRequiresReview(row),
       source_price_matches_current: matched?.price === row.price,
       source_price_verified_at: matched?.price === row.price ? now : null,
       imported_from: "livcheers_csv",

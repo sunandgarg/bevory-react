@@ -6,17 +6,21 @@ Last verified: 2026-09-19
 
 - Primary site: `https://bevory.in`
 - Secondary domain: `https://www.bevory.in` (permanently redirects to the apex domain)
-- Pages project: `https://bevory.pages.dev`
 - API origin: `https://api.bevory.in`
+- Standby Pages project: `https://bevory.pages.dev` (not bound to the production custom domains)
 
 ## Topology
 
-- Cloudflare Pages project `bevory` serves `dist/` and compiles the catch-all
-  `functions/[[path]].js` Pages Function.
-- The Pages Worker proxies `/api/*` to `https://api.bevory.in` and supplies the
-  private origin-verification header.
-- AWS Lightsail instance `bevory-api-prod` runs the API and Caddy with Docker
-  Compose. Only Caddy publishes ports 80 and 443.
+- Cloudflare proxies the apex and `www` hostnames to Caddy on AWS Lightsail.
+- AWS Lightsail instance `bevory-api-prod` runs Caddy and the combined
+  React/Node.js application with Docker Compose. Node serves the built frontend,
+  API, and pre-rendered SEO route documents. Only Caddy publishes ports 80 and
+  443.
+- Caddy supplies the private origin-verification header only for the apex host.
+  Direct API-origin requests without it return 404.
+- The `bevory` Cloudflare Pages project remains available as a rollback artifact,
+  but its custom domains are inactive and it is not in the production request
+  path.
 - Lightsail database `bevory-mysql-prod` runs private MySQL 8.4.
 - S3 bucket `bevory-uploads-091199627263-ap-south-1` blocks all public access,
   uses AES256 encryption, and has versioning enabled.
@@ -31,8 +35,9 @@ Last verified: 2026-09-19
 - `aliza.ns.cloudflare.com`
 - `kellen.ns.cloudflare.com`
 
-The apex and `www` records point to `bevory.pages.dev`. `api` points directly to
-the attached Lightsail static IP and remains DNS-only so Caddy owns origin TLS.
+The apex and `www` records are proxied CNAMEs to `api.bevory.in`. `api` points
+directly to the attached Lightsail static IP and remains DNS-only. This keeps
+Cloudflare at the public edge while Caddy owns the application origin.
 
 ## Expected base cost
 
@@ -48,21 +53,30 @@ other usage.
 
 The following production checks passed on 2026-09-19:
 
-- Both custom domains are active with SSL in Cloudflare Pages.
-- `/api/health` reaches MySQL through the Pages Worker.
+- The apex is proxied by Cloudflare to AWS and redirects `/` to `/gurgaon`.
+- `www` permanently redirects to the equivalent apex URL.
+- `/api/health` reaches MySQL through Caddy and reports 33,334 records.
 - Direct API requests without the verification secret return 404.
+- Phone OTP is not configured in production; email/password and Google OAuth
+  are the verified sign-in methods.
 - Administrator sign-in, session validation, and an admin-only status endpoint
   work through the production domain.
 - Public catalog reads and the party-planner endpoint work.
 - The production catalogue contains all 30 supported cities, 18 active
-  categories, 121 subcategories, 1,498 brands, 3,494 products, and 11,339
-  approved city-specific size prices.
+  categories, 121 active subcategories, 1,745 active brands, 5,220 active
+  products, and 23,768 positive city-specific size prices. Of those prices,
+  23,135 are public and 633 are retained for review.
+- The Gwalior, Mysore, Jabalpur, Hyderabad, Warangal, Pune, Nashik, Nagpur,
+  Indore, and Bhopal batch contributed 12,247 positive prices: 11,796 public and
+  451 review-only, with no duplicate city/product/volume keys or orphaned
+  product references.
 - City availability is strict: a product size is returned only where that city
   has a price for it.
-- All 3,483 publicly priced products have identity-verified source image URLs,
-  and 351 brands have verified reachable logo URLs on `static.livcheers.com`. These remote links are
-  requested at a 720 px display target; they are not stored in Bevory's S3
-  bucket, and image reuse rights require review before any migration.
+- All 3,841 products touched by the ten-city import have identity-verified source
+  image URLs. Of the 1,268 brands used by that batch, 314 have verified logos and
+  954 still have no verified authentic logo. Unverified logos were deliberately
+  not guessed or generated. Remote catalogue images are not stored in Bevory's
+  S3 bucket, and image reuse rights require review before migration.
 - Source-conflict and anomalous prices are retained for administrator review but
   excluded from all public catalogue views and the sitemap.
 - The optimized city catalogue endpoint returns Gurgaon’s 1,888 products and
@@ -86,12 +100,14 @@ The following production checks passed on 2026-09-19:
 - The live `/gurgaon` page renders without browser console errors.
 - The adaptive Bevory favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
-- `sitemap.xml` contains 28,237 unique canonical URLs and 23,949 image entries,
-  including 10,768 city product pages, 11,339 exact city-and-size pages, city
-  brand/category/subcategory pages, 11 published guides, and 170 cocktails.
-  Unpriced variants, free-form search, and arbitrary filter combinations are
-  intentionally `noindex, follow`. A 24-way production crawl verified every
-  sitemap URL, canonical, robots directive, initial heading, and JSON-LD block.
+- `sitemap.xml` is an index for three XML shards containing 57,272 unique
+  canonical URLs and 48,693 image entries, including 21,808 city product pages,
+  23,135 exact city-and-size pages, city brand/category/subcategory pages, 11
+  published guides, and 170 cocktails. Unpriced variants, free-form search, and
+  arbitrary filter combinations remain intentionally `noindex, follow` to avoid
+  thin and duplicate index bloat. A 16-way production crawl verified every URL,
+  matching canonical, indexable robots directive, initial H1/title/description,
+  and required JSON-LD type with zero failures.
 
 ## CloudFront status
 
@@ -107,13 +123,7 @@ to the distribution, and verify an uploaded image end to end.
 
 ## Operations
 
-Deploy the frontend after a production build:
-
-```bash
-npx --yes wrangler@latest pages deploy dist --project-name bevory --branch main
-```
-
-Deploy the API from `/opt/bevory` on the Lightsail instance:
+Deploy the application from `/opt/bevory` on the Lightsail instance:
 
 ```bash
 sudo docker compose -f deploy/docker-compose.production.yml build api
@@ -136,6 +146,16 @@ sudo docker compose -f deploy/docker-compose.production.yml run --rm \
   --bangalore /catalog/bangalore.csv \
   --hubli-dharwad /catalog/hubli-dharwad.csv \
   --mangalore /catalog/mangalore.csv \
+  --gwalior /catalog/gwalior.csv \
+  --mysore /catalog/mysore.csv \
+  --jabalpur /catalog/jabalpur.csv \
+  --hyderabad /catalog/hyderabad.csv \
+  --warangal /catalog/warangal.csv \
+  --pune /catalog/pune.csv \
+  --nashik /catalog/nashik.csv \
+  --nagpur /catalog/nagpur.csv \
+  --indore /catalog/indore.csv \
+  --bhopal /catalog/bhopal.csv \
   --report /tmp/livcheers-import-report.json
 ```
 

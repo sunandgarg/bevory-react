@@ -7,6 +7,7 @@ import {
   parseCategorySlugs,
   pickProductEnrichment,
   resolveSourceCategorySlugs,
+  sourceRowRequiresReview,
 } from "./import-livcheers-catalog.js";
 
 describe("Livcheers catalogue import helpers", () => {
@@ -89,6 +90,16 @@ describe("Livcheers catalogue import helpers", () => {
   it.each([
     ["hubli-dharwad", "rum"],
     ["mangalore", "vodka"],
+    ["gwalior", "rum"],
+    ["mysore", "vodka"],
+    ["jabalpur", "gin"],
+    ["hyderabad", "beers"],
+    ["warangal", "tequila"],
+    ["pune", "red-wine"],
+    ["nashik", "white-wine"],
+    ["nagpur", "brandy"],
+    ["indore", "single-malts"],
+    ["bhopal", "blended-scotch"],
   ] as const)("extracts %s cards", (citySlug, categorySlug) => {
     const html = `
       <a href="/${citySlug}/liquor/sample-product-750ml">
@@ -105,6 +116,17 @@ describe("Livcheers catalogue import helpers", () => {
     expect(parseCategorySlugs("blended-scotch; made-in-india-whisky | blended-scotch"))
       .toEqual(["blended-scotch", "made-in-india-whisky"]);
     expect(parseCategorySlugs("")).toEqual([]);
+  });
+
+  it("normalizes recovered source category labels", () => {
+    expect(parseCategorySlugs("rose_wine_recovered; ready_to_drink_recovered"))
+      .toEqual(["rose-wine", "ready-to-drink"]);
+  });
+
+  it("keeps uncertain source rows out of public catalogue pages", () => {
+    expect(sourceRowRequiresReview({ category_review_needed: "true" })).toBe(true);
+    expect(sourceRowRequiresReview({ identity_review_needed: "TRUE" })).toBe(true);
+    expect(sourceRowRequiresReview({ metadata_review_needed: "false", price_conflict: "false" })).toBe(false);
   });
 
   it("merges additive product metadata without duplicates", () => {
