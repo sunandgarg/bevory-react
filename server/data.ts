@@ -55,9 +55,72 @@ export type QueryPayload = {
   orders?: Array<{ column: string; ascending?: boolean }>;
   limit?: number;
   range?: [number, number];
+  select?: string;
   count?: "exact";
   head?: boolean;
   onConflict?: string;
+};
+
+type Selection = {
+  outputKey: string;
+  sourceKey: string;
+  nested?: Selection[];
+  wildcard?: boolean;
+};
+
+const splitSelection = (value: string) => {
+  const parts: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let index = 0; index < value.length; index += 1) {
+    if (value[index] === "(") depth += 1;
+    else if (value[index] === ")") depth = Math.max(0, depth - 1);
+    else if (value[index] === "," && depth === 0) {
+      parts.push(value.slice(start, index));
+      start = index + 1;
+    }
+  }
+  parts.push(value.slice(start));
+  return parts.map((part) => part.trim()).filter(Boolean);
+};
+
+export const parseSelection = (value = "*"): Selection[] => splitSelection(value).map((token) => {
+  if (token === "*") return { outputKey: "*", sourceKey: "*", wildcard: true };
+  const relation = token.match(/^([a-zA-Z0-9_]+)(?::([a-zA-Z0-9_]+))?(?:!inner)?\(([\s\S]*)\)$/);
+  if (relation) {
+    return {
+      outputKey: relation[1],
+      sourceKey: relation[2] ?? relation[1],
+      nested: parseSelection(relation[3]),
+    };
+  }
+  const key = token.replace(/!inner$/, "").trim();
+  return { outputKey: key, sourceKey: key };
+});
+
+const projectRow = (row: Record<string, unknown>, selection: Selection[]): Record<string, unknown> => {
+  const projected: Record<string, unknown> = selection.some(({ wildcard }) => wildcard) ? { ...row } : {};
+  for (const field of selection) {
+    if (field.wildcard) continue;
+    const value = row[field.outputKey] ?? row[field.sourceKey];
+    if (field.nested) {
+      projected[field.outputKey] = Array.isArray(value)
+        ? value.map((item) => item && typeof item === "object"
+          ? projectRow(item as Record<string, unknown>, field.nested!)
+          : item)
+        : value && typeof value === "object"
+          ? projectRow(value as Record<string, unknown>, field.nested)
+          : value ?? null;
+    } else if (field.sourceKey in row || field.outputKey in row) {
+      projected[field.outputKey] = value;
+    }
+  }
+  return projected;
+};
+
+export const applySelection = (rows: Array<Record<string, unknown>>, value = "*") => {
+  const selection = parseSelection(value);
+  return rows.map((row) => projectRow(row, selection));
 };
 
 const jsonSafe = (value: Record<string, unknown>) =>
@@ -205,7 +268,11 @@ const readTable = async (tableName: string) => {
   return records.map(({ data }) => toRecordData(data));
 };
 
-const attachRelationships = async (table: string, rows: Array<Record<string, unknown>>) => {
+const attachRelationships = async (
+  table: string,
+  rows: Array<Record<string, unknown>>,
+  selection: Selection[],
+) => {
   const relationTables = new Set<string>();
   const belongsTo: Record<string, Array<{ aliases: string[]; foreignKey: string; target: string }>> = {
     blog_posts: [{ aliases: ["product", "products"], foreignKey: "linked_product_id", target: "products" }],
@@ -241,8 +308,19 @@ const attachRelationships = async (table: string, rows: Array<Record<string, unk
     ],
   };
 
-  for (const relation of belongsTo[table] ?? []) relationTables.add(relation.target);
-  if (table === "categories") relationTables.add("products");
+  const relationSelections = selection.filter((field) => field.nested);
+  const requestedRelations = (relation: { aliases: string[]; target: string }) => relationSelections.filter((field) => (
+    relation.aliases.includes(field.outputKey)
+    || relation.aliases.includes(field.sourceKey)
+    || relation.target === field.sourceKey
+  ));
+  for (const relation of belongsTo[table] ?? []) {
+    if (requestedRelations(relation).length) relationTables.add(relation.target);
+  }
+  const requestedProducts = table === "categories"
+    ? relationSelections.filter((field) => field.outputKey === "products" || field.sourceKey === "products")
+    : [];
+  if (requestedProducts.length) relationTables.add("products");
   if ([...relationTables].includes("cities") || table === "cities") relationTables.add("states");
   if ([...relationTables].includes("states") || table === "states") relationTables.add("countries");
   const lookup = new Map<string, Array<Record<string, unknown>>>();
@@ -264,12 +342,15 @@ const attachRelationships = async (table: string, rows: Array<Record<string, unk
   return rows.map((row) => {
     const enriched = { ...row };
     for (const relation of belongsTo[table] ?? []) {
+      const requested = requestedRelations(relation);
+      if (!requested.length) continue;
       const related = lookup.get(relation.target)?.find((candidate) => candidate.id === row[relation.foreignKey]) ?? null;
       const nested = withNestedRelations(relation.target, related);
-      for (const alias of relation.aliases) enriched[alias] = nested;
+      for (const field of requested) enriched[field.outputKey] = nested;
     }
-    if (table === "categories") {
-      enriched.products = (lookup.get("products") ?? []).filter((product) => product.category_id === row.id);
+    if (requestedProducts.length) {
+      const products = (lookup.get("products") ?? []).filter((product) => product.category_id === row.id);
+      for (const field of requestedProducts) enriched[field.outputKey] = products;
     }
     return enriched;
   });
@@ -329,7 +410,9 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
       }
       if (payload.range) rows = rows.slice(payload.range[0], payload.range[1] + 1);
       else if (payload.limit != null) rows = rows.slice(0, payload.limit);
-      rows = await attachRelationships(payload.table, rows);
+      const selection = parseSelection(payload.select);
+      rows = await attachRelationships(payload.table, rows, selection);
+      rows = rows.map((row) => projectRow(row, selection));
       return res.json({ data: payload.head ? null : rows, error: null, count });
     }
 

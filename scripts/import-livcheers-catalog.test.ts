@@ -145,6 +145,7 @@ describe("Livcheers catalogue import helpers", () => {
     ["noida", "rum"],
     ["kanpur", "gin"],
     ["asansol", "beers"],
+    ["kolkata", "made-in-india-whisky"],
   ] as const)("extracts %s cards", (citySlug, categorySlug) => {
     const html = `
       <a href="/${citySlug}/liquor/sample-product-750ml">

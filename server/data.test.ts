@@ -1,5 +1,32 @@
 import { describe, expect, it } from "vitest";
-import { matchesFilter, queryAccessAllowed, scopeWriteInput, type QueryPayload } from "./data.js";
+import { applySelection, matchesFilter, parseSelection, queryAccessAllowed, scopeWriteInput, type QueryPayload } from "./data.js";
+
+describe("query field selection", () => {
+  it("projects only requested scalar fields", () => {
+    expect(applySelection([{
+      id: "category-1",
+      name: "Gin",
+      description: "Botanical spirits",
+      products: [{ id: "product-1", name: "Sample" }],
+    }], "id, name")).toEqual([{ id: "category-1", name: "Gin" }]);
+  });
+
+  it("projects aliased nested relations without leaking other fields", () => {
+    expect(applySelection([{
+      id: "city-1",
+      name: "Kolkata",
+      state: { id: "state-1", name: "West Bengal", code: "WB" },
+    }], "id, name, state:states(name)")).toEqual([{
+      id: "city-1",
+      name: "Kolkata",
+      state: { name: "West Bengal" },
+    }]);
+    expect(parseSelection("*, states!inner(name)")[1]).toMatchObject({
+      outputKey: "states",
+      sourceKey: "states",
+    });
+  });
+});
 
 describe("query compatibility filters", () => {
   const row = {

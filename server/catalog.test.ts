@@ -10,7 +10,7 @@ describe("buildCityCatalog", () => {
         { product_id: "p2", price: 10, volume: "750ml", volume_ml: 750, price_available: true, requires_review: true },
       ],
       [
-        { id: "p1", brand: "Antiquity", name: "Blue", category_id: "c1", sub_category_id: "s1", is_active: true },
+        { id: "p1", brand: "Antiquity", name: "Blue", category_id: "c1", sub_category_id: "s1", is_active: true, source_urls: ["internal"] },
         { id: "p2", brand: "Review", name: "Pending", category_id: "c1", is_active: true },
       ],
       [{ id: "c1", name: "Whisky", slug: "whisky", emoji: null, is_active: true, order_index: 1 }],
@@ -26,5 +26,6 @@ describe("buildCityCatalog", () => {
       sub_category: { slug: "blended" },
     });
     expect(result.products[0].available_variants).toHaveLength(2);
+    expect(result.products[0]).not.toHaveProperty("source_urls");
   });
 });

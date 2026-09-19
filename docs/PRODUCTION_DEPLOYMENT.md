@@ -71,8 +71,12 @@ The following production checks passed on 2026-09-20:
 - Public catalog reads and the party-planner endpoint work.
 - The production catalogue contains all 30 supported cities, 18 active
   categories, 121 active subcategories, 1,818 active brands, 5,991 active
-  products, and 38,918 positive city-specific size prices. Of those prices,
-  36,878 are public and 2,040 are retained for review.
+  products, and 40,065 positive city-specific size prices. Of those prices,
+  37,981 are public and 2,084 are retained for review.
+- Kolkata contributed 1,147 unique positive prices: 1,103 public and 44
+  review-only, with no duplicate city/product/volume keys, orphaned product
+  references, or products missing an identity-verified image. Snapshot
+  `bevory-mysql-pre-kolkata-20260920-0159` was available before the write.
 - The Lucknow, Udaipur, Noida, Kanpur, and Asansol batch contributed 5,846
   unique positive prices: 5,215 public and 631 review-only, with no duplicate
   city/product/volume keys, orphaned product references, or products missing an
@@ -123,9 +127,9 @@ The following production checks passed on 2026-09-20:
   one raster image, and capped at 5 MB.
 - The adaptive Bevory favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
-- `sitemap.xml` is an index for five XML shards containing 91,793 unique
-  canonical URLs and 78,153 image entries, including 34,860 city product pages,
-  36,878 exact city-and-size pages, city brand/category/subcategory pages, 11
+- `sitemap.xml` is an index for five XML shards containing 94,476 unique
+  canonical URLs and 80,471 image entries, including 35,870 city product pages,
+  37,981 exact city-and-size pages, city brand/category/subcategory pages, 11
   published guides, and 170 cocktails. Unpriced variants, free-form search, and
   arbitrary filter combinations remain intentionally `noindex, follow` to avoid
   thin and duplicate index bloat. Sitemap audits default to two concurrent

@@ -25,6 +25,7 @@ type CitySlug =
   | "jaipur"
   | "jodhpur"
   | "kanpur"
+  | "kolkata"
   | "kota"
   | "lucknow"
   | "mangalore"
@@ -271,6 +272,7 @@ const SOURCE_PRIORITY: Record<CitySlug, number> = {
   noida: 27,
   kanpur: 28,
   asansol: 29,
+  kolkata: 30,
 };
 
 const slugify = (value: string) => value
@@ -457,6 +459,7 @@ const parseArguments = () => {
     { flag: "--noida", city: "Noida", citySlug: "noida" },
     { flag: "--kanpur", city: "Kanpur", citySlug: "kanpur" },
     { flag: "--asansol", city: "Asansol", citySlug: "asansol" },
+    { flag: "--kolkata", city: "Kolkata", citySlug: "kolkata" },
   ];
   const sources = definitions.flatMap((definition) => {
     const path = valueFor(definition.flag);
@@ -468,7 +471,7 @@ const parseArguments = () => {
       + "--hubli-dharwad, --mangalore, --gwalior, --mysore, --jabalpur, --hyderabad, "
       + "--warangal, --pune, --nashik, --nagpur, --indore, --bhopal, --jaipur, "
       + "--jodhpur, --kota, --mumbai, --thane, --ghaziabad, --agra, --lucknow, "
-      + "--udaipur, --noida, --kanpur, or --asansol <csv>.",
+      + "--udaipur, --noida, --kanpur, --asansol, or --kolkata <csv>.",
     );
   }
   return {
@@ -829,7 +832,7 @@ const productPath = (value: string | undefined) => {
   if (!value) return "";
   try {
     return new URL(value).pathname.replace(
-      /^\/(?:bangalore|bhopal|delhi|faridabad|goa|gurgaon|gwalior|hubli-dharwad|hyderabad|indore|jabalpur|mangalore|mysore|nagpur|nashik|pune|warangal)/,
+      /^\/(?:agra|asansol|bangalore|bhopal|delhi|faridabad|ghaziabad|goa|gurgaon|gwalior|hubli-dharwad|hyderabad|indore|jabalpur|jaipur|jodhpur|kanpur|kolkata|kota|lucknow|mangalore|mumbai|mysore|nagpur|nashik|noida|pune|thane|udaipur|warangal)/,
       "",
     );
   } catch {
