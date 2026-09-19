@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info } from "lucide-react";
@@ -78,6 +78,14 @@ interface VolumePrice {
   in_stock: boolean;
 }
 
+interface DisplayVolume {
+  volume: string;
+  price: number | null;
+}
+
+const normalizeVolume = (value: string) => value.toLowerCase().replace(/\s+/g, "");
+const volumeSize = (value: string) => Number.parseInt(value.replace(/[^0-9]/g, "")) || 0;
+
 // Volume options are now fetched from the database - no fixed options
 
 const ProductDetail = () => {
@@ -123,9 +131,9 @@ const ProductDetail = () => {
   const { addToCompare, isInCompare, setShowCompareSheet } = useCompare();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const requestedVolume = volume?.toLowerCase().replace(/\s+/g, "") || null;
+  const requestedVolume = volume ? normalizeVolume(volume) : null;
 
-  const currentPrice = volumePrices.find((vp) => vp.volume === selectedVolume);
+  const currentPrice = volumePrices.find((vp) => normalizeVolume(vp.volume) === normalizeVolume(selectedVolume));
   const price = currentPrice?.price ?? null;
   const mrp = currentPrice?.mrp ?? null;
 
@@ -138,6 +146,8 @@ const ProductDetail = () => {
       setUnavailableVariant(false);
 
       if (!routeCityReady) return;
+
+      setVolumePrices([]);
 
       // Try to fetch by slug first, then by id for backwards compatibility
       let productData = null;
@@ -205,24 +215,33 @@ const ProductDetail = () => {
             in_stock: p.in_stock ?? true,
           }));
           // Sort by volume size (largest first)
-          prices.sort((a, b) => {
-            const getSize = (v: string) => parseInt(v.replace(/[^0-9]/g, "")) || 0;
-            return getSize(b.volume) - getSize(a.volume);
-          });
+          prices.sort((a, b) => volumeSize(b.volume) - volumeSize(a.volume));
           setVolumePrices(prices);
           const routeVolume = requestedVolume
-            ? prices.find((candidate) => candidate.volume.toLowerCase().replace(/\s+/g, "") === requestedVolume)
+            ? prices.find((candidate) => normalizeVolume(candidate.volume) === requestedVolume)
             : null;
-          if (requestedVolume && !routeVolume) setUnavailableVariant(true);
-          const defaultVol = routeVolume || prices.find((p) => p.volume === "750ml") || prices[0];
-          if (defaultVol) setSelectedVolume(defaultVol.volume);
+          if (requestedVolume && !routeVolume) {
+            setUnavailableVariant(true);
+            setSelectedVolume(requestedVolume);
+          } else {
+            const defaultVol = routeVolume || prices.find((p) => normalizeVolume(p.volume) === "750ml") || prices[0];
+            if (defaultVol) setSelectedVolume(defaultVol.volume);
+          }
         } else {
           setVolumePrices([]);
           setUnavailableInCity(true);
+          setSelectedVolume(
+            requestedVolume
+            || String(productData.volume || "")
+            || (Array.isArray(productData.available_volumes_ml) && productData.available_volumes_ml[0]
+              ? `${productData.available_volumes_ml[0]}ml`
+              : ""),
+          );
         }
       } else {
         setVolumePrices([]);
         setUnavailableInCity(true);
+        setSelectedVolume(requestedVolume || String(productData.volume || ""));
       }
 
       setLoading(false);
@@ -254,7 +273,9 @@ const ProductDetail = () => {
       const cityName = routeCity?.name || selectedCity?.name || "Gurgaon";
       const variantLabel = requestedVolume ? ` ${selectedVolume}` : "";
       const title = `${productLabel}${variantLabel} Price in ${cityName} | Bevory`;
-      const description = `${productLabel}${variantLabel} price in ${cityName}${price ? ` is ₹${price.toLocaleString("en-IN")}` : ""}. Compare locally listed bottle sizes, product details and reviews.`;
+      const description = price
+        ? `${productLabel}${variantLabel} price in ${cityName} is ₹${price.toLocaleString("en-IN")}. Compare locally listed bottle sizes, product details and reviews.`
+        : `${productLabel}${variantLabel} details for ${cityName}. A verified local price is not available yet; explore known bottle sizes, product information and reviews.`;
       const canonicalUrl = `https://bevory.in${canonicalPath}`;
 
       document.title = title;
@@ -339,16 +360,30 @@ const ProductDetail = () => {
         },
       });
 
-      const selectedVariant = volumePrices.find((variant) => variant.volume === selectedVolume);
-      const productSchema: Record<string, unknown> = requestedVolume && selectedVariant
-        ? {
-          ...variantSchema(selectedVariant),
-          isVariantOf: {
-            "@type": "ProductGroup",
-            name: productLabel,
-            productGroupID: productGroupId,
-          },
-        }
+      const selectedVariant = volumePrices.find((variant) => normalizeVolume(variant.volume) === normalizeVolume(selectedVolume));
+      const variantGroup = {
+        "@type": "ProductGroup",
+        name: productLabel,
+        productGroupID: productGroupId,
+      };
+      const productSchema: Record<string, unknown> = requestedVolume
+        ? selectedVariant
+          ? {
+            ...variantSchema(selectedVariant),
+            isVariantOf: variantGroup,
+          }
+          : {
+            "@type": "Product",
+            name: `${productLabel} ${selectedVolume}`,
+            description: `${productLabel} ${selectedVolume} product details for ${cityName}. A verified local price is not available yet.`,
+            brand: { "@type": "Brand", name: product.brand },
+            image: productImage,
+            sku: `${productGroupId}-${normalizeVolume(selectedVolume)}-${canonicalCitySlug}`,
+            size: selectedVolume,
+            category: product.category?.name || "Alcoholic Beverages",
+            url: canonicalUrl,
+            isVariantOf: variantGroup,
+          }
         : {
           "@type": "ProductGroup",
           name: productLabel,
@@ -427,11 +462,24 @@ const ProductDetail = () => {
   const relatedProducts = products
     .filter((p) => p.category_id === product?.category_id && p.id !== product?.id)
     .slice(0, 6);
-  const locallyPricedVolumes = new Set(volumePrices.map((variant) => (
-    Number.parseInt(variant.volume.replace(/[^0-9]/g, ""))
-  )));
-  const knownUnavailableVolumes = (product?.available_volumes_ml ?? [])
-    .filter((volumeMl) => !locallyPricedVolumes.has(volumeMl));
+  const displayVolumes = useMemo<DisplayVolume[]>(() => {
+    const byVolume = new Map<string, DisplayVolume>();
+    volumePrices.forEach((variant) => byVolume.set(normalizeVolume(variant.volume), {
+      volume: variant.volume,
+      price: variant.price,
+    }));
+    (product?.available_volumes_ml ?? []).forEach((volumeMl) => {
+      const label = `${volumeMl}ml`;
+      if (!byVolume.has(normalizeVolume(label))) byVolume.set(normalizeVolume(label), { volume: label, price: null });
+    });
+    if (product?.volume && !byVolume.has(normalizeVolume(product.volume))) {
+      byVolume.set(normalizeVolume(product.volume), { volume: product.volume, price: null });
+    }
+    if (requestedVolume && !byVolume.has(requestedVolume)) {
+      byVolume.set(requestedVolume, { volume: requestedVolume, price: null });
+    }
+    return [...byVolume.values()].sort((left, right) => volumeSize(right.volume) - volumeSize(left.volume));
+  }, [product?.available_volumes_ml, product?.volume, requestedVolume, volumePrices]);
 
   const handleShare = async () => {
     try {
@@ -500,42 +548,6 @@ const ProductDetail = () => {
           <Link to="/search" className="text-accent mt-2 inline-block">
             Browse products →
           </Link>
-        </div>
-      </MobileLayout>
-    );
-  }
-
-  if (unavailableInCity) {
-    return (
-      <MobileLayout showBack showLocation>
-        <div className="px-5 py-16 text-center">
-          <MapPin className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
-          <h1 className="text-xl font-serif font-bold mb-2">Not listed in {selectedCity?.name || "this city"}</h1>
-          <p className="text-sm text-muted-foreground mb-6">
-            This product is hidden because no verified local price is available for the selected city.
-          </p>
-          <Link to="/search">
-            <Button variant="outline">Browse locally priced products</Button>
-          </Link>
-        </div>
-      </MobileLayout>
-    );
-  }
-
-  if (unavailableVariant) {
-    return (
-      <MobileLayout showBack showLocation>
-        <div className="px-5 py-16 text-center">
-          <Info className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
-          <h1 className="text-xl font-serif font-bold mb-2">
-            {requestedVolume} is not listed in {selectedCity?.name || "this city"}
-          </h1>
-          <p className="text-sm text-muted-foreground mb-6">
-            We only publish a size page after a positive local price passes catalogue review.
-          </p>
-          <Button asChild variant="outline">
-            <Link to={productPath || `/${canonicalCitySlug}`}>View available sizes</Link>
-          </Button>
         </div>
       </MobileLayout>
     );
@@ -648,32 +660,28 @@ const ProductDetail = () => {
             </button>
 
             {/* Volume Options */}
-            {volumePrices.length > 0 && (
+            {displayVolumes.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {volumePrices.map((vp) => (
+                {displayVolumes.map((variant) => (
                   <Link
-                    key={vp.volume}
+                    key={variant.volume}
                     to={generateProductUrlWithVolume({
                       citySlug: canonicalCitySlug,
                       productSlug: product.slug || product.id,
-                    }, vp.volume)}
+                    }, variant.volume)}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                      selectedVolume === vp.volume
+                      normalizeVolume(selectedVolume) === normalizeVolume(variant.volume)
                         ? "bg-accent text-accent-foreground"
                         : "bg-secondary text-foreground hover:bg-secondary/80"
                     }`}
                   >
-                    <span className="block">{vp.volume}</span>
-                    <span className="block text-xs opacity-80">₹{vp.price.toLocaleString()}</span>
+                    <span className="block">{variant.volume}</span>
+                    <span className="block text-xs opacity-80">
+                      {variant.price ? `₹${variant.price.toLocaleString("en-IN")}` : "No price"}
+                    </span>
                   </Link>
                 ))}
               </div>
-            )}
-
-            {knownUnavailableVolumes.length > 0 && (
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Other known sizes without a reviewed {selectedCity?.name || "local"} price: {knownUnavailableVolumes.map((size) => `${size}ml`).join(", ")}.
-              </p>
             )}
 
             {/* Price Display */}
@@ -681,12 +689,12 @@ const ProductDetail = () => {
               <div className="flex-1">
                 <div className="flex items-baseline gap-2">
                   <span className={price ? "text-3xl font-bold" : "text-lg font-semibold text-muted-foreground"}>
-                    {price ? `₹${price.toLocaleString("en-IN")}` : "Price unavailable"}
+                    {price ? `₹${price.toLocaleString("en-IN")}` : "Price not available"}
                   </span>
                   {price && mrp && Number(mrp) > Number(price) && (
                     <span className="text-lg text-muted-foreground line-through">₹{mrp.toLocaleString()}</span>
                   )}
-                  {selectedVolume && volumePrices.length > 0 && (
+                  {selectedVolume && (
                     <span className="text-sm text-muted-foreground">for {selectedVolume}</span>
                   )}
                 </div>
