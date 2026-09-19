@@ -11,12 +11,9 @@ import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CITY_SLUGS } from "@/lib/locations";
 
-// Critical pages — loaded eagerly
-import CityHome from "./pages/CityHome";
-import Auth from "./pages/Auth";
-
 // Lazy-loaded pages for code splitting
-const Home = lazy(() => import("./pages/Home"));
+const CityHome = lazy(() => import("./pages/CityHome"));
+const Auth = lazy(() => import("./pages/Auth"));
 const Search = lazy(() => import("./pages/Search"));
 const Categories = lazy(() => import("./pages/Categories"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));

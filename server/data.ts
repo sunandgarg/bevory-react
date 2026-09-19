@@ -40,7 +40,7 @@ const UNIQUE_COLUMNS: Record<string, string> = {
   video_reviews: "slug",
 };
 
-type Filter = {
+export type Filter = {
   column?: string;
   operator: string;
   value?: unknown;
@@ -240,6 +240,42 @@ export const scopeWriteInput = (
 
 const comparable = (value: unknown) => value instanceof Date ? value.toISOString() : value;
 
+const JSON_FILTER_COLUMN = /^[A-Za-z_][A-Za-z0-9_]*$/;
+const isJsonScalar = (value: unknown): value is string | number | boolean => (
+  typeof value === "string" || typeof value === "number" || typeof value === "boolean"
+);
+
+export const databaseWhereForFilters = (
+  tableName: string,
+  filters: Filter[] = [],
+): Prisma.ContentRecordWhereInput => {
+  const pushedFilters: Prisma.ContentRecordWhereInput[] = [];
+  for (const filter of filters) {
+    if (
+      filter.operator !== "eq"
+      || !filter.column
+      || !JSON_FILTER_COLUMN.test(filter.column)
+      || !isJsonScalar(filter.value)
+    ) continue;
+
+    if (filter.column === "id" && typeof filter.value === "string") {
+      pushedFilters.push({ recordId: filter.value });
+      continue;
+    }
+
+    pushedFilters.push({
+      data: {
+        path: `$.${filter.column}`,
+        equals: filter.value,
+      },
+    });
+  }
+
+  return pushedFilters.length
+    ? { tableName, AND: pushedFilters }
+    : { tableName };
+};
+
 export const matchesFilter = (row: Record<string, unknown>, filter: Filter): boolean => {
   if (filter.operator === "or") return (filter.filters ?? []).some((part) => matchesFilter(row, part));
   const actual = comparable(row[filter.column ?? ""]);
@@ -263,8 +299,10 @@ export const matchesFilter = (row: Record<string, unknown>, filter: Filter): boo
   }
 };
 
-const readTable = async (tableName: string) => {
-  const records = await prisma.contentRecord.findMany({ where: { tableName } });
+const readTable = async (tableName: string, filters: Filter[] = []) => {
+  const records = await prisma.contentRecord.findMany({
+    where: databaseWhereForFilters(tableName, filters),
+  });
   return records.map(({ data }) => toRecordData(data));
 };
 
@@ -397,7 +435,7 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
 
   try {
     if (payload.operation === "select") {
-      let rows = applyUserScope(req, payload, await readTable(payload.table), isAdmin);
+      let rows = applyUserScope(req, payload, await readTable(payload.table, payload.filters), isAdmin);
       rows = rows.filter((row) => (payload.filters ?? []).every((filter) => matchesFilter(row, filter)));
       const count = rows.length;
       for (const order of [...(payload.orders ?? [])].reverse()) {

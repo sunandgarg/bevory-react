@@ -79,21 +79,21 @@ const fetchCityCatalog = async (cityId: string): Promise<{ categories: Category[
 
 /* ===================== HOOK ===================== */
 
-export const useProducts = () => {
+export const useProducts = (enabled = true) => {
   const { selectedCity } = useLocation();
 
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
     staleTime: 10 * 60 * 1000, // categories rarely change
-    enabled: !selectedCity?.id,
+    enabled: enabled && !selectedCity?.id,
   });
 
   const { data: catalogData, isLoading: loading } = useQuery({
     queryKey: ["city-catalog", selectedCity?.id ?? "none"],
     queryFn: () => fetchCityCatalog(selectedCity!.id),
     staleTime: 5 * 60 * 1000,
-    enabled: Boolean(selectedCity?.id),
+    enabled: enabled && Boolean(selectedCity?.id),
   });
   const categories = catalogData?.categories ?? categoriesData ?? EMPTY_CATEGORIES;
   const productsRaw = catalogData?.products ?? EMPTY_PRODUCTS;

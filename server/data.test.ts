@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { applySelection, matchesFilter, parseSelection, queryAccessAllowed, scopeWriteInput, type QueryPayload } from "./data.js";
+import {
+  applySelection,
+  databaseWhereForFilters,
+  matchesFilter,
+  parseSelection,
+  queryAccessAllowed,
+  scopeWriteInput,
+  type QueryPayload,
+} from "./data.js";
 
 describe("query field selection", () => {
   it("projects only requested scalar fields", () => {
@@ -58,6 +66,28 @@ describe("query compatibility filters", () => {
         { column: "published", operator: "eq", value: true },
       ],
     })).toBe(true);
+  });
+
+  it("pushes safe equality filters into MySQL while retaining compatibility filters", () => {
+    expect(databaseWhereForFilters("product_prices", [
+      { column: "product_id", operator: "eq", value: "product-1" },
+      { column: "city_id", operator: "eq", value: "city-1" },
+      { column: "requires_review", operator: "neq", value: true },
+      { column: "unsafe.path", operator: "eq", value: "ignored" },
+    ])).toEqual({
+      tableName: "product_prices",
+      AND: [
+        { data: { path: "$.product_id", equals: "product-1" } },
+        { data: { path: "$.city_id", equals: "city-1" } },
+      ],
+    });
+
+    expect(databaseWhereForFilters("products", [
+      { column: "id", operator: "eq", value: "product-1" },
+    ])).toEqual({
+      tableName: "products",
+      AND: [{ recordId: "product-1" }],
+    });
   });
 });
 

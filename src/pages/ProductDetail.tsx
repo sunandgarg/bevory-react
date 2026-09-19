@@ -23,6 +23,7 @@ import OtherProductsSection from "@/components/product/OtherProductsSection";
 import ExploreCategories from "@/components/product/ExploreCategories";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
+import { cityRecordIdFromSlug } from "@/lib/locations";
 
 interface FAQ {
   question: string;
@@ -111,6 +112,7 @@ const ProductDetail = () => {
   const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [reviewRefresh, setReviewRefresh] = useState(0);
+  const [loadRelatedProducts, setLoadRelatedProducts] = useState(false);
 
   const legacyCityByState: Record<string, string> = {
     delhi: "delhi",
@@ -125,13 +127,20 @@ const ProductDetail = () => {
     allCities,
     setSelectedCity,
     routeCity,
-    routeCityReady,
   } = useRouteCity(canonicalCitySlug);
-  const { products } = useProducts();
+  const { products } = useProducts(loadRelatedProducts);
   const { addToCompare, isInCompare, setShowCompareSheet } = useCompare();
   const { toast } = useToast();
   const navigate = useNavigate();
   const requestedVolume = volume ? normalizeVolume(volume) : null;
+  const priceCityId = routeCity
+    ? cityRecordIdFromSlug(routeCity.slug)
+    : selectedCity?.id;
+  const displayCityName = routeCity?.name || selectedCity?.name;
+
+  useEffect(() => {
+    if (product && !product.image_url) setLoadRelatedProducts(true);
+  }, [product]);
 
   const currentPrice = volumePrices.find((vp) => normalizeVolume(vp.volume) === normalizeVolume(selectedVolume));
   const price = currentPrice?.price ?? null;
@@ -144,8 +153,6 @@ const ProductDetail = () => {
       setLoading(true);
       setUnavailableInCity(false);
       setUnavailableVariant(false);
-
-      if (!routeCityReady) return;
 
       setVolumePrices([]);
 
@@ -196,14 +203,15 @@ const ProductDetail = () => {
       };
 
       setProduct(parsedProduct);
+      setLoading(false);
 
       // Fetch all volume prices for selected city
-      if (selectedCity) {
+      if (priceCityId) {
         const { data: priceData } = await apiClient
           .from("product_prices")
           .select("*")
           .eq("product_id", productData.id)
-          .eq("city_id", selectedCity.id)
+          .eq("city_id", priceCityId)
           .eq("price_available", true)
           .neq("requires_review", true);
 
@@ -248,7 +256,7 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [effectiveSlug, requestedVolume, routeCityReady, selectedCity]);
+  }, [effectiveSlug, priceCityId, requestedVolume]);
 
   const productPath = product ? generateProductUrl({
     citySlug: canonicalCitySlug,
@@ -529,11 +537,18 @@ const ProductDetail = () => {
 
   if (loading) {
     return (
-      <MobileLayout showBack showLocation={false}>
-        <div className="p-4">
-          <div className="aspect-square bg-muted rounded-2xl animate-pulse mb-4" />
-          <div className="h-6 w-48 bg-muted rounded animate-pulse mb-2" />
-          <div className="h-4 w-32 bg-muted rounded animate-pulse" />
+      <MobileLayout showBack showLocation={false} showBottomNav={false}>
+        <div className="pb-24">
+          <div
+            key="product-hero"
+            className="aspect-square bg-muted/30 flex items-center justify-center relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-muted/30 animate-pulse" />
+          </div>
+          <div className="p-4">
+            <div className="h-6 w-48 bg-muted rounded animate-pulse mb-2" />
+            <div className="h-4 w-32 bg-muted rounded animate-pulse" />
+          </div>
         </div>
       </MobileLayout>
     );
@@ -557,13 +572,12 @@ const ProductDetail = () => {
     <MobileLayout showBack showLocation={false} showBottomNav={false}>
       <div className="pb-24">
         {/* Product Image */}
-        <div className="aspect-square bg-muted/30 flex items-center justify-center relative overflow-hidden">
+        <div
+          key="product-hero"
+          className="aspect-square bg-muted/30 flex items-center justify-center relative overflow-hidden"
+        >
           {product.image_url ? (
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="w-full h-full"
-            >
+            <div className="w-full h-full">
               <OptimizedImage
                 src={product.image_url}
                 alt={`${product.brand} ${product.name}${selectedVolume ? ` ${selectedVolume}` : ""} bottle`}
@@ -572,8 +586,9 @@ const ProductDetail = () => {
                 className="w-full h-full"
                 objectFit="contain"
                 priority
+                onLoadComplete={() => setLoadRelatedProducts(true)}
               />
-            </motion.div>
+            </div>
           ) : (
             <motion.span initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-9xl">
               {product.image_emoji || "🥃"}
@@ -655,7 +670,7 @@ const ProductDetail = () => {
               className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <MapPin className="w-3 h-3" />
-              {selectedCity ? `Price in ${selectedCity.name}` : "Select city for price"}
+              {displayCityName ? `Price in ${displayCityName}` : "Select city for price"}
               <ChevronDown className="w-3 h-3" />
             </button>
 
@@ -708,8 +723,8 @@ const ProductDetail = () => {
             <p className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground">
               <Info className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
               {price
-                ? `Indicative price for ${selectedCity?.name || "your selected city"}. Local retail prices may vary.`
-                : `No local price is listed for ${selectedCity?.name || "your selected city"} yet.`}
+                ? `Indicative price for ${displayCityName || "your selected city"}. Local retail prices may vary.`
+                : `No local price is listed for ${displayCityName || "your selected city"} yet.`}
             </p>
           </div>
 

@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { BEVORY_CITIES, CITIES_BY_STATE, CITY_SLUGS, cityFromSlug } from "./locations";
+import {
+  BEVORY_CITIES,
+  CITIES_BY_STATE,
+  CITY_SLUGS,
+  cityFromSlug,
+  cityRecordIdFromSlug,
+} from "./locations";
 
 describe("Bevory city catalogue", () => {
   it("contains all 30 unique launch cities", () => {
@@ -10,7 +16,8 @@ describe("Bevory city catalogue", () => {
 
   it("keeps route names and state groups aligned", () => {
     expect(cityFromSlug("hubli-dharwad")?.name).toBe("Hubli Dharwad");
+    expect(cityRecordIdFromSlug("agra")).toBe("bevory-city-agra");
+    expect(cityRecordIdFromSlug("gurgaon")).toBe("starter-city-gurgaon");
     expect(CITIES_BY_STATE.Maharashtra).toEqual(["Mumbai", "Nagpur", "Nashik", "Pune", "Thane"]);
   });
 });
-

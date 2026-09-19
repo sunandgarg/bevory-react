@@ -105,12 +105,12 @@ const OptimizedImage = memo(({
         onLoad={handleLoad}
         onError={handleError}
         className={cn(
-          "transition-opacity duration-300",
+          !priority && "transition-opacity duration-300",
           objectFit === "cover" && "object-cover w-full h-full",
           objectFit === "contain" && "object-contain w-full h-full",
           objectFit === "fill" && "object-fill w-full h-full",
           objectFit === "none" && "object-none",
-          !isLoaded && "opacity-0",
+          !isLoaded && !priority && "opacity-0",
           isLoaded && "opacity-100",
           error && "hidden"
         )}
