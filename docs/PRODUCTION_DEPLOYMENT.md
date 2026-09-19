@@ -70,9 +70,19 @@ The following production checks passed on 2026-09-20:
   work through the production domain.
 - Public catalog reads and the party-planner endpoint work.
 - The production catalogue contains all 30 supported cities, 18 active
-  categories, 121 active subcategories, 1,745 active brands, 5,220 active
-  products, and 23,768 positive city-specific size prices. Of those prices,
-  23,135 are public and 633 are retained for review.
+  categories, 121 active subcategories, 1,818 active brands, 5,991 active
+  products, and 38,918 positive city-specific size prices. Of those prices,
+  36,878 are public and 2,040 are retained for review.
+- The Lucknow, Udaipur, Noida, Kanpur, and Asansol batch contributed 5,846
+  unique positive prices: 5,215 public and 631 review-only, with no duplicate
+  city/product/volume keys, orphaned product references, or products missing an
+  identity-verified image.
+- The rollback snapshot `bevory-mysql-pre-final-five-20260920-0123` was
+  `available` before the final five-city production write.
+- The Jaipur, Jodhpur, Kota, Mumbai, Thane, Ghaziabad, and Agra batch
+  contributed 9,304 unique positive prices: 8,528 public and 776 review-only,
+  with no duplicate city/product/volume keys, orphaned product references, or
+  products missing an identity-verified image.
 - The Gwalior, Mysore, Jabalpur, Hyderabad, Warangal, Pune, Nashik, Nagpur,
   Indore, and Bhopal batch contributed 12,247 positive prices: 11,796 public and
   451 review-only, with no duplicate city/product/volume keys or orphaned
@@ -113,14 +123,18 @@ The following production checks passed on 2026-09-20:
   one raster image, and capped at 5 MB.
 - The adaptive Bevory favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
-- `sitemap.xml` is an index for three XML shards containing 57,272 unique
-  canonical URLs and 48,693 image entries, including 21,808 city product pages,
-  23,135 exact city-and-size pages, city brand/category/subcategory pages, 11
+- `sitemap.xml` is an index for five XML shards containing 91,793 unique
+  canonical URLs and 78,153 image entries, including 34,860 city product pages,
+  36,878 exact city-and-size pages, city brand/category/subcategory pages, 11
   published guides, and 170 cocktails. Unpriced variants, free-form search, and
   arbitrary filter combinations remain intentionally `noindex, follow` to avoid
-  thin and duplicate index bloat. A 16-way production crawl verified every URL,
-  matching canonical, indexable robots directive, initial H1/title/description,
-  and required JSON-LD type with zero failures.
+  thin and duplicate index bloat. Sitemap audits default to two concurrent
+  requests and support shard, offset, and limit controls so exhaustive checks do
+  not overload the 1 GB origin.
+- Fifteen representative live routes passed after deployment: the city landing,
+  product, and exact-size page for each final-batch city returned HTTP 200 with
+  matching canonical, indexable robots, initial metadata/H1, and the expected
+  CollectionPage, ProductGroup, or Product schema.
 
 ## CloudFront status
 
@@ -170,7 +184,28 @@ sudo docker compose -f deploy/docker-compose.production.yml run --rm \
   --nagpur /catalog/nagpur.csv \
   --indore /catalog/indore.csv \
   --bhopal /catalog/bhopal.csv \
+  --jaipur /catalog/jaipur.csv \
+  --jodhpur /catalog/jodhpur.csv \
+  --kota /catalog/kota.csv \
+  --mumbai /catalog/mumbai.csv \
+  --thane /catalog/thane.csv \
+  --ghaziabad /catalog/ghaziabad.csv \
+  --agra /catalog/agra.csv \
+  --lucknow /catalog/lucknow.csv \
+  --udaipur /catalog/udaipur.csv \
+  --noida /catalog/noida.csv \
+  --kanpur /catalog/kanpur.csv \
+  --asansol /catalog/asansol.csv \
   --report /tmp/livcheers-import-report.json
+```
+
+The expanded sitemap currently requires a larger temporary Node heap when it is
+generated on the 1 GB instance:
+
+```bash
+sudo docker compose -f deploy/docker-compose.production.yml run --rm --no-deps \
+  -e NODE_OPTIONS=--max-old-space-size=1024 \
+  -v /opt/bevory/public:/app/public api pnpm sitemap
 ```
 
 Never commit `.env.production`, AWS access keys, database credentials, JWT

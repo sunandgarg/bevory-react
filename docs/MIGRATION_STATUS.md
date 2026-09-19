@@ -1,6 +1,6 @@
 # Migration Status
 
-Last updated: 2026-09-19
+Last updated: 2026-09-20
 
 ## Summary
 
@@ -22,9 +22,9 @@ and verified.
 | Cloudflare Pages fallback | Standby | Project remains available, but production custom domains are inactive |
 | AWS Lightsail API | Complete | Container health check and public `/api/health` pass |
 | Lightsail Managed MySQL | Complete | Prisma schema, seed, catalogue, and live health checks pass |
-| Catalogue import | Complete | 30 cities, 18 active categories, 121 active subcategories, 1,745 active brands, 5,220 active products, and 23,135 public price variants |
+| Catalogue import | Complete | 30 cities, 18 active categories, 121 active subcategories, 1,818 active brands, 5,991 active products, and 36,878 public price variants |
 | City availability | Complete | Only approved variants priced in the selected city are returned |
-| Product images | Reachable external sources | All 3,841 products in the latest ten-city batch have verified images; 314 of 1,268 used brands have verified logos and 954 remain unset rather than guessed |
+| Product images | Reachable external sources | All 1,818 products in the final five-city batch have verified images; 282 of 835 used brands have verified logos and 553 remain unset rather than guessed |
 | Guide recovery | Complete | 50 articles reconstructed, 2,179 fragments quarantined, and 11 evergreen articles published |
 | 25+ compliance UI | Complete | The configurable 25+ gate is mounted globally across public, auth, and admin routes |
 | Authentication | Complete except phone OTP | Email/password, sessions, admin authorization, and Google OAuth pass; the phone OTP provider is not configured in production |
@@ -32,6 +32,38 @@ and verified.
 | CloudFront media CDN | Blocked by AWS | Existing OAC is ready, but AWS still rejects distribution creation until account verification |
 
 ## Import Exceptions
+
+- The final Lucknow, Udaipur, Noida, Kanpur, and Asansol import processed 5,898
+  source rows. It wrote 5,846 positive city prices, skipped 52 explicitly
+  price-missing rows, and produced zero import errors.
+- Of those prices, 5,215 are public and 631 remain review-only. Public/review
+  totals are: Asansol 1,034/90, Kanpur 987/226, Lucknow 1,149/40, Noida
+  981/219, and Udaipur 1,064/56.
+- The independent audit found zero duplicate city/product/volume keys, zero
+  orphaned product references, and zero products missing an identity-verified
+  image. The batch reused or added 835 canonical brands and 1,818 canonical
+  products rather than creating city-specific copies.
+- Snapshot `bevory-mysql-pre-final-five-20260920-0123` was available before the
+  production write.
+- One mislabeled Lucknow 375 ml source row was merged into the exact London High
+  product identified by its Livcheers URL and linked family ID. Its original
+  `Magic Moments` source label remains in audit metadata.
+- Of the 835 brands used by this batch, 282 have a verified first-party logo.
+  The other 553 remain unset; no generated or uncertain logo was inserted.
+
+- The Jaipur, Jodhpur, Kota, Mumbai, Thane, Ghaziabad, and Agra import processed
+  9,318 source rows. It accepted 9,305 positive rows, skipped 13 explicitly
+  price-missing rows, selected one duplicate by evidence quality, and wrote
+  9,304 unique city prices with zero import errors.
+- Of the seven-city prices, 8,528 are public and 776 remain review-only. Public
+  and review-only totals are: Agra 1,120/44, Ghaziabad 1,092/56, Jaipur 990/153,
+  Jodhpur 998/89, Kota 915/178, Mumbai 1,918/120, and Thane 1,495/136.
+- The seven-city audit found zero duplicate city/product/volume keys, zero
+  orphaned product references, and zero products missing an identity-verified
+  image. Twelve truncated Thane card labels were normalized to existing exact
+  product identities while retaining the original source labels in metadata.
+- Of the 1,141 brands used in this batch, 314 have a verified first-party logo.
+  The other 827 remain unset; no generated or uncertain logo was inserted.
 
 - The ten-city import processed 12,396 source rows. It wrote 12,247 positive
   city prices, skipped 149 explicitly price-missing rows, and produced zero
@@ -93,7 +125,7 @@ propagate the new name across all services.
 ## Verification Record
 
 - Production build and all frontend, server, and script TypeScript checks pass.
-- The 24 focused importer tests and four server-side SEO tests pass. The wider
+- The 40 focused importer tests and four server-side SEO tests pass. The wider
   database-independent suite passes; the two phone-OTP integration tests need
   the local MySQL test service on port 3308 and were not rerun in this pass.
 - ESLint: zero errors; 20 retained advisory warnings.
@@ -106,13 +138,17 @@ propagate the new name across all services.
   console errors.
 - Service worker v6 fetches route documents network-first so compliance changes
   are not hidden behind stale HTML.
-- `sitemap.xml` indexes three compliant shards containing 57,272 unique
-  canonical URLs and 48,693 image entries: 21,808 city product pages, 23,135
+- `sitemap.xml` indexes five compliant shards containing 91,793 unique
+  canonical URLs and 78,153 image entries: 34,860 city product pages, 36,878
   exact city-and-size pages, city brand and taxonomy pages, 11 published guides,
   and 170 cocktails.
-- `pnpm sitemap:audit` fetched every one of the 57,272 production page URLs and
-  confirmed HTTP 200, matching canonicals, indexable robots directives, initial
-  H1/title/description content, and the required JSON-LD type with zero failures.
+- `pnpm sitemap:audit` validates sitemap structure globally and supports safe
+  shard, offset, and limit runs. Its production default is two concurrent
+  requests to protect the 1 GB origin; representative live routes are checked
+  after every deployment.
+- The five final city landing pages plus one product and exact-size page per city
+  passed live HTTP, canonical, robots, metadata, H1, and JSON-LD checks after the
+  final image was deployed.
 - Free-text search, sorting, price ranges, and arbitrary filter combinations are
   `noindex, follow`; only stable subcategory landing pages are indexable to avoid
   duplicate and effectively infinite faceted URL combinations.

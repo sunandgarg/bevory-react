@@ -8,10 +8,13 @@ import { parse } from "csv-parse/sync";
 import { LEGACY_CATALOG_CATEGORY_SLUGS, LIVCHEERS_CATEGORY_DEFINITIONS } from "../src/lib/catalogTaxonomy.js";
 
 type CitySlug =
+  | "agra"
+  | "asansol"
   | "bangalore"
   | "bhopal"
   | "delhi"
   | "faridabad"
+  | "ghaziabad"
   | "goa"
   | "gurgaon"
   | "gwalior"
@@ -19,11 +22,20 @@ type CitySlug =
   | "hyderabad"
   | "indore"
   | "jabalpur"
+  | "jaipur"
+  | "jodhpur"
+  | "kanpur"
+  | "kota"
+  | "lucknow"
   | "mangalore"
+  | "mumbai"
   | "mysore"
   | "nagpur"
   | "nashik"
+  | "noida"
   | "pune"
+  | "thane"
+  | "udaipur"
   | "warangal";
 
 type SourceSpec = {
@@ -68,12 +80,19 @@ export type CsvRow = {
   brand_missing?: string;
   metadata_only_discovery?: string;
   city_price_inferred?: string;
+  source_stale_review?: string;
+  source_cache_6months_or_older?: string;
+  selected_source_older_than_newest_observation?: string;
+  selected_evidence_older_than_alternative?: string;
   price_missing?: string;
 };
 
 type ParsedRow = CsvRow & {
   source: SourceSpec;
   sourceIndex: number;
+  sourceBrandName: string;
+  sourceProductName: string;
+  identityOverrideApplied: boolean;
   price: number;
   volumeMl: number;
   categorySlugs: string[];
@@ -170,7 +189,34 @@ const RECORD_CATEGORY_OVERRIDES = new Map<string, string>([
   ["BLR-R-463153f288272cc5", "red-wine"],
   ["BLR-R-59b866b5e9e53843", "red-wine"],
   ["BLR-R-dfe294c760ab4dfe", "red-wine"],
+  ["KOT-V-3b23e4b53d3fa9d3", "blended-scotch"],
 ]);
+
+const PRODUCT_IDENTITY_OVERRIDES = new Map<string, { brandName: string; productName: string }>([
+  ["LKO-6368813470a5ff", {
+    brandName: "London High",
+    productName: "Oasis London High Triple Distilled English Vodka Orange Flavoured.",
+  }],
+  ["THN-R-4b2ee169bbd257c7", { brandName: "Absinthe", productName: "La Ananta Absinthe" }],
+  ["THN-R-04d91a2eadd179d4", { brandName: "Capucana", productName: "Handcrafted Cachaca Capucana" }],
+  ["THN-R-95da0afd51830b8d", { brandName: "Gancia", productName: "Bitter Gancia Canelli" }],
+  ["THN-R-d81b41eda2720990", { brandName: "Jack Daniels", productName: "Gentleman Jack" }],
+  ["THN-R-df71582240c964ee", {
+    brandName: "Kronenbourg 1664",
+    productName: "Biere Blanche Blanc Kronenbourg 1664 French Beer",
+  }],
+  ["THN-R-0ad043b96f6118a8", { brandName: "Perlino", productName: "Prosecco Brut Perlino" }],
+  ["THN-R-35af0db63823e480", { brandName: "Remy Martin", productName: "Louis XIII De Remy Martin" }],
+  ["THN-R-693594e744d2f87f", { brandName: "Reserve", productName: "818 Tequila Reserve 8" }],
+  ["THN-R-9a9d056669a7a95c", { brandName: "Reserve", productName: "Cotombi Reserve Charred Whisky" }],
+  ["THN-R-5a8ea1349c3f7045", { brandName: "Rosso", productName: "Davana Vermouth Indica Rosso" }],
+  ["THN-R-6055eb660956c57f", { brandName: "Spice", productName: "Makabi Mazal Spice Rum" }],
+  ["THN-R-24f9cf8771b625ef", { brandName: "Triple Sec", productName: "Onsra Zest Triple Sec" }],
+]);
+
+export const resolveProductIdentity = (brandName: string, productName: string, recordId: string) => (
+  PRODUCT_IDENTITY_OVERRIDES.get(recordId) ?? { brandName, productName }
+);
 
 const PRODUCT_IMAGE_OVERRIDES = new Map<string, { imageUrl: string; sourcePage: string }>([
   ["8pm|whisky", {
@@ -180,6 +226,18 @@ const PRODUCT_IMAGE_OVERRIDES = new Map<string, { imageUrl: string; sourcePage: 
   ["vecchiaromagna|vecchiaromagna", {
     imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN05414.webp",
     sourcePage: "https://www.livcheers.com/bangalore/liquor/vecchia-romagna-1820cl",
+  }],
+  ["magicmoments|m2magicmomentscocktailcola", {
+    imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN02540.webp",
+    sourcePage: "https://www.livcheers.com/mumbai/liquor/m2-magic-moments-vodka-cocktail-cola-low-alcoholic-beverage-330ml",
+  }],
+  ["magicmoments|m2magicmomentscocktailcosmopolitan", {
+    imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN02541.webp",
+    sourcePage: "https://www.livcheers.com/mumbai/liquor/m2-magic-moments-vodka-cocktail-cosmopolitan-low-alcoholic-beverage-330ml",
+  }],
+  ["magicmoments|m2magicmomentscocktailmojito", {
+    imageUrl: "https://static.livcheers.com/static/content/images/liquor/LCIN02542.webp",
+    sourcePage: "https://www.livcheers.com/mumbai/liquor/m2-magic-moments-vodka-cocktail-mojito-low-alcoholic-beverage-330ml",
   }],
 ]);
 
@@ -201,6 +259,18 @@ const SOURCE_PRIORITY: Record<CitySlug, number> = {
   nagpur: 15,
   indore: 16,
   bhopal: 17,
+  jaipur: 18,
+  jodhpur: 19,
+  kota: 20,
+  mumbai: 21,
+  thane: 22,
+  ghaziabad: 23,
+  agra: 24,
+  lucknow: 25,
+  udaipur: 26,
+  noida: 27,
+  kanpur: 28,
+  asansol: 29,
 };
 
 const slugify = (value: string) => value
@@ -375,6 +445,18 @@ const parseArguments = () => {
     { flag: "--nagpur", city: "Nagpur", citySlug: "nagpur" },
     { flag: "--indore", city: "Indore", citySlug: "indore" },
     { flag: "--bhopal", city: "Bhopal", citySlug: "bhopal" },
+    { flag: "--jaipur", city: "Jaipur", citySlug: "jaipur" },
+    { flag: "--jodhpur", city: "Jodhpur", citySlug: "jodhpur" },
+    { flag: "--kota", city: "Kota", citySlug: "kota" },
+    { flag: "--mumbai", city: "Mumbai", citySlug: "mumbai" },
+    { flag: "--thane", city: "Thane", citySlug: "thane" },
+    { flag: "--ghaziabad", city: "Ghaziabad", citySlug: "ghaziabad" },
+    { flag: "--agra", city: "Agra", citySlug: "agra" },
+    { flag: "--lucknow", city: "Lucknow", citySlug: "lucknow" },
+    { flag: "--udaipur", city: "Udaipur", citySlug: "udaipur" },
+    { flag: "--noida", city: "Noida", citySlug: "noida" },
+    { flag: "--kanpur", city: "Kanpur", citySlug: "kanpur" },
+    { flag: "--asansol", city: "Asansol", citySlug: "asansol" },
   ];
   const sources = definitions.flatMap((definition) => {
     const path = valueFor(definition.flag);
@@ -384,7 +466,9 @@ const parseArguments = () => {
     throw new Error(
       "Provide at least one source: --delhi, --goa, --gurgaon, --faridabad, --bangalore, "
       + "--hubli-dharwad, --mangalore, --gwalior, --mysore, --jabalpur, --hyderabad, "
-      + "--warangal, --pune, --nashik, --nagpur, --indore, or --bhopal <csv>.",
+      + "--warangal, --pune, --nashik, --nagpur, --indore, --bhopal, --jaipur, "
+      + "--jodhpur, --kota, --mumbai, --thane, --ghaziabad, --agra, --lucknow, "
+      + "--udaipur, --noida, --kanpur, or --asansol <csv>.",
     );
   }
   return {
@@ -412,10 +496,40 @@ const REVIEW_FLAG_FIELDS = [
   "brand_missing",
   "metadata_only_discovery",
   "city_price_inferred",
+  "source_stale_review",
+  "source_cache_6months_or_older",
+  "selected_source_older_than_newest_observation",
+  "selected_evidence_older_than_alternative",
 ] as const satisfies ReadonlyArray<keyof CsvRow>;
 
 export const sourceRowRequiresReview = (row: Partial<CsvRow>) =>
   REVIEW_FLAG_FIELDS.some((field) => parseBoolean(row[field]));
+
+const EVIDENCE_PRIORITY: Record<string, number> = {
+  product_page: 100,
+  city_product_page: 100,
+  category_card: 80,
+  city_category_card: 80,
+  category_card_indexed_text: 75,
+  category_search: 70,
+  chart_card: 60,
+  city_chart_card: 60,
+  brand_card: 40,
+  city_homepage_card: 30,
+  homepage_card: 30,
+  related_card: 0,
+};
+
+export const sourceEvidenceScore = (row: Partial<CsvRow>) => {
+  const evidence = row.price_evidence?.trim().toLowerCase() ?? "";
+  let score = EVIDENCE_PRIORITY[evidence] ?? 20;
+  if (row.known_product_url?.includes("/liquor/")) score += 40;
+  if (row.source_url?.includes("/category/")) score += 20;
+  if (row.source_url?.includes("/liquor/") && evidence !== "related_card") score += 30;
+  if (row.source_category?.trim()) score += 10;
+  if (sourceRowRequiresReview(row)) score -= 5;
+  return score;
+};
 
 const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
   const csv = await readFile(source.path, "utf8");
@@ -433,8 +547,17 @@ const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
     const issue = (code: string, message: string, level: ImportIssue["level"] = "error") => {
       issues.push({ level, code, source: source.path, recordId, message });
     };
-    const brandName = row.brand_name?.trim();
-    const productName = row.product_name?.trim();
+    const sourceBrandName = row.brand_name?.trim();
+    const sourceProductName = row.product_name?.trim();
+    const resolvedIdentity = sourceBrandName && sourceProductName
+      ? resolveProductIdentity(sourceBrandName, sourceProductName, recordId)
+      : null;
+    const brandName = resolvedIdentity?.brandName;
+    const productName = resolvedIdentity?.productName;
+    const identityOverrideApplied = Boolean(
+      resolvedIdentity
+      && (brandName !== sourceBrandName || productName !== sourceProductName),
+    );
     const price = Number(row.price_inr?.replace(/,/g, ""));
     const volumeMl = Number(row.volume_ml);
     const categorySlugs = brandName && productName
@@ -442,6 +565,13 @@ const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
       : [];
 
     if (!brandName || !productName) return issue("missing_identity", "Brand or product name is missing.");
+    if (identityOverrideApplied) {
+      issue(
+        "source_identity_normalized",
+        `${sourceBrandName} ${sourceProductName} was normalized to ${brandName} ${productName} from the source card text.`,
+        "warning",
+      );
+    }
     if (normalizeIdentity(row.city) !== normalizeIdentity(source.city)) {
       return issue("city_mismatch", `Expected ${source.city}, found ${row.city || "blank"}.`);
     }
@@ -531,12 +661,29 @@ const readSourceRows = async (source: SourceSpec, issues: ImportIssue[]) => {
         "warning",
       );
     }
+    if (
+      parseBoolean(row.source_stale_review)
+      || parseBoolean(row.source_cache_6months_or_older)
+      || parseBoolean(row.selected_source_older_than_newest_observation)
+      || parseBoolean(row.selected_evidence_older_than_alternative)
+    ) {
+      issue(
+        "source_freshness_review",
+        "The selected evidence is stale or older than another observation and will remain non-public.",
+        "warning",
+      );
+    }
 
     const productKey = productKeyFor(brandName, productName);
     accepted.push({
       ...row,
+      brand_name: brandName,
+      product_name: productName,
       source,
       sourceIndex,
+      sourceBrandName: sourceBrandName!,
+      sourceProductName: sourceProductName!,
+      identityOverrideApplied,
       price,
       volumeMl,
       categorySlugs,
@@ -942,7 +1089,17 @@ const buildRecords = async (
     const defaultVolume = volumes.includes(750) ? 750 : volumes[0];
     const imageOverride = PRODUCT_IMAGE_OVERRIDES.get(productKey);
     const imageUrl = selectedEnrichment?.imageUrl ?? imageOverride?.imageUrl ?? null;
-    if (imageUrl) report.enrichment.productsWithVerifiedImages += 1;
+    const finalImageUrl = imageUrl ?? existingData.image_url ?? null;
+    const finalImageVerified = imageUrl ? true : Boolean(existingData.image_identity_verified);
+    if (finalImageUrl && finalImageVerified) {
+      report.enrichment.productsWithVerifiedImages += 1;
+    } else {
+      report.issues.push({
+        level: "error",
+        code: "missing_verified_product_image",
+        message: `${brandName} ${productName} has no identity-verified product image.`,
+      });
+    }
     const readableOverrideKey = `${brandName.toLowerCase()}|${productName.toLowerCase()}`;
     const hasCategoryOverride = CATEGORY_OVERRIDES.has(readableOverrideKey);
     const sourceUrls = mergeUniqueStrings(
@@ -967,12 +1124,12 @@ const buildRecords = async (
       type_tag: hasCategoryOverride ? typeName : existingData.type_tag ?? typeName,
       available_volumes_ml: volumes,
       volume: existingData.volume ?? `${defaultVolume}ml`,
-      image_url: imageUrl ?? existingData.image_url ?? null,
+      image_url: finalImageUrl,
       image_source_url: imageUrl ?? existingData.image_source_url ?? null,
       image_source_page: imageUrl
         ? selectedEnrichment?.productUrl ?? imageOverride?.sourcePage ?? null
         : existingData.image_source_page ?? null,
-      image_identity_verified: imageUrl ? true : Boolean(existingData.image_identity_verified),
+      image_identity_verified: finalImageVerified,
       image_verified_at: imageUrl ? now : existingData.image_verified_at ?? null,
       image_target_width: 720,
       image_license_status: existingData.image_license_status ?? "unverified",
@@ -1013,6 +1170,9 @@ const buildRecords = async (
       availability_verified: false,
       source_name: "Livcheers",
       source_record_id: row.record_id || null,
+      source_brand_name: row.sourceBrandName,
+      source_product_name: row.sourceProductName,
+      identity_override_applied: row.identityOverrideApplied,
       source_url: row.known_product_url || matched?.productUrl || row.source_url,
       source_category: row.source_category,
       source_accessed_on: row.source_accessed_on || null,
@@ -1036,6 +1196,10 @@ const buildRecords = async (
       brand_missing: parseBoolean(row.brand_missing),
       metadata_only_discovery: parseBoolean(row.metadata_only_discovery),
       city_price_inferred: parseBoolean(row.city_price_inferred),
+      source_stale_review: parseBoolean(row.source_stale_review),
+      source_cache_6months_or_older: parseBoolean(row.source_cache_6months_or_older),
+      selected_source_older_than_newest_observation: parseBoolean(row.selected_source_older_than_newest_observation),
+      selected_evidence_older_than_alternative: parseBoolean(row.selected_evidence_older_than_alternative),
       resolved_category: row.categorySlugs.join("|"),
       category_resolution: categoryResolution,
       requires_review: sourceRowRequiresReview(row),
@@ -1136,14 +1300,18 @@ export const main = async () => {
   );
   const deduplicatedRows: ParsedRow[] = [];
   for (const [key, duplicates] of duplicatePriceKeys) {
+    const selected = [...duplicates].sort((left, right) => (
+      sourceEvidenceScore(left) - sourceEvidenceScore(right)
+      || left.sourceIndex - right.sourceIndex
+    )).at(-1)!;
     if (duplicates.length > 1) {
       report.issues.push({
         level: "warning",
         code: "duplicate_price_key",
-        message: `${key} appeared ${duplicates.length} times; the latest source row was used.`,
+        message: `${key} appeared ${duplicates.length} times; ${selected.record_id || "the preferred row"} was selected by evidence quality.`,
       });
     }
-    deduplicatedRows.push(duplicates.at(-1)!);
+    deduplicatedRows.push(selected);
   }
 
   const enrichments = options.enrich ? await crawlCategoryPages(options.sources, report) : [];

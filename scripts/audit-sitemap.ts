@@ -1,7 +1,10 @@
 import { readFile } from "node:fs/promises";
 import { CITY_SLUGS } from "../src/lib/locations.js";
 
-const concurrency = Math.max(1, Number(process.env.SITEMAP_AUDIT_CONCURRENCY) || 24);
+const concurrency = Math.max(1, Number(process.env.SITEMAP_AUDIT_CONCURRENCY) || 2);
+const requestedShard = Number(process.env.SITEMAP_AUDIT_SHARD || 0);
+const requestedOffset = Math.max(0, Number(process.env.SITEMAP_AUDIT_OFFSET) || 0);
+const requestedLimit = Math.max(0, Number(process.env.SITEMAP_AUDIT_LIMIT) || 0);
 const auditOrigin = process.env.SITEMAP_AUDIT_ORIGIN?.replace(/\/$/, "");
 const sitemapPath = new URL("../public/sitemap.xml", import.meta.url);
 
@@ -22,7 +25,7 @@ const sitemapDocuments = childSitemaps.length ? await Promise.all(childSitemaps.
   }
   return readFile(new URL(`../public${url.pathname}`, import.meta.url), "utf8");
 })) : [sitemap];
-const canonicalUrls = sitemapDocuments.flatMap((document) => (
+const allCanonicalUrls = sitemapDocuments.flatMap((document) => (
   [...document.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)]
     .map((match) => decodeXml(match[1]))
 ));
@@ -35,13 +38,13 @@ for (const [index, document] of sitemapDocuments.entries()) {
   }
 }
 
-if (!canonicalUrls.length) throw new Error("Sitemap contains no page URLs");
-if (new Set(canonicalUrls).size !== canonicalUrls.length) {
+if (!allCanonicalUrls.length) throw new Error("Sitemap contains no page URLs");
+if (new Set(allCanonicalUrls).size !== allCanonicalUrls.length) {
   throw new Error("Sitemap contains duplicate page URLs");
 }
 
 const legacySegments = ["/haryana/", "/karnataka/", "/india/"];
-for (const value of canonicalUrls) {
+for (const value of allCanonicalUrls) {
   const url = new URL(value);
   if (url.origin !== "https://bevory.in") throw new Error(`Non-canonical origin in sitemap: ${value}`);
   if (url.search || url.hash) throw new Error(`Query or fragment URL in sitemap: ${value}`);
@@ -56,6 +59,19 @@ for (const value of canonicalUrls) {
     throw new Error(`Unknown city catalogue URL in sitemap: ${value}`);
   }
 }
+
+if (requestedShard && (!Number.isInteger(requestedShard) || requestedShard > sitemapDocuments.length)) {
+  throw new Error(`SITEMAP_AUDIT_SHARD must be between 1 and ${sitemapDocuments.length}`);
+}
+const shardUrls = requestedShard
+  ? [...sitemapDocuments[requestedShard - 1].matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)]
+    .map((match) => decodeXml(match[1]))
+  : allCanonicalUrls;
+const canonicalUrls = shardUrls.slice(
+  requestedOffset,
+  requestedLimit ? requestedOffset + requestedLimit : undefined,
+);
+if (!canonicalUrls.length) throw new Error("The selected sitemap audit range contains no page URLs");
 
 type AuditFailure = { url: string; reason: string };
 const failures: AuditFailure[] = [];

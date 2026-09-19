@@ -6,7 +6,9 @@ import {
   parseCategoryCards,
   parseCategorySlugs,
   pickProductEnrichment,
+  resolveProductIdentity,
   resolveSourceCategorySlugs,
+  sourceEvidenceScore,
   sourceRowRequiresReview,
 } from "./import-livcheers-catalog.js";
 
@@ -18,6 +20,37 @@ describe("Livcheers catalogue import helpers", () => {
       "",
       "BLR-R-263c8c9f1f835d88",
     )).toEqual(["red-wine"]);
+  });
+
+  it("uses an auditable category override for the blank Kota Monkey Shoulder row", () => {
+    expect(resolveSourceCategorySlugs(
+      "Monkey Shoulder",
+      "Monkey Shoulder",
+      "",
+      "KOT-V-3b23e4b53d3fa9d3",
+    )).toEqual(["blended-scotch"]);
+  });
+
+  it("restores canonical identity from a source card that repeated only the tail label", () => {
+    expect(resolveProductIdentity("Jack", "Jack", "THN-R-d81b41eda2720990")).toEqual({
+      brandName: "Jack Daniels",
+      productName: "Gentleman Jack",
+    });
+    expect(resolveProductIdentity("Unchanged", "Product", "OTHER-ROW")).toEqual({
+      brandName: "Unchanged",
+      productName: "Product",
+    });
+  });
+
+  it("merges the mislabeled Lucknow Oasis size into its canonical London High product", () => {
+    expect(resolveProductIdentity(
+      "Magic Moments",
+      "Oasis London High Triple Distilled English Vodka Orange Flavoured.",
+      "LKO-6368813470a5ff",
+    )).toEqual({
+      brandName: "London High",
+      productName: "Oasis London High Triple Distilled English Vodka Orange Flavoured.",
+    });
   });
 
   it("normalizes punctuation and spacing for stable deduplication", () => {
@@ -100,6 +133,18 @@ describe("Livcheers catalogue import helpers", () => {
     ["nagpur", "brandy"],
     ["indore", "single-malts"],
     ["bhopal", "blended-scotch"],
+    ["jaipur", "made-in-india-whisky"],
+    ["jodhpur", "single-malts"],
+    ["kota", "rum"],
+    ["mumbai", "red-wine"],
+    ["thane", "vodka"],
+    ["ghaziabad", "gin"],
+    ["agra", "beers"],
+    ["lucknow", "vodka"],
+    ["udaipur", "made-in-india-whisky"],
+    ["noida", "rum"],
+    ["kanpur", "gin"],
+    ["asansol", "beers"],
   ] as const)("extracts %s cards", (citySlug, categorySlug) => {
     const html = `
       <a href="/${citySlug}/liquor/sample-product-750ml">
@@ -126,7 +171,21 @@ describe("Livcheers catalogue import helpers", () => {
   it("keeps uncertain source rows out of public catalogue pages", () => {
     expect(sourceRowRequiresReview({ category_review_needed: "true" })).toBe(true);
     expect(sourceRowRequiresReview({ identity_review_needed: "TRUE" })).toBe(true);
+    expect(sourceRowRequiresReview({ source_stale_review: "true" })).toBe(true);
+    expect(sourceRowRequiresReview({ selected_evidence_older_than_alternative: "TRUE" })).toBe(true);
     expect(sourceRowRequiresReview({ metadata_review_needed: "false", price_conflict: "false" })).toBe(false);
+  });
+
+  it("prefers category evidence over unrelated product cards when deduplicating", () => {
+    expect(sourceEvidenceScore({
+      price_evidence: "category_card",
+      source_category: "rum",
+      source_url: "https://www.livcheers.com/mumbai/category/rum",
+    })).toBeGreaterThan(sourceEvidenceScore({
+      price_evidence: "related_card",
+      source_category: "rum",
+      source_url: "https://www.livcheers.com/mumbai/liquor/unrelated-wine-750ml",
+    }));
   });
 
   it("merges additive product metadata without duplicates", () => {
