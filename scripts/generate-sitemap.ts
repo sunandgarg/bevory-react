@@ -2,6 +2,7 @@ import "dotenv/config";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { PrismaClient, type Prisma } from "@prisma/client";
 import { BEVORY_CITIES, CITY_SLUGS } from "../src/lib/locations.js";
+import { DEMAND_GUIDES } from "../src/lib/demandGuides.js";
 
 type SitemapImage = { loc: string; title?: string };
 type SitemapEntry = { path: string; lastmod?: string; images?: SitemapImage[] };
@@ -15,6 +16,16 @@ type SeoRoute = {
   image?: string;
   breadcrumbs: Breadcrumb[];
   structuredData?: Record<string, unknown>;
+};
+type ProductSeoIndexEntry = {
+  name: string;
+  brand: string;
+  description: string;
+  image?: string;
+  categoryName?: string;
+  categorySlug?: string;
+  volumes: string[];
+  prices: Record<string, Record<string, number>>;
 };
 
 const origin = "https://bevory.in";
@@ -198,6 +209,10 @@ try {
     prices.filter((row) => productById.has(String(row.data.product_id ?? ""))),
     (row) => `${row.data.city_id}|${row.data.product_id}`,
   );
+  const pricesByProduct = groupBy(
+    prices.filter((row) => productById.has(String(row.data.product_id ?? ""))),
+    (row) => String(row.data.product_id ?? ""),
+  );
   const cities = byTable("cities").flatMap((row) => {
     const city = BEVORY_CITIES.find((candidate) => (
       candidate.name.toLowerCase() === String(row.data.name ?? "").toLowerCase()
@@ -206,12 +221,16 @@ try {
   });
   const cityById = new Map(cities.map((item) => [item.row.id, item]));
   const entries: SitemapEntry[] = staticRoutes.map(({ seo: _seo, ...entry }) => entry);
+  const entryPaths = new Set(entries.map((entry) => entry.path));
   const seoRoutes: Record<string, SeoRoute> = Object.fromEntries(
     staticRoutes.map(({ path, seo }) => [path, seo]),
   );
 
   const addRoute = (entry: SitemapEntry, seo: SeoRoute) => {
-    entries.push(entry);
+    if (!entryPaths.has(entry.path)) {
+      entries.push(entry);
+      entryPaths.add(entry.path);
+    }
     seoRoutes[entry.path] = seo;
   };
 
@@ -438,6 +457,94 @@ try {
     }
   }
 
+  const productSeoIndex: Record<string, ProductSeoIndexEntry> = {};
+  for (const product of products) {
+    const productSlug = String(product.data.slug);
+    const productName = `${product.data.brand || ""} ${product.data.name || ""}`.trim();
+    const category = categoryById.get(String(product.data.category_id ?? ""));
+    const image = product.data.image_identity_verified === true ? validImageUrl(product.data.image_url) : null;
+    const productPriceRows = pricesByProduct.get(product.id) ?? [];
+    const volumeLabels = new Map<string, string>();
+    for (const size of Array.isArray(product.data.available_volumes_ml) ? product.data.available_volumes_ml : []) {
+      const numericSize = Number(size);
+      if (Number.isFinite(numericSize) && numericSize > 0) volumeLabels.set(`${numericSize}ml`, `${numericSize}ml`);
+    }
+    if (product.data.volume) {
+      const label = String(product.data.volume);
+      volumeLabels.set(label.toLowerCase().replace(/\s+/g, ""), label);
+    }
+    for (const row of productPriceRows) {
+      const label = String(row.data.volume || `${row.data.volume_ml || ""}ml`);
+      volumeLabels.set(volumeSlug(row), label);
+    }
+    const volumes = [...volumeLabels.values()].sort((left, right) => Number.parseInt(right) - Number.parseInt(left));
+    const cityPrices: Record<string, Record<string, number>> = {};
+    for (const row of productPriceRows) {
+      const cityItem = cityById.get(String(row.data.city_id ?? ""));
+      if (!cityItem) continue;
+      const price = Number(row.data.price);
+      if (!Number.isFinite(price) || price <= 0) continue;
+      cityPrices[cityItem.city.slug] ??= {};
+      cityPrices[cityItem.city.slug][volumeSlug(row)] = price;
+    }
+
+    productSeoIndex[productSlug] = {
+      name: String(product.data.name || productName),
+      brand: String(product.data.brand || ""),
+      description: shortText(product.data.description || `${productName} bottle-size and local price guide.`, 300),
+      ...(image ? { image } : {}),
+      ...(category ? {
+        categoryName: String(category.data.name || ""),
+        categorySlug: String(category.data.slug || ""),
+      } : {}),
+      volumes,
+      prices: cityPrices,
+    };
+
+    for (const { city } of cities) {
+      const basePath = `/${city.slug}/product/${productSlug}`;
+      if (!entryPaths.has(basePath)) {
+        entries.push({
+          path: basePath,
+          lastmod: latestTimestamp(product.data.updated_at, product.data.created_at),
+          images: image ? [{ loc: image, title: `${productName} bottle` }] : [],
+        });
+        entryPaths.add(basePath);
+      }
+      for (const label of volumes) {
+        const variantPath = `${basePath}/${label.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9.-]/g, "-")}`;
+        if (entryPaths.has(variantPath)) continue;
+        entries.push({
+          path: variantPath,
+          lastmod: latestTimestamp(product.data.updated_at, product.data.created_at),
+          images: image ? [{ loc: image, title: `${productName} ${label} bottle` }] : [],
+        });
+        entryPaths.add(variantPath);
+      }
+    }
+  }
+
+  for (const guide of DEMAND_GUIDES) {
+    const path = `/guide/${guide.slug}`;
+    addRoute({ path, lastmod: guide.published_at }, {
+      title: guide.meta_title,
+      description: guide.meta_description,
+      heading: guide.title,
+      body: [guide.excerpt, plainText(guide.content)],
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Guide", path: "/guide" }, { name: guide.title, path }],
+      structuredData: {
+        "@type": "Article",
+        headline: guide.title,
+        description: guide.meta_description,
+        datePublished: guide.published_at,
+        dateModified: guide.published_at,
+        author: { "@type": "Organization", name: "Bevory" },
+        publisher: { "@type": "Organization", name: "Bevory", logo: { "@type": "ImageObject", url: `${origin}/favicon.png` } },
+        mainEntityOfPage: `${origin}${path}`,
+      },
+    });
+  }
+
   for (const post of byTable("blog_posts").filter((row) => row.data.is_published === true && row.data.slug)) {
     const path = `/guide/${post.data.slug}`;
     const image = validImageUrl(post.data.cover_image_url);
@@ -531,27 +638,29 @@ try {
     });
   }
 
-  const uniqueEntries = [...new Map(entries.map((entry) => [entry.path, entry])).values()];
+  const uniqueEntries = entries;
+  const totalUrlCount = uniqueEntries.length;
+  const imageCount = uniqueEntries.reduce((total, entry) => total + new Set((entry.images ?? []).map((item) => item.loc)).size, 0);
+  const variantCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+\/[^/]+$/.test(entry.path)).length;
+  const productCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+$/.test(entry.path)).length;
   const sitemapDirectory = new URL("../public/sitemaps/", import.meta.url);
   await rm(sitemapDirectory, { recursive: true, force: true });
-  const sitemapChunks = Array.from(
-    { length: Math.ceil(uniqueEntries.length / sitemapUrlLimit) },
-    (_value, index) => uniqueEntries.slice(index * sitemapUrlLimit, (index + 1) * sitemapUrlLimit),
-  );
-  const sitemapFiles = sitemapChunks.length > 1 ? sitemapChunks.map((chunk, index) => {
-    const fileName = `catalog-${index + 1}.xml`;
-    const xml = renderUrlSet(chunk);
-    if (Buffer.byteLength(xml) > sitemapByteLimit) {
-      throw new Error(`${fileName} exceeds the uncompressed 50 MB sitemap limit.`);
+  const sitemapFileCount = Math.ceil(uniqueEntries.length / sitemapUrlLimit);
+  const sitemapFiles: Array<{ fileName: string; lastmod?: string }> = [];
+  if (sitemapFileCount > 1) {
+    await mkdir(sitemapDirectory, { recursive: true });
+    for (let index = 0; index < sitemapFileCount; index += 1) {
+      const chunk = uniqueEntries.slice(index * sitemapUrlLimit, (index + 1) * sitemapUrlLimit);
+      const fileName = `catalog-${index + 1}.xml`;
+      const xml = renderUrlSet(chunk);
+      if (Buffer.byteLength(xml) > sitemapByteLimit) {
+        throw new Error(`${fileName} exceeds the uncompressed 50 MB sitemap limit.`);
+      }
+      await writeFile(new URL(fileName, sitemapDirectory), xml);
+      sitemapFiles.push({ fileName, lastmod: latestTimestamp(chunk.map((entry) => entry.lastmod)) });
     }
-    return {
-      fileName,
-      xml,
-      lastmod: latestTimestamp(chunk.map((entry) => entry.lastmod)),
-    };
-  }) : [];
-  if (sitemapFiles.length) await mkdir(sitemapDirectory, { recursive: true });
-  const sitemapXml = sitemapFiles.length ? [
+  }
+  const sitemapXml = sitemapFileCount > 1 ? [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ...sitemapFiles.map(({ fileName, lastmod }) => [
@@ -563,6 +672,9 @@ try {
     "</sitemapindex>",
     "",
   ].join("\n") : renderUrlSet(uniqueEntries);
+  await writeFile(new URL("../public/sitemap.xml", import.meta.url), sitemapXml);
+  entries.length = 0;
+  entryPaths.clear();
 
   const seoBuckets = new Map<string, Record<string, SeoRoute>>();
   for (const [path, seo] of Object.entries(seoRoutes)) {
@@ -574,40 +686,40 @@ try {
   const seoDirectory = new URL("../public/seo-routes/", import.meta.url);
   await rm(seoDirectory, { recursive: true, force: true });
   await mkdir(seoDirectory, { recursive: true });
+  const seoRouteCount = Object.keys(seoRoutes).length;
   const seoBucketNames = [...new Set([
     "content",
     ...CITY_SLUGS.map((citySlug) => `${citySlug}-pages`),
     ...seoBuckets.keys(),
   ])];
 
-  await Promise.all([
-    writeFile(
-      new URL("../public/sitemap.xml", import.meta.url),
-      sitemapXml,
-    ),
-    ...sitemapFiles.map(({ fileName, xml }) => writeFile(new URL(fileName, sitemapDirectory), xml)),
-    ...seoBucketNames.map((bucket) => writeFile(
+  for (const bucket of seoBucketNames) {
+    await writeFile(
       new URL(`${bucket}.json`, seoDirectory),
       `${JSON.stringify(seoBuckets.get(bucket) ?? {})}\n`,
-    )),
-    writeFile(
-      new URL("manifest.json", seoDirectory),
-      `${JSON.stringify({
-        generatedAt: new Date().toISOString(),
-        routes: Object.keys(seoRoutes).length,
-        buckets: Object.fromEntries(seoBucketNames.map((bucket) => [
-          bucket,
-          Object.keys(seoBuckets.get(bucket) ?? {}).length,
-        ])),
-      })}\n`,
-    ),
-  ]);
+    );
+  }
+  await writeFile(
+    new URL("product-index.json", seoDirectory),
+    `${JSON.stringify({
+      products: productSeoIndex,
+      brandsById: Object.fromEntries(brands.map((brand) => [brand.id, brand.data.slug])),
+    })}\n`,
+  );
+  await writeFile(
+    new URL("manifest.json", seoDirectory),
+    `${JSON.stringify({
+      generatedAt: new Date().toISOString(),
+      routes: seoRouteCount,
+      buckets: Object.fromEntries(seoBucketNames.map((bucket) => [
+        bucket,
+        Object.keys(seoBuckets.get(bucket) ?? {}).length,
+      ])),
+    })}\n`,
+  );
 
-  const imageCount = uniqueEntries.reduce((total, entry) => total + new Set((entry.images ?? []).map((item) => item.loc)).size, 0);
-  const variantCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+\/[^/]+$/.test(entry.path)).length;
-  const productCount = uniqueEntries.filter((entry) => /^\/[a-z-]+\/product\/[^/]+$/.test(entry.path)).length;
-  const sitemapFormat = sitemapFiles.length ? `${sitemapFiles.length} indexed files` : "one URL set";
-  console.log(`Generated sitemap with ${uniqueEntries.length} URLs and ${imageCount} images in ${sitemapFormat} (${productCount} city products, ${variantCount} city variants, ${Object.keys(seoRoutes).length} SEO routes)`);
+  const sitemapFormat = sitemapFileCount > 1 ? `${sitemapFiles.length} indexed files` : "one URL set";
+  console.log(`Generated sitemap with ${totalUrlCount} URLs and ${imageCount} images in ${sitemapFormat} (${productCount} city products, ${variantCount} city variants, ${seoRouteCount} SEO routes)`);
 } finally {
   await prisma.$disconnect();
 }

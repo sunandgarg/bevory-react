@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, BookOpen, Calendar, User, ChevronRight, X, Clock, TrendingUp, Star, Sparkles } from "lucide-react";
+import { Search, BookOpen, Calendar, User, ChevronRight, X, Clock, TrendingUp, Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import MobileLayout from "@/components/layout/MobileLayout";
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import SEOHead from "@/components/SEOHead";
+import { DEMAND_GUIDES } from "@/lib/demandGuides";
 
 interface BlogPost {
   id: string;
@@ -33,7 +34,7 @@ const Guide = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const { data: posts = [], isLoading } = useQuery({
+  const { data: databasePosts = [], isLoading } = useQuery({
     queryKey: ["guide-posts"],
     queryFn: async () => {
       const { data, error } = await apiClient
@@ -47,6 +48,14 @@ const Guide = () => {
       return data as BlogPost[];
     },
   });
+
+  const posts = useMemo(() => {
+    const databaseSlugs = new Set(databasePosts.map((post) => post.slug));
+    return [
+      ...DEMAND_GUIDES.filter((guide) => !databaseSlugs.has(guide.slug)),
+      ...databasePosts,
+    ] as BlogPost[];
+  }, [databasePosts]);
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -78,19 +87,16 @@ const Guide = () => {
       />
       <MobileLayout showSearch={false} showCheersGuide={false}>
         {/* Hero Header */}
-        <header className="relative overflow-hidden">
-          {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-background to-background" />
-          
+        <header className="border-b border-border bg-secondary/30">
           <div className="relative px-4 pt-6 pb-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-6"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-3">
-                <Sparkles className="w-4 h-4" />
-                <span>Expert Knowledge Hub</span>
+              <div className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-3">
+                <BookOpen className="w-4 h-4" />
+                <span>Price guides and practical knowledge</span>
               </div>
               <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
                 Bevory Guide
@@ -100,21 +106,19 @@ const Guide = () => {
               </p>
             </motion.div>
 
-            {/* Search with Glass Effect */}
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-accent/10 rounded-2xl blur-xl" />
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
                   placeholder="Search articles, topics, recipes..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-10 h-12 bg-card/80 backdrop-blur-sm border-border/50 rounded-2xl text-base shadow-lg"
+                  className="pl-12 pr-10 h-12 bg-card border-border rounded-xl text-base"
                 />
                 <AnimatePresence>
                   {searchQuery && (
@@ -237,7 +241,7 @@ const FeaturedArticleCard = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.1 }}
-    className="group relative rounded-3xl overflow-hidden cursor-pointer"
+    className="group relative rounded-xl overflow-hidden cursor-pointer border border-border"
   >
     <Link to={`/guide/${post.slug}`}>
       {/* Background Image or Gradient */}
@@ -249,7 +253,7 @@ const FeaturedArticleCard = ({
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-accent/30 via-accent/10 to-secondary flex items-center justify-center">
+          <div className="w-full h-full bg-secondary flex items-center justify-center">
             <span className="text-8xl">{post.cover_emoji || "📰"}</span>
           </div>
         )}
@@ -314,7 +318,7 @@ const ArticleCard = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.05 }}
-    className="group rounded-2xl overflow-hidden bg-card border border-border/50 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300 cursor-pointer"
+    className="group rounded-xl overflow-hidden bg-card border border-border hover:border-accent/40 transition-all duration-300 cursor-pointer"
   >
     <Link to={`/guide/${post.slug}`}>
       {/* Image */}
@@ -326,7 +330,7 @@ const ArticleCard = ({
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
+          <div className="w-full h-full bg-secondary flex items-center justify-center">
             <span className="text-5xl">{post.cover_emoji || "📰"}</span>
           </div>
         )}

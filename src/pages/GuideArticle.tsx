@@ -11,6 +11,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import SEOHead from "@/components/SEOHead";
+import { demandGuideBySlug } from "@/lib/demandGuides";
+import { cityRecordIdFromSlug } from "@/lib/locations";
+import { generateProductUrl } from "@/lib/productSlug";
 
 interface BlogPost {
   id: string;
@@ -27,14 +30,17 @@ interface BlogPost {
   is_featured: boolean | null;
   meta_title: string | null;
   meta_description: string | null;
+  citySlug?: string;
+  categorySlug?: string;
 }
 
 const GuideArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const demandGuide = demandGuideBySlug(slug);
 
-  const { data: post, isLoading } = useQuery({
+  const { data: databasePost, isLoading } = useQuery({
     queryKey: ["guide-article", slug],
     queryFn: async () => {
       const { data, error } = await apiClient
@@ -48,6 +54,21 @@ const GuideArticle = () => {
       return data as BlogPost | null;
     },
     enabled: !!slug,
+  });
+  const post = databasePost || demandGuide || null;
+
+  const { data: guideProducts = [] } = useQuery({
+    queryKey: ["demand-guide-products", demandGuide?.citySlug, demandGuide?.categorySlug],
+    queryFn: async () => {
+      const { data, error } = await apiClient.catalog.getCity(cityRecordIdFromSlug(demandGuide!.citySlug!));
+      if (error) throw error;
+      return ((data?.products ?? []) as Array<Record<string, any>>)
+        .filter((product) => product.category?.slug === demandGuide?.categorySlug)
+        .sort((left, right) => Number(left.price || Number.MAX_SAFE_INTEGER) - Number(right.price || Number.MAX_SAFE_INTEGER))
+        .slice(0, 24);
+    },
+    enabled: Boolean(demandGuide?.citySlug && demandGuide?.categorySlug),
+    staleTime: 5 * 60 * 1000,
   });
 
   // Fetch related posts
@@ -65,7 +86,7 @@ const GuideArticle = () => {
       if (error) throw error;
       return data;
     },
-    enabled: !!post?.category,
+    enabled: Boolean(databasePost?.category),
   });
 
   // Calculate read time (approx 200 words per minute)
@@ -154,7 +175,7 @@ const GuideArticle = () => {
       }
     },
     "datePublished": post.published_at || new Date().toISOString(),
-    "dateModified": post.published_at || new Date().toISOString(),
+    "dateModified": post.published_at || "2026-09-20T00:00:00.000Z",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://bevory.in/guide/${post.slug}`
@@ -230,7 +251,7 @@ const GuideArticle = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
               </motion.figure>
             ) : (
-              <div className="h-40 bg-gradient-to-br from-accent/20 to-secondary flex items-center justify-center">
+              <div className="h-40 bg-secondary flex items-center justify-center border-b border-border">
                 <span className="text-7xl">{post.cover_emoji || "📰"}</span>
               </div>
             )}
@@ -318,6 +339,34 @@ const GuideArticle = () => {
                 })
               }}
             />
+
+            {guideProducts.length > 0 && demandGuide?.citySlug && (
+              <section className="mt-8 border-t border-border pt-6" aria-labelledby="live-price-list">
+                <h2 id="live-price-list" className="text-xl font-serif font-bold mb-2">
+                  Current listed products
+                </h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Prices are indicative. Open a product to compare every locally listed bottle size.
+                </p>
+                <div className="divide-y divide-border rounded-xl border border-border bg-card">
+                  {guideProducts.map((product) => (
+                    <Link
+                      key={product.id}
+                      to={generateProductUrl({ citySlug: demandGuide.citySlug, productSlug: product.slug || product.id })}
+                      className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-secondary/50 transition-colors"
+                    >
+                      <span className="min-w-0">
+                        <span className="block text-xs text-muted-foreground truncate">{product.brand}</span>
+                        <span className="block text-sm font-medium truncate">{product.name}</span>
+                      </span>
+                      <span className="text-sm font-semibold text-accent whitespace-nowrap">
+                        {product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price unavailable"}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
           </motion.div>
 
           {/* Engagement Bar */}

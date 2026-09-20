@@ -7,7 +7,7 @@ RUN apt-get update \
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN NODE_OPTIONS=--max-old-space-size=1024 pnpm build
 
 FROM node:22-bookworm-slim AS runtime
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY --chown=node:node --from=build /app/dist ./dist
 COPY --chown=node:node --from=build /app/dist-server ./dist-server
 COPY --chown=node:node --from=build /app/prisma ./prisma
 COPY --chown=node:node --from=build /app/scripts ./scripts
-COPY --chown=node:node --from=build /app/src/lib/catalogTaxonomy.ts /app/src/lib/locations.ts ./src/lib/
+COPY --chown=node:node --from=build /app/src/lib/catalogTaxonomy.ts /app/src/lib/demandGuides.ts /app/src/lib/locations.ts ./src/lib/
 RUN mkdir -p uploads && chown node:node uploads
 USER node
 EXPOSE 3001

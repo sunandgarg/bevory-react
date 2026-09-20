@@ -23,7 +23,7 @@ import OtherProductsSection from "@/components/product/OtherProductsSection";
 import ExploreCategories from "@/components/product/ExploreCategories";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
-import { cityRecordIdFromSlug } from "@/lib/locations";
+import { BEVORY_CITIES, cityRecordIdFromSlug } from "@/lib/locations";
 
 interface FAQ {
   question: string;
@@ -84,6 +84,11 @@ interface DisplayVolume {
   price: number | null;
 }
 
+interface CityPrice extends VolumePrice {
+  cityName: string;
+  citySlug: string;
+}
+
 const normalizeVolume = (value: string) => value.toLowerCase().replace(/\s+/g, "");
 const volumeSize = (value: string) => Number.parseInt(value.replace(/[^0-9]/g, "")) || 0;
 
@@ -107,8 +112,8 @@ const ProductDetail = () => {
   const [volumePrices, setVolumePrices] = useState<VolumePrice[]>([]);
   const [selectedVolume, setSelectedVolume] = useState<string>("750ml");
   const [loading, setLoading] = useState(true);
-  const [unavailableInCity, setUnavailableInCity] = useState(false);
   const [unavailableVariant, setUnavailableVariant] = useState(false);
+  const [otherCityPrices, setOtherCityPrices] = useState<CityPrice[]>([]);
   const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [reviewRefresh, setReviewRefresh] = useState(0);
@@ -151,8 +156,8 @@ const ProductDetail = () => {
       if (!effectiveSlug) return;
 
       setLoading(true);
-      setUnavailableInCity(false);
       setUnavailableVariant(false);
+      setOtherCityPrices([]);
 
       setVolumePrices([]);
 
@@ -205,18 +210,35 @@ const ProductDetail = () => {
       setProduct(parsedProduct);
       setLoading(false);
 
-      // Fetch all volume prices for selected city
+      // Fetch this product once, then split prices by city. This also gives an
+      // unpriced city page useful links to cities where a price is available.
       if (priceCityId) {
         const { data: priceData } = await apiClient
           .from("product_prices")
           .select("*")
           .eq("product_id", productData.id)
-          .eq("city_id", priceCityId)
           .eq("price_available", true)
           .neq("requires_review", true);
 
-        if (priceData && priceData.length > 0) {
-          const prices: VolumePrice[] = priceData.map((p) => ({
+        const validPrices = (priceData ?? []).filter((item) => Number(item.price) > 0);
+        const localPriceData = validPrices.filter((item) => item.city_id === priceCityId);
+        const cityById = new Map(BEVORY_CITIES.map((city) => [cityRecordIdFromSlug(city.slug), city]));
+        setOtherCityPrices(validPrices.flatMap((item) => {
+          if (item.city_id === priceCityId) return [];
+          const city = cityById.get(item.city_id);
+          if (!city) return [];
+          return [{
+            cityName: city.name,
+            citySlug: city.slug,
+            volume: item.volume || `${item.volume_ml || ""}ml`,
+            price: Number(item.price),
+            mrp: item.mrp == null ? null : Number(item.mrp),
+            in_stock: item.in_stock ?? true,
+          }];
+        }));
+
+        if (localPriceData.length > 0) {
+          const prices: VolumePrice[] = localPriceData.map((p) => ({
             volume: p.volume || "750ml",
             price: p.price,
             mrp: p.mrp,
@@ -228,8 +250,12 @@ const ProductDetail = () => {
           const routeVolume = requestedVolume
             ? prices.find((candidate) => normalizeVolume(candidate.volume) === requestedVolume)
             : null;
+          const globallyKnownVolume = requestedVolume && (
+            (productData.available_volumes_ml ?? []).some((size: number) => normalizeVolume(`${size}ml`) === requestedVolume)
+            || normalizeVolume(String(productData.volume || "")) === requestedVolume
+          );
           if (requestedVolume && !routeVolume) {
-            setUnavailableVariant(true);
+            setUnavailableVariant(!globallyKnownVolume);
             setSelectedVolume(requestedVolume);
           } else {
             const defaultVol = routeVolume || prices.find((p) => normalizeVolume(p.volume) === "750ml") || prices[0];
@@ -237,7 +263,12 @@ const ProductDetail = () => {
           }
         } else {
           setVolumePrices([]);
-          setUnavailableInCity(true);
+          if (requestedVolume) {
+            const globallyKnownVolume = (productData.available_volumes_ml ?? [])
+              .some((size: number) => normalizeVolume(`${size}ml`) === requestedVolume)
+              || normalizeVolume(String(productData.volume || "")) === requestedVolume;
+            setUnavailableVariant(!globallyKnownVolume);
+          }
           setSelectedVolume(
             requestedVolume
             || String(productData.volume || "")
@@ -248,7 +279,12 @@ const ProductDetail = () => {
         }
       } else {
         setVolumePrices([]);
-        setUnavailableInCity(true);
+        if (requestedVolume) {
+          const globallyKnownVolume = (productData.available_volumes_ml ?? [])
+            .some((size: number) => normalizeVolume(`${size}ml`) === requestedVolume)
+            || normalizeVolume(String(productData.volume || "")) === requestedVolume;
+          setUnavailableVariant(!globallyKnownVolume);
+        }
         setSelectedVolume(requestedVolume || String(productData.volume || ""));
       }
 
@@ -314,7 +350,7 @@ const ProductDetail = () => {
       }
       robots.setAttribute(
         "content",
-        unavailableInCity || unavailableVariant
+        unavailableVariant
           ? "noindex, follow, max-image-preview:large"
           : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
       );
@@ -462,7 +498,6 @@ const ProductDetail = () => {
     routeCity?.name,
     selectedCity?.name,
     selectedVolume,
-    unavailableInCity,
     unavailableVariant,
     volumePrices,
   ]);
@@ -488,6 +523,17 @@ const ProductDetail = () => {
     }
     return [...byVolume.values()].sort((left, right) => volumeSize(right.volume) - volumeSize(left.volume));
   }, [product?.available_volumes_ml, product?.volume, requestedVolume, volumePrices]);
+  const relevantOtherCityPrices = useMemo(() => {
+    const selected = normalizeVolume(selectedVolume || "");
+    const matching = selected
+      ? otherCityPrices.filter((item) => normalizeVolume(item.volume) === selected)
+      : otherCityPrices;
+    const uniqueByCity = new Map<string, CityPrice>();
+    for (const item of matching.sort((left, right) => left.price - right.price)) {
+      if (!uniqueByCity.has(item.citySlug)) uniqueByCity.set(item.citySlug, item);
+    }
+    return [...uniqueByCity.values()].slice(0, 8);
+  }, [otherCityPrices, selectedVolume]);
 
   const handleShare = async () => {
     try {
@@ -727,6 +773,29 @@ const ProductDetail = () => {
                 : `No local price is listed for ${displayCityName || "your selected city"} yet.`}
             </p>
           </div>
+
+          {relevantOtherCityPrices.length > 0 && (
+            <section aria-labelledby="other-city-prices">
+              <h2 id="other-city-prices" className="font-semibold mb-2">
+                {selectedVolume || product.volume} prices in other cities
+              </h2>
+              <div className="divide-y divide-border rounded-xl border border-border bg-card">
+                {relevantOtherCityPrices.map((item) => (
+                  <Link
+                    key={`${item.citySlug}-${item.volume}`}
+                    to={generateProductUrlWithVolume({
+                      citySlug: item.citySlug,
+                      productSlug: product.slug || product.id,
+                    }, item.volume)}
+                    className="flex items-center justify-between px-4 py-3 text-sm hover:bg-secondary/50 transition-colors"
+                  >
+                    <span>{item.cityName}</span>
+                    <span className="font-semibold text-accent">₹{item.price.toLocaleString("en-IN")}</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Quick Info */}
           <div className="grid grid-cols-3 gap-3">

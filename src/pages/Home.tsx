@@ -3,7 +3,6 @@ import {
   PartyPopper,
   ArrowLeftRight,
   ArrowRight,
-  Sparkles,
   TrendingUp,
   BookOpen,
   Flame,
@@ -20,6 +19,7 @@ import Footer from "@/components/layout/Footer";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Skeleton } from "@/components/ui/skeleton";
 import { citySlugFromName } from "@/lib/locations";
+import { SEARCH_DEMAND_LINKS } from "@/lib/searchDemand";
 
 const BrandSpotlight = lazy(() => import("@/components/home/BrandSpotlight"));
 const HomeCocktails = lazy(() => import("@/components/home/HomeCocktails"));
@@ -91,14 +91,10 @@ const Home = () => {
 
         {/* ─── Hero Banner ─── */}
         <div className="px-4">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-foreground via-foreground to-foreground/85 px-6 pt-7 pb-6 text-background animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <div aria-hidden className="absolute -top-16 -right-12 w-56 h-56 rounded-full bg-accent/25 blur-3xl" />
-            <div aria-hidden className="absolute -bottom-16 -left-12 w-48 h-48 rounded-full bg-primary/20 blur-3xl" />
-            <div aria-hidden className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] [background-size:14px_14px]" />
-
+          <div className="relative overflow-hidden rounded-2xl bg-foreground border border-foreground px-6 pt-7 pb-6 text-background animate-in fade-in slide-in-from-bottom-2 duration-500">
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background/15 backdrop-blur-sm text-[10px] font-medium mb-4 uppercase tracking-[0.12em]">
-                <Sparkles className="w-3 h-3 text-accent" />
+              <div className="inline-flex items-center gap-1.5 text-[10px] font-medium mb-4 uppercase tracking-[0.12em]">
+                <ShieldCheck className="w-3 h-3 text-accent" />
                 Know Before You Drink
               </div>
 
@@ -116,14 +112,14 @@ const Home = () => {
               <div className="flex flex-wrap gap-2">
                 <Link
                   to="/party-planner"
-                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-accent text-accent-foreground text-sm font-semibold shadow-[var(--shadow-gold)] hover:brightness-110 transition-all duration-200 active:scale-[0.97]"
+                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-semibold hover:brightness-110 transition-all duration-200 active:scale-[0.97]"
                 >
                   <PartyPopper className="w-4 h-4" />
                   Plan a Party
                 </Link>
                 <Link
                   to="/search"
-                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-background/15 backdrop-blur-sm text-background text-sm font-medium hover:bg-background/25 transition-all duration-200 active:scale-[0.97] border border-background/10"
+                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-background/10 text-background text-sm font-medium hover:bg-background/20 transition-all duration-200 active:scale-[0.97] border border-background/20"
                 >
                   <ArrowLeftRight className="w-4 h-4" />
                   Compare
@@ -142,6 +138,25 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        <section className="px-4" aria-labelledby="popular-now">
+          <div className="flex items-center gap-2 mb-3">
+            <TrendingUp className="w-4 h-4 text-accent" />
+            <h2 id="popular-now" className="text-[15px] font-bold">Popular right now</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {SEARCH_DEMAND_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="min-h-11 flex items-center justify-between gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium hover:border-accent/50 transition-colors"
+              >
+                <span>{item.label}</span>
+                <ArrowRight className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* ─── Quick Actions ─── */}
         <div className="px-4">
@@ -221,10 +236,9 @@ const Home = () => {
         <div className="px-4">
           <Link
             to="/party-planner"
-            className="block relative overflow-hidden rounded-2xl bg-gradient-to-r from-accent/15 via-accent/5 to-transparent border border-accent/25 p-5 hover:border-accent/40 transition-all active:scale-[0.99]"
+            className="block rounded-xl bg-secondary/60 border border-accent/25 p-5 hover:border-accent/40 transition-all active:scale-[0.99]"
           >
-            <div aria-hidden className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-accent/10 blur-2xl" />
-            <div className="relative flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Flame className="w-3.5 h-3.5 text-accent" />
@@ -239,7 +253,7 @@ const Home = () => {
                   Personalized drink picks for your budget
                 </p>
               </div>
-              <div className="w-11 h-11 rounded-2xl bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0 shadow-[var(--shadow-gold)]">
+              <div className="w-11 h-11 rounded-xl bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>

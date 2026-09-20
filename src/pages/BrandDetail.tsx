@@ -157,7 +157,6 @@ const BrandDetail = () => {
 
           setProducts(
             productsData
-              .filter((product) => pricesMap.has(product.id))
               .map((product) => {
                 const prices = (pricesMap.get(product.id) ?? []).sort((left, right) => {
                   const leftPreferred = left.volume_ml === 750 ? 1 : 0;
@@ -315,14 +314,12 @@ const BrandDetail = () => {
     <>
       <SEOHead
         title={`${brand.brand_name} Prices in ${selectedCity?.name || "Gurgaon"} | Bevory`}
-        description={brand.description || `Explore locally priced ${brand.brand_name} products and bottle sizes in ${selectedCity?.name || "Gurgaon"}.`}
+        description={brand.description || `Explore ${brand.brand_name} products and bottle sizes in ${selectedCity?.name || "Gurgaon"}, with local prices shown where verified.`}
         keywords={`${brand.brand_name}, ${brand.country || ''} spirits, whisky, premium beverages, tasting notes, food pairing`}
         canonical={`/${canonicalCitySlug}/brand/${brand.slug || slug}`}
         ogImage={brand.image_url || brand.logo_url || undefined}
         jsonLd={generateStructuredData() || undefined}
-        robots={products.length > 0
-          ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-          : "noindex, follow, max-image-preview:large"}
+        robots="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
       />
       
       <MobileLayout showSearch={false} showCheersGuide={false}>
@@ -343,7 +340,7 @@ const BrandDetail = () => {
             animate={{ opacity: 1, y: 0 }}
             className="px-4 pt-4"
           >
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-accent/20 via-accent/10 to-background border border-accent/20">
+            <div className="relative rounded-xl overflow-hidden bg-secondary/60 border border-border">
               {brand.image_url && (
                 <OptimizedImage
                   src={brand.image_url}
@@ -377,7 +374,7 @@ const BrandDetail = () => {
                       <p className="text-sm text-accent font-medium mt-1" itemProp="foundingLocation">{brand.country}</p>
                     )}
                     <p className="text-sm text-muted-foreground mt-2">
-                      {products.length} {products.length === 1 ? 'product' : 'products'} available
+                      {products.length} {products.length === 1 ? 'product' : 'products'} listed
                     </p>
                   </div>
                 </div>
@@ -413,7 +410,7 @@ const BrandDetail = () => {
               transition={{ delay: 0.08 }}
               className="px-4 mt-4"
             >
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/20">
+              <div className="p-5 rounded-xl bg-secondary/50 border border-border">
                 <h3 className="font-serif font-semibold text-lg mb-3 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-amber-500" />
                   Our Story
@@ -484,7 +481,7 @@ const BrandDetail = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.17 + i * 0.03 }}
-                    className="p-4 rounded-xl bg-gradient-to-r from-secondary/80 to-secondary/40 border border-border/50"
+                    className="p-4 rounded-xl bg-secondary/60 border border-border/50"
                   >
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -571,7 +568,7 @@ const BrandDetail = () => {
               transition={{ delay: 0.25 }}
               className="px-4 mt-5"
             >
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-accent/15 to-accent/5 border border-accent/25">
+              <div className="p-5 rounded-xl bg-secondary/60 border border-accent/25">
                 <h3 className="font-serif font-semibold text-lg mb-3 flex items-center gap-2">
                   <Award className="w-5 h-5 text-accent" />
                   Why Choose {brand.brand_name}?

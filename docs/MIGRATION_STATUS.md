@@ -23,7 +23,7 @@ and verified.
 | AWS Lightsail API | Complete | Container health check and public `/api/health` pass |
 | Lightsail Managed MySQL | Complete | Prisma schema, seed, catalogue, and live health checks pass |
 | Catalogue import | Complete | 30 cities, 18 active categories, 121 active subcategories, 1,818 active brands, 5,991 active products, and 37,981 public price variants |
-| City availability | Complete | Only approved variants priced in the selected city are returned |
+| City availability | Complete | The global product and known-size catalogue remains visible in every supported city; only approved local price records are shown as prices |
 | Product images | Reachable external sources | All 1,038 products referenced by Kolkata have verified images; 207 of 463 used brands have verified logos and 256 remain unset rather than guessed |
 | Guide recovery | Complete | 50 articles reconstructed, 2,179 fragments quarantined, and 11 evergreen articles published |
 | 25+ compliance UI | Complete | The configurable 25+ gate is mounted globally across public, auth, and admin routes |
@@ -150,10 +150,11 @@ propagate the new name across all services.
   console errors.
 - Service worker v6 fetches route documents network-first so compliance changes
   are not hidden behind stale HTML.
-- `sitemap.xml` indexes five compliant shards containing 94,476 unique
-  canonical URLs and 80,471 image entries: 35,870 city product pages, 37,981
-  exact city-and-size pages, city brand and taxonomy pages, 11 published guides,
-  and 170 cocktails.
+- `sitemap.xml` indexes 21 compliant shards containing 405,471 unique
+  canonical URLs and 391,460 image entries: 179,730 city product pages, 205,110
+  known city-and-size pages, city brand and taxonomy pages, 17 published guides,
+  and 170 cocktails. Known sizes remain indexable when a city price is missing;
+  the page says the price is unavailable and emits no Offer schema.
 - `pnpm sitemap:audit` validates sitemap structure globally and supports safe
   shard, offset, and limit runs. Its production default is two concurrent
   requests to protect the 1 GB origin; representative live routes are checked

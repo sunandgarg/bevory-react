@@ -18,6 +18,20 @@ type SeoRoute = {
 
 type GeneratedSeoRoute = Partial<SeoRoute> & Pick<SeoRoute, "title" | "description" | "heading">;
 type SeoRouteMap = Record<string, GeneratedSeoRoute>;
+type ProductSeoIndexEntry = {
+  name: string;
+  brand: string;
+  description: string;
+  image?: string;
+  categoryName?: string;
+  categorySlug?: string;
+  volumes: string[];
+  prices: Record<string, Record<string, number>>;
+};
+type ProductSeoIndex = {
+  products: Record<string, ProductSeoIndexEntry>;
+  brandsById: Record<string, string>;
+};
 
 const cityNames = new Map([
   ["agra", "Agra"], ["asansol", "Asansol"], ["bangalore", "Bangalore"],
@@ -138,6 +152,100 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
   return { ...seo, robots: "noindex, follow, max-image-preview:large" };
 };
 
+export const resolveDynamicProductSeo = (
+  pathname: string,
+  productIndex: ProductSeoIndex,
+): SeoRoute | null => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2] || parts.length > 4) return null;
+  const citySlug = parts[0];
+  const cityName = cityNames.get(citySlug)!;
+  const productSlug = parts[2];
+  const requestedVolume = parts[3]?.toLowerCase();
+  const product = productIndex.products[productSlug];
+  if (!product) return null;
+
+  const productName = `${product.brand || ""} ${product.name || ""}`.trim();
+  const knownVolumes = Array.isArray(product.volumes) ? product.volumes : [];
+  const knownVolume = requestedVolume
+    ? knownVolumes.find((value) => value.toLowerCase().replace(/\s+/g, "") === requestedVolume)
+    : null;
+  if (requestedVolume && !knownVolume) return null;
+
+  const cityPrices = product.prices[citySlug] || {};
+  const selectedPrice = requestedVolume ? cityPrices[requestedVolume] : null;
+  const pricedSizes = Object.keys(cityPrices);
+  const knownSizesText = knownVolumes.length ? knownVolumes.join(", ") : "size information pending";
+  const otherCities = Object.entries(product.prices)
+    .filter(([slug]) => slug !== citySlug)
+    .flatMap(([slug, values]) => {
+      const price = requestedVolume ? values[requestedVolume] : Object.values(values)[0];
+      return price ? [`${cityNames.get(slug) || humanize(slug)} at ₹${Number(price).toLocaleString("en-IN")}`] : [];
+    })
+    .slice(0, 6);
+  const canonicalPath = `/${citySlug}/product/${productSlug}${requestedVolume ? `/${requestedVolume}` : ""}`;
+  const sizeLabel = knownVolume || "";
+  const priceStatement = selectedPrice
+    ? `The reviewed indicative ${sizeLabel} price in ${cityName} is ₹${Number(selectedPrice).toLocaleString("en-IN")}.`
+    : requestedVolume
+      ? `${sizeLabel} is a known bottle size, but Bevory does not yet have a verified price for it in ${cityName}.`
+      : pricedSizes.length
+        ? `Verified ${cityName} prices are currently listed for ${pricedSizes.join(", ")}.`
+        : `The product is known nationally, but Bevory does not yet have a verified local price for ${cityName}.`;
+  const structuredData: Record<string, unknown> = requestedVolume ? {
+    "@type": "Product",
+    name: `${productName} ${sizeLabel}`,
+    description: `${productName} ${sizeLabel} price and availability guide for ${cityName}.`,
+    brand: { "@type": "Brand", name: product.brand },
+    ...(product.image ? { image: product.image } : {}),
+    sku: `${productSlug}-${requestedVolume}-${citySlug}`,
+    size: sizeLabel,
+    url: `${SITE_ORIGIN}${canonicalPath}`,
+    isVariantOf: { "@type": "ProductGroup", name: productName, productGroupID: productSlug },
+    ...(selectedPrice ? {
+      offers: {
+        "@type": "Offer",
+        url: `${SITE_ORIGIN}${canonicalPath}`,
+        price: Number(selectedPrice),
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        areaServed: { "@type": "City", name: cityName },
+      },
+    } : {}),
+  } : {
+    "@type": "ProductGroup",
+    name: productName,
+    description: product.description,
+    brand: { "@type": "Brand", name: product.brand },
+    ...(product.image ? { image: product.image } : {}),
+    productGroupID: productSlug,
+    variesBy: ["https://schema.org/size"],
+    url: `${SITE_ORIGIN}${canonicalPath}`,
+  };
+
+  return {
+    title: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} Price in ${cityName} | Bevory`,
+    description: shortDescription(`${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price guide for ${cityName}. ${priceStatement} Known sizes: ${knownSizesText}.`),
+    heading: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price in ${cityName}`,
+    canonicalPath,
+    robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    body: [
+      priceStatement,
+      `Known bottle sizes for ${productName}: ${knownSizesText}. A dash means unavailable, not zero.`,
+      ...(otherCities.length ? [`Prices are also listed in other cities, including ${otherCities.join("; ")}.`] : []),
+    ],
+    ...(product.image ? { image: product.image } : {}),
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: cityName, path: `/${citySlug}` },
+      ...(product.categorySlug ? [{ name: product.categoryName || "Category", path: `/${citySlug}/category/${product.categorySlug}` }] : []),
+      { name: productName, path: `/${citySlug}/product/${productSlug}` },
+      ...(sizeLabel ? [{ name: sizeLabel, path: canonicalPath }] : []),
+    ],
+    structuredData,
+  };
+};
+
 const routeSchema = (seo: SeoRoute) => {
   const canonical = `${SITE_ORIGIN}${seo.canonicalPath}`;
   return {
@@ -224,6 +332,20 @@ export const rewriteSeoDocument = (template: string, route: SeoRoute) => {
   return html.replace(/<div id=["']root["']>[\s\S]*?<\/div>/i, seoShell(seo).trimEnd());
 };
 
+const legacyProductTargets = new Map([
+  ["all-seasons-reserve-whisky-750ml", "/gurgaon/brand/all-season"],
+  ["johnnie-walker-gold-label-reserve-375ml", "/gurgaon/product/johnnie-walker-gold-reserve-abc15db"],
+  ["royal-challenge-select-premium-750ml", "/gurgaon/brand/royal-challenge"],
+  ["johnnie-walker-blonde", "/gurgaon/product/johnnie-walker-blonde-f5823b7"],
+  ["something-special-750ml", "/gurgaon/product/something-special-something-special-e89fcdb/750ml"],
+  ["cragganmore-12-b2", "/gurgaon/product/cragganmore-cragganmore-12-yrs-9577524/750ml"],
+  ["bowmore-classic-e15e35", "/gurgaon/brand/bowmore"],
+  ["springbank-single-malt-750ml-t1", "/gurgaon/category/whisky"],
+  ["haywards-fine-180ml", "/gurgaon/product/haywards-haywards-fine-brandy-c11d5b5/180ml"],
+  ["royal-stag-deluxe-whisky-180ml", "/gurgaon/brand/royal-stag"],
+  ["mcdowell-s-no-1-platinum-750ml", "/gurgaon/product/mcdowells-mcdowell-no1-platinum-bfe18c0/750ml"],
+]);
+
 export const legacyRedirectPath = (pathname: string) => {
   const cleanPath = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const parts = cleanPath.split("/").filter(Boolean);
@@ -231,6 +353,15 @@ export const legacyRedirectPath = (pathname: string) => {
   if (cleanPath === "/") return "/gurgaon";
   if (parts.length === 1 && stateDefaultCities.has(parts[0])) {
     return `/${stateDefaultCities.get(parts[0])}`;
+  }
+  if (parts[0] === "brand" && parts[1]) {
+    return /^[0-9a-f-]{36}$/i.test(parts[1]) ? "/brands" : `/gurgaon/brand/${parts[1]}`;
+  }
+  if (parts[0] === "category" && parts[1]) {
+    return `/gurgaon/category/${parts.slice(1).join("/")}`;
+  }
+  if (parts[0] === "product" && parts[1]) {
+    return legacyProductTargets.get(parts[1]) || `/gurgaon/product/${parts[1]}`;
   }
 
   let stateSlug: string | undefined;
@@ -242,6 +373,9 @@ export const legacyRedirectPath = (pathname: string) => {
   }
   if (!stateSlug || !productSlug) return null;
 
+  const fixedTarget = legacyProductTargets.get(productSlug);
+  if (fixedTarget) return fixedTarget.replace(/^\/gurgaon/, `/${stateDefaultCities.get(stateSlug) || "gurgaon"}`);
+
   const preferredCity = stateDefaultCities.get(stateSlug)
     || (cityNames.has(stateSlug) ? stateSlug : null);
   return preferredCity ? `/${preferredCity}/product/${productSlug}` : null;
@@ -250,6 +384,9 @@ export const legacyRedirectPath = (pathname: string) => {
 export const createSeoRenderer = (clientDist: string) => {
   const template = readFile(path.join(clientDist, "index.html"), "utf8");
   const seoRoutesCache = new Map<string, Promise<SeoRouteMap>>();
+  const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
+    .then((value) => JSON.parse(value) as ProductSeoIndex)
+    .catch(() => ({ products: {}, brandsById: {} }));
 
   const loadSeoRoutes = (pathname: string) => {
     const bucket = seoBucketForPath(pathname);
@@ -263,8 +400,11 @@ export const createSeoRenderer = (clientDist: string) => {
     return routes;
   };
 
-  return async (pathname: string) => rewriteSeoDocument(
-    await template,
-    resolveSeo(pathname, await loadSeoRoutes(pathname)),
-  );
+  return async (pathname: string) => {
+    const generated = resolveSeo(pathname, await loadSeoRoutes(pathname));
+    const dynamic = generated.robots.startsWith("noindex")
+      ? resolveDynamicProductSeo(pathname, await productIndex)
+      : null;
+    return rewriteSeoDocument(await template, dynamic || generated);
+  };
 };

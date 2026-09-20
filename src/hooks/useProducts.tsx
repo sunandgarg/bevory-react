@@ -26,6 +26,7 @@ export interface Product {
   taste_profile?: string | null;
   is_trending?: boolean;
   is_all_time_favourite?: boolean;
+  available_volumes_ml?: number[];
   available_variants?: Array<{
     volume: string;
     volume_ml: number | null;

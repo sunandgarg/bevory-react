@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { legacyRedirectPath, resolveSeo, rewriteSeoDocument, seoBucketForPath } from "./seo.js";
+import {
+  legacyRedirectPath,
+  resolveDynamicProductSeo,
+  resolveSeo,
+  rewriteSeoDocument,
+  seoBucketForPath,
+} from "./seo.js";
 
 const template = `<!doctype html><html><head>
 <link rel="canonical" href="https://bevory.in/" />
@@ -50,5 +56,41 @@ describe("origin SEO rendering", () => {
     expect(legacyRedirectPath("/")).toBe("/gurgaon");
     expect(legacyRedirectPath("/haryana")).toBe("/gurgaon");
     expect(legacyRedirectPath("/haryana/whisky/scotch/black-dog-123")).toBe("/gurgaon/product/black-dog-123");
+    expect(legacyRedirectPath("/brand/peter-scot")).toBe("/gurgaon/brand/peter-scot");
+    expect(legacyRedirectPath("/brand/78575e48-2b55-4a22-9970-39dd28d337e6")).toBe("/brands");
+    expect(legacyRedirectPath("/product/johnnie-walker-blonde"))
+      .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
+  });
+
+  it("indexes known unpriced variants without creating an Offer", () => {
+    const seo = resolveDynamicProductSeo("/mumbai/product/black-label/180ml", {
+      brandsById: {},
+      products: {
+        "black-label": {
+          name: "Black Label",
+          brand: "Johnnie Walker",
+          description: "Blended Scotch whisky.",
+          categoryName: "Whisky",
+          categorySlug: "whisky",
+          volumes: ["750ml", "180ml"],
+          prices: { delhi: { "180ml": 900 }, gurgaon: { "750ml": 3200 } },
+        },
+      },
+    });
+    expect(seo?.robots).toContain("index, follow");
+    expect(seo?.body?.join(" ")).toContain("does not yet have a verified price");
+    expect(JSON.stringify(seo?.structuredData)).not.toContain('"offers"');
+    expect(resolveDynamicProductSeo("/mumbai/product/black-label/100ml", {
+      brandsById: {},
+      products: {
+        "black-label": {
+          name: "Black Label",
+          brand: "Johnnie Walker",
+          description: "Blended Scotch whisky.",
+          volumes: ["750ml", "180ml"],
+          prices: {},
+        },
+      },
+    })).toBeNull();
   });
 });

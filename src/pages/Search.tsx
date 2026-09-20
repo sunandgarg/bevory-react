@@ -1,18 +1,21 @@
 import { useEffect, useState, useMemo } from "react";
-import { Search as SearchIcon, SlidersHorizontal, X, Star, TrendingUp, Sparkles } from "lucide-react";
+import { Search as SearchIcon, SlidersHorizontal, X, Star, TrendingUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import MobileLayout from "@/components/layout/MobileLayout";
-import { useProducts } from "@/hooks/useProducts";
+import { Product, useProducts } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import { Link, useSearchParams } from "react-router-dom";
 import CompareButton from "@/components/product/CompareButton";
 import FavoriteButton from "@/components/FavoriteButton";
 import SEOHead from "@/components/SEOHead";
 import { useProductUrl } from "@/hooks/useProductUrl";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/integrations/api/client";
+import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/lib/searchDemand";
 import {
   Sheet,
   SheetContent,
@@ -24,6 +27,7 @@ import {
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(() => searchParams.get("q")?.trim() || "");
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(() => searchParams.get("category"));
   const [priceRange, setPriceRange] = useState([0, 50000]);
@@ -39,6 +43,41 @@ const Search = () => {
   const { selectedCity } = useLocation();
   const { getProductUrlSafe } = useProductUrl();
   const trendingOnly = searchParams.get("sort") === "trending" || searchParams.get("trending") === "true";
+  const searchIntent = useMemo(() => parseSearchIntent(debouncedQuery), [debouncedQuery]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedQuery(query), 250);
+    return () => window.clearTimeout(timer);
+  }, [query]);
+
+  const { data: globalMatches = [], isFetching: globalSearchLoading } = useQuery({
+    queryKey: ["global-product-search", searchIntent.text, searchIntent.volumeMl],
+    queryFn: async () => {
+      const lookup = searchIntent.lookupTerm.replace(/[%,]/g, "");
+      const { data, error } = await apiClient
+        .from("products")
+        .select(`
+          id, name, slug, brand, brand_id, category_id, sub_category_id, price, mrp, volume,
+          rating, image_emoji, image_url, origin, origin_flag, abv, age, type_tag,
+          taste_profile, is_trending, is_all_time_favourite, available_volumes_ml,
+          category:categories(name, slug, emoji),
+          sub_category:sub_categories(name, slug, emoji)
+        `)
+        .eq("is_active", true)
+        .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
+        .limit(250);
+      if (error) throw error;
+      return ((data ?? []) as Product[]).filter((product) => productMatchesIntent(product, searchIntent));
+    },
+    enabled: searchIntent.lookupTerm.length >= 2,
+    staleTime: 10 * 60 * 1000,
+  });
+
+  const searchableProducts = useMemo(() => {
+    if (!debouncedQuery.trim()) return products;
+    const localById = new Map(products.map((product) => [product.id, product]));
+    return globalMatches.map((product) => ({ ...product, ...localById.get(product.id) }));
+  }, [debouncedQuery, globalMatches, products]);
 
   useEffect(() => {
     setQuery(searchParams.get("q")?.trim() || "");
@@ -76,22 +115,14 @@ const Search = () => {
   };
 
   const filteredProducts = useMemo(() => {
-    let result = [...products];
+    let result = [...searchableProducts];
 
     if (trendingOnly) {
       result = result.filter((product) => product.is_trending);
     }
 
     // Search filter
-    if (query) {
-      const lowerQuery = query.toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.name.toLowerCase().includes(lowerQuery) ||
-          p.brand.toLowerCase().includes(lowerQuery) ||
-          p.category?.name.toLowerCase().includes(lowerQuery)
-      );
-    }
+    if (debouncedQuery) result = result.filter((product) => productMatchesIntent(product, searchIntent));
 
     // Category filter
     if (selectedCategory) {
@@ -134,7 +165,7 @@ const Search = () => {
     }
 
     return result;
-  }, [products, query, selectedCategory, priceRange, minRating, sortBy, trendingOnly]);
+  }, [searchableProducts, debouncedQuery, searchIntent, selectedCategory, priceRange, minRating, sortBy, trendingOnly]);
 
   const clearFilters = () => {
     setSelectedCategory(null);
@@ -179,9 +210,9 @@ const Search = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-2">
-                <Sparkles className="w-4 h-4" />
-                <span>Discover & Compare</span>
+              <div className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-2">
+                <TrendingUp className="w-4 h-4" />
+                <span>Search the full Bevory catalog</span>
               </div>
               <h1 className="text-2xl font-serif font-bold text-foreground">
                 Find Your Perfect Drink
@@ -196,7 +227,6 @@ const Search = () => {
                 transition={{ delay: 0.1 }}
                 className="relative flex-1"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-accent/10 rounded-xl blur-xl" />
                 <div className="relative">
                   <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
@@ -204,7 +234,7 @@ const Search = () => {
                     value={query}
                     onChange={(e) => handleQueryChange(e.target.value)}
                     aria-label="Search drinks and brands"
-                    className="pl-12 h-12 rounded-xl bg-card/80 backdrop-blur-sm border-border/50 shadow-lg"
+                    className="pl-12 h-12 rounded-xl bg-card border-border"
                   />
                   <AnimatePresence>
                     {query && (
@@ -347,6 +377,25 @@ const Search = () => {
           </header>
 
           <main className="px-4">
+            {!query && (
+              <section className="mb-5" aria-labelledby="popular-searches">
+                <h2 id="popular-searches" className="text-xs font-semibold text-muted-foreground mb-2">
+                  Popular searches
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {SEARCH_SUGGESTIONS.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => handleQueryChange(suggestion)}
+                      className="px-3 py-2 rounded-lg border border-border bg-card text-xs font-medium hover:border-accent/50 transition-colors"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
             {/* Results Info */}
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm text-muted-foreground" aria-live="polite">
@@ -366,7 +415,7 @@ const Search = () => {
             </div>
 
             {/* Products Grid */}
-            {loading ? (
+            {loading || (Boolean(query) && globalSearchLoading) ? (
               <div className="grid grid-cols-2 gap-3">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                   <div key={i} className="aspect-[3/4] bg-muted rounded-2xl animate-pulse" />
