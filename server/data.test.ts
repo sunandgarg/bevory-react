@@ -6,8 +6,92 @@ import {
   parseSelection,
   queryAccessAllowed,
   scopeWriteInput,
+  validateFirstPartyImages,
   type QueryPayload,
 } from "./data.js";
+
+describe("first-party rendered image validation", () => {
+  const appUrl = "https://bevory.in/admin";
+
+  it("allows relative images and exact APP_URL-origin images recursively", () => {
+    expect(() => validateFirstPartyImages({
+      image_url: "/media/images/product.jpg",
+      coverImageUrl: "https://bevory.in/media/covers/guide.png",
+      gallery_images: ["images/one.jpg", "../media/two.png"],
+      story: [{ type: "image", url: "/media/stories/three.jpg", alt: "Serving suggestion" }],
+      branding: {
+        header: {
+          logo: { type: "image", lightImageUrl: "/media/branding/light.png", darkImageUrl: "/media/branding/dark.png" },
+        },
+      },
+      content: [
+        '<p><img loading="lazy" src="/media/articles/four.jpg" alt="Article"></p>',
+        "<div style=\"background-image: url('/media/backgrounds/five.png')\"></div>",
+      ],
+    }, appUrl)).not.toThrow();
+  });
+
+  it.each([
+    [{ image_url: "https://images.example/product.jpg" }, "image_url"],
+    [{ logo_url: "//images.example/logo.png" }, "logo_url"],
+    [{ nested: { avatar: "http://bevory.in/media/avatar.jpg" } }, "avatar"],
+    [{ item: { type: "image", url: "https://other.example/story.jpg" } }, "url"],
+    [{ content: '<img src="https://other.example/article.jpg">' }, "<img src>"],
+    [{ content: '<img srcset="/media/one.jpg 1x, https://other.example/two.jpg 2x">' }, "<img srcset>"],
+    [{ content: "<div style=\"background:url(https://other.example/hero.jpg)\"></div>" }, "css-url"],
+    [{ content: "<img src=\"https&colon;&sol;&sol;other.example/entity.jpg\">" }, "<img src>"],
+    [{ content: "<img src=\"https&colon//other.example/named-no-semicolon.jpg\">" }, "<img src>"],
+    [{ content: "<img src=\"https&#58//other.example/decimal.jpg\">" }, "<img src>"],
+    [{ content: "<img src=\"https&#x3a//other.example/hex.jpg\">" }, "<img src>"],
+    [{ content: "<div style=\"background:url(https&#58//other.example/css.jpg)\"></div>" }, "css-url"],
+    [{ content: "<div style=\"background:u/**/rl(https://other.example/comment.jpg)\"></div>" }, "css-url"],
+    [{ content: "<div style=\"background:u\\72l(https\\3a \\2f \\2f other.example/escaped.jpg)\"></div>" }, "css-url"],
+    [{ content: "<div style=\"background-image:image-set('https://other.example/two-x.jpg' 2x)\"></div>" }, "CSS image-set"],
+    [{ content: "<div style=\"background-image:-webkit-image-set('/media/one-x.jpg' 1x)\"></div>" }, "CSS image-set"],
+    [{ content: "<img src=\"https://other.example/unclosed.jpg>" }, "Image markup"],
+    [{ favicon_url: "data:image/png;base64,abcd" }, "favicon_url"],
+    [{ photo_url: "https://other.example/photo.jpg" }, "photo_url"],
+    [{ image1_url: "https://other.example/alternate.jpg" }, "image1_url"],
+  ] as const)("rejects non-first-party rendered image references in %j", (value, location) => {
+    expect(() => validateFirstPartyImages(value, appUrl)).toThrow(location);
+  });
+
+  it("does not reject ordinary external links, videos, or provenance fields", () => {
+    expect(() => validateFirstPartyImages({
+      website_url: "https://partner.example/about",
+      href: "https://partner.example/story",
+      link_url: "https://partner.example/story",
+      video_url: "https://www.youtube.com/watch?v=abc123",
+      youtube_embed_url: "https://www.youtube-nocookie.com/embed/abc123",
+      story: { type: "video", url: "https://www.youtube.com/watch?v=abc123" },
+      source_image_url: "https://catalog.example/original.jpg",
+      image_provenance_url: "https://rights.example/license/123",
+      source: { html: '<img src="https://archive.example/original.jpg">' },
+      imageWithSource: {
+        type: "image",
+        url: "/media/licensed/local-copy.jpg",
+        source_url: "https://rights.example/original.jpg",
+      },
+      artwork: {
+        image: {
+          url: "/media/licensed/second-copy.jpg",
+          source_url: "https://catalog.example/original.jpg",
+          provenance_url: "https://rights.example/license/456",
+        },
+      },
+      content: '<a href="https://partner.example/story">Read the source</a>',
+    }, appUrl)).not.toThrow();
+  });
+
+  it("compares origins exactly and rejects protocol-relative and credentialed lookalikes", () => {
+    expect(() => validateFirstPartyImages({ image: "https://bevory.in.evil.example/media/a.jpg" }, appUrl))
+      .toThrow(/must be local/);
+    expect(() => validateFirstPartyImages({ image: "//bevory.in/media/a.jpg" }, appUrl))
+      .toThrow(/must be local/);
+    expect(() => validateFirstPartyImages({ image: "https://user@bevory.in/media/a.jpg" }, appUrl))
+      .toThrow(/must be local/);
+  });
+});
 
 describe("query field selection", () => {
   it("projects only requested scalar fields", () => {

@@ -1,8 +1,6 @@
 import { useState, useRef, useCallback } from "react";
-import { Upload, Link as LinkIcon, X, Loader2, Image as ImageIcon } from "lucide-react";
+import { Upload, X, Loader2, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiClient } from "@/integrations/api/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,6 +21,13 @@ type ProcessedImage = {
   contentType: "image/jpeg" | "image/png";
   extension: "jpg" | "png";
 };
+
+const supportedSourceTypes = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/avif",
+]);
 
 // Create a non-generative 4K-class PNG/JPEG before upload.
 const processImage = async (
@@ -54,6 +59,8 @@ const processImage = async (
         return;
       }
 
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       ctx.drawImage(img, 0, 0, width, height);
 
       const isJpeg = file.type === "image/jpeg" || file.type === "image/jpg";
@@ -91,8 +98,6 @@ const ImageUpload = ({
   className = "",
 }: ImageUploadProps) => {
   const [uploading, setUploading] = useState(false);
-  const [urlInput, setUrlInput] = useState(value || "");
-  const [activeTab, setActiveTab] = useState<string>(value ? "url" : "upload");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -101,10 +106,10 @@ const ImageUpload = ({
     if (!file) return;
 
     // Validate file type
-    if (!file.type.startsWith("image/")) {
+    if (!supportedSourceTypes.has(file.type)) {
       toast({
         title: "Invalid file",
-        description: "Please select an image file",
+        description: "Please select a JPEG, PNG, WebP, or AVIF image file",
         variant: "destructive",
       });
       return;
@@ -130,8 +135,8 @@ const ImageUpload = ({
 
       // Generate unique filename
       const timestamp = Date.now();
-      const randomStr = Math.random().toString(36).substring(2, 8);
-      const filename = `${folder}/${timestamp}-${randomStr}.${processed.extension}`;
+      const uniqueId = window.crypto.randomUUID();
+      const filename = `${folder}/${timestamp}-${uniqueId}.${processed.extension}`;
 
       // Upload through the Bevory API
       const { data, error } = await apiClient.storage
@@ -149,11 +154,10 @@ const ImageUpload = ({
         .getPublicUrl(data.path);
 
       onChange(urlData.publicUrl);
-      setUrlInput(urlData.publicUrl);
-      
+
       const originalSize = (file.size / 1024).toFixed(1);
       const processedSize = (processed.blob.size / 1024).toFixed(1);
-      
+
       toast({
         title: "Image uploaded",
         description: `Prepared a 4K ${processed.extension.toUpperCase()} (${originalSize}KB → ${processedSize}KB)`,
@@ -173,16 +177,8 @@ const ImageUpload = ({
     }
   }, [folder, onChange, toast]);
 
-  const handleUrlSubmit = useCallback(() => {
-    if (urlInput.trim()) {
-      onChange(urlInput.trim());
-      toast({ title: "URL set" });
-    }
-  }, [urlInput, onChange, toast]);
-
   const handleClear = useCallback(() => {
     onChange(null);
-    setUrlInput("");
   }, [onChange]);
 
   return (
@@ -196,74 +192,37 @@ const ImageUpload = ({
         <span className="text-xs text-muted-foreground ml-auto">4K PNG/JPEG • source &lt; 10 MB</span>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="upload" className="gap-2">
-            <Upload className="w-3.5 h-3.5" /> Upload
-          </TabsTrigger>
-          <TabsTrigger value="url" className="gap-2">
-            <LinkIcon className="w-3.5 h-3.5" /> URL
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="upload" className="mt-3">
-          <div
-            onClick={() => !uploading && fileInputRef.current?.click()}
-            className={`
-              border-2 border-dashed rounded-xl p-6 text-center cursor-pointer
-              transition-colors hover:border-accent hover:bg-accent/5
-              ${uploading ? "opacity-50 cursor-wait" : ""}
-            `}
-          >
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-              disabled={uploading}
-            />
-            {uploading ? (
-              <div className="flex flex-col items-center gap-2">
-                <Loader2 className="w-8 h-8 animate-spin text-accent" />
-                <p className="text-sm text-muted-foreground">Preparing 4K image & uploading...</p>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center gap-2">
-                <Upload className="w-8 h-8 text-muted-foreground" />
-                <p className="text-sm font-medium">Click to upload</p>
-                <p className="text-xs text-muted-foreground">
-                  Non-generative 4K PNG/JPEG • Max source 10MB
-                </p>
-              </div>
-            )}
+      <div
+        onClick={() => !uploading && fileInputRef.current?.click()}
+        className={`
+          border-2 border-dashed rounded-xl p-6 text-center cursor-pointer
+          transition-colors hover:border-accent hover:bg-accent/5
+          ${uploading ? "opacity-50 cursor-wait" : ""}
+        `}
+      >
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif"
+          onChange={handleFileChange}
+          className="hidden"
+          disabled={uploading}
+        />
+        {uploading ? (
+          <div className="flex flex-col items-center gap-2">
+            <Loader2 className="w-8 h-8 animate-spin text-accent" />
+            <p className="text-sm text-muted-foreground">Preparing 4K image & uploading...</p>
           </div>
-        </TabsContent>
-
-        <TabsContent value="url" className="mt-3">
-          <div className="flex gap-2">
-            <Input
-              placeholder="https://example.com/image.jpg"
-              value={urlInput}
-              onChange={(e) => setUrlInput(e.target.value)}
-              onPaste={(e) => {
-                e.stopPropagation();
-                const text = e.clipboardData.getData("text");
-                setUrlInput(text);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  handleUrlSubmit();
-                }
-              }}
-            />
-            <Button type="button" onClick={handleUrlSubmit} variant="secondary">
-              Set
-            </Button>
+        ) : (
+          <div className="flex flex-col items-center gap-2">
+            <Upload className="w-8 h-8 text-muted-foreground" />
+            <p className="text-sm font-medium">Upload an image file</p>
+            <p className="text-xs text-muted-foreground">
+              Use only an image you own or are licensed to use. It will be stored as a 4K PNG/JPEG.
+            </p>
           </div>
-        </TabsContent>
-      </Tabs>
+        )}
+      </div>
 
       {/* Preview */}
       {value && (

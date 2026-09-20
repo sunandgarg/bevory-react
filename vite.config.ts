@@ -8,6 +8,7 @@ export default defineConfig(() => ({
     port: 8080,
     proxy: {
       "/api": "http://localhost:3001",
+      "/media": "http://localhost:3001",
       "/uploads": "http://localhost:3001",
     },
   },

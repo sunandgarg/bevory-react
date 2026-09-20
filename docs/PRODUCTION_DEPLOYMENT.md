@@ -15,6 +15,11 @@ Last verified: 2026-09-20
   `bevory.in/api/*` first pass through the `bevory-edge` Worker, which adds the
   private origin-verification header before forwarding them to the DNS-only API
   origin.
+- The stable public media base is `https://bevory.in/media`. Cloudflare forwards
+  `/media/*` to the Lightsail application, which streams allowed objects from
+  the private S3 bucket. Public reads are restricted to the
+  `migrated-images/` catalogue prefix and the `images/` admin-upload prefix;
+  arbitrary bucket keys and bucket listings are not exposed.
 - AWS Lightsail instance `bevory-api-prod` runs Caddy and the combined
   React/Node.js application with Docker Compose. Node serves the built frontend,
   API, and pre-rendered SEO route documents. Only Caddy publishes ports 80 and
@@ -141,7 +146,7 @@ The following production checks passed on 2026-09-20:
   matching canonical, indexable robots, initial metadata/H1, and the expected
   CollectionPage, ProductGroup, or Product schema.
 
-## CloudFront status
+## Media delivery and CloudFront status
 
 The CloudFront origin access control `bevory-uploads-oac` exists, but AWS still
 rejected a distribution creation attempt on 2026-09-19 because the account must
@@ -149,42 +154,63 @@ be verified by AWS Support. Case `178975941700756` tracks the request.
 The case remained open with no AWS response visible on 2026-09-20. The AWS
 account display name is now
 `Bevory`; the console confirmed the rename from `cirkle.world` on 2026-09-19.
-The S3 bucket remains private; do not make it public as a workaround. After AWS
-removes the restriction, create the distribution using the existing private OAC,
-apply a bucket policy scoped to that distribution ARN, point `media.bevory.in`
-to the distribution, and verify an uploaded image end to end.
+The S3 bucket remains private; do not make it public as a workaround.
+
+CloudFront verification is an acceleration improvement, not a prerequisite for
+the image cutover. The same-origin `/media/*` path can be served through
+Cloudflare and the authenticated Lightsail-to-S3 streaming fallback while the
+distribution is unavailable. After AWS removes the restriction, create the
+distribution using the existing private OAC, apply a bucket policy scoped to
+that distribution ARN, and switch the internal `/media/*` upstream to
+CloudFront. Keep the public URLs at `https://bevory.in/media/...` so database
+records and indexed pages do not need another URL migration.
 
 ## Image ownership migration
 
-The production database currently contains 6,434 image references representing
-4,499 unique externally hosted files: 4,476 from Livcheers, 22 from Unsplash,
-and one YouTube thumbnail. The idempotent migration command downloads each
-source once and rejects private-network redirects and non-image responses. It
-uses deterministic, non-generative Lanczos3 resampling to preserve the aspect
-ratio while setting the longest edge to exactly 3,840 pixels, upscaling smaller
-sources and downscaling larger ones. Images with alpha are stored as lossless
-PNG; all others are stored as progressive JPEG at quality 95 with 4:4:4 chroma.
-No synthetic detail is generated. Objects are uploaded privately under
-`migrated-images/` with immutable cache headers. Repeated runs detect either the
-`.png` or `.jpg` object key and do not upload it again.
+The expanded production inventory found 6,447 image references representing
+4,506 unique external sources: 4,476 from Livcheers, 22 from Unsplash, six from
+Postimages, one WebPageTest capture, and one YouTube thumbnail. Of those, 4,500
+private S3 objects are verified; six unavailable originals must be removed from
+rendered fields with their provenance retained. The database apply remains a
+separate, all-or-nothing phase.
+The idempotent migration command downloads each source once and rejects
+private-network redirects and non-image responses. It uses deterministic,
+non-generative Lanczos3 resampling to preserve the aspect ratio while setting
+the longest edge to exactly 3,840 pixels, upscaling smaller sources and
+downscaling larger ones. Images with alpha are stored as lossless PNG; all
+others are stored as progressive JPEG at quality 95 with 4:4:4 chroma. No
+synthetic detail is generated. Objects are uploaded privately under
+`migrated-images/` with immutable cache headers. Repeated runs detect either
+the `.png` or `.jpg` object key and do not upload it again. New administrator
+uploads use the separate private `images/` prefix and the same public
+`https://bevory.in/media/...` URL space.
 
-Do not change database URLs until CloudFront can read the private bucket and the
-configured `IMAGE_PUBLIC_URL` works publicly. Use the phases below from the API
-container. The upload phase leaves database URLs unchanged; the apply phase
-writes a private S3 manifest before updating records in transactional batches.
+Do not change database URLs until the configured `IMAGE_PUBLIC_URL` works
+publicly through `/media/*`. Use the phases below from the API container. The
+upload phase leaves database URLs unchanged; the apply phase writes a private
+S3 manifest before updating records in transactional batches.
 
 ```bash
 # Inventory only; does not download, upload, or update data.
 pnpm images:migrate
 
 # Upload/optimize all images but retain the existing database URLs.
-IMAGE_PUBLIC_URL=https://media.bevory.in pnpm images:migrate -- --upload-only
+IMAGE_PUBLIC_URL=https://bevory.in/media pnpm images:migrate -- --upload-only
 
-# Verify the CDN first, then atomically cut records over in batches.
-IMAGE_PUBLIC_URL=https://media.bevory.in pnpm images:migrate -- --apply
+# Verify at least one migrated object through the public fallback before apply.
+curl --fail --head https://bevory.in/media/migrated-images/<object-key>.jpg
 
-# Regenerate SEO route documents so structured-data image URLs also use Bevory media.
-pnpm sitemap
+# Atomically cut records over in batches only after the public check passes.
+IMAGE_PUBLIC_URL=https://bevory.in/media pnpm images:migrate -- --apply
+
+# After apply, regenerate SEO documents into the persistent host directory.
+sudo docker compose -f /opt/bevory/deploy/docker-compose.production.yml run --rm --no-deps \
+  -e NODE_OPTIONS=--max-old-space-size=1024 \
+  -v /opt/bevory/public:/app/public api pnpm sitemap
+
+# Independently validate every persisted record with the stricter write policy.
+sudo docker compose -f /opt/bevory/deploy/docker-compose.production.yml run --rm --no-deps \
+  api pnpm images:audit
 ```
 
 `IMAGE_MIGRATION_QUALITY` may override the JPEG quality from 90 through 100;
@@ -198,8 +224,11 @@ the migration uses the AWS SDK default credential chain, including an
 authenticated local AWS profile or an attached instance role; providing only
 one of the pair is rejected.
 
-After the apply phase, rebuild and redeploy the API image so regenerated SEO
-route documents ship with the application. Retain `image_source_url`,
+Immediately before `--apply`, create a managed-database snapshot and pause
+image-bearing administration/import writes. After apply, run a final inventory
+and require zero external image targets before resuming those writes. Rebuild
+and redeploy the API image so the host-mounted regenerated SEO route documents
+ship with the application. Retain `image_source_url`,
 `logo_source_url`, and source-page fields as provenance; they are not rendered
 as public images. Storage relocation does not transfer copyright or reuse rights,
 so the existing `image_license_status` review remains required.

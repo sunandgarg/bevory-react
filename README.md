@@ -8,7 +8,8 @@ Bevory is a React beverage discovery, comparison, editorial, party-planning, and
 - Backend: Node.js, Express, TypeScript
 - Database: MySQL through Prisma ORM
 - Authentication: email/password, Google OAuth, and Twilio phone OTP with signed JWT sessions
-- Storage: local `/uploads` API with an automatic S3-compatible production adapter
+- Storage: local `/uploads` API with a private S3 production adapter and a
+  same-origin `https://bevory.in/media` delivery path
 
 ## Local setup
 
@@ -41,9 +42,10 @@ The seed creates a local administrator only when both `ADMIN_EMAIL` and `ADMIN_P
 
 ## Production
 
-The current production deployment uses Cloudflare Pages for the React frontend
-and a private-header proxy to a Node API on AWS Lightsail. MySQL runs on
-Lightsail Managed Databases and uploads use a private S3 bucket. See
+The current production deployment uses Cloudflare in front of the combined
+React/Node.js application on AWS Lightsail. MySQL runs on Lightsail Managed
+Databases, and media stays in a private S3 bucket exposed only through strict
+first-party `/media/*` prefixes. See
 [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for the deployed
 topology, resource names, operational checks, and remaining CloudFront account
 verification item.
@@ -53,9 +55,9 @@ pnpm build
 NODE_ENV=production pnpm start
 ```
 
-Express can serve the compiled application and API from the same process. In the
-deployed split architecture, set `SERVE_FRONTEND=false`; Cloudflare Pages serves
-the frontend and proxies `/api/*` to the API origin.
+Express serves the compiled application and API from the same production
+process. The Cloudflare Pages project is retained only as a standby artifact;
+the production custom domains route to Lightsail.
 
 For a containerized local/production-like stack:
 

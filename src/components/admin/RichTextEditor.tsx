@@ -41,12 +41,87 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import FormField from "./FormField";
+import ImageUpload from "./ImageUpload";
 
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
 }
+
+const EDITOR_ALLOWED_TAGS = [
+  "h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "ul", "ol", "li", "strong", "em",
+  "b", "i", "u", "blockquote", "img", "code", "pre", "br", "hr", "div", "span", "table",
+  "thead", "tbody", "tr", "th", "td",
+];
+const EDITOR_ALLOWED_ATTR = [
+  "href", "src", "srcset", "alt", "title", "class", "target", "rel", "style", "loading",
+  "colspan", "rowspan",
+];
+
+const isFirstPartyEditorImageUrl = (value: string) => {
+  const candidate = value.trim();
+  if (!candidate || candidate.startsWith("//") || candidate.includes("\\")) return false;
+  try {
+    const url = new URL(candidate, window.location.origin);
+    return ["http:", "https:"].includes(url.protocol)
+      && url.origin === window.location.origin
+      && !url.username
+      && !url.password;
+  } catch {
+    return false;
+  }
+};
+
+const normalizeCssForUrlScan = (value: string) => value
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(
+    /\\(?:([\da-f]{1,6})(?:\r\n|[\t\n\f\r ])?|([^\r\n\f])|(?:\r\n|[\n\f\r]))/gi,
+    (_escape, hexadecimal: string | undefined, escapedCharacter: string | undefined) => {
+      if (hexadecimal) {
+        const codePoint = Number.parseInt(hexadecimal, 16);
+        return codePoint > 0 && codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : "�";
+      }
+      return escapedCharacter ?? "";
+    },
+  );
+
+const sanitizeEditorHtml = (value: string) => {
+  const clean = DOMPurify.sanitize(value, {
+    ALLOWED_TAGS: EDITOR_ALLOWED_TAGS,
+    ALLOWED_ATTR: EDITOR_ALLOWED_ATTR,
+    ALLOW_DATA_ATTR: false,
+  });
+  const template = document.createElement("template");
+  template.innerHTML = clean;
+
+  for (const image of template.content.querySelectorAll("img")) {
+    const source = image.getAttribute("src") ?? "";
+    if (!isFirstPartyEditorImageUrl(source)) {
+      image.remove();
+      continue;
+    }
+    const sourceSet = image.getAttribute("srcset");
+    if (sourceSet && sourceSet.split(",").some((candidate) => (
+      !isFirstPartyEditorImageUrl(candidate.trim().split(/\s+/)[0] ?? "")
+    ))) image.removeAttribute("srcset");
+  }
+
+  for (const element of template.content.querySelectorAll<HTMLElement>("[style]")) {
+    const style = element.getAttribute("style") ?? "";
+    const normalizedStyle = normalizeCssForUrlScan(style);
+    if (/(?:^|[^\w-])(?:-webkit-)?image-set\s*\(/i.test(normalizedStyle)) {
+      element.removeAttribute("style");
+      continue;
+    }
+    const cssUrls = [...normalizedStyle
+      .matchAll(/\burl\(\s*(?:"([^"]*)"|'([^']*)'|([^\s"')]+))\s*\)/gi)]
+      .map((match) => match[1] ?? match[2] ?? match[3] ?? "");
+    if (cssUrls.some((url) => !isFirstPartyEditorImageUrl(url))) element.removeAttribute("style");
+  }
+
+  return template.innerHTML;
+};
 
 const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -63,10 +138,12 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
 
   // Sync editor content with value prop
   useEffect(() => {
-    if (editorRef.current && editorRef.current.innerHTML !== value) {
-      editorRef.current.innerHTML = value || "";
+    const sanitized = sanitizeEditorHtml(value || "");
+    if (editorRef.current && editorRef.current.innerHTML !== sanitized) {
+      editorRef.current.innerHTML = sanitized;
     }
-  }, [value]);
+    if (sanitized !== value) onChange(sanitized);
+  }, [onChange, value]);
 
   const saveHistory = useCallback((newValue: string) => {
     const newHistory = history.slice(0, historyIndex + 1);
@@ -77,9 +154,30 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
 
   const handleInput = () => {
     if (editorRef.current) {
-      const newValue = editorRef.current.innerHTML;
+      const newValue = sanitizeEditorHtml(editorRef.current.innerHTML);
+      if (editorRef.current.innerHTML !== newValue) editorRef.current.innerHTML = newValue;
       onChange(newValue);
     }
+  };
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const clipboardHtml = event.clipboardData.getData("text/html");
+    const clipboardText = event.clipboardData.getData("text/plain");
+    document.execCommand(
+      clipboardHtml ? "insertHTML" : "insertText",
+      false,
+      clipboardHtml ? sanitizeEditorHtml(clipboardHtml) : clipboardText,
+    );
+    handleInput();
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const droppedHtml = event.dataTransfer.getData("text/html");
+    if (!droppedHtml && !event.dataTransfer.files.length) return;
+    event.preventDefault();
+    if (droppedHtml) document.execCommand("insertHTML", false, sanitizeEditorHtml(droppedHtml));
+    handleInput();
   };
 
   const handleBlur = () => {
@@ -99,8 +197,9 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
       const newIndex = historyIndex - 1;
       setHistoryIndex(newIndex);
       if (editorRef.current) {
-        editorRef.current.innerHTML = history[newIndex];
-        onChange(history[newIndex]);
+        const sanitized = sanitizeEditorHtml(history[newIndex]);
+        editorRef.current.innerHTML = sanitized;
+        onChange(sanitized);
       }
     }
   };
@@ -110,8 +209,9 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
       const newIndex = historyIndex + 1;
       setHistoryIndex(newIndex);
       if (editorRef.current) {
-        editorRef.current.innerHTML = history[newIndex];
-        onChange(history[newIndex]);
+        const sanitized = sanitizeEditorHtml(history[newIndex]);
+        editorRef.current.innerHTML = sanitized;
+        onChange(sanitized);
       }
     }
   };
@@ -125,7 +225,18 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
     
     // Use selected text if no link text provided
     const displayText = linkText || selectedText || linkUrl;
-    const html = `<a href="${linkUrl}" target="_blank" rel="noopener" style="color:hsl(var(--primary));text-decoration:underline;">${displayText}</a>`;
+    const anchor = document.createElement("a");
+    anchor.href = linkUrl;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.style.color = "hsl(var(--primary))";
+    anchor.style.textDecoration = "underline";
+    anchor.textContent = displayText;
+    const html = DOMPurify.sanitize(anchor.outerHTML, {
+      ALLOWED_TAGS: ["a"],
+      ALLOWED_ATTR: ["href", "target", "rel", "style"],
+    });
+    if (!html.includes("href=")) return;
     
     document.execCommand("insertHTML", false, html);
     handleInput();
@@ -135,7 +246,17 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
   };
 
   const insertImage = () => {
-    const html = `<img src="${imageUrl}" alt="${imageAlt}" style="max-width:100%; height:auto;" loading="lazy" />`;
+    const image = document.createElement("img");
+    image.src = imageUrl;
+    image.alt = imageAlt;
+    image.loading = "lazy";
+    image.style.maxWidth = "100%";
+    image.style.height = "auto";
+    const html = DOMPurify.sanitize(image.outerHTML, {
+      ALLOWED_TAGS: ["img"],
+      ALLOWED_ATTR: ["src", "alt", "loading", "style"],
+    });
+    if (!html.includes("src=")) return;
     document.execCommand("insertHTML", false, html);
     editorRef.current?.focus();
     handleInput();
@@ -286,6 +407,8 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
           ref={editorRef}
           contentEditable
           onInput={handleInput}
+          onPaste={handlePaste}
+          onDrop={handleDrop}
           onBlur={handleBlur}
           className="min-h-[300px] p-4 outline-none prose prose-sm max-w-none dark:prose-invert focus:ring-2 focus:ring-ring focus:ring-inset"
           style={{ 
@@ -322,7 +445,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
                 onChange={(e) => setLinkText(e.target.value)}
               />
             </FormField>
-            <Button className="w-full" onClick={insertLink} disabled={!linkUrl}>
+            <Button type="button" className="w-full" onClick={insertLink} disabled={!linkUrl}>
               Insert Link
             </Button>
           </div>
@@ -336,13 +459,13 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
             <DialogTitle>Insert Image</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <FormField label="Image URL" required>
-              <Input
-                placeholder="https://example.com/image.jpg"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-              />
-            </FormField>
+            <ImageUpload
+              value={imageUrl || null}
+              onChange={(url) => setImageUrl(url ?? "")}
+              folder="rich-text"
+              recommendedSize="3840 px longest edge"
+              aspectRatio="original aspect ratio"
+            />
             <FormField label="Alt Text (SEO Important!)" hint="Describe the image for SEO and accessibility">
               <Input
                 placeholder="Descriptive text for the image"
@@ -350,7 +473,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
                 onChange={(e) => setImageAlt(e.target.value)}
               />
             </FormField>
-            <Button className="w-full" onClick={insertImage} disabled={!imageUrl}>
+            <Button type="button" className="w-full" onClick={insertImage} disabled={!imageUrl}>
               Insert Image
             </Button>
           </div>

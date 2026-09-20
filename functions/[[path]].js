@@ -1,4 +1,7 @@
 const SITE_ORIGIN = "https://bevory.in";
+const CATALOG_CACHE_VERSION = "20260920-image-cutover";
+const IMMUTABLE_MEDIA_CACHE_CONTROL = "public, max-age=31536000, s-maxage=31536000, immutable";
+const REVALIDATING_MEDIA_CACHE_CONTROL = "public, max-age=300, s-maxage=300, must-revalidate";
 const seoRoutesCache = new Map();
 let productIndexPromise;
 
@@ -348,7 +351,7 @@ const legacyRedirectNeedsIndex = (pathname) => {
     || (parts.length === 4 && !["category", "product"].includes(parts[1]));
 };
 
-const proxyApiRequest = async (request, env, waitUntil) => {
+export const proxyApiRequest = async (request, env, waitUntil) => {
   if (!env.API_ORIGIN || !env.ORIGIN_VERIFY_SECRET) {
     return Response.json({ error: "API origin is not configured" }, { status: 503 });
   }
@@ -357,7 +360,9 @@ const proxyApiRequest = async (request, env, waitUntil) => {
   const cacheableCatalog = request.method === "GET"
     && incomingUrl.pathname.startsWith("/api/catalog/")
     && !request.headers.has("authorization");
-  const cacheKey = cacheableCatalog ? new Request(incomingUrl.toString(), { method: "GET" }) : null;
+  const cacheKeyUrl = new URL(incomingUrl);
+  cacheKeyUrl.searchParams.set("__bevory_catalog_cache", CATALOG_CACHE_VERSION);
+  const cacheKey = cacheableCatalog ? new Request(cacheKeyUrl.toString(), { method: "GET" }) : null;
 
   if (cacheKey) {
     try {
@@ -418,6 +423,140 @@ const proxyApiRequest = async (request, env, waitUntil) => {
   return response;
 };
 
+const mediaResponseHeaders = (source, status, cacheState, pathname = "") => {
+  const headers = new Headers(source);
+  headers.delete("set-cookie");
+  headers.delete("content-type");
+  headers.set("accept-ranges", "bytes");
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-bevory-cache", cacheState);
+  if ((status >= 200 && status < 300) || status === 304) {
+    headers.set(
+      "cache-control",
+      pathname.startsWith("/media/migrated-images/")
+        ? IMMUTABLE_MEDIA_CACHE_CONTROL
+        : REVALIDATING_MEDIA_CACHE_CONTROL,
+    );
+    if (pathname.endsWith(".png")) headers.set("content-type", "image/png");
+    else if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg")) {
+      headers.set("content-type", "image/jpeg");
+    }
+  } else {
+    headers.set("cache-control", "private, no-store");
+  }
+  return headers;
+};
+
+export const proxyMediaRequest = async (request, env, waitUntil) => {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return new Response(null, {
+      status: 405,
+      headers: {
+        allow: "GET, HEAD",
+        "accept-ranges": "bytes",
+        "cache-control": "private, no-store",
+        "x-content-type-options": "nosniff",
+        "x-bevory-cache": "MISS",
+      },
+    });
+  }
+  if (!env.API_ORIGIN || !env.ORIGIN_VERIFY_SECRET) {
+    return new Response(null, {
+      status: 503,
+      headers: mediaResponseHeaders({}, 503, "MISS", new URL(request.url).pathname),
+    });
+  }
+
+  const incomingUrl = new URL(request.url);
+  const hasRange = request.headers.has("range");
+  const hasIfRange = request.headers.has("if-range");
+  const hasUnsafeCachePrecondition = request.headers.has("if-match")
+    || request.headers.has("if-unmodified-since");
+  const hasCacheValidator = request.headers.has("if-none-match")
+    || request.headers.has("if-modified-since");
+  const isMigratedMedia = incomingUrl.pathname.startsWith("/media/migrated-images/");
+  const isMutableMedia = incomingUrl.pathname.startsWith("/media/images/");
+  const cacheable = request.method === "GET"
+    && !hasRange
+    && !hasIfRange
+    && !hasUnsafeCachePrecondition
+    && !hasCacheValidator
+    && (isMigratedMedia || isMutableMedia);
+  const cacheUrl = new URL(incomingUrl);
+  if (isMigratedMedia || isMutableMedia) cacheUrl.search = "";
+  const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
+  const cacheApi = typeof caches === "undefined" ? null : caches.default;
+
+  if (cacheable && cacheApi) {
+    try {
+      const cached = await cacheApi.match(cacheKey);
+      if (cached) {
+        return new Response(cached.body, {
+          status: cached.status,
+          statusText: cached.statusText,
+          headers: mediaResponseHeaders(cached.headers, cached.status, "HIT", incomingUrl.pathname),
+        });
+      }
+    } catch {
+      // Cache API can be unavailable during local emulation.
+    }
+  }
+
+  const originUrl = new URL(env.API_ORIGIN);
+  originUrl.pathname = incomingUrl.pathname;
+  originUrl.search = incomingUrl.search;
+
+  const headers = new Headers();
+  for (const name of [
+    "range",
+    "if-range",
+    "if-match",
+    "if-none-match",
+    "if-modified-since",
+    "if-unmodified-since",
+  ]) {
+    // If-Range requires comparing the validator with the selected object. The
+    // edge deliberately drops Range so the origin returns a complete 200.
+    if (name === "range" && hasIfRange) continue;
+    const value = request.headers.get(name);
+    if (value) headers.set(name, value);
+  }
+  headers.set("x-bevory-origin-verify", env.ORIGIN_VERIFY_SECRET);
+  headers.set("x-forwarded-host", incomingUrl.host);
+  headers.set("x-forwarded-proto", "https");
+
+  let originResponse;
+  try {
+    originResponse = await fetch(originUrl.toString(), {
+      method: request.method,
+      headers,
+      redirect: "manual",
+    });
+  } catch {
+    return new Response(null, {
+      status: 502,
+      headers: mediaResponseHeaders({}, 502, "MISS", incomingUrl.pathname),
+    });
+  }
+
+  const response = new Response(originResponse.body, {
+    status: originResponse.status,
+    statusText: originResponse.statusText,
+    headers: mediaResponseHeaders(originResponse.headers, originResponse.status, "MISS", incomingUrl.pathname),
+  });
+
+  if (cacheable && cacheApi && originResponse.status === 200) {
+    try {
+      const cacheWrite = cacheApi.put(cacheKey, response.clone()).catch(() => undefined);
+      if (typeof waitUntil === "function") waitUntil(cacheWrite);
+      else await cacheWrite;
+    } catch {
+      // A cache write failure must not fail a valid origin response.
+    }
+  }
+  return response;
+};
+
 const rewriteDocument = (response, url, routeData) => {
   const seo = { ...routeData };
   seo.title = shortTitle(seo.title);
@@ -459,7 +598,12 @@ const rewriteDocument = (response, url, routeData) => {
     .transform(htmlResponse);
 };
 
-export async function onRequest({ request, env, waitUntil }) {
+export async function onRequest(context) {
+  const { request, env } = context;
+  const waitUntil = (promise) => {
+    if (typeof context.waitUntil === "function") context.waitUntil(promise);
+    else void promise.catch(() => undefined);
+  };
   const url = new URL(request.url);
 
   if (url.hostname === "www.bevory.in") {
@@ -469,6 +613,10 @@ export async function onRequest({ request, env, waitUntil }) {
 
   if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
     return proxyApiRequest(request, env, waitUntil);
+  }
+
+  if (url.pathname === "/media" || url.pathname.startsWith("/media/")) {
+    return proxyMediaRequest(request, env, waitUntil);
   }
 
   if (isDocumentRequest(request)) {

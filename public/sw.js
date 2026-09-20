@@ -1,8 +1,16 @@
-// Bevory Service Worker v8 - 2026
-const CACHE_VERSION = 'bevory-v8';
+// Bevory Service Worker v10 - 2026
+const CACHE_VERSION = 'bevory-v10';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
+const MEDIA_PASSTHROUGH_HEADERS = [
+  'range',
+  'if-range',
+  'if-match',
+  'if-none-match',
+  'if-modified-since',
+  'if-unmodified-since',
+];
 
 // Static assets to precache on install
 const PRECACHE_URLS = [
@@ -53,6 +61,15 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET
   if (request.method !== 'GET') return;
 
+  // Let the browser perform conditional and partial media requests directly.
+  // Cache Storage rejects 206 responses, and a cached 200 must never replace a
+  // requested byte range or bypass an origin precondition.
+  if (
+    url.origin === self.location.origin &&
+    (url.pathname.startsWith('/media/') || url.pathname.startsWith('/uploads/')) &&
+    MEDIA_PASSTHROUGH_HEADERS.some((name) => request.headers.has(name))
+  ) return;
+
   // Skip chrome-extension, analytics, auth endpoints
   if (
     url.protocol === 'chrome-extension:' ||
@@ -73,40 +90,56 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy 2: Bevory-hosted migrated/local images — Cache first
+  // Strategy 2: Content-addressed migrated media — Cache first
   if (
-    url.hostname === 'media.bevory.in' ||
-    (url.origin === self.location.origin && (
-      url.pathname.startsWith('/uploads/')
-    ))
+    url.origin === self.location.origin &&
+    url.pathname.startsWith('/media/migrated-images/')
   ) {
-    event.respondWith(cacheFirstWithNetwork(request, IMAGE_CACHE, 250));
+    event.respondWith(cacheFirstWithNetwork(request, IMAGE_CACHE, 250, querylessCacheKey(request), event));
     return;
   }
 
-  // Strategy 3: Self-hosted fonts — Cache first (long-lived)
+  // Strategy 3: Mutable uploads — serve cached content while refreshing it.
+  if (
+    url.origin === self.location.origin && (
+      url.pathname.startsWith('/media/images/') ||
+      url.pathname.startsWith('/uploads/')
+    )
+  ) {
+    const cacheKey = url.pathname.startsWith('/media/images/') ? querylessCacheKey(request) : request;
+    event.respondWith(staleWhileRevalidate(request, IMAGE_CACHE, event, cacheKey));
+    return;
+  }
+
+  // Strategy 4: Self-hosted fonts — Cache first (long-lived)
   if (url.origin === self.location.origin && url.pathname.startsWith('/fonts/')) {
-    event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE, 40));
+    event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE, 40, request, event));
     return;
   }
 
-  // Strategy 4: Documents — network first so policy and compliance changes are immediate
+  // Strategy 5: Documents — network first so policy and compliance changes are immediate
   if (url.origin === self.location.origin && request.destination === 'document') {
     event.respondWith(networkFirstDocument(request, STATIC_CACHE));
     return;
   }
 
-  // Strategy 5: Hashed JS and CSS — stale while revalidate
+  // Strategy 6: Hashed JS and CSS — stale while revalidate
   if (
     url.origin === self.location.origin &&
     (request.destination === 'script' || request.destination === 'style')
   ) {
-    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
+    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE, event));
     return;
   }
 });
 
 // --- Strategies ---
+
+function querylessCacheKey(request) {
+  const url = new URL(request.url);
+  url.search = '';
+  return new Request(url.toString(), { method: 'GET' });
+}
 
 async function networkFirstWithCache(request, cacheName, maxAge) {
   const cache = await caches.open(cacheName);
@@ -153,15 +186,18 @@ async function trimCache(cache, maxEntries) {
   await Promise.all(keys.slice(0, keys.length - maxEntries).map((key) => cache.delete(key)));
 }
 
-async function cacheFirstWithNetwork(request, cacheName, maxEntries) {
+async function cacheFirstWithNetwork(request, cacheName, maxEntries, cacheKey = request, event) {
   const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
+  const cached = await cache.match(cacheKey);
   if (cached) return cached;
   try {
     const response = await fetch(request);
     if (response.ok || response.type === 'opaque') {
-      await cache.put(request, response.clone());
-      await trimCache(cache, maxEntries);
+      const cacheWrite = cache.put(cacheKey, response.clone())
+        .then(() => trimCache(cache, maxEntries))
+        .catch(() => undefined);
+      if (event) event.waitUntil(cacheWrite);
+      else await cacheWrite;
     }
     return response;
   } catch {
@@ -169,14 +205,21 @@ async function cacheFirstWithNetwork(request, cacheName, maxEntries) {
   }
 }
 
-async function staleWhileRevalidate(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
+function staleWhileRevalidate(request, cacheName, event, cacheKey = request) {
+  const statePromise = caches.open(cacheName).then(async (cache) => {
+    const cached = await cache.match(cacheKey);
+    const networkPromise = fetch(request);
+    const cacheWritePromise = networkPromise
+      .then((response) => response.ok ? cache.put(cacheKey, response.clone()) : undefined)
+      .catch(() => undefined);
+    const responsePromise = networkPromise.catch(() => cached);
+    return { cached, cacheWritePromise, responsePromise };
+  });
 
-  const fetchPromise = fetch(request).then((response) => {
-    if (response.ok) cache.put(request, response.clone());
-    return response;
-  }).catch(() => cached);
+  const lifetimePromise = statePromise
+    .then(({ cacheWritePromise }) => cacheWritePromise)
+    .catch(() => undefined);
+  event.waitUntil(lifetimePromise);
 
-  return cached || fetchPromise;
+  return statePromise.then(({ cached, responsePromise }) => cached || responsePromise);
 }

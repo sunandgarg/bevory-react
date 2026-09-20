@@ -29,9 +29,10 @@ import {
   googleRedirectUri,
 } from "./integrations/googleOAuth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./integrations/phoneOtp.js";
-import { objectStorageConfigured, storeUpload } from "./storage.js";
 import { createLegacyRedirectResolver, createSeoRenderer } from "./seo.js";
+import { objectStorageConfigured, storedImagePathMatchesType, storeUpload } from "./storage.js";
 import { createRateLimit } from "./rateLimit.js";
+import { createMediaHandler } from "./media.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
@@ -39,6 +40,22 @@ const projectRoot = process.cwd();
 const uploadsRoot = path.join(projectRoot, "uploads");
 const originVerifySecret = process.env.ORIGIN_VERIFY_SECRET?.trim();
 const rateBuckets = new Map<string, { count: number; resetAt: number }>();
+const acceptedStoredImageTypes = new Set(["image/jpeg", "image/png"]);
+
+const detectStoredImageType = (body: Buffer) => {
+  if (
+    body.length >= 3
+    && body[0] === 0xff
+    && body[1] === 0xd8
+    && body[2] === 0xff
+  ) return "image/jpeg";
+  if (
+    body.length >= 8
+    && body.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+  ) return "image/png";
+  return null;
+};
+
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 4, parts: 5 },
@@ -54,6 +71,7 @@ const publicReviewRateLimit = createRateLimit({ windowMs: 60 * 60_000, max: 5, m
 
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
+app.use("/media", createMediaHandler());
 app.use(cors({ origin: process.env.APP_URL || "http://localhost:8080", credentials: true }));
 app.use(express.json({ limit: "25mb" }));
 app.use(optionalAuth);
@@ -259,6 +277,16 @@ app.post("/api/storage/upload", upload.single("file"), async (req: Authenticated
     return res.status(403).json({ data: null, error: { message: "Administrator access required" } });
   }
   if (!req.file) return res.status(400).json({ data: null, error: { message: "An image file is required" } });
+  const detectedImageType = detectStoredImageType(req.file.buffer);
+  if (
+    !acceptedStoredImageTypes.has(req.file.mimetype)
+    || detectedImageType !== req.file.mimetype
+  ) {
+    return res.status(415).json({
+      data: null,
+      error: { message: "Only byte-verified JPEG or PNG images can be stored. Convert WebP, AVIF, or GIF files before uploading." },
+    });
+  }
   const bucket = String(req.body.bucket || "images").replace(/[^a-zA-Z0-9_-]/g, "");
   const safePath = String(req.body.path || req.file.originalname)
     .split("/")
@@ -266,6 +294,12 @@ app.post("/api/storage/upload", upload.single("file"), async (req: Authenticated
     .map((part) => part.replace(/[^a-zA-Z0-9._-]/g, "-"))
     .join("/");
   if (!safePath) return res.status(400).json({ data: null, error: { message: "A valid image path is required" } });
+  if (!storedImagePathMatchesType(safePath, detectedImageType)) {
+    return res.status(415).json({
+      data: null,
+      error: { message: "The image filename extension must match its verified JPEG or PNG bytes." },
+    });
+  }
   const stored = await storeUpload({
     uploadsRoot,
     bucket,

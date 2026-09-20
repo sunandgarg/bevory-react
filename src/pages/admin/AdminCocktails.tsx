@@ -352,7 +352,7 @@ const AdminCocktails = () => {
                 folder="cocktails"
                 recommendedSize="800 × 800 px"
                 aspectRatio="1:1 square"
-                aspectHint="Cocktail glass centered, JPG/WebP"
+                aspectHint="Cocktail glass centered, PNG/JPEG output"
               />
             </FormField>
 

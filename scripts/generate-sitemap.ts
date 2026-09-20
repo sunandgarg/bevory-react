@@ -3,6 +3,11 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { PrismaClient, type Prisma } from "@prisma/client";
 import { BEVORY_CITIES, CITY_SLUGS } from "../src/lib/locations.js";
 import { DEMAND_GUIDES } from "../src/lib/demandGuides.js";
+import {
+  DEFAULT_PUBLIC_MEDIA_BASE,
+  parsePublicMediaBase,
+  validSitemapImageUrl,
+} from "./sitemap-images.js";
 
 type SitemapImage = { loc: string; title?: string };
 type SitemapEntry = { path: string; lastmod?: string; images?: SitemapImage[] };
@@ -29,6 +34,14 @@ type ProductSeoIndexEntry = {
 };
 
 const origin = "https://bevory.in";
+const configuredMediaBase = process.env.SITEMAP_MEDIA_URL?.trim() || process.env.S3_PUBLIC_URL?.trim();
+const parsedConfiguredMediaBase = configuredMediaBase ? parsePublicMediaBase(configuredMediaBase) : null;
+const publicMediaBase = configuredMediaBase
+  ? parsedConfiguredMediaBase ?? DEFAULT_PUBLIC_MEDIA_BASE
+  : DEFAULT_PUBLIC_MEDIA_BASE;
+if (configuredMediaBase && !parsedConfiguredMediaBase) {
+  console.warn(`Ignoring an invalid public media base; using ${DEFAULT_PUBLIC_MEDIA_BASE}`);
+}
 const sitemapUrlLimit = 20_000;
 const sitemapByteLimit = 50 * 1024 * 1024;
 const prisma = new PrismaClient();
@@ -55,15 +68,9 @@ const xmlEscape = (value: string) => value
   .replace(/"/g, "&quot;")
   .replace(/'/g, "&apos;");
 
-const validImageUrl = (value: unknown): string | null => {
-  if (typeof value !== "string" || !value.trim()) return null;
-  try {
-    const url = new URL(value, origin);
-    return ["https:", "http:"].includes(url.protocol) ? url.toString() : null;
-  } catch {
-    return null;
-  }
-};
+const validImageUrl = (value: unknown): string | null => (
+  validSitemapImageUrl(value, publicMediaBase, origin)
+);
 
 const latestTimestamp = (...values: unknown[]) => {
   const dates = values
@@ -548,7 +555,7 @@ try {
         datePublished: post.data.published_at || post.data.created_at,
         dateModified: post.data.updated_at || post.data.published_at,
         author: { "@type": "Person", name: String(post.data.author || "Bevory Team") },
-        publisher: { "@type": "Organization", name: "Bevory", logo: { "@type": "ImageObject", url: `${origin}/favicon.png` } },
+        publisher: { "@type": "Organization", name: "Bevory" },
         mainEntityOfPage: `${origin}${path}`,
       },
     });

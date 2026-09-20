@@ -243,6 +243,17 @@ const AdminCheersGuide = () => {
     }
   };
 
+  const updateStoryType = (index: number, type: StoryMedia["type"]) => {
+    const newStories = [...formData.stories];
+    newStories[index] = { ...newStories[index], type, url: "" };
+    setFormData({ ...formData, stories: newStories });
+    if (errors[`story_${index}`]) {
+      const newErrors = { ...errors };
+      delete newErrors[`story_${index}`];
+      setErrors(newErrors);
+    }
+  };
+
   const csvOps = useCsvOperations<CheersGuide>({
     tableName: "cheers_guides",
     columns: ["id", "title", "subtitle", "image_url", "video_url", "media_type", "display_duration", "emoji", "link_url", "link_type", "order_index", "is_active", "stories"],
@@ -415,7 +426,7 @@ const AdminCheersGuide = () => {
                             <Label className="text-xs">Type</Label>
                             <Select
                               value={story.type}
-                              onValueChange={(v) => updateStory(index, "type", v)}
+                              onValueChange={(value: StoryMedia["type"]) => updateStoryType(index, value)}
                             >
                               <SelectTrigger className="h-8">
                                 <SelectValue />
@@ -440,24 +451,36 @@ const AdminCheersGuide = () => {
                         </div>
 
                         <div>
-                          <Label className={cn("text-xs", errors[`story_${index}`] && "text-destructive")}>
-                            {story.type === "video" ? "Video URL / YouTube URL *" : "Image URL *"}
-                          </Label>
-                          <Input
-                            value={story.url}
-                            onChange={(e) => updateStory(index, "url", e.target.value)}
-                            placeholder={story.type === "image" 
-                              ? "https://image-url..." 
-                              : "https://youtube.com/shorts/... or video URL"
-                            }
-                            className={cn("h-8", errors[`story_${index}`] && "border-destructive")}
-                          />
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {story.type === "image" 
-                              ? "📐 Recommended: 1080×1920px (9:16 portrait), JPEG/PNG, max 500KB"
-                              : "📹 YouTube Shorts, YouTube videos, or direct MP4 URLs supported"
-                            }
-                          </p>
+                          {story.type === "image" ? (
+                            <FormField
+                              label="Story Image *"
+                              hint="Upload an image you own or are licensed to use; external image URLs are not accepted."
+                            >
+                              <ImageUpload
+                                value={story.url || null}
+                                onChange={(url) => updateStory(index, "url", url || "")}
+                                folder="cheers-guide-stories"
+                                recommendedSize="2160 × 3840 px"
+                                aspectRatio="9:16 portrait"
+                                aspectHint="Full-screen story image"
+                              />
+                            </FormField>
+                          ) : (
+                            <>
+                              <Label className={cn("text-xs", errors[`story_${index}`] && "text-destructive")}>
+                                Video URL / YouTube URL *
+                              </Label>
+                              <Input
+                                value={story.url}
+                                onChange={(e) => updateStory(index, "url", e.target.value)}
+                                placeholder="https://youtube.com/shorts/... or video URL"
+                                className={cn("h-8", errors[`story_${index}`] && "border-destructive")}
+                              />
+                              <p className="text-xs text-muted-foreground mt-1">
+                                📹 YouTube Shorts, YouTube videos, or direct MP4 URLs supported
+                              </p>
+                            </>
+                          )}
                           {errors[`story_${index}`] && (
                             <p className="text-xs text-destructive">{errors[`story_${index}`]}</p>
                           )}

@@ -5,6 +5,8 @@ import {
   imageObjectKey,
   imageObjectKeyCandidates,
   isExternalHttpUrl,
+  publicObjectUrl,
+  validatePublicBaseUrl,
   youtubeThumbnailUrl,
 } from "./image-migration-lib.js";
 
@@ -16,12 +18,65 @@ describe("image migration helpers", () => {
       content: '<p><img src="https://third.example/article.png"></p>',
       nested: [{ logoUrl: "https://third.example/logo.png" }],
     };
-    const targets = collectImageTargets(row, "https://media.bevory.in");
+    const targets = collectImageTargets(row, "https://bevory.in/media");
     expect(targets.map((target) => target.sourceUrl)).toEqual([
       "https://third.example/product.jpg",
       "https://third.example/article.png",
       "https://third.example/logo.png",
     ]);
+  });
+
+  it("finds typed image story URLs without treating video stories as images", () => {
+    const row = {
+      stories: [
+        { type: "image", url: "https://third.example/story.jpg", duration: 5 },
+        { type: "video", url: "https://third.example/story.mp4", duration: 8 },
+      ],
+    };
+    const targets = collectImageTargets(row, "https://bevory.in/media");
+    expect(targets).toEqual([{
+      kind: "field",
+      path: ["stories", 0, "url"],
+      sourceUrl: "https://third.example/story.jpg",
+      sourceValue: "https://third.example/story.jpg",
+    }]);
+  });
+
+  it("finds alternate image containers, unquoted markup, srcset, CSS, and protocol-relative URLs", () => {
+    const row = {
+      heroPictures: [{ src: "//cdn.third.example/hero.png" }],
+      image_source_url: "https://third.example/provenance.jpg",
+      content: [
+        "<img src=https://third.example/plain.jpg srcset='https://third.example/small.jpg 1x, //cdn.third.example/large.jpg 2x'>",
+        "<div style=\"background-image: url(https://third.example/background.png)\"></div>",
+      ].join(""),
+    };
+    const targets = collectImageTargets(row, "https://bevory.in/media");
+    expect(targets.map((target) => target.sourceUrl)).toEqual([
+      "https://cdn.third.example/hero.png",
+      "https://third.example/plain.jpg",
+      "https://third.example/small.jpg",
+      "https://cdn.third.example/large.jpg",
+      "https://third.example/background.png",
+    ]);
+    expect(targets.map((target) => target.sourceValue)).toEqual([
+      "//cdn.third.example/hero.png",
+      "https://third.example/plain.jpg",
+      "https://third.example/small.jpg",
+      "//cdn.third.example/large.jpg",
+      "https://third.example/background.png",
+    ]);
+  });
+
+  it("decodes HTML entities in external image fields while retaining the original replacement text", () => {
+    const row = { poster_url: "https&#58;//third.example/poster.jpg" };
+    const [target] = collectImageTargets(row, "https://bevory.in/media");
+    expect(target).toEqual({
+      kind: "field",
+      path: ["poster_url"],
+      sourceUrl: "https://third.example/poster.jpg",
+      sourceValue: "https&#58;//third.example/poster.jpg",
+    });
   });
 
   it("replaces fields and HTML without mutating the original row", () => {
@@ -54,7 +109,49 @@ describe("image migration helpers", () => {
   });
 
   it("skips the configured media host", () => {
-    expect(isExternalHttpUrl("https://media.bevory.in/a.jpg", "https://media.bevory.in")).toBe(false);
-    expect(isExternalHttpUrl("https://example.com/a.png", "https://media.bevory.in")).toBe(true);
+    const publicBaseUrl = "https://bevory.in/media";
+    expect(isExternalHttpUrl("https://bevory.in/media/a.jpg", publicBaseUrl)).toBe(false);
+    expect(isExternalHttpUrl("https://bevory.in/media-library/a.jpg", publicBaseUrl)).toBe(true);
+    expect(isExternalHttpUrl("https://bevory.in/uploads/a.jpg", publicBaseUrl)).toBe(true);
+    expect(isExternalHttpUrl("http://bevory.in/media/a.jpg", publicBaseUrl)).toBe(true);
+    expect(isExternalHttpUrl("https://cdn.bevory.in/media/a.jpg", publicBaseUrl)).toBe(true);
+    expect(isExternalHttpUrl("https://example.com/a.png", publicBaseUrl)).toBe(true);
+    expect(isExternalHttpUrl("//example.com/a.png", publicBaseUrl)).toBe(true);
+  });
+
+  it("validates the exact public HTTPS media base", () => {
+    expect(validatePublicBaseUrl("https://bevory.in/media/")).toBe("https://bevory.in/media");
+    expect(publicObjectUrl("https://bevory.in/media", "migrated-images/a b/c.jpg"))
+      .toBe("https://bevory.in/media/migrated-images/a%20b/c.jpg");
+    expect(() => validatePublicBaseUrl("http://bevory.in/media")).toThrow(/HTTPS origin/);
+    expect(() => validatePublicBaseUrl("https://bevory.in")).toThrow(/\/media path/);
+    expect(() => validatePublicBaseUrl("not a url")).toThrow(/valid HTTPS URL/);
+  });
+
+  it("merges replacements into freshly-read data and preserves concurrent fields", () => {
+    const fresh = {
+      title: "Edited while uploads ran",
+      image_url: "https://third.example/product.jpg",
+      nested: { untouched: true },
+    };
+    const next = applyImageTargets(
+      fresh,
+      collectImageTargets(fresh, "https://bevory.in/media"),
+      new Map([["https://third.example/product.jpg", "https://bevory.in/media/product.jpg"]]),
+    );
+    expect(next).toEqual({
+      title: "Edited while uploads ran",
+      image_url: "https://bevory.in/media/product.jpg",
+      nested: { untouched: true },
+    });
+  });
+
+  it("fails safely when a freshly-read image changed to an asset that was not uploaded", () => {
+    const fresh = { image_url: "https://third.example/new-image.jpg" };
+    expect(() => applyImageTargets(
+      fresh,
+      collectImageTargets(fresh, "https://bevory.in/media"),
+      new Map([["https://third.example/old-image.jpg", "https://bevory.in/media/old-image.jpg"]]),
+    )).toThrow(/Missing migrated URL for https:\/\/third\.example\/new-image\.jpg/);
   });
 });

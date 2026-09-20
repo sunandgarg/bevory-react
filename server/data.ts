@@ -139,6 +139,195 @@ const safeTableInput = (table: string, value: Record<string, unknown>) =>
     ? stripCredentialFields(value) as Record<string, unknown>
     : value;
 
+const IMAGE_FIELD_TOKENS = new Set([
+  "image", "images", "logo", "logos", "cover", "thumbnail", "avatar", "favicon",
+  "photo", "picture", "banner", "hero", "background", "poster", "icon",
+]);
+const EXTERNAL_REFERENCE_FIELD_TOKENS = new Set([
+  "source", "provenance", "link", "video", "youtube",
+]);
+const IMAGE_OBJECT_URL_KEYS = new Set(["url", "src", "href"]);
+
+const fieldTokens = (field: string) => field
+  .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+  .toLowerCase()
+  .split(/[^a-z0-9]+/)
+  .filter(Boolean);
+
+const imageField = (field: string) => {
+  const tokens = fieldTokens(field);
+  return tokens.some((token) => (
+    IMAGE_FIELD_TOKENS.has(token)
+    || /^(?:image|logo|cover|thumbnail|avatar|favicon|photo|picture|banner|hero|background|poster|icon)\d+$/.test(token)
+  ))
+    && !tokens.some((token) => EXTERNAL_REFERENCE_FIELD_TOKENS.has(token));
+};
+
+const externalReferenceField = (field: string) => fieldTokens(field)
+  .some((token) => EXTERNAL_REFERENCE_FIELD_TOKENS.has(token));
+
+const decodeHtmlEntities = (value: string) => value.replace(
+  /&(?:#(\d+);?|#x([\da-f]+);?|(?:colon|sol|tab|newline|amp|quot|apos);?)/gi,
+  (entity, decimal: string | undefined, hexadecimal: string | undefined) => {
+    if (decimal) return String.fromCodePoint(Number.parseInt(decimal, 10));
+    if (hexadecimal) return String.fromCodePoint(Number.parseInt(hexadecimal, 16));
+    const named: Record<string, string> = {
+      "&colon;": ":",
+      "&sol;": "/",
+      "&tab;": "\t",
+      "&newline;": "\n",
+      "&amp;": "&",
+      "&quot;": "\"",
+      "&apos;": "'",
+    };
+    const normalizedEntity = entity.endsWith(";") ? entity.toLowerCase() : `${entity.toLowerCase()};`;
+    return named[normalizedEntity] ?? entity;
+  },
+);
+
+const assertFirstPartyImageUrl = (value: string, path: string, appOrigin: string) => {
+  const candidate = decodeHtmlEntities(value).trim();
+  if (!candidate) return;
+  if (candidate.startsWith("//") || candidate.startsWith("\\\\") || candidate.includes("\\")) {
+    throw new Error(`Image URL at ${path} must be local or use ${appOrigin}`);
+  }
+
+  let parsed: URL;
+  try {
+    parsed = new URL(candidate, `${appOrigin}/`);
+  } catch {
+    throw new Error(`Image URL at ${path} is invalid`);
+  }
+  if (
+    !["http:", "https:"].includes(parsed.protocol)
+    || parsed.origin !== appOrigin
+    || parsed.username
+    || parsed.password
+  ) {
+    throw new Error(`Image URL at ${path} must be local or use ${appOrigin}`);
+  }
+};
+
+const attributeValues = (tag: string, attribute: "src" | "srcset") => {
+  const values: string[] = [];
+  const pattern = new RegExp(
+    `(?:\\s|/)${attribute}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>\u0060]+))`,
+    "gi",
+  );
+  for (const match of tag.matchAll(pattern)) values.push(match[1] ?? match[2] ?? match[3] ?? "");
+  return values;
+};
+
+const normalizeCssForUrlScan = (value: string) => decodeHtmlEntities(value)
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(
+    /\\(?:([\da-f]{1,6})(?:\r\n|[\t\n\f\r ])?|([^\r\n\f])|(?:\r\n|[\n\f\r]))/gi,
+    (_escape, hexadecimal: string | undefined, escapedCharacter: string | undefined) => {
+      if (hexadecimal) {
+        const codePoint = Number.parseInt(hexadecimal, 16);
+        return codePoint > 0 && codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : "�";
+      }
+      return escapedCharacter ?? "";
+    },
+  );
+
+const assertEmbeddedImageUrls = (value: string, path: string, appOrigin: string) => {
+  const imageStarts = [...value.matchAll(/<img\b/gi)];
+  const imageTags = [...value.matchAll(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)];
+  if (imageStarts.length !== imageTags.length) {
+    throw new Error(`Image markup at ${path} is invalid`);
+  }
+  for (const tagMatch of imageTags) {
+    const tag = tagMatch[0];
+    for (const source of attributeValues(tag, "src")) {
+      assertFirstPartyImageUrl(source, `${path}.<img src>`, appOrigin);
+    }
+    for (const sourceSet of attributeValues(tag, "srcset")) {
+      for (const source of sourceSet.split(",").map((item) => item.trim().split(/\s+/)[0]).filter(Boolean)) {
+        assertFirstPartyImageUrl(source, `${path}.<img srcset>`, appOrigin);
+      }
+    }
+  }
+
+  const normalizedCss = normalizeCssForUrlScan(value);
+  if (/(?:^|[^\w-])(?:-webkit-)?image-set\s*\(/i.test(normalizedCss)) {
+    throw new Error(`CSS image-set at ${path} is not allowed`);
+  }
+  const cssUrlPattern = /\burl\(\s*(?:"([^"]*)"|'([^']*)'|([^\s"')]+))\s*\)/gi;
+  for (const match of normalizedCss.matchAll(cssUrlPattern)) {
+    assertFirstPartyImageUrl(match[1] ?? match[2] ?? match[3] ?? "", `${path}.css-url`, appOrigin);
+  }
+};
+
+const looksLikeImageReference = (value: string) => (
+  /^(?:https?:|\/\/|\\\\|\/|\.\.?(?:\/|\\))/i.test(value.trim())
+  || /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/i.test(value.trim())
+);
+
+/**
+ * Enforces the persistence boundary for rendered images. External URLs remain
+ * valid in ordinary links, video fields and explicit source/provenance fields.
+ */
+export const validateFirstPartyImages = (
+  value: unknown,
+  appUrl = process.env.APP_URL || "http://localhost:8080",
+) => {
+  let appOrigin: string;
+  try {
+    appOrigin = new URL(appUrl).origin;
+  } catch {
+    throw new Error("APP_URL must be a valid absolute URL");
+  }
+
+  const visit = (
+    nested: unknown,
+    path: string,
+    expectImageUrl = false,
+    imageContainer = false,
+    skipEmbeddedImages = false,
+  ): void => {
+    if (typeof nested === "string") {
+      if (expectImageUrl) assertFirstPartyImageUrl(nested, path, appOrigin);
+      if (!skipEmbeddedImages) assertEmbeddedImageUrls(nested, path, appOrigin);
+      return;
+    }
+    if (Array.isArray(nested)) {
+      nested.forEach((item, index) => visit(
+        item,
+        `${path}[${index}]`,
+        expectImageUrl,
+        imageContainer,
+        skipEmbeddedImages,
+      ));
+      return;
+    }
+    if (!nested || typeof nested !== "object") return;
+
+    const record = nested as Record<string, unknown>;
+    const typedImage = String(record.type ?? "").toLowerCase() === "image";
+    const objectIsImage = imageContainer || typedImage;
+    for (const [key, child] of Object.entries(record)) {
+      const keyIsImage = imageField(key);
+      const keyIsExternalReference = externalReferenceField(key);
+      const imageObjectUrl = objectIsImage && IMAGE_OBJECT_URL_KEYS.has(key.toLowerCase());
+      const nestedImageContainer = keyIsImage && child != null && typeof child === "object";
+      const nestedStringInImageContainer = objectIsImage
+        && !keyIsExternalReference
+        && typeof child === "string"
+        && looksLikeImageReference(child);
+      visit(
+        child,
+        `${path}.${key}`,
+        keyIsImage || imageObjectUrl || nestedStringInImageContainer,
+        nestedImageContainer,
+        typedImage ? false : skipEmbeddedImages || keyIsExternalReference,
+      );
+    }
+  };
+
+  visit(value, "$root");
+};
+
 const PUBLIC_REVIEW_INSERT_COLUMNS = new Set([
   "product_id", "rating", "reviewer_name", "content", "taste_rating", "value_rating", "rebuy_rating",
   "is_approved", "is_featured", "is_reported",
@@ -472,6 +661,7 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
           created_at: previous.created_at ?? scoped.created_at ?? now,
           updated_at: scoped.updated_at ?? now,
         });
+        validateFirstPartyImages(data);
         await prisma.contentRecord.upsert({
           where: { key: `${payload.table}:${recordId}` },
           update: { data },
@@ -499,6 +689,7 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
       const updated: Array<Record<string, unknown>> = [];
       for (const record of matches) {
         const data = jsonSafe({ ...toRecordData(record.data), ...changes, updated_at: new Date().toISOString() });
+        validateFirstPartyImages(data);
         await prisma.contentRecord.update({ where: { key: record.key }, data: { data } });
         updated.push(data as Record<string, unknown>);
       }
@@ -533,6 +724,7 @@ export const importAllTables = async (tables: Record<string, Array<Record<string
       try {
         const recordId = String(row.id ?? randomUUID());
         const data = jsonSafe({ ...row, id: recordId });
+        validateFirstPartyImages(data);
         await prisma.contentRecord.upsert({
           where: { key: `${tableName}:${recordId}` },
           update: { data },

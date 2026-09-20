@@ -194,6 +194,7 @@ export const CompareFloatingBar = () => {
 // Compare sheet with side-by-side view
 export const CompareSheet = () => {
   const { compareProducts, showCompareSheet, setShowCompareSheet, removeFromCompare } = useCompare();
+  const { selectedCity } = useLocation();
   const [expandedDesc, setExpandedDesc] = useState<string | null>(null);
   const [expandedTaste, setExpandedTaste] = useState<string | null>(null);
 

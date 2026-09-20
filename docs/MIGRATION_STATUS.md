@@ -24,12 +24,13 @@ and verified.
 | Lightsail Managed MySQL | Complete | Prisma schema, seed, catalogue, and live health checks pass |
 | Catalogue import | Complete | 30 cities, 18 active categories, 121 active subcategories, 1,818 active brands, 5,991 active products, and 37,981 public price variants |
 | City availability | Complete | The global product and known-size catalogue remains visible in every supported city; only approved local price records are shown as prices |
-| Product images | Reachable external sources | All 1,038 products referenced by Kolkata have verified images; 207 of 463 used brands have verified logos and 256 remain unset rather than guessed |
+| Product image migration | In progress | Expanded scan found 6,447 references and 4,506 unique sources; 4,500 objects are verified in S3, six dead sources will be removed, and database apply has not started |
 | Guide recovery | Complete | 50 articles reconstructed, 2,179 fragments quarantined, and 11 evergreen articles published |
 | 25+ compliance UI | Complete | The configurable 25+ gate is mounted globally across public, auth, and admin routes |
 | Authentication | Complete except phone OTP | Email/password, sessions, admin authorization, and Google OAuth pass; the phone OTP provider is not configured in production |
-| S3 uploads | Infrastructure complete | Bucket is private, encrypted, versioned, and restricted to the production uploader; it currently contains the encrypted Guide backup, not the catalogue images |
-| CloudFront media CDN | Blocked by AWS | Existing OAC is ready, but AWS still rejects distribution creation until account verification |
+| S3 uploads | Infrastructure complete | Bucket is private, encrypted, versioned, and restricted to the production uploader; catalogue upload and database cutover are tracked separately |
+| First-party media route | Deployment/cutover pending | Selected base is `https://bevory.in/media`; only `migrated-images/` and `images/` objects are public through the Cloudflare/Lightsail streaming path |
+| CloudFront media CDN | Blocked by AWS | Existing OAC is ready, but AWS still rejects distribution creation until account verification; the private-S3 streaming fallback does not require making the bucket public |
 
 ## Import Exceptions
 
@@ -111,21 +112,35 @@ and verified.
   while 27 are retained for review. Its public catalogue has 1,527 products.
 - Blank category cells in both new sources were resolved only from verified
   existing product taxonomy. Explicitly missing prices were not inferred.
-- Product images remain externally linked as requested. Their identity is
-  verified, but reuse rights must be confirmed before copying them to S3.
+- Product images remain externally linked until the database-apply phase. The
+  expanded inventory counted 6,447 references across 4,506 unique sources. Their
+  identity is verified, but reuse rights must still be confirmed; copying an
+  object to Bevory's S3 bucket does not transfer copyright or reuse rights.
 
 Production audit reports are stored with restricted permissions in
 `/opt/bevory/reports`. The pre-repair Guide backup is encrypted in S3 at
 `s3://bevory-uploads-091199627263-ap-south-1/backups/blog/blog-posts-before-repair-2026-09-19T04-18-15-288Z.json`.
 
-## Remaining External Blocker
+## Remaining External Acceleration Blocker
 
 AWS still returns `Your account must be verified before you can add new
 CloudFront resources` when creating the approved distribution. AWS Support case
-`178975941700756` is open and remains unassigned. The private
-bucket must not be made public as a workaround. Once AWS verifies the account,
-create the distribution with OAC `bevory-uploads-oac`, scope the bucket policy
-to its ARN, and then attach `media.bevory.in`.
+`178975941700756` remains open. The private bucket must not be made public as a
+workaround. The selected fallback keeps public URLs on
+`https://bevory.in/media/...`: Cloudflare sends those requests to Lightsail,
+which streams only `migrated-images/` and `images/` keys from private S3. Once
+AWS verifies the account, create the distribution with OAC
+`bevory-uploads-oac`, scope the bucket policy to its ARN, and switch the
+internal media upstream without changing stored public URLs.
+
+The migration sequence is inventory, private `--upload-only`, public
+`/media/*` verification, transactional `--apply`, and finally sitemap
+regeneration plus application redeployment. The apply step must not run until a
+migrated object is reachable through the first-party route. Catalogue assets
+are deterministic non-generative 3,840-pixel-long-edge masters: alpha sources
+become lossless PNG, and other sources become progressive quality-95 JPEG with
+4:4:4 chroma after Lanczos3 resampling. Future administrator uploads are stored
+under `images/`; migrated catalogue assets remain under `migrated-images/`.
 
 The AWS account display name was changed from `cirkle.world` to `Bevory` on
 2026-09-19. The console confirmed the change; AWS may take several hours to
@@ -148,9 +163,10 @@ propagate the new name across all services.
 - The live Guide API returns exactly 11 published reconstructed articles.
 - Desktop and 390 x 844 mobile browser checks show no horizontal overflow or
   console errors.
-- Service worker v6 fetches route documents network-first so compliance changes
-  are not hidden behind stale HTML.
-- `sitemap.xml` indexes 5 compliant shards containing 94,482 unique canonical
+- Service worker v10 fetches route documents network-first so compliance changes
+  are not hidden behind stale HTML and cache-first serves same-origin
+  `/media/*` images.
+- `sitemap.xml` indexes five compliant shards containing 94,482 unique canonical
   URLs and 80,471 image entries. City product and exact-size pages are included
   only when they have a reviewed positive local price. Known products and sizes
   remain visible in other cities, but unavailable-price variants use
@@ -165,4 +181,5 @@ propagate the new name across all services.
 - Free-text search, sorting, price ranges, and arbitrary filter combinations are
   `noindex, follow`; only stable subcategory landing pages are indexable to avoid
   duplicate and effectively infinite faceted URL combinations.
-- Lightsail exposes only TCP ports 80 and 443; temporary SSH access was closed.
+- Lightsail exposes TCP ports 80 and 443 publicly. TCP port 22 is restricted to
+  the administrator's current `122.161.72.132/32` address for this deployment.

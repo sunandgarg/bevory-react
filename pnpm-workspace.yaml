@@ -4,6 +4,7 @@ allowBuilds:
   '@swc/core': true
   esbuild: true
   prisma: true
+  workerd: true
 overrides:
   deepmerge-ts: ^8.0.0
   qs: ^6.16.0

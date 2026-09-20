@@ -11,6 +11,7 @@ import {
   imageObjectKey,
   imageObjectKeyCandidates,
   publicObjectUrl,
+  validatePublicBaseUrl,
   youtubeThumbnailUrl,
   type ImageOutputExtension,
   type ImageTarget,
@@ -25,13 +26,21 @@ const targetLongEdge = 3840;
 const quality = Number(process.env.IMAGE_MIGRATION_QUALITY || 95);
 const concurrency = Number(process.env.IMAGE_MIGRATION_CONCURRENCY || 4);
 const maxSourceBytes = Number(process.env.IMAGE_MIGRATION_MAX_SOURCE_BYTES || 25 * 1024 * 1024);
+const maxInputPixels = Number(process.env.IMAGE_MIGRATION_MAX_INPUT_PIXELS || 50_000_000);
+const immutableCacheControl = "public, max-age=31536000, immutable";
 
 if (apply && uploadOnly) throw new Error("Choose either --apply or --upload-only");
 if (!Number.isInteger(quality) || quality < 90 || quality > 100) {
   throw new Error("IMAGE_MIGRATION_QUALITY must be an integer from 90 to 100");
 }
-if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 12) {
-  throw new Error("IMAGE_MIGRATION_CONCURRENCY must be an integer from 1 to 12");
+if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 8) {
+  throw new Error("IMAGE_MIGRATION_CONCURRENCY must be an integer from 1 to 8");
+}
+if (!Number.isInteger(maxSourceBytes) || maxSourceBytes < 1 || maxSourceBytes > 50 * 1024 * 1024) {
+  throw new Error("IMAGE_MIGRATION_MAX_SOURCE_BYTES must be an integer from 1 to 52428800");
+}
+if (!Number.isInteger(maxInputPixels) || maxInputPixels < targetLongEdge || maxInputPixels > 100_000_000) {
+  throw new Error("IMAGE_MIGRATION_MAX_INPUT_PIXELS must be an integer from 3840 to 100000000");
 }
 
 const requiredEnv = (name: string) => {
@@ -42,9 +51,9 @@ const requiredEnv = (name: string) => {
 
 const bucket = shouldUpload ? requiredEnv("S3_BUCKET") : process.env.S3_BUCKET?.trim() || "dry-run";
 const region = shouldUpload ? requiredEnv("S3_REGION") : process.env.S3_REGION?.trim() || "ap-south-1";
-const publicBaseUrl = shouldUpload
+const publicBaseUrl = validatePublicBaseUrl(shouldUpload
   ? requiredEnv("IMAGE_PUBLIC_URL")
-  : process.env.IMAGE_PUBLIC_URL?.trim() || process.env.S3_PUBLIC_URL?.trim() || "https://media.bevory.in";
+  : process.env.IMAGE_PUBLIC_URL?.trim() || process.env.S3_PUBLIC_URL?.trim() || "https://bevory.in/media");
 const accessKeyId = process.env.S3_ACCESS_KEY_ID?.trim();
 const secretAccessKey = process.env.S3_SECRET_ACCESS_KEY?.trim();
 if (Boolean(accessKeyId) !== Boolean(secretAccessKey)) {
@@ -62,7 +71,6 @@ type RecordPlan = {
   key: string;
   tableName: string;
   recordId: string;
-  original: JsonObject;
   targets: ImageTarget[];
 };
 type AssetPlan = {
@@ -81,6 +89,14 @@ type AssetResult = AssetPlan & {
   height?: number;
   error?: string;
 };
+
+type ExistingObject = {
+  key: string;
+  width?: number;
+  height?: number;
+};
+
+let existingObjectsMissingDimensionMetadata = 0;
 
 const jsonObject = (value: Prisma.JsonValue): JsonObject => (
   value && typeof value === "object" && !Array.isArray(value) ? value as JsonObject : {}
@@ -144,28 +160,81 @@ const downloadImage = async (sourceUrl: string) => {
     const contentType = response.headers.get("content-type")?.split(";")[0].trim().toLowerCase() || "";
     if (!contentType.startsWith("image/")) throw new Error(`Unexpected content type ${contentType || "unknown"}`);
     const advertisedLength = Number(response.headers.get("content-length") || 0);
-    if (advertisedLength > maxSourceBytes) throw new Error(`Source exceeds ${maxSourceBytes} bytes`);
-    const body = Buffer.from(await response.arrayBuffer());
-    if (!body.length || body.length > maxSourceBytes) throw new Error(`Invalid source size ${body.length}`);
-    return body;
+    if (Number.isFinite(advertisedLength) && advertisedLength > maxSourceBytes) {
+      await response.body?.cancel();
+      throw new Error(`Source exceeds ${maxSourceBytes} bytes`);
+    }
+    if (!response.body) throw new Error(`Empty response body from ${current}`);
+    const reader = response.body.getReader();
+    const chunks: Buffer[] = [];
+    let totalBytes = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > maxSourceBytes) {
+        await reader.cancel();
+        throw new Error(`Source exceeds ${maxSourceBytes} bytes while streaming`);
+      }
+      chunks.push(Buffer.from(value));
+    }
+    if (!totalBytes) throw new Error("Source image was empty");
+    return Buffer.concat(chunks, totalBytes);
   }
   throw new Error(`Too many redirects for ${sourceUrl}`);
 };
 
-const objectExists = async (key: string) => {
+const inspectExistingObject = async (key: string): Promise<ExistingObject | null> => {
+  let head;
   try {
-    await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
-    return true;
+    head = await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
   } catch (error) {
     const status = (error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode;
-    if (status === 404) return false;
-    throw error;
+    if (status === 404) return null;
+    const message = error instanceof Error ? error.message : String(error);
+    if (status === 403) {
+      throw new Error(`Cannot validate s3://${bucket}/${key}: HeadObject was denied (check s3:GetObject and s3:ListBucket)`);
+    }
+    throw new Error(`Cannot validate s3://${bucket}/${key}${status ? ` (HTTP ${status})` : ""}: ${message}`);
   }
+
+  const expectedContentType = key.endsWith(".png") ? "image/png" : "image/jpeg";
+  const contentType = head.ContentType?.split(";", 1)[0].trim().toLowerCase();
+  const migrationVersion = head.Metadata?.["migration-version"];
+  if (migrationVersion !== "2") {
+    throw new Error(`Existing s3://${bucket}/${key} has migration-version=${migrationVersion || "missing"}; expected 2`);
+  }
+  if (contentType !== expectedContentType) {
+    throw new Error(`Existing s3://${bucket}/${key} has ContentType=${contentType || "missing"}; expected ${expectedContentType}`);
+  }
+  if (head.CacheControl !== immutableCacheControl) {
+    throw new Error(`Existing s3://${bucket}/${key} has CacheControl=${head.CacheControl || "missing"}; expected ${immutableCacheControl}`);
+  }
+
+  const widthValue = head.Metadata?.["output-width"];
+  const heightValue = head.Metadata?.["output-height"];
+  if (!widthValue && !heightValue) {
+    existingObjectsMissingDimensionMetadata++;
+    return { key };
+  }
+  const width = Number(widthValue);
+  const height = Number(heightValue);
+  if (
+    !Number.isInteger(width)
+    || width < 1
+    || !Number.isInteger(height)
+    || height < 1
+    || Math.max(width, height) !== targetLongEdge
+  ) {
+    throw new Error(`Existing s3://${bucket}/${key} has invalid output dimensions ${widthValue || "missing"}x${heightValue || "missing"}`);
+  }
+  return { key, width, height };
 };
 
 const findExistingObjectKey = async (asset: AssetPlan) => {
   for (const key of imageObjectKeyCandidates(asset.tableName, asset.recordId, asset.sourceUrl)) {
-    if (await objectExists(key)) return key;
+    const existing = await inspectExistingObject(key);
+    if (existing) return existing;
   }
   return null;
 };
@@ -174,18 +243,20 @@ const migrateAsset = async (asset: AssetPlan): Promise<AssetResult> => {
   try {
     const existingObjectKey = await findExistingObjectKey(asset);
     if (existingObjectKey) {
-      const outputFormat: ImageOutputExtension = existingObjectKey.endsWith(".png") ? "png" : "jpg";
+      const outputFormat: ImageOutputExtension = existingObjectKey.key.endsWith(".png") ? "png" : "jpg";
       return {
         ...asset,
         uploaded: false,
-        objectKey: existingObjectKey,
-        publicUrl: publicObjectUrl(publicBaseUrl, existingObjectKey),
+        objectKey: existingObjectKey.key,
+        publicUrl: publicObjectUrl(publicBaseUrl, existingObjectKey.key),
         outputFormat,
+        width: existingObjectKey.width,
+        height: existingObjectKey.height,
       };
     }
 
     const source = await downloadImage(asset.sourceUrl);
-    const sharpOptions = { animated: false, limitInputPixels: 100_000_000 } as const;
+    const sharpOptions = { animated: false, limitInputPixels: maxInputPixels } as const;
     const metadata = await sharp(source, sharpOptions).metadata();
     const outputFormat: ImageOutputExtension = metadata.hasAlpha ? "png" : "jpg";
     const objectKey = imageObjectKey(asset.tableName, asset.recordId, asset.sourceUrl, outputFormat);
@@ -217,11 +288,13 @@ const migrateAsset = async (asset: AssetPlan): Promise<AssetResult> => {
       Key: objectKey,
       Body: converted.data,
       ContentType: outputFormat === "png" ? "image/png" : "image/jpeg",
-      CacheControl: "public, max-age=31536000, immutable",
+      CacheControl: immutableCacheControl,
       Metadata: {
         "source-sha256": createHash("sha256").update(asset.sourceUrl).digest("hex"),
         "migration-version": "2",
         "output-format": outputFormat,
+        "output-width": String(converted.info.width),
+        "output-height": String(converted.info.height),
         "resize-kernel": "lanczos3",
       },
     }));
@@ -278,7 +351,7 @@ try {
       original,
       collectImageTargets(original, publicBaseUrl),
     );
-    return { key: record.key, tableName: record.tableName, recordId: record.recordId, original, targets };
+    return { key: record.key, tableName: record.tableName, recordId: record.recordId, targets };
   }).filter((plan) => plan.targets.length > 0);
 
   const assetsBySource = new Map<string, AssetPlan>();
@@ -329,6 +402,7 @@ try {
       uniqueImages: results.length,
       uploaded: results.filter((result) => result.uploaded).length,
       alreadyPresent: results.filter((result) => !result.uploaded && !result.error).length,
+      existingObjectsMissingDimensionMetadata,
       failures: failures.length,
       inputBytes: results.reduce((sum, result) => sum + (result.inputBytes || 0), 0),
       outputBytes: results.reduce((sum, result) => sum + (result.outputBytes || 0), 0),
@@ -340,6 +414,12 @@ try {
         targets: plan.targets,
       })),
     };
+    if (existingObjectsMissingDimensionMetadata) {
+      console.warn(
+        `${existingObjectsMissingDimensionMetadata} validated migration-v2 objects predate dimension metadata; `
+        + "they were accepted because format, content type, and cache policy matched",
+      );
+    }
     const manifestKey = await uploadManifest(summary as unknown as JsonObject);
     console.log(JSON.stringify({ manifestKey, ...summary, assets: undefined, originals: undefined }, null, 2));
     if (failures.length) {
@@ -352,19 +432,47 @@ try {
         return [result.sourceUrl, result.publicUrl];
       }));
       const timestamp = new Date().toISOString();
-      for (let index = 0; index < plans.length; index += 100) {
-        const chunk = plans.slice(index, index + 100);
-        await prisma.$transaction(chunk.map((plan) => {
-          const data = applyImageTargets(plan.original, plan.targets, migratedUrls);
-          data.image_migrated_at = timestamp;
-          data.image_storage_provider = "s3";
-          return prisma.contentRecord.update({
-            where: { key: plan.key },
-            data: { data: data as Prisma.InputJsonObject },
+      await prisma.$transaction(async (transaction) => {
+        for (let index = 0; index < plans.length; index += 100) {
+          const chunk = plans.slice(index, index + 100);
+          const currentRecords = await transaction.contentRecord.findMany({
+            where: { key: { in: chunk.map((plan) => plan.key) } },
+            select: {
+              key: true,
+              tableName: true,
+              data: true,
+              updatedAt: true,
+            },
           });
-        }));
-        console.log(`Updated ${Math.min(index + chunk.length, plans.length)}/${plans.length} database records`);
-      }
+          const currentByKey = new Map(currentRecords.map((record) => [record.key, record]));
+          for (const plan of chunk) {
+            const current = currentByKey.get(plan.key);
+            if (!current) throw new Error(`Content record ${plan.key} was deleted while images were uploading`);
+            const currentData = jsonObject(current.data);
+            const currentTargets = addYouTubeFallback(
+              current.tableName,
+              currentData,
+              collectImageTargets(currentData, publicBaseUrl),
+            );
+            if (!currentTargets.length) continue;
+            const data = applyImageTargets(currentData, currentTargets, migratedUrls);
+            data.image_migrated_at = timestamp;
+            data.image_storage_provider = "s3";
+            const updated = await transaction.contentRecord.updateMany({
+              where: { key: plan.key, updatedAt: current.updatedAt },
+              data: {
+                data: data as Prisma.InputJsonObject,
+                updatedAt: new Date(),
+              },
+            });
+            if (updated.count !== 1) {
+              throw new Error(`Content record ${plan.key} changed during cutover; the entire cutover was rolled back`);
+            }
+          }
+          console.log(`Prepared ${Math.min(index + chunk.length, plans.length)}/${plans.length} database records`);
+        }
+      }, { maxWait: 10_000, timeout: 300_000 });
+      console.log(`Atomically updated ${plans.length}/${plans.length} database records`);
     }
   }
 } finally {

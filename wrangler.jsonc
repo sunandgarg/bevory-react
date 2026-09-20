@@ -7,6 +7,10 @@
     {
       "pattern": "bevory.in/api/*",
       "zone_name": "bevory.in"
+    },
+    {
+      "pattern": "bevory.in/media/*",
+      "zone_name": "bevory.in"
     }
   ],
   "vars": {
