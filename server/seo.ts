@@ -76,7 +76,7 @@ export const rememberRecentPromise = <T>(
 };
 
 export const isCrawlerUserAgent = (userAgent = "") => (
-  /(?:googlebot|bingbot|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|claudebot|anthropic-ai|gptbot|chatgpt-user|perplexitybot|bytespider)/i
+  /(?:googlebot|bingbot|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|claudebot|anthropic-ai|gptbot|perplexitybot|bytespider)/i
     .test(userAgent)
 );
 

@@ -41,6 +41,9 @@ describe("origin SEO rendering", () => {
   it("serves crawler SEO without booting the interactive application", () => {
     expect(isCrawlerUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1)")).toBe(true);
     expect(isCrawlerUserAgent("Mozilla/5.0 Chrome/153 Safari/537.36")).toBe(false);
+    expect(isCrawlerUserAgent(
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 ChatGPT-User/1.0",
+    )).toBe(false);
 
     const html = stripCrawlerHydration(template);
     expect(html).not.toContain('type="module"');
