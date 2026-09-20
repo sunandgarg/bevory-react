@@ -31,7 +31,7 @@ const fetchImageSettings = async (): Promise<ImageOptimizationSettings> => {
   return { ...DEFAULT_SETTINGS, ...(data.value as unknown as ImageOptimizationSettings) };
 };
 
-// Images are preprocessed into PNG or JPEG and served from Bevory's own CDN.
+// Images are preprocessed into PNG or JPEG and served from BevOry's own CDN.
 const getOptimizedImageUrl = (
   src: string, 
   settings: ImageOptimizationSettings,

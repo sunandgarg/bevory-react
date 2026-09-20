@@ -4,7 +4,7 @@ Last updated: 2026-09-20
 
 ## Summary
 
-Bevory is live at `https://bevory.in`. Cloudflare proxies the production domain
+BevOry is live at `https://bevory.in`. Cloudflare proxies the production domain
 to the combined React/Node.js application on AWS Lightsail; Caddy routes the
 frontend, pre-rendered SEO documents, and `/api/*`. Prisma persists application
 data in Lightsail Managed MySQL, and uploads use a private encrypted S3 bucket.
@@ -115,7 +115,7 @@ and verified.
 - Product images remain externally linked until the database-apply phase. The
   expanded inventory counted 6,447 references across 4,506 unique sources. Their
   identity is verified, but reuse rights must still be confirmed; copying an
-  object to Bevory's S3 bucket does not transfer copyright or reuse rights.
+  object to BevOry's S3 bucket does not transfer copyright or reuse rights.
 
 Production audit reports are stored with restricted permissions in
 `/opt/bevory/reports`. The pre-repair Guide backup is encrypted in S3 at
@@ -142,7 +142,7 @@ become lossless PNG, and other sources become progressive quality-95 JPEG with
 4:4:4 chroma after Lanczos3 resampling. Future administrator uploads are stored
 under `images/`; migrated catalogue assets remain under `migrated-images/`.
 
-The AWS account display name was changed from `cirkle.world` to `Bevory` on
+The AWS account display name was changed from `cirkle.world` to `BevOry` on
 2026-09-19. The console confirmed the change; AWS may take several hours to
 propagate the new name across all services.
 

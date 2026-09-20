@@ -45,8 +45,8 @@ export default function AdminPerformanceReport() {
     results.push({
       category: "Images",
       title: `${imgs.length} images on page`,
-      detail: `${oversize.length} oversized, ${noLazy.length} eager-loaded, ${externalImages.length} outside Bevory hosting`,
-      fix: "Use <ProductImage> / OptimizedImage with the pre-optimized Bevory media URL; keep priority only on hero images.",
+      detail: `${oversize.length} oversized, ${noLazy.length} eager-loaded, ${externalImages.length} outside BevOry hosting`,
+      fix: "Use <ProductImage> / OptimizedImage with the pre-optimized BevOry media URL; keep priority only on hero images.",
       severity: oversize.length > 3 || externalImages.length > 5 ? "bad" : oversize.length || externalImages.length ? "warn" : "good",
     });
 
@@ -139,7 +139,7 @@ export default function AdminPerformanceReport() {
     };
     const rows: string[][] = [columns];
     // Two sample rows at top (commented-style hint via leading "#")
-    rows.push(["# SAMPLE", "Images", "12 images on page", "good", "100", "Use Bevory S3/CDN image URLs.", ts]);
+    rows.push(["# SAMPLE", "Images", "12 images on page", "good", "100", "Use BevOry S3/CDN image URLs.", ts]);
     rows.push(["# SAMPLE", "Web Vitals", "DOM Interactive: 1200 ms", "warn", "70", "Reduce blocking scripts.", ts]);
     for (const f of findings) {
       rows.push([f.category, f.category, f.detail, f.severity, String(sevScore[f.severity]), f.fix, ts]);

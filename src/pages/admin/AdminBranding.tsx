@@ -74,7 +74,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   />
                 ) : (
                   <span className="text-xl font-serif font-bold text-gray-900">
-                    {logo.text || "Bevory"}
+                    {logo.text || "BevOry"}
                   </span>
                 )}
               </div>
@@ -111,7 +111,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   />
                 ) : (
                   <span className="text-xl font-serif font-bold text-white">
-                    {logo.text || "Bevory"}
+                    {logo.text || "BevOry"}
                   </span>
                 )}
               </div>
@@ -270,7 +270,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={logo.text || ""}
                     onChange={(e) => onLogoChange({ ...logo, text: e.target.value })}
-                    placeholder="Bevory"
+                    placeholder="BevOry"
                   />
                 </div>
                 <div>

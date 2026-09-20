@@ -33,7 +33,7 @@ const DEFAULT_BRANDING: BrandingSettings = {
     },
     logo: {
       type: "text",
-      text: "Bevory",
+      text: "BevOry",
       textColor: "currentColor",
     },
   },
@@ -46,7 +46,7 @@ const DEFAULT_BRANDING: BrandingSettings = {
     },
     logo: {
       type: "text",
-      text: "Bevory",
+      text: "BevOry",
       textColor: "currentColor",
     },
   },

@@ -29,7 +29,7 @@ const sendTwilioMessage = async (phone: string, code: string) => {
     body: new URLSearchParams({
       To: phone,
       From: process.env.TWILIO_FROM_NUMBER!.trim(),
-      Body: `Your Bevory verification code is ${code}. It expires in 10 minutes.`,
+      Body: `Your BevOry verification code is ${code}. It expires in 10 minutes.`,
     }),
   });
   if (!response.ok) {

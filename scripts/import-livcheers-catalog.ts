@@ -705,7 +705,7 @@ const fetchWithRetry = async (url: string, method: "GET" | "HEAD" = "GET") => {
     try {
       const response = await fetch(url, {
         method,
-        headers: { "user-agent": "Bevory catalogue verification/1.0 (+https://bevory.in)" },
+        headers: { "user-agent": "BevOry catalogue verification/1.0 (+https://bevory.in)" },
         signal: AbortSignal.timeout(30_000),
       });
       if (response.ok) return response;
@@ -1026,7 +1026,7 @@ const buildRecords = async (
       brand_name: existingData.brand_name ?? brandName,
       slug: existingData.slug ?? slug,
       // Keep third-party URLs as provenance only. Run `pnpm images:migrate -- --apply`
-      // to create and publish a Bevory-owned media URL.
+      // to create and publish a BevOry-owned media URL.
       logo_url: existingData.logo_url ?? null,
       logo_source_url: logoUrl ?? existingData.logo_source_url ?? null,
       logo_identity_verified: logoUrl ? true : Boolean(existingData.logo_identity_verified),
@@ -1095,7 +1095,7 @@ const buildRecords = async (
     const imageOverride = PRODUCT_IMAGE_OVERRIDES.get(productKey);
     const imageUrl = selectedEnrichment?.imageUrl ?? imageOverride?.imageUrl ?? null;
     // New third-party images remain provenance until the S3 migration publishes
-    // a Bevory media URL. Existing public image URLs are retained for idempotency.
+    // a BevOry media URL. Existing public image URLs are retained for idempotency.
     const finalImageUrl = existingData.image_url ?? null;
     const finalImageVerified = Boolean(existingData.image_identity_verified);
     if (finalImageUrl && finalImageVerified) {
@@ -1228,7 +1228,7 @@ const buildRecords = async (
       enabled: ageValue.enabled ?? true,
       defaultCity: ageValue.defaultCity ?? "Gurgaon",
       title: "Are you 25 or older?",
-      description: "You must be 25 or older to access Bevory.",
+      description: "You must be 25 or older to access BevOry.",
       confirmButtonText: "Yes, I am 25+",
       declineButtonText: ageValue.declineButtonText ?? "No, I am not",
       termsText: ageValue.termsText ?? "By entering this website, you agree to our Terms of Service and Privacy Policy.",

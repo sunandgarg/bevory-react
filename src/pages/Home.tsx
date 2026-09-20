@@ -79,7 +79,7 @@ const formatCount = (count: number) => {
 };
 
 const Home = () => {
-  const { categories, products, totalProducts } = useProducts(true, "home");
+  const { categories, products } = useProducts(true, "home");
   const { selectedCity, allCities } = useLocation();
   const cityName = selectedCity?.name || "your city";
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
@@ -90,9 +90,7 @@ const Home = () => {
     : null;
   const trustStats = [
     { value: formatCount(cityCount), label: cityCount === 1 ? "City" : "Cities" },
-    totalProducts > 0
-      ? { value: formatCount(totalProducts), label: totalProducts === 1 ? "Product" : "Products" }
-      : { value: formatCount(categories.length), label: categories.length === 1 ? "Category" : "Categories" },
+    { value: formatCount(categories.length), label: categories.length === 1 ? "Category" : "Categories" },
     averageRating
       ? { value: `${averageRating.toFixed(1)}★`, label: "Community" }
       : { value: "Local", label: "Price guide" },

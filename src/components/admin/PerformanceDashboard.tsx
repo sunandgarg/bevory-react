@@ -279,7 +279,7 @@ const PerformanceDashboard = () => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-              <span>Serve every public image from Bevory's private S3 media CDN</span>
+              <span>Serve every public image from BevOry's private S3 media CDN</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />

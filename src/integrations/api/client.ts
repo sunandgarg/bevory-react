@@ -1,4 +1,4 @@
-/** First-party client for the Bevory Node.js/Prisma/MySQL API. */
+/** First-party client for the BevOry Node.js/Prisma/MySQL API. */
 
 import { parseFilterScalar } from "./filterParser";
 

@@ -65,7 +65,7 @@ const localRecommendation = async (body: Record<string, unknown>) => {
     provider: "bevory-local",
     model: "catalog-rules-v1",
     content: suggestions.length
-      ? `Based on the current Bevory catalog, consider ${suggestions.join(", ")}. Match the final choice to your budget, location and serving occasion.`
+      ? `Based on the current BevOry catalog, consider ${suggestions.join(", ")}. Match the final choice to your budget, location and serving occasion.`
       : "No matching catalog products are available yet. Add products and prices in the admin dashboard, then retry.",
   };
 };

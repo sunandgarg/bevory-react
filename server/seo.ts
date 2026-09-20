@@ -61,16 +61,16 @@ const stateDefaultCities = new Map([
 ]);
 
 const staticSeo: Record<string, [string, string]> = {
-  "/categories": ["Drink Categories & Prices | Bevory", "Browse spirits, wine, beer and ready-to-drink categories with local price guides."],
-  "/brands": ["Beverage Brands & Products | Bevory", "Explore beverage brands, product ranges and locally available bottle prices on Bevory."],
-  "/guide": ["Bevory Guide | Drinks, Prices & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice from Bevory."],
-  "/cocktails": ["Cocktail Recipes & Drink Ideas | Bevory", "Discover cocktail recipes, ingredients and serving ideas for your next gathering."],
-  "/party-planner": ["Drinks Party Planner | Bevory", "Estimate drinks and compare locally priced products for your guest count and budget."],
-  "/help": ["Help & Support | Bevory", "Get help using Bevory's local beverage price guide and planning tools."],
-  "/contact": ["Contact Bevory", "Contact the Bevory team about product information, corrections or support."],
-  "/privacy-policy": ["Privacy Policy | Bevory", "Read how Bevory handles personal data and privacy."],
-  "/terms": ["Terms of Use | Bevory", "Read the terms that apply when using Bevory."],
-  "/disclaimer": ["Information Disclaimer | Bevory", "Read important information about Bevory price guides and beverage content."],
+  "/categories": ["Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local price guides."],
+  "/brands": ["Beverage Brands & Products | BevOry", "Explore beverage brands, product ranges and locally available bottle prices on BevOry."],
+  "/guide": ["BevOry Guide | Drinks, Prices & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice from BevOry."],
+  "/cocktails": ["Cocktail Recipes & Drink Ideas | BevOry", "Discover cocktail recipes, ingredients and serving ideas for your next gathering."],
+  "/party-planner": ["Drinks Party Planner | BevOry", "Estimate drinks and compare locally priced products for your guest count and budget."],
+  "/help": ["Help & Support | BevOry", "Get help using BevOry's local beverage price guide and planning tools."],
+  "/contact": ["Contact BevOry", "Contact the BevOry team about product information, corrections or support."],
+  "/privacy-policy": ["Privacy Policy | BevOry", "Read how BevOry handles personal data and privacy."],
+  "/terms": ["Terms of Use | BevOry", "Read the terms that apply when using BevOry."],
+  "/disclaimer": ["Information Disclaimer | BevOry", "Read important information about BevOry price guides and beverage content."],
 };
 
 const privatePrefixes = [
@@ -115,9 +115,9 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
     }
   });
   const seo: SeoRoute = {
-    title: "Bevory | Compare Local Beverage Prices",
-    description: "Compare local beverage prices, bottle sizes and brands with Bevory's city-aware price guide.",
-    heading: "Compare local beverage prices with Bevory",
+    title: "BevOry | Compare Local Beverage Prices",
+    description: "Compare local beverage prices, bottle sizes and brands with BevOry's city-aware price guide.",
+    heading: "Compare local beverage prices with BevOry",
     canonicalPath: cleanPath,
     robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     breadcrumbs: [{ name: "Home", path: "/" }],
@@ -128,6 +128,9 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
     return {
       ...seo,
       ...generated,
+      title: typeof generated.title === "string"
+        ? generated.title.replace(/\bBevory\b/g, "BevOry")
+        : seo.title,
       canonicalPath: cleanPath,
       robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
       breadcrumbs: Array.isArray(generated.breadcrumbs) ? generated.breadcrumbs : seo.breadcrumbs,
@@ -145,7 +148,7 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
       ...seo,
       title,
       description,
-      heading: title.replace(/ \| Bevory$/, ""),
+      heading: title.replace(/ \| BevOry$/, ""),
       breadcrumbs: [...seo.breadcrumbs, { name: humanize(parts[0]), path: cleanPath }],
     };
   }
@@ -189,10 +192,10 @@ export const resolveDynamicProductSeo = (
   const priceStatement = selectedPrice
     ? `The reviewed indicative ${sizeLabel} price in ${cityName} is ₹${Number(selectedPrice).toLocaleString("en-IN")}.`
     : requestedVolume
-      ? `${sizeLabel} is a known bottle size, but Bevory does not yet have a verified price for it in ${cityName}.`
+      ? `${sizeLabel} is a known bottle size, but BevOry does not yet have a verified price for it in ${cityName}.`
       : pricedSizes.length
         ? `Verified ${cityName} prices are currently listed for ${pricedSizes.join(", ")}.`
-        : `The product is known nationally, but Bevory does not yet have a verified local price for ${cityName}.`;
+        : `The product is known nationally, but BevOry does not yet have a verified local price for ${cityName}.`;
   const structuredData: Record<string, unknown> = requestedVolume ? {
     "@type": "Product",
     name: `${productName} ${sizeLabel}`,
@@ -225,7 +228,7 @@ export const resolveDynamicProductSeo = (
   };
 
   return {
-    title: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} Price in ${cityName} | Bevory`,
+    title: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} Price in ${cityName} | BevOry`,
     description: shortDescription(`${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price guide for ${cityName}. ${priceStatement} Known sizes: ${knownSizesText}.`),
     heading: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price in ${cityName}`,
     canonicalPath,
@@ -283,11 +286,11 @@ const seoShell = (seo: SeoRoute) => {
     ? `<img src="${escapeHtml(seo.image)}" alt="${escapeHtml(seo.heading)}" width="720" height="720" style="display:block;width:min(100%,360px);height:auto;object-fit:contain;margin:20px 0" />`
     : "";
   return `<div id="root">
-  <main aria-label="Bevory page summary" style="max-width:760px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.55">
+  <main aria-label="BevOry page summary" style="max-width:760px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.55">
     <h1>${escapeHtml(seo.heading)}</h1>
     ${image}
     ${body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n    ")}
-    <nav aria-label="Explore Bevory">
+    <nav aria-label="Explore BevOry">
       <a href="/categories">Categories</a> | <a href="/brands">Brands</a> | <a href="/guide">Guide</a> | <a href="/party-planner">Party planner</a>
     </nav>
   </main>

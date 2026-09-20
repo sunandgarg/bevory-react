@@ -365,7 +365,7 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
 });
 
 const server = app.listen(port, "0.0.0.0", () => {
-  console.log(`Bevory API listening on http://localhost:${port}`);
+  console.log(`BevOry API listening on http://localhost:${port}`);
   if (process.env.NODE_ENV === "production") {
     void prewarmCityHomeCatalogs()
       .then((count) => console.log(`Prewarmed ${count} city home catalogues`))

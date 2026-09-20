@@ -16,7 +16,7 @@ const DEFAULT_AGE_SETTINGS: AgeVerificationSettings = {
   enabled: true,
   defaultCity: "Gurgaon",
   title: "Are you 25 or older?",
-  description: "You must be 25 or older to access Bevory.",
+  description: "You must be 25 or older to access BevOry.",
   confirmButtonText: "Yes, I am 25+",
   declineButtonText: "No, I am not",
   termsText: "By entering this website, you agree to our Terms of Service and Privacy Policy.",

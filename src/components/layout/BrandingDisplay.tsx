@@ -23,7 +23,7 @@ const BrandingDisplay = ({ variant = "header", className = "" }: BrandingDisplay
   return (
     <Link
       to="/"
-      aria-label="Bevory home"
+      aria-label="BevOry home"
       className={cn("inline-flex items-center gap-2 text-foreground", size.animation, className)}
     >
       <span
@@ -35,7 +35,7 @@ const BrandingDisplay = ({ variant = "header", className = "" }: BrandingDisplay
         }}
       />
       <span className={`${size.word} font-bold leading-none`} style={{ fontFamily: "'Bricolage Grotesque', 'DM Sans', sans-serif" }}>
-        Bevory
+        BevOry
       </span>
     </Link>
   );

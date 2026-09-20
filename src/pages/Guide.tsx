@@ -81,7 +81,7 @@ const Guide = () => {
   return (
     <>
       <SEOHead
-        title="Bevory Guide - Expert Spirits & Cocktails Knowledge"
+        title="BevOry Guide - Expert Spirits & Cocktails Knowledge"
         description="Discover expert insights on whiskey, rum, vodka, gin, wine, beer, and cocktails. Learn about tasting notes, pairing ideas, and drinking culture."
         keywords="spirits guide, cocktail recipes, whiskey guide, rum guide, vodka guide, wine tips, beer guide"
       />
@@ -99,7 +99,7 @@ const Guide = () => {
                 <span>Price guides and practical knowledge</span>
               </div>
               <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
-                Bevory Guide
+                BevOry Guide
               </h1>
               <p className="text-muted-foreground">
                 Master the art of spirits, cocktails & drinking culture
@@ -285,7 +285,7 @@ const FeaturedArticleCard = ({
           <div className="flex items-center gap-4 text-xs text-white/70">
             <span className="flex items-center gap-1.5">
               <User className="w-3.5 h-3.5" />
-              {post.author || "Bevory Team"}
+              {post.author || "BevOry Team"}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" />

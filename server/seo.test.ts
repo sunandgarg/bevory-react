@@ -32,7 +32,7 @@ describe("origin SEO rendering", () => {
     const path = "/mangalore/product/8-pm-whisky-503f9e4/375ml";
     const seo = resolveSeo(path, {
       [path]: {
-        title: "8 Pm Whisky 375ml Price in Mangalore | Bevory",
+        title: "8 Pm Whisky 375ml Price in Mangalore | BevOry",
         description: "Compare the reviewed local bottle price.",
         heading: "8 Pm Whisky 375ml price in Mangalore",
         breadcrumbs: [{ name: "Home", path: "/" }, { name: "Mangalore", path: "/mangalore" }],
@@ -41,7 +41,7 @@ describe("origin SEO rendering", () => {
     });
     const html = rewriteSeoDocument(template, seo);
 
-    expect(html).toContain("<title>8 Pm Whisky 375ml Price in Mangalore | Bevory</title>");
+    expect(html).toContain("<title>8 Pm Whisky 375ml Price in Mangalore | BevOry</title>");
     expect(html).toContain(`href="https://bevory.in${path}"`);
     expect(html).toContain("<h1>8 Pm Whisky 375ml price in Mangalore</h1>");
     expect(html).toContain('"@type":"Product"');

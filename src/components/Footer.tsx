@@ -60,7 +60,7 @@ const Footer = () => {
           <strong className="text-primary-foreground/70">Pricing Notice:</strong> Prices come from publicly available sources and may vary. Please check with local retailers for the most accurate pricing.
         </p>
         <p className="text-xs text-primary-foreground/50">
-          <strong className="text-primary-foreground/70">No Delivery:</strong> Bevory does not offer home delivery services. Be cautious of fraudulent messages claiming otherwise.
+          <strong className="text-primary-foreground/70">No Delivery:</strong> BevOry does not offer home delivery services. Be cautious of fraudulent messages claiming otherwise.
         </p>
         <p className="text-xs text-primary-foreground/50">
           <strong className="text-primary-foreground/70">Drink Responsibly:</strong> Excessive alcohol consumption is harmful. Choose quality over quantity. Never drink and drive.
@@ -75,7 +75,7 @@ const Footer = () => {
             25+
           </div>
           <p className="text-primary-foreground/50 text-xs">
-            © 2026 Bevory. All rights reserved.
+            © 2026 BevOry. All rights reserved.
           </p>
         </div>
       </div>

@@ -53,10 +53,10 @@ const ImageOptimizationSettings = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Zap className="w-5 h-5 text-accent" />
-          Bevory Image Delivery
+          BevOry Image Delivery
         </CardTitle>
         <CardDescription>
-          Serve Bevory-controlled, non-generatively upscaled image masters through the private S3 media CDN.
+          Serve BevOry-controlled, non-generatively upscaled image masters through the private S3 media CDN.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">

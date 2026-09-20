@@ -89,7 +89,7 @@ const PrivacyConsent = () => {
             Your privacy choices
           </h2>
           <p id="privacy-consent-description" className="mt-1 text-xs text-muted-foreground">
-            Bevory uses necessary storage for age and city preferences. Optional Google Analytics helps us improve the site and stays off unless you allow it.
+            BevOry uses necessary storage for age and city preferences. Optional Google Analytics helps us improve the site and stays off unless you allow it.
           </p>
           <Link to="/privacy-policy" className="mt-2 inline-block text-xs text-foreground underline underline-offset-2">
             Read the privacy policy

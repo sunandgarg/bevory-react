@@ -135,7 +135,7 @@ await upsertContentRecord("app_settings", ageSettingId, {
     enabled: existingAgeValue.enabled ?? true,
     defaultCity: existingAgeValue.defaultCity ?? "Gurgaon",
     title: "Are you 25 or older?",
-    description: "You must be 25 or older to access Bevory.",
+    description: "You must be 25 or older to access BevOry.",
     confirmButtonText: "Yes, I am 25+",
     declineButtonText: existingAgeValue.declineButtonText ?? "No, I am not",
     termsText: existingAgeValue.termsText ?? "By entering this website, you agree to our Terms of Service and Privacy Policy.",
@@ -156,19 +156,19 @@ if (adminEmail && adminPassword) {
   const passwordHash = await bcrypt.hash(adminPassword, 12);
   await prisma.user.upsert({
     where: { email: adminEmail },
-    update: { passwordHash, metadata: { full_name: "Bevory Administrator" } },
-    create: { id, email: adminEmail, passwordHash, metadata: { full_name: "Bevory Administrator" } },
+    update: { passwordHash, metadata: { full_name: "BevOry Administrator" } },
+    create: { id, email: adminEmail, passwordHash, metadata: { full_name: "BevOry Administrator" } },
   });
 
   const now = new Date().toISOString();
   await prisma.contentRecord.upsert({
     where: { key: `profiles:${id}` },
-    update: { data: { id, email: adminEmail, full_name: "Bevory Administrator", updated_at: now } },
+    update: { data: { id, email: adminEmail, full_name: "BevOry Administrator", updated_at: now } },
     create: {
       key: `profiles:${id}`,
       tableName: "profiles",
       recordId: id,
-      data: { id, email: adminEmail, full_name: "Bevory Administrator", created_at: now, updated_at: now },
+      data: { id, email: adminEmail, full_name: "BevOry Administrator", created_at: now, updated_at: now },
     },
   });
   await prisma.contentRecord.upsert({

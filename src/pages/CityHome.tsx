@@ -25,8 +25,8 @@ const CityHome = ({ citySlug }: CityHomeProps) => {
   return (
     <>
       <SEOHead
-        title={`Alcohol Prices in ${cityName} | Bevory`}
-        description={`Compare alcohol prices in ${cityName}. Explore whisky, beer, wine, rum and more with Bevory's local price guide.`}
+        title={`Alcohol Prices in ${cityName} | BevOry`}
+        description={`Compare alcohol prices in ${cityName}. Explore whisky, beer, wine, rum and more with BevOry's local price guide.`}
         canonical={`/${citySlug}`}
         geoPlacename={cityName}
       />

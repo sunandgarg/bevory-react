@@ -66,7 +66,7 @@ const Categories = () => {
   return (
     <>
       <SEOHead
-        title="Browse All Categories - Whisky, Vodka, Rum, Gin & More | Bevory"
+        title="Browse All Categories - Whisky, Vodka, Rum, Gin & More | BevOry"
         description="Explore our complete collection of spirits and beverages. Browse whisky, vodka, rum, gin, tequila, wine, beer, and brandy categories with prices and reviews."
         keywords="whisky, vodka, rum, gin, tequila, wine, beer, brandy, spirits, beverages, liquor"
         jsonLd={generateStructuredData()}

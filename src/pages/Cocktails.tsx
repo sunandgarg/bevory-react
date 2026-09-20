@@ -116,7 +116,7 @@ const Cocktails = () => {
         "text": step.trim(),
       })),
     } : {}),
-    "author": { "@type": "Organization", "name": "Bevory" },
+    "author": { "@type": "Organization", "name": "BevOry" },
     "url": `https://bevory.in/cocktail/${selectedCocktail.slug || selectedCocktail.id}`,
   }) : ({
     "@context": "https://schema.org",
@@ -148,11 +148,11 @@ const Cocktails = () => {
           }] } : {}),
           "author": {
             "@type": "Organization",
-            "name": "Bevory"
+            "name": "BevOry"
           },
           "publisher": {
             "@type": "Organization",
-            "name": "Bevory",
+            "name": "BevOry",
             "logo": {
               "@type": "ImageObject",
               "url": "https://bevory.in/favicon.png"
@@ -168,7 +168,7 @@ const Cocktails = () => {
   return (
     <>
       <SEOHead
-        title={selectedCocktail ? `${selectedCocktail.name} Cocktail Recipe | Bevory` : "Cocktail Recipes & Library | Bevory"}
+        title={selectedCocktail ? `${selectedCocktail.name} Cocktail Recipe | BevOry` : "Cocktail Recipes & Library | BevOry"}
         description={selectedCocktail?.description || "Explore classic and modern cocktail recipes with ingredients and step-by-step instructions."}
         keywords="cocktail recipes, drink recipes, whiskey cocktails, vodka cocktails, rum cocktails, gin cocktails, mixology"
         canonical={selectedCocktail ? `/cocktail/${selectedCocktail.slug || selectedCocktail.id}` : "/cocktails"}

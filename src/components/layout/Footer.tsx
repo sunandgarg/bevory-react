@@ -48,7 +48,7 @@ const Footer = () => {
               <BrandingDisplay variant="footer" />
               <span className="text-xs text-muted-foreground hidden sm:inline">Know Before You Drink</span>
             </div>
-            <p className="text-[10px] text-muted-foreground">© 2026 Bevory</p>
+            <p className="text-[10px] text-muted-foreground">© 2026 BevOry</p>
           </div>
           <p className="text-[10px] text-muted-foreground mt-2">
             For adults of legal drinking age only. Drink responsibly.

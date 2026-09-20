@@ -34,7 +34,7 @@ Last verified: 2026-09-20
 - S3 bucket `bevory-uploads-091199627263-ap-south-1` blocks all public access,
   uses AES256 encryption, and has versioning enabled.
 - IAM user `bevory-production-uploader` is limited to the uploads bucket.
-- AWS Budget `Bevory-Monthly-Budget` is set to USD 25/month with actual and
+- AWS Budget `BevOry-Monthly-Budget` is set to USD 25/month with actual and
   forecast alerts.
 
 ## DNS
@@ -101,7 +101,7 @@ The following production checks passed on 2026-09-20:
 - All 3,841 products touched by the ten-city import have identity-verified source
   image URLs. Of the 1,268 brands used by that batch, 314 have verified logos and
   954 still have no verified authentic logo. Unverified logos were deliberately
-  not guessed or generated. Remote catalogue images are not stored in Bevory's
+  not guessed or generated. Remote catalogue images are not stored in BevOry's
   S3 bucket, and image reuse rights require review before migration.
 - Source-conflict and anomalous prices are retained for administrator review but
   excluded from all public catalogue views and the sitemap.
@@ -119,7 +119,7 @@ The following production checks passed on 2026-09-20:
 - Fifty malformed legacy Guide articles were reconstructed, 2,179 fragments
   were quarantined, and 11 evergreen articles were published after an encrypted
   S3 backup.
-- Google OAuth completes end to end with the verified Bevory consent screen;
+- Google OAuth completes end to end with the verified BevOry consent screen;
   only the current production client secret remains enabled.
 - The restricted S3 identity can put, inspect, and delete an object; the test
   object was deleted afterward.
@@ -130,7 +130,7 @@ The following production checks passed on 2026-09-20:
 - Authentication and public-write endpoints are rate limited; public reviews
   enter moderation as unapproved; uploads are administrator-only, limited to
   one raster image, and capped at 5 MB.
-- The adaptive Bevory favicon and logo render correctly in light and dark mode,
+- The adaptive BevOry favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
 - `sitemap.xml` is an index for 5 XML shards containing 94,482 unique canonical
   URLs and 80,471 image entries. Product and exact-size city URLs are included
@@ -153,7 +153,7 @@ rejected a distribution creation attempt on 2026-09-19 because the account must
 be verified by AWS Support. Case `178975941700756` tracks the request.
 The case remained open with no AWS response visible on 2026-09-20. The AWS
 account display name is now
-`Bevory`; the console confirmed the rename from `cirkle.world` on 2026-09-19.
+`BevOry`; the console confirmed the rename from `cirkle.world` on 2026-09-19.
 The S3 bucket remains private; do not make it public as a workaround.
 
 CloudFront verification is an acceleration improvement, not a prerequisite for

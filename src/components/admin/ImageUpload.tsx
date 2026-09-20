@@ -138,7 +138,7 @@ const ImageUpload = ({
       const uniqueId = window.crypto.randomUUID();
       const filename = `${folder}/${timestamp}-${uniqueId}.${processed.extension}`;
 
-      // Upload through the Bevory API
+      // Upload through the BevOry API
       const { data, error } = await apiClient.storage
         .from("images")
         .upload(filename, processed.blob, {

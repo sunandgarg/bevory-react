@@ -1,5 +1,5 @@
-# Bevory
-> Bevory is a city-aware beverage discovery and local price guide for adults aged 25 and older in India. Bevory does not sell alcohol.
+# BevOry
+> BevOry is a city-aware beverage discovery and local price guide for adults aged 25 and older in India. BevOry does not sell alcohol.
 
 ## Core pages
 - [Local price guide](https://bevory.in/gurgaon): Browse products with approved local price records.
@@ -10,7 +10,7 @@
 - [Bangalore prices](https://bevory.in/bangalore): Reviewed bottle prices available in Bangalore.
 - [Categories](https://bevory.in/categories): Explore beverages by category and subcategory.
 - [Brands](https://bevory.in/brands): Browse brand and product pages.
-- [Bevory Guide](https://bevory.in/guide): Read beverage education, tasting and responsible-serving articles.
+- [BevOry Guide](https://bevory.in/guide): Read beverage education, tasting and responsible-serving articles.
 - [Party Planner](https://bevory.in/party-planner): Estimate drinks for a guest count and budget.
 
 ## Catalogue rules

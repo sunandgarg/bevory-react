@@ -251,7 +251,7 @@ const Settings = () => {
               <div className="flex items-center justify-between py-2">
                 <div>
                   <p className="font-medium text-sm">Announcements</p>
-                  <p className="text-xs text-muted-foreground">News and updates from Bevory</p>
+                  <p className="text-xs text-muted-foreground">News and updates from BevOry</p>
                 </div>
                 <Switch
                   checked={preferences.notifications.announcements}

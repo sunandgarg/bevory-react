@@ -69,7 +69,7 @@ const Profile = () => {
               </div>
               <div className="flex-1">
                 <h2 className="font-semibold text-foreground">
-                  {user.user_metadata?.full_name || "Bevory User"}
+                  {user.user_metadata?.full_name || "BevOry User"}
                 </h2>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
                 {isAdmin && (
@@ -146,7 +146,7 @@ const Profile = () => {
             <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
               <User className="w-10 h-10 text-accent" />
             </div>
-            <h2 className="text-xl font-serif font-bold mb-2">Join Bevory</h2>
+            <h2 className="text-xl font-serif font-bold mb-2">Join BevOry</h2>
             <p className="text-muted-foreground mb-6">
               Sign in to save favorites, track prices, and get personalized recommendations
             </p>

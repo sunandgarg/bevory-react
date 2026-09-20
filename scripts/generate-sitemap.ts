@@ -173,17 +173,17 @@ const loadRows = async (): Promise<DataRow[]> => {
 };
 
 const staticRoutes: Array<SitemapEntry & { seo: SeoRoute }> = [
-  ["/categories", "Drink Categories & Prices | Bevory", "Browse spirits, wine, beer and ready-to-drink categories with local prices.", "Drink categories"],
-  ["/brands", "Beverage Brands & Products | Bevory", "Explore beverage brands, products and locally available bottle prices.", "Beverage brands"],
-  ["/guide", "Bevory Guide | Drinks & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice.", "Bevory Guide"],
-  ["/cocktails", "Cocktail Recipes & Drink Ideas | Bevory", "Discover cocktail recipes, ingredients and serving ideas.", "Cocktail recipes"],
-  ["/party-planner", "Drinks Party Planner | Bevory", "Estimate drinks and compare locally priced products for a guest count and budget.", "Drinks party planner"],
-  ["/masterclass", "Beverage Masterclasses | Bevory", "Watch beverage reviews, explainers and creator masterclasses.", "Beverage masterclasses"],
-  ["/help", "Help & Support | Bevory", "Get help using Bevory's local beverage price guide and planning tools.", "Help and support"],
-  ["/contact", "Contact Bevory", "Contact Bevory about product information, corrections or support.", "Contact Bevory"],
-  ["/privacy-policy", "Privacy Policy | Bevory", "Read how Bevory handles personal data and privacy.", "Privacy policy"],
-  ["/terms", "Terms of Use | Bevory", "Read the terms that apply when using Bevory.", "Terms of use"],
-  ["/disclaimer", "Information Disclaimer | Bevory", "Read important information about Bevory price guides and beverage content.", "Information disclaimer"],
+  ["/categories", "Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local prices.", "Drink categories"],
+  ["/brands", "Beverage Brands & Products | BevOry", "Explore beverage brands, products and locally available bottle prices.", "Beverage brands"],
+  ["/guide", "BevOry Guide | Drinks & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice.", "BevOry Guide"],
+  ["/cocktails", "Cocktail Recipes & Drink Ideas | BevOry", "Discover cocktail recipes, ingredients and serving ideas.", "Cocktail recipes"],
+  ["/party-planner", "Drinks Party Planner | BevOry", "Estimate drinks and compare locally priced products for a guest count and budget.", "Drinks party planner"],
+  ["/masterclass", "Beverage Masterclasses | BevOry", "Watch beverage reviews, explainers and creator masterclasses.", "Beverage masterclasses"],
+  ["/help", "Help & Support | BevOry", "Get help using BevOry's local beverage price guide and planning tools.", "Help and support"],
+  ["/contact", "Contact BevOry", "Contact BevOry about product information, corrections or support.", "Contact BevOry"],
+  ["/privacy-policy", "Privacy Policy | BevOry", "Read how BevOry handles personal data and privacy.", "Privacy policy"],
+  ["/terms", "Terms of Use | BevOry", "Read the terms that apply when using BevOry.", "Terms of use"],
+  ["/disclaimer", "Information Disclaimer | BevOry", "Read important information about BevOry price guides and beverage content.", "Information disclaimer"],
 ].map(([path, title, description, heading]) => ({
   path,
   seo: {
@@ -253,11 +253,11 @@ try {
       path: cityPath,
       lastmod: latestTimestamp(cityRow.data.updated_at, cityPrices.map((price) => price.data.updated_at)),
     }, {
-      title: `Alcohol Prices in ${city.name} | Bevory`,
-      description: `Compare ${cityProducts.length.toLocaleString("en-IN")} locally priced beverage products and bottle sizes in ${city.name}.`,
+      title: `Alcohol Prices in ${city.name} | BevOry`,
+      description: `Explore local beverage categories, bottle sizes and reviewed price guidance in ${city.name}.`,
       heading: `Alcohol prices in ${city.name}`,
       body: [
-        `Bevory currently lists ${cityPrices.length.toLocaleString("en-IN")} reviewed bottle prices across ${cityProducts.length.toLocaleString("en-IN")} products in ${city.name}.`,
+        `BevOry helps you compare reviewed bottle prices and known sizes across beverage categories in ${city.name}.`,
         categoryNames.length ? `Browse local ${categoryNames.slice(0, 8).join(", ")} prices. Listings are informational and can change at retail.` : "Listings are informational and can change at retail.",
       ],
       breadcrumbs: [{ name: "Home", path: "/" }, { name: city.name, path: cityPath }],
@@ -265,7 +265,6 @@ try {
         "@type": "CollectionPage",
         name: `Alcohol prices in ${city.name}`,
         url: `${origin}${cityPath}`,
-        numberOfItems: cityProducts.length,
         about: { "@type": "City", name: city.name },
       },
     });
@@ -283,17 +282,17 @@ try {
         lastmod: latestTimestamp(category.data.updated_at, categoryProducts.map((product) => product.data.updated_at)),
         images: image ? [{ loc: image, title: `${categoryName} in ${city.name}` }] : [],
       }, {
-        title: `${categoryName} Prices in ${city.name} | Bevory`,
-        description: `Compare ${categoryProducts.length} ${categoryName.toLowerCase()} products with reviewed bottle prices in ${city.name}.`,
+        title: `${categoryName} Prices in ${city.name} | BevOry`,
+        description: `Compare ${categoryName.toLowerCase()} bottle sizes and reviewed local price guidance in ${city.name}.`,
         heading: `${categoryName} prices in ${city.name}`,
-        body: [`Browse ${categoryProducts.length} locally priced ${categoryName.toLowerCase()} products in ${city.name}. Only reviewed positive price records are listed.`],
+        body: [`Browse locally priced ${categoryName.toLowerCase()} options in ${city.name}. Only reviewed positive price records are listed.`],
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
           { name: city.name, path: cityPath },
           { name: categoryName, path },
         ],
-        structuredData: { "@type": "CollectionPage", name: `${categoryName} in ${city.name}`, url: `${origin}${path}`, numberOfItems: categoryProducts.length },
+        structuredData: { "@type": "CollectionPage", name: `${categoryName} in ${city.name}`, url: `${origin}${path}` },
       });
 
       const subcategoryIds = new Set(categoryProducts.map((product) => String(product.data.sub_category_id ?? "")).filter(Boolean));
@@ -310,10 +309,10 @@ try {
           lastmod: latestTimestamp(subcategory.data.updated_at, subProducts.map((product) => product.data.updated_at)),
           images: subImage ? [{ loc: subImage, title: `${subName} in ${city.name}` }] : [],
         }, {
-          title: `${subName} Prices in ${city.name} | Bevory`,
-          description: `Compare ${subProducts.length} ${subName.toLowerCase()} products and reviewed local prices in ${city.name}.`,
+          title: `${subName} Prices in ${city.name} | BevOry`,
+          description: `Compare ${subName.toLowerCase()} bottle sizes and reviewed local price guidance in ${city.name}.`,
           heading: `${subName} prices in ${city.name}`,
-          body: [`Explore ${subProducts.length} locally priced ${subName.toLowerCase()} products in ${city.name}.`],
+          body: [`Explore locally priced ${subName.toLowerCase()} options and known bottle sizes in ${city.name}.`],
           ...(subImage ? { image: subImage } : {}),
           breadcrumbs: [
             { name: "Home", path: "/" },
@@ -321,7 +320,7 @@ try {
             { name: categoryName, path },
             { name: subName, path: subPath },
           ],
-          structuredData: { "@type": "CollectionPage", name: `${subName} in ${city.name}`, url: `${origin}${subPath}`, numberOfItems: subProducts.length },
+          structuredData: { "@type": "CollectionPage", name: `${subName} in ${city.name}`, url: `${origin}${subPath}` },
         });
       }
     }
@@ -338,8 +337,8 @@ try {
         lastmod: latestTimestamp(brand.data.updated_at, brandProducts.map((product) => product.data.updated_at)),
         images: image ? [{ loc: image, title: `${brandName} logo` }] : [],
       }, {
-        title: `${brandName} Prices in ${city.name} | Bevory`,
-        description: `Explore ${brandProducts.length} locally priced ${brandName} products and bottle sizes in ${city.name}.`,
+        title: `${brandName} Prices in ${city.name} | BevOry`,
+        description: `Explore ${brandName} bottle sizes and reviewed local price guidance in ${city.name}.`,
         heading: `${brandName} prices in ${city.name}`,
         body: [shortText(brand.data.description || `Compare ${brandName} products with reviewed local prices in ${city.name}.`, 300)],
         ...(image ? { image } : {}),
@@ -401,7 +400,7 @@ try {
       lastmod: latestTimestamp(product.data.updated_at, sortedVariants.map((variant) => variant.data.updated_at)),
       images: image ? [{ loc: image, title: `${productName} bottle` }] : [],
     }, {
-      title: `${productName} Price in ${city.name} | Bevory`,
+      title: `${productName} Price in ${city.name} | BevOry`,
       description: shortText(`${productName} price in ${city.name}. Compare ${sortedVariants.length} reviewed bottle size${sortedVariants.length === 1 ? "" : "s"}: ${pricesText}.`),
       heading: `${productName} price in ${city.name}`,
       body: [
@@ -427,7 +426,7 @@ try {
         lastmod: latestTimestamp(variant.data.updated_at, product.data.updated_at),
         images: image ? [{ loc: image, title: `${productName} ${size} bottle` }] : [],
       }, {
-        title: `${productName} ${size} Price in ${city.name} | Bevory`,
+        title: `${productName} ${size} Price in ${city.name} | BevOry`,
         description: shortText(`${productName} ${size} price in ${city.name} is ₹${price.toLocaleString("en-IN")}. See product details, other locally listed sizes and price guidance.`),
         heading: `${productName} ${size} price in ${city.name}`,
         body: [
@@ -524,8 +523,8 @@ try {
         description: guide.meta_description,
         datePublished: guide.published_at,
         dateModified: guide.published_at,
-        author: { "@type": "Organization", name: "Bevory" },
-        publisher: { "@type": "Organization", name: "Bevory" },
+        author: { "@type": "Organization", name: "BevOry" },
+        publisher: { "@type": "Organization", name: "BevOry" },
         mainEntityOfPage: `${origin}${path}`,
       },
     });
@@ -534,8 +533,8 @@ try {
   for (const post of byTable("blog_posts").filter((row) => row.data.is_published === true && row.data.slug)) {
     const path = `/guide/${post.data.slug}`;
     const image = validImageUrl(post.data.cover_image_url);
-    const title = String(post.data.meta_title || `${post.data.title} | Bevory Guide`);
-    const description = shortText(post.data.meta_description || post.data.excerpt || post.data.content || `Read ${post.data.title} on Bevory.`);
+    const title = String(post.data.meta_title || `${post.data.title} | BevOry Guide`);
+    const description = shortText(post.data.meta_description || post.data.excerpt || post.data.content || `Read ${post.data.title} on BevOry.`);
     addRoute({
       path,
       lastmod: latestTimestamp(post.data.updated_at, post.data.published_at, post.data.created_at),
@@ -554,8 +553,8 @@ try {
         ...(image ? { image: [image] } : {}),
         datePublished: post.data.published_at || post.data.created_at,
         dateModified: post.data.updated_at || post.data.published_at,
-        author: { "@type": "Person", name: String(post.data.author || "Bevory Team") },
-        publisher: { "@type": "Organization", name: "Bevory" },
+        author: { "@type": "Person", name: String(post.data.author || "BevOry Team") },
+        publisher: { "@type": "Organization", name: "BevOry" },
         mainEntityOfPage: `${origin}${path}`,
       },
     });
@@ -573,7 +572,7 @@ try {
       lastmod: latestTimestamp(cocktail.data.updated_at, cocktail.data.created_at),
       images: image ? [{ loc: image, title: `${name} cocktail` }] : [],
     }, {
-      title: `${name} Cocktail Recipe | Bevory`,
+      title: `${name} Cocktail Recipe | BevOry`,
       description,
       heading: `${name} cocktail recipe`,
       body: [description, ingredients.length ? `Ingredients: ${ingredients.join(", ")}.` : instructions].filter(Boolean),
@@ -587,7 +586,7 @@ try {
         recipeCategory: "Cocktail",
         recipeIngredient: ingredients,
         ...(instructions ? { recipeInstructions: [{ "@type": "HowToStep", text: instructions }] } : {}),
-        author: { "@type": "Organization", name: "Bevory" },
+        author: { "@type": "Organization", name: "BevOry" },
         url: `${origin}${path}`,
       },
     });
@@ -597,9 +596,9 @@ try {
     const path = `/masterclass/${video.data.slug}`;
     const image = validImageUrl(video.data.thumbnail_url);
     const title = String(video.data.title || "Beverage video");
-    const description = shortText(video.data.description || `Watch ${title} on Bevory.`);
+    const description = shortText(video.data.description || `Watch ${title} on BevOry.`);
     addRoute({ path, lastmod: latestTimestamp(video.data.updated_at, video.data.created_at), images: image ? [{ loc: image, title }] : [] }, {
-      title: `${title} | Bevory Masterclass`,
+      title: `${title} | BevOry Masterclass`,
       description,
       heading: title,
       body: [description],
@@ -612,9 +611,9 @@ try {
     const path = `/creator/${creator.data.slug}`;
     const image = validImageUrl(creator.data.avatar_url);
     const name = String(creator.data.name || "Creator");
-    const description = shortText(creator.data.bio || `Watch beverage videos from ${name} on Bevory.`);
+    const description = shortText(creator.data.bio || `Watch beverage videos from ${name} on BevOry.`);
     addRoute({ path, lastmod: latestTimestamp(creator.data.updated_at, creator.data.created_at), images: image ? [{ loc: image, title: name }] : [] }, {
-      title: `${name} | Bevory Creator`,
+      title: `${name} | BevOry Creator`,
       description,
       heading: name,
       body: [description],

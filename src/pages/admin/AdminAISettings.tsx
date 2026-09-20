@@ -32,7 +32,7 @@ const DEFAULT_SETTINGS: AISettings = {
 };
 
 const PROVIDERS = [
-  { value: 'bevory-local', label: 'Bevory Catalog Rules', description: 'Built-in, no API key needed', badge: 'Built in' },
+  { value: 'bevory-local', label: 'BevOry Catalog Rules', description: 'Built-in, no API key needed', badge: 'Built in' },
   { value: 'openai', label: 'OpenAI (GPT)', description: 'GPT-4o-mini is cheapest' },
   { value: 'claude', label: 'Anthropic (Claude)', description: 'Claude Haiku is cheapest' },
   { value: 'perplexity', label: 'Perplexity', description: 'Search-augmented AI' },
@@ -138,7 +138,7 @@ const AdminAISettings = () => {
           AI Recommendation Settings
         </h1>
         <p className="text-muted-foreground">
-          Configure recommendation providers. Bevory Catalog Rules works locally without an API key.
+          Configure recommendation providers. BevOry Catalog Rules works locally without an API key.
         </p>
       </div>
 

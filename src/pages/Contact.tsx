@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 const Contact = () => (
   <div className="min-h-screen bg-background">
-    <SEOHead title="Contact Us | Bevory" description="Get in touch with Bevory — India's smart beverage discovery platform." />
+    <SEOHead title="Contact Us | BevOry" description="Get in touch with BevOry — India's smart beverage discovery platform." />
     <Header />
     <main className="px-4 py-8 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-2">Contact Us</h1>
@@ -41,7 +41,7 @@ const Contact = () => (
 
       <div className="mt-8 p-4 rounded-xl bg-muted/50 border border-border/50">
         <p className="text-xs text-muted-foreground">
-          <strong>Note:</strong> Bevory does not offer home delivery services. Please be cautious of any fraudulent messages claiming delivery in our name. For any concerns, contact us directly using the information above.
+          <strong>Note:</strong> BevOry does not offer home delivery services. Please be cautious of any fraudulent messages claiming delivery in our name. For any concerns, contact us directly using the information above.
         </p>
       </div>
     </main>

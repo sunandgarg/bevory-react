@@ -1,6 +1,6 @@
 {
-  "name": "Bevory - Know Before You Drink",
-  "short_name": "Bevory",
+  "name": "BevOry - Know Before You Drink",
+  "short_name": "BevOry",
   "description": "Compare local beverage prices, discover brands, and plan gatherings.",
   "start_url": "/",
   "display": "standalone",

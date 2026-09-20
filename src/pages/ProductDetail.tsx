@@ -352,7 +352,7 @@ const ProductDetail = () => {
       const productLabel = `${product.brand} ${product.name}`.trim();
       const cityName = routeCity?.name || selectedCity?.name || "Gurgaon";
       const variantLabel = requestedVolume ? ` ${selectedVolume}` : "";
-      const title = `${productLabel}${variantLabel} Price in ${cityName} | Bevory`;
+      const title = `${productLabel}${variantLabel} Price in ${cityName} | BevOry`;
       const description = price
         ? `${productLabel}${variantLabel} price in ${cityName} is ₹${price.toLocaleString("en-IN")}. Compare locally listed bottle sizes, product details and reviews.`
         : `${productLabel}${variantLabel} details for ${cityName}. A verified local price is not available yet; explore known bottle sizes, product information and reviews.`;
@@ -520,7 +520,7 @@ const ProductDetail = () => {
     }
 
     return () => {
-      document.title = "Bevory - Know Before You Drink";
+      document.title = "BevOry - Know Before You Drink";
       document.querySelector('script[data-bevory-seo="product"]')?.remove();
     };
   }, [
@@ -572,7 +572,7 @@ const ProductDetail = () => {
     try {
       await navigator.share({
         title: `${product?.brand} ${product?.name}`,
-        text: `Check out ${product?.brand} ${product?.name} on Bevory`,
+        text: `Check out ${product?.brand} ${product?.name} on BevOry`,
         url: window.location.href,
       });
     } catch {

@@ -313,7 +313,7 @@ const BrandDetail = () => {
   return (
     <>
       <SEOHead
-        title={`${brand.brand_name} Prices in ${selectedCity?.name || "Gurgaon"} | Bevory`}
+        title={`${brand.brand_name} Prices in ${selectedCity?.name || "Gurgaon"} | BevOry`}
         description={brand.description || `Explore ${brand.brand_name} products and bottle sizes in ${selectedCity?.name || "Gurgaon"}, with local prices shown where verified.`}
         keywords={`${brand.brand_name}, ${brand.country || ''} spirits, whisky, premium beverages, tasting notes, food pairing`}
         canonical={`/${canonicalCitySlug}/brand/${brand.slug || slug}`}

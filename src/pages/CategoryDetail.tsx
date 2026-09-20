@@ -133,8 +133,8 @@ const CategoryDetail = () => {
     <>
       <SEOHead
         title={selectedSubCategory
-          ? `${selectedSubCategory.name} Prices | Bevory`
-          : (category as any).meta_title || `${category.name} Prices & Reviews | Bevory`}
+          ? `${selectedSubCategory.name} Prices | BevOry`
+          : (category as any).meta_title || `${category.name} Prices & Reviews | BevOry`}
         description={selectedSubCategory
           ? `Compare ${selectedSubCategory.name} products, bottle sizes and verified local prices in ${selectedCity?.name || "India"}.`
           : (category as any).meta_description || category.description || `Browse our collection of ${category.name}. Compare prices, read reviews, and find the best ${category.name.toLowerCase()} in ${selectedCity?.name || 'India'}.`}

@@ -2,7 +2,7 @@
  * Image Processing Engine for Product Images
  * 
  * Migrated assets are resampled once on the server and served directly from
- * Bevory's CDN without browser-side re-encoding.
+ * BevOry's CDN without browser-side re-encoding.
  */
 
 import { apiClient } from "@/integrations/api/client";
@@ -11,7 +11,7 @@ const TARGET_SIZE = 3840;
 
 /**
  * Process image URL to ensure optimal display
- * Images are pre-optimized during the S3 migration and served from Bevory's CDN.
+ * Images are pre-optimized during the S3 migration and served from BevOry's CDN.
  */
 export function getOptimizedProductImageUrl(
   imageUrl: string | null,
@@ -70,7 +70,7 @@ export async function uploadProductImage(
     const ext = file.name.split(".").pop() || "jpg";
     const filename = `products/${productId}/${Date.now()}.${ext}`;
 
-    // Upload through the Bevory API
+    // Upload through the BevOry API
     const { data, error } = await apiClient.storage
       .from("images")
       .upload(filename, file, {

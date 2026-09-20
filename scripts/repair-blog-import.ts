@@ -220,7 +220,7 @@ export const main = async () => {
         const data = jsonObject({
           ...record.data,
           content,
-          author: "Bevory Editorial",
+          author: "BevOry Editorial",
           category: categoryFor(slug),
           tags: tagsFor(slug),
           is_published: publish,

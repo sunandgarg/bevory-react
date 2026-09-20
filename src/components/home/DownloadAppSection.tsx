@@ -101,7 +101,7 @@ const DownloadAppSection = () => {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-              Bevory in Your Pocket
+              BevOry in Your Pocket
             </h2>
 
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">

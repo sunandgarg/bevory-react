@@ -7,7 +7,7 @@ import {
   cityRecordIdFromSlug,
 } from "./locations";
 
-describe("Bevory city catalogue", () => {
+describe("BevOry city catalogue", () => {
   it("contains all 30 unique launch cities", () => {
     expect(BEVORY_CITIES).toHaveLength(30);
     expect(new Set(BEVORY_CITIES.map(({ name }) => name)).size).toBe(30);

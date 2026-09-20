@@ -85,7 +85,7 @@ const AdminSidebar = ({ email }: { email?: string }) => {
           {!collapsed && (
             <div className="flex flex-col leading-tight">
               <span className="font-bold text-base tracking-tight text-foreground">Admin</span>
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Bevory</span>
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">BevOry</span>
             </div>
           )}
         </Link>

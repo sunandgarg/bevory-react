@@ -159,16 +159,16 @@ const GuideArticle = () => {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
-    "description": post.excerpt || post.meta_description || `Read ${post.title} on Bevory Guide.`,
+    "description": post.excerpt || post.meta_description || `Read ${post.title} on BevOry Guide.`,
     "image": [articleImage],
     "author": {
       "@type": "Person",
-      "name": post.author || "Bevory Team",
+      "name": post.author || "BevOry Team",
       "url": "https://bevory.in/guide"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Bevory",
+      "name": "BevOry",
       "logo": {
         "@type": "ImageObject",
         "url": "https://bevory.in/favicon.png"
@@ -187,12 +187,12 @@ const GuideArticle = () => {
   return (
     <>
       <SEOHead
-        title={post.meta_title || `${post.title} | Bevory Guide`}
+        title={post.meta_title || `${post.title} | BevOry Guide`}
         description={post.meta_description || post.excerpt || ""}
         keywords={post.tags?.join(", ") || post.category || ""}
         ogImage={articleImage}
         ogType="article"
-        author={post.author || "Bevory Team"}
+        author={post.author || "BevOry Team"}
         publishedTime={post.published_at || undefined}
         section={post.category || undefined}
         tags={post.tags || undefined}
@@ -295,7 +295,7 @@ const GuideArticle = () => {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <User className="w-4 h-4 text-accent" />
                     </div>
-                    <span className="font-medium text-foreground">{post.author || "Bevory Team"}</span>
+                    <span className="font-medium text-foreground">{post.author || "BevOry Team"}</span>
                   </span>
                   {post.published_at && (
                     <span className="flex items-center gap-1.5">

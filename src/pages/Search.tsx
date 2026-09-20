@@ -195,7 +195,7 @@ const Search = () => {
   return (
     <>
       <SEOHead
-        title={query ? `Search: ${query} | Bevory` : "Search Products - Find Your Perfect Drink | Bevory"}
+        title={query ? `Search: ${query} | BevOry` : "Search Products - Find Your Perfect Drink | BevOry"}
         description="Search and compare prices for whisky, vodka, rum, gin, and more. Find the best deals on premium spirits near you."
         keywords="search spirits, find whisky, compare prices, buy alcohol online, liquor search"
         canonical="/search"
@@ -212,7 +212,7 @@ const Search = () => {
             >
               <div className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-2">
                 <TrendingUp className="w-4 h-4" />
-                <span>Search the full Bevory catalog</span>
+                <span>Search the full BevOry catalog</span>
               </div>
               <h1 className="text-2xl font-serif font-bold text-foreground">
                 Find Your Perfect Drink

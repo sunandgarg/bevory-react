@@ -80,7 +80,7 @@ const SEOHead = ({
     updateMeta("og:title", seoTitle, true);
     updateMeta("og:type", ogType, true);
     updateMeta("og:locale", locale, true);
-    updateMeta("og:site_name", "Bevory", true);
+    updateMeta("og:site_name", "BevOry", true);
     
     // Only set og:image if it's a valid image URL (not emoji)
     // Check if ogImage is a valid URL (starts with http/https or /)
@@ -178,7 +178,7 @@ const SEOHead = ({
 
     // Cleanup
     return () => {
-      document.title = "Bevory - Know Before You Drink";
+      document.title = "BevOry - Know Before You Drink";
       document.querySelector('script[data-bevory-seo="page"]')?.remove();
     };
   }, [title, description, keywords, ogImage, ogType, canonical, jsonLd, author, publishedTime, modifiedTime, section, tags, locale, geoRegion, geoPlacename, geoPosition, robots]);

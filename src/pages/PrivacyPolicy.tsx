@@ -4,7 +4,7 @@ import SEOHead from "@/components/SEOHead";
 
 const PrivacyPolicy = () => (
   <div className="min-h-screen bg-background">
-    <SEOHead title="Privacy Policy | Bevory" description="Bevory's privacy policy — how we collect, use, and protect your data." />
+    <SEOHead title="Privacy Policy | BevOry" description="BevOry's privacy policy — how we collect, use, and protect your data." />
     <Header />
     <main className="px-4 py-8 max-w-3xl mx-auto prose prose-sm dark:prose-invert">
       <h1 className="text-2xl font-bold mb-6">Privacy Policy</h1>
@@ -37,13 +37,13 @@ const PrivacyPolicy = () => (
       <p>Subject to applicable law, you may ask for a summary of your personal data, correction, completion, erasure, consent withdrawal, or grievance redressal, and may nominate another person to exercise applicable rights. Account information can be updated in your profile. For access or deletion requests, email <a href="mailto:bevory.main@gmail.com" className="text-primary">bevory.main@gmail.com</a>. We may verify your identity before completing a request.</p>
 
       <h2>8. Children's Privacy</h2>
-      <p>Bevory is intended for adults aged 25 or older who meet their local legal drinking-age requirements. We do not knowingly collect data from minors.</p>
+      <p>BevOry is intended for adults aged 25 or older who meet their local legal drinking-age requirements. We do not knowingly collect data from minors.</p>
 
       <h2>9. Changes to This Policy</h2>
       <p>We may update this policy from time to time. We will notify you of significant changes via email or in-app notification.</p>
 
       <h2>10. Contact and Grievances</h2>
-      <p>For privacy questions, rights requests, or grievances, contact Bevory at <a href="mailto:bevory.main@gmail.com" className="text-primary">bevory.main@gmail.com</a> or +91 8010321712. Location: Delhi, India.</p>
+      <p>For privacy questions, rights requests, or grievances, contact BevOry at <a href="mailto:bevory.main@gmail.com" className="text-primary">bevory.main@gmail.com</a> or +91 8010321712. Location: Delhi, India.</p>
     </main>
     <Footer />
   </div>

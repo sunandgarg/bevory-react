@@ -86,7 +86,7 @@ const auditUrl = async (canonicalUrl: string) => {
   const response = await fetch(requestUrl, {
     headers: {
       accept: "text/html",
-      "user-agent": "Bevory-Sitemap-Audit/1.0",
+      "user-agent": "BevOry-Sitemap-Audit/1.0",
     },
     redirect: "manual",
     signal: AbortSignal.timeout(20_000),

@@ -21,7 +21,7 @@ describe("legacy blog repair", () => {
       excerpt: "and the stated volume.",
     });
     const trailer = record("trailer", "2026-01-01T00:00:02.000Z", {
-      title: `Drink responsibly.,,${String.fromCodePoint(0x1f4f0)},Bevory Editorial`,
+      title: `Drink responsibly.,,${String.fromCodePoint(0x1f4f0)},BevOry Editorial`,
     });
 
     expect(isArticleRoot(root.data)).toBe(true);
@@ -30,6 +30,6 @@ describe("legacy blog repair", () => {
     expect(result.fragments).toHaveLength(2);
     expect(result.articles[0].content).toContain("Look for the category, the producer, and the stated volume.");
     expect(result.articles[0].content).toContain("Drink responsibly.");
-    expect(result.articles[0].content).not.toContain("Bevory Editorial");
+    expect(result.articles[0].content).not.toContain("BevOry Editorial");
   });
 });

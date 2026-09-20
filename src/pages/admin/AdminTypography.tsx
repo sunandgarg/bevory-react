@@ -65,7 +65,7 @@ const AdminTypography = () => {
           <div className="space-y-1">
             <span className="text-xs text-muted-foreground font-mono">text-base (16px) — Default body</span>
             <p className="text-base">
-              Bevory is your ultimate guide to the world of beverages. Compare prices, explore brands, 
+              BevOry is your ultimate guide to the world of beverages. Compare prices, explore brands,
               plan parties, and make informed choices for every celebration.
             </p>
           </div>

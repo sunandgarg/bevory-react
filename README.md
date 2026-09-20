@@ -1,6 +1,6 @@
-# Bevory React
+# BevOry React
 
-Bevory is a React beverage discovery, comparison, editorial, party-planning, and administration application. The visual frontend and route structure are preserved from the original website; the backend is now a self-hosted Node.js API using Prisma and MySQL.
+BevOry is a React beverage discovery, comparison, editorial, party-planning, and administration application. The visual frontend and route structure are preserved from the original website; the backend is now a self-hosted Node.js API using Prisma and MySQL.
 
 ## Stack
 
