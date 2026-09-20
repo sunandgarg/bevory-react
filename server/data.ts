@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import type { AuthenticatedRequest } from "./auth.js";
 import { userIsAdmin } from "./auth.js";
-import { prisma, toRecordData } from "./db.js";
+import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 import { invalidateCatalogCache } from "./catalog.js";
 
 const TABLES = new Set([
@@ -491,9 +491,16 @@ export const matchesFilter = (row: Record<string, unknown>, filter: Filter): boo
 };
 
 const readTable = async (tableName: string, filters: Filter[] = []) => {
-  const records = await prisma.contentRecord.findMany({
-    where: databaseWhereForFilters(tableName, filters),
-  });
+  const indexedFilters = Object.fromEntries(filters.flatMap((filter) => (
+    filter.operator === "eq" && filter.column && isJsonScalar(filter.value)
+      ? [[filter.column, filter.value]]
+      : []
+  )));
+  const records = await findIndexedContentData(tableName, indexedFilters)
+    ?? await prisma.contentRecord.findMany({
+      where: databaseWhereForFilters(tableName, filters),
+      select: { data: true },
+    });
   return records.map(({ data }) => toRecordData(data));
 };
 

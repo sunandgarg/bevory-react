@@ -9,6 +9,7 @@ import {
   validateFirstPartyImages,
   type QueryPayload,
 } from "./data.js";
+import { indexedContentFilterEntries } from "./db.js";
 
 describe("first-party rendered image validation", () => {
   const appUrl = "https://bevory.in/admin";
@@ -181,6 +182,18 @@ describe("query compatibility filters", () => {
       tableName: "products",
       AND: [{ recordId: "product-1" }],
     });
+  });
+
+  it("maps only allowlisted JSON fields to generated database indexes", () => {
+    expect(indexedContentFilterEntries({
+      slug: "sample-product",
+      city_id: "gurgaon",
+      unknown: "ignored",
+      product_id: null,
+    })).toEqual([
+      ["slug", "sample-product"],
+      ["city_id", "gurgaon"],
+    ]);
   });
 });
 

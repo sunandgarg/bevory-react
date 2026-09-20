@@ -1,5 +1,5 @@
-// BevOry Service Worker v11 - 2026
-const CACHE_VERSION = 'bevory-v11';
+// BevOry Service Worker v12 - 2026
+const CACHE_VERSION = 'bevory-v12';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
@@ -14,7 +14,6 @@ const MEDIA_PASSTHROUGH_HEADERS = [
 
 // Static assets to precache on install
 const PRECACHE_URLS = [
-  '/',
   '/favicon.ico',
   '/favicon-light.png',
   '/favicon-dark.png',
@@ -117,20 +116,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy 5: Documents — network first so policy and compliance changes are immediate
-  if (url.origin === self.location.origin && request.destination === 'document') {
-    event.respondWith(networkFirstDocument(request, STATIC_CACHE));
-    return;
-  }
-
-  // Strategy 6: Hashed JS and CSS — stale while revalidate
-  if (
-    url.origin === self.location.origin &&
-    (request.destination === 'script' || request.destination === 'style')
-  ) {
-    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE, event));
-    return;
-  }
+  // Documents and compiled JS/CSS use the browser's normal HTTP cache. Keeping
+  // page shells in Cache Storage can pair an old document with removed chunks
+  // during a deployment and leave returning visitors on an error screen.
 });
 
 // --- Strategies ---
@@ -164,19 +152,6 @@ async function networkFirstWithCache(request, cacheName, maxAge) {
       status: 503,
       headers: { 'Content-Type': 'application/json' },
     });
-  }
-}
-
-async function networkFirstDocument(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  try {
-    const response = await fetch(request, { cache: 'no-cache' });
-    if (response.ok) cache.put(request, response.clone());
-    return response;
-  } catch {
-    return (await cache.match(request))
-      || (await cache.match('/'))
-      || new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
   }
 }
 

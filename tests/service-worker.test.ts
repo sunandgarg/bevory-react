@@ -84,6 +84,25 @@ const loadWorker = (options: {
 };
 
 describe("media service-worker passthrough", () => {
+  it.each([
+    ["https://bevory.in/gurgaon", "document"],
+    ["https://bevory.in/assets/index-current.js", "script"],
+    ["https://bevory.in/assets/index-current.css", "style"],
+  ])("leaves %s to the HTTP cache instead of serving a stale shell", async (url, destination) => {
+    const worker = loadWorker({
+      cached: new Response("stale", { status: 200 }),
+      network: () => new Response("fresh", { status: 200 }),
+    });
+    const request = new Request(url);
+    Object.defineProperty(request, "destination", { value: destination });
+
+    const { event, response } = await worker.dispatch(request);
+
+    expect(event.respondWith).not.toHaveBeenCalled();
+    expect(await response.text()).toBe("fresh");
+    expect(worker.cache.match).not.toHaveBeenCalled();
+  });
+
   it("leaves a cold Range request to the network and preserves its 206", async () => {
     const worker = loadWorker({
       network: () => new Response("part", {

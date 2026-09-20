@@ -2,12 +2,15 @@ import { describe, expect, it } from "vitest";
 import {
   enrichProductSeo,
   legacyRedirectPath,
+  isCrawlerUserAgent,
   productAliasBucketForPath,
   productContentBucketForPath,
+  rememberRecentPromise,
   resolveDynamicProductSeo,
   resolveSeo,
   rewriteSeoDocument,
   seoBucketForPath,
+  stripCrawlerHydration,
 } from "./seo.js";
 
 const template = `<!doctype html><html><head>
@@ -25,6 +28,25 @@ const template = `<!doctype html><html><head>
 </head><body><div id="root"><h1>Default</h1></div><script type="module" src="/app.js"></script></body></html>`;
 
 describe("origin SEO rendering", () => {
+  it("bounds the parsed SEO shard cache and refreshes recent entries", () => {
+    const cache = new Map<string, Promise<number>>();
+    rememberRecentPromise(cache, "a", Promise.resolve(1), 2);
+    rememberRecentPromise(cache, "b", Promise.resolve(2), 2);
+    rememberRecentPromise(cache, "a", cache.get("a")!, 2);
+    rememberRecentPromise(cache, "c", Promise.resolve(3), 2);
+
+    expect([...cache.keys()]).toEqual(["a", "c"]);
+  });
+
+  it("serves crawler SEO without booting the interactive application", () => {
+    expect(isCrawlerUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1)")).toBe(true);
+    expect(isCrawlerUserAgent("Mozilla/5.0 Chrome/153 Safari/537.36")).toBe(false);
+
+    const html = stripCrawlerHydration(template);
+    expect(html).not.toContain('type="module"');
+    expect(html).toContain("<title>Default</title>");
+  });
+
   it("selects city product shards", () => {
     expect(seoBucketForPath("/mangalore/product/8-pm-whisky-503f9e4/375ml"))
       .toBe("mangalore-product-8");

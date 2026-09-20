@@ -32,7 +32,12 @@ import {
   googleRedirectUri,
 } from "./integrations/googleOAuth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./integrations/phoneOtp.js";
-import { createLegacyRedirectResolver, createSeoRenderer } from "./seo.js";
+import {
+  createLegacyRedirectResolver,
+  createSeoRenderer,
+  isCrawlerUserAgent,
+  stripCrawlerHydration,
+} from "./seo.js";
 import { objectStorageConfigured, storedImagePathMatchesType, storeUpload } from "./storage.js";
 import { createRateLimit } from "./rateLimit.js";
 import { createMediaHandler } from "./media.js";
@@ -401,8 +406,12 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
       const rendered = await renderSeo(req.path);
       res.setHeader("Cache-Control", rendered.statusCode === 404
         ? "private, no-store"
-        : "public, max-age=0, must-revalidate");
-      return res.status(rendered.statusCode).type("html").send(rendered.html);
+        : "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400");
+      const crawler = isCrawlerUserAgent(req.get("user-agent"));
+      if (crawler) res.vary("User-Agent");
+      return res.status(rendered.statusCode).type("html").send(
+        crawler ? stripCrawlerHydration(rendered.html) : rendered.html,
+      );
     } catch (error) {
       return next(error);
     }

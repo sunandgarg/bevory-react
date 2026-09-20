@@ -50,6 +50,41 @@ type ProductEditorialEntry = {
 };
 type ProductEditorialIndex = Record<string, ProductEditorialEntry>;
 
+const DEFAULT_SEO_ROUTE_CACHE_ENTRIES = 4;
+
+const seoRouteCacheEntries = () => {
+  const configured = Number(process.env.SEO_ROUTE_CACHE_ENTRIES);
+  return Number.isInteger(configured) && configured > 0
+    ? Math.min(configured, 32)
+    : DEFAULT_SEO_ROUTE_CACHE_ENTRIES;
+};
+
+export const rememberRecentPromise = <T>(
+  cache: Map<string, Promise<T>>,
+  key: string,
+  value: Promise<T>,
+  maxEntries: number,
+) => {
+  cache.delete(key);
+  cache.set(key, value);
+  while (cache.size > maxEntries) {
+    const oldest = cache.keys().next().value;
+    if (oldest === undefined) break;
+    cache.delete(oldest);
+  }
+  return value;
+};
+
+export const isCrawlerUserAgent = (userAgent = "") => (
+  /(?:googlebot|bingbot|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|claudebot|anthropic-ai|gptbot|chatgpt-user|perplexitybot|bytespider)/i
+    .test(userAgent)
+);
+
+export const stripCrawlerHydration = (html: string) => html.replace(
+  /<script\b(?=[^>]*\btype\s*=\s*["']module["'])[^>]*>[\s\S]*?<\/script>\s*/gi,
+  "",
+);
+
 const cityNames = new Map([
   ["agra", "Agra"], ["asansol", "Asansol"], ["bangalore", "Bangalore"],
   ["bhopal", "Bhopal"], ["delhi", "Delhi"], ["faridabad", "Faridabad"],
@@ -490,18 +525,18 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => emptyProductIndex);
   const aliasCache = new Map<string, Promise<Record<string, string>>>();
+  const maxCacheEntries = seoRouteCacheEntries();
 
   const loadAliases = (pathname: string) => {
     const bucket = productAliasBucketForPath(pathname);
     if (!bucket) return Promise.resolve({});
     let aliases = aliasCache.get(bucket);
-    if (!aliases) {
-      aliases = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
-        .then((value) => JSON.parse(value) as Record<string, string>)
-        .catch(() => ({}));
-      aliasCache.set(bucket, aliases);
-    }
-    return aliases;
+    if (aliases) return rememberRecentPromise(aliasCache, bucket, aliases, maxCacheEntries);
+
+    aliases = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
+      .then((value) => JSON.parse(value) as Record<string, string>)
+      .catch(() => ({}));
+    return rememberRecentPromise(aliasCache, bucket, aliases, maxCacheEntries);
   };
 
   return async (pathname: string) => {
@@ -520,6 +555,7 @@ export const createSeoRenderer = (clientDist: string) => {
   const template = readFile(path.join(clientDist, "index.html"), "utf8");
   const seoRoutesCache = new Map<string, Promise<SeoRouteMap>>();
   const productEditorialCache = new Map<string, Promise<ProductEditorialIndex>>();
+  const maxCacheEntries = seoRouteCacheEntries();
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => ({ products: {}, brandsById: {} }));
@@ -527,26 +563,24 @@ export const createSeoRenderer = (clientDist: string) => {
   const loadSeoRoutes = (pathname: string) => {
     const bucket = seoBucketForPath(pathname);
     let routes = seoRoutesCache.get(bucket);
-    if (!routes) {
-      routes = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
-        .then((value) => JSON.parse(value) as SeoRouteMap)
-        .catch(() => ({}));
-      seoRoutesCache.set(bucket, routes);
-    }
-    return routes;
+    if (routes) return rememberRecentPromise(seoRoutesCache, bucket, routes, maxCacheEntries);
+
+    routes = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
+      .then((value) => JSON.parse(value) as SeoRouteMap)
+      .catch(() => ({}));
+    return rememberRecentPromise(seoRoutesCache, bucket, routes, maxCacheEntries);
   };
 
   const loadProductEditorial = (pathname: string) => {
     const bucket = productContentBucketForPath(pathname);
     if (!bucket) return Promise.resolve({} as ProductEditorialIndex);
     let content = productEditorialCache.get(bucket);
-    if (!content) {
-      content = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
-        .then((value) => JSON.parse(value) as ProductEditorialIndex)
-        .catch(() => ({}));
-      productEditorialCache.set(bucket, content);
-    }
-    return content;
+    if (content) return rememberRecentPromise(productEditorialCache, bucket, content, maxCacheEntries);
+
+    content = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
+      .then((value) => JSON.parse(value) as ProductEditorialIndex)
+      .catch(() => ({}));
+    return rememberRecentPromise(productEditorialCache, bucket, content, maxCacheEntries);
   };
 
   return async (pathname: string) => {

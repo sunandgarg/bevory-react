@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { Prisma } from "@prisma/client";
-import { prisma, toRecordData } from "./db.js";
+import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 
 type CatalogRow = Record<string, unknown>;
 
@@ -170,7 +170,10 @@ const catalogCacheKey = (cityId: string, view: CatalogView, categorySlug = "") =
 );
 
 const buildCatalogPayload = async (cityId: string, view: CatalogView, categorySlug = "") => {
-  const priceRecords = await prisma.contentRecord.findMany({
+  const priceRecords = await findIndexedContentData("product_prices", {
+    city_id: cityId,
+    price_available: true,
+  }) ?? await prisma.contentRecord.findMany({
     where: {
       tableName: "product_prices",
       AND: [
