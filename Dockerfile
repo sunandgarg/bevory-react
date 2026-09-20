@@ -22,7 +22,6 @@ COPY --chown=node:node --from=build /app/dist ./dist
 COPY --chown=node:node --from=build /app/dist-server ./dist-server
 COPY --chown=node:node --from=build /app/prisma ./prisma
 COPY --chown=node:node --from=build /app/scripts ./scripts
-COPY --chown=node:node --from=build /app/server ./server
 COPY --chown=node:node --from=build /app/src/lib/catalogTaxonomy.ts /app/src/lib/demandGuides.ts /app/src/lib/locations.ts ./src/lib/
 RUN mkdir -p uploads && chown node:node uploads
 USER node

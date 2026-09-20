@@ -1,9 +1,12 @@
 import "dotenv/config";
-import { prisma } from "../server/db.js";
-import { validateFirstPartyImages } from "../server/data.js";
 
 const appUrl = process.env.APP_URL?.trim();
 if (!appUrl) throw new Error("APP_URL is required for the first-party image audit");
+const runtimeServerRoot = "../dist-server/server";
+const [{ prisma }, { validateFirstPartyImages }] = await Promise.all([
+  import(`${runtimeServerRoot}/db.js`),
+  import(`${runtimeServerRoot}/data.js`),
+]);
 
 try {
   const records = await prisma.contentRecord.findMany({
