@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info } from "lucide-react";
@@ -90,6 +90,26 @@ interface CityPrice extends VolumePrice {
 
 const normalizeVolume = (value: string) => value.toLowerCase().replace(/\s+/g, "");
 const volumeSize = (value: string) => Number.parseInt(value.replace(/[^0-9]/g, "")) || 0;
+
+const DeferredProductContent = ({ children }: { children: ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || visible) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "200px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [visible]);
+
+  return <div ref={ref} style={visible ? undefined : { minHeight: 360 }}>{visible ? children : null}</div>;
+};
 
 // Volume options are now fetched from the database - no fixed options
 
@@ -880,26 +900,30 @@ const ProductDetail = () => {
             </div>
           )}
 
-          {/* Rate This Product */}
-          <RateProductSection productId={product.id} onReviewSubmitted={() => setReviewRefresh((prev) => prev + 1)} />
+          <DeferredProductContent>
+            <div className="space-y-6">
+              {/* Rate This Product */}
+              <RateProductSection productId={product.id} onReviewSubmitted={() => setReviewRefresh((prev) => prev + 1)} />
 
-          {/* User Reviews */}
-          <UserReviewsSection productId={product.id} refreshTrigger={reviewRefresh} />
+              {/* User Reviews */}
+              <UserReviewsSection productId={product.id} refreshTrigger={reviewRefresh} />
 
-          {/* Brand Spotlight */}
-          <ProductBrandSpotlight brandName={product.brand} />
+              {/* Brand Spotlight */}
+              <ProductBrandSpotlight brandName={product.brand} />
 
-          {/* FAQs */}
-          <ProductFAQs faqs={product.faqs || []} />
+              {/* FAQs */}
+              <ProductFAQs faqs={product.faqs || []} />
 
-          {/* Related Articles */}
-          <RelatedArticles productId={product.id} brandName={product.brand} />
+              {/* Related Articles */}
+              <RelatedArticles productId={product.id} brandName={product.brand} />
 
-          {/* Other Products in Same Category */}
-          <OtherProductsSection products={relatedProducts as any} title={`More ${product.category?.name || "Products"}`} />
+              {/* Other Products in Same Category */}
+              <OtherProductsSection products={relatedProducts as any} title={`More ${product.category?.name || "Products"}`} />
 
-          {/* Explore Other Categories */}
-          <ExploreCategories currentCategoryId={product.category_id} />
+              {/* Explore Other Categories */}
+              <ExploreCategories currentCategoryId={product.category_id} />
+            </div>
+          </DeferredProductContent>
 
           {/* Footer */}
           <Footer />
