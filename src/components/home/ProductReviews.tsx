@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Star, ExternalLink } from "lucide-react";
+import { Play, X, Star } from "lucide-react";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -99,16 +98,13 @@ const ProductReviews = () => {
           <h2 className="font-semibold">Spiritz Reviews</h2>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory scroll-smooth">
-          {reviews.map((review, index) => {
+          {reviews.map((review) => {
             const thumbnail = review.thumbnail_url || 
               (review.youtube_url ? getYouTubeThumbnail(review.youtube_url) : null);
             
             return (
-              <motion.button
+              <button
                 key={review.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
                 onClick={() => review.youtube_url && setSelectedVideo(review.youtube_url)}
                 className="w-32 flex-shrink-0 text-left group"
               >
@@ -143,7 +139,7 @@ const ProductReviews = () => {
                 <p className="text-xs font-medium mt-1.5 line-clamp-2">
                   {review.title || review.product?.name || "Review"}
                 </p>
-              </motion.button>
+              </button>
             );
           })}
         </div>

@@ -43,8 +43,12 @@ const FavoriteButton = ({
     <Button
       size="icon"
       variant="ghost"
+      type="button"
+      aria-label={isActive ? "Remove from favorites" : "Add to favorites"}
+      aria-pressed={isActive}
       className={cn(
         sizeClasses[size],
+        "min-h-11 min-w-11",
         variant === "overlay" &&
           "bg-background/80 backdrop-blur-sm hover:bg-background/90",
         className

@@ -205,12 +205,30 @@ const legacyRedirectPath = (pathname) => {
   return preferredCity ? `/${preferredCity}/product/${productSlug}` : null;
 };
 
-const proxyApiRequest = async (request, env) => {
+const proxyApiRequest = async (request, env, waitUntil) => {
   if (!env.API_ORIGIN || !env.ORIGIN_VERIFY_SECRET) {
     return Response.json({ error: "API origin is not configured" }, { status: 503 });
   }
 
   const incomingUrl = new URL(request.url);
+  const cacheableCatalog = request.method === "GET"
+    && incomingUrl.pathname.startsWith("/api/catalog/")
+    && !request.headers.has("authorization");
+  const cacheKey = cacheableCatalog ? new Request(incomingUrl.toString(), { method: "GET" }) : null;
+
+  if (cacheKey) {
+    try {
+      const cached = await caches.default.match(cacheKey);
+      if (cached) {
+        const headers = new Headers(cached.headers);
+        headers.set("x-bevory-cache", "HIT");
+        return new Response(cached.body, { status: cached.status, headers });
+      }
+    } catch {
+      // Cache API can be unavailable in local Pages emulation.
+    }
+  }
+
   const originUrl = new URL(env.API_ORIGIN);
   originUrl.pathname = incomingUrl.pathname;
   originUrl.search = incomingUrl.search;
@@ -220,6 +238,7 @@ const proxyApiRequest = async (request, env) => {
   headers.set("x-bevory-origin-verify", env.ORIGIN_VERIFY_SECRET);
   headers.set("x-forwarded-host", incomingUrl.host);
   headers.set("x-forwarded-proto", "https");
+  if (cacheableCatalog) headers.delete("cookie");
 
   const init = {
     method: request.method,
@@ -228,7 +247,32 @@ const proxyApiRequest = async (request, env) => {
   };
   if (request.method !== "GET" && request.method !== "HEAD") init.body = request.body;
 
-  return fetch(originUrl.toString(), init);
+  const originResponse = await fetch(originUrl.toString(), init);
+  const responseHeaders = new Headers(originResponse.headers);
+  responseHeaders.set("x-content-type-options", "nosniff");
+  responseHeaders.set("referrer-policy", "strict-origin-when-cross-origin");
+  responseHeaders.set("x-bevory-cache", "MISS");
+  if (cacheableCatalog && originResponse.ok) {
+    responseHeaders.delete("set-cookie");
+    responseHeaders.set("cache-control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
+  } else {
+    responseHeaders.set("cache-control", "private, no-store");
+  }
+
+  const response = new Response(originResponse.body, {
+    status: originResponse.status,
+    statusText: originResponse.statusText,
+    headers: responseHeaders,
+  });
+
+  if (cacheKey && originResponse.ok) {
+    try {
+      waitUntil(caches.default.put(cacheKey, response.clone()));
+    } catch {
+      // The origin response is still valid when edge cache storage fails.
+    }
+  }
+  return response;
 };
 
 const rewriteDocument = (response, url, routeData) => {
@@ -270,7 +314,7 @@ const rewriteDocument = (response, url, routeData) => {
     .transform(htmlResponse);
 };
 
-export async function onRequest({ request, env }) {
+export async function onRequest({ request, env, waitUntil }) {
   const url = new URL(request.url);
 
   if (url.hostname === "www.bevory.in") {
@@ -279,7 +323,7 @@ export async function onRequest({ request, env }) {
   }
 
   if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
-    return proxyApiRequest(request, env);
+    return proxyApiRequest(request, env, waitUntil);
   }
 
   if (isDocumentRequest(request)) {

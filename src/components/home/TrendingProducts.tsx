@@ -95,7 +95,7 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
           <TrendingUp className="w-4 h-4 text-accent" />
           <h2 className="text-base font-semibold">Trending</h2>
         </div>
-        <Link to="/search?sort=trending" className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-0.5 transition-colors">
+        <Link to="/search?sort=trending" className="text-xs text-foreground hover:text-foreground/80 flex items-center gap-0.5 transition-colors">
           See all <ChevronRight className="w-3 h-3" />
         </Link>
       </div>
@@ -109,7 +109,7 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
             className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize whitespace-nowrap transition-all duration-150 ${
               selectedTab === tab
                 ? "bg-foreground text-background"
-                : "bg-secondary text-muted-foreground hover:text-foreground"
+                : "bg-secondary text-foreground hover:bg-secondary/80"
             }`}
           >
             {tab}

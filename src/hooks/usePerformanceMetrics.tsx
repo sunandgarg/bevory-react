@@ -3,7 +3,6 @@ import { useState, useEffect, useCallback } from "react";
 export interface PerformanceMetrics {
   // Core Web Vitals
   lcp: number | null; // Largest Contentful Paint
-  fid: number | null; // First Input Delay
   cls: number | null; // Cumulative Layout Shift
   fcp: number | null; // First Contentful Paint
   ttfb: number | null; // Time to First Byte
@@ -25,7 +24,6 @@ export interface PerformanceMetrics {
 
 const DEFAULT_METRICS: PerformanceMetrics = {
   lcp: null,
-  fid: null,
   cls: null,
   fcp: null,
   ttfb: null,
@@ -113,13 +111,15 @@ export const usePerformanceMetrics = () => {
   }, []);
 
   useEffect(() => {
-    // Wait for page to fully load
+    let collectionTimer: number | undefined;
+    const scheduleCollection = () => {
+      collectionTimer = window.setTimeout(collectMetrics, 100);
+    };
+
     if (document.readyState === "complete") {
-      setTimeout(collectMetrics, 100);
+      scheduleCollection();
     } else {
-      window.addEventListener("load", () => {
-        setTimeout(collectMetrics, 100);
-      });
+      window.addEventListener("load", scheduleCollection, { once: true });
     }
 
     // Set up observers for Web Vitals
@@ -131,14 +131,6 @@ export const usePerformanceMetrics = () => {
         setMetrics(prev => ({ ...prev, lcp: Math.round(lastEntry.startTime) }));
       });
       lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
-
-      // FID Observer
-      const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const firstEntry = entries[0] as any;
-        setMetrics(prev => ({ ...prev, fid: Math.round(firstEntry.processingStart - firstEntry.startTime) }));
-      });
-      fidObserver.observe({ type: "first-input", buffered: true });
 
       // CLS Observer
       const clsObserver = new PerformanceObserver((list) => {
@@ -163,14 +155,19 @@ export const usePerformanceMetrics = () => {
       inpObserver.observe({ type: "event", buffered: true });
 
       return () => {
+        window.removeEventListener("load", scheduleCollection);
+        if (collectionTimer !== undefined) window.clearTimeout(collectionTimer);
         lcpObserver.disconnect();
-        fidObserver.disconnect();
         clsObserver.disconnect();
         inpObserver.disconnect();
       };
     } catch (error) {
       // PerformanceObserver not fully supported
       console.warn("Some performance metrics not available:", error);
+      return () => {
+        window.removeEventListener("load", scheduleCollection);
+        if (collectionTimer !== undefined) window.clearTimeout(collectionTimer);
+      };
     }
   }, [collectMetrics]);
 
@@ -202,7 +199,6 @@ export const getScoreColor = (value: number | null, thresholds: { good: number; 
 // Web Vitals thresholds (Google's recommendations)
 export const WEB_VITALS_THRESHOLDS = {
   lcp: { good: 2500, needsImprovement: 4000 },
-  fid: { good: 100, needsImprovement: 300 },
   cls: { good: 0.1, needsImprovement: 0.25 },
   fcp: { good: 1800, needsImprovement: 3000 },
   ttfb: { good: 800, needsImprovement: 1800 },

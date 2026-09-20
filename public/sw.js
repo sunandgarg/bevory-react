@@ -1,5 +1,5 @@
-// Bevory Service Worker v6 - 2026
-const CACHE_VERSION = 'bevory-v6';
+// Bevory Service Worker v8 - 2026
+const CACHE_VERSION = 'bevory-v8';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
@@ -17,6 +17,10 @@ const PRECACHE_URLS = [
   '/icon-512.png',
   '/site.webmanifest',
   '/og-image.png',
+  '/fonts/dm-sans-latin.woff2',
+  '/fonts/bricolage-grotesque-latin.woff2',
+  '/fonts/instrument-serif-latin.woff2',
+  '/fonts/instrument-serif-italic-latin.woff2',
 ];
 
 // Install — precache critical assets
@@ -58,8 +62,13 @@ self.addEventListener('fetch', (event) => {
     url.pathname.includes('token')
   ) return;
 
-  // Strategy 1: Bevory Node API — Network first, cache fallback (5 min TTL)
-  if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) {
+  // Strategy 1: cache only the anonymous public catalogue. Never cache account,
+  // admin, upload, function, or future authenticated API responses.
+  if (
+    url.origin === self.location.origin &&
+    url.pathname.startsWith('/api/catalog/') &&
+    !request.headers.has('authorization')
+  ) {
     event.respondWith(networkFirstWithCache(request, API_CACHE, 5 * 60 * 1000));
     return;
   }
@@ -71,13 +80,13 @@ self.addEventListener('fetch', (event) => {
       url.pathname.startsWith('/uploads/')
     ))
   ) {
-    event.respondWith(cacheFirstWithNetwork(request, IMAGE_CACHE));
+    event.respondWith(cacheFirstWithNetwork(request, IMAGE_CACHE, 250));
     return;
   }
 
-  // Strategy 3: Google Fonts — Cache first (long-lived)
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
-    event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE));
+  // Strategy 3: Self-hosted fonts — Cache first (long-lived)
+  if (url.origin === self.location.origin && url.pathname.startsWith('/fonts/')) {
+    event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE, 40));
     return;
   }
 
@@ -100,11 +109,11 @@ self.addEventListener('fetch', (event) => {
 // --- Strategies ---
 
 async function networkFirstWithCache(request, cacheName, maxAge) {
+  const cache = await caches.open(cacheName);
   try {
     const response = await fetch(request);
     if (response.ok) {
       const clone = response.clone();
-      const cache = await caches.open(cacheName);
       // Store with timestamp header
       const headers = new Headers(clone.headers);
       headers.set('sw-cached-at', Date.now().toString());
@@ -113,7 +122,7 @@ async function networkFirstWithCache(request, cacheName, maxAge) {
     }
     return response;
   } catch {
-    const cached = await caches.match(request);
+    const cached = await cache.match(request);
     if (cached) {
       const cachedAt = parseInt(cached.headers.get('sw-cached-at') || '0');
       if (Date.now() - cachedAt < maxAge) return cached;
@@ -138,14 +147,21 @@ async function networkFirstDocument(request, cacheName) {
   }
 }
 
-async function cacheFirstWithNetwork(request, cacheName) {
-  const cached = await caches.match(request);
+async function trimCache(cache, maxEntries) {
+  const keys = await cache.keys();
+  if (keys.length <= maxEntries) return;
+  await Promise.all(keys.slice(0, keys.length - maxEntries).map((key) => cache.delete(key)));
+}
+
+async function cacheFirstWithNetwork(request, cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
   if (cached) return cached;
   try {
     const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, response.clone());
+    if (response.ok || response.type === 'opaque') {
+      await cache.put(request, response.clone());
+      await trimCache(cache, maxEntries);
     }
     return response;
   } catch {

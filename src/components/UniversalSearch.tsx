@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useMemo, useCallback, memo } from "react";
 import { Search, X, ArrowRight, Star } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import { apiClient } from "@/integrations/api/client";
 import { fuzzyFilter } from "@/lib/fuzzySearch";
 import { useProducts } from "@/hooks/useProducts";
@@ -193,7 +192,7 @@ const UniversalSearch = memo(({
         </div>
       </form>
 
-      <AnimatePresence>
+      <>
         {showResults && query.length >= 2 && hasResults && (
           <div
             className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-lg z-50 overflow-hidden max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-150"
@@ -288,7 +287,7 @@ const UniversalSearch = memo(({
             Searching...
           </div>
         )}
-      </AnimatePresence>
+      </>
     </div>
   );
 });

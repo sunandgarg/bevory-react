@@ -1,12 +1,9 @@
-import { useState, useCallback, useEffect, memo } from "react";
-import { motion } from "framer-motion";
+import { useState, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, ChevronLeft, ChevronRight, Utensils } from "lucide-react";
+import { Clock, Utensils } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
 interface Cocktail {
@@ -73,23 +70,20 @@ const HomeCocktails = () => {
           <Utensils className="w-4 h-4 text-accent" />
           <h2 className="font-semibold">Cocktail Recipes</h2>
         </div>
-        <Link to="/cocktails" className="text-sm text-accent">
+        <Link to="/cocktails" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
           See all
         </Link>
       </div>
 
       {/* Mobile-optimized horizontal scroll */}
       <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory">
-        {cocktails.map((cocktail, index) => (
+        {cocktails.map((cocktail) => (
           <Link 
             key={cocktail.id} 
             to={`/cocktail/${cocktail.slug || cocktail.id}`}
             className="flex-shrink-0 snap-start"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
+            <div
               className="w-36 bg-card rounded-xl border border-border overflow-hidden hover:border-accent/50 transition-colors"
             >
               {/* Image */}
@@ -125,7 +119,7 @@ const HomeCocktails = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </Link>
         ))}
       </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, ChevronDown, Check, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,8 +10,8 @@ import BrandingDisplay from "@/components/layout/BrandingDisplay";
 const AGE_VERIFIED_KEY = "bevory-age-verified-v25";
 
 const AgeVerificationModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isOpen, setIsOpen] = useState(() => !localStorage.getItem(AGE_VERIFIED_KEY));
+  const [isVerified, setIsVerified] = useState(() => Boolean(localStorage.getItem(AGE_VERIFIED_KEY)));
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCityName, setSelectedCityName] = useState<string>("Gurgaon");
@@ -21,10 +20,12 @@ const AgeVerificationModal = () => {
 
   useEffect(() => {
     if (settingsLoading) return;
-    
+
     // If popup is disabled, mark as verified immediately
     if (!ageSettings.enabled) {
       setIsVerified(true);
+      setIsOpen(false);
+      queueMicrotask(() => window.dispatchEvent(new Event("bevory:age-verified")));
       return;
     }
 
@@ -40,6 +41,7 @@ const AgeVerificationModal = () => {
   const handleVerify = async () => {
     await setCityByName(selectedCityName);
     localStorage.setItem(AGE_VERIFIED_KEY, "true");
+    window.dispatchEvent(new Event("bevory:age-verified"));
     setIsVerified(true);
     setIsOpen(false);
   };
@@ -76,26 +78,21 @@ const AgeVerificationModal = () => {
     return filtered;
   };
 
-  if (isVerified || settingsLoading) return null;
+  if (isVerified || !isOpen) return null;
 
   const filteredCities = getFilteredCities();
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          style={{ backgroundColor: "hsl(220 20% 15% / 0.95)" }}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", damping: 20 }}
-            className="w-full max-w-md rounded-3xl bg-card border border-border text-center shadow-elevated overflow-hidden"
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
+      style={{ backgroundColor: "hsl(220 20% 15% / 0.95)" }}
+    >
+          <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="age-verification-title"
+          aria-describedby="age-verification-description"
+          className="w-full max-w-md rounded-3xl bg-card border border-border text-center shadow-elevated overflow-hidden"
           >
             {!showCitySelector ? (
               <div className="p-8">
@@ -103,17 +100,20 @@ const AgeVerificationModal = () => {
                   <BrandingDisplay variant="auth" />
                 </div>
 
-                <h2 className="text-2xl font-serif font-bold text-foreground mb-2">
+                <h2 id="age-verification-title" className="text-2xl font-serif font-bold text-foreground mb-2">
                   {ageSettings.title}
                 </h2>
 
-                <p className="text-muted-foreground mb-6">
+                <p id="age-verification-description" className="text-muted-foreground mb-6">
                   {ageSettings.description}
                 </p>
 
                 {/* City Selector Button */}
                 <button
+                  type="button"
                   onClick={() => setShowCitySelector(true)}
+                  aria-expanded={showCitySelector}
+                  aria-controls="age-city-selector"
                   className="w-full flex items-center justify-between p-4 mb-6 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors"
                 >
                   <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ const AgeVerificationModal = () => {
                 </button>
 
                 <div className="flex flex-col gap-3">
-                  <Button onClick={handleVerify} variant="gold" size="xl" className="w-full">
+                  <Button autoFocus onClick={handleVerify} variant="gold" size="xl" className="w-full">
                     {ageSettings.confirmButtonText}
                   </Button>
                   <Button
@@ -144,14 +144,16 @@ const AgeVerificationModal = () => {
                 </p>
               </div>
             ) : (
-              <div className="h-[80vh] max-h-[600px] flex flex-col">
+              <div id="age-city-selector" className="h-[80vh] max-h-[600px] flex flex-col">
                 {/* Header */}
                 <div className="p-4 border-b border-border">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold">Select Your City</h3>
                     <button 
+                      type="button"
                       onClick={() => setShowCitySelector(false)}
-                      className="text-muted-foreground hover:text-foreground"
+                      aria-label="Close city selector"
+                      className="min-h-11 min-w-11 text-muted-foreground hover:text-foreground"
                     >
                       ✕
                     </button>
@@ -161,6 +163,7 @@ const AgeVerificationModal = () => {
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
+                      aria-label="Search cities"
                       placeholder="Search city..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -262,10 +265,8 @@ const AgeVerificationModal = () => {
                 </div>
               </div>
             )}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+    </div>
   );
 };
 

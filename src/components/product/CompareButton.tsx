@@ -49,11 +49,14 @@ const CompareButton = ({
     return (
       <button
         onClick={handleClick}
+        type="button"
+        aria-label={inCompare ? "Remove product from comparison" : "Add product to comparison"}
+        aria-pressed={inCompare}
         className={cn(
           "rounded-full flex items-center justify-center transition-colors",
-          size === "sm" && "w-7 h-7",
-          size === "md" && "w-8 h-8",
-          size === "lg" && "w-10 h-10",
+          size === "sm" && "w-11 h-11",
+          size === "md" && "w-11 h-11",
+          size === "lg" && "w-12 h-12",
           inCompare 
             ? "bg-accent text-accent-foreground" 
             : "bg-card/90 text-muted-foreground hover:bg-accent hover:text-accent-foreground",
@@ -74,6 +77,8 @@ const CompareButton = ({
     return (
       <button
         onClick={handleClick}
+        type="button"
+        aria-pressed={inCompare}
         className={cn(
           "flex items-center gap-1.5 rounded-lg font-medium transition-colors",
           sizeClasses[size],
@@ -93,6 +98,9 @@ const CompareButton = ({
   return (
     <button
       onClick={handleClick}
+      type="button"
+      aria-label={inCompare ? "Remove product from comparison" : "Add product to comparison"}
+      aria-pressed={inCompare}
       className={cn(
         "flex items-center gap-1 rounded-full font-medium transition-all",
         sizeClasses[size],

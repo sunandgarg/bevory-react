@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Preconnect to critical origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- DNS prefetch for image CDNs -->
+    <!-- Self-hosted critical fonts preserve typography without a third-party request. -->
+    <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- DNS prefetch for the image CDN -->
     <link rel="dns-prefetch" href="https://wsrv.nl" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <meta name="application-name" content="Bevory" />
     <meta name="apple-mobile-web-app-title" content="Bevory" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
@@ -23,34 +23,21 @@
     <!-- Canonical URL - bevory.in is the primary domain -->
     <link rel="canonical" href="https://bevory.in/" />
 
-    <!-- Google tag (gtag.js) - defer to after page load for performance -->
+    <!-- Consent defaults run before any optional analytics tag. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QPBTP7TCDV', { 'send_page_view': true });
-      // Lazy-load gtag script after main content
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          const s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QPBTP7TCDV';
-          document.head.appendChild(s);
-        });
-      } else {
-        setTimeout(() => {
-          const s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QPBTP7TCDV';
-          document.head.appendChild(s);
-        }, 2000);
-      }
+      window.gtag = gtag;
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', false);
     </script>
-
-    <!-- Google Fonts - non-render-blocking -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
 
     <title>Bevory | Compare Local Beverage Prices</title>
     <meta name="description" content="Compare local beverage prices, bottle sizes and brands with Bevory's city-aware price guide for adults aged 25 and older.">

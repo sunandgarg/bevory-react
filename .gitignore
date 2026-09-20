@@ -21,6 +21,7 @@ coverage
 reports/
 tmp/
 .wrangler/
+.seo-cache/
 
 # Editor directories and files
 .vscode/*

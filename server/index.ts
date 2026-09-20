@@ -38,6 +38,7 @@ const port = Number(process.env.PORT) || 3001;
 const projectRoot = process.cwd();
 const uploadsRoot = path.join(projectRoot, "uploads");
 const originVerifySecret = process.env.ORIGIN_VERIFY_SECRET?.trim();
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 4, parts: 5 },
@@ -65,6 +66,45 @@ app.use("/api/storage", (_req, res, next) => {
   res.setHeader("Cache-Control", "private, no-store");
   next();
 });
+
+const noStore: express.RequestHandler = (_req, res, next) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  next();
+};
+
+const rateLimit = (limit: number, windowMs: number): express.RequestHandler => (req, res, next) => {
+  const now = Date.now();
+  const key = `${req.ip}:${req.baseUrl}${req.path}`;
+  const current = rateBuckets.get(key);
+  const bucket = !current || current.resetAt <= now
+    ? { count: 0, resetAt: now + windowMs }
+    : current;
+  bucket.count += 1;
+  rateBuckets.set(key, bucket);
+
+  if (rateBuckets.size > 10_000) {
+    for (const [bucketKey, value] of rateBuckets) {
+      if (value.resetAt <= now) rateBuckets.delete(bucketKey);
+    }
+  }
+
+  res.setHeader("RateLimit-Limit", String(limit));
+  res.setHeader("RateLimit-Remaining", String(Math.max(0, limit - bucket.count)));
+  res.setHeader("RateLimit-Reset", String(Math.ceil(bucket.resetAt / 1000)));
+  if (bucket.count > limit) {
+    res.setHeader("Retry-After", String(Math.ceil((bucket.resetAt - now) / 1000)));
+    return res.status(429).json({ data: null, error: { message: "Too many requests. Please try again later." } });
+  }
+  return next();
+};
+
+app.use("/api/auth", noStore);
+app.use("/api/storage", noStore);
+app.use("/api/auth/signin", rateLimit(10, 15 * 60 * 1000));
+app.use("/api/auth/signup", rateLimit(5, 60 * 60 * 1000));
+app.use("/api/auth/otp/send", rateLimit(5, 15 * 60 * 1000));
+app.use("/api/auth/otp/verify", rateLimit(10, 15 * 60 * 1000));
+app.use("/api/storage/upload", rateLimit(30, 60 * 60 * 1000));
 
 app.use("/api", (req, res, next) => {
   if (process.env.NODE_ENV !== "production") return next();
@@ -279,7 +319,10 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
 }
 
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  const message = error instanceof Error ? error.message : "Unexpected server error";
+  console.error("Unhandled request error", error);
+  const message = process.env.NODE_ENV === "production"
+    ? "Unexpected server error"
+    : error instanceof Error ? error.message : "Unexpected server error";
   res.status(500).json({ data: null, error: { message } });
 });
 

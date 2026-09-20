@@ -106,7 +106,6 @@ const renderUrlSet = (entries: SitemapEntry[]) => {
     const imageTags = [...new Map(images.map((item) => [item.loc, item])).values()].map((item) => [
       "    <image:image>",
       `      <image:loc>${xmlEscape(item.loc)}</image:loc>`,
-      ...(item.title ? [`      <image:title>${xmlEscape(item.title)}</image:title>`] : []),
       "    </image:image>",
     ].join("\n"));
     return [

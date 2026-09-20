@@ -1,11 +1,9 @@
-import { useState, memo } from "react";
-import { motion } from "framer-motion";
+import { memo } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, Calendar, User } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
@@ -64,23 +62,20 @@ const BevoryGuide = () => {
           <BookOpen className="w-4 h-4 text-accent" />
           <h2 className="font-semibold">Bevory Guide</h2>
         </div>
-        <Link to="/guide" className="text-sm text-accent">
+        <Link to="/guide" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
           See all
         </Link>
       </div>
 
       {/* Mobile-optimized horizontal scroll */}
       <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory">
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <Link 
             key={post.id} 
             to={`/guide/${post.slug}`}
             className="flex-shrink-0 snap-start"
           >
-            <motion.article
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
+            <article
               className="w-48 bg-card rounded-xl border border-border overflow-hidden hover:border-accent/50 transition-colors"
             >
               {/* Image */}
@@ -122,7 +117,7 @@ const BevoryGuide = () => {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </article>
           </Link>
         ))}
       </div>

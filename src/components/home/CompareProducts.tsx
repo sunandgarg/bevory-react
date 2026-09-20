@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeftRight, ChevronRight, ExternalLink, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -151,11 +150,8 @@ export const CompareFloatingBar = () => {
   if (compareProducts.length === 0) return null;
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 100, opacity: 0 }}
-      className="fixed bottom-24 left-4 right-4 z-40 bg-card border border-border rounded-2xl p-3 shadow-lg"
+    <div
+      className="fixed bottom-24 left-4 right-4 z-40 bg-card border border-border rounded-2xl p-3 shadow-lg animate-fade-in"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -191,7 +187,7 @@ export const CompareFloatingBar = () => {
           </Button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

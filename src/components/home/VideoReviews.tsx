@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Play, Star, ChevronRight, X } from "lucide-react";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -85,23 +84,20 @@ const VideoReviews = () => {
           <Star className="w-4 h-4 text-accent fill-accent" />
           <h2 className="font-semibold">Product Reviews</h2>
         </div>
-        <Link to="/reviews" className="text-sm text-accent flex items-center gap-1">
+        <Link to="/reviews" className="text-sm font-medium text-foreground hover:text-accent flex items-center gap-1 transition-colors">
           See all <ChevronRight className="w-3 h-3" />
         </Link>
       </div>
 
       {/* Video Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        {reviews.slice(0, 5).map((review, index) => {
+        {reviews.slice(0, 5).map((review) => {
           const videoId = getYouTubeId(review.youtube_url);
           const thumbnail = review.thumbnail_url || (videoId ? getYouTubeThumbnail(videoId) : null);
           
           return (
-            <motion.div
+            <div
               key={review.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
               className="relative aspect-[9/16] rounded-xl overflow-hidden bg-muted group cursor-pointer"
               onClick={() => setActiveVideo(review.id)}
             >
@@ -146,7 +142,7 @@ const VideoReviews = () => {
                   SHORTS
                 </div>
               )}
-            </motion.div>
+            </div>
           );
         })}
       </div>

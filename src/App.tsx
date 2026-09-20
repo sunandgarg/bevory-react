@@ -7,6 +7,7 @@ import { LocationProvider } from "@/hooks/useLocation";
 import { AuthProvider } from "@/hooks/useAuth";
 import { CompareProvider, CompareFloatingBar, CompareSheet } from "@/components/home/CompareProducts";
 import AgeVerificationModal from "@/components/home/AgeVerificationModal";
+import PrivacyConsent from "@/components/PrivacyConsent";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CITY_SLUGS } from "@/lib/locations";
@@ -102,6 +103,7 @@ const App = () => (
             <Sonner />
             <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
               <AgeVerificationModal />
+              <PrivacyConsent />
               <Suspense fallback={<PageFallback />}>
                 <Routes>
                   <Route path="/" element={<Navigate to="/gurgaon" replace />} />

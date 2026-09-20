@@ -8,7 +8,7 @@ const Footer = () => {
       {/* Links Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/50 mb-3">Explore</h4>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/70 mb-3">Explore</h2>
           <ul className="space-y-2">
             <li><Link to="/search" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Trending</Link></li>
             <li><Link to="/categories" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Categories</Link></li>
@@ -17,7 +17,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/50 mb-3">Learn</h4>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/70 mb-3">Learn</h2>
           <ul className="space-y-2">
             <li><Link to="/masterclass" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">MasterClass</Link></li>
             <li><Link to="/cocktails" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Cocktails</Link></li>
@@ -25,7 +25,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/50 mb-3">Legal</h4>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/70 mb-3">Legal</h2>
           <ul className="space-y-2">
             <li><Link to="/privacy-policy" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Terms & Conditions</Link></li>
@@ -33,7 +33,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/50 mb-3">Contact</h4>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-primary-foreground/70 mb-3">Contact</h2>
           <ul className="space-y-2">
             <li className="flex items-center gap-1.5">
               <Mail className="h-3 w-3 text-primary-foreground/50" />
@@ -79,6 +79,13 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      <button
+        type="button"
+        className="mt-3 text-xs text-primary-foreground/70 underline underline-offset-2 hover:text-primary-foreground"
+        onClick={() => window.dispatchEvent(new Event("bevory:open-privacy-choices"))}
+      >
+        Privacy choices
+      </button>
     </footer>
   );
 };

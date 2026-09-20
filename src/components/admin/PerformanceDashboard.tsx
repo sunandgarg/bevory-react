@@ -34,14 +34,6 @@ const PerformanceDashboard = () => {
       description: "Loading performance - time until largest content element is visible",
     },
     {
-      name: "FID",
-      fullName: "First Input Delay",
-      value: metrics.fid,
-      unit: "ms",
-      thresholds: WEB_VITALS_THRESHOLDS.fid,
-      description: "Interactivity - time from first interaction to browser response",
-    },
-    {
       name: "CLS",
       fullName: "Cumulative Layout Shift",
       value: metrics.cls,
@@ -71,7 +63,7 @@ const PerformanceDashboard = () => {
       value: metrics.inp,
       unit: "ms",
       thresholds: WEB_VITALS_THRESHOLDS.inp,
-      description: "Responsiveness - latency of all interactions during page life",
+      description: "Responsiveness - observed interaction latency during page life",
     },
   ];
 

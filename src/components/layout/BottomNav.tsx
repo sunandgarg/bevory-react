@@ -30,14 +30,15 @@ const BottomNav = memo(() => {
               to={item.path}
               className={cn(
                 "flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-colors duration-200 min-w-[44px]",
-                active ? "text-primary" : "text-muted-foreground"
+                active ? "text-foreground" : "text-muted-foreground"
               )}
               aria-label={item.label}
+              aria-current={active ? "page" : undefined}
             >
               <item.icon className="w-5 h-5" strokeWidth={active ? 2.5 : 1.5} />
               <span className={cn(
                 "text-[10px] font-medium",
-                active && "text-primary"
+                active && "text-foreground"
               )}>
                 {item.label}
               </span>

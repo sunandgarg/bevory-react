@@ -1,5 +1,4 @@
 import { useState, useCallback, memo } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -212,13 +211,9 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
       </div>
 
       {/* Story Viewer Modal */}
-      <AnimatePresence>
-        {selectedGuideIndex !== null && selectedGuide && stories.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+      {selectedGuideIndex !== null && selectedGuide && stories.length > 0 && (
+          <div
+            className="fixed inset-0 z-50 bg-black flex items-center justify-center animate-fade-in"
             onClick={(e) => {
               const rect = (e.target as HTMLElement).getBoundingClientRect();
               const x = e.clientX - rect.left;
@@ -354,9 +349,8 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                 View More
               </button>
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </>
   );
 });
