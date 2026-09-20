@@ -71,7 +71,7 @@ describe("origin SEO rendering", () => {
       expect(seo.statusCode).toBeUndefined();
       expect(seo.robots).toContain("index, follow");
       expect(seo.canonicalPath).toBe(path);
-      expect(seo.title).toContain("Bevory");
+      expect(seo.title).toContain("BevOry");
     }
   });
 

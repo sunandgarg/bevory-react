@@ -18,6 +18,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface Brand {
   id: string;
@@ -695,7 +696,14 @@ const BrandDetail = () => {
           >
             <div className="px-4 mb-4">
               <h3 className="font-serif font-semibold text-lg flex items-center gap-2">
-                <span>🥃</span> Products by {brand.brand_name}
+                {products[0]?.category && (
+                  <CategoryBottleVisual
+                    slug={products[0].category.slug}
+                    categoryName={products[0].category.name}
+                    className="h-8 w-8 shrink-0 rounded-lg bg-secondary"
+                  />
+                )}
+                Products by {brand.brand_name}
               </h3>
               <p className="text-sm text-muted-foreground mt-1">
                 Explore our collection of {brand.brand_name} products

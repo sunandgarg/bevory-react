@@ -23,6 +23,7 @@ import ExploreCategories from "@/components/product/ExploreCategories";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
 import { BEVORY_CITIES, cityRecordIdFromSlug } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface FAQ {
   question: string;
@@ -714,8 +715,15 @@ const ProductDetail = () => {
             <div className="flex items-center gap-2 mb-2 flex-wrap">
               <Link
                 to={`/${canonicalCitySlug}/category/${product.category?.slug}`}
-                className="px-2 py-0.5 rounded bg-secondary text-xs font-medium"
+                className="inline-flex items-center gap-1.5 rounded bg-secondary px-2 py-0.5 text-xs font-medium"
               >
+                {product.category?.slug && (
+                  <CategoryBottleVisual
+                    slug={product.category.slug}
+                    categoryName={product.category.name}
+                    className="h-5 w-5 shrink-0 rounded bg-background/70"
+                  />
+                )}
                 {product.category?.name}
               </Link>
               {product.sub_category && (

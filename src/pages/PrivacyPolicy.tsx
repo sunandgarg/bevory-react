@@ -37,7 +37,7 @@ const PrivacyPolicy = () => (
       </li>
       <li>
         <strong>Policy acceptance records:</strong> the Terms and Privacy Policy version accepted, a server-recorded
-        acceptance time, the authentication channel used, and a bounded history of later renewed acceptances.
+        acceptance time, the authentication channel used, and a deduplicated history of policy-version acceptances.
       </li>
       <li>
         <strong>Google sign-in data:</strong> if you choose Google sign-in, the verified email, Google subject

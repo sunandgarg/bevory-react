@@ -35,10 +35,10 @@ const IntellectualPropertyPolicy = () => (
       users to suggest an affiliation that does not exist or use another party's mark as their own identity.
     </p>
     <p>
-      Category artwork may use a representative product silhouette or package so an adult user can recognise the type
-      of beverage. Label wording may be obscured, cropped, or blurred to reduce unnecessary brand display. This is a
-      visual classification device, not a statement that the depicted product is "best", "top", most popular, or
-      preferred, and not a claim that trade dress or image rights have ceased to exist.
+      BevOry's category-card artwork uses original, brand-neutral bottle designs created as visual classification
+      devices. It uses general category cues without copying a named label or displaying a brand name or logo. The
+      artwork is not a statement that any product is "best", "top", most popular, or preferred. Separate catalogue
+      product images and marks remain subject to their own provenance and third-party rights.
     </p>
 
     <h2>3. Images, videos, metadata, and public information</h2>

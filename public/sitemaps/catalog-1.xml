@@ -34,6 +34,24 @@
     <loc>https://bevory.in/disclaimer</loc>
   </url>
   <url>
+    <loc>https://bevory.in/cookie-policy</loc>
+  </url>
+  <url>
+    <loc>https://bevory.in/responsible-drinking</loc>
+  </url>
+  <url>
+    <loc>https://bevory.in/intellectual-property</loc>
+  </url>
+  <url>
+    <loc>https://bevory.in/community-guidelines</loc>
+  </url>
+  <url>
+    <loc>https://bevory.in/source-disclosure</loc>
+  </url>
+  <url>
+    <loc>https://bevory.in/grievance-redressal</loc>
+  </url>
+  <url>
     <loc>https://bevory.in/agra</loc>
     <lastmod>2026-09-19T13:17:06.285Z</lastmod>
   </url>
@@ -129928,48 +129946,6 @@
     <lastmod>2026-09-20T15:37:37.326Z</lastmod>
     <image:image>
       <image:loc>https://bevory.in/media/migrated-images/products/lc-product-4778226f12c0008405451100/3f4955a5682525d6b9e1.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/biker-deluxe</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-d30806ccf4d85437fca98020/f09c10b53b0a6ce5f20d.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/one-more</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-23503ef6dbfc0783da639077/1349de98f5337e1b59ed.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/captain-morgan</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-5000a5701f60dc6902ea709f/10b336b8bd1ab4380a64.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/fair</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-990f92abbbc382ec536ad51f/c19c7f72c3c9b3ef067d.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/ag-47</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-9a8af7d2fc0a449771a37d16/59e50d9cf6ea5a9206bd.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/gurgaon/brand/iconiq-white-whisky</loc>
-    <lastmod>2026-09-20T15:37:37.326Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-89d32918c963065c1d91337f/3de1b1aaebd37c800065.jpg</image:loc>
     </image:image>
   </url>
 </urlset>

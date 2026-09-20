@@ -16,6 +16,7 @@ import { useProductUrl } from "@/hooks/useProductUrl";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/lib/searchDemand";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import {
   Sheet,
   SheetContent,
@@ -279,12 +280,17 @@ const Search = () => {
                             key={cat.id}
                             onClick={() => handleCategoryChange(cat.slug)}
                             aria-pressed={selectedCategory === cat.slug}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                            className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-all ${
                               selectedCategory === cat.slug
                                 ? "bg-accent text-accent-foreground shadow-lg"
                                 : "bg-secondary text-foreground hover:bg-secondary/80"
                             }`}
                           >
+                            <CategoryBottleVisual
+                              slug={cat.slug}
+                              categoryName={cat.name}
+                              className="h-6 w-6 shrink-0 rounded-md bg-background/70"
+                            />
                             {cat.name}
                           </button>
                         ))}

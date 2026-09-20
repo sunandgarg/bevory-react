@@ -57,15 +57,16 @@ const SourceDisclosure = () => (
 
     <h2>4. Representative category imagery</h2>
     <p>
-      Category cards may show a recognisable bottle or package as a visual example of the category. The example is
-      <strong> representative, not ranked</strong>. Selection may reflect image suitability, recognisability of the
-      package shape, catalogue availability, and visual consistency. It does not state that the depicted product is
-      "best", "top", most popular, category-leading, recommended, or preferred over competitors.
+      Category cards use original, brand-neutral bottle artwork created for BevOry as a visual example of each
+      category. The examples use general category cues such as bottle form, glass colour, liquid colour, closure, and
+      packaging style, but do not reproduce a named product label or claim to depict a particular product. They are
+      <strong> representative, not ranked</strong>, and do not state that any product is "best", "top", most popular,
+      category-leading, recommended, or preferred over competitors.
     </p>
     <p>
-      Brand wording may be blurred, cropped, masked, or otherwise obscured while the overall package remains useful as
-      a category cue. That presentation does not remove third-party trademark, design, copyright, or image rights; nor
-      does it imply sponsorship. Rights concerns can be submitted under the notice-and-takedown process.
+      The category artwork contains no brand name or logo. Product and brand pages may separately contain third-party
+      product material subject to the provenance and rights qualifications in our IP policy. Rights concerns can be
+      submitted under the notice-and-takedown process.
     </p>
 
     <h2>5. Paid placement, sponsorship, and affiliate links</h2>
