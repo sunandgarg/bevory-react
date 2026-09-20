@@ -333,12 +333,6 @@ try {
       const path = `${cityPath}/brand/${brand.data.slug}`;
       const image = validImageUrl(brand.data.image_url || brand.data.logo_url);
       const brandDescription = shortText(brand.data.description || `Compare ${brandName} products with reviewed local prices in ${city.name}.`, 400);
-      const brandBody = [
-        brandDescription,
-        shortText(brand.data.story, 600),
-        shortText(brand.data.why_choose, 500),
-        shortText(brand.data.final_verdict, 500),
-      ].filter(Boolean);
       addRoute({
         path,
         lastmod: latestTimestamp(brand.data.updated_at, brandProducts.map((product) => product.data.updated_at)),
@@ -347,7 +341,7 @@ try {
         title: `${brandName} Prices in ${city.name} | BevOry`,
         description: `Explore ${brandName} bottle sizes and reviewed local price guidance in ${city.name}.`,
         heading: `${brandName} prices in ${city.name}`,
-        body: brandBody,
+        body: [brandDescription],
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
