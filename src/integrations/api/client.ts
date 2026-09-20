@@ -33,7 +33,7 @@ export const currentPolicyAcceptance = (): PolicyAcceptanceInput => ({
   privacyVersion: CURRENT_POLICY_VERSION,
 });
 
-type ApiError = { message: string };
+type ApiError = { message: string; status?: number };
 type ApiResult<T = unknown> = { data: T | null; error: ApiError | null; count?: number | null };
 type Filter = { column?: string; operator: string; value?: unknown; filters?: Filter[] };
 
@@ -57,7 +57,9 @@ const setSession = (session: Session | null, event: string) => {
 };
 
 const request = async <T>(path: string, init: RequestInit = {}): Promise<ApiResult<T>> => {
-  try {
+  const isRead = !init.method || init.method === "GET" || (path === "/query" && String(init.body).includes('"operation":"select"'));
+  const attempts = isRead ? 2 : 1;
+  for (let attempt = 0; attempt < attempts; attempt += 1) try {
     const headers = new Headers(init.headers);
     if (!(init.body instanceof FormData)) headers.set("Content-Type", "application/json");
     if (currentSession?.access_token) headers.set("Authorization", `Bearer ${currentSession.access_token}`);
@@ -65,12 +67,21 @@ const request = async <T>(path: string, init: RequestInit = {}): Promise<ApiResu
     const body = await response.json().catch(() => ({}));
     if (!response.ok) {
       const message = body?.error?.message || body?.error || `Request failed (${response.status})`;
-      return { data: body?.data ?? null, error: { message }, count: body?.count ?? null };
+      if (isRead && attempt === 0 && (response.status === 429 || response.status >= 500)) {
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        continue;
+      }
+      return { data: body?.data ?? null, error: { message, status: response.status }, count: body?.count ?? null };
     }
     return body as ApiResult<T>;
   } catch (error) {
+    if (isRead && attempt === 0) {
+      await new Promise((resolve) => setTimeout(resolve, 250));
+      continue;
+    }
     return { data: null, error: { message: error instanceof Error ? error.message : "Network request failed" } };
   }
+  return { data: null, error: { message: "Network request failed" } };
 };
 
 class QueryBuilder implements PromiseLike<ApiResult<any>> {

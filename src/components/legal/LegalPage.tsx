@@ -32,7 +32,7 @@ export const LegalContact = ({ purpose = "questions or notices" }: { purpose?: s
     <strong>BevOry Grievance Desk</strong><br />
     Email: <a href={`mailto:${LEGAL_EMAIL}`}>{LEGAL_EMAIL}</a><br />
     Phone: <a href={`tel:${LEGAL_PHONE_HREF}`}>{LEGAL_PHONE_DISPLAY}</a><br />
-    Location: Delhi, India
+    Location: Dwarka, Delhi
     <p className="mb-0 mt-3 text-xs text-muted-foreground">
       These are BevOry's current published operator-contact details for {purpose}. No separate legal-entity name or
       postal service address is represented on this page.

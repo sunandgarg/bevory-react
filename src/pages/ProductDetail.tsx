@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info } from "lucide-react";
+import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import MobileLayout from "@/components/layout/MobileLayout";
@@ -145,6 +145,8 @@ const ProductDetail = () => {
   const [volumePrices, setVolumePrices] = useState<VolumePrice[]>([]);
   const [selectedVolume, setSelectedVolume] = useState<string>("750ml");
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [unavailableVariant, setUnavailableVariant] = useState(false);
   const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
@@ -192,13 +194,15 @@ const ProductDetail = () => {
       if (!effectiveSlug) return;
 
       setLoading(true);
+      setLoadError(null);
+      setProduct(null);
       setUnavailableVariant(false);
       setVolumePrices([]);
 
       // Try to fetch by slug first, then by id for backwards compatibility
       let productData = null;
 
-      const { data: dataBySlug } = await apiClient
+      const { data: dataBySlug, error: slugError } = await apiClient
         .from("products")
         .select(
           `
@@ -215,7 +219,7 @@ const ProductDetail = () => {
         productData = dataBySlug;
       } else {
         // Fallback: try by ID for old links
-        const { data: dataById } = await apiClient
+        const { data: dataById, error: idError } = await apiClient
           .from("products")
           .select(
             `
@@ -228,6 +232,7 @@ const ProductDetail = () => {
           .eq("id", effectiveSlug)
           .maybeSingle();
         productData = dataById;
+        if (!dataById && (slugError || idError)) setLoadError(idError?.message || slugError?.message || "Unable to load this product");
       }
 
       if (!productData) {
@@ -325,7 +330,7 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [effectiveSlug, priceCityId, requestedVolume]);
+  }, [effectiveSlug, priceCityId, requestedVolume, loadAttempt]);
 
   const productPath = product ? generateProductUrl({
     citySlug: canonicalCitySlug,
@@ -648,11 +653,18 @@ const ProductDetail = () => {
     return (
       <MobileLayout showBack showLocation={false}>
         <div className="p-4 text-center py-12">
-          <div className="text-5xl mb-4">❓</div>
-          <h3 className="font-semibold">Product not found</h3>
-          <Link to="/search" className="text-accent mt-2 inline-block">
-            Browse products →
-          </Link>
+          <div className="text-5xl mb-4">{loadError ? "↻" : "❓"}</div>
+          <h3 className="font-semibold">{loadError ? "This product did not load" : "Product not found"}</h3>
+          {loadError ? (
+            <>
+              <p className="mt-2 text-sm text-muted-foreground">Your connection may have paused. The product is still available to retry.</p>
+              <Button className="mt-4" onClick={() => setLoadAttempt((attempt) => attempt + 1)}>
+                <RefreshCw className="mr-2 h-4 w-4" /> Retry
+              </Button>
+            </>
+          ) : (
+            <Link to="/search" className="text-accent mt-2 inline-block">Browse products →</Link>
+          )}
         </div>
       </MobileLayout>
     );
@@ -685,10 +697,10 @@ const ProductDetail = () => {
           )}
 
           {/* Origin badge */}
-          {product.origin && (
+          {(product.origin || product.origin_flag) && (
             <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-card/90 backdrop-blur-sm text-sm flex items-center gap-1">
               <span>{product.origin_flag}</span>
-              <span className="text-muted-foreground">{product.origin}</span>
+              {product.origin && <span className="text-muted-foreground">{product.origin}</span>}
             </div>
           )}
 
@@ -847,7 +859,7 @@ const ProductDetail = () => {
             </div>
             <div className="p-3 rounded-xl bg-secondary text-center">
               <p className="text-xs text-muted-foreground mb-1">Origin</p>
-              <p className="font-semibold">{product.origin || "Not verified"}</p>
+              <p className="font-semibold">{product.origin_flag && <span className="mr-1">{product.origin_flag}</span>}{product.origin || "Not verified"}</p>
             </div>
           </div>
 

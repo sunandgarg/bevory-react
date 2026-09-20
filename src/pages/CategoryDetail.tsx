@@ -15,6 +15,9 @@ import { apiClient } from "@/integrations/api/client";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
+import ProductImage from "@/components/product/ProductImage";
+
+const INITIAL_PRODUCT_COUNT = 24;
 
 interface SubCategory {
   id: string;
@@ -34,6 +37,7 @@ const CategoryDetail = () => {
   const { selectedCity, routeCityReady } = useRouteCity(citySlug);
   const { getProductUrlSafe } = useProductUrl();
   const [subCategories, setSubCategories] = useState<SubCategory[]>([]);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_PRODUCT_COUNT);
 
   const category = categories.find((c) => c.slug === slug);
   const allProducts = getProductsByCategory(slug || "");
@@ -65,6 +69,9 @@ const CategoryDetail = () => {
     if (!selectedSubCategory) return allProducts;
     return allProducts.filter((p: any) => p.sub_category_id === selectedSubCategory.id);
   }, [allProducts, selectedSubCategory]);
+
+  useEffect(() => setVisibleCount(INITIAL_PRODUCT_COUNT), [slug, subCategorySlug, canonicalCitySlug]);
+  const visibleProducts = products.slice(0, visibleCount);
 
   // Generate structured data for SEO
   const generateStructuredData = () => {
@@ -277,13 +284,8 @@ const CategoryDetail = () => {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  {products.map((product, index) => (
-                    <motion.article
-                      key={product.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.03 }}
-                    >
+                  {visibleProducts.map((product, index) => (
+                    <article key={product.id}>
                       <Link to={getProductUrlSafe(product)}>
                         <div className="bg-card rounded-2xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
                           {/* Action Buttons */}
@@ -293,20 +295,13 @@ const CategoryDetail = () => {
                           </div>
                           
                           {/* Product Image */}
-                          <div className="aspect-square bg-gradient-to-br from-muted/50 to-muted/30 flex items-center justify-center">
-                            {product.image_url ? (
-                              <img 
-                                src={product.image_url}
-                                alt={`${product.brand} ${product.name} bottle`}
-                                loading="lazy" decoding="async" width={400} height={400}
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <span className="text-6xl group-hover:scale-110 transition-transform">
-                                {product.image_emoji || "🥃"}
-                              </span>
-                            )}
-                          </div>
+                          <ProductImage
+                            src={product.image_url}
+                            alt={`${product.brand} ${product.name} bottle`}
+                            fallbackEmoji={product.image_emoji}
+                            priority={index < 4}
+                            className="aspect-square rounded-none"
+                          />
                           
                           {/* Product Info */}
                           <div className="p-3.5">
@@ -315,11 +310,14 @@ const CategoryDetail = () => {
                               {product.name}
                             </h3>
                             {/* Sub-Category Badge */}
-                            {product.sub_category && !selectedSubCategory && (
-                              <Badge variant="outline" className="text-[9px] px-1.5 py-0 mt-1 border-accent/30 text-accent">
-                                {product.sub_category.emoji} {product.sub_category.name}
-                              </Badge>
-                            )}
+                            <div className="mt-1 flex min-h-4 items-center gap-1.5">
+                              {product.sub_category && !selectedSubCategory && (
+                                <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-accent/30 text-accent">
+                                  {product.sub_category.emoji} {product.sub_category.name}
+                                </Badge>
+                              )}
+                              {product.origin_flag && <span className="text-sm" title={product.origin || "Origin"}>{product.origin_flag}</span>}
+                            </div>
                             
                             {/* Rating & Price */}
                             <div className="flex items-center justify-between mt-2.5">
@@ -336,9 +334,19 @@ const CategoryDetail = () => {
                           </div>
                         </div>
                       </Link>
-                    </motion.article>
+                    </article>
                   ))}
                 </div>
+                {visibleCount < products.length && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="mt-5 w-full"
+                    onClick={() => setVisibleCount((count) => Math.min(count + INITIAL_PRODUCT_COUNT, products.length))}
+                  >
+                    Show more products
+                  </Button>
+                )}
               </>
             )}
           </main>

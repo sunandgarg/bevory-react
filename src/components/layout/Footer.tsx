@@ -43,12 +43,13 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="mailto:bevory.main@gmail.com" className="text-xs text-muted-foreground hover:text-foreground transition-colors">bevory.main@gmail.com</a></li>
               <li><a href="tel:+918010321712" className="text-xs text-muted-foreground hover:text-foreground transition-colors">+91 8010321712</a></li>
-              <li><span className="text-xs text-muted-foreground">Delhi, India</span></li>
+              <li><span className="text-xs text-muted-foreground">Dwarka, Delhi</span></li>
             </ul>
           </div>
         </div>
 
         <div className="pt-4 border-t border-border/50">
+          <p className="mb-3 text-sm font-semibold text-accent">Drink Less. Drink Better. Drink Responsibly.</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <BrandingDisplay variant="footer" />

@@ -220,15 +220,13 @@ const Home = () => {
           </div>
         </div>
 
-        {/* ─── Trending ─── */}
-        <TrendingProducts />
-
         {/* ─── Brand Spotlight ─── */}
-        <DeferredSection>
-          <Suspense fallback={<SectionSkeleton />}>
-            <BrandSpotlight />
-          </Suspense>
-        </DeferredSection>
+        <Suspense fallback={<SectionSkeleton />}>
+          <BrandSpotlight />
+        </Suspense>
+
+        {/* ─── Favourites and Trending ─── */}
+        <TrendingProducts />
 
         {/* ─── Promotional Card ─── */}
         <div className="px-4">

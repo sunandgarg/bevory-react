@@ -82,7 +82,7 @@ const TrendingSection = () => {
             <div className="flex items-center gap-2 mb-3">
               <TrendingUp className="w-5 h-5 text-accent" />
               <span className="text-sm font-semibold text-accent uppercase tracking-wider">
-                The Pour Lineup
+                Featured Selection
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">

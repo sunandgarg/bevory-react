@@ -132,7 +132,30 @@ export const invalidateCatalogCache = () => {
   cityCatalogBuilds.clear();
 };
 
-const buildHomeCatalog = (catalog: ReturnType<typeof buildCityCatalog>) => {
+const toCatalogCard = (product: CatalogRow) => ({
+  id: product.id,
+  name: product.name,
+  slug: product.slug,
+  brand: product.brand,
+  brand_id: product.brand_id ?? null,
+  category_id: product.category_id ?? null,
+  sub_category_id: product.sub_category_id ?? null,
+  price: product.price ?? null,
+  mrp: product.mrp ?? null,
+  volume: product.volume ?? null,
+  rating: product.rating ?? null,
+  image_emoji: product.image_emoji ?? null,
+  image_url: product.image_url ?? null,
+  origin: product.origin ?? null,
+  origin_flag: product.origin_flag ?? null,
+  type_tag: product.type_tag ?? null,
+  is_trending: product.is_trending === true,
+  is_all_time_favourite: product.is_all_time_favourite === true,
+  category: product.category ?? null,
+  sub_category: product.sub_category ?? null,
+});
+
+export const buildHomeCatalog = (catalog: ReturnType<typeof buildCityCatalog>) => {
   const productsPerCategory = 8;
   const counts = new Map<string, number>();
   const categoryCounts = catalog.products.reduce<Record<string, number>>((result, product) => {
@@ -155,14 +178,18 @@ const buildHomeCatalog = (catalog: ReturnType<typeof buildCityCatalog>) => {
       return true;
     });
 
-  return { ...catalog, products, categoryCounts, brandNames };
+  return { ...catalog, products: products.map(toCatalogCard), categoryCounts, brandNames };
 };
 
-const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog>, categorySlug: string) => {
+export const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog>, categorySlug: string) => {
   const products = catalog.products.filter((product) => (
     String((product.category as CatalogRow | null)?.slug ?? "") === categorySlug
   ));
-  return { ...catalog, products, totalProducts: products.length };
+  return {
+    categories: catalog.categories.filter((category) => String(category.slug ?? "") === categorySlug),
+    products: products.map(toCatalogCard),
+    totalProducts: products.length,
+  };
 };
 
 const catalogCacheKey = (cityId: string, view: CatalogView, categorySlug = "") => (

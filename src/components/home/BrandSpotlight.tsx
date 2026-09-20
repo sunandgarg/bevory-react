@@ -59,7 +59,7 @@ const BrandSpotlight = memo(() => {
   return (
     <section className="px-4" aria-label="Featured Brand Spotlight">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-base font-semibold">Brands</h2>
+        <h2 className="text-base font-semibold">Brand Spotlight</h2>
         <Link
           to="/brands"
           className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-0.5 transition-colors"
@@ -68,16 +68,16 @@ const BrandSpotlight = memo(() => {
         </Link>
       </div>
 
-      <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4">
+      <div className="grid grid-rows-2 grid-flow-col auto-cols-[82px] gap-x-3 gap-y-4 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 snap-x snap-mandatory">
         {brands.map((brand) => (
-          <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group block w-[68px] flex-shrink-0">
-            <div className="w-[68px] h-[68px] rounded-2xl bg-secondary flex items-center justify-center text-2xl overflow-hidden group-hover:ring-2 group-hover:ring-accent/30 transition-all duration-150">
+          <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group block w-[82px] snap-start">
+            <div className="w-[82px] h-[82px] rounded-lg bg-secondary flex items-center justify-center text-2xl overflow-hidden border border-border/50 group-hover:border-accent/40 transition-colors">
               {brand.logo_url ? (
                 <OptimizedImage
                   src={brand.logo_url}
                   alt={`${brand.brand_name} logo`}
-                  width={68}
-                  height={68}
+                  width={164}
+                  height={164}
                   className="w-full h-full"
                   objectFit="contain"
                   placeholder="blur"
@@ -86,7 +86,7 @@ const BrandSpotlight = memo(() => {
                 <span>{brand.logo_emoji || "🏷️"}</span>
               )}
             </div>
-            <p className="text-[10px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate mt-1.5 transition-colors">
+            <p className="text-[11px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate mt-1.5 transition-colors">
               {brand.brand_name}
             </p>
           </Link>

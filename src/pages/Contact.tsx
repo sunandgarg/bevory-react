@@ -33,7 +33,7 @@ const Contact = () => (
           <div className="p-2.5 rounded-lg bg-primary/10"><MapPin className="h-5 w-5 text-primary" /></div>
           <div>
             <h3 className="font-semibold text-sm mb-1">Location</h3>
-            <p className="text-sm text-foreground">Delhi, India</p>
+            <p className="text-sm text-foreground">Dwarka, Delhi</p>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
 import { generateProductUrl } from "@/lib/productSlug";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
+import ProductImage from "@/components/product/ProductImage";
 
 interface Brand {
   id: string;
@@ -23,6 +24,7 @@ interface SearchProduct {
   brand: string;
   rating: number | null;
   image_emoji: string | null;
+  image_url: string | null;
   slug: string | null;
   category: { name: string; slug: string; emoji: string | null } | null;
 }
@@ -113,7 +115,7 @@ const UniversalSearch = memo(({
       }
       const { data, error } = await apiClient
         .from("products")
-        .select("id, name, brand, rating, image_emoji, slug, category:categories(name, slug, emoji)")
+        .select("id, name, brand, rating, image_emoji, image_url, slug, category:categories(name, slug, emoji)")
         .eq("is_active", true)
         .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
         .limit(30);
@@ -218,20 +220,34 @@ const UniversalSearch = memo(({
           <div
             className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-lg z-50 overflow-hidden max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-150"
           >
-            {/* Categories */}
-            {filteredCategories.length > 0 && (
+            {/* Products are shown first because they satisfy the most common search intent. */}
+            {searchResults.length > 0 && (
               <div className="p-2 border-b border-border">
-                <p className="text-xs text-muted-foreground px-2 py-1">Categories</p>
-                {filteredCategories.map((cat) => (
+                <p className="text-[11px] font-semibold uppercase text-muted-foreground px-2 py-1">Products</p>
+                {searchResults.map((product) => (
                   <Link
-                    key={cat.id}
-                    to={`/${citySlug}/category/${cat.slug}`}
+                    key={product.id}
+                    to={generateProductUrl({ citySlug, productSlug: product.slug || product.id })}
                     onClick={handleResultClick}
-                    className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
+                    className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
                   >
-                    <CategoryBottleVisual slug={cat.slug} categoryName={cat.name} className="h-8 w-8 shrink-0" />
-                    <span className="font-medium">{cat.name}</span>
-                    <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground" />
+                    <ProductImage
+                      src={product.image_url}
+                      alt={`${product.brand} ${product.name} bottle`}
+                      fallbackEmoji={product.image_emoji}
+                      className="h-11 w-11 shrink-0 rounded-md"
+                      width={88}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">{product.name}</p>
+                      <p className="text-xs text-muted-foreground truncate">{product.brand}</p>
+                    </div>
+                    {product.rating && (
+                      <div className="flex items-center gap-1 text-xs">
+                        <Star className="w-3 h-3 fill-accent text-accent" />
+                        {product.rating}
+                      </div>
+                    )}
                   </Link>
                 ))}
               </div>
@@ -240,7 +256,7 @@ const UniversalSearch = memo(({
             {/* Brands */}
             {filteredBrands.length > 0 && (
               <div className="p-2 border-b border-border">
-                <p className="text-xs text-muted-foreground px-2 py-1">Brands</p>
+                <p className="text-[11px] font-semibold uppercase text-muted-foreground px-2 py-1">Brands</p>
                 {filteredBrands.map((brand) => (
                   <Link
                     key={brand.id}
@@ -260,31 +276,20 @@ const UniversalSearch = memo(({
               </div>
             )}
 
-            {/* Products */}
-            {searchResults.length > 0 && (
+            {/* Categories */}
+            {filteredCategories.length > 0 && (
               <div className="p-2">
-                <p className="text-xs text-muted-foreground px-2 py-1">Products</p>
-                {searchResults.map((product) => (
+                <p className="text-[11px] font-semibold uppercase text-muted-foreground px-2 py-1">Categories</p>
+                {filteredCategories.map((cat) => (
                   <Link
-                    key={product.id}
-                    to={generateProductUrl({
-                      citySlug,
-                      productSlug: product.slug || product.id,
-                    })}
+                    key={cat.id}
+                    to={`/${citySlug}/category/${cat.slug}`}
                     onClick={handleResultClick}
-                    className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
+                    className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
                   >
-                    <span className="text-2xl">{product.image_emoji || "🥃"}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate">{product.name}</p>
-                      <p className="text-xs text-muted-foreground truncate">{product.brand}</p>
-                    </div>
-                    {product.rating && (
-                      <div className="flex items-center gap-1 text-xs">
-                        <Star className="w-3 h-3 fill-accent text-accent" />
-                        {product.rating}
-                      </div>
-                    )}
+                    <CategoryBottleVisual slug={cat.slug} categoryName={cat.name} className="h-8 w-8 shrink-0" />
+                    <span className="font-medium">{cat.name}</span>
+                    <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground" />
                   </Link>
                 ))}
               </div>

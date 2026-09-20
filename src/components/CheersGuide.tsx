@@ -31,6 +31,25 @@ interface CheersGuideProps {
   className?: string;
 }
 
+const DEFAULT_GUIDES: CheersGuideItem[] = [
+  ["goa-after-dark", "Goa After Dark", "Beach shacks, bass and a safe ride home", "/guides/goa-after-dark.jpg"],
+  ["tropical-splash", "Tropical Splash", "Poolside energy, water breaks included", "/guides/tropical-pool-party.jpg"],
+  ["rooftop-after-hours", "Rooftop After Hours", "City lights and a sharp house-party plan", "/guides/rooftop-after-hours.jpg"],
+  ["dancefloor-survival", "Dancefloor Survival", "Pace the night without losing the mood", "/guides/dancefloor-survival.jpg"],
+  ["sunrise-reset", "Sunrise Reset", "Food, hydration and the morning after", "/guides/sunrise-reset.jpg"],
+].map(([id, title, subtitle, image_url], index) => ({
+  id,
+  title,
+  subtitle,
+  image_url,
+  emoji: null,
+  link_url: "/guide",
+  link_type: "internal",
+  order_index: (index + 1) * 10,
+  is_active: true,
+  stories: [{ type: "image", url: image_url, duration: 6 }],
+}));
+
 const fetchGuides = async (): Promise<CheersGuideItem[]> => {
   const { data, error } = await apiClient
     .from("cheers_guides")
@@ -52,11 +71,12 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { data: guides = [], isLoading } = useQuery({
+  const { data: remoteGuides = [], isLoading } = useQuery({
     queryKey: ["cheers-guides"],
     queryFn: fetchGuides,
     staleTime: 10 * 60 * 1000,
   });
+  const guides = remoteGuides.length > 0 ? remoteGuides : DEFAULT_GUIDES;
 
   const selectedGuide = selectedGuideIndex !== null ? guides[selectedGuideIndex] : null;
   const stories = selectedGuide?.stories || [];
@@ -166,8 +186,6 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
       </div>
     );
   }
-
-  if (guides.length === 0) return null;
 
   return (
     <>

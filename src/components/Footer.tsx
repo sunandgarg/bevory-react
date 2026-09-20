@@ -51,7 +51,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-1.5">
               <MapPin className="h-3 w-3 text-primary-foreground/50" />
-              <span className="text-sm text-primary-foreground/70">Delhi, India</span>
+              <span className="text-sm text-primary-foreground/70">Dwarka, Delhi</span>
             </li>
             <li>
               <Link to="/contact" className="text-sm text-accent hover:underline">Contact Us →</Link>
@@ -62,6 +62,7 @@ const Footer = () => {
 
       {/* Disclaimers */}
       <div className="space-y-2 mb-6 pt-4 border-t border-primary-foreground/10">
+        <p className="text-sm font-semibold text-accent">Drink Less. Drink Better. Drink Responsibly.</p>
         <p className="text-xs text-primary-foreground/50">
           <strong className="text-primary-foreground/70">Pricing Notice:</strong> Prices come from publicly available sources and may vary. Please check with local retailers for the most accurate pricing.
         </p>

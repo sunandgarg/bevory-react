@@ -74,7 +74,7 @@ const ProductImage = memo(({
           width={width}
           height={height || width}
           loading={priority ? "eager" : "lazy"}
-          decoding={priority ? "sync" : "async"}
+          decoding="async"
           {...({ fetchpriority: priority ? "high" : "auto" } as any)}
           onLoad={() => setIsLoaded(true)}
           onError={() => setHasError(true)}

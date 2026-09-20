@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCityCatalog } from "./catalog.js";
+import { buildCategoryCatalog, buildCityCatalog, buildHomeCatalog } from "./catalog.js";
 
 describe("buildCityCatalog", () => {
   it("returns only active products with approved city prices", () => {
@@ -27,5 +27,21 @@ describe("buildCityCatalog", () => {
     });
     expect(result.products[0].available_variants).toHaveLength(2);
     expect(result.products[0]).not.toHaveProperty("source_urls");
+  });
+
+  it("uses lean card records for home and category views", () => {
+    const catalog = buildCityCatalog(
+      [{ product_id: "p1", price: 900, volume: "750ml", volume_ml: 750, price_available: true }],
+      [{ id: "p1", brand: "Antiquity", name: "Blue", category_id: "c1", is_active: true, taste_profile: ["oak"], abv: 42 }],
+      [{ id: "c1", name: "Whisky", slug: "whisky", is_active: true }],
+      [],
+    );
+
+    const home = buildHomeCatalog(catalog);
+    const category = buildCategoryCatalog(catalog, "whisky");
+    expect(home.products[0]).not.toHaveProperty("available_variants");
+    expect(home.products[0]).not.toHaveProperty("taste_profile");
+    expect(category.products[0]).not.toHaveProperty("abv");
+    expect(category.categories).toHaveLength(1);
   });
 });
