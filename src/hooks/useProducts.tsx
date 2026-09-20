@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { apiClient } from "@/integrations/api/client";
 import { useLocation } from "./useLocation";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 /* ===================== TYPES ===================== */
 
@@ -56,6 +56,7 @@ export interface Category {
 
 const EMPTY_CATEGORIES: Category[] = [];
 const EMPTY_PRODUCTS: Product[] = [];
+const PRODUCT_PAGE_SIZE = 20;
 
 /* ===================== FETCHERS ===================== */
 
@@ -71,14 +72,23 @@ const fetchCategories = async (): Promise<Category[]> => {
 
 type CatalogView = "full" | "home" | "category";
 
-const fetchCityCatalog = async (cityId: string, view: CatalogView, categorySlug?: string): Promise<{
+type CatalogPage = {
   categories: Category[];
   products: Product[];
   totalProducts: number;
   categoryCounts: Record<string, number>;
   brandNames: string[];
-}> => {
-  const { data, error } = await apiClient.catalog.getCity(cityId, view, categorySlug);
+  hasMore: boolean;
+  offset: number;
+};
+
+const fetchCityCatalog = async (
+  cityId: string,
+  view: CatalogView,
+  categorySlug?: string,
+  pagination?: { offset: number; limit: number },
+): Promise<CatalogPage> => {
+  const { data, error } = await apiClient.catalog.getCity(cityId, view, categorySlug, pagination);
   if (error) throw error;
   return {
     categories: (data?.categories ?? []) as Category[],
@@ -86,12 +96,19 @@ const fetchCityCatalog = async (cityId: string, view: CatalogView, categorySlug?
     totalProducts: Number(data?.totalProducts ?? 0),
     categoryCounts: data?.categoryCounts ?? {},
     brandNames: data?.brandNames ?? [],
+    hasMore: data?.hasMore === true,
+    offset: Number(data?.offset ?? 0),
   };
 };
 
 /* ===================== HOOK ===================== */
 
-export const useProducts = (enabled = true, view: CatalogView = "full", categorySlug?: string) => {
+export const useProducts = (
+  enabled = true,
+  view: CatalogView = "full",
+  categorySlug?: string,
+  progressive = false,
+) => {
   const { selectedCity } = useLocation();
 
   const { data: categoriesData } = useQuery({
@@ -101,14 +118,34 @@ export const useProducts = (enabled = true, view: CatalogView = "full", category
     enabled: enabled && !selectedCity?.id,
   });
 
-  const { data: catalogData, isLoading: loading } = useQuery({
+  const { data: catalogData, isLoading: queryLoading } = useQuery({
     queryKey: ["city-catalog", selectedCity?.id ?? "none", view, categorySlug ?? "all"],
     queryFn: () => fetchCityCatalog(selectedCity!.id, view, categorySlug),
     staleTime: 5 * 60 * 1000,
-    enabled: enabled && Boolean(selectedCity?.id) && (view !== "category" || Boolean(categorySlug)),
+    enabled: enabled && !progressive && Boolean(selectedCity?.id) && (view !== "category" || Boolean(categorySlug)),
   });
-  const categories = catalogData?.categories ?? categoriesData ?? EMPTY_CATEGORIES;
-  const productsRaw = catalogData?.products ?? EMPTY_PRODUCTS;
+
+  const infiniteCatalog = useInfiniteQuery({
+    queryKey: ["city-catalog-pages", selectedCity?.id ?? "none", view, categorySlug ?? "all", PRODUCT_PAGE_SIZE],
+    queryFn: ({ pageParam }) => fetchCityCatalog(selectedCity!.id, view, categorySlug, {
+      offset: pageParam,
+      limit: PRODUCT_PAGE_SIZE,
+    }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.hasMore
+      ? lastPage.offset + lastPage.products.length
+      : undefined,
+    staleTime: 5 * 60 * 1000,
+    enabled: enabled && progressive && view !== "home" && Boolean(selectedCity?.id)
+      && (view !== "category" || Boolean(categorySlug)),
+  });
+
+  const firstPage = infiniteCatalog.data?.pages[0];
+  const categories = firstPage?.categories ?? catalogData?.categories ?? categoriesData ?? EMPTY_CATEGORIES;
+  const productsRaw = progressive
+    ? infiniteCatalog.data?.pages.flatMap((page) => page.products) ?? EMPTY_PRODUCTS
+    : catalogData?.products ?? EMPTY_PRODUCTS;
+  const loading = progressive ? infiniteCatalog.isLoading : queryLoading;
 
   // Pre-index products by category slug for O(1) lookups
   const productsByCategorySlug = useMemo(() => {
@@ -136,10 +173,13 @@ export const useProducts = (enabled = true, view: CatalogView = "full", category
   return {
     products: productsRaw,
     categories,
-    totalProducts: catalogData?.totalProducts ?? productsRaw.length,
-    categoryCounts: catalogData?.categoryCounts ?? {},
-    brandNames: catalogData?.brandNames ?? [],
+    totalProducts: firstPage?.totalProducts ?? catalogData?.totalProducts ?? productsRaw.length,
+    categoryCounts: firstPage?.categoryCounts ?? catalogData?.categoryCounts ?? {},
+    brandNames: firstPage?.brandNames ?? catalogData?.brandNames ?? [],
     loading,
+    hasNextPage: infiniteCatalog.hasNextPage,
+    fetchNextPage: infiniteCatalog.fetchNextPage,
+    isFetchingNextPage: infiniteCatalog.isFetchingNextPage,
     getProductsByCategory,
     trendingProducts,
   };

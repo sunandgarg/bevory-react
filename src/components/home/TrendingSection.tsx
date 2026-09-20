@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const TrendingSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const { products, loading } = useProducts();
+  const { products, loading } = useProducts(true, "home");
   const { selectedCity } = useLocation();
 
   // Get trending products

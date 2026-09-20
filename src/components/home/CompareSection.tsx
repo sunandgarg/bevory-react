@@ -14,7 +14,7 @@ import { useCompare } from "@/components/home/CompareProducts";
 import { useLocation } from "@/hooks/useLocation";
 
 const CompareSection = () => {
-  const { products, loading: productsLoading } = useProducts();
+  const { products, loading: productsLoading } = useProducts(true, "home");
   const { compareProducts, addToCompare, removeFromCompare, clearCompare } = useCompare();
   const { selectedCity } = useLocation();
   const [showProductPicker, setShowProductPicker] = useState(false);

@@ -60,12 +60,16 @@ const GuideArticle = () => {
   const { data: guideProducts = [] } = useQuery({
     queryKey: ["demand-guide-products", demandGuide?.citySlug, demandGuide?.categorySlug],
     queryFn: async () => {
-      const { data, error } = await apiClient.catalog.getCity(cityRecordIdFromSlug(demandGuide!.citySlug!));
+      const { data, error } = await apiClient.catalog.getCity(
+        cityRecordIdFromSlug(demandGuide!.citySlug!),
+        "category",
+        demandGuide!.categorySlug!,
+        { offset: 0, limit: 20 },
+      );
       if (error) throw error;
       return ((data?.products ?? []) as Array<Record<string, any>>)
-        .filter((product) => product.category?.slug === demandGuide?.categorySlug)
         .sort((left, right) => Number(left.price || Number.MAX_SAFE_INTEGER) - Number(right.price || Number.MAX_SAFE_INTEGER))
-        .slice(0, 24);
+        .slice(0, 20);
     },
     enabled: Boolean(demandGuide?.citySlug && demandGuide?.categorySlug),
     staleTime: 5 * 60 * 1000,

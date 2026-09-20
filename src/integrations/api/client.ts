@@ -346,15 +346,19 @@ const functions = {
 };
 
 const catalog = {
-  getCity(cityId: string, view: "full" | "home" | "category" = "full", categorySlug?: string) {
+  getCity(cityId: string, view: "full" | "home" | "category" = "full", categorySlug?: string, pagination?: { offset: number; limit: number }) {
     const category = categorySlug ? `&category=${encodeURIComponent(categorySlug)}` : "";
+    const page = pagination ? `&offset=${pagination.offset}&limit=${pagination.limit}` : "";
     return request<{
       categories: Array<Record<string, unknown>>;
       products: Array<Record<string, unknown>>;
       totalProducts: number;
       categoryCounts?: Record<string, number>;
       brandNames?: string[];
-    }>(`/catalog/${encodeURIComponent(cityId)}?view=${view}${category}`);
+      hasMore?: boolean;
+      offset?: number;
+      limit?: number;
+    }>(`/catalog/${encodeURIComponent(cityId)}?view=${view}${category}${page}`);
   },
 };
 

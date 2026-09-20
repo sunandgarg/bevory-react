@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, ArrowLeft, Package } from "lucide-react";
@@ -16,8 +16,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
-
-const INITIAL_PRODUCT_COUNT = 24;
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
 interface SubCategory {
   id: string;
@@ -33,11 +32,17 @@ const CategoryDetail = () => {
     slug: string;
     subCategorySlug?: string;
   }>();
-  const { categories, getProductsByCategory, loading } = useProducts(true, "category", slug);
+  const {
+    categories,
+    getProductsByCategory,
+    loading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useProducts(true, "category", slug, true);
   const { selectedCity, routeCityReady } = useRouteCity(citySlug);
   const { getProductUrlSafe } = useProductUrl();
   const [subCategories, setSubCategories] = useState<SubCategory[]>([]);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_PRODUCT_COUNT);
 
   const category = categories.find((c) => c.slug === slug);
   const allProducts = getProductsByCategory(slug || "");
@@ -70,8 +75,16 @@ const CategoryDetail = () => {
     return allProducts.filter((p: any) => p.sub_category_id === selectedSubCategory.id);
   }, [allProducts, selectedSubCategory]);
 
-  useEffect(() => setVisibleCount(INITIAL_PRODUCT_COUNT), [slug, subCategorySlug, canonicalCitySlug]);
-  const visibleProducts = products.slice(0, visibleCount);
+  const loadNextPage = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) void fetchNextPage();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  const loadMoreRef = useInfiniteScroll(loadNextPage, Boolean(hasNextPage) && !isFetchingNextPage);
+
+  useEffect(() => {
+    if (selectedSubCategory && products.length < 8 && hasNextPage && !isFetchingNextPage) {
+      void fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, products.length, selectedSubCategory]);
 
   // Generate structured data for SEO
   const generateStructuredData = () => {
@@ -284,8 +297,11 @@ const CategoryDetail = () => {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  {visibleProducts.map((product, index) => (
-                    <article key={product.id}>
+                  {products.map((product, index) => (
+                    <article
+                      key={product.id}
+                      ref={index === products.length - 5 ? loadMoreRef : undefined}
+                    >
                       <Link to={getProductUrlSafe(product)}>
                         <div className="bg-card rounded-2xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
                           {/* Action Buttons */}
@@ -337,15 +353,11 @@ const CategoryDetail = () => {
                     </article>
                   ))}
                 </div>
-                {visibleCount < products.length && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="mt-5 w-full"
-                    onClick={() => setVisibleCount((count) => Math.min(count + INITIAL_PRODUCT_COUNT, products.length))}
-                  >
-                    Show more products
-                  </Button>
+                {isFetchingNextPage && (
+                  <div className="mt-5 grid grid-cols-2 gap-3" aria-label="Loading more products">
+                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
+                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
+                  </div>
                 )}
               </>
             )}

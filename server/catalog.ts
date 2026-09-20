@@ -192,6 +192,18 @@ export const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog
   };
 };
 
+export const paginateCatalog = <T extends { products: CatalogRow[]; totalProducts: number }>(
+  payload: T,
+  offset: number,
+  limit: number,
+) => ({
+  ...payload,
+  products: payload.products.slice(offset, offset + limit),
+  offset,
+  limit,
+  hasMore: offset + limit < payload.totalProducts,
+});
+
 const catalogCacheKey = (cityId: string, view: CatalogView, categorySlug = "") => (
   view === "category" ? `${cityId}:category:${categorySlug}` : `${cityId}:${view}`
 );
@@ -282,6 +294,11 @@ export const cityCatalogHandler = async (req: Request, res: Response) => {
   const requestedView = String(req.query.view ?? "full");
   const categorySlug = String(req.query.category ?? "").trim().toLowerCase();
   const view: CatalogView = requestedView === "home" ? "home" : requestedView === "category" && categorySlug ? "category" : "full";
+  const requestedLimit = Number(req.query.limit);
+  const requestedOffset = Number(req.query.offset);
+  const paginated = Number.isInteger(requestedLimit) && requestedLimit > 0;
+  const limit = paginated ? Math.min(requestedLimit, 50) : 0;
+  const offset = Number.isInteger(requestedOffset) && requestedOffset > 0 ? requestedOffset : 0;
   if (!cityId || cityId.length > 191 || !/^[a-zA-Z0-9_-]+$/.test(cityId)) {
     return res.status(400).json({ data: null, error: { message: "A valid city is required" } });
   }
@@ -291,8 +308,11 @@ export const cityCatalogHandler = async (req: Request, res: Response) => {
 
   try {
     const payload = await getCatalogPayload(cityId, view, categorySlug);
+    const responsePayload = paginated && view !== "home"
+      ? paginateCatalog(payload, offset, limit)
+      : payload;
     res.set("Cache-Control", PUBLIC_CACHE_CONTROL);
-    return res.json({ data: payload, error: null });
+    return res.json({ data: responsePayload, error: null });
   } catch (error) {
     return res.status(500).json({
       data: null,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCategoryCatalog, buildCityCatalog, buildHomeCatalog } from "./catalog.js";
+import { buildCategoryCatalog, buildCityCatalog, buildHomeCatalog, paginateCatalog } from "./catalog.js";
 
 describe("buildCityCatalog", () => {
   it("returns only active products with approved city prices", () => {
@@ -43,5 +43,17 @@ describe("buildCityCatalog", () => {
     expect(home.products[0]).not.toHaveProperty("taste_profile");
     expect(category.products[0]).not.toHaveProperty("abv");
     expect(category.categories).toHaveLength(1);
+  });
+
+  it("returns deterministic 20-product pages with a continuation signal", () => {
+    const products = Array.from({ length: 45 }, (_, index) => ({ id: `p${index + 1}` }));
+    const firstPage = paginateCatalog({ products, totalProducts: products.length }, 0, 20);
+    const lastPage = paginateCatalog({ products, totalProducts: products.length }, 40, 20);
+
+    expect(firstPage.products).toHaveLength(20);
+    expect(firstPage.products[15]).toEqual({ id: "p16" });
+    expect(firstPage.hasMore).toBe(true);
+    expect(lastPage.products).toHaveLength(5);
+    expect(lastPage.hasMore).toBe(false);
   });
 });

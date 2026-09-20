@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { Search as SearchIcon, SlidersHorizontal, X, Star, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
@@ -13,13 +13,14 @@ import CompareButton from "@/components/product/CompareButton";
 import FavoriteButton from "@/components/FavoriteButton";
 import SEOHead from "@/components/SEOHead";
 import { useProductUrl } from "@/hooks/useProductUrl";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/lib/searchDemand";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
-const INITIAL_PRODUCT_COUNT = 24;
+const PRODUCT_PAGE_SIZE = 20;
 import {
   Sheet,
   SheetContent,
@@ -36,7 +37,7 @@ const Search = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(() => searchParams.get("category"));
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [minRating, setMinRating] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_PRODUCT_COUNT);
+  const [visibleCount, setVisibleCount] = useState(PRODUCT_PAGE_SIZE);
   const [sortBy, setSortBy] = useState<"rating" | "price_asc" | "price_desc" | "name">(() => {
     const requestedSort = searchParams.get("sort");
     return requestedSort === "price_asc" || requestedSort === "price_desc" || requestedSort === "name"
@@ -44,7 +45,14 @@ const Search = () => {
       : "rating";
   });
 
-  const { products, categories, loading } = useProducts();
+  const {
+    products,
+    categories,
+    loading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useProducts(true, "full", undefined, true);
   const { selectedCity } = useLocation();
   const { getProductUrlSafe } = useProductUrl();
   const trendingOnly = searchParams.get("sort") === "trending" || searchParams.get("trending") === "true";
@@ -55,9 +63,9 @@ const Search = () => {
     return () => window.clearTimeout(timer);
   }, [query]);
 
-  const { data: globalMatches = [], isFetching: globalSearchLoading } = useQuery({
+  const globalSearch = useInfiniteQuery({
     queryKey: ["global-product-search", searchIntent.text, searchIntent.volumeMl],
-    queryFn: async () => {
+    queryFn: async ({ pageParam }) => {
       const lookup = searchIntent.lookupTerm.replace(/[%,]/g, "");
       const { data, error } = await apiClient
         .from("products")
@@ -70,13 +78,29 @@ const Search = () => {
         `)
         .eq("is_active", true)
         .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
-        .limit(250);
+        .range(pageParam, pageParam + PRODUCT_PAGE_SIZE - 1);
       if (error) throw error;
-      return ((data ?? []) as Product[]).filter((product) => productMatchesIntent(product, searchIntent));
+      const pageProducts = (data ?? []) as Product[];
+      return {
+        products: pageProducts.filter((product) => productMatchesIntent(product, searchIntent)),
+        nextOffset: pageProducts.length === PRODUCT_PAGE_SIZE ? pageParam + PRODUCT_PAGE_SIZE : undefined,
+      };
     },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextOffset,
     enabled: searchIntent.lookupTerm.length >= 2,
     staleTime: 10 * 60 * 1000,
   });
+  const globalMatches = useMemo(
+    () => globalSearch.data?.pages.flatMap((page) => page.products) ?? [],
+    [globalSearch.data],
+  );
+  const globalSearchLoading = globalSearch.isLoading;
+  const {
+    hasNextPage: hasNextSearchPage,
+    fetchNextPage: fetchNextSearchPage,
+    isFetchingNextPage: isFetchingNextSearchPage,
+  } = globalSearch;
 
   const searchableProducts = useMemo(() => {
     if (!debouncedQuery.trim()) return products;
@@ -172,8 +196,41 @@ const Search = () => {
     return result;
   }, [searchableProducts, debouncedQuery, searchIntent, selectedCategory, priceRange, minRating, sortBy, trendingOnly]);
 
-  useEffect(() => setVisibleCount(INITIAL_PRODUCT_COUNT), [debouncedQuery, selectedCategory, priceRange, minRating, sortBy, selectedCity?.id]);
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
+  useEffect(() => setVisibleCount(PRODUCT_PAGE_SIZE), [debouncedQuery, selectedCategory, priceRange, minRating, sortBy, selectedCity?.id]);
+  const visibleProducts = debouncedQuery
+    ? filteredProducts.slice(0, visibleCount)
+    : filteredProducts;
+  const canRevealSearchResults = Boolean(debouncedQuery) && visibleCount < filteredProducts.length;
+  const canFetchCatalog = !debouncedQuery && Boolean(hasNextPage);
+  const canFetchSearch = Boolean(debouncedQuery) && Boolean(hasNextSearchPage);
+  const loadNextPage = useCallback(() => {
+    if (canRevealSearchResults) {
+      setVisibleCount((count) => Math.min(count + PRODUCT_PAGE_SIZE, filteredProducts.length));
+    } else if (canFetchSearch && !isFetchingNextSearchPage) {
+      void fetchNextSearchPage();
+    } else if (canFetchCatalog && !isFetchingNextPage) {
+      void fetchNextPage();
+    }
+  }, [canFetchCatalog, canFetchSearch, canRevealSearchResults, fetchNextPage, fetchNextSearchPage, filteredProducts.length, isFetchingNextPage, isFetchingNextSearchPage]);
+  const loadMoreRef = useInfiniteScroll(
+    loadNextPage,
+    (canRevealSearchResults || canFetchCatalog || canFetchSearch)
+      && !isFetchingNextPage
+      && !isFetchingNextSearchPage,
+  );
+
+  useEffect(() => {
+    if (debouncedQuery && filteredProducts.length < 8 && hasNextSearchPage && !isFetchingNextSearchPage) {
+      void fetchNextSearchPage();
+    }
+  }, [debouncedQuery, fetchNextSearchPage, filteredProducts.length, hasNextSearchPage, isFetchingNextSearchPage]);
+
+  useEffect(() => {
+    const filteringCatalog = Boolean(selectedCategory || trendingOnly || minRating > 0 || priceRange[0] > 0 || priceRange[1] < 50000);
+    if (!debouncedQuery && filteringCatalog && filteredProducts.length < 8 && hasNextPage && !isFetchingNextPage) {
+      void fetchNextPage();
+    }
+  }, [debouncedQuery, fetchNextPage, filteredProducts.length, hasNextPage, isFetchingNextPage, minRating, priceRange, selectedCategory, trendingOnly]);
 
   const clearFilters = () => {
     setSelectedCategory(null);
@@ -466,7 +523,10 @@ const Search = () => {
               <>
                 <div className="grid grid-cols-2 gap-3">
                   {visibleProducts.map((product, index) => (
-                    <article key={product.id}>
+                    <article
+                      key={product.id}
+                      ref={index === visibleProducts.length - 5 ? loadMoreRef : undefined}
+                    >
                       <Link to={getProductUrlSafe(product)}>
                         <div className="bg-card rounded-2xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
                           {/* Action Buttons */}
@@ -532,15 +592,11 @@ const Search = () => {
                     </article>
                   ))}
                 </div>
-                {visibleCount < filteredProducts.length && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="mt-5 w-full"
-                    onClick={() => setVisibleCount((count) => Math.min(count + INITIAL_PRODUCT_COUNT, filteredProducts.length))}
-                  >
-                    Show more products
-                  </Button>
+                {(isFetchingNextPage || isFetchingNextSearchPage) && (
+                  <div className="mt-5 grid grid-cols-2 gap-3" aria-label="Loading more products">
+                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
+                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
+                  </div>
                 )}
               </>
             )}

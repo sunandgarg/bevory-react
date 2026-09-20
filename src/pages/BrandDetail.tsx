@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, ExternalLink, ChevronRight, Wine, Utensils, Sparkles, HelpCircle, Award, BookOpen } from "lucide-react";
@@ -19,6 +19,11 @@ import {
 } from "@/components/ui/accordion";
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
+import ProductImage from "@/components/product/ProductImage";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { useInfiniteQuery } from "@tanstack/react-query";
+
+const PRODUCT_PAGE_SIZE = 20;
 
 interface Brand {
   id: string;
@@ -49,6 +54,7 @@ interface Product {
   slug: string | null;
   brand: string;
   image_emoji: string | null;
+  image_url: string | null;
   rating: number | null;
   review_count: number | null;
   volume: string | null;
@@ -96,8 +102,7 @@ const BrandDetail = () => {
   const { slug, citySlug } = useParams<{ slug: string; citySlug?: string }>();
   const { selectedCity, routeCityReady } = useRouteCity(citySlug);
   const [brand, setBrand] = useState<Brand | null>(null);
-  const [products, setProducts] = useState<ProductWithPrice[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [brandLoading, setBrandLoading] = useState(true);
   const canonicalCitySlug = citySlug || citySlugFromName(selectedCity?.name) || "gurgaon";
 
   useEffect(() => {
@@ -126,61 +131,69 @@ const BrandDetail = () => {
       if (brandData) {
         setBrand(brandData);
 
-        const { data: productsData } = await apiClient
-          .from("products")
-          .select(`
-            id, name, slug, brand, image_emoji, rating, review_count, volume, abv,
-            category:categories(name, slug, emoji),
-            sub_category:sub_categories(name, slug)
-          `)
-          .eq("brand_id", brandData.id)
-          .eq("is_active", true)
-          .order("is_trending", { ascending: false });
-
-        if (productsData && selectedCity?.id) {
-          const productIds = productsData.map(p => p.id);
-          const pricesMap = new Map<string, Array<{ price: number; volume_ml: number | null }>>();
-
-          if (productIds.length > 0) {
-            const { data: pricesData } = await apiClient
-              .from("product_prices")
-              .select("product_id, price, volume_ml")
-              .eq("city_id", selectedCity.id)
-              .eq("price_available", true)
-              .neq("requires_review", true)
-              .in("product_id", productIds);
-
-            if (pricesData) {
-              pricesData.forEach((price) => {
-                const variants = pricesMap.get(price.product_id) ?? [];
-                variants.push({ price: Number(price.price), volume_ml: price.volume_ml ?? null });
-                pricesMap.set(price.product_id, variants);
-              });
-            }
-          }
-
-          setProducts(
-            productsData
-              .map((product) => {
-                const prices = (pricesMap.get(product.id) ?? []).sort((left, right) => {
-                  const leftPreferred = left.volume_ml === 750 ? 1 : 0;
-                  const rightPreferred = right.volume_ml === 750 ? 1 : 0;
-                  return rightPreferred - leftPreferred || (right.volume_ml ?? 0) - (left.volume_ml ?? 0);
-                });
-                return { ...product, price: prices[0]?.price ?? null };
-              })
-              .slice(0, 20)
-          );
-        } else {
-          setProducts([]);
-        }
       }
 
-      setLoading(false);
+      setBrandLoading(false);
     };
 
     fetchBrandData();
   }, [routeCityReady, slug, selectedCity?.id]);
+
+  const productPages = useInfiniteQuery({
+    queryKey: ["brand-products", brand?.id ?? "none", selectedCity?.id ?? "none", PRODUCT_PAGE_SIZE],
+    queryFn: async ({ pageParam }): Promise<{ products: ProductWithPrice[]; nextOffset?: number }> => {
+      const { data: productsData, error } = await apiClient
+        .from("products")
+        .select(`
+          id, name, slug, brand, image_emoji, image_url, rating, review_count, volume, abv,
+          category:categories(name, slug, emoji),
+          sub_category:sub_categories(name, slug)
+        `)
+        .eq("brand_id", brand!.id)
+        .eq("is_active", true)
+        .order("is_trending", { ascending: false })
+        .range(pageParam, pageParam + PRODUCT_PAGE_SIZE - 1);
+      if (error) throw error;
+
+      const pageProducts = (productsData ?? []) as Product[];
+      const pricesMap = new Map<string, Array<{ price: number; volume_ml: number | null }>>();
+      if (pageProducts.length > 0 && selectedCity?.id) {
+        const { data: pricesData } = await apiClient
+          .from("product_prices")
+          .select("product_id, price, volume_ml")
+          .eq("city_id", selectedCity.id)
+          .eq("price_available", true)
+          .neq("requires_review", true)
+          .in("product_id", pageProducts.map((product) => product.id));
+        (pricesData ?? []).forEach((price) => {
+          const variants = pricesMap.get(price.product_id) ?? [];
+          variants.push({ price: Number(price.price), volume_ml: price.volume_ml ?? null });
+          pricesMap.set(price.product_id, variants);
+        });
+      }
+
+      const products = pageProducts.map((product) => {
+        const prices = (pricesMap.get(product.id) ?? []).sort((left, right) => {
+          const leftPreferred = left.volume_ml === 750 ? 1 : 0;
+          const rightPreferred = right.volume_ml === 750 ? 1 : 0;
+          return rightPreferred - leftPreferred || (right.volume_ml ?? 0) - (left.volume_ml ?? 0);
+        });
+        return { ...product, price: prices[0]?.price ?? null };
+      });
+      return { products, nextOffset: products.length === PRODUCT_PAGE_SIZE ? pageParam + PRODUCT_PAGE_SIZE : undefined };
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextOffset,
+    enabled: Boolean(brand?.id && selectedCity?.id),
+    staleTime: 5 * 60 * 1000,
+  });
+  const products = productPages.data?.pages.flatMap((page) => page.products) ?? [];
+  const loading = brandLoading || (Boolean(brand) && productPages.isLoading);
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = productPages;
+  const loadNextPage = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) void fetchNextPage();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  const loadMoreRef = useInfiniteScroll(loadNextPage, Boolean(hasNextPage) && !isFetchingNextPage);
 
   // Parse tasting notes
   const parseTastingNotes = (): TastingNote[] => {
@@ -713,17 +726,20 @@ const BrandDetail = () => {
             {products.length > 0 ? (
               <div className="px-4 space-y-2">
                 {products.map((product, index) => (
-                  <motion.div
+                  <div
                     key={product.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.38 + index * 0.02 }}
+                    ref={index === products.length - 5 ? loadMoreRef : undefined}
                   >
                     <Link to={generateProductUrlStatic(product, selectedCity?.name)}>
                       <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 hover:bg-secondary border border-border/50 transition-all group">
-                        <div className="w-16 h-16 rounded-xl bg-background flex items-center justify-center text-3xl flex-shrink-0 shadow-sm border border-border/50">
-                          {product.image_emoji || "🥃"}
-                        </div>
+                        <ProductImage
+                          src={product.image_url}
+                          alt={`${product.brand} ${product.name} bottle`}
+                          fallbackEmoji={product.image_emoji}
+                          priority={index < 3}
+                          className="h-16 w-16 flex-shrink-0 rounded-lg border border-border/50"
+                          width={128}
+                        />
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-sm line-clamp-1 group-hover:text-accent transition-colors">
                             {product.name}
@@ -763,8 +779,14 @@ const BrandDetail = () => {
                         <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0 group-hover:text-accent transition-colors" />
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 ))}
+                {productPages.isFetchingNextPage && (
+                  <div className="space-y-2" aria-label="Loading more products">
+                    <div className="h-24 animate-pulse rounded-xl bg-muted" />
+                    <div className="h-24 animate-pulse rounded-xl bg-muted" />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="px-4 py-12 text-center">
