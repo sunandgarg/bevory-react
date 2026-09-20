@@ -22,6 +22,7 @@
     "images:migrate": "tsx scripts/migrate-images-to-s3.ts",
     "images:audit": "tsx scripts/audit-first-party-images.ts",
     "blog:repair": "tsx scripts/repair-blog-import.ts",
+    "brands:enrich": "tsx scripts/enrich-brand-content.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts",
     "sitemap:prune": "tsx scripts/prune-sitemap.ts",
     "sitemap:audit": "tsx scripts/audit-sitemap.ts",

@@ -37,6 +37,9 @@ interface Brand {
   why_choose: string | null;
   faqs: unknown;
   final_verdict: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  updated_at?: string | null;
 }
 
 interface Product {
@@ -264,16 +267,48 @@ const BrandDetail = () => {
   // Generate structured data for SEO
   const generateStructuredData = () => {
     if (!brand) return null;
-    
+
+    const canonicalUrl = `https://bevory.in/${canonicalCitySlug}/brand/${brand.slug || slug}`;
     return {
       "@context": "https://schema.org",
-      "@type": "Brand",
-      "name": brand.brand_name,
-      "description": brand.description || `Discover ${brand.brand_name} - premium spirits and beverages`,
-      "url": window.location.href,
-      "image": brand.image_url || brand.logo_url,
-      "logo": brand.logo_url,
-      ...(brand.country && { "foundingLocation": { "@type": "Country", "name": brand.country } }),
+      "@graph": [
+        {
+          "@type": "Brand",
+          "@id": `${canonicalUrl}#brand`,
+          "name": brand.brand_name,
+          "description": brand.description || `Explore ${brand.brand_name} products and known bottle sizes.`,
+          "url": canonicalUrl,
+          ...(brand.image_url && { "image": brand.image_url }),
+          ...(brand.logo_url && { "logo": brand.logo_url }),
+          ...(brand.country && { "foundingLocation": { "@type": "Country", "name": brand.country } }),
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": `${canonicalUrl}#page`,
+          "url": canonicalUrl,
+          "name": brand.meta_title || `${brand.brand_name} products and prices`,
+          "description": brand.meta_description || brand.description,
+          "about": { "@id": `${canonicalUrl}#brand` },
+          ...(brand.updated_at && { "dateModified": brand.updated_at }),
+        },
+        ...(faqs.length > 0 ? [{
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          "mainEntity": faqs.filter((faq) => faq.question && faq.answer).map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+          })),
+        }] : []),
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bevory.in/" },
+            { "@type": "ListItem", "position": 2, "name": selectedCity?.name || "Gurgaon", "item": `https://bevory.in/${canonicalCitySlug}` },
+            { "@type": "ListItem", "position": 3, "name": brand.brand_name, "item": canonicalUrl },
+          ],
+        },
+      ],
     };
   };
 
@@ -313,8 +348,8 @@ const BrandDetail = () => {
   return (
     <>
       <SEOHead
-        title={`${brand.brand_name} Prices in ${selectedCity?.name || "Gurgaon"} | BevOry`}
-        description={brand.description || `Explore ${brand.brand_name} products and bottle sizes in ${selectedCity?.name || "Gurgaon"}, with local prices shown where verified.`}
+        title={brand.meta_title || `${brand.brand_name} Prices in ${selectedCity?.name || "Gurgaon"} | BevOry`}
+        description={brand.meta_description || brand.description || `Explore ${brand.brand_name} products and bottle sizes in ${selectedCity?.name || "Gurgaon"}, with local prices shown where verified.`}
         keywords={`${brand.brand_name}, ${brand.country || ''} spirits, whisky, premium beverages, tasting notes, food pairing`}
         canonical={`/${canonicalCitySlug}/brand/${brand.slug || slug}`}
         ogImage={brand.image_url || brand.logo_url || undefined}
@@ -413,7 +448,7 @@ const BrandDetail = () => {
               <div className="p-5 rounded-xl bg-secondary/50 border border-border">
                 <h3 className="font-serif font-semibold text-lg mb-3 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-amber-500" />
-                  Our Story
+                  The {brand.brand_name} Range
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {brand.story}

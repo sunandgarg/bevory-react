@@ -331,23 +331,37 @@ try {
       const brandProducts = cityProducts.filter((product) => String(product.data.brand_id ?? "") === brandId);
       const brandName = String(brand.data.brand_name || "Brand");
       const path = `${cityPath}/brand/${brand.data.slug}`;
-      const image = validImageUrl(brand.data.logo_url || brand.data.image_url);
+      const image = validImageUrl(brand.data.image_url || brand.data.logo_url);
+      const brandDescription = shortText(brand.data.description || `Compare ${brandName} products with reviewed local prices in ${city.name}.`, 400);
+      const brandBody = [
+        brandDescription,
+        shortText(brand.data.story, 600),
+        shortText(brand.data.why_choose, 500),
+        shortText(brand.data.final_verdict, 500),
+      ].filter(Boolean);
       addRoute({
         path,
         lastmod: latestTimestamp(brand.data.updated_at, brandProducts.map((product) => product.data.updated_at)),
-        images: image ? [{ loc: image, title: `${brandName} logo` }] : [],
+        images: image ? [{ loc: image, title: `${brandName} products` }] : [],
       }, {
         title: `${brandName} Prices in ${city.name} | BevOry`,
         description: `Explore ${brandName} bottle sizes and reviewed local price guidance in ${city.name}.`,
         heading: `${brandName} prices in ${city.name}`,
-        body: [shortText(brand.data.description || `Compare ${brandName} products with reviewed local prices in ${city.name}.`, 300)],
+        body: brandBody,
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
           { name: city.name, path: cityPath },
           { name: brandName, path },
         ],
-        structuredData: { "@type": "Brand", name: brandName, url: `${origin}${path}`, ...(image ? { logo: image } : {}) },
+        structuredData: {
+          "@type": "Brand",
+          name: brandName,
+          description: brandDescription,
+          url: `${origin}${path}`,
+          ...(brand.data.logo_url ? { logo: brand.data.logo_url } : {}),
+          ...(image ? { image } : {}),
+        },
       });
     }
   }

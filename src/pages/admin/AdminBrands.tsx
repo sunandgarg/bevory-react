@@ -251,7 +251,7 @@ const AdminBrands = () => {
 
   const csvOps = useCsvOperations<Brand>({
     tableName: "brand_spotlights",
-    columns: ["id", "brand_name", "logo_emoji", "logo_url", "image_url", "description", "link_url", "country", "story", "why_choose", "final_verdict", "is_active", "order_index", "tasting_notes", "how_to_enjoy", "pairing_ideas", "faqs"],
+    columns: ["id", "slug", "brand_name", "logo_emoji", "logo_url", "image_url", "description", "link_url", "country", "story", "why_choose", "final_verdict", "is_active", "show_in_spotlight", "order_index", "tasting_notes", "how_to_enjoy", "pairing_ideas", "faqs", "meta_title", "meta_description"],
     excludeColumns: ["id"],
     formatRow: (row) => ({
       ...Object.fromEntries(Object.entries(row).map(([k, v]) => [k, v === null ? "" : typeof v === "object" ? JSON.stringify(v) : String(v)])),
