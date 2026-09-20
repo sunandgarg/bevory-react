@@ -171,7 +171,9 @@ const dynamicProductSeo = (pathname, productIndex) => {
     description: shortDescription(`${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price guide for ${cityName}. ${priceStatement} Known sizes: ${knownSizesText}.`),
     heading: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price in ${cityName}`,
     canonicalPath,
-    robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    robots: selectedPrice || (!requestedVolume && pricedSizes.length)
+      ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      : "noindex, follow, max-image-preview:large",
     body: [
       priceStatement,
       `Known bottle sizes for ${productName}: ${knownSizesText}. A dash means unavailable, not zero.`,
@@ -235,7 +237,7 @@ const routeSeo = (pathname, seoRoutes = {}) => {
     };
   }
 
-  return { ...seo, robots: "noindex, follow, max-image-preview:large" };
+  return { ...seo, robots: "noindex, follow, max-image-preview:large", statusCode: 404 };
 };
 
 const routeSchema = (seo) => {
@@ -310,7 +312,7 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
     const slug = /^[0-9a-f-]{36}$/i.test(parts[1])
       ? productIndex.brandsById?.[parts[1]]
       : parts[1];
-    return slug ? `/gurgaon/brand/${slug}` : "/brands";
+    return slug ? `/gurgaon/brand/${slug}` : null;
   }
 
   if (parts[0] === "category" && parts[1]) {
@@ -319,7 +321,7 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
 
   if (parts[0] === "product" && parts[1]) {
     return legacyProductTargets.get(parts[1])
-      || (productIndex.products?.[parts[1]] ? `/gurgaon/product/${parts[1]}` : "/gurgaon");
+      || (productIndex.products?.[parts[1]] ? `/gurgaon/product/${parts[1]}` : null);
   }
 
   let stateSlug;
@@ -329,13 +331,13 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
   } else if (parts.length === 4 && !["category", "product"].includes(parts[1])) {
     [stateSlug, , , productSlug] = parts;
   }
-  if (!stateSlug || !productSlug) return null;
+  if (!stateSlug || !productSlug) return cleanPath !== pathname ? cleanPath : null;
 
   const fixedTarget = legacyProductTargets.get(productSlug);
   if (fixedTarget) return fixedTarget.replace(/^\/gurgaon/, `/${stateDefaultCities.get(stateSlug) || "gurgaon"}`);
   const preferredCity = stateDefaultCities.get(stateSlug)
     || (cityNames.has(stateSlug) ? stateSlug : null);
-  return preferredCity ? `/${preferredCity}/product/${productSlug}` : null;
+  return preferredCity ? `/${preferredCity}/product/${productSlug}` : (cleanPath !== pathname ? cleanPath : null);
 };
 
 const legacyRedirectNeedsIndex = (pathname) => {
@@ -425,10 +427,12 @@ const rewriteDocument = (response, url, routeData) => {
   const schema = JSON.stringify(routeSchema(seo)).replace(/</g, "\\u003c");
   const headers = new Headers(response.headers);
   headers.delete("etag");
-  headers.set("cache-control", "public, max-age=0, must-revalidate");
+  headers.set("cache-control", seo.statusCode === 404
+    ? "private, no-store"
+    : "public, max-age=0, must-revalidate");
 
   const htmlResponse = new Response(response.body, {
-    status: response.status,
+    status: seo.statusCode || response.status,
     statusText: response.statusText,
     headers,
   });

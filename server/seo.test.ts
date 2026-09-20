@@ -50,6 +50,7 @@ describe("origin SEO rendering", () => {
   it("keeps private and unknown routes out of the index", () => {
     expect(resolveSeo("/admin", {}).robots).toContain("noindex");
     expect(resolveSeo("/not-a-real-page", {}).robots).toContain("noindex");
+    expect(resolveSeo("/not-a-real-page", {}).statusCode).toBe(404);
   });
 
   it("redirects root and legacy state URLs to city-first routes", () => {
@@ -57,12 +58,17 @@ describe("origin SEO rendering", () => {
     expect(legacyRedirectPath("/haryana")).toBe("/gurgaon");
     expect(legacyRedirectPath("/haryana/whisky/scotch/black-dog-123")).toBe("/gurgaon/product/black-dog-123");
     expect(legacyRedirectPath("/brand/peter-scot")).toBe("/gurgaon/brand/peter-scot");
-    expect(legacyRedirectPath("/brand/78575e48-2b55-4a22-9970-39dd28d337e6")).toBe("/brands");
+    expect(legacyRedirectPath("/brand/78575e48-2b55-4a22-9970-39dd28d337e6", {
+      brandsById: { "78575e48-2b55-4a22-9970-39dd28d337e6": "peter-scot" },
+      products: {},
+    })).toBe("/gurgaon/brand/peter-scot");
     expect(legacyRedirectPath("/product/johnnie-walker-blonde"))
       .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
+    expect(legacyRedirectPath("/gurgaon/")).toBe("/gurgaon");
+    expect(legacyRedirectPath("/product/not-a-real-product")).toBeNull();
   });
 
-  it("indexes known unpriced variants without creating an Offer", () => {
+  it("keeps known unpriced variants visible without indexing or creating an Offer", () => {
     const seo = resolveDynamicProductSeo("/mumbai/product/black-label/180ml", {
       brandsById: {},
       products: {
@@ -77,7 +83,7 @@ describe("origin SEO rendering", () => {
         },
       },
     });
-    expect(seo?.robots).toContain("index, follow");
+    expect(seo?.robots).toContain("noindex, follow");
     expect(seo?.body?.join(" ")).toContain("does not yet have a verified price");
     expect(JSON.stringify(seo?.structuredData)).not.toContain('"offers"');
     expect(resolveDynamicProductSeo("/mumbai/product/black-label/100ml", {
@@ -92,5 +98,22 @@ describe("origin SEO rendering", () => {
         },
       },
     })).toBeNull();
+  });
+
+  it("keeps known but locally unpriced products visible and out of the index", () => {
+    const seo = resolveDynamicProductSeo("/mumbai/product/black-label/180ml", {
+      brandsById: {},
+      products: {
+        "black-label": {
+          name: "Black Label",
+          brand: "Johnnie Walker",
+          description: "Blended Scotch whisky.",
+          volumes: ["180ml"],
+          prices: { delhi: { "180ml": 900 } },
+        },
+      },
+    });
+    expect(seo?.robots).toContain("noindex, follow");
+    expect(seo?.body?.join(" ")).toContain("does not yet have a verified price");
   });
 });

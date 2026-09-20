@@ -17,12 +17,12 @@ const productIndex = {
 };
 
 describe("SEO routing", () => {
-  it("creates indexable city variant metadata without inventing a price", () => {
+  it("keeps an unpriced city variant visible without indexing or inventing a price", () => {
     const seo = dynamicProductSeo(
       "/mumbai/product/johnnie-walker-black-label/180ml",
       productIndex,
     );
-    expect(seo?.robots).toContain("index, follow");
+    expect(seo?.robots).toContain("noindex, follow");
     expect(seo?.body.join(" ")).toContain("does not yet have a verified price");
     expect(JSON.stringify(seo?.structuredData)).not.toContain('"offers"');
   });
@@ -43,5 +43,7 @@ describe("SEO routing", () => {
       "/product/johnnie-walker-blonde",
       productIndex,
     )).toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
+    expect(legacyRedirectPath("/gurgaon/", productIndex)).toBe("/gurgaon");
+    expect(legacyRedirectPath("/product/not-a-real-product", productIndex)).toBeNull();
   });
 });

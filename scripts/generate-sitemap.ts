@@ -501,27 +501,6 @@ try {
       prices: cityPrices,
     };
 
-    for (const { city } of cities) {
-      const basePath = `/${city.slug}/product/${productSlug}`;
-      if (!entryPaths.has(basePath)) {
-        entries.push({
-          path: basePath,
-          lastmod: latestTimestamp(product.data.updated_at, product.data.created_at),
-          images: image ? [{ loc: image, title: `${productName} bottle` }] : [],
-        });
-        entryPaths.add(basePath);
-      }
-      for (const label of volumes) {
-        const variantPath = `${basePath}/${label.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9.-]/g, "-")}`;
-        if (entryPaths.has(variantPath)) continue;
-        entries.push({
-          path: variantPath,
-          lastmod: latestTimestamp(product.data.updated_at, product.data.created_at),
-          images: image ? [{ loc: image, title: `${productName} ${label} bottle` }] : [],
-        });
-        entryPaths.add(variantPath);
-      }
-    }
   }
 
   for (const guide of DEMAND_GUIDES) {

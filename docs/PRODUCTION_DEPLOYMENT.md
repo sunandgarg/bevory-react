@@ -127,16 +127,15 @@ The following production checks passed on 2026-09-20:
   one raster image, and capped at 5 MB.
 - The adaptive Bevory favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
-- `sitemap.xml` is an index for 21 XML shards containing 405,471 unique
-  canonical URLs and 391,460 image entries, including 179,730 city product
-  pages, 205,110 known city-and-size pages, city brand/category/subcategory
-  pages, 17 published guides, and 170 cocktails. A known size stays indexable
-  when its selected city lacks a price, but the page clearly reports that state
-  and emits no Offer schema. Unknown sizes, free-form search, and arbitrary
-  filter combinations remain `noindex, follow` to avoid thin and duplicate
-  index bloat. Sitemap audits default to two concurrent requests and support
-  shard, offset, and limit controls so exhaustive checks do not overload the
-  1 GB origin.
+- `sitemap.xml` is an index for 5 XML shards containing 94,482 unique canonical
+  URLs and 80,471 image entries. Product and exact-size city URLs are included
+  only when a reviewed positive local price exists. Known products and sizes
+  remain visible when another city lacks a price, but those thin local variants
+  use `noindex, follow` and emit no Offer schema. Unknown products return HTTP
+  404, while free-form search and arbitrary filter combinations remain
+  `noindex, follow`. Sitemap audits default to two concurrent requests and
+  support shard, offset, and limit controls so exhaustive checks do not overload
+  the 1 GB origin.
 - Fifteen representative live routes passed after deployment: the city landing,
   product, and exact-size page for each final-batch city returned HTTP 200 with
   matching canonical, indexable robots, initial metadata/H1, and the expected

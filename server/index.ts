@@ -30,7 +30,7 @@ import {
 } from "./integrations/googleOAuth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./integrations/phoneOtp.js";
 import { objectStorageConfigured, storeUpload } from "./storage.js";
-import { createSeoRenderer, legacyRedirectPath } from "./seo.js";
+import { createLegacyRedirectResolver, createSeoRenderer } from "./seo.js";
 import { createRateLimit } from "./rateLimit.js";
 
 const app = express();
@@ -287,6 +287,7 @@ app.use("/api", (_req, res) => res.status(404).json({ data: null, error: { messa
 if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "false") {
   const clientDist = path.join(projectRoot, "dist");
   const renderSeo = createSeoRenderer(clientDist);
+  const resolveLegacyRedirect = createLegacyRedirectResolver(clientDist);
   app.use(express.static(clientDist, {
     index: false,
     setHeaders: (res, filePath) => {
@@ -305,13 +306,16 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
       if (req.hostname === "www.bevory.in") {
         return res.redirect(308, `https://bevory.in${req.originalUrl}`);
       }
-      const redirectPath = legacyRedirectPath(req.path);
+      const redirectPath = await resolveLegacyRedirect(req.path);
       if (redirectPath && redirectPath !== req.path) {
         const query = req.originalUrl.slice(req.path.length);
         return res.redirect(308, `${redirectPath}${query}`);
       }
-      res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
-      return res.type("html").send(await renderSeo(req.path));
+      const rendered = await renderSeo(req.path);
+      res.setHeader("Cache-Control", rendered.statusCode === 404
+        ? "private, no-store"
+        : "public, max-age=0, must-revalidate");
+      return res.status(rendered.statusCode).type("html").send(rendered.html);
     } catch (error) {
       return next(error);
     }

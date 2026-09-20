@@ -83,7 +83,7 @@ const Home = () => {
           <MapPin className="w-3 h-3 text-accent" />
           <span>Tonight in</span>
           <span className="text-foreground font-semibold">{cityName}</span>
-          <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground/70">
+          <span className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground">
             <ShieldCheck className="w-3 h-3 text-success" />
             Local price guide
           </span>
@@ -242,7 +242,7 @@ const Home = () => {
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Flame className="w-3.5 h-3.5 text-accent" />
-                  <span className="text-[10px] font-bold text-accent uppercase tracking-[0.14em]">
+                  <span className="text-xs font-bold text-foreground uppercase tracking-wider">
                     Party Planner
                   </span>
                 </div>

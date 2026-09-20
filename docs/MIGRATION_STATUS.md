@@ -150,11 +150,11 @@ propagate the new name across all services.
   console errors.
 - Service worker v6 fetches route documents network-first so compliance changes
   are not hidden behind stale HTML.
-- `sitemap.xml` indexes 21 compliant shards containing 405,471 unique
-  canonical URLs and 391,460 image entries: 179,730 city product pages, 205,110
-  known city-and-size pages, city brand and taxonomy pages, 17 published guides,
-  and 170 cocktails. Known sizes remain indexable when a city price is missing;
-  the page says the price is unavailable and emits no Offer schema.
+- `sitemap.xml` indexes 5 compliant shards containing 94,482 unique canonical
+  URLs and 80,471 image entries. City product and exact-size pages are included
+  only when they have a reviewed positive local price. Known products and sizes
+  remain visible in other cities, but unavailable-price variants use
+  `noindex, follow` and emit no Offer schema.
 - `pnpm sitemap:audit` validates sitemap structure globally and supports safe
   shard, offset, and limit runs. Its production default is two concurrent
   requests to protect the 1 GB origin; representative live routes are checked

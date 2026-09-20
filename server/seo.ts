@@ -14,6 +14,7 @@ type SeoRoute = {
   body?: string[];
   image?: string;
   structuredData?: Record<string, unknown>;
+  statusCode?: number;
 };
 
 type GeneratedSeoRoute = Partial<SeoRoute> & Pick<SeoRoute, "title" | "description" | "heading">;
@@ -149,7 +150,7 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
     };
   }
 
-  return { ...seo, robots: "noindex, follow, max-image-preview:large" };
+  return { ...seo, robots: "noindex, follow, max-image-preview:large", statusCode: 404 };
 };
 
 export const resolveDynamicProductSeo = (
@@ -228,7 +229,9 @@ export const resolveDynamicProductSeo = (
     description: shortDescription(`${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price guide for ${cityName}. ${priceStatement} Known sizes: ${knownSizesText}.`),
     heading: `${productName}${sizeLabel ? ` ${sizeLabel}` : ""} price in ${cityName}`,
     canonicalPath,
-    robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    robots: selectedPrice || (!requestedVolume && pricedSizes.length)
+      ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      : "noindex, follow, max-image-preview:large",
     body: [
       priceStatement,
       `Known bottle sizes for ${productName}: ${knownSizesText}. A dash means unavailable, not zero.`,
@@ -346,7 +349,12 @@ const legacyProductTargets = new Map([
   ["mcdowell-s-no-1-platinum-750ml", "/gurgaon/product/mcdowells-mcdowell-no1-platinum-bfe18c0/750ml"],
 ]);
 
-export const legacyRedirectPath = (pathname: string) => {
+const emptyProductIndex: ProductSeoIndex = { products: {}, brandsById: {} };
+
+export const legacyRedirectPath = (
+  pathname: string,
+  productIndex: ProductSeoIndex = emptyProductIndex,
+) => {
   const cleanPath = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const parts = cleanPath.split("/").filter(Boolean);
 
@@ -355,13 +363,17 @@ export const legacyRedirectPath = (pathname: string) => {
     return `/${stateDefaultCities.get(parts[0])}`;
   }
   if (parts[0] === "brand" && parts[1]) {
-    return /^[0-9a-f-]{36}$/i.test(parts[1]) ? "/brands" : `/gurgaon/brand/${parts[1]}`;
+    const slug = /^[0-9a-f-]{36}$/i.test(parts[1])
+      ? productIndex.brandsById[parts[1]]
+      : parts[1];
+    return slug ? `/gurgaon/brand/${slug}` : null;
   }
   if (parts[0] === "category" && parts[1]) {
     return `/gurgaon/category/${parts.slice(1).join("/")}`;
   }
   if (parts[0] === "product" && parts[1]) {
-    return legacyProductTargets.get(parts[1]) || `/gurgaon/product/${parts[1]}`;
+    return legacyProductTargets.get(parts[1])
+      || (productIndex.products[parts[1]] ? `/gurgaon/product/${parts[1]}` : null);
   }
 
   let stateSlug: string | undefined;
@@ -371,14 +383,27 @@ export const legacyRedirectPath = (pathname: string) => {
   } else if (parts.length === 4 && !["category", "product"].includes(parts[1])) {
     [stateSlug, , , productSlug] = parts;
   }
-  if (!stateSlug || !productSlug) return null;
+  if (!stateSlug || !productSlug) return cleanPath !== pathname ? cleanPath : null;
 
   const fixedTarget = legacyProductTargets.get(productSlug);
   if (fixedTarget) return fixedTarget.replace(/^\/gurgaon/, `/${stateDefaultCities.get(stateSlug) || "gurgaon"}`);
 
   const preferredCity = stateDefaultCities.get(stateSlug)
     || (cityNames.has(stateSlug) ? stateSlug : null);
-  return preferredCity ? `/${preferredCity}/product/${productSlug}` : null;
+  return preferredCity ? `/${preferredCity}/product/${productSlug}` : (cleanPath !== pathname ? cleanPath : null);
+};
+
+export const createLegacyRedirectResolver = (clientDist: string) => {
+  const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
+    .then((value) => JSON.parse(value) as ProductSeoIndex)
+    .catch(() => emptyProductIndex);
+
+  return async (pathname: string) => {
+    const parts = pathname.split("/").filter(Boolean);
+    const needsProductIndex = parts[0] === "product"
+      || (parts[0] === "brand" && /^[0-9a-f-]{36}$/i.test(parts[1] || ""));
+    return legacyRedirectPath(pathname, needsProductIndex ? await productIndex : emptyProductIndex);
+  };
 };
 
 export const createSeoRenderer = (clientDist: string) => {
@@ -405,6 +430,10 @@ export const createSeoRenderer = (clientDist: string) => {
     const dynamic = generated.robots.startsWith("noindex")
       ? resolveDynamicProductSeo(pathname, await productIndex)
       : null;
-    return rewriteSeoDocument(await template, dynamic || generated);
+    const route = dynamic || generated;
+    return {
+      html: rewriteSeoDocument(await template, route),
+      statusCode: route.statusCode || 200,
+    };
   };
 };
