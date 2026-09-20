@@ -1,5 +1,6 @@
 const SITE_ORIGIN = "https://bevory.in";
-const CATALOG_CACHE_VERSION = "20260920-image-cutover";
+const CATALOG_CACHE_VERSION = "20260920-cold-start-v2";
+const CATALOG_CACHE_CONTROL = "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400";
 const IMMUTABLE_MEDIA_CACHE_CONTROL = "public, max-age=31536000, s-maxage=31536000, immutable";
 const REVALIDATING_MEDIA_CACHE_CONTROL = "public, max-age=300, s-maxage=300, must-revalidate";
 const seoRoutesCache = new Map();
@@ -422,7 +423,7 @@ export const proxyApiRequest = async (request, env, waitUntil) => {
   responseHeaders.set("x-bevory-cache", "MISS");
   if (cacheableCatalog && originResponse.ok) {
     responseHeaders.delete("set-cookie");
-    responseHeaders.set("cache-control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
+    responseHeaders.set("cache-control", CATALOG_CACHE_CONTROL);
   } else {
     responseHeaders.set("cache-control", "private, no-store");
   }

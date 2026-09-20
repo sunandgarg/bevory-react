@@ -19,7 +19,7 @@ import {
   type AuthenticatedRequest,
 } from "./auth.js";
 import { queryHandler } from "./data.js";
-import { cityCatalogHandler } from "./catalog.js";
+import { cityCatalogHandler, prewarmCityHomeCatalogs } from "./catalog.js";
 import { functionsHandler } from "./functions.js";
 import { prisma } from "./db.js";
 import {
@@ -366,6 +366,11 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
 
 const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Bevory API listening on http://localhost:${port}`);
+  if (process.env.NODE_ENV === "production") {
+    void prewarmCityHomeCatalogs()
+      .then((count) => console.log(`Prewarmed ${count} city home catalogues`))
+      .catch((error) => console.error("City catalogue prewarm failed", error));
+  }
 });
 
 const shutdown = async () => {
