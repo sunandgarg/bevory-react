@@ -28,7 +28,7 @@ const CompareSection = () => {
       const trending = products.filter((p: any) => p.is_trending).slice(0, 2);
       trending.forEach((p: any) => addToCompare(p.id));
     }
-  }, [products]);
+  }, [products, compareProducts.length, addToCompare]);
 
   const filteredProducts = products.filter(
     (p) =>

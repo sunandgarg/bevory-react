@@ -22,6 +22,8 @@ const USER_TABLES = new Set([
 ]);
 
 const CATALOG_TABLES = new Set(["categories", "product_prices", "products", "sub_categories"]);
+const ADMIN_READ_TABLES = new Set(["content_drafts", "party_recommendations"]);
+const OPERATIONS = new Set(["select", "insert", "update", "delete", "upsert"]);
 
 const UNIQUE_COLUMNS: Record<string, string> = {
   app_settings: "key",
@@ -102,8 +104,10 @@ const publicReviewInsert = (payload: QueryPayload) =>
   && (!Array.isArray(payload.values) || payload.values.length === 1);
 
 export const queryAccessAllowed = (payload: QueryPayload, hasUser: boolean, isAdmin: boolean) => {
-  if (payload.operation === "select" && !USER_TABLES.has(payload.table)) return true;
+  if (!OPERATIONS.has(payload.operation)) return false;
   if (isAdmin) return true;
+  if (payload.operation === "select" && ADMIN_READ_TABLES.has(payload.table)) return false;
+  if (payload.operation === "select" && !USER_TABLES.has(payload.table)) return true;
   if (payload.table === "product_reviews") {
     return publicReviewInsert(payload) || publicReviewReport(payload);
   }
@@ -139,7 +143,7 @@ const sanitizePublicReviewInsert = (input: Record<string, unknown>): Record<stri
     taste_rating: boundedRating(input.taste_rating, "Taste rating"),
     value_rating: boundedRating(input.value_rating, "Value rating"),
     rebuy_rating: boundedRating(input.rebuy_rating, "Rebuy rating"),
-    is_approved: true,
+    is_approved: false,
     is_featured: false,
     is_reported: false,
   };
@@ -192,7 +196,7 @@ export const matchesFilter = (row: Record<string, unknown>, filter: Filter): boo
     }
     case "contains": return Array.isArray(actual) && Array.isArray(expected)
       && expected.every((item) => actual.includes(item));
-    default: return true;
+    default: return false;
   }
 };
 
@@ -277,6 +281,12 @@ const canAccess = async (req: AuthenticatedRequest, payload: QueryPayload, isAdm
 
 const applyUserScope = (req: AuthenticatedRequest, payload: QueryPayload, rows: Array<Record<string, unknown>>, isAdmin: boolean) => {
   if (isAdmin) return rows;
+  if (payload.table === "product_reviews") {
+    return rows.filter((row) => row.is_approved === true && row.is_reported !== true);
+  }
+  if (payload.table === "app_settings") {
+    return rows.map((row) => stripCredentialFields(row) as Record<string, unknown>);
+  }
   if (!req.authUser || !USER_TABLES.has(payload.table)) return rows;
   if (payload.table === "profiles") return rows.filter((row) => row.id === req.authUser!.id);
   return rows.filter((row) => row.user_id === req.authUser!.id);
@@ -291,8 +301,14 @@ const findUpsertRecord = async (table: string, row: Record<string, unknown>, onC
 };
 
 export const queryHandler = async (req: AuthenticatedRequest, res: Response) => {
-  const payload = req.body as QueryPayload;
+  const payload = req.body as QueryPayload | undefined;
+  if (!payload || typeof payload !== "object") {
+    return res.status(400).json({ data: null, error: { message: "A query payload is required" } });
+  }
   if (!TABLES.has(payload.table)) return res.status(400).json({ data: null, error: { message: "Unknown table" } });
+  if (!OPERATIONS.has(payload.operation)) {
+    return res.status(400).json({ data: null, error: { message: "Unknown operation" } });
+  }
   const isAdmin = req.authUser ? await userIsAdmin(req.authUser.id) : false;
   if (!await canAccess(req, payload, isAdmin)) {
     return res.status(req.authUser ? 403 : 401).json({ data: null, error: { message: "Not authorized" } });

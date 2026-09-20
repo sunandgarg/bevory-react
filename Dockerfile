@@ -16,13 +16,14 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends openssl ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && corepack enable
-COPY --from=build /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/dist-server ./dist-server
-COPY --from=build /app/prisma ./prisma
-COPY --from=build /app/scripts ./scripts
-COPY --from=build /app/src/lib/catalogTaxonomy.ts /app/src/lib/locations.ts ./src/lib/
-RUN mkdir -p uploads
+COPY --chown=node:node --from=build /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --chown=node:node --from=build /app/node_modules ./node_modules
+COPY --chown=node:node --from=build /app/dist ./dist
+COPY --chown=node:node --from=build /app/dist-server ./dist-server
+COPY --chown=node:node --from=build /app/prisma ./prisma
+COPY --chown=node:node --from=build /app/scripts ./scripts
+COPY --chown=node:node --from=build /app/src/lib/catalogTaxonomy.ts /app/src/lib/locations.ts ./src/lib/
+RUN mkdir -p uploads && chown node:node uploads
+USER node
 EXPOSE 3001
 CMD ["pnpm", "start"]

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Star, Trash2, Check, X, Download, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { apiClient } from "@/integrations/api/client";
@@ -26,7 +26,7 @@ const AdminProductReviews = ({ productId }: AdminProductReviewsProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     let query = apiClient
       .from("product_reviews")
       .select("*, product:products(name, brand)")
@@ -39,11 +39,11 @@ const AdminProductReviews = ({ productId }: AdminProductReviewsProps) => {
     const { data } = await query;
     if (data) setReviews(data);
     setLoading(false);
-  };
+  }, [productId]);
 
   useEffect(() => {
     fetchReviews();
-  }, [productId]);
+  }, [fetchReviews]);
 
   const toggleApproval = async (id: string, currentStatus: boolean | null) => {
     const { error } = await apiClient

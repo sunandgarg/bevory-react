@@ -1,6 +1,6 @@
 # Production Deployment
 
-Last verified: 2026-09-19
+Last verified: 2026-09-20
 
 ## Public endpoints
 
@@ -11,13 +11,17 @@ Last verified: 2026-09-19
 
 ## Topology
 
-- Cloudflare proxies the apex and `www` hostnames to Caddy on AWS Lightsail.
+- Cloudflare proxies the apex and `www` hostnames to AWS Lightsail. Requests to
+  `bevory.in/api/*` first pass through the `bevory-edge` Worker, which adds the
+  private origin-verification header before forwarding them to the DNS-only API
+  origin.
 - AWS Lightsail instance `bevory-api-prod` runs Caddy and the combined
   React/Node.js application with Docker Compose. Node serves the built frontend,
   API, and pre-rendered SEO route documents. Only Caddy publishes ports 80 and
   443.
-- Caddy supplies the private origin-verification header only for the apex host.
-  Direct API-origin requests without it return 404.
+- Caddy validates, but never supplies, the private origin-verification header.
+  Direct API-origin requests without it return 404, including requests sent to
+  the Lightsail IP with a forged `Host: bevory.in` header.
 - The `bevory` Cloudflare Pages project remains available as a rollback artifact,
   but its custom domains are inactive and it is not in the production request
   path.
@@ -36,8 +40,9 @@ Last verified: 2026-09-19
 - `kellen.ns.cloudflare.com`
 
 The apex and `www` records are proxied CNAMEs to `api.bevory.in`. `api` points
-directly to the attached Lightsail static IP and remains DNS-only. This keeps
-Cloudflare at the public edge while Caddy owns the application origin.
+directly to the attached Lightsail static IP and remains DNS-only so the Worker
+can reach the application origin. The active Worker route is
+`bevory.in/api/*`; public API traffic must use the apex domain.
 
 ## Expected base cost
 
@@ -51,12 +56,14 @@ other usage.
 
 ## Verification
 
-The following production checks passed on 2026-09-19:
+The following production checks passed on 2026-09-20:
 
 - The apex is proxied by Cloudflare to AWS and redirects `/` to `/gurgaon`.
 - `www` permanently redirects to the equivalent apex URL.
-- `/api/health` reaches MySQL through Caddy and reports 33,334 records.
-- Direct API requests without the verification secret return 404.
+- `/api/health` reaches MySQL through the Cloudflare Worker and Caddy and
+  reports 50,475 records.
+- Direct API requests without the verification secret return 404, including a
+  direct-IP request carrying the production hostname.
 - Phone OTP is not configured in production; email/password and Google OAuth
   are the verified sign-in methods.
 - Administrator sign-in, session validation, and an admin-only status endpoint
@@ -98,6 +105,12 @@ The following production checks passed on 2026-09-19:
 - The restricted S3 identity can put, inspect, and delete an object; the test
   object was deleted afterward.
 - The live `/gurgaon` page renders without browser console errors.
+- The production dependency audit reports no known runtime vulnerabilities;
+  the lint, build, and automated test suites pass. Database-backed phone OTP
+  integration tests skip when `DATABASE_URL` is intentionally unavailable.
+- Authentication and public-write endpoints are rate limited; public reviews
+  enter moderation as unapproved; uploads are administrator-only, limited to
+  one raster image, and capped at 5 MB.
 - The adaptive Bevory favicon and logo render correctly in light and dark mode,
   and the production source contains no legacy third-party branding.
 - `sitemap.xml` is an index for three XML shards containing 57,272 unique
@@ -114,7 +127,8 @@ The following production checks passed on 2026-09-19:
 The CloudFront origin access control `bevory-uploads-oac` exists, but AWS still
 rejected a distribution creation attempt on 2026-09-19 because the account must
 be verified by AWS Support. Case `178975941700756` tracks the request.
-The case remains open and unassigned. The AWS account display name is now
+The case remained open with no AWS response visible on 2026-09-20. The AWS
+account display name is now
 `Bevory`; the console confirmed the rename from `cirkle.world` on 2026-09-19.
 The S3 bucket remains private; do not make it public as a workaround. After AWS
 removes the restriction, create the distribution using the existing private OAC,
@@ -160,4 +174,4 @@ sudo docker compose -f deploy/docker-compose.production.yml run --rm \
 ```
 
 Never commit `.env.production`, AWS access keys, database credentials, JWT
-secrets, or the Pages origin-verification secret.
+secrets, or the Worker origin-verification secret.

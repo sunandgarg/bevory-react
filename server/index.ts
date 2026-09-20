@@ -31,6 +31,7 @@ import {
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./integrations/phoneOtp.js";
 import { objectStorageConfigured, storeUpload } from "./storage.js";
 import { createSeoRenderer, legacyRedirectPath } from "./seo.js";
+import { createRateLimit } from "./rateLimit.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
@@ -39,9 +40,16 @@ const uploadsRoot = path.join(projectRoot, "uploads");
 const originVerifySecret = process.env.ORIGIN_VERIFY_SECRET?.trim();
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (_req, file, callback) => callback(null, file.mimetype.startsWith("image/")),
+  limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 4, parts: 5 },
+  fileFilter: (_req, file, callback) => callback(null, [
+    "image/avif", "image/gif", "image/jpeg", "image/png", "image/webp",
+  ].includes(file.mimetype)),
 });
+const signInRateLimit = createRateLimit({ windowMs: 15 * 60_000, max: 10, message: "Too many sign-in attempts; try again later" });
+const signUpRateLimit = createRateLimit({ windowMs: 60 * 60_000, max: 5, message: "Too many sign-up attempts; try again later" });
+const otpSendRateLimit = createRateLimit({ windowMs: 60 * 60_000, max: 5, message: "Too many verification-code requests; try again later" });
+const otpVerifyRateLimit = createRateLimit({ windowMs: 15 * 60_000, max: 10, message: "Too many verification attempts; try again later" });
+const publicReviewRateLimit = createRateLimit({ windowMs: 60 * 60_000, max: 5, message: "Too many review submissions; try again later" });
 
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
@@ -49,6 +57,14 @@ app.use(cors({ origin: process.env.APP_URL || "http://localhost:8080", credentia
 app.use(express.json({ limit: "25mb" }));
 app.use(optionalAuth);
 app.use("/uploads", express.static(uploadsRoot, { immutable: true, maxAge: "1h" }));
+app.use("/api/auth", (_req, res, next) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  next();
+});
+app.use("/api/storage", (_req, res, next) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  next();
+});
 
 app.use("/api", (req, res, next) => {
   if (process.env.NODE_ENV !== "production") return next();
@@ -81,11 +97,12 @@ app.get("/api/health", async (_req, res) => {
       },
     });
   } catch (error) {
-    res.status(503).json({ status: "error", error: error instanceof Error ? error.message : "Database unavailable" });
+    console.error("Health check failed", error);
+    res.status(503).json({ status: "error", error: "Database unavailable" });
   }
 });
 
-app.post("/api/auth/signup", async (req: AuthenticatedRequest, res) => {
+app.post("/api/auth/signup", signUpRateLimit, async (req: AuthenticatedRequest, res) => {
   try {
     const user = await signUp(req.body ?? {});
     const adminCreatingUser = req.authUser ? await userIsAdmin(req.authUser.id) : false;
@@ -95,7 +112,7 @@ app.post("/api/auth/signup", async (req: AuthenticatedRequest, res) => {
   }
 });
 
-app.post("/api/auth/signin", async (req, res) => {
+app.post("/api/auth/signin", signInRateLimit, async (req, res) => {
   try {
     const user = await signIn(String(req.body?.email ?? ""), String(req.body?.password ?? ""));
     res.json({ data: { user, session: createSession(user) }, error: null });
@@ -154,7 +171,7 @@ app.get("/api/auth/google/callback", async (req, res) => {
   }
 });
 
-app.post("/api/auth/otp/send", async (req, res) => {
+app.post("/api/auth/otp/send", otpSendRateLimit, async (req, res) => {
   try {
     const result = await sendPhoneOtp(String(req.body?.phone ?? ""));
     res.json({ data: result, error: null });
@@ -163,7 +180,7 @@ app.post("/api/auth/otp/send", async (req, res) => {
   }
 });
 
-app.post("/api/auth/otp/verify", async (req, res) => {
+app.post("/api/auth/otp/verify", otpVerifyRateLimit, async (req, res) => {
   try {
     const phone = await verifyPhoneOtp(String(req.body?.phone ?? ""), String(req.body?.token ?? ""));
     const user = await findOrCreatePhoneUser(phone);
@@ -187,12 +204,20 @@ app.get("/api/auth/me", async (req: AuthenticatedRequest, res) => {
   }
 });
 
-app.post("/api/query", queryHandler);
+app.post("/api/query", (req, res, next) => {
+  if (req.body?.table === "product_reviews" && req.body?.operation === "insert") {
+    return publicReviewRateLimit(req, res, next);
+  }
+  return next();
+}, queryHandler);
 app.get("/api/catalog/:cityId", cityCatalogHandler);
 app.post("/api/functions/:name", functionsHandler);
 
 app.post("/api/storage/upload", upload.single("file"), async (req: AuthenticatedRequest, res) => {
   if (!req.authUser) return res.status(401).json({ data: null, error: { message: "Authentication required" } });
+  if (!await userIsAdmin(req.authUser.id)) {
+    return res.status(403).json({ data: null, error: { message: "Administrator access required" } });
+  }
   if (!req.file) return res.status(400).json({ data: null, error: { message: "An image file is required" } });
   const bucket = String(req.body.bucket || "images").replace(/[^a-zA-Z0-9_-]/g, "");
   const safePath = String(req.body.path || req.file.originalname)
@@ -200,6 +225,7 @@ app.post("/api/storage/upload", upload.single("file"), async (req: Authenticated
     .filter((part) => part && part !== "." && part !== "..")
     .map((part) => part.replace(/[^a-zA-Z0-9._-]/g, "-"))
     .join("/");
+  if (!safePath) return res.status(400).json({ data: null, error: { message: "A valid image path is required" } });
   const stored = await storeUpload({
     uploadsRoot,
     bucket,
@@ -224,7 +250,10 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
   app.use(express.static(clientDist, {
     index: false,
     setHeaders: (res, filePath) => {
-      if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+      if (
+        filePath.includes(`${path.sep}assets${path.sep}`)
+        || filePath.includes(`${path.sep}fonts${path.sep}`)
+      ) {
         res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
       } else if (filePath.endsWith("sitemap.xml")) {
         res.setHeader("Cache-Control", "public, max-age=3600, must-revalidate");

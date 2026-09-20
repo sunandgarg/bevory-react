@@ -4,35 +4,37 @@ import { findOrCreatePhoneUser } from "../auth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./phoneOtp.js";
 
 const testPhone = "+919000000001";
-const previousNodeEnv = process.env.NODE_ENV;
-const previousTestCode = process.env.OTP_TEST_CODE;
+const describeWithDatabase = process.env.DATABASE_URL ? describe : describe.skip;
 
-beforeAll(async () => {
-  process.env.NODE_ENV = "test";
-  process.env.OTP_TEST_CODE = "123456";
-  await prisma.otpChallenge.deleteMany({ where: { phone: testPhone } });
-  const existing = await prisma.user.findUnique({ where: { phone: testPhone } });
-  if (existing) {
-    await prisma.contentRecord.deleteMany({ where: { key: `profiles:${existing.id}` } });
-    await prisma.user.delete({ where: { id: existing.id } });
-  }
-});
+describeWithDatabase("phone OTP", () => {
+  const previousNodeEnv = process.env.NODE_ENV;
+  const previousTestCode = process.env.OTP_TEST_CODE;
 
-afterAll(async () => {
-  await prisma.otpChallenge.deleteMany({ where: { phone: testPhone } });
-  const existing = await prisma.user.findUnique({ where: { phone: testPhone } });
-  if (existing) {
-    await prisma.contentRecord.deleteMany({ where: { key: `profiles:${existing.id}` } });
-    await prisma.user.delete({ where: { id: existing.id } });
-  }
-  if (previousNodeEnv === undefined) delete process.env.NODE_ENV;
-  else process.env.NODE_ENV = previousNodeEnv;
-  if (previousTestCode === undefined) delete process.env.OTP_TEST_CODE;
-  else process.env.OTP_TEST_CODE = previousTestCode;
-  await prisma.$disconnect();
-});
+  beforeAll(async () => {
+    process.env.NODE_ENV = "test";
+    process.env.OTP_TEST_CODE = "123456";
+    await prisma.otpChallenge.deleteMany({ where: { phone: testPhone } });
+    const existing = await prisma.user.findUnique({ where: { phone: testPhone } });
+    if (existing) {
+      await prisma.contentRecord.deleteMany({ where: { key: `profiles:${existing.id}` } });
+      await prisma.user.delete({ where: { id: existing.id } });
+    }
+  });
 
-describe("phone OTP", () => {
+  afterAll(async () => {
+    await prisma.otpChallenge.deleteMany({ where: { phone: testPhone } });
+    const existing = await prisma.user.findUnique({ where: { phone: testPhone } });
+    if (existing) {
+      await prisma.contentRecord.deleteMany({ where: { key: `profiles:${existing.id}` } });
+      await prisma.user.delete({ where: { id: existing.id } });
+    }
+    if (previousNodeEnv === undefined) delete process.env.NODE_ENV;
+    else process.env.NODE_ENV = previousNodeEnv;
+    if (previousTestCode === undefined) delete process.env.OTP_TEST_CODE;
+    else process.env.OTP_TEST_CODE = previousTestCode;
+    await prisma.$disconnect();
+  });
+
   it("creates and verifies an expiring local test challenge", async () => {
     expect(phoneOtpConfigured()).toBe(true);
     const sent = await sendPhoneOtp(testPhone);

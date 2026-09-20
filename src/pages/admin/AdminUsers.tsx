@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { User, Plus, Trash2, UserCog, Filter, UserPlus, Send, RefreshCw, Settings2, Shield, Eye, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,7 +74,7 @@ const userValidationSchema: ValidationSchema = {
   },
   password: {
     required: true,
-    minLength: 6,
+    minLength: 8,
   },
 };
 
@@ -119,9 +119,9 @@ const AdminUsers = () => {
     fetchData();
   }, []);
 
-  const getUserRoles = (userId: string) => {
+  const getUserRoles = useCallback((userId: string) => {
     return userRoles.filter((r) => r.user_id === userId);
-  };
+  }, [userRoles]);
 
   const getUserPermissions = (userId: string) => {
     return userPermissions.filter((p) => p.user_id === userId);
@@ -150,14 +150,14 @@ const AdminUsers = () => {
     }
 
     return result;
-  }, [profiles, searchQuery, roleFilter, userRoles]);
+  }, [profiles, searchQuery, roleFilter, getUserRoles]);
 
   const managers = useMemo(() => {
     return profiles.filter((p) => {
       const roles = getUserRoles(p.id);
       return roles.some((r) => r.role === "admin" || r.role === "content_manager");
     });
-  }, [profiles, userRoles]);
+  }, [profiles, getUserRoles]);
 
   const stats = useMemo(() => {
     const adminCount = profiles.filter(p => getUserRoles(p.id).some(r => r.role === "admin")).length;
@@ -167,7 +167,7 @@ const AdminUsers = () => {
     const noRoleCount = profiles.filter(p => getUserRoles(p.id).length === 0).length;
     
     return { adminCount, userCount, managerCount, writerCount, noRoleCount, total: profiles.length };
-  }, [profiles, userRoles]);
+  }, [profiles, getUserRoles]);
 
   const addRole = async () => {
     if (!selectedUserId || !newRole) return;

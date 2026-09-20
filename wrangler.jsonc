@@ -5,7 +5,7 @@
   "workers_dev": true,
   "routes": [
     {
-      "pattern": "bevory.in/_edge-disabled/*",
+      "pattern": "bevory.in/api/*",
       "zone_name": "bevory.in"
     }
   ],

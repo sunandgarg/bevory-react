@@ -65,6 +65,7 @@ describe("query authorization", () => {
     expect(queryAccessAllowed(payload({ table: "user_roles", operation: "insert" }), true, false)).toBe(false);
     expect(queryAccessAllowed(payload({ table: "products", operation: "delete" }), true, false)).toBe(false);
     expect(queryAccessAllowed(payload({ table: "products", operation: "delete" }), true, true)).toBe(true);
+    expect(queryAccessAllowed(payload({ operation: "drop" as QueryPayload["operation"] }), true, true)).toBe(false);
   });
 
   it("allows safe public review inserts but rejects public upserts and deletes", () => {
@@ -95,7 +96,7 @@ describe("query authorization", () => {
       undefined,
       false,
     );
-    expect(review).toMatchObject({ is_approved: true, is_featured: false, is_reported: false });
+    expect(review).toMatchObject({ is_approved: false, is_featured: false, is_reported: false });
     const forcedSafe = scopeWriteInput(
       payload({ table: "product_reviews", operation: "insert" }),
       { product_id: "product-1", rating: 5, reviewer_name: "Guest", is_featured: true },
@@ -131,5 +132,18 @@ describe("query authorization", () => {
       ...report,
       filters: [],
     }), false, false)).toBe(false);
+  });
+
+  it("keeps draft and recommendation tables admin-only", () => {
+    expect(queryAccessAllowed(payload({ table: "content_drafts" }), false, false)).toBe(false);
+    expect(queryAccessAllowed(payload({ table: "party_recommendations" }), true, false)).toBe(false);
+    expect(queryAccessAllowed(payload({ table: "content_drafts" }), true, true)).toBe(true);
+  });
+
+  it("rejects unknown filter operators instead of matching every record", () => {
+    expect(matchesFilter(
+      { id: "product-1" },
+      { column: "id", operator: "unknown", value: "product-1" },
+    )).toBe(false);
   });
 });

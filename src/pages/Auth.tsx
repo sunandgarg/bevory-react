@@ -11,7 +11,7 @@ import { z } from "zod";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 
 const emailSchema = z.string().email("Please enter a valid email");
-const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
+const passwordSchema = z.string().min(8, "Password must be at least 8 characters");
 const phoneSchema = z.string().regex(/^\+?[1-9]\d{9,14}$/, "Please enter a valid phone number");
 
 type AuthMode = "email" | "phone" | "otp";

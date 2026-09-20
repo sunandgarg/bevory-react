@@ -26,8 +26,6 @@ services:
   caddy:
     image: caddy:2.10-alpine
     restart: unless-stopped
-    env_file:
-      - ../.env.production
     depends_on:
       api:
         condition: service_healthy

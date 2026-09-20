@@ -107,13 +107,12 @@ export const signUp = async (input: {
   data?: Record<string, unknown>;
 }) => {
   const email = input.email?.trim().toLowerCase() || null;
-  const phone = input.phone?.trim() || null;
-  if (!email && !phone) throw new Error("Email or phone is required");
-  if (input.password && input.password.length < 8) throw new Error("Password must be at least 8 characters");
+  if (!email) throw new Error("A valid email is required");
+  if (input.phone) throw new Error("Phone sign-up must use OTP verification");
+  if (!input.password) throw new Error("Password is required");
+  if (input.password.length < 8) throw new Error("Password must be at least 8 characters");
 
-  const duplicate = email
-    ? await prisma.user.findUnique({ where: { email } })
-    : await prisma.user.findUnique({ where: { phone: phone! } });
+  const duplicate = await prisma.user.findUnique({ where: { email } });
   if (duplicate) throw new Error("A user with this email or phone already exists");
 
   const id = randomUUID();
@@ -122,7 +121,7 @@ export const signUp = async (input: {
     data: {
       id,
       email,
-      phone,
+      phone: null,
       passwordHash,
       metadata: (input.data ?? {}) as Prisma.InputJsonObject,
     },

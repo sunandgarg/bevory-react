@@ -89,7 +89,7 @@ const RateProductSection = ({ productId, onReviewSubmitted }: RateProductSection
 
     setSubmitting(true);
     try {
-      // Prepare review data - directly approved for immediate posting
+      // Public reviews stay pending until an administrator approves them.
       const reviewData = {
         product_id: productId,
         rating: selectedStar,

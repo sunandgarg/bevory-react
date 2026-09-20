@@ -42,6 +42,7 @@ interface PriceRow {
 }
 
 type ValidationFlag = "missing" | "zero" | "high" | "low" | null;
+const VOLUME_OPTIONS = ["60ml", "90ml", "180ml", "330ml", "350ml", "375ml", "500ml", "650ml", "750ml", "1L", "1000ml", "2L"];
 
 /* ========== COMPONENT ========== */
 
@@ -64,8 +65,6 @@ const AdminProductPrices = () => {
   const [bulkValue, setBulkValue] = useState("");
   const [bulkPreview, setBulkPreview] = useState<{ key: string; old: number; new: number }[]>([]);
   const { toast } = useToast();
-
-  const volumeOptions = ["60ml", "90ml", "180ml", "330ml", "350ml", "375ml", "500ml", "650ml", "750ml", "1L", "1000ml", "2L"];
 
   /* ========== DATA FETCH ========== */
 
@@ -175,7 +174,7 @@ const AdminProductPrices = () => {
       if (bc !== 0) return bc;
       const nc = a.product_name.localeCompare(b.product_name);
       if (nc !== 0) return nc;
-      return volumeOptions.indexOf(a.volume) - volumeOptions.indexOf(b.volume);
+      return VOLUME_OPTIONS.indexOf(a.volume) - VOLUME_OPTIONS.indexOf(b.volume);
     });
   }, [priceRows, searchQuery, selectedVolume]);
 
@@ -471,7 +470,7 @@ const AdminProductPrices = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Volumes</SelectItem>
-                {volumeOptions.map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
+                {VOLUME_OPTIONS.map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
               </SelectContent>
             </Select>
 

@@ -84,11 +84,8 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
       
       if (!error && data) {
         setCountries(data);
-        // Auto-select India if no country selected
-        if (!selectedCountry) {
-          const india = data.find(c => c.code === "IN");
-          if (india) setSelectedCountryState(india);
-        }
+        const india = data.find(c => c.code === "IN") ?? null;
+        setSelectedCountryState((current) => current ?? india);
       }
       setLoading(false);
     };
