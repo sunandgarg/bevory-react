@@ -65,6 +65,7 @@ describe("first-party rendered image validation", () => {
       youtube_embed_url: "https://www.youtube-nocookie.com/embed/abc123",
       story: { type: "video", url: "https://www.youtube.com/watch?v=abc123" },
       source_image_url: "https://catalog.example/original.jpg",
+      image_page_url: "https://catalog.example/product-page",
       image_provenance_url: "https://rights.example/license/123",
       source: { html: '<img src="https://archive.example/original.jpg">' },
       imageWithSource: {
@@ -89,6 +90,14 @@ describe("first-party rendered image validation", () => {
     expect(() => validateFirstPartyImages({ image: "//bevory.in/media/a.jpg" }, appUrl))
       .toThrow(/must be local/);
     expect(() => validateFirstPartyImages({ image: "https://user@bevory.in/media/a.jpg" }, appUrl))
+      .toThrow(/must be local/);
+  });
+
+  it.each([
+    "photos", "pictures", "covers", "thumbnails", "avatars", "favicons",
+    "banners", "backgrounds", "posters", "icons",
+  ])("rejects external URLs inside the %s image container", (field) => {
+    expect(() => validateFirstPartyImages({ [field]: ["https://other.example/a.jpg"] }, appUrl))
       .toThrow(/must be local/);
   });
 });

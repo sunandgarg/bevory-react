@@ -68,6 +68,25 @@ const escapeHtml = (value) => String(value)
   .replace(/"/g, "&quot;")
   .replace(/'/g, "&#039;");
 
+const firstPartyMediaImage = (value) => {
+  if (typeof value !== "string" || !value.trim() || value.includes("\\") || value.trim().startsWith("//")) return null;
+  try {
+    const candidate = new URL(value.trim());
+    if (
+      candidate.protocol !== "https:"
+      || candidate.origin !== SITE_ORIGIN
+      || candidate.username
+      || candidate.password
+      || candidate.search
+      || candidate.hash
+      || !candidate.pathname.startsWith("/media/")
+    ) return null;
+    return candidate.toString();
+  } catch {
+    return null;
+  }
+};
+
 const seoBucketForPath = (pathname) => {
   const parts = pathname.split("/").filter(Boolean);
   const citySlug = parts[0];
@@ -110,6 +129,7 @@ const dynamicProductSeo = (pathname, productIndex) => {
   const requestedVolume = parts[3]?.toLowerCase();
   const product = productIndex.products?.[productSlug];
   if (!product) return null;
+  const productImage = firstPartyMediaImage(product.image);
 
   const productName = `${product.brand || ""} ${product.name || ""}`.trim();
   const knownVolumes = Array.isArray(product.volumes) ? product.volumes : [];
@@ -143,7 +163,7 @@ const dynamicProductSeo = (pathname, productIndex) => {
     name: `${productName} ${sizeLabel}`,
     description: `${productName} ${sizeLabel} price and availability guide for ${cityName}.`,
     brand: { "@type": "Brand", name: product.brand },
-    ...(product.image ? { image: product.image } : {}),
+    ...(productImage ? { image: productImage } : {}),
     sku: `${productSlug}-${requestedVolume}-${citySlug}`,
     size: sizeLabel,
     url: `${SITE_ORIGIN}${canonicalPath}`,
@@ -163,7 +183,7 @@ const dynamicProductSeo = (pathname, productIndex) => {
     name: productName,
     description: product.description,
     brand: { "@type": "Brand", name: product.brand },
-    ...(product.image ? { image: product.image } : {}),
+    ...(productImage ? { image: productImage } : {}),
     productGroupID: productSlug,
     variesBy: ["https://schema.org/size"],
     url: `${SITE_ORIGIN}${canonicalPath}`,
@@ -182,7 +202,7 @@ const dynamicProductSeo = (pathname, productIndex) => {
       `Known bottle sizes for ${productName}: ${knownSizesText}. A dash means unavailable, not zero.`,
       ...(otherCities.length ? [`Prices are also listed in other cities, including ${otherCities.join("; ")}.`] : []),
     ],
-    ...(product.image ? { image: product.image } : {}),
+    ...(productImage ? { image: productImage } : {}),
     breadcrumbs: [
       { name: "Home", path: "/" },
       { name: cityName, path: `/${citySlug}` },
@@ -559,6 +579,9 @@ export const proxyMediaRequest = async (request, env, waitUntil) => {
 
 const rewriteDocument = (response, url, routeData) => {
   const seo = { ...routeData };
+  const safeImage = firstPartyMediaImage(seo.image);
+  if (safeImage) seo.image = safeImage;
+  else delete seo.image;
   seo.title = shortTitle(seo.title);
   seo.description = shortDescription(seo.description);
   const canonical = `${SITE_ORIGIN}${seo.canonicalPath}`;

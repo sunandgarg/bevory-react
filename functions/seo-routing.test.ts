@@ -34,6 +34,33 @@ describe("SEO routing", () => {
     )).toBeNull();
   });
 
+  it("emits only exact first-party /media product images", () => {
+    const external = dynamicProductSeo("/gurgaon/product/johnnie-walker-black-label", {
+      ...productIndex,
+      products: {
+        ...productIndex.products,
+        "johnnie-walker-black-label": {
+          ...productIndex.products["johnnie-walker-black-label"],
+          image: "https://images.example/black-label.jpg",
+        },
+      },
+    });
+    expect(external?.image).toBeUndefined();
+    expect(JSON.stringify(external?.structuredData)).not.toContain("images.example");
+
+    const firstParty = dynamicProductSeo("/gurgaon/product/johnnie-walker-black-label", {
+      ...productIndex,
+      products: {
+        ...productIndex.products,
+        "johnnie-walker-black-label": {
+          ...productIndex.products["johnnie-walker-black-label"],
+          image: "https://bevory.in/media/migrated-images/products/black-label/photo.jpg",
+        },
+      },
+    });
+    expect(firstParty?.image).toBe("https://bevory.in/media/migrated-images/products/black-label/photo.jpg");
+  });
+
   it("redirects UUID brands and legacy products to readable canonical paths", () => {
     expect(legacyRedirectPath(
       "/brand/78575e48-2b55-4a22-9970-39dd28d337e6",

@@ -188,7 +188,7 @@ uploads use the separate private `images/` prefix and the same public
 Do not change database URLs until the configured `IMAGE_PUBLIC_URL` works
 publicly through `/media/*`. Use the phases below from the API container. The
 upload phase leaves database URLs unchanged; the apply phase writes a private
-S3 manifest before updating records in transactional batches.
+S3 manifest before updating every planned record in one all-or-nothing transaction.
 
 ```bash
 # Inventory only; does not download, upload, or update data.
@@ -205,7 +205,7 @@ IMAGE_PUBLIC_URL=https://bevory.in/media pnpm images:migrate -- --apply
 
 # After apply, regenerate SEO documents into the persistent host directory.
 sudo docker compose -f /opt/bevory/deploy/docker-compose.production.yml run --rm --no-deps \
-  -e NODE_OPTIONS=--max-old-space-size=1024 \
+  --user root -e NODE_OPTIONS=--max-old-space-size=768 \
   -v /opt/bevory/public:/app/public api pnpm sitemap
 
 # Independently validate every persisted record with the stricter write policy.

@@ -525,7 +525,7 @@ try {
         datePublished: guide.published_at,
         dateModified: guide.published_at,
         author: { "@type": "Organization", name: "Bevory" },
-        publisher: { "@type": "Organization", name: "Bevory", logo: { "@type": "ImageObject", url: `${origin}/favicon.png` } },
+        publisher: { "@type": "Organization", name: "Bevory" },
         mainEntityOfPage: `${origin}${path}`,
       },
     });

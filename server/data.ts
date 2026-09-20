@@ -141,10 +141,12 @@ const safeTableInput = (table: string, value: Record<string, unknown>) =>
 
 const IMAGE_FIELD_TOKENS = new Set([
   "image", "images", "logo", "logos", "cover", "thumbnail", "avatar", "favicon",
-  "photo", "picture", "banner", "hero", "background", "poster", "icon",
+  "covers", "thumbnails", "avatars", "favicons", "photo", "photos", "picture", "pictures",
+  "banner", "banners", "hero", "heroes", "background", "backgrounds", "poster", "posters",
+  "icon", "icons",
 ]);
 const EXTERNAL_REFERENCE_FIELD_TOKENS = new Set([
-  "source", "provenance", "link", "video", "youtube",
+  "source", "provenance", "page", "link", "video", "youtube",
 ]);
 const IMAGE_OBJECT_URL_KEYS = new Set(["url", "src", "href"]);
 
@@ -158,7 +160,7 @@ const imageField = (field: string) => {
   const tokens = fieldTokens(field);
   return tokens.some((token) => (
     IMAGE_FIELD_TOKENS.has(token)
-    || /^(?:image|logo|cover|thumbnail|avatar|favicon|photo|picture|banner|hero|background|poster|icon)\d+$/.test(token)
+    || /^(?:images?|logos?|covers?|thumbnails?|avatars?|favicons?|photos?|pictures?|banners?|heroes?|backgrounds?|posters?|icons?)\d+$/.test(token)
   ))
     && !tokens.some((token) => EXTERNAL_REFERENCE_FIELD_TOKENS.has(token));
 };

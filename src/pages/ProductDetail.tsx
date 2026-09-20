@@ -645,7 +645,6 @@ const ProductDetail = () => {
                 className="w-full h-full"
                 objectFit="contain"
                 priority
-                onLoadComplete={() => setLoadRelatedProducts(true)}
               />
             </div>
           ) : (

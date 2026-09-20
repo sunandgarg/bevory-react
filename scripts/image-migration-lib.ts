@@ -15,7 +15,9 @@ export type ImageOutputExtension = "png" | "jpg";
 
 const IMAGE_FIELD_TOKENS = new Set([
   "image", "images", "logo", "logos", "cover", "thumbnail", "avatar", "favicon",
-  "photo", "picture", "banner", "hero", "background", "poster", "icon",
+  "covers", "thumbnails", "avatars", "favicons", "photo", "photos", "picture", "pictures",
+  "banner", "banners", "hero", "heroes", "background", "backgrounds", "poster", "posters",
+  "icon", "icons",
 ]);
 const EXTERNAL_REFERENCE_FIELD_TOKENS = new Set([
   "source", "provenance", "page", "link", "video", "youtube",
@@ -30,7 +32,7 @@ export const shouldMigrateField = (key: string) => {
   const tokens = fieldTokens(key);
   return tokens.some((token) => (
     IMAGE_FIELD_TOKENS.has(token)
-    || /^(?:image|logo|cover|thumbnail|avatar|favicon|photo|picture|banner|hero|background|poster|icon)\d+$/.test(token)
+    || /^(?:images?|logos?|covers?|thumbnails?|avatars?|favicons?|photos?|pictures?|banners?|heroes?|backgrounds?|posters?|icons?)\d+$/.test(token)
   )) && !tokens.some((token) => EXTERNAL_REFERENCE_FIELD_TOKENS.has(token));
 };
 
@@ -96,7 +98,7 @@ const normalizedExternalHttpUrl = (value: unknown, publicBaseUrl?: string) => {
       && !candidate.password
       && candidate.origin === publicOrigin
       && candidate.pathname.startsWith(`${MEDIA_PATH}/`);
-    return isMigratedMedia ? null : absolute;
+    return isMigratedMedia && !decoded.startsWith("//") ? null : absolute;
   } catch {
     return null;
   }

@@ -79,6 +79,23 @@ describe("image migration helpers", () => {
     });
   });
 
+  it.each([
+    "photos", "pictures", "covers", "thumbnails", "avatars", "favicons",
+    "banners", "backgrounds", "posters", "icons",
+  ])("finds external URLs inside the %s image container", (field) => {
+    const targets = collectImageTargets({ [field]: ["https://third.example/a.jpg"] }, "https://bevory.in/media");
+    expect(targets.map((target) => target.sourceUrl)).toEqual(["https://third.example/a.jpg"]);
+  });
+
+  it("canonicalizes a protocol-relative first-party media URL instead of falsely certifying it", () => {
+    const [target] = collectImageTargets({ image: "//bevory.in/media/a.jpg" }, "https://bevory.in/media");
+    expect(target).toMatchObject({
+      kind: "field",
+      sourceUrl: "https://bevory.in/media/a.jpg",
+      sourceValue: "//bevory.in/media/a.jpg",
+    });
+  });
+
   it("replaces fields and HTML without mutating the original row", () => {
     const row = {
       image_url: "https://third.example/product.jpg",
