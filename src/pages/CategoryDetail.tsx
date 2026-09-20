@@ -29,7 +29,7 @@ const CategoryDetail = () => {
     slug: string;
     subCategorySlug?: string;
   }>();
-  const { categories, getProductsByCategory, loading } = useProducts();
+  const { categories, getProductsByCategory, loading } = useProducts(true, "category", slug);
   const { selectedCity, routeCityReady } = useRouteCity(citySlug);
   const { getProductUrlSafe } = useProductUrl();
   const [subCategories, setSubCategories] = useState<SubCategory[]>([]);

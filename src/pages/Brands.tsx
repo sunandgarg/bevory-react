@@ -29,7 +29,7 @@ const Brands = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const { selectedCity } = useLocation();
-  const { products } = useProducts();
+  const { brandNames } = useProducts(true, "home");
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Brands = () => {
     fetchBrands();
   }, []);
 
-  const availableBrandNames = new Set(products.map((product) => product.brand.toLowerCase()));
+  const availableBrandNames = new Set(brandNames.map((brandName) => brandName.toLowerCase()));
   const filteredBrands = brands.filter((brand) => (
     availableBrandNames.has(brand.brand_name.toLowerCase())
     && brand.brand_name.toLowerCase().includes(searchQuery.toLowerCase())

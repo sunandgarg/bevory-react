@@ -21,12 +21,12 @@ const categoryGradients: Record<string, string> = {
 };
 
 const Categories = () => {
-  const { categories, products, loading } = useProducts();
+  const { categories, categoryCounts, loading } = useProducts(true, "home");
   const { selectedCity } = useLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
 
   const getCategoryProductCount = (categoryId: string) => {
-    return products.filter((p) => p.category_id === categoryId).length;
+    return categoryCounts[categoryId] ?? 0;
   };
 
   const trendingCategories = categories.filter(c => (c as any).is_trending);

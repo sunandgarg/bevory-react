@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { MapPin, ChevronDown, Check, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -11,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocation } from "@/hooks/useLocation";
-import { apiClient } from "@/integrations/api/client";
 import { cn } from "@/lib/utils";
 import { POPULAR_CITIES, STATE_ORDER } from "@/lib/locations";
 import { useNavigate, useLocation as useRouterLocation } from "react-router-dom";
@@ -40,6 +38,7 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
     setSelectedCity,
     setSelectedState,
     states,
+    allCities: locationCities,
     loading: locationLoading,
   } = useLocation();
 
@@ -47,84 +46,13 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
   const routerLocation = useRouterLocation();
 
   const [open, setOpen] = useState(false);
-  const [allCities, setAllCities] = useState<City[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-  
-  // Use ref to track if we've already initialized - persists across renders
-  const hasInitialized = useRef(false);
-
-  // Fetch all cities with state names
-  useEffect(() => {
-    const fetchAllCities = async () => {
-      const { data, error } = await apiClient
-        .from("cities")
-        .select(`
-          id,
-          name,
-          state_id,
-          states!inner(name)
-        `)
-        .order("name");
-
-      if (!error && data) {
-        const citiesWithState = data.map((city: any) => ({
-          id: city.id,
-          name: city.name,
-          state_id: city.state_id,
-          state_name: city.states?.name,
-        }));
-        setAllCities(citiesWithState);
-      }
-      setLoading(false);
-    };
-    fetchAllCities();
-  }, []);
-
-  // Initialize city ONLY ONCE when cities are loaded and no city is selected
-  useEffect(() => {
-    // Skip if already initialized or cities not loaded yet
-    if (hasInitialized.current || allCities.length === 0) return;
-    
-    // If user already has a selected city from context (loaded from localStorage), mark as initialized
-    if (selectedCity && selectedCity.id) {
-      hasInitialized.current = true;
-      return;
-    }
-
-    // Try to get city from cookie
-    const cookieCity = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("bevory_city="))
-      ?.split("=")[1];
-
-    if (cookieCity) {
-      const city = allCities.find(
-        (c) => c.name.toLowerCase() === decodeURIComponent(cookieCity).toLowerCase()
-      );
-      if (city) {
-        // Set city without triggering navigation for initial load
-        const state = states.find((s) => s.id === city.state_id);
-        if (state) {
-          setSelectedState(state);
-        }
-        setSelectedCity({ id: city.id, name: city.name, state_id: city.state_id });
-        hasInitialized.current = true;
-        return;
-      }
-    }
-
-    // Default to Gurgaon only if nothing is selected
-    const gurgaon = allCities.find((c) => c.name.toLowerCase() === "gurgaon");
-    if (gurgaon) {
-      const state = states.find((s) => s.id === gurgaon.state_id);
-      if (state) {
-        setSelectedState(state);
-      }
-      setSelectedCity({ id: gurgaon.id, name: gurgaon.name, state_id: gurgaon.state_id });
-    }
-    hasInitialized.current = true;
-  }, [allCities, states, selectedCity, setSelectedCity, setSelectedState]);
+  const allCities = useMemo<City[]>(() => locationCities.map((city) => ({
+    id: city.id,
+    name: city.name,
+    state_id: city.state_id,
+    state_name: city.state?.name,
+  })), [locationCities]);
 
   const getCitySlug = useCallback((cityName: string) => {
     return cityName.toLowerCase().trim().replace(/\s+/g, "-");
@@ -172,7 +100,7 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
 
   const displayText = selectedCity?.name || "Select City";
 
-  if (locationLoading || loading) {
+  if (locationLoading) {
     return (
       <div className={cn("flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary animate-pulse", className)}>
         <MapPin className="w-4 h-4 text-muted-foreground" />

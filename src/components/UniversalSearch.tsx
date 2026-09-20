@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
 import { fuzzyFilter } from "@/lib/fuzzySearch";
-import { useProducts } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
 import { generateProductUrl } from "@/lib/productSlug";
@@ -54,17 +53,21 @@ const UniversalSearch = memo(({
   const [searchResults, setSearchResults] = useState<SearchProduct[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [staticDataLoaded, setStaticDataLoaded] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
-  const { products } = useProducts();
+  const staticDataLoadingRef = useRef(false);
+  const searchSequenceRef = useRef(0);
   const { selectedCity } = useLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
 
-  // Fetch lightweight static data once (categories + brands only)
+  // Load suggestions only after the user starts searching.
   useEffect(() => {
+    if (query.trim().length < 2 || staticDataLoaded || staticDataLoadingRef.current) return;
+    staticDataLoadingRef.current = true;
     const fetchStatic = async () => {
       const [catRes, brandRes] = await Promise.all([
         apiClient.from("categories").select("id, name, slug, emoji").eq("is_active", true).order("order_index"),
@@ -72,15 +75,18 @@ const UniversalSearch = memo(({
       ]);
       if (catRes.data) setCategories(catRes.data);
       if (brandRes.data) setBrands(brandRes.data);
+      setStaticDataLoaded(true);
+      staticDataLoadingRef.current = false;
     };
-    fetchStatic();
-  }, []);
+    void fetchStatic();
+  }, [query, staticDataLoaded]);
 
   // Debounced search - only fetches matching products, NOT all products
   const debouncedSearch = useCallback((searchQuery: string) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     
     if (searchQuery.length < 2) {
+      searchSequenceRef.current += 1;
       setSearchResults([]);
       setIsSearching(false);
       return;
@@ -96,13 +102,27 @@ const UniversalSearch = memo(({
     }
 
     setIsSearching(true);
-    debounceRef.current = setTimeout(() => {
-      const results = fuzzyFilter(
-        products as SearchProduct[],
+    const sequence = ++searchSequenceRef.current;
+    debounceRef.current = setTimeout(async () => {
+      const lookup = searchQuery.trim().replace(/[^a-zA-Z0-9\s'-]/g, " ").trim();
+      if (!lookup) {
+        setSearchResults([]);
+        setIsSearching(false);
+        return;
+      }
+      const { data, error } = await apiClient
+        .from("products")
+        .select("id, name, brand, rating, image_emoji, slug, category:categories(name, slug, emoji)")
+        .eq("is_active", true)
+        .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
+        .limit(30);
+      const results = error ? [] : fuzzyFilter(
+        (data ?? []) as SearchProduct[],
         searchQuery,
         (product) => [product.name, product.brand, product.category?.name || ""],
         0.25,
       ).slice(0, 8);
+      if (sequence !== searchSequenceRef.current) return;
 
       if (searchCache.size >= CACHE_MAX) {
         const firstKey = searchCache.keys().next().value;
@@ -112,7 +132,7 @@ const UniversalSearch = memo(({
       setSearchResults(results);
       setIsSearching(false);
     }, 250); // 250ms debounce
-  }, [products, selectedCity?.id]);
+  }, [selectedCity?.id]);
 
   // Trigger search on query change
   useEffect(() => {

@@ -300,12 +300,15 @@ const functions = {
 };
 
 const catalog = {
-  getCity(cityId: string) {
+  getCity(cityId: string, view: "full" | "home" | "category" = "full", categorySlug?: string) {
+    const category = categorySlug ? `&category=${encodeURIComponent(categorySlug)}` : "";
     return request<{
       categories: Array<Record<string, unknown>>;
       products: Array<Record<string, unknown>>;
       totalProducts: number;
-    }>(`/catalog/${encodeURIComponent(cityId)}`);
+      categoryCounts?: Record<string, number>;
+      brandNames?: string[];
+    }>(`/catalog/${encodeURIComponent(cityId)}?view=${view}${category}`);
   },
 };
 

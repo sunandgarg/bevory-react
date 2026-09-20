@@ -1,4 +1,4 @@
-import { memo, lazy, Suspense } from "react";
+import { memo, lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   PartyPopper,
   ArrowLeftRight,
@@ -19,7 +19,6 @@ import Footer from "@/components/layout/Footer";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Skeleton } from "@/components/ui/skeleton";
 import { citySlugFromName } from "@/lib/locations";
-import { SEARCH_DEMAND_LINKS } from "@/lib/searchDemand";
 
 const BrandSpotlight = lazy(() => import("@/components/home/BrandSpotlight"));
 const HomeCocktails = lazy(() => import("@/components/home/HomeCocktails"));
@@ -37,6 +36,30 @@ const SectionSkeleton = () => (
     </div>
   </div>
 );
+
+const DeferredSection = ({ children, minHeight = 180 }: { children: ReactNode; minHeight?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || visible) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "240px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [visible]);
+
+  return (
+    <div ref={ref} style={visible ? undefined : { minHeight }}>
+      {visible ? children : null}
+    </div>
+  );
+};
 
 const QUICK_ACTIONS = [
   { icon: TrendingUp, label: "Trending", hint: "What's hot now", to: "/search?sort=trending", color: "text-primary" },
@@ -56,7 +79,7 @@ const formatCount = (count: number) => {
 };
 
 const Home = () => {
-  const { categories, products } = useProducts();
+  const { categories, products, totalProducts } = useProducts(true, "home");
   const { selectedCity, allCities } = useLocation();
   const cityName = selectedCity?.name || "your city";
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
@@ -67,8 +90,8 @@ const Home = () => {
     : null;
   const trustStats = [
     { value: formatCount(cityCount), label: cityCount === 1 ? "City" : "Cities" },
-    products.length > 0
-      ? { value: formatCount(products.length), label: products.length === 1 ? "Product" : "Products" }
+    totalProducts > 0
+      ? { value: formatCount(totalProducts), label: totalProducts === 1 ? "Product" : "Products" }
       : { value: formatCount(categories.length), label: categories.length === 1 ? "Category" : "Categories" },
     averageRating
       ? { value: `${averageRating.toFixed(1)}★`, label: "Community" }
@@ -138,25 +161,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        <section className="px-4" aria-labelledby="popular-now">
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingUp className="w-4 h-4 text-accent" />
-            <h2 id="popular-now" className="text-[15px] font-bold">Popular right now</h2>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {SEARCH_DEMAND_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="min-h-11 flex items-center justify-between gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium hover:border-accent/50 transition-colors"
-              >
-                <span>{item.label}</span>
-                <ArrowRight className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
-              </Link>
-            ))}
-          </div>
-        </section>
 
         {/* ─── Quick Actions ─── */}
         <div className="px-4">
@@ -228,9 +232,11 @@ const Home = () => {
         <TrendingProducts />
 
         {/* ─── Brand Spotlight ─── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <BrandSpotlight />
-        </Suspense>
+        <DeferredSection>
+          <Suspense fallback={<SectionSkeleton />}>
+            <BrandSpotlight />
+          </Suspense>
+        </DeferredSection>
 
         {/* ─── Promotional Card ─── */}
         <div className="px-4">
@@ -261,18 +267,26 @@ const Home = () => {
         </div>
 
         {/* ─── Lazy Loaded Sections ─── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <HomeCocktails />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <BevoryGuide />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <ProductReviews />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <VideoReviews />
-        </Suspense>
+        <DeferredSection>
+          <Suspense fallback={<SectionSkeleton />}>
+            <HomeCocktails />
+          </Suspense>
+        </DeferredSection>
+        <DeferredSection>
+          <Suspense fallback={<SectionSkeleton />}>
+            <BevoryGuide />
+          </Suspense>
+        </DeferredSection>
+        <DeferredSection minHeight={220}>
+          <Suspense fallback={<SectionSkeleton />}>
+            <ProductReviews />
+          </Suspense>
+        </DeferredSection>
+        <DeferredSection minHeight={260}>
+          <Suspense fallback={<SectionSkeleton />}>
+            <VideoReviews />
+          </Suspense>
+        </DeferredSection>
 
         <Footer />
       </div>

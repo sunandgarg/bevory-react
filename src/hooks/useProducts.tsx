@@ -69,18 +69,29 @@ const fetchCategories = async (): Promise<Category[]> => {
   return data as Category[];
 };
 
-const fetchCityCatalog = async (cityId: string): Promise<{ categories: Category[]; products: Product[] }> => {
-  const { data, error } = await apiClient.catalog.getCity(cityId);
+type CatalogView = "full" | "home" | "category";
+
+const fetchCityCatalog = async (cityId: string, view: CatalogView, categorySlug?: string): Promise<{
+  categories: Category[];
+  products: Product[];
+  totalProducts: number;
+  categoryCounts: Record<string, number>;
+  brandNames: string[];
+}> => {
+  const { data, error } = await apiClient.catalog.getCity(cityId, view, categorySlug);
   if (error) throw error;
   return {
     categories: (data?.categories ?? []) as Category[],
     products: (data?.products ?? []) as Product[],
+    totalProducts: Number(data?.totalProducts ?? 0),
+    categoryCounts: data?.categoryCounts ?? {},
+    brandNames: data?.brandNames ?? [],
   };
 };
 
 /* ===================== HOOK ===================== */
 
-export const useProducts = (enabled = true) => {
+export const useProducts = (enabled = true, view: CatalogView = "full", categorySlug?: string) => {
   const { selectedCity } = useLocation();
 
   const { data: categoriesData } = useQuery({
@@ -91,10 +102,10 @@ export const useProducts = (enabled = true) => {
   });
 
   const { data: catalogData, isLoading: loading } = useQuery({
-    queryKey: ["city-catalog", selectedCity?.id ?? "none"],
-    queryFn: () => fetchCityCatalog(selectedCity!.id),
+    queryKey: ["city-catalog", selectedCity?.id ?? "none", view, categorySlug ?? "all"],
+    queryFn: () => fetchCityCatalog(selectedCity!.id, view, categorySlug),
     staleTime: 5 * 60 * 1000,
-    enabled: enabled && Boolean(selectedCity?.id),
+    enabled: enabled && Boolean(selectedCity?.id) && (view !== "category" || Boolean(categorySlug)),
   });
   const categories = catalogData?.categories ?? categoriesData ?? EMPTY_CATEGORIES;
   const productsRaw = catalogData?.products ?? EMPTY_PRODUCTS;
@@ -125,6 +136,9 @@ export const useProducts = (enabled = true) => {
   return {
     products: productsRaw,
     categories,
+    totalProducts: catalogData?.totalProducts ?? productsRaw.length,
+    categoryCounts: catalogData?.categoryCounts ?? {},
+    brandNames: catalogData?.brandNames ?? [],
     loading,
     getProductsByCategory,
     trendingProducts,

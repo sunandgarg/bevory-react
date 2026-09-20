@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo, memo, useCallback } from "react";
 import { Star, TrendingUp, ChevronRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
-import { apiClient } from "@/integrations/api/client";
 import { useProducts } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import { useProductUrl } from "@/hooks/useProductUrl";
@@ -18,24 +17,9 @@ const CATEGORY_TABS = ["whisky", "wine", "beer", "vodka", "gin", "rum"] as const
 
 const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsProps) => {
   const [selectedTab, setSelectedTab] = useState(defaultCategory);
-  const { products, loading } = useProducts();
+  const { products, loading } = useProducts(true, "home");
   const { selectedCity } = useLocation();
   const { getProductUrlSafe } = useProductUrl();
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      const { data } = await apiClient
-        .from("app_settings")
-        .select("value")
-        .eq("key", "trending_default_category")
-        .maybeSingle();
-      if (data?.value) {
-        const defaultCat = typeof data.value === "string" ? JSON.parse(data.value) : data.value;
-        setSelectedTab(defaultCat);
-      }
-    };
-    fetchSettings();
-  }, []);
 
   // Pre-index products by category slug for O(1) tab switching
   const productsByTab = useMemo(() => {

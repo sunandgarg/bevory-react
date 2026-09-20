@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import MobileLayout from "@/components/layout/MobileLayout";
 import { apiClient } from "@/integrations/api/client";
 import { useRouteCity } from "@/hooks/useRouteCity";
-import { useProducts } from "@/hooks/useProducts";
 import { useCompare } from "@/components/home/CompareProducts";
 import { useToast } from "@/hooks/use-toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -117,7 +116,16 @@ const ProductDetail = () => {
   const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [reviewRefresh, setReviewRefresh] = useState(0);
-  const [loadRelatedProducts, setLoadRelatedProducts] = useState(false);
+  const [relatedProducts, setRelatedProducts] = useState<Array<{
+    id: string;
+    name: string;
+    brand: string;
+    slug: string | null;
+    image_emoji: string | null;
+    image_url: string | null;
+    rating: number | null;
+    category?: { name: string; slug: string } | null;
+  }>>([]);
 
   const legacyCityByState: Record<string, string> = {
     delhi: "delhi",
@@ -133,7 +141,6 @@ const ProductDetail = () => {
     setSelectedCity,
     routeCity,
   } = useRouteCity(canonicalCitySlug);
-  const { products } = useProducts(loadRelatedProducts);
   const { addToCompare, isInCompare, setShowCompareSheet } = useCompare();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -142,10 +149,6 @@ const ProductDetail = () => {
     ? cityRecordIdFromSlug(routeCity.slug)
     : selectedCity?.id;
   const displayCityName = routeCity?.name || selectedCity?.name;
-
-  useEffect(() => {
-    if (product && !product.image_url) setLoadRelatedProducts(true);
-  }, [product]);
 
   const currentPrice = volumePrices.find((vp) => normalizeVolume(vp.volume) === normalizeVolume(selectedVolume));
   const price = currentPrice?.price ?? null;
@@ -209,6 +212,19 @@ const ProductDetail = () => {
 
       setProduct(parsedProduct);
       setLoading(false);
+
+      if (productData.category_id) {
+        void apiClient
+          .from("products")
+          .select("id, name, brand, slug, image_emoji, image_url, rating, category:categories(name, slug)")
+          .eq("category_id", productData.category_id)
+          .eq("is_active", true)
+          .neq("id", productData.id)
+          .limit(6)
+          .then(({ data }: { data: typeof relatedProducts | null }) => setRelatedProducts(data ?? []));
+      } else {
+        setRelatedProducts([]);
+      }
 
       // Fetch this product once, then split prices by city. This also gives an
       // unpriced city page useful links to cities where a price is available.
@@ -502,9 +518,6 @@ const ProductDetail = () => {
     volumePrices,
   ]);
 
-  const relatedProducts = products
-    .filter((p) => p.category_id === product?.category_id && p.id !== product?.id)
-    .slice(0, 6);
   const displayVolumes = useMemo<DisplayVolume[]>(() => {
     const byVolume = new Map<string, DisplayVolume>();
     volumePrices.forEach((variant) => byVolume.set(normalizeVolume(variant.volume), {

@@ -123,13 +123,53 @@ export const buildCityCatalog = (
 
 export const invalidateCatalogCache = () => cityCatalogCache.clear();
 
+const buildHomeCatalog = (catalog: ReturnType<typeof buildCityCatalog>) => {
+  const productsPerCategory = 8;
+  const counts = new Map<string, number>();
+  const categoryCounts = catalog.products.reduce<Record<string, number>>((result, product) => {
+    const categoryId = String(product.category_id ?? "");
+    if (categoryId) result[categoryId] = (result[categoryId] ?? 0) + 1;
+    return result;
+  }, {});
+  const brandNames = [...new Set(catalog.products.map((product) => String(product.brand ?? "").trim()).filter(Boolean))];
+  const products = [...catalog.products]
+    .sort((left, right) => (
+      Number(right.is_trending === true) - Number(left.is_trending === true)
+      || Number(right.rating ?? 0) - Number(left.rating ?? 0)
+      || String(left.name ?? "").localeCompare(String(right.name ?? ""))
+    ))
+    .filter((product) => {
+      const categorySlug = String((product.category as CatalogRow | null)?.slug ?? "uncategorized");
+      const current = counts.get(categorySlug) ?? 0;
+      if (current >= productsPerCategory) return false;
+      counts.set(categorySlug, current + 1);
+      return true;
+    });
+
+  return { ...catalog, products, categoryCounts, brandNames };
+};
+
+const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog>, categorySlug: string) => {
+  const products = catalog.products.filter((product) => (
+    String((product.category as CatalogRow | null)?.slug ?? "") === categorySlug
+  ));
+  return { ...catalog, products, totalProducts: products.length };
+};
+
 export const cityCatalogHandler = async (req: Request, res: Response) => {
   const cityId = String(req.params.cityId ?? "").trim();
+  const requestedView = String(req.query.view ?? "full");
+  const categorySlug = String(req.query.category ?? "").trim().toLowerCase();
+  const view = requestedView === "home" ? "home" : requestedView === "category" && categorySlug ? "category" : "full";
   if (!cityId || cityId.length > 191 || !/^[a-zA-Z0-9_-]+$/.test(cityId)) {
     return res.status(400).json({ data: null, error: { message: "A valid city is required" } });
   }
+  if (view === "category" && (categorySlug.length > 100 || !/^[a-z0-9-]+$/.test(categorySlug))) {
+    return res.status(400).json({ data: null, error: { message: "A valid category is required" } });
+  }
 
-  const cached = cityCatalogCache.get(cityId);
+  const cacheKey = view === "category" ? `${cityId}:category:${categorySlug}` : `${cityId}:${view}`;
+  const cached = cityCatalogCache.get(cacheKey);
   if (cached && cached.expiresAt > Date.now()) {
     res.set("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
     return res.json({ data: cached.payload, error: null });
@@ -161,13 +201,22 @@ export const cityCatalogHandler = async (req: Request, res: Response) => {
       prisma.contentRecord.findMany({ where: { tableName: "sub_categories" }, select: { data: true } }),
     ]);
 
-    const payload = buildCityCatalog(
+    const fullCatalog = buildCityCatalog(
       prices,
       jsonRows(productRecords),
       jsonRows(categoryRecords),
       jsonRows(subcategoryRecords),
     );
-    cityCatalogCache.set(cityId, { payload, expiresAt: Date.now() + CACHE_TTL_MS });
+    const homeCatalog = buildHomeCatalog(fullCatalog);
+    const expiresAt = Date.now() + CACHE_TTL_MS;
+    cityCatalogCache.set(`${cityId}:full`, { payload: fullCatalog, expiresAt });
+    cityCatalogCache.set(`${cityId}:home`, { payload: homeCatalog, expiresAt });
+    const payload = view === "home"
+      ? homeCatalog
+      : view === "category"
+        ? buildCategoryCatalog(fullCatalog, categorySlug)
+        : fullCatalog;
+    if (view === "category") cityCatalogCache.set(cacheKey, { payload, expiresAt });
     res.set("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
     return res.json({ data: payload, error: null });
   } catch (error) {

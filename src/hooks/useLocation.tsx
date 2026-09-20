@@ -1,5 +1,10 @@
-import { useState, useEffect, createContext, useContext, ReactNode } from "react";
-import { apiClient } from "@/integrations/api/client";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  BEVORY_CITIES,
+  cityFromSlug,
+  cityRecordIdFromSlug,
+  type BevoryCity,
+} from "@/lib/locations";
 export { CITIES_BY_STATE, POPULAR_CITIES } from "@/lib/locations";
 
 interface Country {
@@ -42,207 +47,112 @@ interface LocationContextType {
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
-
 const LOCATION_CACHE_KEY = "bevory_location";
+const INDIA: Country = { id: "starter-country-india", name: "India", code: "IN", flag: null };
 
-// Default city if no match found
+const stateId = (city: BevoryCity) => `bevory-state-${city.stateCode.toLowerCase()}`;
+const STATIC_STATES: State[] = [...new Map(BEVORY_CITIES.map((city) => [city.state, {
+  id: stateId(city),
+  name: city.state,
+  code: city.stateCode,
+  country_id: INDIA.id,
+}])).values()];
+const stateByName = new Map(STATIC_STATES.map((state) => [state.name, state]));
+const STATIC_CITIES: CityWithState[] = BEVORY_CITIES.map((city) => {
+  const state = stateByName.get(city.state)!;
+  return {
+    id: cityRecordIdFromSlug(city.slug),
+    name: city.name,
+    state_id: state.id,
+    state,
+  };
+});
+
 export const DEFAULT_CITY = "Gurgaon";
 export const DEFAULT_CITY_ID = "starter-city-gurgaon";
 
+const cityByName = (name?: string | null) => STATIC_CITIES.find(
+  (city) => city.name.toLowerCase() === name?.toLowerCase().trim(),
+);
+
+const initialCity = () => {
+  const routeSlug = typeof window === "undefined" ? "" : window.location.pathname.split("/").filter(Boolean)[0] || "";
+  const routeCity = cityFromSlug(routeSlug);
+  if (routeCity) return cityByName(routeCity.name) ?? null;
+
+  try {
+    const cached = JSON.parse(localStorage.getItem(LOCATION_CACHE_KEY) || "null") as { city?: City } | null;
+    const cachedCity = cityByName(cached?.city?.name);
+    if (cachedCity) return cachedCity;
+  } catch {
+    localStorage.removeItem(LOCATION_CACHE_KEY);
+  }
+
+  return cityByName(DEFAULT_CITY) ?? null;
+};
+
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [states, setStates] = useState<State[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
-  const [allCities, setAllCities] = useState<CityWithState[]>([]);
-  const [selectedCountry, setSelectedCountryState] = useState<Country | null>(null);
-  const [selectedState, setSelectedStateState] = useState<State | null>(null);
-  const [selectedCity, setSelectedCityState] = useState<City | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [selectedCountry, setSelectedCountryState] = useState<Country | null>(INDIA);
+  const [selectedCity, setSelectedCityState] = useState<CityWithState | null>(initialCity);
+  const [selectedState, setSelectedStateState] = useState<State | null>(
+    () => initialCity()?.state ?? null,
+  );
 
-  // Load cached location on mount
+  const cities = useMemo(
+    () => selectedState ? STATIC_CITIES.filter((city) => city.state_id === selectedState.id) : STATIC_CITIES,
+    [selectedState],
+  );
+
   useEffect(() => {
-    const cached = localStorage.getItem(LOCATION_CACHE_KEY);
-    if (cached) {
-      try {
-        const { country, state, city } = JSON.parse(cached);
-        if (country) setSelectedCountryState(country);
-        if (state) setSelectedStateState(state);
-        if (city) setSelectedCityState(city);
-      } catch (e) {
-        console.error("Failed to parse cached location:", e);
-      }
-    }
-  }, []);
-
-  // Fetch countries
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const { data, error } = await apiClient
-        .from("countries")
-        .select("*")
-        .order("name");
-      
-      if (!error && data) {
-        setCountries(data);
-        const india = data.find(c => c.code === "IN") ?? null;
-        setSelectedCountryState((current) => current ?? india);
-      }
-      setLoading(false);
-    };
-    fetchCountries();
-  }, []);
-
-  // Fetch all cities with their states for the new selector
-  useEffect(() => {
-    const fetchAllCities = async () => {
-      const { data, error } = await apiClient
-        .from("cities")
-        .select(`
-          *,
-          state:states(*)
-        `)
-        .order("name");
-      
-      if (!error && data) {
-        setAllCities(data as CityWithState[]);
-      }
-    };
-    fetchAllCities();
-  }, []);
-
-  // Fetch states when country changes
-  useEffect(() => {
-    if (!selectedCountry) {
-      setStates([]);
-      return;
-    }
-
-    const fetchStates = async () => {
-      const { data, error } = await apiClient
-        .from("states")
-        .select("*")
-        .eq("country_id", selectedCountry.id)
-        .order("name");
-      
-      if (!error && data) {
-        setStates(data);
-      }
-    };
-    fetchStates();
-  }, [selectedCountry]);
-
-  // Fetch cities when state changes
-  useEffect(() => {
-    if (!selectedState) {
-      setCities([]);
-      return;
-    }
-
-    const fetchCities = async () => {
-      const { data, error } = await apiClient
-        .from("cities")
-        .select("*")
-        .eq("state_id", selectedState.id)
-        .order("name");
-      
-      if (!error && data) {
-        setCities(data);
-      }
-    };
-    fetchCities();
-  }, [selectedState]);
-
-  // Save to cache when location changes
-  useEffect(() => {
-    if (selectedCountry || selectedState || selectedCity) {
-      localStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify({
-        country: selectedCountry,
-        state: selectedState,
-        city: selectedCity,
-      }));
-    }
+    localStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify({
+      country: selectedCountry,
+      state: selectedState,
+      city: selectedCity,
+    }));
   }, [selectedCountry, selectedState, selectedCity]);
 
   const setSelectedCountry = (country: Country | null) => {
     setSelectedCountryState(country);
-    setSelectedStateState(null);
-    setSelectedCityState(null);
+    if (!country) {
+      setSelectedStateState(null);
+      setSelectedCityState(null);
+    }
   };
 
   const setSelectedState = (state: State | null) => {
     setSelectedStateState(state);
-    setSelectedCityState(null);
   };
 
   const setSelectedCity = (city: City | null) => {
-    setSelectedCityState(city);
+    const canonicalCity = cityByName(city?.name) ?? null;
+    setSelectedCityState(canonicalCity);
+    if (canonicalCity?.state) setSelectedStateState(canonicalCity.state);
   };
 
-  // Set city by name - returns true if city was found and set
   const setCityByName = async (cityName: string): Promise<boolean> => {
-    const normalizedName = cityName.toLowerCase().trim();
-    
-    // First check in allCities
-    let foundCity = allCities.find(
-      c => c.name.toLowerCase() === normalizedName
-    );
-
-    // If not found locally, fetch from DB
-    if (!foundCity) {
-      const { data } = await apiClient
-        .from("cities")
-        .select(`
-          *,
-          state:states(*)
-        `)
-        .ilike("name", cityName)
-        .limit(1)
-        .maybeSingle();
-      
-      if (data) {
-        foundCity = data as CityWithState;
-      }
-    }
-
-    if (foundCity) {
-      // Also set the state and country
-      if (foundCity.state) {
-        // Fetch country for the state
-        const { data: countryData } = await apiClient
-          .from("countries")
-          .select("*")
-          .eq("id", foundCity.state.country_id)
-          .maybeSingle();
-        
-        if (countryData) {
-          setSelectedCountryState(countryData);
-        }
-        setSelectedStateState(foundCity.state);
-      }
-      setSelectedCityState(foundCity);
-      return true;
-    }
-    
-    return false;
+    const city = cityByName(cityName);
+    if (!city) return false;
+    setSelectedCountryState(INDIA);
+    setSelectedStateState(city.state ?? null);
+    setSelectedCityState(city);
+    return true;
   };
 
   return (
-    <LocationContext.Provider
-      value={{
-        countries,
-        states,
-        cities,
-        allCities,
-        selectedCountry,
-        selectedState,
-        selectedCity,
-        setSelectedCountry,
-        setSelectedState,
-        setSelectedCity,
-        setCityByName,
-        loading,
-      }}
-    >
+    <LocationContext.Provider value={{
+      countries: [INDIA],
+      states: STATIC_STATES,
+      cities,
+      allCities: STATIC_CITIES,
+      selectedCountry,
+      selectedState,
+      selectedCity,
+      setSelectedCountry,
+      setSelectedState,
+      setSelectedCity,
+      setCityByName,
+      loading: false,
+    }}>
       {children}
     </LocationContext.Provider>
   );
