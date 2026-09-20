@@ -184,6 +184,12 @@ const staticRoutes: Array<SitemapEntry & { seo: SeoRoute }> = [
   ["/privacy-policy", "Privacy Policy | BevOry", "Read how BevOry handles personal data and privacy.", "Privacy policy"],
   ["/terms", "Terms of Use | BevOry", "Read the terms that apply when using BevOry.", "Terms of use"],
   ["/disclaimer", "Information Disclaimer | BevOry", "Read important information about BevOry price guides and beverage content.", "Information disclaimer"],
+  ["/cookie-policy", "Cookie & Local Storage Policy | BevOry", "Read how BevOry uses cookies, browser storage and optional analytics.", "Cookie and local storage policy"],
+  ["/responsible-drinking", "Responsible Drinking & Age Policy | BevOry", "Read BevOry's adult-access, local-law and responsible-drinking standards.", "Responsible drinking and age policy"],
+  ["/intellectual-property", "IP, Trademark & Image Rights Policy | BevOry", "Read BevOry's intellectual-property boundaries and rights notice-and-takedown process.", "IP, trademark and image rights policy"],
+  ["/community-guidelines", "Community & Review Guidelines | BevOry", "Read the rules for reviews, ratings and other contributions to BevOry.", "Community and review guidelines"],
+  ["/source-disclosure", "Source, Ranking & Commercial Disclosure | BevOry", "Learn how BevOry sources information, orders results and labels commercial relationships.", "Source, ranking and commercial disclosure"],
+  ["/grievance-redressal", "Grievance Redressal & Legal Contact | BevOry", "Submit privacy, content, account, rights, correction or legal grievances to BevOry.", "Grievance redressal and legal contact"],
 ].map(([path, title, description, heading]) => ({
   path,
   seo: {

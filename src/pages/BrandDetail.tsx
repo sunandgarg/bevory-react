@@ -723,7 +723,7 @@ const BrandDetail = () => {
                           <div className="flex items-center gap-2 mt-1 flex-wrap">
                             {product.category && (
                               <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-                                {product.category.emoji} {product.category.name}
+                                {product.category.name}
                               </Badge>
                             )}
                             {product.volume && (

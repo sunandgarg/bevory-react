@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, Eye, EyeOff, Loader2, Phone, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { CURRENT_POLICY_VERSION } from "@/integrations/api/client";
 import { z } from "zod";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 
@@ -24,19 +26,36 @@ const Auth = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [policyAccepted, setPolicyAccepted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string; fullName?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{
+    email?: string;
+    password?: string;
+    fullName?: string;
+    phone?: string;
+    policy?: string;
+  }>({});
   
   const { signIn, signUp, signInWithGoogle, signInWithPhone, verifyOTP, user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const oauthError = new URLSearchParams(window.location.search).get("oauth_error");
-    if (!oauthError) return;
-    toast({ title: "Google sign-in failed", description: oauthError, variant: "destructive" });
-    window.history.replaceState({}, document.title, window.location.pathname);
+    const searchParams = new URLSearchParams(window.location.search);
+    const invitedEmail = searchParams.get("email");
+    const oauthError = searchParams.get("oauth_error");
+
+    if (invitedEmail && emailSchema.safeParse(invitedEmail).success) {
+      setEmail(invitedEmail);
+      setIsLogin(false);
+    }
+    if (oauthError) {
+      toast({ title: "Google sign-in failed", description: oauthError, variant: "destructive" });
+    }
+    if (invitedEmail || oauthError) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   }, [toast]);
 
   useEffect(() => {
@@ -49,12 +68,14 @@ const Auth = () => {
       try { emailSchema.parse(email); } catch (e) { if (e instanceof z.ZodError) newErrors.email = e.errors[0].message; }
       try { passwordSchema.parse(password); } catch (e) { if (e instanceof z.ZodError) newErrors.password = e.errors[0].message; }
       if (!isLogin && !fullName.trim()) newErrors.fullName = "Please enter your name";
+      if (!isLogin && !policyAccepted) newErrors.policy = "Please accept the current Terms and Privacy Policy";
     } else if (authMode === "phone") {
       try { phoneSchema.parse(phone); } catch (e) { if (e instanceof z.ZodError) newErrors.phone = e.errors[0].message; }
+      if (!policyAccepted) newErrors.policy = "Please accept the current Terms and Privacy Policy";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [authMode, email, password, fullName, phone, isLogin]);
+  }, [authMode, email, password, fullName, phone, isLogin, policyAccepted]);
 
   const handleEmailSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +91,7 @@ const Auth = () => {
           navigate("/");
         }
       } else {
-        const { error } = await signUp(email, password, fullName);
+        const { error } = await signUp(email, password, fullName, policyAccepted);
         if (error) {
           toast({ title: error.message.includes("already registered") ? "Account exists" : "Sign up failed", description: error.message, variant: "destructive" });
         } else {
@@ -79,7 +100,7 @@ const Auth = () => {
         }
       }
     } finally { setLoading(false); }
-  }, [validateForm, isLogin, email, password, fullName, signIn, signUp, toast, navigate]);
+  }, [validateForm, isLogin, email, password, fullName, policyAccepted, signIn, signUp, toast, navigate]);
 
   const handlePhoneSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +108,7 @@ const Auth = () => {
     setLoading(true);
     try {
       const formattedPhone = phone.startsWith("+") ? phone : `+91${phone}`;
-      const { error } = await signInWithPhone(formattedPhone);
+      const { error } = await signInWithPhone(formattedPhone, policyAccepted);
       if (error) {
         toast({ title: "Failed to send OTP", description: error.message, variant: "destructive" });
       } else {
@@ -96,26 +117,68 @@ const Auth = () => {
         setAuthMode("otp");
       }
     } finally { setLoading(false); }
-  }, [validateForm, phone, signInWithPhone, toast]);
+  }, [validateForm, phone, policyAccepted, signInWithPhone, toast]);
 
   const handleOTPSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (otp.length !== 6) { toast({ title: "Invalid OTP", description: "Enter the 6-digit code.", variant: "destructive" }); return; }
     setLoading(true);
     try {
-      const { error } = await verifyOTP(phone, otp);
+      const { error } = await verifyOTP(phone, otp, policyAccepted);
       if (error) { toast({ title: "Verification failed", description: error.message, variant: "destructive" }); }
       else { toast({ title: "Welcome!" }); navigate("/"); }
     } finally { setLoading(false); }
-  }, [otp, phone, verifyOTP, toast, navigate]);
+  }, [otp, phone, policyAccepted, verifyOTP, toast, navigate]);
 
   const handleGoogleSignIn = useCallback(async () => {
+    if (!policyAccepted) {
+      setErrors((current) => ({ ...current, policy: "Please accept the current Terms and Privacy Policy" }));
+      return;
+    }
     setLoading(true);
     try {
-      const { error } = await signInWithGoogle();
+      const { error } = await signInWithGoogle(policyAccepted);
       if (error) toast({ title: "Google sign-in failed", description: error.message, variant: "destructive" });
     } finally { setLoading(false); }
-  }, [signInWithGoogle, toast]);
+  }, [policyAccepted, signInWithGoogle, toast]);
+
+  const handlePhoneMode = useCallback(() => {
+    if (!policyAccepted) {
+      setErrors((current) => ({ ...current, policy: "Please accept the current Terms and Privacy Policy" }));
+      return;
+    }
+    setErrors((current) => ({ ...current, policy: undefined }));
+    setAuthMode("phone");
+  }, [policyAccepted]);
+
+  const policyAcceptance = (
+    <div className="space-y-2">
+      <div className="flex items-start gap-3 rounded-md border border-border p-3">
+        <Checkbox
+          id="policy-acceptance"
+          checked={policyAccepted}
+          onCheckedChange={(checked) => {
+            setPolicyAccepted(checked === true);
+            if (checked === true) setErrors((current) => ({ ...current, policy: undefined }));
+          }}
+          aria-describedby="policy-acceptance-description"
+        />
+        <div
+          id="policy-acceptance-description"
+          className="text-xs leading-relaxed text-muted-foreground"
+        >
+          <label htmlFor="policy-acceptance" className="cursor-pointer">
+            I confirm that I am 25 or older, meet the legal drinking age in my location, and accept BevOry&apos;s current{" "}
+          </label>
+          <Link to="/terms" className="underline underline-offset-2 hover:text-foreground">Terms</Link>{" "}
+          and <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-foreground">Privacy Policy</Link>{" "}
+          (version {CURRENT_POLICY_VERSION}).
+          {isLogin && authMode === "email" ? " This is required for Google or phone, but not for email sign-in." : ""}
+        </div>
+      </div>
+      {errors.policy && <p className="text-sm text-destructive" role="alert">{errors.policy}</p>}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -172,7 +235,8 @@ const Auth = () => {
                 {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                 <p className="text-xs text-muted-foreground">We'll send you a verification code via SMS</p>
               </div>
-              <Button type="submit" disabled={loading} className="w-full h-12">
+              {policyAcceptance}
+              <Button type="submit" disabled={loading || !policyAccepted} className="w-full h-12">
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Send OTP"}
               </Button>
             </form>
@@ -208,7 +272,8 @@ const Auth = () => {
                   </div>
                   {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                 </div>
-                <Button type="submit" disabled={loading} className="w-full h-12">
+                {policyAcceptance}
+                <Button type="submit" disabled={loading || (!isLogin && !policyAccepted)} className="w-full h-12">
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : isLogin ? "Sign In" : "Create Account"}
                 </Button>
               </form>
@@ -220,18 +285,18 @@ const Auth = () => {
               </div>
 
               <div className="space-y-3">
-                <Button type="button" variant="outline" onClick={handleGoogleSignIn} disabled={loading} className="w-full h-12 flex items-center justify-center gap-3">
+                <Button type="button" variant="outline" onClick={handleGoogleSignIn} disabled={loading || !policyAccepted} className="w-full h-12 flex items-center justify-center gap-3">
                   <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                   Continue with Google
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setAuthMode("phone")} className="w-full h-12 flex items-center justify-center gap-3">
+                <Button type="button" variant="outline" onClick={handlePhoneMode} disabled={!policyAccepted} className="w-full h-12 flex items-center justify-center gap-3">
                   <Phone className="w-5 h-5" /> Continue with Phone
                 </Button>
               </div>
 
               <p className="text-center mt-6 text-muted-foreground text-sm">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-                <button onClick={() => { setIsLogin(!isLogin); setErrors({}); }} className="text-primary font-semibold hover:underline">
+                <button onClick={() => { setIsLogin(!isLogin); setPolicyAccepted(false); setErrors({}); }} className="text-primary font-semibold hover:underline">
                   {isLogin ? "Sign Up" : "Sign In"}
                 </button>
               </p>

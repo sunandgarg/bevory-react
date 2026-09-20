@@ -6,8 +6,22 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocation, POPULAR_CITIES, CITIES_BY_STATE } from "@/hooks/useLocation";
 import { useAppSettings } from "@/hooks/useAppSettings";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
+import { Link, useLocation as useRouterLocation } from "react-router-dom";
 
-const AGE_VERIFIED_KEY = "bevory-age-verified-v25";
+const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
+const AGE_POLICY_VERSION = "2026-09-20";
+const PUBLIC_LEGAL_PATHS = new Set([
+  "/terms",
+  "/privacy-policy",
+  "/cookie-policy",
+  "/disclaimer",
+  "/responsible-drinking",
+  "/intellectual-property",
+  "/community-guidelines",
+  "/source-disclosure",
+  "/grievance-redressal",
+  "/contact",
+]);
 
 const AgeVerificationModal = () => {
   const [isOpen, setIsOpen] = useState(() => !localStorage.getItem(AGE_VERIFIED_KEY));
@@ -17,6 +31,7 @@ const AgeVerificationModal = () => {
   const [selectedCityName, setSelectedCityName] = useState<string>("Gurgaon");
   const { setCityByName } = useLocation();
   const { ageSettings, loading: settingsLoading } = useAppSettings();
+  const { pathname } = useRouterLocation();
 
   useEffect(() => {
     if (settingsLoading) return;
@@ -40,7 +55,11 @@ const AgeVerificationModal = () => {
 
   const handleVerify = async () => {
     await setCityByName(selectedCityName);
-    localStorage.setItem(AGE_VERIFIED_KEY, "true");
+    localStorage.setItem(AGE_VERIFIED_KEY, JSON.stringify({
+      confirmedAt: new Date().toISOString(),
+      policyVersion: AGE_POLICY_VERSION,
+      minimumAge: 25,
+    }));
     window.dispatchEvent(new Event("bevory:age-verified"));
     setIsVerified(true);
     setIsOpen(false);
@@ -78,7 +97,8 @@ const AgeVerificationModal = () => {
     return filtered;
   };
 
-  if (isVerified || !isOpen) return null;
+  const normalizedPathname = pathname.replace(/\/+$/, "");
+  if (isVerified || !isOpen || PUBLIC_LEGAL_PATHS.has(normalizedPathname)) return null;
 
   const filteredCities = getFilteredCities();
 
@@ -141,6 +161,12 @@ const AgeVerificationModal = () => {
 
                 <p className="mt-6 text-xs text-muted-foreground">
                   {ageSettings.termsText}
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  By continuing, you confirm that you are 25+ and meet local law. Read our{" "}
+                  <Link to="/terms" className="text-foreground underline underline-offset-2">Terms</Link>
+                  {" "}and{" "}
+                  <Link to="/privacy-policy" className="text-foreground underline underline-offset-2">Privacy Policy</Link>.
                 </p>
               </div>
             ) : (

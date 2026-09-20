@@ -11,6 +11,7 @@ import { apiClient } from "@/integrations/api/client";
 import { useToast } from "@/hooks/use-toast";
 import { generateProductUrl } from "@/lib/productSlug";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface AIRecommendation {
   category: string;
@@ -123,7 +124,7 @@ const PartyPlanner = () => {
   const handleSharePlan = async () => {
     const planText = step === "ai-results" && aiRecommendations
       ? `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${aiRecommendations.recommendations.map(r => `${r.category}: ${r.quantity} items - ₹${r.estimatedCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${aiRecommendations.totalEstimatedCost.toLocaleString()}\n\nPlanned with BevOry 🥂`
-      : `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${recommendations.map(r => `${r.category.emoji || "🍷"} ${r.category.name}: ${r.quantity} items - ₹${r.totalCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${totalCost.toLocaleString()}\n\nPlanned with BevOry 🥂`;
+      : `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${recommendations.map(r => `${r.category.name}: ${r.quantity} items - ₹${r.totalCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${totalCost.toLocaleString()}\n\nPlanned with BevOry 🥂`;
 
     try {
       if (navigator.share) {
@@ -382,7 +383,11 @@ const PartyPlanner = () => {
                               {isSelected && <Check className="h-3 w-3" />}
                             </span>
                             <div>
-                              <span className="text-2xl block mb-1">{category.emoji || "🍷"}</span>
+                              <CategoryBottleVisual
+                                slug={category.slug}
+                                categoryName={category.name}
+                                className="mb-1 h-12 w-12"
+                              />
                               <p className="font-medium text-sm">{category.name}</p>
                             </div>
                           </div>
@@ -596,7 +601,11 @@ const PartyPlanner = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
-                          <span className="text-3xl">{rec.category.emoji}</span>
+                          <CategoryBottleVisual
+                            slug={rec.category.slug}
+                            categoryName={rec.category.name}
+                            className="h-12 w-12 shrink-0"
+                          />
                           <div>
                             <h3 className="font-semibold">{rec.category.name}</h3>
                             <p className="text-xs text-muted-foreground">{rec.notes}</p>

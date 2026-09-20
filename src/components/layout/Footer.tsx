@@ -29,6 +29,12 @@ const Footer = () => {
               <li><Link to="/privacy-policy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</Link></li>
               <li><Link to="/disclaimer" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Disclaimer</Link></li>
+              <li><Link to="/cookie-policy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Cookie & Storage Policy</Link></li>
+              <li><Link to="/responsible-drinking" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Responsible Drinking</Link></li>
+              <li><Link to="/intellectual-property" className="text-xs text-muted-foreground hover:text-foreground transition-colors">IP & Takedown</Link></li>
+              <li><Link to="/community-guidelines" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Community Guidelines</Link></li>
+              <li><Link to="/source-disclosure" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Source & Ranking Disclosure</Link></li>
+              <li><Link to="/grievance-redressal" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Grievance Redressal</Link></li>
               <li><Link to="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
             </ul>
           </div>
@@ -51,7 +57,7 @@ const Footer = () => {
             <p className="text-[10px] text-muted-foreground">© 2026 BevOry</p>
           </div>
           <p className="text-[10px] text-muted-foreground mt-2">
-            For adults of legal drinking age only. Drink responsibly.
+            For adults aged 25+ who also meet local law. BevOry does not sell or deliver alcohol.
           </p>
           <button
             type="button"

@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { randomUUID } from "node:crypto";
+import { randomUUID, timingSafeEqual } from "node:crypto";
 import { Prisma } from "@prisma/client";
 import { prisma, toRecordData } from "./db.js";
 
@@ -15,7 +15,124 @@ export type AuthUser = {
 
 export type AuthenticatedRequest = Request & { authUser?: AuthUser };
 
-const jwtSecret = () => process.env.JWT_SECRET || "bevory-local-development-only";
+export const CURRENT_POLICY_VERSION = "2026-09-20";
+
+export type PolicyAcceptanceInput = {
+  accepted?: boolean;
+  termsVersion?: string;
+  privacyVersion?: string;
+};
+
+type PolicyAcceptanceSource = "email_signup" | "google" | "phone_otp";
+
+export type PolicyAcceptanceRecord = {
+  terms_version: string;
+  privacy_version: string;
+  accepted_at: string;
+  source: PolicyAcceptanceSource;
+};
+
+const LOCAL_JWT_SECRET = "bevory-local-development-only";
+
+export const resolveJwtSecret = (nodeEnv: string | undefined, configuredSecret: string | undefined) => {
+  const secret = configuredSecret?.trim();
+  if (nodeEnv !== "production") return secret || LOCAL_JWT_SECRET;
+
+  const looksLikePlaceholder = !secret
+    || /replace|change[ -_]?me|example|before-shared-use|local-development|long-random-secret/i.test(secret)
+    || new Set(secret).size < 10;
+  if (looksLikePlaceholder || Buffer.byteLength(secret, "utf8") < 32) {
+    throw new Error("JWT_SECRET must be a strong, unique secret of at least 32 bytes in production");
+  }
+  return secret;
+};
+
+const jwtSigningSecret = resolveJwtSecret(process.env.NODE_ENV, process.env.JWT_SECRET);
+const jwtSecret = () => jwtSigningSecret;
+
+export class PolicyAcceptanceError extends Error {
+  constructor() {
+    super("You must accept the current Terms and Privacy Policy before creating an account");
+    this.name = "PolicyAcceptanceError";
+  }
+}
+
+const policyAcceptanceError = () => new PolicyAcceptanceError();
+
+export const recordPolicyAcceptance = (
+  input: PolicyAcceptanceInput | undefined,
+  source: PolicyAcceptanceSource,
+  acceptedAt = new Date(),
+): PolicyAcceptanceRecord => {
+  if (
+    input?.accepted !== true
+    || input.termsVersion !== CURRENT_POLICY_VERSION
+    || input.privacyVersion !== CURRENT_POLICY_VERSION
+  ) {
+    throw policyAcceptanceError();
+  }
+
+  return {
+    terms_version: CURRENT_POLICY_VERSION,
+    privacy_version: CURRENT_POLICY_VERSION,
+    accepted_at: acceptedAt.toISOString(),
+    source,
+  };
+};
+
+const isPolicyAcceptanceRecord = (value: unknown): value is PolicyAcceptanceRecord => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const record = value as Record<string, unknown>;
+  return typeof record.terms_version === "string"
+    && typeof record.privacy_version === "string"
+    && typeof record.accepted_at === "string"
+    && typeof record.source === "string";
+};
+
+export const withPolicyAcceptance = (
+  metadata: Record<string, unknown>,
+  acceptance: PolicyAcceptanceRecord,
+) => {
+  const rawHistory = Array.isArray(metadata.policy_acceptance_history)
+    ? metadata.policy_acceptance_history.filter(isPolicyAcceptanceRecord)
+    : [];
+  const currentSnapshot = isPolicyAcceptanceRecord(metadata.policy_acceptance)
+    ? metadata.policy_acceptance
+    : null;
+  const uniqueHistory = [...rawHistory, ...(currentSnapshot ? [currentSnapshot] : [])].filter(
+    (record, index, records) => records.findIndex((candidate) => (
+      candidate.terms_version === record.terms_version
+      && candidate.privacy_version === record.privacy_version
+    )) === index,
+  );
+  const existingAcceptance = uniqueHistory.find((record) => (
+    record.terms_version === acceptance.terms_version
+    && record.privacy_version === acceptance.privacy_version
+  ));
+  const immutableAcceptance = existingAcceptance ?? acceptance;
+  const policyAcceptanceHistory = existingAcceptance
+    ? uniqueHistory
+    : [...uniqueHistory, acceptance];
+
+  return JSON.parse(JSON.stringify({
+    ...metadata,
+    terms_version: immutableAcceptance.terms_version,
+    privacy_version: immutableAcceptance.privacy_version,
+    policy_accepted_at: immutableAcceptance.accepted_at,
+    policy_acceptance: immutableAcceptance,
+    policy_acceptance_history: policyAcceptanceHistory,
+  })) as Prisma.InputJsonObject;
+};
+
+const withoutPolicyAcceptanceFields = (metadata: Record<string, unknown>) => Object.fromEntries(
+  Object.entries(metadata).filter(([key]) => ![
+    "terms_version",
+    "privacy_version",
+    "policy_accepted_at",
+    "policy_acceptance",
+    "policy_acceptance_history",
+  ].includes(key)),
+);
 
 const serializeUser = (user: {
   id: string;
@@ -105,12 +222,14 @@ export const signUp = async (input: {
   phone?: string;
   password?: string;
   data?: Record<string, unknown>;
+  policyAcceptance?: PolicyAcceptanceInput;
 }) => {
   const email = input.email?.trim().toLowerCase() || null;
   if (!email) throw new Error("A valid email is required");
   if (input.phone) throw new Error("Phone sign-up must use OTP verification");
   if (!input.password) throw new Error("Password is required");
   if (input.password.length < 8) throw new Error("Password must be at least 8 characters");
+  const policyAcceptance = recordPolicyAcceptance(input.policyAcceptance, "email_signup");
 
   const duplicate = await prisma.user.findUnique({ where: { email } });
   if (duplicate) throw new Error("A user with this email or phone already exists");
@@ -123,7 +242,7 @@ export const signUp = async (input: {
       email,
       phone: null,
       passwordHash,
-      metadata: (input.data ?? {}) as Prisma.InputJsonObject,
+      metadata: withPolicyAcceptance(withoutPolicyAcceptanceFields(input.data ?? {}), policyAcceptance),
     },
   });
   const serialized = serializeUser(user);
@@ -145,13 +264,43 @@ export const getUserFromToken = async (token: string) => {
   return user ? serializeUser(user) : null;
 };
 
-export const createOAuthState = (redirectTo: string) =>
-  jwt.sign({ purpose: "google-oauth", redirectTo }, jwtSecret(), { expiresIn: "10m" });
+export const createOAuthState = (
+  redirectTo: string,
+  policyAcceptance: PolicyAcceptanceInput | undefined,
+  nonce: string,
+) => {
+  if (nonce.length < 16) throw new Error("OAuth nonce is required");
+  if (policyAcceptance) recordPolicyAcceptance(policyAcceptance, "google");
+  return jwt.sign({ purpose: "google-oauth", redirectTo, policyAcceptance, nonce }, jwtSecret(), { expiresIn: "10m" });
+};
 
-export const verifyOAuthState = (state: string) => {
-  const payload = jwt.verify(state, jwtSecret()) as { purpose?: string; redirectTo?: string };
-  if (payload.purpose !== "google-oauth" || !payload.redirectTo) throw new Error("Invalid OAuth state");
-  return payload.redirectTo;
+export const verifyOAuthState = (state: string, expectedNonce: string | undefined) => {
+  const payload = jwt.verify(state, jwtSecret()) as {
+    purpose?: string;
+    redirectTo?: string;
+    policyAcceptance?: PolicyAcceptanceInput;
+    nonce?: string;
+  };
+  if (payload.purpose !== "google-oauth" || !payload.redirectTo || !payload.nonce || !expectedNonce) {
+    throw new Error("Invalid OAuth state");
+  }
+  const actual = Buffer.from(payload.nonce);
+  const expected = Buffer.from(expectedNonce);
+  if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) throw new Error("Invalid OAuth state");
+  return { redirectTo: payload.redirectTo, policyAcceptance: payload.policyAcceptance };
+};
+
+export const validatePolicyAcceptanceBeforePhoneOtp = async (
+  phone: string,
+  policyAcceptance: PolicyAcceptanceInput | undefined,
+) => {
+  const existing = await prisma.user.findUnique({
+    where: { phone: phone.trim() },
+    select: { id: true },
+  });
+  if (policyAcceptance !== undefined || !existing) {
+    recordPolicyAcceptance(policyAcceptance, "phone_otp");
+  }
 };
 
 export const findOrCreateExternalUser = async (profile: {
@@ -160,17 +309,24 @@ export const findOrCreateExternalUser = async (profile: {
   avatarUrl?: string;
   provider: "google";
   providerId: string;
-}) => {
+}, policyAcceptanceInput?: PolicyAcceptanceInput) => {
   const email = profile.email.trim().toLowerCase();
   const existing = await prisma.user.findUnique({ where: { email } });
   const previousMetadata = existing ? toRecordData(existing.metadata) : {};
-  const metadata = JSON.parse(JSON.stringify({
+  const profileMetadata = JSON.parse(JSON.stringify({
     ...previousMetadata,
     full_name: profile.fullName ?? previousMetadata.full_name,
     avatar_url: profile.avatarUrl ?? previousMetadata.avatar_url,
     provider: profile.provider,
     provider_id: profile.providerId,
   })) as Prisma.InputJsonObject;
+  const policyAcceptance = policyAcceptanceInput
+    ? recordPolicyAcceptance(policyAcceptanceInput, "google")
+    : null;
+  if (!existing && !policyAcceptance) throw policyAcceptanceError();
+  const metadata = policyAcceptance
+    ? withPolicyAcceptance(profileMetadata, policyAcceptance)
+    : profileMetadata;
   const user = existing
     ? await prisma.user.update({ where: { id: existing.id }, data: { metadata } })
     : await prisma.user.create({ data: { id: randomUUID(), email, metadata } });
@@ -179,12 +335,23 @@ export const findOrCreateExternalUser = async (profile: {
   return serialized;
 };
 
-export const findOrCreatePhoneUser = async (phone: string) => {
+export const findOrCreatePhoneUser = async (phone: string, policyAcceptanceInput?: PolicyAcceptanceInput) => {
   const normalized = phone.trim();
   const existing = await prisma.user.findUnique({ where: { phone: normalized } });
-  const user = existing ?? await prisma.user.create({
-    data: { id: randomUUID(), phone: normalized, metadata: { provider: "phone" } },
-  });
+  const previousMetadata = existing ? toRecordData(existing.metadata) : {};
+  const policyAcceptance = policyAcceptanceInput
+    ? recordPolicyAcceptance(policyAcceptanceInput, "phone_otp")
+    : null;
+  if (!existing && !policyAcceptance) throw policyAcceptanceError();
+  const providerMetadata = { ...previousMetadata, provider: "phone" };
+  const metadata = policyAcceptance
+    ? withPolicyAcceptance(providerMetadata, policyAcceptance)
+    : providerMetadata as Prisma.InputJsonObject;
+  const user = existing
+    ? policyAcceptance
+      ? await prisma.user.update({ where: { id: existing.id }, data: { metadata } })
+      : existing
+    : await prisma.user.create({ data: { id: randomUUID(), phone: normalized, metadata } });
   const serialized = serializeUser(user);
   await upsertProfile(serialized);
   return serialized;

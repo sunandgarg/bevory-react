@@ -69,6 +69,12 @@ const AdminPerformanceReport = lazy(() => import("./pages/admin/AdminPerformance
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Disclaimer = lazy(() => import("./pages/Disclaimer"));
+const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const ResponsibleDrinking = lazy(() => import("./pages/ResponsibleDrinking"));
+const IntellectualPropertyPolicy = lazy(() => import("./pages/IntellectualPropertyPolicy"));
+const CommunityGuidelines = lazy(() => import("./pages/CommunityGuidelines"));
+const GrievanceRedressal = lazy(() => import("./pages/GrievanceRedressal"));
+const SourceDisclosure = lazy(() => import("./pages/SourceDisclosure"));
 const Contact = lazy(() => import("./pages/Contact"));
 
 // Optimized QueryClient with aggressive caching
@@ -145,6 +151,12 @@ const App = () => (
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms" element={<Terms />} />
                   <Route path="/disclaimer" element={<Disclaimer />} />
+                  <Route path="/cookie-policy" element={<CookiePolicy />} />
+                  <Route path="/responsible-drinking" element={<ResponsibleDrinking />} />
+                  <Route path="/intellectual-property" element={<IntellectualPropertyPolicy />} />
+                  <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+                  <Route path="/grievance-redressal" element={<GrievanceRedressal />} />
+                  <Route path="/source-disclosure" element={<SourceDisclosure />} />
                   <Route path="/contact" element={<Contact />} />
 
                   <Route path="/admin" element={<AdminLayout />}>

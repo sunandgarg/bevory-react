@@ -4,7 +4,7 @@ import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
-const AGE_VERIFIED_KEY = "bevory-age-verified-v25";
+const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const MEASUREMENT_ID = "G-QPBTP7TCDV";
 
 type ConsentChoice = "granted" | "denied";
@@ -91,9 +91,14 @@ const PrivacyConsent = () => {
           <p id="privacy-consent-description" className="mt-1 text-xs text-muted-foreground">
             BevOry uses necessary storage for age and city preferences. Optional Google Analytics helps us improve the site and stays off unless you allow it.
           </p>
-          <Link to="/privacy-policy" className="mt-2 inline-block text-xs text-foreground underline underline-offset-2">
-            Read the privacy policy
-          </Link>
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+            <Link to="/privacy-policy" className="text-xs text-foreground underline underline-offset-2">
+              Privacy policy
+            </Link>
+            <Link to="/cookie-policy" className="text-xs text-foreground underline underline-offset-2">
+              Cookie & local storage policy
+            </Link>
+          </div>
         </div>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-2">

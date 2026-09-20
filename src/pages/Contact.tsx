@@ -2,6 +2,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => (
   <div className="min-h-screen bg-background">
@@ -17,8 +18,6 @@ const Contact = () => (
           <div>
             <h3 className="font-semibold text-sm mb-1">Email</h3>
             <a href="mailto:bevory.main@gmail.com" className="text-sm text-primary hover:underline">bevory.main@gmail.com</a>
-            <br />
-            <a href="mailto:contact@bevory.io" className="text-sm text-muted-foreground hover:underline">contact@bevory.io</a>
           </div>
         </div>
 
@@ -42,6 +41,12 @@ const Contact = () => (
       <div className="mt-8 p-4 rounded-xl bg-muted/50 border border-border/50">
         <p className="text-xs text-muted-foreground">
           <strong>Note:</strong> BevOry does not offer home delivery services. Please be cautious of any fraudulent messages claiming delivery in our name. For any concerns, contact us directly using the information above.
+        </p>
+        <p className="mt-3 text-xs text-muted-foreground">
+          For privacy, content, rights, account, or legal complaints, follow our{" "}
+          <Link to="/grievance-redressal" className="text-primary hover:underline">Grievance Redressal process</Link>.
+          These are BevOry's current published operator-contact details; no separate legal-entity name or postal service
+          address is represented here.
         </p>
       </div>
     </main>

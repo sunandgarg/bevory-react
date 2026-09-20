@@ -46,6 +46,12 @@ const staticSeo = {
   "/privacy-policy": ["Privacy Policy | BevOry", "Read how BevOry handles personal data and privacy."],
   "/terms": ["Terms of Use | BevOry", "Read the terms that apply when using BevOry."],
   "/disclaimer": ["Information Disclaimer | BevOry", "Read important information about BevOry price guides and beverage content."],
+  "/cookie-policy": ["Cookie & Local Storage Policy | BevOry", "Read how BevOry uses cookies, browser storage and optional analytics."],
+  "/responsible-drinking": ["Responsible Drinking & Age Policy | BevOry", "Read BevOry's adult-access, local-law and responsible-drinking standards."],
+  "/intellectual-property": ["IP, Trademark & Image Rights Policy | BevOry", "Read BevOry's intellectual-property boundaries and rights notice-and-takedown process."],
+  "/community-guidelines": ["Community & Review Guidelines | BevOry", "Read the rules for reviews, ratings and other contributions to BevOry."],
+  "/source-disclosure": ["Source, Ranking & Commercial Disclosure | BevOry", "Learn how BevOry sources information, orders results and labels commercial relationships."],
+  "/grievance-redressal": ["Grievance Redressal & Legal Contact | BevOry", "Submit privacy, content, account, rights, correction or legal grievances to BevOry."],
 };
 
 const privatePrefixes = [

@@ -53,6 +53,28 @@ describe("origin SEO rendering", () => {
     expect(resolveSeo("/not-a-real-page", {}).statusCode).toBe(404);
   });
 
+  it("publishes the complete legal suite as indexable canonical routes", () => {
+    const legalPaths = [
+      "/terms",
+      "/privacy-policy",
+      "/disclaimer",
+      "/cookie-policy",
+      "/responsible-drinking",
+      "/intellectual-property",
+      "/community-guidelines",
+      "/source-disclosure",
+      "/grievance-redressal",
+    ];
+
+    for (const path of legalPaths) {
+      const seo = resolveSeo(path, {});
+      expect(seo.statusCode).toBeUndefined();
+      expect(seo.robots).toContain("index, follow");
+      expect(seo.canonicalPath).toBe(path);
+      expect(seo.title).toContain("Bevory");
+    }
+  });
+
   it("redirects root and legacy state URLs to city-first routes", () => {
     expect(legacyRedirectPath("/")).toBe("/gurgaon");
     expect(legacyRedirectPath("/haryana")).toBe("/gurgaon");

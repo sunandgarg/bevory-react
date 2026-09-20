@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { User, Plus, Trash2, UserCog, Filter, UserPlus, Send, RefreshCw, Settings2, Shield, Eye, Pencil, Check, X } from "lucide-react";
+import { User, Trash2, UserCog, Filter, UserPlus, Send, RefreshCw, Settings2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -72,10 +72,6 @@ const userValidationSchema: ValidationSchema = {
     required: true,
     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
-  password: {
-    required: true,
-    minLength: 8,
-  },
 };
 
 const AdminUsers = () => {
@@ -90,13 +86,10 @@ const AdminUsers = () => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [newRole, setNewRole] = useState<string>("user");
   const [newUserEmail, setNewUserEmail] = useState("");
-  const [newUserPassword, setNewUserPassword] = useState("");
-  const [newUserName, setNewUserName] = useState("");
   const [newUserRole, setNewUserRole] = useState("user");
   const [addUserTab, setAddUserTab] = useState<"create" | "invite">("create");
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [creating, setCreating] = useState(false);
   const [selectedManager, setSelectedManager] = useState<string | null>(null);
   const { toast } = useToast();
   const { errors, validate, clearErrors, clearError } = useFormValidation(userValidationSchema);
@@ -253,54 +246,6 @@ const AdminUsers = () => {
     return perm[permission] as boolean;
   };
 
-  const createUser = async () => {
-    if (!validate({ email: newUserEmail, password: newUserPassword })) {
-      toast({ title: "Validation Error", description: "Please fill all required fields correctly", variant: "destructive" });
-      return;
-    }
-
-    setCreating(true);
-    
-    try {
-      const { data, error } = await apiClient.auth.signUp({
-        email: newUserEmail,
-        password: newUserPassword,
-        options: {
-          data: {
-            full_name: newUserName || null,
-          },
-        },
-      });
-
-      if (error) throw error;
-
-      if (data.user) {
-        if (newUserRole !== "user") {
-          await apiClient.from("user_roles").insert({
-            user_id: data.user.id,
-            role: newUserRole as "admin" | "user" | "content_manager" | "content_writer",
-          });
-        }
-
-        toast({ 
-          title: "User Created!", 
-          description: `${newUserEmail} has been added with ${ROLE_LABELS[newUserRole]} role` 
-        });
-        setShowAddUserDialog(false);
-        resetAddUserForm();
-        fetchData();
-      }
-    } catch (error: any) {
-      toast({ 
-        title: "Error", 
-        description: error.message || "Failed to create user", 
-        variant: "destructive" 
-      });
-    }
-    
-    setCreating(false);
-  };
-
   const sendInvite = async () => {
     if (!validate({ email: newUserEmail })) {
       toast({ title: "Validation Error", description: "Please enter a valid email address", variant: "destructive" });
@@ -320,8 +265,6 @@ const AdminUsers = () => {
 
   const resetAddUserForm = () => {
     setNewUserEmail("");
-    setNewUserPassword("");
-    setNewUserName("");
     setNewUserRole("user");
     setSelectedManager(null);
     clearErrors();
@@ -696,50 +639,16 @@ const AdminUsers = () => {
             </TabsList>
             
             <TabsContent value="create" className="space-y-4 mt-4">
-              <FormField label="Full Name">
-                <Input
-                  placeholder="John Doe"
-                  value={newUserName}
-                  onChange={(e) => setNewUserName(e.target.value)}
-                />
-              </FormField>
-              <FormField label="Email Address" required error={errors.email}>
-                <Input
-                  type="email"
-                  placeholder="user@example.com"
-                  value={newUserEmail}
-                  onChange={(e) => {
-                    setNewUserEmail(e.target.value);
-                    clearError("email");
-                  }}
-                />
-              </FormField>
-              <FormField label="Password" required error={errors.password}>
-                <Input
-                  type="password"
-                  placeholder="Min 6 characters"
-                  value={newUserPassword}
-                  onChange={(e) => {
-                    setNewUserPassword(e.target.value);
-                    clearError("password");
-                  }}
-                />
-              </FormField>
-              <FormField label="Assign Role">
-                <Select value={newUserRole} onValueChange={setNewUserRole}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="user">User - Basic access</SelectItem>
-                    <SelectItem value="content_writer">Content Writer - Create content</SelectItem>
-                    <SelectItem value="content_manager">Content Manager - Manage content</SelectItem>
-                    <SelectItem value="admin">Admin - Full access</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <Button className="w-full" onClick={createUser} disabled={creating}>
-                {creating ? "Creating..." : "Create User"}
+              <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 text-sm">
+                <p className="font-medium">Use the invite flow for new accounts</p>
+                <p className="mt-1 text-muted-foreground">
+                  An administrator cannot accept BevOry&apos;s Terms and Privacy Policy on another person&apos;s behalf.
+                  Invite the person to create their own account and record their acceptance, then assign the intended
+                  role here.
+                </p>
+              </div>
+              <Button className="w-full" onClick={() => setAddUserTab("invite")}>
+                <Send className="mr-1 h-4 w-4" /> Continue to Invite User
               </Button>
             </TabsContent>
             

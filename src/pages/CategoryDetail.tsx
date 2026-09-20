@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { apiClient } from "@/integrations/api/client";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface SubCategory {
   id: string;
@@ -153,51 +154,30 @@ const CategoryDetail = () => {
             animate={{ opacity: 1 }}
             className="relative"
           >
-            {category.image_url ? (
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={category.image_url}
-                  alt={`${category.name} beverage category`}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-3xl">{category.emoji}</span>
-                      <h1 className="text-3xl font-serif font-bold text-foreground">{category.name}</h1>
-                    </div>
-                    <p className="text-muted-foreground">
-                      {products.length} products
-                      {selectedCity && <span className="text-accent"> • {selectedCity.name}</span>}
-                    </p>
-                  </motion.div>
+            <div className="p-5 bg-gradient-to-br from-accent/10 to-background">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="flex items-center gap-4"
+              >
+                <div className="w-24 h-24 rounded-2xl bg-secondary/80 flex items-center justify-center flex-shrink-0 shadow-lg border border-border overflow-hidden">
+                  <CategoryBottleVisual
+                    slug={category.slug}
+                    categoryName={category.name}
+                    priority
+                    className="h-full w-full"
+                  />
                 </div>
-              </div>
-            ) : (
-              <div className="p-5 bg-gradient-to-br from-accent/10 to-background">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-start gap-4"
-                >
-                  <div className="w-20 h-20 rounded-2xl bg-secondary flex items-center justify-center text-5xl flex-shrink-0 shadow-lg border border-border">
-                    {category.emoji}
-                  </div>
-                  <div>
-                    <h1 className="text-2xl font-serif font-bold mb-1">{category.name}</h1>
-                    <p className="text-muted-foreground text-sm">
-                      {products.length} products
-                      {selectedCity && <span className="text-accent"> • {selectedCity.name}</span>}
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            )}
+                <div>
+                  <h1 className="text-2xl font-serif font-bold mb-1">{category.name}</h1>
+                  <p className="text-muted-foreground text-sm">
+                    {products.length} products
+                    {selectedCity && <span className="text-accent"> • {selectedCity.name}</span>}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </motion.section>
 
           {/* Description */}

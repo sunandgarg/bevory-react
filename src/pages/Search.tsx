@@ -285,7 +285,7 @@ const Search = () => {
                                 : "bg-secondary text-foreground hover:bg-secondary/80"
                             }`}
                           >
-                            {cat.emoji} {cat.name}
+                            {cat.name}
                           </button>
                         ))}
                       </div>

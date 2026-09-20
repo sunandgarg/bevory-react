@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 const PartyPlannerSection = () => {
   const [guests, setGuests] = useState([10]);
@@ -230,7 +231,11 @@ const PartyPlannerSection = () => {
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-2xl">{rec.category.emoji}</span>
+                      <CategoryBottleVisual
+                        slug={rec.category.slug}
+                        categoryName={rec.category.name}
+                        className="h-10 w-10 shrink-0"
+                      />
                       <div>
                         <h4 className="font-semibold">{rec.category.name}</h4>
                         <p className="text-sm text-muted-foreground">{rec.notes}</p>

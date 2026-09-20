@@ -1,9 +1,14 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { prisma } from "../db.js";
-import { findOrCreatePhoneUser } from "../auth.js";
+import { CURRENT_POLICY_VERSION, findOrCreatePhoneUser } from "../auth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./phoneOtp.js";
 
 const testPhone = "+919000000001";
+const currentAcceptance = {
+  accepted: true as const,
+  termsVersion: CURRENT_POLICY_VERSION,
+  privacyVersion: CURRENT_POLICY_VERSION,
+};
 const describeWithDatabase = process.env.DATABASE_URL ? describe : describe.skip;
 
 describeWithDatabase("phone OTP", () => {
@@ -45,12 +50,25 @@ describeWithDatabase("phone OTP", () => {
   });
 
   it("links a phone account without overwriting existing profile fields", async () => {
-    const user = await findOrCreatePhoneUser(testPhone);
+    const user = await findOrCreatePhoneUser(testPhone, currentAcceptance);
+    expect(user.user_metadata).toMatchObject({
+      terms_version: CURRENT_POLICY_VERSION,
+      privacy_version: CURRENT_POLICY_VERSION,
+      policy_acceptance: { source: "phone_otp" },
+    });
     await prisma.contentRecord.update({
       where: { key: `profiles:${user.id}` },
       data: { data: { id: user.id, phone: testPhone, favorite_city: "Gurgaon" } },
     });
-    await findOrCreatePhoneUser(testPhone);
+    const signedIn = await findOrCreatePhoneUser(testPhone);
+    expect(signedIn.id).toBe(user.id);
+    expect(signedIn.user_metadata.policy_acceptance_history).toHaveLength(1);
+    const updated = await findOrCreatePhoneUser(testPhone, currentAcceptance);
+    expect(updated.user_metadata).toMatchObject({
+      terms_version: CURRENT_POLICY_VERSION,
+      privacy_version: CURRENT_POLICY_VERSION,
+    });
+    expect(updated.user_metadata.policy_acceptance_history).toHaveLength(1);
     const profile = await prisma.contentRecord.findUnique({ where: { key: `profiles:${user.id}` } });
     expect(profile?.data).toMatchObject({ favorite_city: "Gurgaon" });
   });

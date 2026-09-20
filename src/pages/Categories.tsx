@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import SEOHead from "@/components/SEOHead";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 const categoryGradients: Record<string, string> = {
   whisky: "from-amber-500/20 to-amber-500/5",
@@ -174,10 +175,11 @@ const CategoryCard = ({ category, index, productCount, isTrending, citySlug }: C
           </Badge>
         )}
         
-        {/* Emoji */}
-        <span className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-          {category.emoji}
-        </span>
+        <CategoryBottleVisual
+          slug={category.slug}
+          categoryName={category.name}
+          className="mb-3 h-24 w-24 transition-transform duration-300 group-hover:scale-105"
+        />
         
         {/* Name */}
         <h3 className="font-serif font-semibold text-lg text-foreground text-center group-hover:text-accent transition-colors">

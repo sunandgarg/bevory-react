@@ -23,6 +23,8 @@ interface HelpItem {
   order_index: number;
 }
 
+const SUPPORT_EMAIL = "bevory.main@gmail.com";
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   HelpCircle,
   Mail,
@@ -77,7 +79,7 @@ const HelpSupport = () => {
 
     if (isEmail && item.link_url) {
       return (
-        <a key={item.id} href={item.link_url}>
+        <a key={item.id} href={`mailto:${SUPPORT_EMAIL}`}>
           {content}
         </a>
       );
@@ -139,11 +141,16 @@ const HelpSupport = () => {
             Can't find what you're looking for?
           </p>
           <a
-            href="mailto:support@bevory.com"
+            href={`mailto:${SUPPORT_EMAIL}`}
             className="text-accent font-medium text-sm hover:underline"
           >
-            Contact us at support@bevory.com
+            Contact us at {SUPPORT_EMAIL}
           </a>
+          <p className="mt-2 text-xs text-muted-foreground">
+            <Link to="/grievance-redressal" className="underline underline-offset-2 hover:text-foreground">
+              Privacy, content, rights, and legal grievances
+            </Link>
+          </p>
         </div>
       </div>
     </MobileLayout>

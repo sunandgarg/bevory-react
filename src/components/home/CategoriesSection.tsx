@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface Category {
   id: string;
@@ -144,16 +145,11 @@ const CategoriesSection = memo(() => {
                   className={`group/card block cursor-pointer rounded-2xl bg-gradient-to-b ${getGradient(category.slug)} p-6 text-center transition-all hover-lift border border-transparent hover:border-accent/20 w-40 h-48`}
                 >
                   <div className="w-16 h-16 mx-auto mb-3 rounded-xl overflow-hidden group-hover/card:scale-110 transition-transform duration-300 flex items-center justify-center bg-background/50">
-                    {category.image_url ? (
-                      <img
-                        src={category.image_url}
-                        alt={category.name}
-                        loading="lazy" decoding="async" width={64} height={64}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-4xl">{category.emoji || "🍸"}</span>
-                    )}
+                    <CategoryBottleVisual
+                      slug={category.slug}
+                      categoryName={category.name}
+                      className="h-full w-full"
+                    />
                   </div>
                   <h3 className="font-semibold text-foreground mb-1 text-sm">{category.name}</h3>
                   <p className="text-xs text-muted-foreground mb-3 line-clamp-2">

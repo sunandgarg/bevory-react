@@ -16,7 +16,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import TrendingProducts from "@/components/home/TrendingProducts";
 import Footer from "@/components/layout/Footer";
-import OptimizedImage from "@/components/ui/OptimizedImage";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import { Skeleton } from "@/components/ui/skeleton";
 import { citySlugFromName } from "@/lib/locations";
 
@@ -202,24 +202,15 @@ const Home = () => {
             </Link>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-1 px-4 scrollbar-hide snap-x snap-mandatory">
-            {categories.slice(0, 8).map((cat) => (
+            {categories.slice(0, 8).map((cat, index) => (
               <Link key={cat.id} to={`/${citySlug}/category/${cat.slug}`} className="group block w-[76px] flex-shrink-0 snap-start">
-                <div className="w-[76px] h-[76px] rounded-2xl bg-secondary/80 border border-border/40 flex items-center justify-center text-2xl mb-1.5 overflow-hidden group-hover:border-accent/40 group-hover:shadow-[var(--shadow-sm)] transition-all duration-200">
-                  {cat.image_url ? (
-                    <OptimizedImage
-                      src={cat.image_url}
-                      alt={`${cat.name} beverage category`}
-                      width={76}
-                      height={76}
-                      className="w-full h-full"
-                      objectFit="cover"
-                      placeholder="blur"
-                    />
-                  ) : (
-                    <span className="group-hover:scale-110 transition-transform duration-200">
-                      {cat.emoji || "🍸"}
-                    </span>
-                  )}
+                <div className="w-[76px] h-[76px] rounded-2xl bg-secondary/80 border border-border/40 flex items-center justify-center mb-1.5 overflow-hidden group-hover:border-accent/40 group-hover:shadow-[var(--shadow-sm)] transition-all duration-200">
+                  <CategoryBottleVisual
+                    slug={cat.slug}
+                    categoryName={cat.name}
+                    priority={index < 2}
+                    className="h-full w-full transition-transform duration-200 group-hover:scale-105"
+                  />
                 </div>
                 <p className="text-[11px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate transition-colors">
                   {cat.name}

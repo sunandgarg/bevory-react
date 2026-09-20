@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface Category {
   id: string;
@@ -50,7 +51,11 @@ const ExploreCategories = ({ currentCategoryId }: ExploreCategoriesProps) => {
             {categories.map((cat) => (
               <Link key={cat.id} to={`/${citySlug}/category/${cat.slug}`}>
                 <div className="p-4 rounded-xl bg-card border border-border hover:border-accent/50 transition-colors text-center">
-                  <span className="text-3xl block mb-2">{cat.emoji || "🍷"}</span>
+                  <CategoryBottleVisual
+                    slug={cat.slug}
+                    categoryName={cat.name}
+                    className="mx-auto mb-2 h-14 w-14"
+                  />
                   <p className="font-medium text-sm">{cat.name}</p>
                 </div>
               </Link>
@@ -70,7 +75,11 @@ const ExploreCategories = ({ currentCategoryId }: ExploreCategoriesProps) => {
                   ? "bg-accent/10 border-accent text-accent" 
                   : "bg-card border-border hover:border-accent/50"
               }`}>
-                <span>{cat.emoji || "🍷"}</span>
+                <CategoryBottleVisual
+                  slug={cat.slug}
+                  categoryName={cat.name}
+                  className="h-6 w-6"
+                />
                 <span>{cat.name}</span>
               </div>
             </Link>

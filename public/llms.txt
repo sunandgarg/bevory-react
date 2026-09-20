@@ -23,5 +23,11 @@
 ## Policies
 - [Information disclaimer](https://bevory.in/disclaimer)
 - [Privacy policy](https://bevory.in/privacy-policy)
+- [Cookie and local storage policy](https://bevory.in/cookie-policy)
 - [Terms of use](https://bevory.in/terms)
+- [Responsible drinking and age policy](https://bevory.in/responsible-drinking)
+- [IP, trademark and image rights policy](https://bevory.in/intellectual-property)
+- [Community and review guidelines](https://bevory.in/community-guidelines)
+- [Source, ranking and commercial disclosure](https://bevory.in/source-disclosure)
+- [Grievance redressal and legal contact](https://bevory.in/grievance-redressal)
 - [Contact](https://bevory.in/contact)

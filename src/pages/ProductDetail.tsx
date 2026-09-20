@@ -716,7 +716,7 @@ const ProductDetail = () => {
                 to={`/${canonicalCitySlug}/category/${product.category?.slug}`}
                 className="px-2 py-0.5 rounded bg-secondary text-xs font-medium"
               >
-                {product.category?.emoji} {product.category?.name}
+                {product.category?.name}
               </Link>
               {product.sub_category && (
                 <span className="px-2 py-0.5 rounded bg-accent/10 text-accent text-xs font-medium">

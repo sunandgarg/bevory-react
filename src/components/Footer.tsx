@@ -30,6 +30,12 @@ const Footer = () => {
             <li><Link to="/privacy-policy" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Terms & Conditions</Link></li>
             <li><Link to="/disclaimer" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Disclaimer</Link></li>
+            <li><Link to="/cookie-policy" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Cookie & Storage Policy</Link></li>
+            <li><Link to="/responsible-drinking" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Responsible Drinking</Link></li>
+            <li><Link to="/intellectual-property" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">IP & Takedown</Link></li>
+            <li><Link to="/community-guidelines" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Community Guidelines</Link></li>
+            <li><Link to="/source-disclosure" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Source & Ranking Disclosure</Link></li>
+            <li><Link to="/grievance-redressal" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Grievance Redressal</Link></li>
           </ul>
         </div>
         <div>
@@ -63,7 +69,7 @@ const Footer = () => {
           <strong className="text-primary-foreground/70">No Delivery:</strong> BevOry does not offer home delivery services. Be cautious of fraudulent messages claiming otherwise.
         </p>
         <p className="text-xs text-primary-foreground/50">
-          <strong className="text-primary-foreground/70">Drink Responsibly:</strong> Excessive alcohol consumption is harmful. Choose quality over quantity. Never drink and drive.
+          <strong className="text-primary-foreground/70">25+ and local law:</strong> Alcohol can harm health. Never drink and drive. Access does not prove legal eligibility in your location.
         </p>
       </div>
 

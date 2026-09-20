@@ -19,6 +19,20 @@ export type Session = {
   user: User;
 };
 
+export const CURRENT_POLICY_VERSION = "2026-09-20";
+
+export type PolicyAcceptanceInput = {
+  accepted: true;
+  termsVersion: typeof CURRENT_POLICY_VERSION;
+  privacyVersion: typeof CURRENT_POLICY_VERSION;
+};
+
+export const currentPolicyAcceptance = (): PolicyAcceptanceInput => ({
+  accepted: true,
+  termsVersion: CURRENT_POLICY_VERSION,
+  privacyVersion: CURRENT_POLICY_VERSION,
+});
+
 type ApiError = { message: string };
 type ApiResult<T = unknown> = { data: T | null; error: ApiError | null; count?: number | null };
 type Filter = { column?: string; operator: string; value?: unknown; filters?: Filter[] };
@@ -167,6 +181,7 @@ const auth = {
   async getSession() {
     const oauthToken = new URLSearchParams(window.location.hash.slice(1)).get("bevory_oauth");
     if (oauthToken) {
+      window.history.replaceState({}, document.title, `${window.location.pathname}${window.location.search}`);
       currentSession = {
         access_token: oauthToken,
         token_type: "bearer",
@@ -182,7 +197,6 @@ const auth = {
       } else {
         setSession(null, "SIGNED_OUT");
       }
-      window.history.replaceState({}, document.title, `${window.location.pathname}${window.location.search}`);
     }
     if (!currentSession) return { data: { session: null }, error: null };
     const result = await request<{ user: User }>("/auth/me");
@@ -211,16 +225,30 @@ const auth = {
     return result;
   },
 
-  async signUp(input: { email?: string; phone?: string; password?: string; options?: { data?: Record<string, unknown> } }) {
+  async signUp(input: {
+    email?: string;
+    phone?: string;
+    password?: string;
+    options?: { data?: Record<string, unknown>; emailRedirectTo?: string; policyAcceptance?: PolicyAcceptanceInput };
+  }) {
     const result = await request<{ user: User; session: Session | null }>("/auth/signup", {
       method: "POST",
-      body: JSON.stringify({ ...input, data: input.options?.data }),
+      body: JSON.stringify({
+        email: input.email,
+        phone: input.phone,
+        password: input.password,
+        data: input.options?.data,
+        policyAcceptance: input.options?.policyAcceptance,
+      }),
     });
     if (result.data?.session) setSession(result.data.session, "SIGNED_IN");
     return result;
   },
 
-  async signInWithOAuth(input?: { provider?: string; options?: { redirectTo?: string } }) {
+  async signInWithOAuth(input?: {
+    provider?: string;
+    options?: { redirectTo?: string; policyAcceptance?: PolicyAcceptanceInput };
+  }) {
     if (input?.provider && input.provider !== "google") {
       return { data: null, error: { message: `Unsupported OAuth provider: ${input.provider}` } };
     }
@@ -229,19 +257,26 @@ const auth = {
       return { data: null, error: { message: providers.error?.message || "Google sign-in is not configured yet." } };
     }
     const redirectTo = input?.options?.redirectTo || window.location.origin;
-    const url = `${API_URL}/auth/google?redirect_to=${encodeURIComponent(redirectTo)}`;
+    const query = new URLSearchParams({ redirect_to: redirectTo });
+    const policyAcceptance = input?.options?.policyAcceptance;
+    if (policyAcceptance) {
+      query.set("policy_accepted", String(policyAcceptance.accepted));
+      query.set("terms_version", policyAcceptance.termsVersion);
+      query.set("privacy_version", policyAcceptance.privacyVersion);
+    }
+    const url = `${API_URL}/auth/google?${query.toString()}`;
     window.location.assign(url);
     return { data: { url }, error: null };
   },
 
-  async signInWithOtp(input: { phone: string }) {
+  async signInWithOtp(input: { phone: string; policyAcceptance?: PolicyAcceptanceInput }) {
     return request<{ phone: string; expiresIn: number }>("/auth/otp/send", {
       method: "POST",
       body: JSON.stringify(input),
     });
   },
 
-  async verifyOtp(input: { phone: string; token: string; type?: string }) {
+  async verifyOtp(input: { phone: string; token: string; type?: string; policyAcceptance?: PolicyAcceptanceInput }) {
     const result = await request<{ user: User; session: Session }>("/auth/otp/verify", {
       method: "POST",
       body: JSON.stringify(input),

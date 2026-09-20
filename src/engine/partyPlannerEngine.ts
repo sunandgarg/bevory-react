@@ -30,6 +30,7 @@ export interface PartyRecommendation {
   category: {
     id: string;
     name: string;
+    slug: string;
     emoji: string;
   };
   quantity: number;
@@ -248,6 +249,7 @@ export const generatePartyPlan = ({
       category: {
         id: category.id,
         name: category.name,
+        slug: category.slug,
         emoji: category.emoji || "🍸",
       },
       quantity: totalQuantity,

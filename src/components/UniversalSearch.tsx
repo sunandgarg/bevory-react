@@ -7,6 +7,7 @@ import { fuzzyFilter } from "@/lib/fuzzySearch";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
 import { generateProductUrl } from "@/lib/productSlug";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface Brand {
   id: string;
@@ -228,7 +229,7 @@ const UniversalSearch = memo(({
                     onClick={handleResultClick}
                     className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
                   >
-                    <span className="text-xl">{cat.emoji}</span>
+                    <CategoryBottleVisual slug={cat.slug} categoryName={cat.name} className="h-8 w-8 shrink-0" />
                     <span className="font-medium">{cat.name}</span>
                     <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground" />
                   </Link>

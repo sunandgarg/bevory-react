@@ -12,11 +12,14 @@ import {
   findOrCreatePhoneUser,
   getUserFromToken,
   optionalAuth,
+  PolicyAcceptanceError,
   signIn,
   signUp,
   userIsAdmin,
+  validatePolicyAcceptanceBeforePhoneOtp,
   verifyOAuthState,
   type AuthenticatedRequest,
+  type PolicyAcceptanceInput,
 } from "./auth.js";
 import { queryHandler } from "./data.js";
 import { cityCatalogHandler, prewarmCityHomeCatalogs } from "./catalog.js";
@@ -161,10 +164,15 @@ app.get("/api/health", async (_req, res) => {
 });
 
 app.post("/api/auth/signup", signUpRateLimit, async (req: AuthenticatedRequest, res) => {
+  if (req.authUser) {
+    return res.status(403).json({
+      data: null,
+      error: { message: "Sign out before creating a new account; administrators must use a self-registration link" },
+    });
+  }
   try {
     const user = await signUp(req.body ?? {});
-    const adminCreatingUser = req.authUser ? await userIsAdmin(req.authUser.id) : false;
-    res.status(201).json({ data: { user, session: adminCreatingUser ? null : createSession(user) }, error: null });
+    res.status(201).json({ data: { user, session: createSession(user) }, error: null });
   } catch (error) {
     res.status(400).json({ data: null, error: { message: error instanceof Error ? error.message : "Sign-up failed" } });
   }
@@ -198,14 +206,51 @@ const allowedRedirect = (requested: string | undefined) => {
   }
 };
 
+const policyAcceptanceFromQuery = (query: express.Request["query"]): PolicyAcceptanceInput | undefined => {
+  const supplied = query.policy_accepted !== undefined
+    || query.terms_version !== undefined
+    || query.privacy_version !== undefined;
+  if (!supplied) return undefined;
+  return {
+    accepted: query.policy_accepted === "true",
+    termsVersion: typeof query.terms_version === "string" ? query.terms_version : undefined,
+    privacyVersion: typeof query.privacy_version === "string" ? query.privacy_version : undefined,
+  };
+};
+
+const OAUTH_NONCE_COOKIE = "bevory_oauth_nonce";
+const oauthNonceCookieOptions = (): express.CookieOptions => ({
+  httpOnly: true,
+  sameSite: "lax",
+  secure: process.env.NODE_ENV === "production",
+  path: "/api/auth/google/callback",
+});
+
+const cookieValue = (cookieHeader: string | undefined, name: string) => {
+  if (!cookieHeader) return undefined;
+  for (const part of cookieHeader.split(";")) {
+    const separator = part.indexOf("=");
+    if (separator < 0 || part.slice(0, separator).trim() !== name) continue;
+    try {
+      return decodeURIComponent(part.slice(separator + 1).trim());
+    } catch {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 app.get("/api/auth/google", (req, res) => {
   try {
     if (!googleOAuthConfigured()) throw new Error("Google OAuth credentials are not configured");
     const redirectTo = allowedRedirect(typeof req.query.redirect_to === "string" ? req.query.redirect_to : undefined);
-    const state = createOAuthState(redirectTo);
+    const nonce = randomUUID();
+    const state = createOAuthState(redirectTo, policyAcceptanceFromQuery(req.query), nonce);
+    res.cookie(OAUTH_NONCE_COOKIE, nonce, { ...oauthNonceCookieOptions(), maxAge: 10 * 60_000 });
     res.redirect(buildGoogleAuthorizationUrl(googleRedirectUri(req), state));
   } catch (error) {
-    res.status(503).json({ data: null, error: { message: error instanceof Error ? error.message : "Google sign-in unavailable" } });
+    const status = error instanceof PolicyAcceptanceError ? 400 : 503;
+    res.status(status).json({ data: null, error: { message: error instanceof Error ? error.message : "Google sign-in unavailable" } });
   }
 });
 
@@ -213,10 +258,16 @@ app.get("/api/auth/google/callback", async (req, res) => {
   try {
     const code = typeof req.query.code === "string" ? req.query.code : "";
     const state = typeof req.query.state === "string" ? req.query.state : "";
+    const expectedNonce = cookieValue(req.headers.cookie, OAUTH_NONCE_COOKIE);
+    res.clearCookie(OAUTH_NONCE_COOKIE, oauthNonceCookieOptions());
     if (!code || !state) throw new Error("Google callback is missing code or state");
-    const redirectTo = allowedRedirect(verifyOAuthState(state));
+    const oauthState = verifyOAuthState(state, expectedNonce);
+    const redirectTo = allowedRedirect(oauthState.redirectTo);
     const profile = await exchangeGoogleCode(code, googleRedirectUri(req));
-    const user = await findOrCreateExternalUser({ ...profile, provider: "google" });
+    const user = await findOrCreateExternalUser(
+      { ...profile, provider: "google" },
+      oauthState.policyAcceptance,
+    );
     const session = createSession(user);
     const destination = new URL(redirectTo);
     destination.hash = new URLSearchParams({ bevory_oauth: session.access_token }).toString();
@@ -240,8 +291,10 @@ app.post("/api/auth/otp/send", otpSendRateLimit, async (req, res) => {
 
 app.post("/api/auth/otp/verify", otpVerifyRateLimit, async (req, res) => {
   try {
-    const phone = await verifyPhoneOtp(String(req.body?.phone ?? ""), String(req.body?.token ?? ""));
-    const user = await findOrCreatePhoneUser(phone);
+    const phoneInput = String(req.body?.phone ?? "");
+    await validatePolicyAcceptanceBeforePhoneOtp(phoneInput, req.body?.policyAcceptance);
+    const phone = await verifyPhoneOtp(phoneInput, String(req.body?.token ?? ""));
+    const user = await findOrCreatePhoneUser(phone, req.body?.policyAcceptance);
     res.json({ data: { user, session: createSession(user) }, error: null });
   } catch (error) {
     res.status(400).json({ data: null, error: { message: error instanceof Error ? error.message : "OTP verification failed" } });

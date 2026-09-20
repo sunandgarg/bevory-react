@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://bevory.in/gurgaon/brand/biker-deluxe</loc>
+    <lastmod>2026-09-19T19:58:02.213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bevory.in/gurgaon/brand/one-more</loc>
+    <lastmod>2026-09-19T19:58:02.213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bevory.in/gurgaon/brand/captain-morgan</loc>
+    <lastmod>2026-09-19T19:58:02.213Z</lastmod>
+    <image:image>
+      <image:loc>https://bevory.in/media/migrated-images/brand-spotlights/lc-brand-2b1c9cd7e36108c9e56b5e83/37074c7e67792a9b1221.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://bevory.in/gurgaon/brand/fair</loc>
+    <lastmod>2026-09-19T13:17:06.285Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bevory.in/gurgaon/brand/ag-47</loc>
+    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bevory.in/gurgaon/brand/iconiq-white-whisky</loc>
+    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
+  </url>
+  <url>
     <loc>https://bevory.in/gurgaon/brand/vina-albali</loc>
     <lastmod>2026-09-20T15:37:37.326Z</lastmod>
     <image:image>
@@ -139920,48 +139947,6 @@
     <lastmod>2026-09-19T19:58:02.213Z</lastmod>
     <image:image>
       <image:loc>https://bevory.in/media/migrated-images/products/lc-product-3ba18071eaefbd3ed5f823e4/8f34df324838ce53c383.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/hubli-dharwad/product/ketel-one-vodka-fa9bb93</loc>
-    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-8c15cddc7281b2be464b4498/0d26fdf119377f8aa01c.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/hubli-dharwad/product/ketel-one-vodka-fa9bb93/750ml</loc>
-    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-8c15cddc7281b2be464b4498/0d26fdf119377f8aa01c.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/mysore/product/imperial-blue-52e13e2</loc>
-    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-673ee07971de665e31ec120a/365231597705a321195a.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/mysore/product/imperial-blue-52e13e2/750ml</loc>
-    <lastmod>2026-09-19T20:32:54.105Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-673ee07971de665e31ec120a/365231597705a321195a.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/mumbai/product/mikhail-premium-vodka-cb98f6f</loc>
-    <lastmod>2026-09-19T13:17:06.285Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-3e10db1efeb09c753539e54c/2c21246a9e82d71d2bed.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://bevory.in/mumbai/product/mikhail-premium-vodka-cb98f6f/750ml</loc>
-    <lastmod>2026-09-19T13:17:06.285Z</lastmod>
-    <image:image>
-      <image:loc>https://bevory.in/media/migrated-images/products/lc-product-3e10db1efeb09c753539e54c/2c21246a9e82d71d2bed.jpg</image:loc>
     </image:image>
   </url>
 </urlset>

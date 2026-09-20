@@ -1,5 +1,10 @@
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
-import { apiClient, type User, type Session } from "@/integrations/api/client";
+import {
+  apiClient,
+  currentPolicyAcceptance,
+  type User,
+  type Session,
+} from "@/integrations/api/client";
 
 interface AuthContextType {
   user: User | null;
@@ -7,10 +12,10 @@ interface AuthContextType {
   isAdmin: boolean;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: Error | null }>;
-  signInWithGoogle: () => Promise<{ error: Error | null }>;
-  signInWithPhone: (phone: string) => Promise<{ error: Error | null }>;
-  verifyOTP: (phone: string, token: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, fullName: string | undefined, policyAccepted: boolean) => Promise<{ error: Error | null }>;
+  signInWithGoogle: (policyAccepted: boolean) => Promise<{ error: Error | null }>;
+  signInWithPhone: (phone: string, policyAccepted: boolean) => Promise<{ error: Error | null }>;
+  verifyOTP: (phone: string, token: string, policyAccepted: boolean) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 }
 
@@ -80,7 +85,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { error: error as Error | null };
   };
 
-  const signUp = async (email: string, password: string, fullName?: string) => {
+  const acceptanceRequired = () => ({
+    error: new Error("Please accept the current Terms and Privacy Policy to continue."),
+  });
+
+  const signUp = async (email: string, password: string, fullName: string | undefined, policyAccepted: boolean) => {
+    if (!policyAccepted) return acceptanceRequired();
     const redirectUrl = `${window.location.origin}/`;
     
     const { error } = await apiClient.auth.signUp({
@@ -91,33 +101,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         data: {
           full_name: fullName,
         },
+        policyAcceptance: currentPolicyAcceptance(),
       },
     });
     return { error: error as Error | null };
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (policyAccepted: boolean) => {
+    if (!policyAccepted) return acceptanceRequired();
     const { error } = await apiClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/auth`,
+        policyAcceptance: currentPolicyAcceptance(),
       },
     });
     return { error: error as Error | null };
   };
 
-  const signInWithPhone = async (phone: string) => {
+  const signInWithPhone = async (phone: string, policyAccepted: boolean) => {
+    if (!policyAccepted) return acceptanceRequired();
     const { error } = await apiClient.auth.signInWithOtp({
       phone,
+      policyAcceptance: currentPolicyAcceptance(),
     });
     return { error: error as Error | null };
   };
 
-  const verifyOTP = async (phone: string, token: string) => {
+  const verifyOTP = async (phone: string, token: string, policyAccepted: boolean) => {
+    if (!policyAccepted) return acceptanceRequired();
     const { error } = await apiClient.auth.verifyOtp({
       phone,
       token,
       type: 'sms',
+      policyAcceptance: currentPolicyAcceptance(),
     });
     return { error: error as Error | null };
   };

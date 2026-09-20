@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { Search, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 const HeroSection = () => {
   const categories = [
-    { name: "Whisky", emoji: "🥃" },
-    { name: "Wine", emoji: "🍷" },
-    { name: "Gin", emoji: "🍸" },
-    { name: "Rum", emoji: "🥥" },
-    { name: "Vodka", emoji: "❄️" },
-    { name: "Beer", emoji: "🍺" },
+    { name: "Whisky", slug: "blended-scotch" },
+    { name: "Wine", slug: "red-wine" },
+    { name: "Gin", slug: "gin" },
+    { name: "Rum", slug: "rum" },
+    { name: "Vodka", slug: "vodka" },
+    { name: "Beer", slug: "beers" },
   ];
 
   return (
@@ -70,7 +71,7 @@ const HeroSection = () => {
                   transition={{ duration: 0.3, delay: 0.1 * index }}
                   className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary hover:bg-muted border border-border transition-all hover:border-accent/30"
                 >
-                  <span>{cat.emoji}</span>
+                  <CategoryBottleVisual slug={cat.slug} categoryName={cat.name} className="h-6 w-6" />
                   <span className="text-sm font-medium">{cat.name}</span>
                 </motion.button>
               ))}
