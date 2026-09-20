@@ -292,16 +292,19 @@ const CategoryDetail = () => {
                   </Badge>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                   {products.map((product, index) => (
                     <article
                       key={product.id}
                       ref={index === products.length - 5 ? loadMoreRef : undefined}
                     >
-                      <Link to={getProductUrlSafe(product)}>
-                        <div className="bg-card rounded-xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
+                      <Link
+                        to={getProductUrlSafe(product)}
+                        className="group flex min-h-[208px] gap-3 rounded-2xl border border-border/60 bg-card p-2.5 transition-all hover:border-accent/40 hover:shadow-md"
+                      >
+                        <div className="relative w-[138px] shrink-0">
                           {/* Action Buttons */}
-                          <div className="absolute top-2 left-2 right-2 flex justify-between z-10">
+                          <div className="absolute left-1.5 right-1.5 top-1.5 z-10 flex justify-between">
                             <CompareButton productId={product.id} size="sm" />
                             <FavoriteButton productId={product.id} size="sm" />
                           </div>
@@ -312,40 +315,40 @@ const CategoryDetail = () => {
                             alt={`${product.brand} ${product.name} bottle`}
                             fallbackEmoji={product.image_emoji}
                             priority={index < 4}
-                            className="aspect-[4/3] rounded-none"
+                            className="h-[190px] w-[138px] rounded-xl border border-border/70 bg-background"
                           />
-                          
-                          {/* Product Info */}
-                          <div className="p-2.5">
-                            <p className="text-xs text-muted-foreground mb-0.5">{product.brand}</p>
-                            <h3 className="font-medium text-sm leading-tight line-clamp-2 group-hover:text-accent transition-colors min-h-9">
+                        </div>
+
+                        {/* Product Info */}
+                        <div className="min-w-0 flex-1 py-1 pr-1">
+                          <p className="mb-1 text-xs font-medium text-accent">{product.brand}</p>
+                          <h3 className="min-h-10 text-[15px] font-medium leading-snug text-foreground group-hover:text-accent transition-colors">
                               {product.name}
-                            </h3>
-                            {/* Sub-Category Badge */}
+                          </h3>
+                          <p className="mt-1 text-sm uppercase tracking-wide text-muted-foreground">
+                            {product.volume || "See label"}
+                          </p>
+
+                          {/* Rating & Price */}
+                          <div className="mt-7 flex items-center gap-3">
+                            {product.rating ? (
+                              <span className="inline-flex items-center gap-1 rounded-md bg-[#ed5f9e] px-1.5 py-0.5 text-xs font-semibold text-white">
+                                <Star className="h-3 w-3 fill-current" />
+                                {Number(product.rating).toFixed(1)}
+                              </span>
+                            ) : <span className="text-xs text-muted-foreground">Not rated</span>}
+                            <p className="text-sm font-semibold text-foreground">
+                              {product.price ? `₹${Number(product.price).toLocaleString('en-IN')}` : "Price unavailable"}
+                            </p>
+                          </div>
+
+                          <div className="mt-7 flex min-w-0 items-center gap-2">
                             {product.sub_category && !selectedSubCategory && (
-                              <Badge variant="outline" className="text-[9px] px-1.5 py-0 mt-1 border-accent/30 text-accent">
+                              <Badge variant="secondary" className="max-w-[150px] truncate rounded-full px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
                                 {product.sub_category.name}
                               </Badge>
                             )}
-
-                            <div className="mt-1.5 flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-muted-foreground">
-                              {product.volume && <span>{product.volume}</span>}
-                              {product.abv != null && Number(product.abv) > 0 && <span>{Number(product.abv)}% ABV</span>}
-                              {product.origin && <span className="truncate">{product.origin}</span>}
-                            </div>
-                            
-                            {/* Rating & Price */}
-                            <div className="flex items-center justify-between mt-2.5">
-                              {product.rating ? (
-                                <div className="flex items-center gap-1">
-                                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                  <span className="text-xs font-medium">{Number(product.rating).toFixed(1)}</span>
-                                </div>
-                              ) : <span className="text-[10px] text-muted-foreground">Not rated</span>}
-                              <p className="font-bold text-sm text-accent">
-                                {product.price ? `₹${Number(product.price).toLocaleString('en-IN')}` : "—"}
-                              </p>
-                            </div>
+                            {product.origin_flag && <span className="text-base" title={product.origin || "Origin"}>{product.origin_flag}</span>}
                           </div>
                         </div>
                       </Link>
@@ -353,9 +356,9 @@ const CategoryDetail = () => {
                   ))}
                 </div>
                 {isFetchingNextPage && (
-                  <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4" aria-label="Loading more products">
-                    <div className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />
-                    <div className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />
+                  <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2" aria-label="Loading more products">
+                    <div className="h-52 animate-pulse rounded-2xl bg-muted" />
+                    <div className="h-52 animate-pulse rounded-2xl bg-muted" />
                   </div>
                 )}
               </>

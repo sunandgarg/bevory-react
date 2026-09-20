@@ -2,16 +2,17 @@ import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface BrandingDisplayProps {
-  variant?: "header" | "footer" | "auth" | "loading";
+  variant?: "header" | "mark" | "footer" | "auth" | "loading";
   className?: string;
 }
 
 const sizeMap: Record<NonNullable<BrandingDisplayProps["variant"]>, {
   mark: string;
-  word: string;
+  word?: string;
   animation?: string;
 }> = {
   header: { mark: "h-7 w-7", word: "text-xl" },
+  mark: { mark: "h-8 w-8" },
   footer: { mark: "h-5 w-5", word: "text-sm" },
   auth: { mark: "h-11 w-11", word: "text-3xl" },
   loading: { mark: "h-14 w-14", word: "text-4xl", animation: "animate-pulse-glow" },
@@ -34,9 +35,11 @@ const BrandingDisplay = ({ variant = "header", className = "" }: BrandingDisplay
           mask: "url('/favicon.png?v=5') center / contain no-repeat",
         }}
       />
-      <span className={`${size.word} font-bold leading-none`} style={{ fontFamily: "'Bricolage Grotesque', 'DM Sans', sans-serif" }}>
-        BevOry
-      </span>
+      {size.word && (
+        <span className={`${size.word} font-bold leading-none`} style={{ fontFamily: "'Bricolage Grotesque', 'DM Sans', sans-serif" }}>
+          BevOry
+        </span>
+      )}
     </Link>
   );
 };
