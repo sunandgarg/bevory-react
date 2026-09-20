@@ -10,13 +10,11 @@
 
 import { apiClient } from "@/integrations/api/client";
 
-// Maximum dimensions for processed images
-const MAX_DIMENSION = 800;
 const TARGET_SIZE = 600;
 
 /**
  * Process image URL to ensure optimal display
- * Uses wsrv.nl for image transformations
+ * Images are pre-optimized during the S3 migration and served from Bevory's CDN.
  */
 export function getOptimizedProductImageUrl(
   imageUrl: string | null,
@@ -36,24 +34,11 @@ export function getOptimizedProductImageUrl(
     background = "ffffff" // White background by default
   } = options;
 
-  // Local migrated assets and uploads are already optimized and served by this app.
-  if (imageUrl.startsWith("/")) return imageUrl;
-
-  // For external URLs, use wsrv.nl proxy
-  try {
-    const params = new URLSearchParams({
-      url: imageUrl,
-      w: width.toString(),
-      h: height.toString(),
-      fit: fit,
-      bg: background,
-      output: "webp",
-      q: "85",
-    });
-    return `https://wsrv.nl/?${params.toString()}`;
-  } catch {
-    return imageUrl;
-  }
+  void width;
+  void height;
+  void fit;
+  void background;
+  return imageUrl;
 }
 
 /**
@@ -62,13 +47,7 @@ export function getOptimizedProductImageUrl(
 export function generateProductImageSrcset(imageUrl: string | null): string | null {
   if (!imageUrl) return null;
 
-  const sizes = [200, 400, 600, 800];
-  const srcset = sizes.map(size => {
-    const optimizedUrl = getOptimizedProductImageUrl(imageUrl, { width: size, height: size });
-    return `${optimizedUrl} ${size}w`;
-  }).join(", ");
-
-  return srcset;
+  return `${imageUrl} 720w`;
 }
 
 /**

@@ -50,22 +50,6 @@ interface VideoReview {
   video_categories?: VideoCategory | null;
 }
 
-// Extract YouTube video ID
-const getYouTubeId = (url: string): string | null => {
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&\n?#]+)/,
-    /^([a-zA-Z0-9_-]{11})$/
-  ];
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match) return match[1];
-  }
-  return null;
-};
-
-const getYouTubeThumbnail = (videoId: string): string => 
-  `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
 const AdminVideoReviews = () => {
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
@@ -228,10 +212,9 @@ const AdminVideoReviews = () => {
       return;
     }
 
-    const videoId = getYouTubeId(formData.youtube_url);
     const finalData = {
       ...formData,
-      thumbnail_url: formData.thumbnail_url || (videoId ? getYouTubeThumbnail(videoId) : null),
+      thumbnail_url: formData.thumbnail_url || null,
       creator_id: formData.creator_id || null,
       category_id: formData.category_id || null,
     };
@@ -525,8 +508,7 @@ const AdminVideoReviews = () => {
               </TableRow>
             ) : (
               filteredReviews.map((review) => {
-                const videoId = getYouTubeId(review.youtube_url);
-                const thumbnail = review.thumbnail_url || (videoId ? getYouTubeThumbnail(videoId) : null);
+                const thumbnail = review.thumbnail_url;
                 
                 return (
                   <TableRow key={review.id}>

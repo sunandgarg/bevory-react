@@ -29,17 +29,6 @@ const getYouTubeId = (url: string): string | null => {
   return null;
 };
 
-// Generate thumbnail from YouTube ID
-const getYouTubeThumbnail = (videoId: string, quality: 'default' | 'medium' | 'high' | 'maxres' = 'high'): string => {
-  const qualityMap = {
-    default: 'default',
-    medium: 'mqdefault', 
-    high: 'hqdefault',
-    maxres: 'maxresdefault'
-  };
-  return `https://img.youtube.com/vi/${videoId}/${qualityMap[quality]}.jpg`;
-};
-
 const VideoReviews = () => {
   const [reviews, setReviews] = useState<VideoReview[]>([]);
   const [loading, setLoading] = useState(true);
@@ -92,8 +81,7 @@ const VideoReviews = () => {
       {/* Video Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
         {reviews.slice(0, 5).map((review) => {
-          const videoId = getYouTubeId(review.youtube_url);
-          const thumbnail = review.thumbnail_url || (videoId ? getYouTubeThumbnail(videoId) : null);
+          const thumbnail = review.thumbnail_url;
           
           return (
             <div

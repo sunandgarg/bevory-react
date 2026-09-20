@@ -38,7 +38,7 @@ export default function AdminPerformanceReport() {
       category: "Images",
       title: `${imgs.length} images on page`,
       detail: `${oversize.length} oversized, ${noLazy.length} eager-loaded, ${nonWebp.length} non-WebP`,
-      fix: "Use <ProductImage> / OptimizedImage so wsrv.nl serves WebP at the right size; keep priority only on hero images.",
+      fix: "Use <ProductImage> / OptimizedImage with the pre-optimized Bevory media URL; keep priority only on hero images.",
       severity: oversize.length > 3 || nonWebp.length > 5 ? "bad" : oversize.length || nonWebp.length ? "warn" : "good",
     });
 

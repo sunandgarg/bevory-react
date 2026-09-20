@@ -73,9 +73,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy 2: Images (remote optimization proxy and migrated/local uploads) — Cache first
+  // Strategy 2: Bevory-hosted migrated/local images — Cache first
   if (
-    url.hostname.includes('wsrv.nl') ||
+    url.hostname === 'media.bevory.in' ||
     (url.origin === self.location.origin && (
       url.pathname.startsWith('/uploads/')
     ))

@@ -316,9 +316,7 @@ const CategoryDetail = () => {
                           <div className="aspect-square bg-gradient-to-br from-muted/50 to-muted/30 flex items-center justify-center">
                             {product.image_url ? (
                               <img 
-                                src={`https://wsrv.nl/?url=${encodeURIComponent(product.image_url)}&w=400&output=webp&q=80`}
-                                srcSet={`https://wsrv.nl/?url=${encodeURIComponent(product.image_url)}&w=200&output=webp&q=80 200w, https://wsrv.nl/?url=${encodeURIComponent(product.image_url)}&w=400&output=webp&q=80 400w`}
-                                sizes="(max-width: 640px) 50vw, 200px"
+                                src={product.image_url}
                                 alt={`${product.brand} ${product.name} bottle`}
                                 loading="lazy" decoding="async" width={400} height={400}
                                 className="w-full h-full object-cover"

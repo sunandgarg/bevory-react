@@ -76,11 +76,6 @@ const CreatorProfile = () => {
     if (slug) fetchData();
   }, [slug]);
 
-  const getYouTubeThumbnail = (url: string): string => {
-    const videoId = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/shorts\/))([^"&?\/\s]{11})/)?.[1];
-    return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : "";
-  };
-
   if (loading) {
     return (
       <MobileLayout showBack>
@@ -198,7 +193,7 @@ const CreatorProfile = () => {
           ) : (
             <div className="grid grid-cols-2 gap-3">
               {videos.map((video, index) => {
-                const thumbnail = video.thumbnail_url || getYouTubeThumbnail(video.youtube_url);
+                const thumbnail = video.thumbnail_url;
                 return (
                   <motion.div
                     key={video.id}

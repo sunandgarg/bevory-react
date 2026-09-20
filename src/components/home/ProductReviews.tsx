@@ -62,20 +62,6 @@ const ProductReviews = () => {
     return null;
   };
 
-  const getYouTubeThumbnail = (url: string) => {
-    const patterns = [
-      /(?:youtube\.com\/shorts\/|youtu\.be\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/,
-    ];
-    
-    for (const pattern of patterns) {
-      const match = url.match(pattern);
-      if (match && match[1]) {
-        return `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg`;
-      }
-    }
-    return null;
-  };
-
   if (loading) {
     return (
       <div className="px-4">
@@ -99,8 +85,7 @@ const ProductReviews = () => {
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory scroll-smooth">
           {reviews.map((review) => {
-            const thumbnail = review.thumbnail_url || 
-              (review.youtube_url ? getYouTubeThumbnail(review.youtube_url) : null);
+            const thumbnail = review.thumbnail_url;
             
             return (
               <button

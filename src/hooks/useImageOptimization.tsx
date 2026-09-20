@@ -13,12 +13,12 @@ export interface ImageOptimizationSettings {
 const DEFAULT_SETTINGS: ImageOptimizationSettings = {
   enabled: true,
   quality: 80,
-  maxWidth: 1920,
-  maxHeight: 1080,
+  maxWidth: 720,
+  maxHeight: 720,
   format: 'webp'
 };
 
-// Image optimization service URLs (free CDN-based converters)
+// Images are pre-optimized to WebP and served from Bevory's own CDN.
 const getOptimizedImageUrl = (
   src: string, 
   settings: ImageOptimizationSettings,
@@ -36,29 +36,9 @@ const getOptimizedImageUrl = (
   // Skip emoji or non-URL sources
   if (!src.startsWith('http')) return src;
 
-  try {
-    const url = new URL(src);
-    
-    // For external URLs, use wsrv.nl (free image CDN)
-    // This converts and optimizes images on the fly
-    const optimizedWidth = width ? Math.min(width, settings.maxWidth) : settings.maxWidth;
-    const optimizedHeight = height ? Math.min(height, settings.maxHeight) : undefined;
-    
-    const wsrvParams = new URLSearchParams({
-      url: src,
-      w: String(optimizedWidth),
-      q: String(settings.quality),
-      output: settings.format === 'auto' ? 'webp' : settings.format,
-    });
-    
-    if (optimizedHeight) {
-      wsrvParams.set('h', String(optimizedHeight));
-    }
-    
-    return `https://wsrv.nl/?${wsrvParams.toString()}`;
-  } catch {
-    return src;
-  }
+  void width;
+  void height;
+  return src;
 };
 
 // Generate srcset for responsive images
@@ -69,14 +49,8 @@ const generateSrcSet = (
 ): string => {
   if (!settings.enabled || !src || !src.startsWith('http')) return '';
   
-  try {
-    return sizes
-      .filter(size => size <= settings.maxWidth)
-      .map(size => `${getOptimizedImageUrl(src, settings, size)} ${size}w`)
-      .join(', ');
-  } catch {
-    return '';
-  }
+  void sizes;
+  return `${src} 720w`;
 };
 
 export const useImageOptimization = () => {

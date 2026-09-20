@@ -38,11 +38,6 @@ interface VideoCategory {
   emoji: string | null;
 }
 
-const getYouTubeThumbnail = (url: string): string => {
-  const videoId = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/shorts\/))([^"&?\/\s]{11})/)?.[1];
-  return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : "";
-};
-
 const Masterclass = () => {
   const [videos, setVideos] = useState<VideoReview[]>([]);
   const [categories, setCategories] = useState<VideoCategory[]>([]);
@@ -220,7 +215,7 @@ const Masterclass = () => {
 };
 
 const VideoCard = ({ video, index }: { video: VideoReview; index: number }) => {
-  const thumbnail = video.thumbnail_url || getYouTubeThumbnail(video.youtube_url);
+  const thumbnail = video.thumbnail_url;
 
   return (
     <motion.div

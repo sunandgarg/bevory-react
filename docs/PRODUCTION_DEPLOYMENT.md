@@ -153,6 +153,40 @@ removes the restriction, create the distribution using the existing private OAC,
 apply a bucket policy scoped to that distribution ARN, point `media.bevory.in`
 to the distribution, and verify an uploaded image end to end.
 
+## Image ownership migration
+
+The production database currently contains 6,434 image references representing
+4,499 unique externally hosted files: 4,476 from Livcheers, 22 from Unsplash,
+and one YouTube thumbnail. The idempotent migration command downloads each
+source once, rejects private-network redirects and non-image responses, converts
+it to high-quality WebP, limits both dimensions to 720 pixels without upscaling,
+and uploads it under `migrated-images/` with immutable cache headers.
+
+Do not change database URLs until CloudFront can read the private bucket and the
+configured `IMAGE_PUBLIC_URL` works publicly. Use the phases below from the API
+container. The upload phase leaves database URLs unchanged; the apply phase
+writes a private S3 manifest before updating records in transactional batches.
+
+```bash
+# Inventory only; does not download, upload, or update data.
+pnpm images:migrate
+
+# Upload/optimize all images but retain the existing database URLs.
+IMAGE_PUBLIC_URL=https://media.bevory.in pnpm images:migrate -- --upload-only
+
+# Verify the CDN first, then atomically cut records over in batches.
+IMAGE_PUBLIC_URL=https://media.bevory.in pnpm images:migrate -- --apply
+
+# Regenerate SEO route documents so structured-data image URLs also use Bevory media.
+pnpm sitemap
+```
+
+After the apply phase, rebuild and redeploy the API image so regenerated SEO
+route documents ship with the application. Retain `image_source_url`,
+`logo_source_url`, and source-page fields as provenance; they are not rendered
+as public images. Storage relocation does not transfer copyright or reuse rights,
+so the existing `image_license_status` review remains required.
+
 ## Operations
 
 Deploy the application from `/opt/bevory` on the Lightsail instance:

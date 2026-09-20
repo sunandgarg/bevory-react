@@ -146,7 +146,7 @@ const CategoriesSection = memo(() => {
                   <div className="w-16 h-16 mx-auto mb-3 rounded-xl overflow-hidden group-hover/card:scale-110 transition-transform duration-300 flex items-center justify-center bg-background/50">
                     {category.image_url ? (
                       <img
-                        src={`https://wsrv.nl/?url=${encodeURIComponent(category.image_url)}&w=128&output=webp&q=80`}
+                        src={category.image_url}
                         alt={category.name}
                         loading="lazy" decoding="async" width={64} height={64}
                         className="w-full h-full object-cover"

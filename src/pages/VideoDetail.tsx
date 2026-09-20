@@ -149,8 +149,7 @@ const VideoDetail = () => {
   }
 
   const embedUrl = getYouTubeEmbedUrl(video.youtube_url);
-  const thumbnailUrl = video.thumbnail_url || 
-    `https://img.youtube.com/vi/${video.youtube_url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/shorts\/))([^"&?\/\s]{11})/)?.[1]}/maxresdefault.jpg`;
+  const thumbnailUrl = video.thumbnail_url;
 
   return (
     <MobileLayout showBack title={video.category?.name || "MasterClass"}>
@@ -167,11 +166,13 @@ const VideoDetail = () => {
             />
           ) : (
             <div className="relative w-full h-full">
-              <img
-                src={thumbnailUrl}
-                alt={video.title}
-                className="w-full h-full object-cover"
-              />
+              {thumbnailUrl && (
+                <img
+                  src={thumbnailUrl}
+                  alt={video.title}
+                  className="w-full h-full object-cover"
+                />
+              )}
               <button
                 onClick={() => setIsPlaying(true)}
                 className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors"
@@ -266,11 +267,13 @@ const VideoDetail = () => {
                     className="group"
                   >
                     <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
-                      <img
-                        src={related.thumbnail_url || `https://img.youtube.com/vi/${related.youtube_url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/shorts\/))([^"&?\/\s]{11})/)?.[1]}/hqdefault.jpg`}
-                        alt={related.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      />
+                      {related.thumbnail_url && (
+                        <img
+                          src={related.thumbnail_url}
+                          alt={related.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        />
+                      )}
                       <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <Play className="w-8 h-8 text-white" />
                       </div>

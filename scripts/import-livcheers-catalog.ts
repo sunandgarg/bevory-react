@@ -1025,7 +1025,9 @@ const buildRecords = async (
     setRecord("brand_spotlights", id, {
       brand_name: existingData.brand_name ?? brandName,
       slug: existingData.slug ?? slug,
-      logo_url: logoUrl ?? existingData.logo_url ?? null,
+      // Keep third-party URLs as provenance only. Run `pnpm images:migrate -- --apply`
+      // to create and publish a Bevory-owned media URL.
+      logo_url: existingData.logo_url ?? null,
       logo_source_url: logoUrl ?? existingData.logo_source_url ?? null,
       logo_identity_verified: logoUrl ? true : Boolean(existingData.logo_identity_verified),
       logo_verified_at: logoUrl ? now : existingData.logo_verified_at ?? null,
@@ -1092,8 +1094,10 @@ const buildRecords = async (
     const defaultVolume = volumes.includes(750) ? 750 : volumes[0];
     const imageOverride = PRODUCT_IMAGE_OVERRIDES.get(productKey);
     const imageUrl = selectedEnrichment?.imageUrl ?? imageOverride?.imageUrl ?? null;
-    const finalImageUrl = imageUrl ?? existingData.image_url ?? null;
-    const finalImageVerified = imageUrl ? true : Boolean(existingData.image_identity_verified);
+    // New third-party images remain provenance until the S3 migration publishes
+    // a Bevory media URL. Existing public image URLs are retained for idempotency.
+    const finalImageUrl = existingData.image_url ?? null;
+    const finalImageVerified = Boolean(existingData.image_identity_verified);
     if (finalImageUrl && finalImageVerified) {
       report.enrichment.productsWithVerifiedImages += 1;
     } else {
