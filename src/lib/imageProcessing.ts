@@ -1,16 +1,13 @@
 /**
  * Image Processing Engine for Product Images
  * 
- * Features:
- * - Auto-crop and center images
- * - Background removal integration
- * - Consistent sizing and alignment
- * - WebP conversion for performance
+ * Migrated assets are resampled once on the server and served directly from
+ * Bevory's CDN without browser-side re-encoding.
  */
 
 import { apiClient } from "@/integrations/api/client";
 
-const TARGET_SIZE = 600;
+const TARGET_SIZE = 3840;
 
 /**
  * Process image URL to ensure optimal display
@@ -47,7 +44,9 @@ export function getOptimizedProductImageUrl(
 export function generateProductImageSrcset(imageUrl: string | null): string | null {
   if (!imageUrl) return null;
 
-  return `${imageUrl} 720w`;
+  // A single canonical asset is available today. Returning no srcset avoids
+  // claiming an incorrect intrinsic width for portrait images.
+  return null;
 }
 
 /**
@@ -96,57 +95,10 @@ export async function uploadProductImage(
 }
 
 /**
- * Create a canvas-based image processor for client-side optimization
+ * Preserve the CDN asset without lossy browser-side re-encoding.
  */
 export async function processImageForDisplay(
   imageUrl: string
 ): Promise<string> {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      
-      if (!ctx) {
-        resolve(imageUrl);
-        return;
-      }
-
-      // Calculate dimensions to maintain aspect ratio
-      const aspectRatio = img.width / img.height;
-      let targetWidth = TARGET_SIZE;
-      let targetHeight = TARGET_SIZE;
-
-      if (aspectRatio > 1) {
-        // Landscape
-        targetHeight = TARGET_SIZE / aspectRatio;
-      } else {
-        // Portrait
-        targetWidth = TARGET_SIZE * aspectRatio;
-      }
-
-      // Set canvas size
-      canvas.width = TARGET_SIZE;
-      canvas.height = TARGET_SIZE;
-
-      // Fill with white background
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, TARGET_SIZE, TARGET_SIZE);
-
-      // Center the image
-      const x = (TARGET_SIZE - targetWidth) / 2;
-      const y = (TARGET_SIZE - targetHeight) / 2;
-
-      // Draw image centered
-      ctx.drawImage(img, x, y, targetWidth, targetHeight);
-
-      // Convert to data URL
-      resolve(canvas.toDataURL("image/webp", 0.85));
-    };
-
-    img.onerror = () => resolve(imageUrl);
-    img.src = imageUrl;
-  });
+  return imageUrl;
 }

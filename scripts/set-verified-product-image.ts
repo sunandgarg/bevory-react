@@ -41,12 +41,11 @@ try {
     data: {
       data: {
         ...existing,
-        image_url: image.toString(),
         image_source_url: image.toString(),
         image_source_page: source.toString(),
         image_identity_verified: true,
         image_verified_at: verifiedAt,
-        image_target_width: 720,
+        image_target_width: 3840,
         updated_at: verifiedAt,
       },
     },

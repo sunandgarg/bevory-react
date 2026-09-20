@@ -33,13 +33,21 @@ export default function AdminPerformanceReport() {
     const imgs = Array.from(document.images);
     const oversize = imgs.filter((i) => i.naturalWidth > 1.5 * i.clientWidth && i.clientWidth > 0);
     const noLazy = imgs.filter((i) => !i.loading || i.loading === "eager").slice(0, -1);
-    const nonWebp = imgs.filter((i) => i.currentSrc && !/\.webp|wsrv\.nl/i.test(i.currentSrc));
+    const externalImages = imgs.filter((image) => {
+      if (!image.currentSrc) return false;
+      try {
+        const url = new URL(image.currentSrc, window.location.href);
+        return url.origin !== window.location.origin && url.hostname !== "media.bevory.in";
+      } catch {
+        return true;
+      }
+    });
     results.push({
       category: "Images",
       title: `${imgs.length} images on page`,
-      detail: `${oversize.length} oversized, ${noLazy.length} eager-loaded, ${nonWebp.length} non-WebP`,
+      detail: `${oversize.length} oversized, ${noLazy.length} eager-loaded, ${externalImages.length} outside Bevory hosting`,
       fix: "Use <ProductImage> / OptimizedImage with the pre-optimized Bevory media URL; keep priority only on hero images.",
-      severity: oversize.length > 3 || nonWebp.length > 5 ? "bad" : oversize.length || nonWebp.length ? "warn" : "good",
+      severity: oversize.length > 3 || externalImages.length > 5 ? "bad" : oversize.length || externalImages.length ? "warn" : "good",
     });
 
     // 2. Fonts
@@ -131,7 +139,7 @@ export default function AdminPerformanceReport() {
     };
     const rows: string[][] = [columns];
     // Two sample rows at top (commented-style hint via leading "#")
-    rows.push(["# SAMPLE", "Images", "12 images on page", "good", "100", "Use ProductImage for WebP/AVIF.", ts]);
+    rows.push(["# SAMPLE", "Images", "12 images on page", "good", "100", "Use Bevory S3/CDN image URLs.", ts]);
     rows.push(["# SAMPLE", "Web Vitals", "DOM Interactive: 1200 ms", "warn", "70", "Reduce blocking scripts.", ts]);
     for (const f of findings) {
       rows.push([f.category, f.category, f.detail, f.severity, String(sevScore[f.severity]), f.fix, ts]);

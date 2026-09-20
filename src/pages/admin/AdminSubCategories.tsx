@@ -399,7 +399,7 @@ const AdminSubCategories = () => {
                 folder="sub-categories"
                 recommendedSize="800 × 400 px"
                 aspectRatio="2:1 landscape"
-                aspectHint="Sub-category banner, JPG/WebP"
+                aspectHint="Sub-category banner, JPEG/PNG"
               />
             </FormField>
 

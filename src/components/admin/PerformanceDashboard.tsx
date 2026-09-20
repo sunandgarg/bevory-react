@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { RefreshCw, Zap, Image, Clock, Activity, TrendingDown, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+import { RefreshCw, Zap, Image, Clock, Activity, Cloud, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
 import { usePerformanceMetrics, formatBytes, getScoreColor, WEB_VITALS_THRESHOLDS } from "@/hooks/usePerformanceMetrics";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
@@ -146,11 +146,11 @@ const PerformanceDashboard = () => {
                 {settings.enabled ? "Enabled" : "Disabled"}
               </Badge>
               <span className="text-sm text-muted-foreground">
-                {settings.format.toUpperCase()} @ {settings.quality}%
+                Lossless PNG / JPEG 95
               </span>
             </div>
             <p className="text-sm text-muted-foreground mt-2">
-              Max: {settings.maxWidth}×{settings.maxHeight}px
+              3,840px longest edge, non-generative
             </p>
           </CardContent>
         </Card>
@@ -158,18 +158,14 @@ const PerformanceDashboard = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <TrendingDown className="w-4 h-4 text-green-500" />
-              Estimated Savings
+              <Cloud className="w-4 h-4 text-green-500" />
+              Media Origin
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-end gap-2">
-              <span className="text-3xl font-bold text-green-500">
-                {formatBytes(metrics.estimatedSavings)}
-              </span>
-            </div>
+            <div className="text-2xl font-bold text-green-500">Private S3</div>
             <p className="text-sm text-muted-foreground mt-1">
-              ~30% from WebP conversion
+              CloudFront OAC with immutable caching
             </p>
           </CardContent>
         </Card>
@@ -270,12 +266,6 @@ const PerformanceDashboard = () => {
                 }
               </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-green-500">Potential Savings</span>
-              <span className="font-mono text-sm text-green-500">
-                {formatBytes(metrics.estimatedSavings)}
-              </span>
-            </div>
           </CardContent>
         </Card>
       </div>
@@ -289,7 +279,7 @@ const PerformanceDashboard = () => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-              <span>Enable image optimization to automatically convert images to WebP format</span>
+              <span>Serve every public image from Bevory's private S3 media CDN</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />

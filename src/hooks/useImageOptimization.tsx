@@ -7,18 +7,18 @@ export interface ImageOptimizationSettings {
   quality: number; // 1-100
   maxWidth: number;
   maxHeight: number;
-  format: 'webp' | 'avif' | 'auto';
+  format: string; // Legacy UI preference; canonical CDN assets are served unchanged.
 }
 
 const DEFAULT_SETTINGS: ImageOptimizationSettings = {
   enabled: true,
-  quality: 80,
-  maxWidth: 720,
-  maxHeight: 720,
-  format: 'webp'
+  quality: 95,
+  maxWidth: 3840,
+  maxHeight: 3840,
+  format: 'auto'
 };
 
-// Images are pre-optimized to WebP and served from Bevory's own CDN.
+// Images are preprocessed into PNG or JPEG and served from Bevory's own CDN.
 const getOptimizedImageUrl = (
   src: string, 
   settings: ImageOptimizationSettings,
@@ -50,7 +50,10 @@ const generateSrcSet = (
   if (!settings.enabled || !src || !src.startsWith('http')) return '';
   
   void sizes;
-  return `${src} 720w`;
+  // The migration currently creates one canonical 4K-class asset, not multiple
+  // width variants. Omitting srcset avoids assigning a false width descriptor
+  // to portrait images whose intrinsic width is below 3,840 pixels.
+  return '';
 };
 
 export const useImageOptimization = () => {
@@ -102,7 +105,7 @@ export const useImageOptimization = () => {
           .insert([{ 
             key: "image_optimization", 
             value: jsonValue, 
-            description: "Image optimization and WebP conversion settings" 
+            description: "Image optimization and CDN delivery settings"
           }]);
         if (error) throw error;
       }

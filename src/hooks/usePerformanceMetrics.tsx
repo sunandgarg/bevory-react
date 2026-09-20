@@ -17,9 +17,6 @@ export interface PerformanceMetrics {
   totalTransferSize: number;
   imageCount: number;
   imageTransferSize: number;
-  
-  // Optimization Savings
-  estimatedSavings: number;
 }
 
 const DEFAULT_METRICS: PerformanceMetrics = {
@@ -34,7 +31,6 @@ const DEFAULT_METRICS: PerformanceMetrics = {
   totalTransferSize: 0,
   imageCount: 0,
   imageTransferSize: 0,
-  estimatedSavings: 0,
 };
 
 export const usePerformanceMetrics = () => {
@@ -74,9 +70,6 @@ export const usePerformanceMetrics = () => {
       newMetrics.totalTransferSize = totalSize;
       newMetrics.imageCount = imageCount;
       newMetrics.imageTransferSize = imageSize;
-
-      // Estimate savings from WebP conversion (typically 25-35% smaller)
-      newMetrics.estimatedSavings = Math.round(imageSize * 0.30);
 
       // Web Vitals (using PerformanceObserver if available)
       const paintEntries = performance.getEntriesByType("paint");

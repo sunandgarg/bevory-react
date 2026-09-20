@@ -3,6 +3,7 @@ import {
   applyImageTargets,
   collectImageTargets,
   imageObjectKey,
+  imageObjectKeyCandidates,
   isExternalHttpUrl,
   youtubeThumbnailUrl,
 } from "./image-migration-lib.js";
@@ -30,23 +31,30 @@ describe("image migration helpers", () => {
     };
     const targets = collectImageTargets(row);
     const next = applyImageTargets(row, targets, new Map([
-      ["https://third.example/product.jpg", "https://media.bevory.in/product.webp"],
-      ["https://third.example/article.png", "https://media.bevory.in/article.webp"],
+      ["https://third.example/product.jpg", "https://media.bevory.in/product.jpg"],
+      ["https://third.example/article.png", "https://media.bevory.in/article.png"],
     ]));
-    expect(next.image_url).toBe("https://media.bevory.in/product.webp");
-    expect(next.content).toContain("https://media.bevory.in/article.webp");
+    expect(next.image_url).toBe("https://media.bevory.in/product.jpg");
+    expect(next.content).toContain("https://media.bevory.in/article.png");
     expect(row.image_url).toBe("https://third.example/product.jpg");
   });
 
-  it("creates stable object keys and YouTube thumbnails", () => {
-    expect(imageObjectKey("Products", "A Product", "https://example.com/a.jpg"))
-      .toMatch(/^migrated-images\/products\/a-product\/[a-f0-9]{20}\.webp$/);
+  it("creates stable format-aware object keys and YouTube thumbnails", () => {
+    expect(imageObjectKey("Products", "A Product", "https://example.com/a.jpg", "jpg"))
+      .toMatch(/^migrated-images\/products\/a-product\/[a-f0-9]{20}\.jpg$/);
+    expect(imageObjectKey("Products", "A Product", "https://example.com/a.jpg", "png"))
+      .toMatch(/^migrated-images\/products\/a-product\/[a-f0-9]{20}\.png$/);
+    expect(imageObjectKeyCandidates("Products", "A Product", "https://example.com/a.jpg"))
+      .toEqual([
+        expect.stringMatching(/\.png$/),
+        expect.stringMatching(/\.jpg$/),
+      ]);
     expect(youtubeThumbnailUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
       .toBe("https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg");
   });
 
   it("skips the configured media host", () => {
-    expect(isExternalHttpUrl("https://media.bevory.in/a.webp", "https://media.bevory.in")).toBe(false);
-    expect(isExternalHttpUrl("https://example.com/a.webp", "https://media.bevory.in")).toBe(true);
+    expect(isExternalHttpUrl("https://media.bevory.in/a.jpg", "https://media.bevory.in")).toBe(false);
+    expect(isExternalHttpUrl("https://example.com/a.png", "https://media.bevory.in")).toBe(true);
   });
 });

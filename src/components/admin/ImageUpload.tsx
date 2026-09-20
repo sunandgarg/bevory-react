@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiClient } from "@/integrations/api/client";
 import { useToast } from "@/hooks/use-toast";
-import { useImageOptimization } from "@/hooks/useImageOptimization";
 
 interface ImageUploadProps {
   value: string | null;
@@ -19,51 +18,66 @@ interface ImageUploadProps {
   className?: string;
 }
 
-// Compress image on client side before upload
-const compressImage = async (
+type ProcessedImage = {
+  blob: Blob;
+  contentType: "image/jpeg" | "image/png";
+  extension: "jpg" | "png";
+};
+
+// Create a non-generative 4K-class PNG/JPEG before upload.
+const processImage = async (
   file: File,
-  maxWidth: number = 1200,
-  maxHeight: number = 1200,
-  quality: number = 0.8
-): Promise<Blob> => {
+  maxWidth: number = 3840,
+  maxHeight: number = 3840,
+  quality: number = 0.95
+): Promise<ProcessedImage> => {
   return new Promise((resolve, reject) => {
     const img = new window.Image();
+    const objectUrl = URL.createObjectURL(file);
     img.onload = () => {
       const canvas = document.createElement("canvas");
       let { width, height } = img;
 
-      // Calculate new dimensions
-      if (width > maxWidth || height > maxHeight) {
-        const ratio = Math.min(maxWidth / width, maxHeight / height);
-        width = Math.round(width * ratio);
-        height = Math.round(height * ratio);
-      }
+      // Preserve aspect ratio and set the longest edge to the configured 4K target.
+      const targetLongEdge = Math.min(maxWidth, maxHeight);
+      const ratio = targetLongEdge / Math.max(width, height);
+      width = Math.max(1, Math.round(width * ratio));
+      height = Math.max(1, Math.round(height * ratio));
 
       canvas.width = width;
       canvas.height = height;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) {
+        URL.revokeObjectURL(objectUrl);
         reject(new Error("Failed to get canvas context"));
         return;
       }
 
       ctx.drawImage(img, 0, 0, width, height);
 
+      const isJpeg = file.type === "image/jpeg" || file.type === "image/jpg";
+      const contentType = isJpeg ? "image/jpeg" : "image/png";
+      const extension = isJpeg ? "jpg" : "png";
+
       canvas.toBlob(
         (blob) => {
+          URL.revokeObjectURL(objectUrl);
           if (blob) {
-            resolve(blob);
+            resolve({ blob, contentType, extension });
           } else {
-            reject(new Error("Failed to compress image"));
+            reject(new Error("Failed to process image"));
           }
         },
-        "image/webp",
+        contentType,
         quality
       );
     };
-    img.onerror = () => reject(new Error("Failed to load image"));
-    img.src = URL.createObjectURL(file);
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Failed to load image"));
+    };
+    img.src = objectUrl;
   });
 };
 
@@ -81,7 +95,6 @@ const ImageUpload = ({
   const [activeTab, setActiveTab] = useState<string>(value ? "url" : "upload");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
-  const { settings } = useImageOptimization();
 
   const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -110,24 +123,21 @@ const ImageUpload = ({
     setUploading(true);
 
     try {
-      // Compress image
-      const compressedBlob = await compressImage(
-        file,
-        settings.maxWidth,
-        settings.maxHeight,
-        settings.quality / 100
-      );
+      const processed = await processImage(file);
+      if (processed.blob.size > 5 * 1024 * 1024) {
+        throw new Error("The 4K output exceeds the 5MB upload limit; use a JPEG source for photographic images");
+      }
 
       // Generate unique filename
       const timestamp = Date.now();
       const randomStr = Math.random().toString(36).substring(2, 8);
-      const filename = `${folder}/${timestamp}-${randomStr}.webp`;
+      const filename = `${folder}/${timestamp}-${randomStr}.${processed.extension}`;
 
       // Upload through the Bevory API
       const { data, error } = await apiClient.storage
         .from("images")
-        .upload(filename, compressedBlob, {
-          contentType: "image/webp",
+        .upload(filename, processed.blob, {
+          contentType: processed.contentType,
           cacheControl: "31536000",
         });
 
@@ -142,11 +152,11 @@ const ImageUpload = ({
       setUrlInput(urlData.publicUrl);
       
       const originalSize = (file.size / 1024).toFixed(1);
-      const compressedSize = (compressedBlob.size / 1024).toFixed(1);
+      const processedSize = (processed.blob.size / 1024).toFixed(1);
       
       toast({
         title: "Image uploaded",
-        description: `Compressed from ${originalSize}KB to ${compressedSize}KB`,
+        description: `Prepared a 4K ${processed.extension.toUpperCase()} (${originalSize}KB → ${processedSize}KB)`,
       });
     } catch (error: any) {
       console.error("Upload error:", error);
@@ -161,7 +171,7 @@ const ImageUpload = ({
         fileInputRef.current.value = "";
       }
     }
-  }, [folder, onChange, settings, toast]);
+  }, [folder, onChange, toast]);
 
   const handleUrlSubmit = useCallback(() => {
     if (urlInput.trim()) {
@@ -183,7 +193,7 @@ const ImageUpload = ({
         <span className="text-xs font-medium text-foreground">Recommended:</span>
         <span className="text-xs font-semibold text-accent">{recommendedSize}</span>
         <span className="text-xs text-muted-foreground">• {aspectRatio}</span>
-        <span className="text-xs text-muted-foreground ml-auto">WebP • &lt; 10 MB</span>
+        <span className="text-xs text-muted-foreground ml-auto">4K PNG/JPEG • source &lt; 10 MB</span>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -216,14 +226,14 @@ const ImageUpload = ({
             {uploading ? (
               <div className="flex flex-col items-center gap-2">
                 <Loader2 className="w-8 h-8 animate-spin text-accent" />
-                <p className="text-sm text-muted-foreground">Compressing & uploading...</p>
+                <p className="text-sm text-muted-foreground">Preparing 4K image & uploading...</p>
               </div>
             ) : (
               <div className="flex flex-col items-center gap-2">
                 <Upload className="w-8 h-8 text-muted-foreground" />
                 <p className="text-sm font-medium">Click to upload</p>
                 <p className="text-xs text-muted-foreground">
-                  Auto-converts to WebP • Max 10MB
+                  Non-generative 4K PNG/JPEG • Max source 10MB
                 </p>
               </div>
             )}

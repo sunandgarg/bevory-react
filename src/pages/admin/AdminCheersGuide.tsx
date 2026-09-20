@@ -454,7 +454,7 @@ const AdminCheersGuide = () => {
                           />
                           <p className="text-xs text-muted-foreground mt-1">
                             {story.type === "image" 
-                              ? "📐 Recommended: 1080×1920px (9:16 portrait), JPG/WebP, max 500KB"
+                              ? "📐 Recommended: 1080×1920px (9:16 portrait), JPEG/PNG, max 500KB"
                               : "📹 YouTube Shorts, YouTube videos, or direct MP4 URLs supported"
                             }
                           </p>

@@ -9,8 +9,10 @@ import {
   applyImageTargets,
   collectImageTargets,
   imageObjectKey,
+  imageObjectKeyCandidates,
   publicObjectUrl,
   youtubeThumbnailUrl,
+  type ImageOutputExtension,
   type ImageTarget,
 } from "./image-migration-lib.js";
 
@@ -19,17 +21,14 @@ const args = new Set(process.argv.slice(2));
 const apply = args.has("--apply");
 const uploadOnly = args.has("--upload-only");
 const shouldUpload = apply || uploadOnly;
-const maxDimension = Number(process.env.IMAGE_MIGRATION_MAX_DIMENSION || 720);
-const quality = Number(process.env.IMAGE_MIGRATION_QUALITY || 88);
+const targetLongEdge = 3840;
+const quality = Number(process.env.IMAGE_MIGRATION_QUALITY || 95);
 const concurrency = Number(process.env.IMAGE_MIGRATION_CONCURRENCY || 4);
 const maxSourceBytes = Number(process.env.IMAGE_MIGRATION_MAX_SOURCE_BYTES || 25 * 1024 * 1024);
 
 if (apply && uploadOnly) throw new Error("Choose either --apply or --upload-only");
-if (!Number.isInteger(maxDimension) || maxDimension < 320 || maxDimension > 2160) {
-  throw new Error("IMAGE_MIGRATION_MAX_DIMENSION must be an integer from 320 to 2160");
-}
-if (!Number.isInteger(quality) || quality < 70 || quality > 100) {
-  throw new Error("IMAGE_MIGRATION_QUALITY must be an integer from 70 to 100");
+if (!Number.isInteger(quality) || quality < 90 || quality > 100) {
+  throw new Error("IMAGE_MIGRATION_QUALITY must be an integer from 90 to 100");
 }
 if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 12) {
   throw new Error("IMAGE_MIGRATION_CONCURRENCY must be an integer from 1 to 12");
@@ -46,13 +45,16 @@ const region = shouldUpload ? requiredEnv("S3_REGION") : process.env.S3_REGION?.
 const publicBaseUrl = shouldUpload
   ? requiredEnv("IMAGE_PUBLIC_URL")
   : process.env.IMAGE_PUBLIC_URL?.trim() || process.env.S3_PUBLIC_URL?.trim() || "https://media.bevory.in";
-const accessKeyId = shouldUpload ? requiredEnv("S3_ACCESS_KEY_ID") : "";
-const secretAccessKey = shouldUpload ? requiredEnv("S3_SECRET_ACCESS_KEY") : "";
+const accessKeyId = process.env.S3_ACCESS_KEY_ID?.trim();
+const secretAccessKey = process.env.S3_SECRET_ACCESS_KEY?.trim();
+if (Boolean(accessKeyId) !== Boolean(secretAccessKey)) {
+  throw new Error("S3_ACCESS_KEY_ID and S3_SECRET_ACCESS_KEY must be provided together");
+}
 const s3 = new S3Client({
   region,
   endpoint: process.env.S3_ENDPOINT?.trim() || undefined,
   forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
-  credentials: shouldUpload ? { accessKeyId, secretAccessKey } : undefined,
+  credentials: accessKeyId && secretAccessKey ? { accessKeyId, secretAccessKey } : undefined,
 });
 
 type JsonObject = Record<string, unknown>;
@@ -65,13 +67,14 @@ type RecordPlan = {
 };
 type AssetPlan = {
   sourceUrl: string;
-  objectKey: string;
-  publicUrl: string;
   tableName: string;
   recordId: string;
 };
 type AssetResult = AssetPlan & {
   uploaded: boolean;
+  objectKey?: string;
+  publicUrl?: string;
+  outputFormat?: ImageOutputExtension;
   inputBytes?: number;
   outputBytes?: number;
   width?: number;
@@ -160,30 +163,74 @@ const objectExists = async (key: string) => {
   }
 };
 
+const findExistingObjectKey = async (asset: AssetPlan) => {
+  for (const key of imageObjectKeyCandidates(asset.tableName, asset.recordId, asset.sourceUrl)) {
+    if (await objectExists(key)) return key;
+  }
+  return null;
+};
+
 const migrateAsset = async (asset: AssetPlan): Promise<AssetResult> => {
   try {
-    if (await objectExists(asset.objectKey)) return { ...asset, uploaded: false };
+    const existingObjectKey = await findExistingObjectKey(asset);
+    if (existingObjectKey) {
+      const outputFormat: ImageOutputExtension = existingObjectKey.endsWith(".png") ? "png" : "jpg";
+      return {
+        ...asset,
+        uploaded: false,
+        objectKey: existingObjectKey,
+        publicUrl: publicObjectUrl(publicBaseUrl, existingObjectKey),
+        outputFormat,
+      };
+    }
+
     const source = await downloadImage(asset.sourceUrl);
-    const converted = await sharp(source, { animated: false, limitInputPixels: 100_000_000 })
+    const sharpOptions = { animated: false, limitInputPixels: 100_000_000 } as const;
+    const metadata = await sharp(source, sharpOptions).metadata();
+    const outputFormat: ImageOutputExtension = metadata.hasAlpha ? "png" : "jpg";
+    const objectKey = imageObjectKey(asset.tableName, asset.recordId, asset.sourceUrl, outputFormat);
+    const resized = sharp(source, sharpOptions)
       .rotate()
-      .resize({ width: maxDimension, height: maxDimension, fit: "inside", withoutEnlargement: true })
-      .webp({ quality, alphaQuality: 92, effort: 4, smartSubsample: true })
+      .resize({
+        width: targetLongEdge,
+        height: targetLongEdge,
+        fit: "inside",
+        withoutEnlargement: false,
+        kernel: sharp.kernel.lanczos3,
+      })
+      .toColorspace("srgb");
+    const converted = await (outputFormat === "png"
+      ? resized.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false })
+      : resized.jpeg({
+        quality,
+        progressive: true,
+        chromaSubsampling: "4:4:4",
+        mozjpeg: true,
+      }))
       .toBuffer({ resolveWithObject: true });
     if (!converted.info.width || !converted.info.height) throw new Error("Image conversion produced no dimensions");
+    if (Math.max(converted.info.width, converted.info.height) !== targetLongEdge) {
+      throw new Error(`Image conversion produced ${converted.info.width}x${converted.info.height}, not a ${targetLongEdge}px long edge`);
+    }
     await s3.send(new PutObjectCommand({
       Bucket: bucket,
-      Key: asset.objectKey,
+      Key: objectKey,
       Body: converted.data,
-      ContentType: "image/webp",
+      ContentType: outputFormat === "png" ? "image/png" : "image/jpeg",
       CacheControl: "public, max-age=31536000, immutable",
       Metadata: {
         "source-sha256": createHash("sha256").update(asset.sourceUrl).digest("hex"),
-        "migration-version": "1",
+        "migration-version": "2",
+        "output-format": outputFormat,
+        "resize-kernel": "lanczos3",
       },
     }));
     return {
       ...asset,
       uploaded: true,
+      objectKey,
+      publicUrl: publicObjectUrl(publicBaseUrl, objectKey),
+      outputFormat,
       inputBytes: source.length,
       outputBytes: converted.data.length,
       width: converted.info.width,
@@ -238,11 +285,8 @@ try {
   for (const plan of plans) {
     for (const target of plan.targets) {
       if (assetsBySource.has(target.sourceUrl)) continue;
-      const objectKey = imageObjectKey(plan.tableName, plan.recordId, target.sourceUrl);
       assetsBySource.set(target.sourceUrl, {
         sourceUrl: target.sourceUrl,
-        objectKey,
-        publicUrl: publicObjectUrl(publicBaseUrl, objectKey),
         tableName: plan.tableName,
         recordId: plan.recordId,
       });
@@ -260,8 +304,10 @@ try {
     records: plans.length,
     references: plans.reduce((sum, plan) => sum + plan.targets.length, 0),
     uniqueImages: assets.length,
-    maxDimension,
+    targetLongEdge,
     quality,
+    resizeKernel: "lanczos3",
+    outputFormats: ["lossless-png-for-alpha", "progressive-jpeg-4:4:4"],
     publicBaseUrl,
     domains,
   }, null, 2));
@@ -273,8 +319,10 @@ try {
     const summary = {
       generatedAt: new Date().toISOString(),
       mode: apply ? "apply" : "upload-only",
-      maxDimension,
+      targetLongEdge,
       quality,
+      resizeKernel: "lanczos3",
+      outputFormats: ["lossless-png-for-alpha", "progressive-jpeg-4:4:4"],
       publicBaseUrl,
       records: plans.length,
       references: plans.reduce((sum, plan) => sum + plan.targets.length, 0),
@@ -299,7 +347,10 @@ try {
       throw new Error(`${failures.length} images failed; database URLs were not changed`);
     }
     if (apply) {
-      const migratedUrls = new Map(results.map((result) => [result.sourceUrl, result.publicUrl]));
+      const migratedUrls = new Map(results.map((result) => {
+        if (!result.publicUrl) throw new Error(`Missing public URL for ${result.sourceUrl}`);
+        return [result.sourceUrl, result.publicUrl];
+      }));
       const timestamp = new Date().toISOString();
       for (let index = 0; index < plans.length; index += 100) {
         const chunk = plans.slice(index, index + 100);

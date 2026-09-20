@@ -8,6 +8,8 @@ export type ImageTarget = {
   sourceUrl: string;
 };
 
+export type ImageOutputExtension = "png" | "jpg";
+
 const IMAGE_FIELD = /(?:^|_)(?:image|logo|cover|thumbnail|avatar|favicon)(?:_|$)/i;
 const SOURCE_FIELD = /source|page|link|video|youtube/i;
 const HTML_IMAGE = /<img\b[^>]*?\bsrc=["'](https?:\/\/[^"']+)["']/gi;
@@ -107,10 +109,20 @@ const safeSegment = (value: string) => value
   .replace(/^-+|-+$/g, "")
   .slice(0, 72) || "image";
 
-export const imageObjectKey = (table: string, recordId: string, sourceUrl: string) => {
+export const imageObjectKey = (
+  table: string,
+  recordId: string,
+  sourceUrl: string,
+  extension: ImageOutputExtension,
+) => {
   const digest = createHash("sha256").update(sourceUrl).digest("hex").slice(0, 20);
-  return `migrated-images/${safeSegment(table)}/${safeSegment(recordId)}/${digest}.webp`;
+  return `migrated-images/${safeSegment(table)}/${safeSegment(recordId)}/${digest}.${extension}`;
 };
+
+export const imageObjectKeyCandidates = (table: string, recordId: string, sourceUrl: string) => ([
+  imageObjectKey(table, recordId, sourceUrl, "png"),
+  imageObjectKey(table, recordId, sourceUrl, "jpg"),
+]);
 
 export const publicObjectUrl = (baseUrl: string, key: string) => (
   `${baseUrl.replace(/\/$/, "")}/${key.split("/").map(encodeURIComponent).join("/")}`

@@ -158,9 +158,14 @@ to the distribution, and verify an uploaded image end to end.
 The production database currently contains 6,434 image references representing
 4,499 unique externally hosted files: 4,476 from Livcheers, 22 from Unsplash,
 and one YouTube thumbnail. The idempotent migration command downloads each
-source once, rejects private-network redirects and non-image responses, converts
-it to high-quality WebP, limits both dimensions to 720 pixels without upscaling,
-and uploads it under `migrated-images/` with immutable cache headers.
+source once and rejects private-network redirects and non-image responses. It
+uses deterministic, non-generative Lanczos3 resampling to preserve the aspect
+ratio while setting the longest edge to exactly 3,840 pixels, upscaling smaller
+sources and downscaling larger ones. Images with alpha are stored as lossless
+PNG; all others are stored as progressive JPEG at quality 95 with 4:4:4 chroma.
+No synthetic detail is generated. Objects are uploaded privately under
+`migrated-images/` with immutable cache headers. Repeated runs detect either the
+`.png` or `.jpg` object key and do not upload it again.
 
 Do not change database URLs until CloudFront can read the private bucket and the
 configured `IMAGE_PUBLIC_URL` works publicly. Use the phases below from the API
@@ -180,6 +185,17 @@ IMAGE_PUBLIC_URL=https://media.bevory.in pnpm images:migrate -- --apply
 # Regenerate SEO route documents so structured-data image URLs also use Bevory media.
 pnpm sitemap
 ```
+
+`IMAGE_MIGRATION_QUALITY` may override the JPEG quality from 90 through 100;
+it defaults to 95. PNG output remains lossless. The 3,840-pixel long edge is
+fixed so every migrated asset is produced consistently. Because Lanczos3 is a
+traditional resampling filter rather than a generative enhancer, upscaled files
+retain the character and limitations of their source pixels instead of adding
+invented visual details. Production may continue to provide the paired
+`S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY` variables. If both are omitted,
+the migration uses the AWS SDK default credential chain, including an
+authenticated local AWS profile or an attached instance role; providing only
+one of the pair is rejected.
 
 After the apply phase, rebuild and redeploy the API image so regenerated SEO
 route documents ship with the application. Retain `image_source_url`,
