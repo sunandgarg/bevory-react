@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import type { Json } from "@/types/json";
 
@@ -16,6 +17,18 @@ const DEFAULT_SETTINGS: ImageOptimizationSettings = {
   maxWidth: 3840,
   maxHeight: 3840,
   format: 'auto'
+};
+const IMAGE_SETTINGS_QUERY_KEY = ["app-setting", "image-optimization"] as const;
+
+const fetchImageSettings = async (): Promise<ImageOptimizationSettings> => {
+  const { data, error } = await apiClient
+    .from("app_settings")
+    .select("*")
+    .eq("key", "image_optimization")
+    .maybeSingle();
+  if (error) throw error;
+  if (!data?.value) return DEFAULT_SETTINGS;
+  return { ...DEFAULT_SETTINGS, ...(data.value as unknown as ImageOptimizationSettings) };
 };
 
 // Images are preprocessed into PNG or JPEG and served from Bevory's own CDN.
@@ -57,31 +70,12 @@ const generateSrcSet = (
 };
 
 export const useImageOptimization = () => {
-  const [settings, setSettings] = useState<ImageOptimizationSettings>(DEFAULT_SETTINGS);
-  const [loading, setLoading] = useState(true);
-
-  const fetchSettings = useCallback(async () => {
-    try {
-      const { data, error } = await apiClient
-        .from("app_settings")
-        .select("*")
-        .eq("key", "image_optimization")
-        .maybeSingle();
-
-      if (!error && data?.value) {
-        const value = data.value as unknown as ImageOptimizationSettings;
-        setSettings({ ...DEFAULT_SETTINGS, ...value });
-      }
-    } catch (error) {
-      console.error("Error fetching image optimization settings:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchSettings();
-  }, [fetchSettings]);
+  const queryClient = useQueryClient();
+  const { data: settings = DEFAULT_SETTINGS, isLoading: loading } = useQuery({
+    queryKey: IMAGE_SETTINGS_QUERY_KEY,
+    queryFn: fetchImageSettings,
+    staleTime: 30 * 60 * 1000,
+  });
 
   const updateSettings = async (newSettings: ImageOptimizationSettings) => {
     try {
@@ -110,7 +104,7 @@ export const useImageOptimization = () => {
         if (error) throw error;
       }
 
-      setSettings(newSettings);
+      queryClient.setQueryData(IMAGE_SETTINGS_QUERY_KEY, newSettings);
       return true;
     } catch (error) {
       console.error("Error updating image optimization settings:", error);
