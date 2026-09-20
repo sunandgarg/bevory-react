@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=bevory-api:latest
+FROM ${BASE_IMAGE}
+
+ARG REVISION=unknown
+LABEL bevory.revision=${REVISION}
+
+COPY --chown=node:node dist-server/server/catalog.js /app/dist-server/server/catalog.js
+COPY --chown=node:node dist-server/server/index.js /app/dist-server/server/index.js
