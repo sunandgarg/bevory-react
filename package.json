@@ -23,6 +23,7 @@
     "images:migrate": "tsx scripts/migrate-images-to-s3.ts",
     "images:webp:q95": "tsx scripts/generate-webp-derivatives.ts",
     "images:webp:apply": "tsx scripts/apply-webp-manifest.ts",
+    "brands:logos": "tsx scripts/crawl-official-brand-logos.ts",
     "images:audit": "tsx scripts/audit-first-party-images.ts",
     "blog:repair": "tsx scripts/repair-blog-import.ts",
     "brands:enrich": "tsx scripts/enrich-brand-content.ts",
