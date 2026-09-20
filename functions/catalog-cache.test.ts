@@ -34,7 +34,7 @@ describe("Cloudflare catalogue cache", () => {
 
   it("serves catalogues from the edge cache with a long stale window", async () => {
     const cached = Response.json({ data: { products: [] }, error: null }, {
-      headers: { "cache-control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400" },
+      headers: { "cache-control": "public, max-age=14400" },
     });
     const cache = {
       match: vi.fn(async () => cached),
@@ -51,7 +51,9 @@ describe("Cloudflare catalogue cache", () => {
     );
 
     expect(response.headers.get("x-bevory-cache")).toBe("HIT");
-    expect(response.headers.get("cache-control")).toContain("stale-while-revalidate=86400");
+    expect(response.headers.get("cache-control")).toBe(
+      "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+    );
     expect(originFetch).not.toHaveBeenCalled();
   });
 });

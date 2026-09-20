@@ -390,6 +390,7 @@ export const proxyApiRequest = async (request, env, waitUntil) => {
       const cached = await caches.default.match(cacheKey);
       if (cached) {
         const headers = new Headers(cached.headers);
+        headers.set("cache-control", CATALOG_CACHE_CONTROL);
         headers.set("x-bevory-cache", "HIT");
         return new Response(cached.body, { status: cached.status, headers });
       }
