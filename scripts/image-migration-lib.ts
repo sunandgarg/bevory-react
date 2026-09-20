@@ -7,6 +7,8 @@ export type ImageTarget = {
   path: PathPart[];
   sourceUrl: string;
   sourceValue?: string;
+  start?: number;
+  end?: number;
 };
 
 export type ImageOutputExtension = "png" | "jpg";
@@ -105,29 +107,51 @@ export const isExternalHttpUrl = (value: unknown, publicBaseUrl?: string) => (
 );
 
 const attributeValues = (value: string, attribute: "src" | "srcset") => {
-  const values: string[] = [];
+  const values: Array<{ value: string; start: number; end: number }> = [];
   const pattern = new RegExp(
     `(?:\\s|/)${attribute}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>\\x60]+))`,
     "gi",
   );
-  for (const match of value.matchAll(pattern)) values.push(match[1] ?? match[2] ?? match[3] ?? "");
+  for (const match of value.matchAll(pattern)) {
+    const raw = match[1] ?? match[2] ?? match[3] ?? "";
+    const relativeStart = match[0].lastIndexOf(raw);
+    const start = (match.index ?? 0) + relativeStart;
+    values.push({ value: raw, start, end: start + raw.length });
+  }
   return values;
 };
 
 const embeddedImageTargets = (value: string, publicBaseUrl: string | undefined, path: PathPart[]) => {
   const targets: ImageTarget[] = [];
-  const add = (raw: string) => {
+  const add = (raw: string, start: number, end: number) => {
     const sourceUrl = normalizedExternalHttpUrl(raw, publicBaseUrl);
-    if (sourceUrl) targets.push({ kind: "html", path, sourceUrl, sourceValue: raw });
+    if (sourceUrl) targets.push({ kind: "html", path, sourceUrl, sourceValue: raw, start, end });
   };
-  for (const tag of value.match(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi) ?? []) {
-    attributeValues(tag, "src").forEach(add);
+  for (const tagMatch of value.matchAll(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)) {
+    const tag = tagMatch[0];
+    const tagStart = tagMatch.index ?? 0;
+    for (const source of attributeValues(tag, "src")) {
+      add(source.value, tagStart + source.start, tagStart + source.end);
+    }
     for (const sourceSet of attributeValues(tag, "srcset")) {
-      sourceSet.split(",").map((item) => item.trim().split(/\s+/)[0]).filter(Boolean).forEach(add);
+      let offset = 0;
+      for (const item of sourceSet.value.split(",")) {
+        const raw = item.trim().split(/\s+/)[0];
+        if (raw) {
+          const itemStart = item.indexOf(raw);
+          const start = tagStart + sourceSet.start + offset + itemStart;
+          add(raw, start, start + raw.length);
+        }
+        offset += item.length + 1;
+      }
     }
   }
   const cssUrlPattern = /\burl\(\s*(?:"([^"]*)"|'([^']*)'|([^\s"')]+))\s*\)/gi;
-  for (const match of value.matchAll(cssUrlPattern)) add(match[1] ?? match[2] ?? match[3] ?? "");
+  for (const match of value.matchAll(cssUrlPattern)) {
+    const raw = match[1] ?? match[2] ?? match[3] ?? "";
+    const start = (match.index ?? 0) + match[0].lastIndexOf(raw);
+    add(raw, start, start + raw.length);
+  }
   return targets;
 };
 
@@ -206,6 +230,7 @@ export const applyImageTargets = (
   migratedUrls: Map<string, string>,
 ) => {
   const next = structuredClone(value);
+  const embeddedByPath = new Map<string, ImageTarget[]>();
   for (const target of targets) {
     const migrated = migratedUrls.get(target.sourceUrl);
     if (!migrated) throw new Error(`Missing migrated URL for ${target.sourceUrl}`);
@@ -213,9 +238,23 @@ export const applyImageTargets = (
       writePath(next, target.path, migrated);
       continue;
     }
-    const html = readPath(next, target.path);
-    if (typeof html !== "string") throw new Error(`Expected HTML string at ${target.path.join(".")}`);
-    writePath(next, target.path, html.split(target.sourceValue ?? target.sourceUrl).join(migrated));
+    const key = JSON.stringify(target.path);
+    embeddedByPath.set(key, [...(embeddedByPath.get(key) ?? []), target]);
+  }
+  for (const embeddedTargets of embeddedByPath.values()) {
+    const path = embeddedTargets[0].path;
+    const currentHtml = readPath(next, path);
+    if (typeof currentHtml !== "string") throw new Error(`Expected HTML string at ${path.join(".")}`);
+    let html = currentHtml;
+    for (const target of embeddedTargets.sort((left, right) => (right.start ?? -1) - (left.start ?? -1))) {
+      const migrated = migratedUrls.get(target.sourceUrl)!;
+      const sourceValue = target.sourceValue ?? target.sourceUrl;
+      if (target.start === undefined || target.end === undefined || html.slice(target.start, target.end) !== sourceValue) {
+        throw new Error(`Image token changed at ${target.path.join(".")}`);
+      }
+      html = `${html.slice(0, target.start)}${migrated}${html.slice(target.end)}`;
+    }
+    writePath(next, path, html);
   }
   return next;
 };

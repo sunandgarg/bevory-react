@@ -94,6 +94,27 @@ describe("image migration helpers", () => {
     expect(row.image_url).toBe("https://third.example/product.jpg");
   });
 
+  it("replaces only the exact rendered image tokens", () => {
+    const short = "https://third.example/a.jpg";
+    const long = "https://third.example/a.jpg?size=2";
+    const row = {
+      content: `<a href="${short}">source</a><img src="${short}"><img srcset="${long} 2x">`,
+    };
+    const next = applyImageTargets(
+      row,
+      collectImageTargets(row, "https://bevory.in/media"),
+      new Map([
+        [short, "https://bevory.in/media/short.jpg"],
+        [long, "https://bevory.in/media/long.jpg"],
+      ]),
+    );
+    expect(next.content).toBe(
+      `<a href="${short}">source</a>`
+      + '<img src="https://bevory.in/media/short.jpg">'
+      + '<img srcset="https://bevory.in/media/long.jpg 2x">',
+    );
+  });
+
   it("creates stable format-aware object keys and YouTube thumbnails", () => {
     expect(imageObjectKey("Products", "A Product", "https://example.com/a.jpg", "jpg"))
       .toMatch(/^migrated-images\/products\/a-product\/[a-f0-9]{20}\.jpg$/);
