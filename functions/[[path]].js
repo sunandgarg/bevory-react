@@ -208,13 +208,6 @@ const dynamicProductSeo = (pathname, productIndex) => {
   const selectedPrice = requestedVolume ? cityPrices[requestedVolume] : null;
   const pricedSizes = Object.entries(cityPrices);
   const knownSizesText = knownVolumes.length ? knownVolumes.join(", ") : "size information pending";
-  const otherCities = Object.entries(product.prices || {})
-    .filter(([slug]) => slug !== citySlug)
-    .flatMap(([slug, values]) => {
-      const price = requestedVolume ? values?.[requestedVolume] : Object.values(values || {})[0];
-      return price ? [`${cityNames.get(slug) || humanize(slug)} at ₹${Number(price).toLocaleString("en-IN")}`] : [];
-    })
-    .slice(0, 6);
   const canonicalPath = `/${citySlug}/product/${productSlug}${requestedVolume ? `/${requestedVolume}` : ""}`;
   const sizeLabel = knownVolume || "";
   const priceStatement = selectedPrice
@@ -266,7 +259,6 @@ const dynamicProductSeo = (pathname, productIndex) => {
     body: [
       priceStatement,
       `Known bottle sizes for ${productName}: ${knownSizesText}. A dash means unavailable, not zero.`,
-      ...(otherCities.length ? [`Prices are also listed in other cities, including ${otherCities.join("; ")}.`] : []),
     ],
     ...(productImage ? { image: productImage } : {}),
     breadcrumbs: [

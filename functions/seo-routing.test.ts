@@ -30,7 +30,20 @@ describe("SEO routing", () => {
     );
     expect(seo?.robots).toContain("noindex, follow");
     expect(seo?.body.join(" ")).toContain("does not yet have a verified price");
+    expect(seo?.body.join(" ")).not.toContain("Gurgaon");
+    expect(seo?.body.join(" ")).not.toContain("₹3,200");
     expect(JSON.stringify(seo?.structuredData)).not.toContain('"offers"');
+  });
+
+  it("keeps priced variant content specific to its route city", () => {
+    const seo = dynamicProductSeo(
+      "/delhi/product/johnnie-walker-black-label/180ml",
+      productIndex,
+    );
+    expect(seo?.body.join(" ")).toContain("Delhi");
+    expect(seo?.body.join(" ")).toContain("₹900");
+    expect(seo?.body.join(" ")).not.toContain("Gurgaon");
+    expect(seo?.body.join(" ")).not.toContain("₹3,200");
   });
 
   it("keeps unknown sizes out of the index", () => {
