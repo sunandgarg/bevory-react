@@ -75,16 +75,6 @@ export const rememberRecentPromise = <T>(
   return value;
 };
 
-export const isCrawlerUserAgent = (userAgent = "") => (
-  /(?:googlebot|bingbot|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|claudebot|anthropic-ai|gptbot|perplexitybot|bytespider)/i
-    .test(userAgent)
-);
-
-export const stripCrawlerHydration = (html: string) => html.replace(
-  /<script\b(?=[^>]*\btype\s*=\s*["']module["'])[^>]*>[\s\S]*?<\/script>\s*/gi,
-  "",
-);
-
 const cityNames = new Map([
   ["agra", "Agra"], ["asansol", "Asansol"], ["bangalore", "Bangalore"],
   ["bhopal", "Bhopal"], ["delhi", "Delhi"], ["faridabad", "Faridabad"],

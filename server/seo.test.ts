@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   enrichProductSeo,
   legacyRedirectPath,
-  isCrawlerUserAgent,
   productAliasBucketForPath,
   productContentBucketForPath,
   rememberRecentPromise,
@@ -10,7 +9,6 @@ import {
   resolveSeo,
   rewriteSeoDocument,
   seoBucketForPath,
-  stripCrawlerHydration,
 } from "./seo.js";
 
 const template = `<!doctype html><html><head>
@@ -38,16 +36,10 @@ describe("origin SEO rendering", () => {
     expect([...cache.keys()]).toEqual(["a", "c"]);
   });
 
-  it("serves crawler SEO without booting the interactive application", () => {
-    expect(isCrawlerUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1)")).toBe(true);
-    expect(isCrawlerUserAgent("Mozilla/5.0 Chrome/153 Safari/537.36")).toBe(false);
-    expect(isCrawlerUserAgent(
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 ChatGPT-User/1.0",
-    )).toBe(false);
-
-    const html = stripCrawlerHydration(template);
-    expect(html).not.toContain('type="module"');
-    expect(html).toContain("<title>Default</title>");
+  it("preserves application hydration in server-rendered SEO documents", () => {
+    const html = rewriteSeoDocument(template, resolveSeo("/gurgaon", {}));
+    expect(html).toContain('<script type="module" src="/app.js"></script>');
+    expect(html).toContain("<title>BevOry | Compare Local Beverage Prices</title>");
   });
 
   it("selects city product shards", () => {
