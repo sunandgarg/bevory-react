@@ -1,5 +1,5 @@
-// BevOry Service Worker v10 - 2026
-const CACHE_VERSION = 'bevory-v10';
+// BevOry Service Worker v11 - 2026
+const CACHE_VERSION = 'bevory-v11';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
