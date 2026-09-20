@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
@@ -43,7 +42,6 @@ export const LegalContact = ({ purpose = "questions or notices" }: { purpose?: s
 const LegalPage = ({ title, description, children }: LegalPageProps) => (
   <div className="min-h-screen bg-background">
     <SEOHead title={`${title} | BevOry`} description={description} />
-    <Header />
     <main className="mx-auto max-w-4xl px-4 py-8">
       <article className="prose prose-sm max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-primary">
         <h1 className="mb-2 text-2xl font-bold">{title}</h1>

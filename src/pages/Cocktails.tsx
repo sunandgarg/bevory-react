@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Wine, Clock, ChefHat, X, ChevronRight, Sparkles, Share2, Heart, Bookmark } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -27,15 +27,27 @@ interface Cocktail {
   base_spirit: string | null;
   is_featured: boolean | null;
   is_popular: boolean | null;
+  is_active?: boolean | null;
+  duplicate_of_slug?: string | null;
+  glassware?: string | null;
+  ice?: string | null;
+  method?: string | null;
+  garnish?: string | null;
+  equipment?: string[] | null;
+  substitutions?: string[] | null;
+  common_mistakes?: string[] | null;
+  food_pairings?: string[] | null;
+  variations?: string[] | null;
+  responsible_notice?: string | null;
 }
 
 const SPIRIT_FILTERS = [
-  { label: "All", value: "all", emoji: "🍸" },
-  { label: "Whiskey", value: "Whiskey", emoji: "🥃" },
-  { label: "Vodka", value: "Vodka", emoji: "🍸" },
-  { label: "Rum", value: "Rum", emoji: "🍹" },
-  { label: "Gin", value: "Gin", emoji: "🫒" },
-  { label: "Tequila", value: "Tequila", emoji: "🌵" },
+  { label: "All", value: "all" },
+  { label: "Whisky", value: "Whiskey" },
+  { label: "Vodka", value: "Vodka" },
+  { label: "Rum", value: "Rum" },
+  { label: "Gin", value: "Gin" },
+  { label: "Tequila", value: "Tequila" },
 ];
 
 const CATEGORY_FILTERS = ["All", "Classic", "Modern", "Tropical"];
@@ -63,18 +75,26 @@ const Cocktails = () => {
       return data as Cocktail[];
     },
   });
+  const publicCocktails = useMemo(
+    () => cocktails.filter((cocktail) => cocktail.is_active !== false),
+    [cocktails],
+  );
 
   useEffect(() => {
     const cocktailSlug = routeSlug || searchParams.get("slug") || searchParams.get("id");
     if (cocktailSlug && cocktails.length > 0) {
       const cocktail = cocktails.find(c => c.slug === cocktailSlug || c.id === cocktailSlug);
       if (cocktail) {
+        if (cocktail.is_active === false && cocktail.duplicate_of_slug) {
+          navigate(`/cocktail/${cocktail.duplicate_of_slug}`, { replace: true });
+          return;
+        }
         setSelectedCocktail(cocktail);
       }
     }
-  }, [routeSlug, searchParams, cocktails]);
+  }, [routeSlug, searchParams, cocktails, navigate]);
 
-  const filteredCocktails = cocktails.filter((cocktail) => {
+  const filteredCocktails = publicCocktails.filter((cocktail) => {
     const matchesSearch = cocktail.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cocktail.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cocktail.ingredients?.some(i => i.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -90,10 +110,11 @@ const Cocktails = () => {
   const otherCocktails = filteredCocktails.filter(c => !c.is_featured && !c.is_popular);
 
   // Helper to convert prep_time to ISO 8601 duration format
-  const formatPrepTimeISO = (prepTime: string | null): string => {
-    if (!prepTime) return "PT5M"; // Default 5 minutes
+  const formatPrepTimeISO = (prepTime: string | null): string | null => {
+    if (!prepTime) return null;
     const match = prepTime.match(/(\d+)/);
-    const minutes = match ? parseInt(match[1]) : 5;
+    if (!match) return null;
+    const minutes = parseInt(match[1]);
     return `PT${minutes}M`;
   };
 
@@ -102,11 +123,13 @@ const Cocktails = () => {
     "@type": "Recipe",
     "name": selectedCocktail.name,
     "description": selectedCocktail.description || `How to make a ${selectedCocktail.name} cocktail.`,
-    "image": selectedCocktail.image_url || "https://bevory.in/og-image.png",
+    ...(selectedCocktail.image_url ? { "image": selectedCocktail.image_url } : {}),
     "recipeCategory": "Cocktail",
-    "recipeCuisine": "International",
-    "prepTime": formatPrepTimeISO(selectedCocktail.prep_time),
-    "totalTime": formatPrepTimeISO(selectedCocktail.prep_time),
+    "recipeCuisine": "Indian and international",
+    ...(formatPrepTimeISO(selectedCocktail.prep_time) ? {
+      "prepTime": formatPrepTimeISO(selectedCocktail.prep_time),
+      "totalTime": formatPrepTimeISO(selectedCocktail.prep_time),
+    } : {}),
     "recipeYield": "1 serving",
     "recipeIngredient": selectedCocktail.ingredients || [],
     ...(selectedCocktail.instructions ? {
@@ -124,22 +147,24 @@ const Cocktails = () => {
     "name": "Cocktail Recipes & Library",
     "description": "Discover classic and modern cocktail recipes. Learn how to make your favorite drinks with step-by-step instructions.",
     "url": "https://bevory.in/cocktails",
-    "numberOfItems": cocktails.length,
+    "numberOfItems": publicCocktails.length,
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": cocktails.slice(0, 10).map((c, i) => ({
+      "itemListElement": publicCocktails.slice(0, 10).map((c, i) => ({
         "@type": "ListItem",
         "position": i + 1,
         "item": {
           "@type": "Recipe",
           "name": c.name,
           "description": c.description || `Delicious ${c.name} cocktail recipe with ${c.base_spirit || 'spirits'}.`,
-          "image": c.image_url || "https://bevory.in/og-image.png",
+          ...(c.image_url ? { "image": c.image_url } : {}),
           "recipeCategory": "Cocktail",
           "recipeCuisine": "International",
-          "prepTime": formatPrepTimeISO(c.prep_time),
           "cookTime": "PT0M",
-          "totalTime": formatPrepTimeISO(c.prep_time),
+          ...(formatPrepTimeISO(c.prep_time) ? {
+            "prepTime": formatPrepTimeISO(c.prep_time),
+            "totalTime": formatPrepTimeISO(c.prep_time),
+          } : {}),
           "recipeYield": "1 serving",
           "recipeIngredient": c.ingredients || [],
           ...(c.instructions ? { "recipeInstructions": [{
@@ -253,7 +278,6 @@ const Cocktails = () => {
                         : "bg-secondary/80 text-foreground hover:bg-secondary hover:scale-102"
                     }`}
                   >
-                    <span>{spirit.emoji}</span>
                     <span>{spirit.label}</span>
                   </motion.button>
                 ))}
@@ -399,7 +423,7 @@ const CocktailCard = ({
         : "bg-secondary/50 border border-border/50 hover:border-accent/30"
     }`}
   >
-    <div className="text-5xl mb-3">{cocktail.image_emoji || "🍸"}</div>
+    <CocktailVisual cocktail={cocktail} className="mb-3 h-24 w-full rounded-xl" />
     <h3 className="font-semibold text-sm mb-1.5 line-clamp-1 group-hover:text-accent transition-colors">
       {cocktail.name}
     </h3>
@@ -435,9 +459,7 @@ const CocktailListItem = ({
     transition={{ delay: index * 0.03 }}
     className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border/50 cursor-pointer hover:bg-secondary hover:border-accent/30 transition-all group"
   >
-    <div className="w-14 h-14 rounded-xl bg-background flex items-center justify-center text-3xl flex-shrink-0 shadow-sm border border-border/50">
-      {cocktail.image_emoji || "🍸"}
-    </div>
+    <CocktailVisual cocktail={cocktail} className="h-14 w-14 flex-shrink-0 rounded-xl" />
     <div className="flex-1 min-w-0">
       <h3 className="font-medium text-sm group-hover:text-accent transition-colors">{cocktail.name}</h3>
       <div className="flex items-center gap-2 mt-1 flex-wrap">
@@ -513,7 +535,7 @@ const CocktailDetailSheet = ({
               </Button>
             </div>
 
-            <div className="text-7xl mb-4">{cocktail.image_emoji || "🍸"}</div>
+            <CocktailVisual cocktail={cocktail} className="mb-4 h-44 w-full rounded-2xl" />
             <SheetTitle className="text-2xl font-serif">{cocktail.name}</SheetTitle>
             <p className="text-muted-foreground leading-relaxed">{cocktail.description}</p>
           </SheetHeader>
@@ -555,6 +577,30 @@ const CocktailDetailSheet = ({
             </ul>
           </section>
 
+          {(cocktail.glassware || cocktail.ice || cocktail.method || cocktail.garnish) && (
+            <section className="mb-6">
+              <h3 className="font-serif font-semibold text-lg mb-3">Serve details</h3>
+              <dl className="grid grid-cols-2 gap-2 text-sm">
+                {cocktail.glassware && <div className="rounded-xl bg-secondary/50 p-3"><dt className="text-xs text-muted-foreground">Glassware</dt><dd className="mt-1 font-medium">{cocktail.glassware}</dd></div>}
+                {cocktail.ice && <div className="rounded-xl bg-secondary/50 p-3"><dt className="text-xs text-muted-foreground">Ice</dt><dd className="mt-1 font-medium">{cocktail.ice}</dd></div>}
+                {cocktail.method && <div className="rounded-xl bg-secondary/50 p-3"><dt className="text-xs text-muted-foreground">Method</dt><dd className="mt-1 font-medium">{cocktail.method}</dd></div>}
+                {cocktail.garnish && <div className="rounded-xl bg-secondary/50 p-3"><dt className="text-xs text-muted-foreground">Garnish</dt><dd className="mt-1 font-medium">{cocktail.garnish}</dd></div>}
+              </dl>
+            </section>
+          )}
+
+          <RecipeNotes title="Equipment" items={cocktail.equipment} />
+          <RecipeNotes title="Substitutions" items={cocktail.substitutions} />
+          <RecipeNotes title="Common mistakes" items={cocktail.common_mistakes} />
+          <RecipeNotes title="Indian food pairings" items={cocktail.food_pairings} />
+          <RecipeNotes title="Variations" items={cocktail.variations} />
+
+          {cocktail.responsible_notice && (
+            <p className="mb-6 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-muted-foreground">
+              {cocktail.responsible_notice}
+            </p>
+          )}
+
           {/* Instructions */}
           <section className="mb-6">
             <h3 className="font-serif font-semibold text-lg mb-3 flex items-center gap-2">
@@ -584,6 +630,38 @@ const CocktailDetailSheet = ({
         </ScrollArea>
       </SheetContent>
     </Sheet>
+  );
+};
+
+const CocktailVisual = ({ cocktail, className }: { cocktail: Cocktail; className: string }) => (
+  <div className={`overflow-hidden border border-border/50 bg-gradient-to-br from-accent/15 via-secondary to-background ${className}`}>
+    {cocktail.image_url ? (
+      <img
+        src={cocktail.image_url}
+        alt={`${cocktail.name} cocktail`}
+        width={640}
+        height={480}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
+    ) : (
+      <div className="flex h-full w-full items-center justify-center">
+        <Wine className="h-9 w-9 text-accent/70" aria-hidden="true" />
+      </div>
+    )}
+  </div>
+);
+
+const RecipeNotes = ({ title, items }: { title: string; items?: string[] | null }) => {
+  if (!items?.length) return null;
+  return (
+    <section className="mb-6">
+      <h3 className="font-serif font-semibold text-lg mb-2">{title}</h3>
+      <ul className="space-y-2 text-sm text-muted-foreground">
+        {items.map((item) => <li key={item} className="rounded-lg bg-secondary/40 px-3 py-2">{item}</li>)}
+      </ul>
+    </section>
   );
 };
 

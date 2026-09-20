@@ -13,7 +13,7 @@ import type { RequestHandler } from "express";
 const ONE_YEAR_SECONDS = 31_536_000;
 const IMMUTABLE_CACHE_CONTROL = `public, max-age=${ONE_YEAR_SECONDS}, s-maxage=${ONE_YEAR_SECONDS}, immutable`;
 const REVALIDATING_CACHE_CONTROL = "public, max-age=300, s-maxage=300, must-revalidate";
-const MIGRATED_KEY = /^migrated-images\/[a-z0-9][a-z0-9-]{0,71}\/[a-z0-9][a-z0-9-]{0,71}\/[a-f0-9]{20}\.(?:jpg|png)$/;
+const MIGRATED_KEY = /^migrated-images\/[a-z0-9][a-z0-9-]{0,71}\/[a-z0-9][a-z0-9-]{0,71}\/[a-f0-9]{20}\.(?:jpg|png|webp)$/;
 const SAFE_UPLOAD_SEGMENT = "[A-Za-z0-9_-](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9_-])?";
 const UPLOAD_KEY = new RegExp(`^images/(?:${SAFE_UPLOAD_SEGMENT}/)*${SAFE_UPLOAD_SEGMENT}\\.(?:jpg|jpeg|png)$`);
 
@@ -168,7 +168,9 @@ const applyResponseHeaders = (
   );
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.removeHeader("Set-Cookie");
-  res.setHeader("Content-Type", key.endsWith(".png") ? "image/png" : "image/jpeg");
+  res.setHeader("Content-Type", key.endsWith(".png")
+    ? "image/png"
+    : key.endsWith(".webp") ? "image/webp" : "image/jpeg");
   if (metadata.contentLength !== undefined) res.setHeader("Content-Length", String(metadata.contentLength));
   if (metadata.contentRange) res.setHeader("Content-Range", metadata.contentRange);
   if (metadata.etag) res.setHeader("ETag", metadata.etag);

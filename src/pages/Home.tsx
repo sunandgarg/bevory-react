@@ -69,6 +69,23 @@ const QUICK_ACTIONS = [
 
 const serifStyle = { fontFamily: "'Instrument Serif', Georgia, serif" } as const;
 
+// India is a whisky-led market, with beer the next broad demand group. Keep
+// high-intent local price categories first, then faster-growing white spirits.
+const CATEGORY_DEMAND_ORDER = [
+  "made-in-india-whisky",
+  "beers",
+  "world-whisky",
+  "single-malts",
+  "rum",
+  "brandy",
+  "vodka",
+  "gin",
+  "red-wine",
+  "white-wine",
+  "ready-to-drink",
+  "champagne",
+] as const;
+
 const formatCount = (count: number) => {
   if (count >= 1000) {
     const compact = count >= 10000 ? Math.floor(count / 1000) : Math.floor(count / 100) / 10;
@@ -88,6 +105,12 @@ const Home = () => {
   const averageRating = ratedProducts.length
     ? ratedProducts.reduce((total, product) => total + Number(product.rating), 0) / ratedProducts.length
     : null;
+  const demandOrderedCategories = [...categories].sort((left, right) => {
+    const leftRank = CATEGORY_DEMAND_ORDER.indexOf(left.slug as typeof CATEGORY_DEMAND_ORDER[number]);
+    const rightRank = CATEGORY_DEMAND_ORDER.indexOf(right.slug as typeof CATEGORY_DEMAND_ORDER[number]);
+    return (leftRank < 0 ? Number.MAX_SAFE_INTEGER : leftRank)
+      - (rightRank < 0 ? Number.MAX_SAFE_INTEGER : rightRank);
+  });
   const trustStats = [
     { value: formatCount(cityCount), label: cityCount === 1 ? "City" : "Cities" },
     {
@@ -202,7 +225,7 @@ const Home = () => {
             </Link>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-1 px-4 scrollbar-hide snap-x snap-mandatory">
-            {categories.slice(0, 8).map((cat, index) => (
+            {demandOrderedCategories.slice(0, 8).map((cat, index) => (
               <Link key={cat.id} to={`/${citySlug}/category/${cat.slug}`} className="group block w-[76px] flex-shrink-0 snap-start">
                 <div className="w-[76px] h-[76px] rounded-2xl bg-secondary/80 border border-border/40 flex items-center justify-center mb-1.5 overflow-hidden group-hover:border-accent/40 group-hover:shadow-[var(--shadow-sm)] transition-all duration-200">
                   <CategoryBottleVisual

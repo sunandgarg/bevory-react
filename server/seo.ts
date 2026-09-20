@@ -36,6 +36,7 @@ type ProductSeoIndex = {
   products: Record<string, ProductSeoIndexEntry>;
   brandsById: Record<string, string>;
   aliases?: Record<string, string>;
+  cocktailAliases?: Record<string, string>;
 };
 type ProductEditorialEntry = {
   description?: string;
@@ -462,6 +463,10 @@ export const legacyRedirectPath = (
   const parts = cleanPath.split("/").filter(Boolean);
 
   if (cleanPath === "/") return "/gurgaon";
+  if (parts[0] === "cocktail" && parts[1]) {
+    const canonicalSlug = productIndex.cocktailAliases?.[parts[1]];
+    if (canonicalSlug) return `/cocktail/${canonicalSlug}`;
+  }
   if (cityNames.has(parts[0]) && parts[1] === "product" && parts[2]) {
     const canonicalSlug = productIndex.aliases?.[parts[2]];
     if (canonicalSlug) return `/${parts[0]}/product/${canonicalSlug}${parts[3] ? `/${parts[3]}` : ""}`;
@@ -523,7 +528,7 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
 
   return async (pathname: string) => {
     const parts = pathname.split("/").filter(Boolean);
-    const needsProductIndex = parts[0] === "product"
+    const needsProductIndex = parts[0] === "product" || parts[0] === "cocktail"
       || (parts[0] === "brand" && /^[0-9a-f-]{36}$/i.test(parts[1] || ""));
     const baseIndex = needsProductIndex ? await productIndex : emptyProductIndex;
     const aliases = productAliasBucketForPath(pathname)

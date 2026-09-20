@@ -11,6 +11,7 @@ import PrivacyConsent from "@/components/PrivacyConsent";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CITY_SLUGS } from "@/lib/locations";
+import PublicShell from "@/components/layout/PublicShell";
 
 // Lazy-loaded pages for code splitting
 const CityHome = lazy(() => import("./pages/CityHome"));
@@ -112,11 +113,12 @@ const App = () => (
               <PrivacyConsent />
               <Suspense fallback={<PageFallback />}>
                 <Routes>
-                  <Route path="/" element={<Navigate to="/gurgaon" replace />} />
+                  <Route element={<PublicShell />}>
+                    <Route path="/" element={<Navigate to="/gurgaon" replace />} />
 
-                  {CITY_SLUGS.map(city => (
-                    <Route key={city} path={`/${city}`} element={<CityHome citySlug={city} />} />
-                  ))}
+                    {CITY_SLUGS.map(city => (
+                      <Route key={city} path={`/${city}`} element={<CityHome citySlug={city} />} />
+                    ))}
 
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/search" element={<Search />} />
@@ -157,7 +159,9 @@ const App = () => (
                   <Route path="/community-guidelines" element={<CommunityGuidelines />} />
                   <Route path="/grievance-redressal" element={<GrievanceRedressal />} />
                   <Route path="/source-disclosure" element={<SourceDisclosure />} />
-                  <Route path="/contact" element={<Contact />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Route>
 
                   <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<AdminDashboard />} />
@@ -189,7 +193,6 @@ const App = () => (
                     <Route path="performance-report" element={<AdminPerformanceReport />} />
                   </Route>
 
-                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
               <CompareFloatingBar />

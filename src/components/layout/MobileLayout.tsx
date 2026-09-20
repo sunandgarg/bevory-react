@@ -1,7 +1,7 @@
 import { memo, ReactNode, lazy, Suspense } from "react";
-import MobileHeader from "./MobileHeader";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import BottomNav from "./BottomNav";
-import UniversalSearch from "@/components/UniversalSearch";
 
 const CheersGuide = lazy(() => import("@/components/CheersGuide"));
 
@@ -26,19 +26,22 @@ const MobileLayout = memo(({
   showSearch = true,
   showCheersGuide = true,
 }: MobileLayoutProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
-      {showHeader && (
-        <MobileHeader
-          title={title}
-          showLocation={showLocation}
-          showBack={showBack}
-        />
-      )}
-      
-      {showSearch && (
-        <div className="sticky top-14 z-30 bg-background/80 backdrop-blur-xl px-4 py-2 border-b border-border/50">
-          <UniversalSearch />
+      {showHeader && (showBack || title) && (
+        <div className="flex min-h-12 items-center gap-2 border-b border-border/50 bg-background px-4">
+          {showBack && (
+            <button
+              onClick={() => navigate(-1)}
+              className="-ml-2 flex min-h-11 min-w-11 items-center justify-center rounded-lg hover:bg-secondary"
+              aria-label="Go back"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+          )}
+          {title && <h1 className="truncate text-base font-semibold">{title}</h1>}
         </div>
       )}
       

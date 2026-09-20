@@ -89,7 +89,7 @@ const Brands = () => {
 
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
+        <header className="bg-background/95 border-b border-border">
           <div className="flex items-center gap-3 px-4 py-3">
             <Link to="/" className="p-2 -ml-2 hover:bg-muted rounded-full transition-colors">
               <ArrowLeft className="w-5 h-5" />

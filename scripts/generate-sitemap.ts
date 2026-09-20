@@ -250,6 +250,11 @@ try {
   const categories = byTable("categories").filter((row) => row.data.is_active !== false && row.data.slug);
   const subcategories = byTable("sub_categories").filter((row) => row.data.is_active !== false && row.data.slug);
   const brands = byTable("brand_spotlights").filter((row) => row.data.is_active !== false && row.data.slug);
+  const cocktailAliases = Object.fromEntries(byTable("cocktails").flatMap((row) => (
+    row.data.is_active === false && row.data.slug && row.data.duplicate_of_slug
+      ? [[String(row.data.slug), String(row.data.duplicate_of_slug)]]
+      : []
+  )));
   const productById = new Map(products.map((row) => [row.id, row]));
   const categoryById = new Map(categories.map((row) => [row.id, row]));
   const subcategoryById = new Map(subcategories.map((row) => [row.id, row]));
@@ -649,6 +654,7 @@ try {
     const description = shortText(cocktail.data.description || `Ingredients and method for the ${name} cocktail.`);
     const ingredients = Array.isArray(cocktail.data.ingredients) ? cocktail.data.ingredients.map(String) : [];
     const instructions = plainText(cocktail.data.instructions);
+    const prepMinutes = String(cocktail.data.prep_time ?? "").match(/\d+/)?.[0];
     addRoute({
       path,
       lastmod: latestTimestamp(cocktail.data.updated_at, cocktail.data.created_at),
@@ -666,8 +672,10 @@ try {
         description,
         ...(image ? { image } : {}),
         recipeCategory: "Cocktail",
+        recipeCuisine: "Indian and international",
         recipeIngredient: ingredients,
         ...(instructions ? { recipeInstructions: [{ "@type": "HowToStep", text: instructions }] } : {}),
+        ...(prepMinutes ? { prepTime: `PT${prepMinutes}M` } : {}),
         author: { "@type": "Organization", name: "BevOry" },
         url: `${origin}${path}`,
       },
@@ -784,6 +792,7 @@ try {
       products: productSeoIndex,
       brandsById: Object.fromEntries(brands.map((brand) => [brand.id, brand.data.slug])),
       aliases: productAliases,
+      cocktailAliases,
     })}\n`,
   );
   await writeFile(

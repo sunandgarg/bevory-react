@@ -102,6 +102,7 @@ describe("media key policy", () => {
   it.each([
     migratedKey,
     "migrated-images/a/b/ffffffffffffffffffff.png",
+    "migrated-images/a/b/0123456789abcdefabcd.webp",
     `migrated-images/${`a${"b".repeat(70)}-`}/${`c${"d".repeat(70)}-`}/0123456789abcdefabcd.jpg`,
     uploadKey,
     "images/Brands/nested/owned.photo-2.jpeg",
@@ -114,7 +115,6 @@ describe("media key policy", () => {
     "manifests/migration.json",
     "backups/media.jpg",
     "other/image.jpg",
-    "migrated-images/a/b/0123456789abcdefabcd.webp",
     "migrated-images/a/b/0123456789abcdefabc.jpg",
     "migrated-images/a/b/0123456789abcdefabcD.jpg",
     "images/../private.jpg",

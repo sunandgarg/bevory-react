@@ -74,7 +74,6 @@ const CategoryDetail = () => {
     if (!selectedSubCategory) return allProducts;
     return allProducts.filter((p: any) => p.sub_category_id === selectedSubCategory.id);
   }, [allProducts, selectedSubCategory]);
-
   const loadNextPage = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) void fetchNextPage();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
@@ -242,10 +241,7 @@ const CategoryDetail = () => {
                         size="sm"
                         className="rounded-full flex-shrink-0 gap-1.5"
                       >
-                        <Link to={`${categoryPath}/${sub.slug}`}>
-                          {sub.emoji && <span>{sub.emoji}</span>}
-                          {sub.name} ({count})
-                        </Link>
+                        <Link to={`${categoryPath}/${sub.slug}`}>{sub.name} ({count})</Link>
                       </Button>
                     );
                   })}
@@ -296,14 +292,14 @@ const CategoryDetail = () => {
                   </Badge>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
                   {products.map((product, index) => (
                     <article
                       key={product.id}
                       ref={index === products.length - 5 ? loadMoreRef : undefined}
                     >
                       <Link to={getProductUrlSafe(product)}>
-                        <div className="bg-card rounded-2xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
+                        <div className="bg-card rounded-xl border border-border/50 overflow-hidden relative group hover:border-accent/30 hover:shadow-lg transition-all">
                           {/* Action Buttons */}
                           <div className="absolute top-2 left-2 right-2 flex justify-between z-10">
                             <CompareButton productId={product.id} size="sm" />
@@ -316,33 +312,36 @@ const CategoryDetail = () => {
                             alt={`${product.brand} ${product.name} bottle`}
                             fallbackEmoji={product.image_emoji}
                             priority={index < 4}
-                            className="aspect-square rounded-none"
+                            className="aspect-[4/3] rounded-none"
                           />
                           
                           {/* Product Info */}
-                          <div className="p-3.5">
+                          <div className="p-2.5">
                             <p className="text-xs text-muted-foreground mb-0.5">{product.brand}</p>
-                            <h3 className="font-medium text-sm line-clamp-1 group-hover:text-accent transition-colors">
+                            <h3 className="font-medium text-sm leading-tight line-clamp-2 group-hover:text-accent transition-colors min-h-9">
                               {product.name}
                             </h3>
                             {/* Sub-Category Badge */}
-                            <div className="mt-1 flex min-h-4 items-center gap-1.5">
-                              {product.sub_category && !selectedSubCategory && (
-                                <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-accent/30 text-accent">
-                                  {product.sub_category.emoji} {product.sub_category.name}
-                                </Badge>
-                              )}
-                              {product.origin_flag && <span className="text-sm" title={product.origin || "Origin"}>{product.origin_flag}</span>}
+                            {product.sub_category && !selectedSubCategory && (
+                              <Badge variant="outline" className="text-[9px] px-1.5 py-0 mt-1 border-accent/30 text-accent">
+                                {product.sub_category.name}
+                              </Badge>
+                            )}
+
+                            <div className="mt-1.5 flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-muted-foreground">
+                              {product.volume && <span>{product.volume}</span>}
+                              {product.abv != null && Number(product.abv) > 0 && <span>{Number(product.abv)}% ABV</span>}
+                              {product.origin && <span className="truncate">{product.origin}</span>}
                             </div>
                             
                             {/* Rating & Price */}
                             <div className="flex items-center justify-between mt-2.5">
-                              <div className="flex items-center gap-1">
-                                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                <span className="text-xs font-medium">
-                                  {product.rating ? Number(product.rating).toFixed(1) : "4.5"}
-                                </span>
-                              </div>
+                              {product.rating ? (
+                                <div className="flex items-center gap-1">
+                                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                                  <span className="text-xs font-medium">{Number(product.rating).toFixed(1)}</span>
+                                </div>
+                              ) : <span className="text-[10px] text-muted-foreground">Not rated</span>}
                               <p className="font-bold text-sm text-accent">
                                 {product.price ? `₹${Number(product.price).toLocaleString('en-IN')}` : "—"}
                               </p>
@@ -354,9 +353,9 @@ const CategoryDetail = () => {
                   ))}
                 </div>
                 {isFetchingNextPage && (
-                  <div className="mt-5 grid grid-cols-2 gap-3" aria-label="Loading more products">
-                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
-                    <div className="aspect-[3/4] animate-pulse rounded-xl bg-muted" />
+                  <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4" aria-label="Loading more products">
+                    <div className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />
+                    <div className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />
                   </div>
                 )}
               </>
