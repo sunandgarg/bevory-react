@@ -3,6 +3,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { PrismaClient, type Prisma } from "@prisma/client";
 import { BEVORY_CITIES, CITY_SLUGS } from "../src/lib/locations.js";
 import { DEMAND_GUIDES } from "../src/lib/demandGuides.js";
+import { fullProductName } from "../src/lib/productName.js";
 import {
   DEFAULT_PUBLIC_MEDIA_BASE,
   parsePublicMediaBase,
@@ -13,6 +14,7 @@ type SitemapImage = { loc: string; title?: string };
 type SitemapEntry = { path: string; lastmod?: string; images?: SitemapImage[] };
 type DataRow = { table: string; id: string; data: Prisma.JsonObject };
 type Breadcrumb = { name: string; path: string };
+type SeoFaq = { question: string; answer: string };
 type SeoRoute = {
   title: string;
   description: string;
@@ -31,6 +33,17 @@ type ProductSeoIndexEntry = {
   categorySlug?: string;
   volumes: string[];
   prices: Record<string, Record<string, number>>;
+};
+type ProductEditorialEntry = {
+  description?: string;
+  tasteProfile?: string;
+  tastingNotes?: string;
+  servingGuide?: string;
+  foodPairings?: string[];
+  cocktailUses?: string;
+  whoMayEnjoy?: string;
+  responsibleNotice?: string;
+  faqs?: SeoFaq[];
 };
 
 const origin = "https://bevory.in";
@@ -95,6 +108,29 @@ const shortText = (value: unknown, max = 155) => {
 const volumeSlug = (row: DataRow) => String(
   row.data.volume || `${row.data.volume_ml || ""}ml`,
 ).toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9.-]/g, "-");
+
+const productContentBucketForSlug = (slug: string) => {
+  const initial = slug.charAt(0).toLowerCase();
+  return `product-content-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
+const productAliasBucketForSlug = (slug: string) => {
+  const initial = slug.charAt(0).toLowerCase();
+  return `product-alias-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
+const stringArray = (value: Prisma.JsonValue | undefined) => Array.isArray(value)
+  ? value.map(plainText).filter(Boolean)
+  : [];
+
+const faqArray = (value: Prisma.JsonValue | undefined): SeoFaq[] => Array.isArray(value)
+  ? value.flatMap((item) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) return [];
+    const question = plainText(item.question);
+    const answer = plainText(item.answer);
+    return question && answer ? [{ question, answer }] : [];
+  })
+  : [];
 
 const seoBucketForPath = (path: string) => {
   const parts = path.split("/").filter(Boolean);
@@ -209,7 +245,8 @@ try {
     && row.data.requires_review !== true
     && Number(row.data.price) > 0
   ));
-  const products = byTable("products").filter((row) => row.data.is_active !== false && row.data.slug);
+  const allProducts = byTable("products").filter((row) => row.data.slug);
+  const products = allProducts.filter((row) => row.data.is_active !== false);
   const categories = byTable("categories").filter((row) => row.data.is_active !== false && row.data.slug);
   const subcategories = byTable("sub_categories").filter((row) => row.data.is_active !== false && row.data.slug);
   const brands = byTable("brand_spotlights").filter((row) => row.data.is_active !== false && row.data.slug);
@@ -373,7 +410,7 @@ try {
     if (!cityItem || !product) continue;
     const { city } = cityItem;
     const productSlug = String(product.data.slug);
-    const productName = `${product.data.brand || ""} ${product.data.name || ""}`.trim();
+    const productName = fullProductName(String(product.data.brand || ""), String(product.data.name || ""));
     const category = categoryById.get(String(product.data.category_id ?? ""));
     const image = product.data.image_identity_verified === true ? validImageUrl(product.data.image_url) : null;
     const sortedVariants = [...variantRows].sort((left, right) => Number(right.data.volume_ml) - Number(left.data.volume_ml));
@@ -478,9 +515,22 @@ try {
   }
 
   const productSeoIndex: Record<string, ProductSeoIndexEntry> = {};
+  const productEditorialBuckets = new Map<string, Record<string, ProductEditorialEntry>>();
+  const productAliases: Record<string, string> = {};
+  const productAliasBuckets = new Map<string, Record<string, string>>();
+  for (const product of allProducts) {
+    const alias = String(product.data.slug || "");
+    const canonical = String(product.data.canonical_slug || "");
+    if (!alias || !canonical || alias === canonical) continue;
+    productAliases[alias] = canonical;
+    const bucketName = productAliasBucketForSlug(alias);
+    const bucket = productAliasBuckets.get(bucketName) ?? {};
+    bucket[alias] = canonical;
+    productAliasBuckets.set(bucketName, bucket);
+  }
   for (const product of products) {
     const productSlug = String(product.data.slug);
-    const productName = `${product.data.brand || ""} ${product.data.name || ""}`.trim();
+    const productName = fullProductName(String(product.data.brand || ""), String(product.data.name || ""));
     const category = categoryById.get(String(product.data.category_id ?? ""));
     const image = product.data.image_identity_verified === true ? validImageUrl(product.data.image_url) : null;
     const productPriceRows = pricesByProduct.get(product.id) ?? [];
@@ -520,6 +570,24 @@ try {
       volumes,
       prices: cityPrices,
     };
+
+    const editorial: ProductEditorialEntry = {
+      ...(plainText(product.data.description) ? { description: plainText(product.data.description) } : {}),
+      ...(plainText(product.data.taste_profile) ? { tasteProfile: plainText(product.data.taste_profile) } : {}),
+      ...(plainText(product.data.tasting_notes) ? { tastingNotes: plainText(product.data.tasting_notes) } : {}),
+      ...(plainText(product.data.serving_guide) ? { servingGuide: plainText(product.data.serving_guide) } : {}),
+      ...(stringArray(product.data.food_pairings).length ? { foodPairings: stringArray(product.data.food_pairings) } : {}),
+      ...(plainText(product.data.cocktail_uses) ? { cocktailUses: plainText(product.data.cocktail_uses) } : {}),
+      ...(plainText(product.data.who_may_enjoy) ? { whoMayEnjoy: plainText(product.data.who_may_enjoy) } : {}),
+      ...(plainText(product.data.responsible_notice) ? { responsibleNotice: plainText(product.data.responsible_notice) } : {}),
+      ...(faqArray(product.data.faqs).length ? { faqs: faqArray(product.data.faqs) } : {}),
+    };
+    if (Object.keys(editorial).length) {
+      const bucketName = productContentBucketForSlug(productSlug);
+      const bucket = productEditorialBuckets.get(bucketName) ?? {};
+      bucket[productSlug] = editorial;
+      productEditorialBuckets.set(bucketName, bucket);
+    }
 
   }
 
@@ -698,11 +766,24 @@ try {
       `${JSON.stringify(seoBuckets.get(bucket) ?? {})}\n`,
     );
   }
+  for (const [bucket, content] of productEditorialBuckets) {
+    await writeFile(
+      new URL(`${bucket}.json`, seoDirectory),
+      `${JSON.stringify(content)}\n`,
+    );
+  }
+  for (const [bucket, aliases] of productAliasBuckets) {
+    await writeFile(
+      new URL(`${bucket}.json`, seoDirectory),
+      `${JSON.stringify(aliases)}\n`,
+    );
+  }
   await writeFile(
     new URL("product-index.json", seoDirectory),
     `${JSON.stringify({
       products: productSeoIndex,
       brandsById: Object.fromEntries(brands.map((brand) => [brand.id, brand.data.slug])),
+      aliases: productAliases,
     })}\n`,
   );
   await writeFile(
@@ -713,6 +794,14 @@ try {
       buckets: Object.fromEntries(seoBucketNames.map((bucket) => [
         bucket,
         Object.keys(seoBuckets.get(bucket) ?? {}).length,
+      ])),
+      productContentBuckets: Object.fromEntries([...productEditorialBuckets].map(([bucket, content]) => [
+        bucket,
+        Object.keys(content).length,
+      ])),
+      productAliasBuckets: Object.fromEntries([...productAliasBuckets].map(([bucket, aliases]) => [
+        bucket,
+        Object.keys(aliases).length,
       ])),
     })}\n`,
   );

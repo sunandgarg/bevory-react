@@ -4,6 +4,8 @@ const CATALOG_CACHE_CONTROL = "public, max-age=300, s-maxage=3600, stale-while-r
 const IMMUTABLE_MEDIA_CACHE_CONTROL = "public, max-age=31536000, s-maxage=31536000, immutable";
 const REVALIDATING_MEDIA_CACHE_CONTROL = "public, max-age=300, s-maxage=300, must-revalidate";
 const seoRoutesCache = new Map();
+const productContentCache = new Map();
+const productAliasCache = new Map();
 let productIndexPromise;
 
 const isDocumentRequest = (request) =>
@@ -65,6 +67,21 @@ const humanize = (value) => value
   .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
   .join(" ");
 
+const identity = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+const fullProductName = (brandName, productName) => {
+  const brand = String(brandName || "").trim();
+  const product = String(productName || "").trim();
+  if (!brand) return product;
+  if (!product) return brand;
+  const brandTokens = new Set(brand.toLowerCase().match(/[a-z0-9]+/g) || []);
+  const productTokens = new Set(product.toLowerCase().match(/[a-z0-9]+/g) || []);
+  const sharedTokens = [...brandTokens].filter((token) => productTokens.has(token)).length;
+  const overlap = sharedTokens / Math.max(1, Math.min(brandTokens.size, productTokens.size));
+  return identity(product).startsWith(identity(brand)) || overlap >= 0.5
+    ? product
+    : `${brand} ${product}`;
+};
+
 const shortTitle = (value) => value.length <= 60 ? value : `${value.slice(0, 57).trim()}...`;
 const shortDescription = (value) => value.length <= 160 ? value : `${value.slice(0, 157).trim()}...`;
 
@@ -105,6 +122,20 @@ const seoBucketForPath = (pathname) => {
   return `${citySlug}-pages`;
 };
 
+const productContentBucketForPath = (pathname) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return null;
+  const initial = parts[2].charAt(0).toLowerCase();
+  return `product-content-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
+const productAliasBucketForPath = (pathname) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return null;
+  const initial = parts[2].charAt(0).toLowerCase();
+  return `product-alias-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
 const loadSeoRoutes = async (env, pathname) => {
   const bucket = seoBucketForPath(pathname);
   if (seoRoutesCache.has(bucket)) return seoRoutesCache.get(bucket);
@@ -127,6 +158,34 @@ const loadProductIndex = async (env) => {
   return productIndexPromise;
 };
 
+const loadProductEditorial = async (env, pathname) => {
+  const bucket = productContentBucketForPath(pathname);
+  if (!bucket) return {};
+  if (productContentCache.has(bucket)) return productContentCache.get(bucket);
+  try {
+    const response = await env.ASSETS.fetch(new Request(`${SITE_ORIGIN}/seo-routes/${bucket}.json`));
+    const content = response.ok ? await response.json() : {};
+    productContentCache.set(bucket, content);
+    return content;
+  } catch {
+    return {};
+  }
+};
+
+const loadProductAliases = async (env, pathname) => {
+  const bucket = productAliasBucketForPath(pathname);
+  if (!bucket) return {};
+  if (productAliasCache.has(bucket)) return productAliasCache.get(bucket);
+  try {
+    const response = await env.ASSETS.fetch(new Request(`${SITE_ORIGIN}/seo-routes/${bucket}.json`));
+    const aliases = response.ok ? await response.json() : {};
+    productAliasCache.set(bucket, aliases);
+    return aliases;
+  } catch {
+    return {};
+  }
+};
+
 const dynamicProductSeo = (pathname, productIndex) => {
   const parts = pathname.split("/").filter(Boolean);
   if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2] || parts.length > 4) return null;
@@ -138,7 +197,7 @@ const dynamicProductSeo = (pathname, productIndex) => {
   if (!product) return null;
   const productImage = firstPartyMediaImage(product.image);
 
-  const productName = `${product.brand || ""} ${product.name || ""}`.trim();
+  const productName = fullProductName(product.brand, product.name);
   const knownVolumes = Array.isArray(product.volumes) ? product.volumes : [];
   const knownVolume = requestedVolume
     ? knownVolumes.find((value) => value.toLowerCase().replace(/\s+/g, "") === requestedVolume)
@@ -221,6 +280,35 @@ const dynamicProductSeo = (pathname, productIndex) => {
   };
 };
 
+const enrichProductSeo = (pathname, seo, editorialIndex = {}) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return seo;
+  const editorial = editorialIndex[parts[2]];
+  if (!editorial) return seo;
+  const editorialBody = [
+    editorial.description,
+    editorial.tasteProfile,
+    editorial.tastingNotes,
+    editorial.servingGuide,
+    Array.isArray(editorial.foodPairings) && editorial.foodPairings.length
+      ? `Food pairing ideas include ${editorial.foodPairings.join(", ")}.`
+      : null,
+    editorial.cocktailUses,
+    editorial.whoMayEnjoy,
+    editorial.responsibleNotice,
+  ].filter((value) => typeof value === "string" && value.trim());
+  const body = [...new Set([...(Array.isArray(seo.body) ? seo.body : []), ...editorialBody])];
+  const structuredData = seo.structuredData
+    ? { ...seo.structuredData, ...(editorial.description ? { description: editorial.description } : {}) }
+    : undefined;
+  return {
+    ...seo,
+    body,
+    ...(structuredData ? { structuredData } : {}),
+    ...(Array.isArray(editorial.faqs) && editorial.faqs.length ? { faqs: editorial.faqs } : {}),
+  };
+};
+
 const routeSeo = (pathname, seoRoutes = {}) => {
   const cleanPath = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const parts = cleanPath.split("/").filter(Boolean).map((part) => {
@@ -297,6 +385,14 @@ const routeSchema = (seo) => {
         })),
       },
       ...(seo.structuredData ? [seo.structuredData] : []),
+      ...(seo.faqs?.length ? [{
+        "@type": "FAQPage",
+        mainEntity: seo.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }] : []),
     ],
   };
 };
@@ -306,11 +402,15 @@ const seoShell = (seo) => {
   const image = seo.image
     ? `<img src="${escapeHtml(seo.image)}" alt="${escapeHtml(seo.heading)}" width="720" height="720" style="display:block;width:min(100%,360px);height:auto;object-fit:contain;margin:20px 0" />`
     : "";
+  const faqSection = Array.isArray(seo.faqs) && seo.faqs.length
+    ? `<section aria-labelledby="product-faq-heading"><h2 id="product-faq-heading">Common questions</h2>${seo.faqs.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join("")}</section>`
+    : "";
   return `
   <main aria-label="BevOry page summary" style="max-width:760px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.55">
     <h1>${escapeHtml(seo.heading)}</h1>
     ${image}
     ${body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n    ")}
+    ${faqSection}
     <nav aria-label="Explore BevOry">
       <a href="/categories">Categories</a> | <a href="/brands">Brands</a> | <a href="/guide">Guide</a> | <a href="/party-planner">Party planner</a>
     </nav>
@@ -337,6 +437,11 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
 
   if (cleanPath === "/") return "/gurgaon";
 
+  if (cityNames.has(parts[0]) && parts[1] === "product" && parts[2]) {
+    const canonicalSlug = productIndex.aliases?.[parts[2]];
+    if (canonicalSlug) return `/${parts[0]}/product/${canonicalSlug}${parts[3] ? `/${parts[3]}` : ""}`;
+  }
+
   if (parts.length === 1 && stateDefaultCities.has(parts[0])) {
     return `/${stateDefaultCities.get(parts[0])}`;
   }
@@ -353,8 +458,9 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
   }
 
   if (parts[0] === "product" && parts[1]) {
+    const canonicalSlug = productIndex.aliases?.[parts[1]] || parts[1];
     return legacyProductTargets.get(parts[1])
-      || (productIndex.products?.[parts[1]] ? `/gurgaon/product/${parts[1]}` : null);
+      || (productIndex.products?.[canonicalSlug] ? `/gurgaon/product/${canonicalSlug}` : null);
   }
 
   let stateSlug;
@@ -368,6 +474,7 @@ const legacyRedirectPath = (pathname, productIndex = { products: {}, brandsById:
 
   const fixedTarget = legacyProductTargets.get(productSlug);
   if (fixedTarget) return fixedTarget.replace(/^\/gurgaon/, `/${stateDefaultCities.get(stateSlug) || "gurgaon"}`);
+  productSlug = productIndex.aliases?.[productSlug] || productSlug;
   const preferredCity = stateDefaultCities.get(stateSlug)
     || (cityNames.has(stateSlug) ? stateSlug : null);
   return preferredCity ? `/${preferredCity}/product/${productSlug}` : (cleanPath !== pathname ? cleanPath : null);
@@ -657,6 +764,10 @@ export async function onRequest(context) {
     const productIndex = legacyRedirectNeedsIndex(url.pathname)
       ? await loadProductIndex(env)
       : { products: {}, brandsById: {} };
+    const aliases = productAliasBucketForPath(url.pathname)
+      ? await loadProductAliases(env, url.pathname)
+      : productIndex.aliases;
+    if (aliases) productIndex.aliases = aliases;
     const redirectPath = legacyRedirectPath(url.pathname, productIndex);
     if (redirectPath && redirectPath !== url.pathname) {
       url.pathname = redirectPath;
@@ -680,7 +791,20 @@ export async function onRequest(context) {
   const dynamicSeo = productIndex
     ? dynamicProductSeo(url.pathname, productIndex)
     : null;
-  return rewriteDocument(response, url, dynamicSeo || generatedSeo);
+  const productEditorial = /^\/[a-z-]+\/product\//.test(url.pathname)
+    ? await loadProductEditorial(env, url.pathname)
+    : {};
+  return rewriteDocument(
+    response,
+    url,
+    enrichProductSeo(url.pathname, dynamicSeo || generatedSeo, productEditorial),
+  );
 }
 
-export { dynamicProductSeo, legacyRedirectPath };
+export {
+  dynamicProductSeo,
+  enrichProductSeo,
+  legacyRedirectPath,
+  productAliasBucketForPath,
+  productContentBucketForPath,
+};

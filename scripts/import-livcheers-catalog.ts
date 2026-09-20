@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { parse } from "csv-parse/sync";
 import { LEGACY_CATALOG_CATEGORY_SLUGS, LIVCHEERS_CATEGORY_DEFINITIONS } from "../src/lib/catalogTaxonomy.js";
+import { fullProductName } from "../src/lib/productName.js";
 
 type CitySlug =
   | "agra"
@@ -333,8 +334,9 @@ const stableId = (namespace: string, value: string) => {
   return `lc-${namespace}-${digest}`;
 };
 
-const productKeyFor = (brandName: string, productName: string) =>
-  `${normalizeIdentity(brandName)}|${normalizeIdentity(productName)}`;
+export const productKeyFor = (brandName: string, productName: string) => (
+  normalizeIdentity(fullProductName(brandName, productName))
+);
 
 const variantLookupKey = (citySlug: CitySlug, productName: string, volumeMl: number) =>
   `${citySlug}|${normalizeIdentity(productName)}|${volumeMl}`;
@@ -886,16 +888,24 @@ const buildRecords = async (
     .map((record) => [record.recordId, String(jsonObject(record.data).slug ?? "")])
     .filter((entry): entry is [string, string] => CATEGORY_SLUGS.has(entry[1])));
   const existingProductByIdentity = new Map<string, { recordId: string; data: Prisma.JsonObject }>();
-  existingRecords
-    .filter((record) => record.tableName === "products")
-    .forEach((record) => {
-      const data = jsonObject(record.data);
-      const identity = String(data.catalog_identity ?? "") || productKeyFor(
-        String(data.brand ?? ""),
-        String(data.name ?? ""),
-      );
-      if (identity && identity !== "|") existingProductByIdentity.set(identity, { recordId: record.recordId, data });
-    });
+  const existingProducts = existingRecords.filter((record) => record.tableName === "products");
+  const existingProductById = new Map(existingProducts.map((record) => [record.recordId, record]));
+  existingProducts.forEach((record) => {
+    const data = jsonObject(record.data);
+    const canonicalId = String(data.canonical_product_id ?? "");
+    const canonicalRecord = canonicalId ? existingProductById.get(canonicalId) : null;
+    const targetRecord = canonicalRecord ?? record;
+    const targetData = canonicalRecord ? jsonObject(canonicalRecord.data) : data;
+    const identities = new Set([
+      String(data.catalog_identity ?? ""),
+      String(data.canonical_product_identity ?? ""),
+      productKeyFor(String(data.brand ?? ""), String(data.name ?? "")),
+    ].filter(Boolean));
+    identities.forEach((identity) => existingProductByIdentity.set(identity, {
+      recordId: targetRecord.recordId,
+      data: targetData,
+    }));
+  });
   const existingBrandBySlug = new Map<string, { recordId: string; data: Prisma.JsonObject }>();
   const existingBrandByIdentity = new Map<string, { recordId: string; data: Prisma.JsonObject }>();
   existingRecords
@@ -1061,8 +1071,15 @@ const buildRecords = async (
   const rowsByProduct = groupBy(resolvedRows, (row) => row.productKey);
   const productIdByKey = new Map<string, string>();
   for (const [productKey, productRows] of rowsByProduct) {
-    const brandName = productRows[0].brand_name.trim();
-    const productName = productRows[0].product_name.trim();
+    const existing = existingProductByIdentity.get(productKey);
+    const preferredSource = [...productRows].sort((left, right) => {
+      const repeated = (row: ParsedRow) => normalizeIdentity(row.product_name)
+        .startsWith(normalizeIdentity(row.brand_name));
+      return Number(repeated(left)) - Number(repeated(right))
+        || left.product_name.length - right.product_name.length;
+    })[0];
+    const brandName = String(existing?.data.brand ?? preferredSource.brand_name).trim();
+    const productName = String(existing?.data.name ?? preferredSource.product_name).trim();
     const categorySlug = choosePrimaryCategory(productKey, productRows);
     const categorySet = [...new Set(productRows.flatMap((row) => row.categorySlugs))].sort();
     if (categorySet.length > 1) {
@@ -1086,7 +1103,6 @@ const buildRecords = async (
       : null;
     const productSlugBase = `${slugify(brandName)}-${slugify(productName)}`.slice(0, 110).replace(/-$/g, "");
     const productSlug = `${productSlugBase}-${createHash("sha1").update(productKey).digest("hex").slice(0, 7)}`;
-    const existing = existingProductByIdentity.get(productKey);
     const productId = existing?.recordId ?? stableId("product", productKey);
     productIdByKey.set(productKey, productId);
     const existingData = existing?.data ?? {};
@@ -1120,11 +1136,12 @@ const buildRecords = async (
     const mergedCategorySlugs = mergeUniqueStrings(existingData.category_slugs, [...categorySet, categorySlug]).sort();
 
     setRecord("products", productId, {
-      brand_id: brandIdByKey.get(productRows[0].brandKey) ?? null,
+      brand_id: existingData.brand_id ?? brandIdByKey.get(normalizeIdentity(brandName)) ?? null,
       brand: existingData.brand ?? brandName,
       name: existingData.name ?? productName,
       slug: existingData.slug ?? productSlug,
       catalog_identity: existingData.catalog_identity ?? productKey,
+      canonical_product_identity: productKey,
       category_id: hasCategoryOverride ? categoryIds.get(categorySlug)! : existingData.category_id ?? categoryIds.get(categorySlug)!,
       category_slugs: mergedCategorySlugs,
       sub_category_id: hasCategoryOverride ? subcategoryId : existingData.sub_category_id ?? subcategoryId,

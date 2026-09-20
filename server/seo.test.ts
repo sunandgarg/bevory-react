@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
+  enrichProductSeo,
   legacyRedirectPath,
+  productAliasBucketForPath,
+  productContentBucketForPath,
   resolveDynamicProductSeo,
   resolveSeo,
   rewriteSeoDocument,
@@ -26,6 +29,10 @@ describe("origin SEO rendering", () => {
     expect(seoBucketForPath("/mangalore/product/8-pm-whisky-503f9e4/375ml"))
       .toBe("mangalore-product-8");
     expect(seoBucketForPath("/hubli-dharwad/category/whisky")).toBe("hubli-dharwad-pages");
+    expect(productContentBucketForPath("/mangalore/product/8-pm-whisky-503f9e4/375ml"))
+      .toBe("product-content-8");
+    expect(productAliasBucketForPath("/mangalore/product/8-pm-whisky-503f9e4/375ml"))
+      .toBe("product-alias-8");
   });
 
   it("renders exact metadata, canonical URL and schema", () => {
@@ -88,6 +95,11 @@ describe("origin SEO rendering", () => {
       .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
     expect(legacyRedirectPath("/gurgaon/")).toBe("/gurgaon");
     expect(legacyRedirectPath("/product/not-a-real-product")).toBeNull();
+    expect(legacyRedirectPath("/delhi/product/old-black-label/750ml", {
+      brandsById: {},
+      products: {},
+      aliases: { "old-black-label": "johnnie-walker-black-label" },
+    })).toBe("/delhi/product/johnnie-walker-black-label/750ml");
   });
 
   it("keeps known unpriced variants visible without indexing or creating an Offer", () => {
@@ -137,5 +149,32 @@ describe("origin SEO rendering", () => {
     });
     expect(seo?.robots).toContain("noindex, follow");
     expect(seo?.body?.join(" ")).toContain("does not yet have a verified price");
+  });
+
+  it("adds product editorial content and matching FAQ schema to the initial HTML", () => {
+    const path = "/delhi/product/johnnie-walker-black-label";
+    const base = resolveSeo(path, {
+      [path]: {
+        title: "Johnnie Walker Black Label Price in Delhi | BevOry",
+        description: "Compare reviewed local prices.",
+        heading: "Johnnie Walker Black Label price in Delhi",
+        body: ["Reviewed Delhi price guidance."],
+        breadcrumbs: [{ name: "Home", path: "/" }],
+        structuredData: { "@type": "ProductGroup", name: "Johnnie Walker Black Label" },
+      },
+    });
+    const enriched = enrichProductSeo(path, base, {
+      "johnnie-walker-black-label": {
+        description: "A catalogue-grounded product overview.",
+        tasteProfile: "General style guidance, not a bottle-specific tasting claim.",
+        faqs: [{ question: "Which sizes are listed?", answer: "Known sizes are shown on the page." }],
+      },
+    });
+    const html = rewriteSeoDocument(template, enriched);
+
+    expect(enriched.body).toContain("A catalogue-grounded product overview.");
+    expect(html).toContain("Common questions");
+    expect(html).toContain('"@type":"FAQPage"');
+    expect(html).toContain("Which sizes are listed?");
   });
 });

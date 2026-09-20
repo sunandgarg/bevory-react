@@ -6,6 +6,7 @@ import {
   parseCategoryCards,
   parseCategorySlugs,
   pickProductEnrichment,
+  productKeyFor,
   resolveProductIdentity,
   resolveSourceCategorySlugs,
   sourceEvidenceScore,
@@ -56,6 +57,8 @@ describe("Livcheers catalogue import helpers", () => {
   it("normalizes punctuation and spacing for stable deduplication", () => {
     expect(normalizeIdentity("Teacher's  Highland-Cream")).toBe("teachershighlandcream");
     expect(normalizeIdentity("A & B")).toBe("aandb");
+    expect(productKeyFor("Fosters", "Gold Select Strong Beer"))
+      .toBe(productKeyFor("Fosters", "Fosters Gold Select Strong Beer"));
   });
 
   it("extracts a verified product card with type and volume", () => {

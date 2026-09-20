@@ -22,6 +22,7 @@ import OtherProductsSection from "@/components/product/OtherProductsSection";
 import ExploreCategories from "@/components/product/ExploreCategories";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
+import { fullProductName } from "@/lib/productName";
 import { BEVORY_CITIES, cityRecordIdFromSlug } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
@@ -45,6 +46,23 @@ interface Product {
   origin_flag: string | null;
   taste_profile: string | null;
   tasting_notes: string | null;
+  colour_note: string | null;
+  aroma_note: string | null;
+  flavour_note: string | null;
+  texture_note: string | null;
+  finish_note: string | null;
+  ingredients_note: string | null;
+  production_note: string | null;
+  serving_temperature: string | null;
+  glassware: string | null;
+  serving_guide: string | null;
+  food_pairings: string[] | null;
+  cocktail_uses: string | null;
+  who_may_enjoy: string | null;
+  label_guidance: string | null;
+  responsible_notice: string | null;
+  author_line: string | null;
+  content_updated_at: string | null;
   image_emoji: string | null;
   image_url: string | null;
   rating: number | null;
@@ -346,11 +364,28 @@ const ProductDetail = () => {
     ? Number(product.rating).toFixed(1)
     : null;
   const displayReviewCount = product?.review_count || 0;
+  const productLabel = product ? fullProductName(product.brand, product.name) : "";
+  const pageHeading = displayCityName
+    ? `${productLabel} price in ${displayCityName}`
+    : productLabel;
+  const editorialDate = product?.content_updated_at
+    ? new Date(product.content_updated_at).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+    : null;
+  const sensoryDetails = product ? [
+    ["Colour", product.colour_note],
+    ["Aroma", product.aroma_note],
+    ["Flavour", product.flavour_note],
+    ["Body", product.texture_note],
+    ["Finish", product.finish_note],
+  ].filter((item): item is [string, string] => Boolean(item[1])) : [];
 
   // Keep client-rendered metadata aligned with the initial Cloudflare SEO shell.
   useEffect(() => {
     if (product && canonicalPath) {
-      const productLabel = `${product.brand} ${product.name}`.trim();
       const cityName = routeCity?.name || selectedCity?.name || "Gurgaon";
       const variantLabel = requestedVolume ? ` ${selectedVolume}` : "";
       const title = `${productLabel}${variantLabel} Price in ${cityName} | BevOry`;
@@ -515,6 +550,14 @@ const ProductDetail = () => {
               },
             ],
           },
+          ...(product.faqs?.length ? [{
+            "@type": "FAQPage",
+            mainEntity: product.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+          }] : []),
         ],
       });
 
@@ -531,6 +574,7 @@ const ProductDetail = () => {
     displayReviewCount,
     price,
     product,
+    productLabel,
     requestedVolume,
     routeCity?.name,
     selectedCity?.name,
@@ -745,7 +789,14 @@ const ProductDetail = () => {
             </div>
 
             <p className="text-muted-foreground">{product.brand}</p>
-            <h1 className="text-2xl font-serif font-bold text-foreground">{product.name}</h1>
+            <h1 className="text-2xl font-serif font-bold text-foreground">{pageHeading}</h1>
+            {(product.author_line || editorialDate) && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                {product.author_line ? `Editorial: ${product.author_line}` : ""}
+                {product.author_line && editorialDate ? " · " : ""}
+                {editorialDate ? `Updated ${editorialDate}` : ""}
+              </p>
+            )}
           </div>
 
           {/* Price with Volume & City Selector */}
@@ -838,43 +889,61 @@ const ProductDetail = () => {
           )}
 
           {/* Quick Info */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="p-3 rounded-xl bg-secondary text-center">
               <p className="text-xs text-muted-foreground mb-1">Selected</p>
-              <p className="font-semibold">{selectedVolume || product.volume || "—"}</p>
+              <p className="font-semibold">{selectedVolume || product.volume || "See label"}</p>
             </div>
             <div className="p-3 rounded-xl bg-secondary text-center">
               <p className="text-xs text-muted-foreground mb-1">ABV</p>
-              <p className="font-semibold">{product.abv ? `${product.abv}%` : "—"}</p>
+              <p className="font-semibold">{product.abv ? `${product.abv}%` : "See label"}</p>
             </div>
             <div className="p-3 rounded-xl bg-secondary text-center">
               <p className="text-xs text-muted-foreground mb-1">Age</p>
-              <p className="font-semibold">{product.age || "—"}</p>
+              <p className="font-semibold">{product.age || "Not verified"}</p>
+            </div>
+            <div className="p-3 rounded-xl bg-secondary text-center">
+              <p className="text-xs text-muted-foreground mb-1">Origin</p>
+              <p className="font-semibold">{product.origin || "Not verified"}</p>
             </div>
           </div>
 
           {/* Description */}
           {product.description && (
-            <div>
-              <h3 className="font-semibold mb-2">About</h3>
+            <section>
+              <h2 className="font-semibold mb-2">About {productLabel}</h2>
               <p className="text-muted-foreground leading-relaxed">{product.description}</p>
-            </div>
+            </section>
           )}
 
           {/* Taste Profile */}
           {product.taste_profile && (
-            <div>
-              <h3 className="font-semibold mb-2">Taste Profile</h3>
+            <section>
+              <h2 className="font-semibold mb-2">General taste profile</h2>
               <p className="text-muted-foreground">{product.taste_profile}</p>
-            </div>
+            </section>
           )}
 
           {/* Tasting Notes */}
           {product.tasting_notes && (
-            <div>
-              <h3 className="font-semibold mb-2">Tasting Notes</h3>
+            <section>
+              <h2 className="font-semibold mb-2">How to assess this product</h2>
               <p className="text-muted-foreground leading-relaxed">{product.tasting_notes}</p>
-            </div>
+            </section>
+          )}
+
+          {sensoryDetails.length > 0 && (
+            <section aria-labelledby="sensory-guide-heading">
+              <h2 id="sensory-guide-heading" className="font-semibold mb-3">Sensory guide</h2>
+              <dl className="divide-y divide-border border-y border-border">
+                {sensoryDetails.map(([label, value]) => (
+                  <div key={label} className="py-3 grid grid-cols-[72px_1fr] gap-3 text-sm">
+                    <dt className="font-medium text-foreground">{label}</dt>
+                    <dd className="text-muted-foreground leading-relaxed">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
           )}
 
           {/* Product Type */}
@@ -910,6 +979,65 @@ const ProductDetail = () => {
 
           <DeferredProductContent>
             <div className="space-y-6">
+              {(product.serving_guide || product.serving_temperature || product.glassware) && (
+                <section aria-labelledby="serving-guide-heading">
+                  <h2 id="serving-guide-heading" className="font-semibold mb-2">Serving guide</h2>
+                  {product.serving_guide && (
+                    <p className="text-sm text-muted-foreground leading-relaxed">{product.serving_guide}</p>
+                  )}
+                  <dl className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <dt className="font-medium">Temperature</dt>
+                      <dd className="mt-1 text-muted-foreground">{product.serving_temperature || "Follow the current label"}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-medium">Glassware</dt>
+                      <dd className="mt-1 text-muted-foreground">{product.glassware || "Clean glassware suited to the style"}</dd>
+                    </div>
+                  </dl>
+                </section>
+              )}
+
+              {Array.isArray(product.food_pairings) && product.food_pairings.length > 0 && (
+                <section aria-labelledby="pairing-heading">
+                  <h2 id="pairing-heading" className="font-semibold mb-2">Food pairing ideas</h2>
+                  <ul className="grid grid-cols-2 gap-x-5 gap-y-2 text-sm text-muted-foreground list-disc pl-5">
+                    {product.food_pairings.map((pairing) => <li key={pairing}>{pairing}</li>)}
+                  </ul>
+                </section>
+              )}
+
+              {product.cocktail_uses && (
+                <section>
+                  <h2 className="font-semibold mb-2">Cocktail use</h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{product.cocktail_uses}</p>
+                </section>
+              )}
+
+              {product.who_may_enjoy && (
+                <section>
+                  <h2 className="font-semibold mb-2">Who may find it useful to compare</h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{product.who_may_enjoy}</p>
+                </section>
+              )}
+
+              {(product.ingredients_note || product.production_note || product.label_guidance) && (
+                <section aria-labelledby="label-check-heading">
+                  <h2 id="label-check-heading" className="font-semibold mb-3">Before you choose</h2>
+                  <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                    {product.ingredients_note && <p><strong className="text-foreground">Ingredients:</strong> {product.ingredients_note}</p>}
+                    {product.production_note && <p><strong className="text-foreground">Production:</strong> {product.production_note}</p>}
+                    {product.label_guidance && <p><strong className="text-foreground">Label check:</strong> {product.label_guidance}</p>}
+                  </div>
+                </section>
+              )}
+
+              {product.responsible_notice && (
+                <aside className="border-l-2 border-accent pl-4 text-sm text-muted-foreground leading-relaxed">
+                  {product.responsible_notice}
+                </aside>
+              )}
+
               {/* Rate This Product */}
               <RateProductSection productId={product.id} onReviewSubmitted={() => setReviewRefresh((prev) => prev + 1)} />
 

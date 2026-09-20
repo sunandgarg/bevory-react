@@ -1,9 +1,11 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { fullProductName } from "../src/lib/productName.js";
 
 const SITE_ORIGIN = "https://bevory.in";
 
 type Breadcrumb = { name: string; path: string };
+type SeoFaq = { question: string; answer: string };
 type SeoRoute = {
   title: string;
   description: string;
@@ -14,6 +16,7 @@ type SeoRoute = {
   body?: string[];
   image?: string;
   structuredData?: Record<string, unknown>;
+  faqs?: SeoFaq[];
   statusCode?: number;
 };
 
@@ -32,7 +35,20 @@ type ProductSeoIndexEntry = {
 type ProductSeoIndex = {
   products: Record<string, ProductSeoIndexEntry>;
   brandsById: Record<string, string>;
+  aliases?: Record<string, string>;
 };
+type ProductEditorialEntry = {
+  description?: string;
+  tasteProfile?: string;
+  tastingNotes?: string;
+  servingGuide?: string;
+  foodPairings?: string[];
+  cocktailUses?: string;
+  whoMayEnjoy?: string;
+  responsibleNotice?: string;
+  faqs?: SeoFaq[];
+};
+type ProductEditorialIndex = Record<string, ProductEditorialEntry>;
 
 const cityNames = new Map([
   ["agra", "Agra"], ["asansol", "Asansol"], ["bangalore", "Bangalore"],
@@ -111,6 +127,20 @@ export const seoBucketForPath = (pathname: string) => {
   return `${citySlug}-pages`;
 };
 
+export const productContentBucketForPath = (pathname: string) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return null;
+  const initial = parts[2].charAt(0).toLowerCase();
+  return `product-content-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
+export const productAliasBucketForPath = (pathname: string) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return null;
+  const initial = parts[2].charAt(0).toLowerCase();
+  return `product-alias-${/[a-z0-9]/.test(initial) ? initial : "other"}`;
+};
+
 export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRoute => {
   const cleanPath = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const parts = cleanPath.split("/").filter(Boolean).map((part) => {
@@ -175,7 +205,7 @@ export const resolveDynamicProductSeo = (
   const product = productIndex.products[productSlug];
   if (!product) return null;
 
-  const productName = `${product.brand || ""} ${product.name || ""}`.trim();
+  const productName = fullProductName(product.brand || "", product.name || "");
   const knownVolumes = Array.isArray(product.volumes) ? product.volumes : [];
   const knownVolume = requestedVolume
     ? knownVolumes.find((value) => value.toLowerCase().replace(/\s+/g, "") === requestedVolume)
@@ -258,6 +288,41 @@ export const resolveDynamicProductSeo = (
   };
 };
 
+export const enrichProductSeo = (
+  pathname: string,
+  seo: SeoRoute,
+  editorialIndex: ProductEditorialIndex,
+): SeoRoute => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return seo;
+  const editorial = editorialIndex[parts[2]];
+  if (!editorial) return seo;
+
+  const editorialBody = [
+    editorial.description,
+    editorial.tasteProfile,
+    editorial.tastingNotes,
+    editorial.servingGuide,
+    editorial.foodPairings?.length
+      ? `Food pairing ideas include ${editorial.foodPairings.join(", ")}.`
+      : undefined,
+    editorial.cocktailUses,
+    editorial.whoMayEnjoy,
+    editorial.responsibleNotice,
+  ].filter((value): value is string => Boolean(value?.trim()));
+  const body = [...new Set([...(seo.body ?? []), ...editorialBody])];
+  const structuredData = seo.structuredData
+    ? { ...seo.structuredData, ...(editorial.description ? { description: editorial.description } : {}) }
+    : undefined;
+
+  return {
+    ...seo,
+    body,
+    ...(structuredData ? { structuredData } : {}),
+    ...(editorial.faqs?.length ? { faqs: editorial.faqs } : {}),
+  };
+};
+
 const routeSchema = (seo: SeoRoute) => {
   const canonical = `${SITE_ORIGIN}${seo.canonicalPath}`;
   return {
@@ -282,6 +347,14 @@ const routeSchema = (seo: SeoRoute) => {
         })),
       },
       ...(seo.structuredData ? [seo.structuredData] : []),
+      ...(seo.faqs?.length ? [{
+        "@type": "FAQPage",
+        mainEntity: seo.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }] : []),
     ],
   };
 };
@@ -291,11 +364,15 @@ const seoShell = (seo: SeoRoute) => {
   const image = seo.image
     ? `<img src="${escapeHtml(seo.image)}" alt="${escapeHtml(seo.heading)}" width="720" height="720" style="display:block;width:min(100%,360px);height:auto;object-fit:contain;margin:20px 0" />`
     : "";
+  const faqSection = seo.faqs?.length
+    ? `<section aria-labelledby="product-faq-heading"><h2 id="product-faq-heading">Common questions</h2>${seo.faqs.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join("")}</section>`
+    : "";
   return `<div id="root">
   <main aria-label="BevOry page summary" style="max-width:760px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.55">
     <h1>${escapeHtml(seo.heading)}</h1>
     ${image}
     ${body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n    ")}
+    ${faqSection}
     <nav aria-label="Explore BevOry">
       <a href="/categories">Categories</a> | <a href="/brands">Brands</a> | <a href="/guide">Guide</a> | <a href="/party-planner">Party planner</a>
     </nav>
@@ -368,6 +445,10 @@ export const legacyRedirectPath = (
   const parts = cleanPath.split("/").filter(Boolean);
 
   if (cleanPath === "/") return "/gurgaon";
+  if (cityNames.has(parts[0]) && parts[1] === "product" && parts[2]) {
+    const canonicalSlug = productIndex.aliases?.[parts[2]];
+    if (canonicalSlug) return `/${parts[0]}/product/${canonicalSlug}${parts[3] ? `/${parts[3]}` : ""}`;
+  }
   if (parts.length === 1 && stateDefaultCities.has(parts[0])) {
     return `/${stateDefaultCities.get(parts[0])}`;
   }
@@ -381,8 +462,9 @@ export const legacyRedirectPath = (
     return `/gurgaon/category/${parts.slice(1).join("/")}`;
   }
   if (parts[0] === "product" && parts[1]) {
+    const canonicalSlug = productIndex.aliases?.[parts[1]] || parts[1];
     return legacyProductTargets.get(parts[1])
-      || (productIndex.products[parts[1]] ? `/gurgaon/product/${parts[1]}` : null);
+      || (productIndex.products[canonicalSlug] ? `/gurgaon/product/${canonicalSlug}` : null);
   }
 
   let stateSlug: string | undefined;
@@ -396,6 +478,7 @@ export const legacyRedirectPath = (
 
   const fixedTarget = legacyProductTargets.get(productSlug);
   if (fixedTarget) return fixedTarget.replace(/^\/gurgaon/, `/${stateDefaultCities.get(stateSlug) || "gurgaon"}`);
+  productSlug = productIndex.aliases?.[productSlug] || productSlug;
 
   const preferredCity = stateDefaultCities.get(stateSlug)
     || (cityNames.has(stateSlug) ? stateSlug : null);
@@ -406,18 +489,37 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => emptyProductIndex);
+  const aliasCache = new Map<string, Promise<Record<string, string>>>();
+
+  const loadAliases = (pathname: string) => {
+    const bucket = productAliasBucketForPath(pathname);
+    if (!bucket) return Promise.resolve({});
+    let aliases = aliasCache.get(bucket);
+    if (!aliases) {
+      aliases = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
+        .then((value) => JSON.parse(value) as Record<string, string>)
+        .catch(() => ({}));
+      aliasCache.set(bucket, aliases);
+    }
+    return aliases;
+  };
 
   return async (pathname: string) => {
     const parts = pathname.split("/").filter(Boolean);
     const needsProductIndex = parts[0] === "product"
       || (parts[0] === "brand" && /^[0-9a-f-]{36}$/i.test(parts[1] || ""));
-    return legacyRedirectPath(pathname, needsProductIndex ? await productIndex : emptyProductIndex);
+    const baseIndex = needsProductIndex ? await productIndex : emptyProductIndex;
+    const aliases = productAliasBucketForPath(pathname)
+      ? await loadAliases(pathname)
+      : baseIndex.aliases;
+    return legacyRedirectPath(pathname, { ...baseIndex, ...(aliases ? { aliases } : {}) });
   };
 };
 
 export const createSeoRenderer = (clientDist: string) => {
   const template = readFile(path.join(clientDist, "index.html"), "utf8");
   const seoRoutesCache = new Map<string, Promise<SeoRouteMap>>();
+  const productEditorialCache = new Map<string, Promise<ProductEditorialIndex>>();
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => ({ products: {}, brandsById: {} }));
@@ -434,12 +536,25 @@ export const createSeoRenderer = (clientDist: string) => {
     return routes;
   };
 
+  const loadProductEditorial = (pathname: string) => {
+    const bucket = productContentBucketForPath(pathname);
+    if (!bucket) return Promise.resolve({} as ProductEditorialIndex);
+    let content = productEditorialCache.get(bucket);
+    if (!content) {
+      content = readFile(path.join(clientDist, "seo-routes", `${bucket}.json`), "utf8")
+        .then((value) => JSON.parse(value) as ProductEditorialIndex)
+        .catch(() => ({}));
+      productEditorialCache.set(bucket, content);
+    }
+    return content;
+  };
+
   return async (pathname: string) => {
     const generated = resolveSeo(pathname, await loadSeoRoutes(pathname));
     const dynamic = generated.robots.startsWith("noindex")
       ? resolveDynamicProductSeo(pathname, await productIndex)
       : null;
-    const route = dynamic || generated;
+    const route = enrichProductSeo(pathname, dynamic || generated, await loadProductEditorial(pathname));
     return {
       html: rewriteSeoDocument(await template, route),
       statusCode: route.statusCode || 200,

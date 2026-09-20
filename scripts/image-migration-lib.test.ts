@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   applyImageTargets,
+  assertPublicHttpUrl,
   collectImageTargets,
   imageObjectKey,
   imageObjectKeyCandidates,
@@ -11,6 +12,13 @@ import {
 } from "./image-migration-lib.js";
 
 describe("image migration helpers", () => {
+  it("blocks private-network and credential-bearing fetch targets", async () => {
+    await expect(assertPublicHttpUrl(new URL("https://127.0.0.1/image.jpg")))
+      .rejects.toThrow(/Blocked private/);
+    await expect(assertPublicHttpUrl(new URL("https://user:pass@example.com/image.jpg")))
+      .rejects.toThrow(/without credentials/);
+  });
+
   it("finds image fields and embedded images while preserving provenance fields", () => {
     const row = {
       image_url: "https://third.example/product.jpg",

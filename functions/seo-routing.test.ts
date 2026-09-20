@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { dynamicProductSeo, legacyRedirectPath } from "./[[path]].js";
+import {
+  dynamicProductSeo,
+  enrichProductSeo,
+  legacyRedirectPath,
+  productAliasBucketForPath,
+  productContentBucketForPath,
+} from "./[[path]].js";
 
 const productIndex = {
   brandsById: { "78575e48-2b55-4a22-9970-39dd28d337e6": "peter-scot" },
@@ -72,5 +78,43 @@ describe("SEO routing", () => {
     )).toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
     expect(legacyRedirectPath("/gurgaon/", productIndex)).toBe("/gurgaon");
     expect(legacyRedirectPath("/product/not-a-real-product", productIndex)).toBeNull();
+  });
+
+  it("loads editorial content from a small product shard and avoids repeated brand names", () => {
+    expect(productContentBucketForPath("/delhi/product/johnnie-walker-gold-label/750ml"))
+      .toBe("product-content-j");
+    expect(productAliasBucketForPath("/delhi/product/johnnie-walker-gold-label/750ml"))
+      .toBe("product-alias-j");
+    const path = "/delhi/product/johnnie-walker-gold-label";
+    const base = dynamicProductSeo(path, {
+      brandsById: {},
+      products: {
+        "johnnie-walker-gold-label": {
+          name: "Johnnie Walker Gold Label",
+          brand: "Johnnie Walker",
+          description: "Whisky product guide.",
+          volumes: ["750ml"],
+          prices: { delhi: { "750ml": 4500 } },
+        },
+      },
+    });
+    const enriched = enrichProductSeo(path, base, {
+      "johnnie-walker-gold-label": {
+        description: "A catalogue-grounded product overview.",
+        faqs: [{ question: "Which size is listed?", answer: "The catalogue lists 750ml." }],
+      },
+    });
+
+    expect(base.heading).toBe("Johnnie Walker Gold Label price in Delhi");
+    expect(enriched.body).toContain("A catalogue-grounded product overview.");
+    expect(enriched.faqs).toHaveLength(1);
+  });
+
+  it("redirects a retired city product slug while preserving its bottle size", () => {
+    expect(legacyRedirectPath("/delhi/product/old-black-label/750ml", {
+      products: {},
+      brandsById: {},
+      aliases: { "old-black-label": "johnnie-walker-black-label" },
+    })).toBe("/delhi/product/johnnie-walker-black-label/750ml");
   });
 });

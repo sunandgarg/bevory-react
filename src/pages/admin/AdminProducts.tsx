@@ -49,6 +49,21 @@ interface Product {
   description: string | null;
   taste_profile: string | null;
   tasting_notes: string | null;
+  colour_note: string | null;
+  aroma_note: string | null;
+  flavour_note: string | null;
+  texture_note: string | null;
+  finish_note: string | null;
+  ingredients_note: string | null;
+  production_note: string | null;
+  serving_temperature: string | null;
+  glassware: string | null;
+  serving_guide: string | null;
+  food_pairings: string[] | null;
+  cocktail_uses: string | null;
+  who_may_enjoy: string | null;
+  label_guidance: string | null;
+  responsible_notice: string | null;
   type_tag: string | null;
   type_description: string | null;
   is_trending: boolean | null;
@@ -335,6 +350,21 @@ const AdminProducts = () => {
       description: editProduct.description,
       taste_profile: editProduct.taste_profile,
       tasting_notes: editProduct.tasting_notes,
+      colour_note: editProduct.colour_note,
+      aroma_note: editProduct.aroma_note,
+      flavour_note: editProduct.flavour_note,
+      texture_note: editProduct.texture_note,
+      finish_note: editProduct.finish_note,
+      ingredients_note: editProduct.ingredients_note,
+      production_note: editProduct.production_note,
+      serving_temperature: editProduct.serving_temperature,
+      glassware: editProduct.glassware,
+      serving_guide: editProduct.serving_guide,
+      food_pairings: JSON.parse(JSON.stringify(editProduct.food_pairings || [])),
+      cocktail_uses: editProduct.cocktail_uses,
+      who_may_enjoy: editProduct.who_may_enjoy,
+      label_guidance: editProduct.label_guidance,
+      responsible_notice: editProduct.responsible_notice,
       type_tag: editProduct.type_tag,
       type_description: editProduct.type_description,
       is_trending: editProduct.is_trending,
@@ -611,6 +641,21 @@ const AdminProducts = () => {
     description: null,
     taste_profile: null,
     tasting_notes: null,
+    colour_note: null,
+    aroma_note: null,
+    flavour_note: null,
+    texture_note: null,
+    finish_note: null,
+    ingredients_note: null,
+    production_note: null,
+    serving_temperature: null,
+    glassware: null,
+    serving_guide: null,
+    food_pairings: [],
+    cocktail_uses: null,
+    who_may_enjoy: null,
+    label_guidance: null,
+    responsible_notice: null,
     type_tag: null,
     type_description: null,
     is_trending: false,
@@ -633,6 +678,10 @@ const AdminProducts = () => {
     "id", "slug", "name", "brand", "category_id", "sub_category_id",
     "image_emoji", "image_url", "rating", "abv", "volume", "age",
     "origin", "origin_flag", "description", "taste_profile", "tasting_notes",
+    "colour_note", "aroma_note", "flavour_note", "texture_note", "finish_note",
+    "ingredients_note", "production_note", "serving_temperature", "glassware",
+    "serving_guide", "food_pairings", "cocktail_uses", "who_may_enjoy",
+    "label_guidance", "responsible_notice",
     "type_tag", "type_description", "is_trending", "is_all_time_favourite",
     "meta_title", "meta_description", "faqs"
   ];
@@ -697,6 +746,29 @@ const AdminProducts = () => {
       parsed.description = row.description || null;
       parsed.taste_profile = row.taste_profile || null;
       parsed.tasting_notes = row.tasting_notes || null;
+      parsed.colour_note = row.colour_note || null;
+      parsed.aroma_note = row.aroma_note || null;
+      parsed.flavour_note = row.flavour_note || null;
+      parsed.texture_note = row.texture_note || null;
+      parsed.finish_note = row.finish_note || null;
+      parsed.ingredients_note = row.ingredients_note || null;
+      parsed.production_note = row.production_note || null;
+      parsed.serving_temperature = row.serving_temperature || null;
+      parsed.glassware = row.glassware || null;
+      parsed.serving_guide = row.serving_guide || null;
+      parsed.cocktail_uses = row.cocktail_uses || null;
+      parsed.who_may_enjoy = row.who_may_enjoy || null;
+      parsed.label_guidance = row.label_guidance || null;
+      parsed.responsible_notice = row.responsible_notice || null;
+      if (row.food_pairings) {
+        try {
+          parsed.food_pairings = JSON.parse(row.food_pairings);
+        } catch {
+          parsed.food_pairings = row.food_pairings.split("|").map((value) => value.trim()).filter(Boolean);
+        }
+      } else {
+        parsed.food_pairings = [];
+      }
       parsed.type_tag = row.type_tag || null;
       parsed.type_description = row.type_description || null;
       parsed.meta_title = row.meta_title || null;
@@ -759,6 +831,21 @@ const AdminProducts = () => {
           description: rest.description || null,
           taste_profile: rest.taste_profile || null,
           tasting_notes: rest.tasting_notes || null,
+          colour_note: rest.colour_note || null,
+          aroma_note: rest.aroma_note || null,
+          flavour_note: rest.flavour_note || null,
+          texture_note: rest.texture_note || null,
+          finish_note: rest.finish_note || null,
+          ingredients_note: rest.ingredients_note || null,
+          production_note: rest.production_note || null,
+          serving_temperature: rest.serving_temperature || null,
+          glassware: rest.glassware || null,
+          serving_guide: rest.serving_guide || null,
+          food_pairings: Array.isArray(rest.food_pairings) ? rest.food_pairings : [],
+          cocktail_uses: rest.cocktail_uses || null,
+          who_may_enjoy: rest.who_may_enjoy || null,
+          label_guidance: rest.label_guidance || null,
+          responsible_notice: rest.responsible_notice || null,
           type_tag: rest.type_tag || null,
           type_description: rest.type_description || null,
           is_trending: Boolean(rest.is_trending),
@@ -1264,6 +1351,117 @@ const AdminProducts = () => {
                 rows={2}
               />
             </FormField>
+
+            <div className="border-t pt-4 space-y-3">
+              <h4 className="font-semibold">Editorial product guide</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <FormField label="Colour guidance">
+                  <Textarea
+                    value={editProduct?.colour_note || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, colour_note: e.target.value || null } : p))}
+                    rows={2}
+                  />
+                </FormField>
+                <FormField label="Aroma guidance">
+                  <Textarea
+                    value={editProduct?.aroma_note || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, aroma_note: e.target.value || null } : p))}
+                    rows={2}
+                  />
+                </FormField>
+                <FormField label="Flavour guidance">
+                  <Textarea
+                    value={editProduct?.flavour_note || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, flavour_note: e.target.value || null } : p))}
+                    rows={2}
+                  />
+                </FormField>
+                <FormField label="Body and texture guidance">
+                  <Textarea
+                    value={editProduct?.texture_note || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, texture_note: e.target.value || null } : p))}
+                    rows={2}
+                  />
+                </FormField>
+                <FormField label="Finish guidance">
+                  <Textarea
+                    value={editProduct?.finish_note || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, finish_note: e.target.value || null } : p))}
+                    rows={2}
+                  />
+                </FormField>
+                <FormField label="Serving temperature">
+                  <Input
+                    value={editProduct?.serving_temperature || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, serving_temperature: e.target.value || null } : p))}
+                  />
+                </FormField>
+                <FormField label="Glassware">
+                  <Input
+                    value={editProduct?.glassware || ""}
+                    onChange={(e) => setEditProduct((p) => (p ? { ...p, glassware: e.target.value || null } : p))}
+                  />
+                </FormField>
+                <FormField label="Food pairings" hint="Separate items with |">
+                  <Input
+                    value={(editProduct?.food_pairings || []).join(" | ")}
+                    onChange={(e) => setEditProduct((p) => (p ? {
+                      ...p,
+                      food_pairings: e.target.value.split("|").map((value) => value.trim()).filter(Boolean),
+                    } : p))}
+                  />
+                </FormField>
+              </div>
+              <FormField label="Serving guide">
+                <Textarea
+                  value={editProduct?.serving_guide || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, serving_guide: e.target.value || null } : p))}
+                  rows={3}
+                />
+              </FormField>
+              <FormField label="Cocktail use">
+                <Textarea
+                  value={editProduct?.cocktail_uses || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, cocktail_uses: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+              <FormField label="Who may find it useful to compare">
+                <Textarea
+                  value={editProduct?.who_may_enjoy || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, who_may_enjoy: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+              <FormField label="Ingredient and allergen note">
+                <Textarea
+                  value={editProduct?.ingredients_note || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, ingredients_note: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+              <FormField label="Production note">
+                <Textarea
+                  value={editProduct?.production_note || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, production_note: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+              <FormField label="Bottle label guidance">
+                <Textarea
+                  value={editProduct?.label_guidance || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, label_guidance: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+              <FormField label="Responsible drinking notice">
+                <Textarea
+                  value={editProduct?.responsible_notice || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, responsible_notice: e.target.value || null } : p))}
+                  rows={2}
+                />
+              </FormField>
+            </div>
 
             {/* Variants & Pricing — nested manager */}
             <div className="border-t pt-4">

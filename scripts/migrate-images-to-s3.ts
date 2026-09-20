@@ -1,12 +1,11 @@
 import "dotenv/config";
 import { createHash } from "node:crypto";
-import { lookup } from "node:dns/promises";
-import { isIP } from "node:net";
 import { HeadObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Prisma, PrismaClient } from "@prisma/client";
 import sharp from "sharp";
 import {
   applyImageTargets,
+  assertPublicHttpUrl,
   collectImageTargets,
   imageObjectKey,
   imageObjectKeyCandidates,
@@ -111,40 +110,10 @@ const addYouTubeFallback = (tableName: string, row: JsonObject, targets: ImageTa
   return fallback ? [...targets, fallback] : targets;
 };
 
-const isPrivateV4 = (address: string) => {
-  const parts = address.split(".").map(Number);
-  return parts[0] === 10
-    || parts[0] === 127
-    || (parts[0] === 169 && parts[1] === 254)
-    || (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31)
-    || (parts[0] === 192 && parts[1] === 168)
-    || (parts[0] === 100 && parts[1] >= 64 && parts[1] <= 127)
-    || parts[0] >= 224;
-};
-
-const isPrivateAddress = (address: string) => {
-  if (isIP(address) === 4) return isPrivateV4(address);
-  const normalized = address.toLowerCase();
-  if (normalized.startsWith("::ffff:")) return isPrivateV4(normalized.slice(7));
-  return normalized === "::" || normalized === "::1" || normalized.startsWith("fc")
-    || normalized.startsWith("fd") || normalized.startsWith("fe8") || normalized.startsWith("fe9")
-    || normalized.startsWith("fea") || normalized.startsWith("feb");
-};
-
-const assertPublicUrl = async (url: URL) => {
-  if (!["http:", "https:"].includes(url.protocol)) throw new Error("Only HTTP(S) image URLs are supported");
-  const addresses = isIP(url.hostname)
-    ? [{ address: url.hostname }]
-    : await lookup(url.hostname, { all: true, verbatim: true });
-  if (!addresses.length || addresses.some(({ address }) => isPrivateAddress(address))) {
-    throw new Error(`Blocked private or unresolvable image host: ${url.hostname}`);
-  }
-};
-
 const downloadImage = async (sourceUrl: string) => {
   let current = new URL(sourceUrl);
   for (let redirects = 0; redirects <= 5; redirects++) {
-    await assertPublicUrl(current);
+    await assertPublicHttpUrl(current);
     const response = await fetch(current, {
       redirect: "manual",
       signal: AbortSignal.timeout(30_000),
