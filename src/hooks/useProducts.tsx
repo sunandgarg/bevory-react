@@ -2,6 +2,7 @@ import { useMemo, useCallback } from "react";
 import { apiClient } from "@/integrations/api/client";
 import { useLocation } from "./useLocation";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
 
 /* ===================== TYPES ===================== */
 
@@ -56,7 +57,6 @@ export interface Category {
 
 const EMPTY_CATEGORIES: Category[] = [];
 const EMPTY_PRODUCTS: Product[] = [];
-const PRODUCT_PAGE_SIZE = 20;
 
 /* ===================== FETCHERS ===================== */
 
@@ -126,10 +126,10 @@ export const useProducts = (
   });
 
   const infiniteCatalog = useInfiniteQuery({
-    queryKey: ["city-catalog-pages", selectedCity?.id ?? "none", view, categorySlug ?? "all", PRODUCT_PAGE_SIZE],
+    queryKey: ["city-catalog-pages", selectedCity?.id ?? "none", view, categorySlug ?? "all", PRODUCT_BATCH_SIZE],
     queryFn: ({ pageParam }) => fetchCityCatalog(selectedCity!.id, view, categorySlug, {
       offset: pageParam,
-      limit: PRODUCT_PAGE_SIZE,
+      limit: PRODUCT_BATCH_SIZE,
     }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.hasMore

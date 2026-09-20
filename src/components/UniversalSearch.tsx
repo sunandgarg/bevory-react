@@ -9,6 +9,7 @@ import { citySlugFromName } from "@/lib/locations";
 import { generateProductUrl } from "@/lib/productSlug";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
+import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
 
 interface Brand {
   id: string;
@@ -118,7 +119,7 @@ const UniversalSearch = memo(({
         .select("id, name, brand, rating, image_emoji, image_url, slug, category:categories(name, slug, emoji)")
         .eq("is_active", true)
         .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
-        .limit(30);
+        .limit(PRODUCT_BATCH_SIZE);
       const results = error ? [] : fuzzyFilter(
         (data ?? []) as SearchProduct[],
         searchQuery,

@@ -22,8 +22,7 @@ import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { useInfiniteQuery } from "@tanstack/react-query";
-
-const PRODUCT_PAGE_SIZE = 20;
+import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
 
 interface Brand {
   id: string;
@@ -140,7 +139,7 @@ const BrandDetail = () => {
   }, [routeCityReady, slug, selectedCity?.id]);
 
   const productPages = useInfiniteQuery({
-    queryKey: ["brand-products", brand?.id ?? "none", selectedCity?.id ?? "none", PRODUCT_PAGE_SIZE],
+    queryKey: ["brand-products", brand?.id ?? "none", selectedCity?.id ?? "none", PRODUCT_BATCH_SIZE],
     queryFn: async ({ pageParam }): Promise<{ products: ProductWithPrice[]; nextOffset?: number }> => {
       const { data: productsData, error } = await apiClient
         .from("products")
@@ -152,7 +151,7 @@ const BrandDetail = () => {
         .eq("brand_id", brand!.id)
         .eq("is_active", true)
         .order("is_trending", { ascending: false })
-        .range(pageParam, pageParam + PRODUCT_PAGE_SIZE - 1);
+        .range(pageParam, pageParam + PRODUCT_BATCH_SIZE - 1);
       if (error) throw error;
 
       const pageProducts = (productsData ?? []) as Product[];
@@ -180,7 +179,7 @@ const BrandDetail = () => {
         });
         return { ...product, price: prices[0]?.price ?? null };
       });
-      return { products, nextOffset: products.length === PRODUCT_PAGE_SIZE ? pageParam + PRODUCT_PAGE_SIZE : undefined };
+      return { products, nextOffset: products.length === PRODUCT_BATCH_SIZE ? pageParam + PRODUCT_BATCH_SIZE : undefined };
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextOffset,

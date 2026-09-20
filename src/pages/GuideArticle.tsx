@@ -14,6 +14,7 @@ import SEOHead from "@/components/SEOHead";
 import { demandGuideBySlug } from "@/lib/demandGuides";
 import { cityRecordIdFromSlug } from "@/lib/locations";
 import { generateProductUrl } from "@/lib/productSlug";
+import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
 
 interface BlogPost {
   id: string;
@@ -64,12 +65,12 @@ const GuideArticle = () => {
         cityRecordIdFromSlug(demandGuide!.citySlug!),
         "category",
         demandGuide!.categorySlug!,
-        { offset: 0, limit: 20 },
+        { offset: 0, limit: PRODUCT_BATCH_SIZE },
       );
       if (error) throw error;
       return ((data?.products ?? []) as Array<Record<string, any>>)
         .sort((left, right) => Number(left.price || Number.MAX_SAFE_INTEGER) - Number(right.price || Number.MAX_SAFE_INTEGER))
-        .slice(0, 20);
+        .slice(0, PRODUCT_BATCH_SIZE);
     },
     enabled: Boolean(demandGuide?.citySlug && demandGuide?.categorySlug),
     staleTime: 5 * 60 * 1000,

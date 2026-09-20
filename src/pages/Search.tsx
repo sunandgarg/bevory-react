@@ -19,8 +19,8 @@ import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/l
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
 
-const PRODUCT_PAGE_SIZE = 20;
 import {
   Sheet,
   SheetContent,
@@ -37,7 +37,7 @@ const Search = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(() => searchParams.get("category"));
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [minRating, setMinRating] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(PRODUCT_PAGE_SIZE);
+  const [visibleCount, setVisibleCount] = useState(PRODUCT_BATCH_SIZE);
   const [sortBy, setSortBy] = useState<"rating" | "price_asc" | "price_desc" | "name">(() => {
     const requestedSort = searchParams.get("sort");
     return requestedSort === "price_asc" || requestedSort === "price_desc" || requestedSort === "name"
@@ -78,12 +78,12 @@ const Search = () => {
         `)
         .eq("is_active", true)
         .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
-        .range(pageParam, pageParam + PRODUCT_PAGE_SIZE - 1);
+        .range(pageParam, pageParam + PRODUCT_BATCH_SIZE - 1);
       if (error) throw error;
       const pageProducts = (data ?? []) as Product[];
       return {
         products: pageProducts.filter((product) => productMatchesIntent(product, searchIntent)),
-        nextOffset: pageProducts.length === PRODUCT_PAGE_SIZE ? pageParam + PRODUCT_PAGE_SIZE : undefined,
+        nextOffset: pageProducts.length === PRODUCT_BATCH_SIZE ? pageParam + PRODUCT_BATCH_SIZE : undefined,
       };
     },
     initialPageParam: 0,
@@ -196,7 +196,7 @@ const Search = () => {
     return result;
   }, [searchableProducts, debouncedQuery, searchIntent, selectedCategory, priceRange, minRating, sortBy, trendingOnly]);
 
-  useEffect(() => setVisibleCount(PRODUCT_PAGE_SIZE), [debouncedQuery, selectedCategory, priceRange, minRating, sortBy, selectedCity?.id]);
+  useEffect(() => setVisibleCount(PRODUCT_BATCH_SIZE), [debouncedQuery, selectedCategory, priceRange, minRating, sortBy, selectedCity?.id]);
   const visibleProducts = debouncedQuery
     ? filteredProducts.slice(0, visibleCount)
     : filteredProducts;
@@ -205,7 +205,7 @@ const Search = () => {
   const canFetchSearch = Boolean(debouncedQuery) && Boolean(hasNextSearchPage);
   const loadNextPage = useCallback(() => {
     if (canRevealSearchResults) {
-      setVisibleCount((count) => Math.min(count + PRODUCT_PAGE_SIZE, filteredProducts.length));
+      setVisibleCount((count) => Math.min(count + PRODUCT_BATCH_SIZE, filteredProducts.length));
     } else if (canFetchSearch && !isFetchingNextSearchPage) {
       void fetchNextSearchPage();
     } else if (canFetchCatalog && !isFetchingNextPage) {

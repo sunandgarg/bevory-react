@@ -45,15 +45,15 @@ describe("buildCityCatalog", () => {
     expect(category.categories).toHaveLength(1);
   });
 
-  it("returns deterministic 20-product pages with a continuation signal", () => {
+  it("returns deterministic 15-product pages with a continuation signal", () => {
     const products = Array.from({ length: 45 }, (_, index) => ({ id: `p${index + 1}` }));
-    const firstPage = paginateCatalog({ products, totalProducts: products.length }, 0, 20);
-    const lastPage = paginateCatalog({ products, totalProducts: products.length }, 40, 20);
+    const firstPage = paginateCatalog({ products, totalProducts: products.length }, 0, 15);
+    const lastPage = paginateCatalog({ products, totalProducts: products.length }, 30, 15);
 
-    expect(firstPage.products).toHaveLength(20);
-    expect(firstPage.products[15]).toEqual({ id: "p16" });
+    expect(firstPage.products).toHaveLength(15);
+    expect(firstPage.products[14]).toEqual({ id: "p15" });
     expect(firstPage.hasMore).toBe(true);
-    expect(lastPage.products).toHaveLength(5);
+    expect(lastPage.products).toHaveLength(15);
     expect(lastPage.hasMore).toBe(false);
   });
 });
