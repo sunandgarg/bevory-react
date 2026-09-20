@@ -406,7 +406,7 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
       const rendered = await renderSeo(req.path);
       res.setHeader("Cache-Control", rendered.statusCode === 404
         ? "private, no-store"
-        : "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400");
+        : "public, max-age=0, must-revalidate");
       const crawler = isCrawlerUserAgent(req.get("user-agent"));
       if (crawler) res.vary("User-Agent");
       return res.status(rendered.statusCode).type("html").send(
