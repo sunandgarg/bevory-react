@@ -89,9 +89,11 @@ const converted = await (outputFormat === "png"
   .toBuffer({ resolveWithObject: true });
 if (!converted.info.width || !converted.info.height) throw new Error("Image conversion produced no dimensions");
 
-const publicBaseUrl = validatePublicBaseUrl(
-  apply ? requiredEnv("IMAGE_PUBLIC_URL") : process.env.IMAGE_PUBLIC_URL?.trim() || "https://bevory.in/media",
-);
+const configuredPublicBaseUrl = process.env.IMAGE_PUBLIC_URL?.trim() || process.env.S3_PUBLIC_URL?.trim();
+if (apply && !configuredPublicBaseUrl) {
+  throw new Error("IMAGE_PUBLIC_URL or S3_PUBLIC_URL is required with --apply");
+}
+const publicBaseUrl = validatePublicBaseUrl(configuredPublicBaseUrl || "https://bevory.in/media");
 const objectKey = imageObjectKey("products", productId, image.toString(), outputFormat);
 const firstPartyUrl = publicObjectUrl(publicBaseUrl, objectKey);
 
