@@ -24,7 +24,6 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
 import { fullProductName } from "@/lib/productName";
 import { cityRecordIdFromSlug } from "@/lib/locations";
-import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 
 interface FAQ {
   question: string;
@@ -676,15 +675,16 @@ const ProductDetail = () => {
         {/* Product Image */}
         <div
           key="product-hero"
-          className="aspect-square bg-muted/30 flex items-center justify-center relative overflow-hidden"
+          className="relative flex h-[350px] items-center justify-center overflow-hidden bg-white"
         >
           {product.image_url ? (
-            <div className="w-full h-full">
+            <div className="h-full w-full p-8 sm:p-12">
               <OptimizedImage
                 src={product.image_url}
                 alt={`${product.brand} ${product.name}${selectedVolume ? ` ${selectedVolume}` : ""} bottle`}
-                width={720}
-                height={720}
+                width={1080}
+                height={1080}
+                sizes="100vw"
                 className="w-full h-full"
                 objectFit="contain"
                 priority
@@ -698,8 +698,8 @@ const ProductDetail = () => {
 
           {/* Origin badge */}
           {(product.origin || product.origin_flag) && (
-            <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-card/90 backdrop-blur-sm text-sm flex items-center gap-1">
-              <span>{product.origin_flag}</span>
+            <div className="absolute right-4 top-10 flex flex-col items-center gap-1 bg-transparent text-sm text-muted-foreground [writing-mode:vertical-rl]">
+              <span className="[writing-mode:initial]">{product.origin_flag}</span>
               {product.origin && <span className="text-muted-foreground">{product.origin}</span>}
             </div>
           )}
@@ -707,7 +707,7 @@ const ProductDetail = () => {
           {/* Trending badge */}
           {product.is_trending && (
             <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-accent/90 backdrop-blur-sm text-xs font-medium text-accent-foreground">
-              🔥 Trending
+              Trending
             </div>
           )}
 
@@ -734,40 +734,25 @@ const ProductDetail = () => {
         <div className="p-4 space-y-6">
           {/* Header */}
           <div>
-            <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <Link
-                to={`/${canonicalCitySlug}/category/${product.category?.slug}`}
-                className="inline-flex items-center gap-1.5 rounded bg-secondary px-2 py-0.5 text-xs font-medium"
-              >
-                {product.category?.slug && (
-                  <CategoryBottleVisual
-                    slug={product.category.slug}
-                    categoryName={product.category.name}
-                    className="h-5 w-5 shrink-0 rounded bg-background/70"
-                  />
-                )}
-                {product.category?.name}
-              </Link>
-              {product.sub_category && (
-                <span className="px-2 py-0.5 rounded bg-accent/10 text-accent text-xs font-medium">
-                  {product.sub_category.emoji} {product.sub_category.name}
-                </span>
-              )}
+            <div className="flex items-end justify-between gap-3">
+              <div className="min-w-0">
+                <Link
+                  to={`/${canonicalCitySlug}/brand/${product.brand.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                  className="inline-flex items-center text-xl font-semibold text-accent underline decoration-accent/60 underline-offset-4"
+                >
+                  Brand: {product.brand} <span aria-hidden="true" className="ml-1">›</span>
+                </Link>
+                <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground">{productLabel}</h1>
+              </div>
               {displayRating ? (
-                <div className="flex items-center gap-1 text-sm">
-                  <Star className="w-4 h-4 fill-accent text-accent" />
-                  <span className="font-medium">{displayRating}</span>
-                  <span className="text-muted-foreground">
-                    ({displayReviewCount} {displayReviewCount === 1 ? "review" : "reviews"})
-                  </span>
-                </div>
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-[#ed5f9e] px-3 py-2 text-lg font-semibold text-white">
+                  <Star className="h-5 w-5 fill-current" /> {displayRating}
+                </span>
               ) : (
-                <span className="text-sm text-muted-foreground">Not rated yet</span>
+                <span className="shrink-0 text-xs text-muted-foreground">Not rated</span>
               )}
             </div>
-
-            <p className="text-muted-foreground">{product.brand}</p>
-            <h1 className="text-2xl font-serif font-bold text-foreground">{pageHeading}</h1>
+            <p className="mt-2 text-sm uppercase tracking-wide text-muted-foreground">{selectedVolume || product.volume || "See label"}</p>
             {(product.author_line || editorialDate) && (
               <p className="mt-2 text-xs text-muted-foreground">
                 {product.author_line ? `Editorial: ${product.author_line}` : ""}
@@ -778,11 +763,11 @@ const ProductDetail = () => {
           </div>
 
           {/* Price with Volume & City Selector */}
-          <div className="p-4 rounded-xl bg-card border border-border space-y-4">
+          <div className="space-y-4 border-y border-border py-5">
             {/* City Selector */}
             <button
               onClick={() => setShowCitySelector(true)}
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <MapPin className="w-3 h-3" />
               {displayCityName ? `Price in ${displayCityName}` : "Select city for price"}
@@ -791,7 +776,7 @@ const ProductDetail = () => {
 
             {/* Volume Options */}
             {displayVolumes.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-end gap-2">
                 {displayVolumes.map((variant) => (
                   <Link
                     key={variant.volume}
@@ -799,41 +784,31 @@ const ProductDetail = () => {
                       citySlug: canonicalCitySlug,
                       productSlug: product.slug || product.id,
                     }, variant.volume)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-all ${
                       normalizeVolume(selectedVolume) === normalizeVolume(variant.volume)
-                        ? "bg-accent text-accent-foreground"
-                        : "bg-secondary text-foreground hover:bg-secondary/80"
+                        ? "border-accent bg-accent/5 text-accent"
+                        : "border-border bg-background text-foreground hover:border-accent/50"
                     }`}
                   >
-                    <span className="block">{variant.volume}</span>
-                    <span className="block text-xs opacity-80">
-                      {variant.price ? `₹${variant.price.toLocaleString("en-IN")}` : "No price"}
-                    </span>
+                    <span className="block uppercase">{variant.volume}</span>
                   </Link>
                 ))}
               </div>
             )}
 
             {/* Price Display */}
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
+            <div className="flex items-center justify-between gap-4">
+              <div>
                 <div className="flex items-baseline gap-2">
-                  <span className={price ? "text-3xl font-bold" : "text-lg font-semibold text-muted-foreground"}>
+                  <span className={price ? "text-4xl font-bold tracking-tight" : "text-lg font-semibold text-muted-foreground"}>
                     {price ? `₹${price.toLocaleString("en-IN")}` : "Price not available"}
                   </span>
                   {price && mrp && Number(mrp) > Number(price) && (
-                    <span className="text-lg text-muted-foreground line-through">₹{mrp.toLocaleString()}</span>
-                  )}
-                  {selectedVolume && (
-                    <span className="text-sm text-muted-foreground">for {selectedVolume}</span>
+                    <span className="text-sm text-muted-foreground line-through">₹{mrp.toLocaleString()}</span>
                   )}
                 </div>
+                <p className="mt-2 text-xs text-muted-foreground">* This is the MRP set by the state government</p>
               </div>
-              {price && mrp && Number(mrp) > Number(price) && (
-                <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-600 text-sm font-medium">
-                  {Math.round(((Number(mrp) - Number(price)) / Number(mrp)) * 100)}% off
-                </div>
-              )}
             </div>
             <p className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground">
               <Info className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
@@ -841,6 +816,18 @@ const ProductDetail = () => {
                 ? `Indicative price for ${displayCityName || "your selected city"}. Local retail prices may vary.`
                 : `No local price is listed for ${displayCityName || "your selected city"} yet.`}
             </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
+            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={() => setLiked(!liked)}>
+              <Heart className={`h-5 w-5 text-accent ${liked ? "fill-current" : ""}`} /> Wishlist
+            </Button>
+            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={handleCompare}>
+              <ArrowLeftRight className="h-5 w-5 text-accent" /> Compare
+            </Button>
+            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={() => navigate("/party-planner")}>
+              <span className="text-lg text-accent" aria-hidden="true">✣</span> Party
+            </Button>
           </div>
 
           {/* Quick Info */}

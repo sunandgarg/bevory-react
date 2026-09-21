@@ -114,7 +114,8 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
       <SheetTrigger asChild>
         <button
           className={cn(
-            "flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary hover:bg-muted transition-colors",
+            "flex min-h-10 items-center gap-2 rounded-xl bg-secondary px-3 py-2 transition-colors hover:bg-muted",
+            variant === "compact" && "px-2.5",
             className
           )}
         >

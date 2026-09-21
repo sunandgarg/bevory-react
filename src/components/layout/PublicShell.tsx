@@ -1,5 +1,5 @@
 import { Bell, Bot, Settings } from "lucide-react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation as useRouterLocation } from "react-router-dom";
 import UniversalSearch from "@/components/UniversalSearch";
 import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
@@ -12,17 +12,41 @@ const PublicShell = () => {
   const { isAdmin } = useAuth();
   const { unreadCount } = useNotifications();
   const { selectedCity } = useLocation();
+  const { pathname } = useRouterLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
+  const isHome = /^\/(?:[a-z-]+)?$/.test(pathname);
+  const isSearch = pathname === "/search";
+
+  const pageHeading = (() => {
+    if (isHome) return "";
+    const parts = pathname.split("/").filter(Boolean);
+    const categoryIndex = parts.indexOf("category");
+    const productIndex = parts.indexOf("product");
+    const raw = categoryIndex >= 0
+      ? parts[categoryIndex + 1]
+      : productIndex >= 0
+        ? parts[productIndex + 1]
+        : parts.at(-1);
+    if (!raw || raw === citySlug) return "BevOry";
+    return raw.split("-").map((word) => word ? word[0].toUpperCase() + word.slice(1) : word).join(" ");
+  })();
+
+  const compactHeader = !isHome;
 
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/95 shadow-sm backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-[1120px] items-center gap-2 px-4 md:h-[72px] md:gap-4">
-          <BrandingDisplay variant="header" className="shrink-0" />
-          <div className="ml-auto shrink-0 md:ml-0">
-            <LocationSelectorNew />
+          <BrandingDisplay variant={compactHeader ? "mark" : "header"} className="shrink-0" />
+          {compactHeader && (
+            <h1 className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground md:text-base">
+              {pageHeading}
+            </h1>
+          )}
+          <div className={`${compactHeader ? "ml-auto" : "ml-auto md:ml-0"} shrink-0`}>
+            <LocationSelectorNew variant={compactHeader ? "compact" : "default"} />
           </div>
-          <div className="hidden min-w-0 flex-1 md:block">
+          <div className={`${isHome || isSearch ? "" : "hidden"} min-w-0 flex-1`}>
             <UniversalSearch />
           </div>
           {isAdmin && (
@@ -47,12 +71,10 @@ const PublicShell = () => {
             )}
           </Link>
         </div>
-        <div className="mx-auto max-w-[1120px] px-4 pb-2 md:hidden">
-          <UniversalSearch />
-        </div>
+        {(isHome || isSearch) && <div className="mx-auto max-w-[1120px] px-4 pb-2 md:hidden"><UniversalSearch /></div>}
       </header>
 
-      <div className="pt-[110px] md:pt-[72px]">
+      <div className={`${isHome || isSearch ? "pt-[110px]" : "pt-[64px]"} md:pt-[72px]`}>
         <Outlet />
       </div>
 

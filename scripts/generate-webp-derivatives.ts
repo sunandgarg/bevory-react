@@ -11,7 +11,7 @@ import sharp from "sharp";
 
 const apply = process.argv.includes("--apply");
 const quality = 95;
-const concurrency = Math.max(1, Math.min(4, Number(process.env.WEBP_CONCURRENCY || 2)));
+const concurrency = Math.max(1, Math.min(8, Number(process.env.WEBP_CONCURRENCY || 4)));
 const bucket = process.env.S3_BUCKET?.trim() || "bevory-uploads-091199627263-ap-south-1";
 const region = process.env.S3_REGION?.trim() || "ap-south-1";
 const immutableCacheControl = "public, max-age=31536000, immutable";
