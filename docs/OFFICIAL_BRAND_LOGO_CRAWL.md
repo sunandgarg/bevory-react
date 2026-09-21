@@ -2,6 +2,9 @@
 
 `pnpm brands:logos` is intentionally strict. It does not treat Livcheers,
 search-result pages, marketplaces, or a CDN mirror as an official source.
+The default run is sequential: one brand is resolved, downloaded, converted,
+and recorded before the next brand starts. Set `BRAND_LOGO_CONCURRENCY` only
+when you explicitly want bounded parallel processing.
 
 The preferred input is a JSON map of verified brand names (or slugs) to the
 brand's HTTPS homepage:

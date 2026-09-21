@@ -29,7 +29,9 @@ const limit = limitArgument >= 0 ? Number(process.argv[limitArgument + 1]) : Inf
 const domainsArgument = process.argv.indexOf("--domains-file");
 const domainsFile = domainsArgument >= 0 ? process.argv[domainsArgument + 1] : undefined;
 const quality = 95;
-const concurrency = Math.max(1, Math.min(6, Number(process.env.BRAND_LOGO_CONCURRENCY || 4)));
+// Keep the default deliberately sequential so every brand is independently
+// verified and captured. A larger value remains an explicit operator choice.
+const concurrency = Math.max(1, Math.min(6, Number(process.env.BRAND_LOGO_CONCURRENCY || 1)));
 const maxSourceBytes = 15 * 1024 * 1024;
 const immutableCacheControl = "public, max-age=31536000, immutable";
 const prisma = new PrismaClient();
