@@ -239,9 +239,17 @@ Deploy the application from `/opt/bevory` on the Lightsail instance:
 
 ```bash
 sudo docker compose -f deploy/docker-compose.production.yml build api
-sudo docker compose -f deploy/docker-compose.production.yml run --rm api pnpm db:setup
+# Do not run db:setup in production. It runs prisma db push and can drop
+# manually-managed generated catalogue index columns. Apply additive brand
+# content without changing the production schema.
+sudo docker compose -f deploy/docker-compose.production.yml run --rm --no-deps api pnpm brands:expand
 sudo docker compose -f deploy/docker-compose.production.yml up -d
 ```
+
+Schema changes require a separately reviewed migration and a managed-database
+snapshot. Never accept a Prisma `db push` warning that proposes dropping
+`filter_city_id`, `filter_price_available`, `filter_product_id`,
+`filter_requires_review`, or `filter_slug`.
 
 Import one or more reviewed Livcheers city catalogues after copying the CSVs to
 a temporary host directory. The importer is additive and idempotent and writes

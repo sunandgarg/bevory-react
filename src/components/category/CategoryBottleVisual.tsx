@@ -59,7 +59,7 @@ const CategoryBottleVisual = memo(({
     <div
       aria-hidden="true"
       data-category-visual={categoryName}
-      className={cn("relative flex items-center justify-center overflow-hidden", className)}
+      className={cn("relative flex aspect-square min-h-0 min-w-0 items-center justify-center overflow-hidden", className)}
     >
       {src && !failed ? (
         <img
@@ -73,7 +73,7 @@ const CategoryBottleVisual = memo(({
           fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-full w-full select-none object-cover"
+          className="block h-full w-full select-none object-contain object-center"
         />
       ) : (
         <NeutralBottle />
