@@ -26,6 +26,7 @@
     "images:audit": "tsx scripts/audit-first-party-images.ts",
     "blog:repair": "tsx scripts/repair-blog-import.ts",
     "brands:enrich": "tsx scripts/enrich-brand-content.ts",
+    "brands:expand": "tsx scripts/apply-brand-expansion.ts",
     "products:consolidate": "tsx scripts/consolidate-product-duplicates.ts",
     "products:enrich": "tsx scripts/enrich-product-content.ts",
     "products:image:set": "tsx scripts/set-verified-product-image.ts",

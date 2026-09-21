@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { randomUUID } from "node:crypto";
 import { BEVORY_CITIES } from "../src/lib/locations.js";
 import { LEGACY_CATALOG_CATEGORY_SLUGS, LIVCHEERS_CATEGORY_DEFINITIONS } from "../src/lib/catalogTaxonomy.js";
+import { applyBrandExpansion } from "../src/lib/brandExpansionDb.js";
 
 const prisma = new PrismaClient();
 
@@ -145,7 +146,9 @@ await upsertContentRecord("app_settings", ageSettingId, {
   updated_at: createdAt,
 });
 
-console.log(`Seeded India, ${stateDefinitions.length} states, ${BEVORY_CITIES.length} cities, and ${LIVCHEERS_CATEGORY_DEFINITIONS.length} categories`);
+const brandExpansion = await applyBrandExpansion(prisma, createdAt);
+
+console.log(`Seeded India, ${stateDefinitions.length} states, ${BEVORY_CITIES.length} cities, ${LIVCHEERS_CATEGORY_DEFINITIONS.length} categories, and ${brandExpansion.created + brandExpansion.updated} expanded brands`);
 
 const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 const adminPassword = process.env.ADMIN_PASSWORD;

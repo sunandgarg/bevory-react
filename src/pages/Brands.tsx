@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import MobileLayout from "@/components/layout/MobileLayout";
 import SEOHead from "@/components/SEOHead";
 import { useLocation } from "@/hooks/useLocation";
-import { useProducts } from "@/hooks/useProducts";
 import { citySlugFromName } from "@/lib/locations";
 
 interface Brand {
@@ -29,7 +28,6 @@ const Brands = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const { selectedCity } = useLocation();
-  const { brandNames } = useProducts(true, "home");
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
 
   useEffect(() => {
@@ -48,9 +46,8 @@ const Brands = () => {
     fetchBrands();
   }, []);
 
-  const availableBrandNames = new Set(brandNames.map((brandName) => brandName.toLowerCase()));
   const filteredBrands = brands.filter((brand) => (
-    availableBrandNames.has(brand.brand_name.toLowerCase())
+    brand.is_active !== false
     && brand.brand_name.toLowerCase().includes(searchQuery.toLowerCase())
   ));
 
@@ -66,7 +63,7 @@ const Brands = () => {
     url: typeof window !== "undefined" ? window.location.href : "",
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: brands.map((brand, index) => ({
+      itemListElement: filteredBrands.map((brand, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {
