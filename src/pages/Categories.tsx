@@ -102,7 +102,7 @@ const Categories = () => {
                   <TrendingUp className="w-5 h-5 text-accent" />
                   <h2 className="font-serif font-semibold text-lg">Trending Now</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
                   {trendingCategories.map((category, index) => (
                     <CategoryCard 
                       key={category.id} 
@@ -122,7 +122,7 @@ const Categories = () => {
               {trendingCategories.length > 0 && (
                 <h2 className="font-serif font-semibold text-lg mb-4">All Categories</h2>
               )}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
                 {otherCategories.map((category, index) => (
                   <CategoryCard 
                     key={category.id} 
@@ -164,13 +164,13 @@ const CategoryCard = ({ category, index, productCount, isTrending, citySlug }: C
   >
     <Link to={`/${citySlug}/category/${category.slug}`}>
       <div
-        className={`aspect-square rounded-2xl p-5 flex flex-col items-center justify-center relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-xl
+        className={`min-h-[164px] rounded-2xl p-4 md:min-h-[148px] md:p-3 lg:min-h-[156px] flex flex-col items-center justify-center relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-xl
           bg-gradient-to-br ${categoryGradients[category.slug.toLowerCase()] || "from-secondary to-secondary/50"}
           border ${isTrending ? "border-accent/30" : "border-border/50"} hover:border-accent/50`}
       >
         {/* Trending Badge */}
         {isTrending && (
-          <Badge className="absolute top-3 right-3 bg-accent/90 text-accent-foreground text-[10px]">
+            <Badge className="absolute right-2 top-2 bg-accent/90 text-accent-foreground text-[10px]">
             🔥 Hot
           </Badge>
         )}
@@ -178,21 +178,21 @@ const CategoryCard = ({ category, index, productCount, isTrending, citySlug }: C
         <CategoryBottleVisual
           slug={category.slug}
           categoryName={category.name}
-          className="mb-3 h-24 w-24 transition-transform duration-300 group-hover:scale-105"
+          className="mb-2 h-16 w-16 md:h-14 md:w-14 lg:h-16 lg:w-16 transition-transform duration-300 group-hover:scale-105"
         />
         
         {/* Name */}
-        <h3 className="font-serif font-semibold text-lg text-foreground text-center group-hover:text-accent transition-colors">
+        <h3 className="font-serif font-semibold text-base md:text-sm text-foreground text-center group-hover:text-accent transition-colors">
           {category.name}
         </h3>
         
         {/* Product Count */}
-        <p className="text-xs text-muted-foreground mt-1.5">
+        <p className="text-[11px] text-muted-foreground mt-1">
           {productCount} products
         </p>
         
         {/* Explore Link */}
-        <div className="flex items-center gap-1 mt-3 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-1 mt-2 text-accent text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
           Explore <ArrowRight className="w-3.5 h-3.5" />
         </div>
       </div>

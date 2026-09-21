@@ -17,7 +17,7 @@ const PublicShell = () => {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/95 shadow-sm backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 md:h-[72px] md:gap-4">
+        <div className="mx-auto flex h-14 max-w-[1120px] items-center gap-2 px-4 md:h-[72px] md:gap-4">
           <BrandingDisplay variant="header" className="shrink-0" />
           <div className="ml-auto shrink-0 md:ml-0">
             <LocationSelectorNew />
@@ -47,7 +47,7 @@ const PublicShell = () => {
             )}
           </Link>
         </div>
-        <div className="mx-auto max-w-7xl px-4 pb-2 md:hidden">
+        <div className="mx-auto max-w-[1120px] px-4 pb-2 md:hidden">
           <UniversalSearch />
         </div>
       </header>

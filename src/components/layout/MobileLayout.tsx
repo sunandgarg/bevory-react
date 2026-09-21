@@ -29,7 +29,7 @@ const MobileLayout = memo(({
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background custom-scrollbar">
+    <div className="min-h-screen bg-background custom-scrollbar md:mx-auto md:max-w-[1120px] md:border-x md:border-border/50">
       {showHeader && (showBack || title) && (
         <div className="flex min-h-12 items-center gap-2 border-b border-border/50 bg-background px-4">
           {showBack && (
