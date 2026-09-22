@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef, memo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
@@ -10,6 +10,7 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   priority?: boolean; // Load immediately without lazy loading
   placeholder?: "blur" | "empty";
   onLoadComplete?: () => void;
+  errorFallback?: ReactNode;
   aspectRatio?: string; // e.g., "16/9", "1/1", "4/3"
   objectFit?: "cover" | "contain" | "fill" | "none";
   sizes?: string; // Responsive sizes attribute
@@ -23,6 +24,7 @@ const OptimizedImage = memo(({
   priority = false,
   placeholder = "empty",
   onLoadComplete,
+  errorFallback,
   aspectRatio,
   objectFit = "cover",
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
@@ -120,7 +122,7 @@ const OptimizedImage = memo(({
       {/* Error fallback */}
       {error && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
-          <span className="text-4xl">🖼️</span>
+          {errorFallback ?? <span className="text-4xl">🖼️</span>}
         </div>
       )}
     </div>

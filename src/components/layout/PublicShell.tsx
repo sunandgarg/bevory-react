@@ -1,19 +1,18 @@
-import { Bell, Bot } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Link, Outlet, useLocation as useRouterLocation } from "react-router-dom";
 import UniversalSearch from "@/components/UniversalSearch";
 import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
-import { citySlugFromName } from "@/lib/locations";
+import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
 
 const PublicShell = () => {
   const { unreadCount } = useNotifications();
   const { selectedCity } = useLocation();
   const { pathname } = useRouterLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
-  const isHome = /^\/(?:[a-z-]+)?$/.test(pathname);
-  const isSearch = pathname === "/search";
+  const isHome = pathname === "/" || CITY_SLUGS.includes(pathname.slice(1));
 
   const pageHeading = (() => {
     if (isHome) return "";
@@ -57,36 +56,24 @@ const PublicShell = () => {
             )}
           </Link>
         </div>
-        {(isHome || isSearch) && (
-          <div className="mx-auto max-w-[1120px] px-4 pb-2 md:pb-3">
-            <UniversalSearch />
-          </div>
-        )}
+        <div className="mx-auto max-w-[1120px] px-4 pb-2 pt-2">
+          <UniversalSearch />
+        </div>
       </header>
 
-      <div className={`${isHome || isSearch ? "pt-[110px] md:pt-[132px]" : "pt-[64px] md:pt-[72px]"}`}>
+      <div className="pt-[126px] md:pt-[136px]">
         <Outlet />
       </div>
 
       <Link
         to={`/${citySlug}`}
         aria-label="Open oRy AI home"
-        className="fixed bottom-20 right-4 z-40 flex min-h-12 items-center gap-2 rounded-full border border-accent/30 bg-foreground px-3.5 py-2 text-background shadow-xl transition-transform hover:scale-105 active:scale-95 md:bottom-6"
+        className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1 text-foreground transition-transform hover:scale-105 active:scale-95 md:bottom-6"
       >
-        <span
-          aria-hidden="true"
-          className="h-7 w-7 shrink-0 bg-current"
-          style={{
-            WebkitMask: "url('/favicon.png?v=5') center / contain no-repeat",
-            mask: "url('/favicon.png?v=5') center / contain no-repeat",
-          }}
-        />
-        <span className="leading-tight">
-          <span className="flex items-center gap-1 text-xs font-bold">
-            oRy AI <Bot className="h-3.5 w-3.5" />
-          </span>
-          <span className="block text-[9px] text-background/65">Coming soon</span>
+        <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-white p-1 shadow-lg">
+          <img src="/ory-ai-logo.png" alt="" width={148} height={148} className="h-full w-full rounded-full object-contain" />
         </span>
+        <span className="text-xs font-bold">oRy AI</span>
       </Link>
     </>
   );

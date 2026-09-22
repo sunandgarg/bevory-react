@@ -105,6 +105,7 @@ const stateDefaultCities = new Map([
 const staticSeo: Record<string, [string, string]> = {
   "/categories": ["Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local price guides."],
   "/brands": ["Beverage Brands & Products | BevOry", "Explore beverage brands, product ranges and locally available bottle prices on BevOry."],
+  "/wine-universe": ["Wine Universe | Styles, Regions & Prices | BevOry", "Explore red, white, rosé and sparkling wines with tasting guidance, food pairings and indicative local price information."],
   "/guide": ["BevOry Guide | Drinks, Prices & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice from BevOry."],
   "/cocktails": ["Cocktail Recipes & Drink Ideas | BevOry", "Discover cocktail recipes, ingredients and serving ideas for your next gathering."],
   "/party-planner": ["Drinks Party Planner | BevOry", "Estimate drinks and compare locally priced products for your guest count and budget."],
@@ -212,6 +213,22 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
       description,
       heading: title.replace(/ \| BevOry$/, ""),
       breadcrumbs: [...seo.breadcrumbs, { name: humanize(parts[0]), path: cleanPath }],
+    };
+  }
+
+  if (cityNames.has(parts[0]) && parts[1] === "wine-universe" && parts.length === 2) {
+    const cityName = cityNames.get(parts[0])!;
+    return {
+      ...seo,
+      title: `Wine Universe in ${cityName} | Styles, Regions & Prices | BevOry`,
+      description: `Explore red, white, rosé and sparkling wines with tasting guidance, food pairings and indicative ${cityName} price information.`,
+      heading: `Wine Universe in ${cityName}`,
+      canonicalPath: cleanPath,
+      breadcrumbs: [
+        ...seo.breadcrumbs,
+        { name: cityName, path: `/${parts[0]}` },
+        { name: "Wine Universe", path: cleanPath },
+      ],
     };
   }
 

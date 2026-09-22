@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { citySlugFromName } from "@/lib/locations";
 
 const BrandSpotlight = lazy(() => import("@/components/home/BrandSpotlight"));
+const WineCollection = lazy(() => import("@/components/home/WineCollection"));
 const HomeCocktails = lazy(() => import("@/components/home/HomeCocktails"));
 const BevoryGuide = lazy(() => import("@/components/home/BevoryGuide"));
 const ProductReviews = lazy(() => import("@/components/home/ProductReviews"));
@@ -242,6 +243,11 @@ const Home = () => {
             ))}
           </div>
         </div>
+
+        {/* ─── Wine Collection ─── */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <WineCollection categories={categories} />
+        </Suspense>
 
         {/* ─── Brand Spotlight ─── */}
         <Suspense fallback={<SectionSkeleton />}>

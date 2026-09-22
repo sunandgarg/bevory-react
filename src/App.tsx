@@ -34,6 +34,7 @@ const Notifications = lazy(() => import("./pages/Notifications"));
 const HelpSupport = lazy(() => import("./pages/HelpSupport"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Brands = lazy(() => import("./pages/Brands"));
+const WineUniverse = lazy(() => import("./pages/WineUniverse"));
 const Masterclass = lazy(() => import("./pages/Masterclass"));
 const VideoDetail = lazy(() => import("./pages/VideoDetail"));
 const CreatorProfile = lazy(() => import("./pages/CreatorProfile"));
@@ -135,6 +136,8 @@ const App = () => (
                   <Route path="/bevory/:state/:category/:subcategory/:productSlug" element={<ProductDetail />} />
                   <Route path="/brand/:slug" element={<BrandDetail />} />
                   <Route path="/brands" element={<Brands />} />
+                  <Route path="/wine-universe" element={<WineUniverse />} />
+                  <Route path="/:citySlug/wine-universe" element={<WineUniverse />} />
                   <Route path="/party-planner" element={<PartyPlanner />} />
                   <Route path="/cocktails" element={<Cocktails />} />
                   <Route path="/cocktail/:slug" element={<Cocktails />} />

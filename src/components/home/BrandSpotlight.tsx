@@ -21,17 +21,48 @@ interface BrandSpotlightItem {
   link_url: string | null;
   is_active: boolean;
   show_in_spotlight: boolean | null;
+  order_index: number | null;
 }
+
+// The order mirrors the high-recognition brands users expect to see first,
+// while the API remains the source of truth for which brands are published.
+const BRAND_PRIORITY = [
+  "glenfiddich",
+  "jagermeister",
+  "jägermeister",
+  "jim beam",
+  "royal green",
+  "jack daniel's",
+  "jack daniels",
+  "dewars",
+  "dewar's",
+  "bombay sapphire",
+  "blenders pride",
+  "kingfisher",
+  "sula",
+] as const;
+
+const normalizeBrandName = (name: string) => name.toLowerCase().replace(/[’']/g, "'").trim();
 
 const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
   const { data, error } = await apiClient
     .from("brand_spotlights")
-    .select("id, brand_name, slug, logo_emoji, logo_url, description, country_flag, country_flag_url, featured_product_id, link_url, is_active, show_in_spotlight")
+    .select("id, brand_name, slug, logo_emoji, logo_url, description, country_flag, country_flag_url, featured_product_id, link_url, is_active, show_in_spotlight, order_index")
     .eq("is_active", true)
     .eq("show_in_spotlight", true)
     .order("order_index");
   if (error) throw error;
-  return data || [];
+  return (data || []).sort((left, right) => {
+    const leftName = normalizeBrandName(left.brand_name);
+    const rightName = normalizeBrandName(right.brand_name);
+    const leftRank = BRAND_PRIORITY.indexOf(leftName as typeof BRAND_PRIORITY[number]);
+    const rightRank = BRAND_PRIORITY.indexOf(rightName as typeof BRAND_PRIORITY[number]);
+    const normalizedLeftRank = leftRank < 0 ? Number.MAX_SAFE_INTEGER : leftRank;
+    const normalizedRightRank = rightRank < 0 ? Number.MAX_SAFE_INTEGER : rightRank;
+    return normalizedLeftRank - normalizedRightRank
+      || Number(left.order_index ?? 0) - Number(right.order_index ?? 0)
+      || leftName.localeCompare(rightName);
+  });
 };
 
 const BrandSpotlight = memo(() => {
@@ -61,19 +92,24 @@ const BrandSpotlight = memo(() => {
   return (
     <section className="px-4" aria-label="Featured Brand Spotlight">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-base font-semibold">Brand Spotlight</h2>
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <h2 className="shrink-0 text-[20px] tracking-tight text-foreground">
+            Brand <span className="font-bold">Spotlight</span>
+          </h2>
+          <div className="h-px flex-1 bg-border" aria-hidden="true" />
+        </div>
         <Link
           to="/brands"
-          className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-0.5 transition-colors"
+          className="ml-3 flex shrink-0 items-center gap-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
         >
           View all <ArrowRight className="w-3 h-3" />
         </Link>
       </div>
 
-      <div className="grid grid-rows-2 grid-flow-col auto-cols-[82px] gap-x-3 gap-y-4 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 snap-x snap-mandatory">
+      <div className="grid grid-rows-2 grid-flow-col auto-cols-[96px] gap-x-3 gap-y-4 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 snap-x snap-mandatory sm:auto-cols-[112px]">
         {brands.map((brand) => (
-          <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group block w-[82px] snap-start">
-            <div className="w-[82px] h-[82px] rounded-lg bg-secondary flex items-center justify-center text-2xl overflow-hidden border border-border/50 group-hover:border-accent/40 transition-colors">
+          <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group block w-[96px] snap-start sm:w-[112px]">
+            <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-card p-2 shadow-[var(--shadow-sm)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent/40 group-hover:shadow-[var(--shadow-md)]">
               <BrandLogo
                 brandName={brand.brand_name}
                 slug={brand.slug}
@@ -83,7 +119,7 @@ const BrandSpotlight = memo(() => {
                 imgClassName="h-full w-full"
               />
             </div>
-            <p className="text-[11px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate mt-1.5 transition-colors">
+            <p className="mt-1.5 truncate text-center text-[11px] font-medium text-muted-foreground transition-colors group-hover:text-foreground">
               {brand.brand_name}
             </p>
             {(brand.country_flag_url || brand.country_flag) && (
