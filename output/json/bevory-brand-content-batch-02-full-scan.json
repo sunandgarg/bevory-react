@@ -1,0 +1,1171 @@
+{
+  "batch": 2,
+  "positions": "11-20",
+  "generated_at": "2026-09-22T05:18:09.274228+00:00",
+  "db_write_status": "not_written_database_unavailable",
+  "logo_policy": "Use only verified first-party standalone marks. Do not relabel a bottle/product photo as a logo. Keep unresolved assets pending instead of inventing URLs.",
+  "brands": [
+    {
+      "id": "brand-expansion-vinsura",
+      "brand_name": "Vinsura",
+      "slug": "vinsura",
+      "category": "Wine",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "logo_alt": "Vinsura brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://vinsurawines.com/",
+      "logo_status": "official_logo_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Vinsura official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Vinsura is an Indian winery at Vinchur Wine Park in the Nashik Valley. Its official portfolio names Cabernet Sauvignon, Zinfandel and Syrah among its red grapes, and Sauvignon Blanc, Chenin Blanc and Symphony among its white grapes; the exact grape, vintage and style belong to each bottle.",
+      "story": "Vinsura was established by farmers and is based in Nashik, Maharashtra. Keep wine records separated by grape, colour, vintage, bottle size and city price so a portfolio-level description is not mistaken for a tasting note for every release.",
+      "tasting_notes": [
+        {
+          "title": "Portfolio range",
+          "description": "The listed grapes cover both red and white wine styles, so one brand-level aroma or body claim would be misleading."
+        },
+        {
+          "title": "What to compare",
+          "description": "Read the individual label for grape, vintage, sweetness, strength and serving temperature."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "No award, vintage, alcohol percentage or current availability is added unless it is attached to the exact bottle record."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve the exact wine at the temperature stated on its label in a clean wine glass."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair a fresh white with grilled vegetables or tomato pasta; pair a fuller red with tandoori chicken or roast lamb."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability before relying on a local listing."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "grilled vegetables",
+            "tomato pasta",
+            "tandoori chicken",
+            "roast lamb"
+          ]
+        }
+      ],
+      "why_choose": "Useful for readers comparing Nashik wines by grape, colour, vintage, bottle size and verified city price.",
+      "faqs": [
+        {
+          "question": "What is Vinsura?",
+          "answer": "Vinsura is an Indian wine producer based at Vinchur Wine Park in the Nashik Valley."
+        },
+        {
+          "question": "What should I check on a Vinsura bottle?",
+          "answer": "Check the grape, colour, vintage, bottle size, stated strength and local price date for the exact release."
+        }
+      ],
+      "final_verdict": "Treat Vinsura as a Nashik wine portfolio, then compare the exact grape, vintage and bottle record rather than using one tasting description for every wine.",
+      "meta_title": "Vinsura Wine Guide | BevOry",
+      "meta_description": "Vinsura Wine guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 11,
+      "featured_product_id": null,
+      "link_url": "https://vinsurawines.com/",
+      "official_source_page": "https://vinsurawines.com/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "official_logo_evidence",
+        "source": "https://vinsurawines.com/",
+        "evidence": "The official Vinsura site identifies its Vinsura Logo and explains the vine-leaf mark. Store only after the first-party asset URL is captured."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://vinsurawines.com/",
+        "evidence": "Official site reviewed for Vinchur Wine Park, Nashik location, farmer-founded background and listed grape varieties.",
+        "strict_description": "Vinsura is an Indian winery at Vinchur Wine Park in the Nashik Valley. Its official portfolio names Cabernet Sauvignon, Zinfandel and Syrah among its red grapes, and Sauvignon Blanc, Chenin Blanc and Symphony among its white grapes; the exact grape, vintage and style belong to each bottle.",
+        "strict_tasting": "The listed grapes cover both red and white wine styles, so one brand-level aroma or body claim would be misleading. Read the individual label for grape, vintage, sweetness, strength and serving temperature. No award, vintage, alcohol percentage or current availability is added unless it is attached to the exact bottle record.",
+        "strict_enjoy": "Serve the exact wine at the temperature stated on its label in a clean wine glass. Pair a fresh white with grilled vegetables or tomato pasta; pair a fuller red with tandoori chicken or roast lamb. Check BevOry for reviewed city-level prices and availability before relying on a local listing."
+      }
+    },
+    {
+      "id": "brand-expansion-suntory-toki",
+      "brand_name": "Suntory Toki",
+      "slug": "suntory-toki",
+      "category": "World Whisky",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Suntory Toki brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://house.suntory.com/toki-whisky",
+      "logo_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Suntory Toki official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "Japan",
+      "country_code": "JP",
+      "country_flag": "🇯🇵",
+      "country_flag_url": "https://flagcdn.com/h20/jp.webp",
+      "description": "Suntory Toki is a Japanese blended whisky from House of Suntory, made from whisky from Suntory's Yamazaki, Hakushu and Chita distilleries. The official profile highlights orchard fruit, green herbal notes, gentle smoke, rich grain and soft sweetness.",
+      "story": "Toki is presented as a bright, highball-friendly Japanese blend. The bottle record should still carry its own strength, size, market price and current availability rather than inheriting assumptions from another Toki expression.",
+      "tasting_notes": [
+        {
+          "title": "Producer profile",
+          "description": "The official tasting description points to orchard fruit, green herbs, gentle smoke, rich grains, soft sweetness and spice."
+        },
+        {
+          "title": "What to compare",
+          "description": "Check the exact bottle size, declared strength, market label and local availability."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not merge Toki with other House of Suntory brands or treat a highball serve as a product specification."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Try a small neat pour first, then use a chilled highball with plenty of ice and dry soda."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair the highball with yakitori, tempura, grilled mushrooms or lightly spiced snacks."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "yakitori",
+            "tempura",
+            "grilled mushrooms",
+            "lightly spiced snacks"
+          ]
+        }
+      ],
+      "why_choose": "A clear entry point for readers comparing Japanese blends built for a long, refreshing serve.",
+      "faqs": [
+        {
+          "question": "What is Suntory Toki?",
+          "answer": "Suntory Toki is a blended Japanese whisky from House of Suntory."
+        },
+        {
+          "question": "How is Toki commonly served?",
+          "answer": "The producer recommends a highball-style serve; a small neat pour is useful for comparison before dilution."
+        }
+      ],
+      "final_verdict": "Toki is best evaluated as a bright Japanese blend with a highball use case; keep the local bottle size and price tied to the exact city record.",
+      "meta_title": "Suntory Toki World Whisky Guide | BevOry",
+      "meta_description": "Suntory Toki World Whisky guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 12,
+      "featured_product_id": null,
+      "link_url": "https://house.suntory.com/toki-whisky",
+      "official_source_page": "https://house.suntory.com/toki-whisky",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/toki-whisky",
+        "evidence": "Official House of Suntory Toki page with official bottle/product imagery and parent brand mark. A separate Toki wordmark asset was not resolved."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://house.suntory.com/toki-whisky",
+        "evidence": "Official House of Suntory page reviewed for the three-distillery blend and published tasting profile.",
+        "strict_description": "Suntory Toki is a Japanese blended whisky from House of Suntory, made from whisky from Suntory's Yamazaki, Hakushu and Chita distilleries. The official profile highlights orchard fruit, green herbal notes, gentle smoke, rich grain and soft sweetness.",
+        "strict_tasting": "The official tasting description points to orchard fruit, green herbs, gentle smoke, rich grains, soft sweetness and spice. Check the exact bottle size, declared strength, market label and local availability. Do not merge Toki with other House of Suntory brands or treat a highball serve as a product specification.",
+        "strict_enjoy": "Try a small neat pour first, then use a chilled highball with plenty of ice and dry soda. Pair the highball with yakitori, tempura, grilled mushrooms or lightly spiced snacks. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-hakushu",
+      "brand_name": "Hakushu",
+      "slug": "hakushu",
+      "category": "Single Malts",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Hakushu brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://house.suntory.com/hakushu-whisky",
+      "logo_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Hakushu official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "Japan",
+      "country_code": "JP",
+      "country_flag": "🇯🇵",
+      "country_flag_url": "https://flagcdn.com/h20/jp.webp",
+      "description": "Hakushu is a Japanese single malt whisky from House of Suntory's mountain forest distillery, established in 1973 in the Southern Japanese Alps. The official house style is described as gently smoky and herbal, while age, strength and expression vary by bottle.",
+      "story": "Hakushu belongs in a dedicated single-malt page because its age statements and bottlings are not interchangeable. Keep the exact expression, bottle size, strength and city price attached to each product record.",
+      "tasting_notes": [
+        {
+          "title": "House style",
+          "description": "The official page describes a gently smoky, herbal character associated with the mountain forest distillery."
+        },
+        {
+          "title": "What to compare",
+          "description": "Separate Distiller's Reserve, age-stated and other bottlings instead of combining them."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not infer age, cask, proof or awards when they are not present on the individual label."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Begin neat in a clean tulip glass; add a few drops of water only if the exact bottling benefits from it."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with sushi, grilled fish, roasted vegetables or a mild cheese plate."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "sushi",
+            "grilled fish",
+            "roasted vegetables",
+            "mild cheese"
+          ]
+        }
+      ],
+      "why_choose": "A strong guide entry for readers exploring Japanese single malt by expression, age statement and local availability.",
+      "faqs": [
+        {
+          "question": "What is Hakushu?",
+          "answer": "Hakushu is a Japanese single malt whisky made at House of Suntory's Hakushu distillery."
+        },
+        {
+          "question": "Is every Hakushu bottle the same?",
+          "answer": "No. Expression, age statement, strength and bottle format must be checked separately."
+        }
+      ],
+      "final_verdict": "Hakushu should be compared bottle by bottle: the mountain-distillery identity is shared, but expression and local price are not.",
+      "meta_title": "Hakushu Single Malts Guide | BevOry",
+      "meta_description": "Hakushu Single Malts guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 13,
+      "featured_product_id": null,
+      "link_url": "https://house.suntory.com/hakushu-whisky",
+      "official_source_page": "https://house.suntory.com/hakushu-whisky",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/hakushu-whisky",
+        "evidence": "Official Hakushu page with official product imagery and House of Suntory branding. A standalone Hakushu logo asset was not resolved."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://house.suntory.com/hakushu-whisky",
+        "evidence": "Official House of Suntory page reviewed for the 1973 distillery origin, Southern Alps setting and gently smoky herbal profile.",
+        "strict_description": "Hakushu is a Japanese single malt whisky from House of Suntory's mountain forest distillery, established in 1973 in the Southern Japanese Alps. The official house style is described as gently smoky and herbal, while age, strength and expression vary by bottle.",
+        "strict_tasting": "The official page describes a gently smoky, herbal character associated with the mountain forest distillery. Separate Distiller's Reserve, age-stated and other bottlings instead of combining them. Do not infer age, cask, proof or awards when they are not present on the individual label.",
+        "strict_enjoy": "Begin neat in a clean tulip glass; add a few drops of water only if the exact bottling benefits from it. Pair with sushi, grilled fish, roasted vegetables or a mild cheese plate. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-ao",
+      "brand_name": "Ao",
+      "slug": "ao",
+      "category": "World Whisky",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Ao brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://house.suntory.com/ao-whisky",
+      "logo_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Ao official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "Japan",
+      "country_code": "JP",
+      "country_flag": "🇯🇵",
+      "country_flag_url": "https://flagcdn.com/h20/jp.webp",
+      "description": "Ao is a world whisky from House of Suntory, blended from whisky traditions in Ireland, Scotland, America, Canada and Japan. The official profile describes smoky notes, fruit, creamy sweetness, spice and wood, with the five-sided bottle reflecting the five whisky regions.",
+      "story": "Ao gives BevOry a distinct entry for a multi-region blend. The exact bottle record must still state the local label, size, strength and price because those details cannot be transferred from one market or release to another.",
+      "tasting_notes": [
+        {
+          "title": "Published profile",
+          "description": "The official description combines fruit and creamy sweetness with smoke, cinnamon and woody notes."
+        },
+        {
+          "title": "What to compare",
+          "description": "Check the exact market label, declared strength, bottle size and any stated release detail."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not attribute the profile of another Suntory blend to Ao."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Try a measured neat pour first, then compare it with a restrained highball."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with grilled meats, soy-glazed dishes, roasted nuts or dark chocolate."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "grilled meats",
+            "soy-glazed dishes",
+            "roasted nuts",
+            "dark chocolate"
+          ]
+        }
+      ],
+      "why_choose": "Useful for readers looking beyond single-country whisky and comparing a multi-region blend by serve and city.",
+      "faqs": [
+        {
+          "question": "What is Ao whisky?",
+          "answer": "Ao is a world whisky blend from House of Suntory using whisky from five regions."
+        },
+        {
+          "question": "How should Ao be compared?",
+          "answer": "Compare the exact expression, strength, bottle size, serve and local price rather than a generic category label."
+        }
+      ],
+      "final_verdict": "Ao is a five-region blend with a published smoky, sweet and woody profile; keep every local price attached to the exact product record.",
+      "meta_title": "Ao World Whisky Guide | BevOry",
+      "meta_description": "Ao World Whisky guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 14,
+      "featured_product_id": null,
+      "link_url": "https://house.suntory.com/ao-whisky",
+      "official_source_page": "https://house.suntory.com/ao-whisky",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/ao-whisky",
+        "evidence": "Official Ao page with official bottle imagery and Ao design cues. A standalone downloadable logo asset was not resolved."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://house.suntory.com/ao-whisky",
+        "evidence": "Official House of Suntory pages reviewed for the five-region blend, five-sided bottle and published tasting notes.",
+        "strict_description": "Ao is a world whisky from House of Suntory, blended from whisky traditions in Ireland, Scotland, America, Canada and Japan. The official profile describes smoky notes, fruit, creamy sweetness, spice and wood, with the five-sided bottle reflecting the five whisky regions.",
+        "strict_tasting": "The official description combines fruit and creamy sweetness with smoke, cinnamon and woody notes. Check the exact market label, declared strength, bottle size and any stated release detail. Do not attribute the profile of another Suntory blend to Ao.",
+        "strict_enjoy": "Try a measured neat pour first, then compare it with a restrained highball. Pair with grilled meats, soy-glazed dishes, roasted nuts or dark chocolate. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-kakubin",
+      "brand_name": "Kakubin",
+      "slug": "kakubin",
+      "category": "Japanese Whisky",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Kakubin brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://house.suntory.com/kakubin-whisky/kakubin",
+      "logo_status": "official_brand_asset_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Kakubin official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "Japan",
+      "country_code": "JP",
+      "country_flag": "🇯🇵",
+      "country_flag_url": "https://flagcdn.com/h20/jp.webp",
+      "description": "Kakubin is a Suntory Japanese blended whisky made from whisky associated with the Yamazaki, Hakushu and Chita distilleries. The official profile lists lemon, green apple, butter cookie and hazelnut, followed by popcorn, dried coconut and baked almond notes.",
+      "story": "Kakubin has a clear highball role, but its catalogue record still needs the exact market bottle, strength, size and city price. A long serve should not erase the underlying product facts.",
+      "tasting_notes": [
+        {
+          "title": "Published profile",
+          "description": "The official tasting notes move from lemon, green apple, butter cookie and hazelnut to popcorn, dried coconut and baked almond."
+        },
+        {
+          "title": "What to compare",
+          "description": "Check bottle format, strength, current label and local price date."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not reuse tasting notes for other Suntory blends."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Taste a small measure neat, then try a highball with cold soda and a large clear ice cube."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with yakitori, fried chicken, grilled vegetables or salty snacks."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "yakitori",
+            "fried chicken",
+            "grilled vegetables",
+            "salty snacks"
+          ]
+        }
+      ],
+      "why_choose": "A practical Japanese whisky entry for readers who want a brand-level guide plus a highball-focused serve.",
+      "faqs": [
+        {
+          "question": "What is Kakubin?",
+          "answer": "Kakubin is a Japanese blended whisky label from Suntory."
+        },
+        {
+          "question": "What is Kakubin commonly used for?",
+          "answer": "It is commonly associated with a highball serve, but the exact bottle and local availability should still be checked."
+        }
+      ],
+      "final_verdict": "Kakubin is a highball-oriented Japanese blend with a clearly published flavour profile; compare the exact city bottle before quoting a price.",
+      "meta_title": "Kakubin Japanese Whisky Guide | BevOry",
+      "meta_description": "Kakubin Japanese Whisky guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 15,
+      "featured_product_id": null,
+      "link_url": "https://house.suntory.com/kakubin-whisky/kakubin",
+      "official_source_page": "https://house.suntory.com/kakubin-whisky/kakubin",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "official_brand_asset_evidence",
+        "source": "https://house.suntory.com/kakubin-whisky/kakubin",
+        "evidence": "Official Kakubin page with official bottle/product imagery and House of Suntory branding. A standalone Kakubin logo asset was not resolved."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://house.suntory.com/kakubin-whisky/kakubin",
+        "evidence": "Official House of Suntory Kakubin page reviewed for the three-distillery blend and published tasting notes.",
+        "strict_description": "Kakubin is a Suntory Japanese blended whisky made from whisky associated with the Yamazaki, Hakushu and Chita distilleries. The official profile lists lemon, green apple, butter cookie and hazelnut, followed by popcorn, dried coconut and baked almond notes.",
+        "strict_tasting": "The official tasting notes move from lemon, green apple, butter cookie and hazelnut to popcorn, dried coconut and baked almond. Check bottle format, strength, current label and local price date. Do not reuse tasting notes for other Suntory blends.",
+        "strict_enjoy": "Taste a small measure neat, then try a highball with cold soda and a large clear ice cube. Pair with yakitori, fried chicken, grilled vegetables or salty snacks. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-knob-creek",
+      "brand_name": "Knob Creek",
+      "slug": "knob-creek",
+      "category": "Bourbon",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.knobcreek.com/sites/default/files/styles/original/public/2024-07/Knob%20Creek%20logo.png.webp?itok=3taCQI4A",
+      "logo_alt": "Knob Creek brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://www.knobcreek.com/",
+      "logo_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": "2026-09-22T05:18:09.274228+00:00",
+      "image_url": null,
+      "image_alt": "Knob Creek official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "United States",
+      "country_code": "US",
+      "country_flag": "🇺🇸",
+      "country_flag_url": "https://flagcdn.com/h20/us.webp",
+      "description": "Knob Creek is an American bourbon brand from Suntory Global Spirits. Its official range includes a 9 Year Old bourbon at 100 proof, with a full-bodied profile built around oak, vanilla and caramel; other expressions can differ in age and proof.",
+      "story": "The brand is best organised expression by expression. Do not move a 9-year or single-barrel tasting note onto every Knob Creek product, and keep bottle size, proof and city price on the matching variant.",
+      "tasting_notes": [
+        {
+          "title": "Signature reference",
+          "description": "The official 9 Year Old profile points to robust oak, vanilla and caramel in a full-bodied bourbon."
+        },
+        {
+          "title": "What to compare",
+          "description": "Separate standard, single-barrel and higher-proof releases by age, proof and bottle format."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "No single Knob Creek note should represent the entire range."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve a modest pour neat in a rocks glass, add a little water if preferred, or use a measured whiskey cocktail."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with barbecue, blue cheese, roast meats or pecan desserts."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "barbecue",
+            "blue cheese",
+            "roast meats",
+            "pecan desserts"
+          ]
+        }
+      ],
+      "why_choose": "A useful bourbon page for comparing age statements, proof and oak-led styles without merging variants.",
+      "faqs": [
+        {
+          "question": "What is Knob Creek?",
+          "answer": "Knob Creek is an American bourbon whiskey brand in the Suntory Global Spirits portfolio."
+        },
+        {
+          "question": "Are all Knob Creek bottles 9 years old?",
+          "answer": "No. Age, proof and expression vary, so the exact bottle record controls the claim."
+        }
+      ],
+      "final_verdict": "Knob Creek earns a precise, expression-led listing: use the 9 Year Old as a reference, but never substitute it for a different bottle.",
+      "meta_title": "Knob Creek Bourbon Guide | BevOry",
+      "meta_description": "Knob Creek Bourbon guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 16,
+      "featured_product_id": null,
+      "link_url": "https://www.knobcreek.com/",
+      "official_source_page": "https://www.knobcreek.com/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "populated_verified_first_party_asset",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "verified_official_asset_url",
+        "source": "https://www.knobcreek.com/",
+        "evidence": "Official Knob Creek site exposes a Knob Creek logo asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://www.knobcreek.com/",
+        "evidence": "Official Knob Creek site and 9 Year Old Single Barrel page reviewed for range, age, proof and tasting profile.",
+        "strict_description": "Knob Creek is an American bourbon brand from Suntory Global Spirits. Its official range includes a 9 Year Old bourbon at 100 proof, with a full-bodied profile built around oak, vanilla and caramel; other expressions can differ in age and proof.",
+        "strict_tasting": "The official 9 Year Old profile points to robust oak, vanilla and caramel in a full-bodied bourbon. Separate standard, single-barrel and higher-proof releases by age, proof and bottle format. No single Knob Creek note should represent the entire range.",
+        "strict_enjoy": "Serve a modest pour neat in a rocks glass, add a little water if preferred, or use a measured whiskey cocktail. Pair with barbecue, blue cheese, roast meats or pecan desserts. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-basil-haydens",
+      "brand_name": "Basil Hayden's",
+      "slug": "basil-haydens",
+      "category": "Bourbon",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.basilhaydenbourbon.com/sites/default/files/styles/original/public/2024-10/Logo.webp?itok=Lrrj2k5V",
+      "logo_alt": "Basil Hayden's brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://www.basilhaydenbourbon.com/",
+      "logo_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": "2026-09-22T05:18:09.274228+00:00",
+      "image_url": null,
+      "image_alt": "Basil Hayden's official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "United States",
+      "country_code": "US",
+      "country_flag": "🇺🇸",
+      "country_flag_url": "https://flagcdn.com/h20/us.webp",
+      "description": "Basil Hayden's is an American bourbon brand from Suntory Global Spirits, known for a high-rye style. The official Kentucky Straight Bourbon profile lists charred oak, vanilla, caramel, dried fruit, brown sugar and black pepper at 80 proof; other releases have their own details.",
+      "story": "Basil Hayden's should be compared by expression because age, proof and maturation differ across the range. Keep the high-rye identity separate from any claim about a particular 10-year or limited bottling.",
+      "tasting_notes": [
+        {
+          "title": "Signature reference",
+          "description": "The official 80-proof profile names charred oak, vanilla caramel, dried fruit, brown sugar, black pepper and a lingering oak finish."
+        },
+        {
+          "title": "What to compare",
+          "description": "Separate the core bourbon, 10 Year and other releases by proof, age and label."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not transfer the core profile or 10-year details to another expression."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Start neat or over one large cube, then use a measured serve in an Old Fashioned-style drink."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with smoked chicken, roasted nuts, apple dessert or aged cheddar."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "smoked chicken",
+            "roasted nuts",
+            "apple dessert",
+            "aged cheddar"
+          ]
+        }
+      ],
+      "why_choose": "A clear high-rye bourbon entry for readers comparing approachable proof, oak and spice by exact bottle.",
+      "faqs": [
+        {
+          "question": "What is Basil Hayden's?",
+          "answer": "Basil Hayden's is an American bourbon brand in the Suntory Global Spirits portfolio."
+        },
+        {
+          "question": "What should I check before buying a Basil Hayden's product?",
+          "answer": "Check the expression, proof, age statement, bottle size and local price date."
+        }
+      ],
+      "final_verdict": "Basil Hayden's is best read through the exact expression: the high-rye identity is useful, but proof and maturation still belong to each bottle.",
+      "meta_title": "Basil Hayden's Bourbon Guide | BevOry",
+      "meta_description": "Basil Hayden's Bourbon guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 17,
+      "featured_product_id": null,
+      "link_url": "https://www.basilhaydenbourbon.com/",
+      "official_source_page": "https://www.basilhaydenbourbon.com/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "populated_verified_first_party_asset",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "verified_official_asset_url",
+        "source": "https://www.basilhaydenbourbon.com/",
+        "evidence": "Official Basil Hayden’s site exposes official brand/product imagery. A stable standalone logo asset was not resolved. Direct first-party asset URL captured for review and later S3 storage."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://www.basilhaydenbourbon.com/",
+        "evidence": "Official Basil Hayden's site and product page reviewed for high-rye positioning and published 80-proof tasting profile.",
+        "strict_description": "Basil Hayden's is an American bourbon brand from Suntory Global Spirits, known for a high-rye style. The official Kentucky Straight Bourbon profile lists charred oak, vanilla, caramel, dried fruit, brown sugar and black pepper at 80 proof; other releases have their own details.",
+        "strict_tasting": "The official 80-proof profile names charred oak, vanilla caramel, dried fruit, brown sugar, black pepper and a lingering oak finish. Separate the core bourbon, 10 Year and other releases by proof, age and label. Do not transfer the core profile or 10-year details to another expression.",
+        "strict_enjoy": "Start neat or over one large cube, then use a measured serve in an Old Fashioned-style drink. Pair with smoked chicken, roasted nuts, apple dessert or aged cheddar. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-gentleman-jack",
+      "brand_name": "Gentleman Jack",
+      "slug": "gentleman-jack",
+      "category": "Whiskey",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Gentleman Jack brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://pressroom.jackdaniels.com/products/",
+      "logo_status": "needs_logo_url_resolution",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": "Gentleman Jack official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "United States",
+      "country_code": "US",
+      "country_flag": "🇺🇸",
+      "country_flag_url": "https://flagcdn.com/h20/us.webp",
+      "description": "Gentleman Jack is a Tennessee whiskey from the Jack Daniel Distillery in Lynchburg, Tennessee. The official fact sheet describes a recipe using corn, rye, barley malt and limestone-filtered water, with charcoal mellowing before and after aging and an 80-proof bottling.",
+      "story": "This expression deserves its own page instead of being folded into a generic Jack Daniel's listing. Keep the classic bottle separate from other Tennessee whiskey releases and attach every price to its exact size and city.",
+      "tasting_notes": [
+        {
+          "title": "Published profile",
+          "description": "The official material describes light amber colour with vanilla, caramel, almond, fruit and a gentle smoky finish."
+        },
+        {
+          "title": "What to compare",
+          "description": "Check the exact bottle size, strength, market label and current local listing."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not copy Gentleman Jack notes onto Old No. 7, Single Barrel or flavoured releases."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve a small pour neat or over ice, or use it in a balanced whiskey highball."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with barbecue, fried chicken, smoked cheese or pecan pie."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "barbecue",
+            "fried chicken",
+            "smoked cheese",
+            "pecan pie"
+          ]
+        }
+      ],
+      "why_choose": "A distinct Jack Daniel's-family page with the double-mellowed process and core bottle details kept separate from other releases.",
+      "faqs": [
+        {
+          "question": "What is Gentleman Jack?",
+          "answer": "Gentleman Jack is a Tennessee whiskey made at the Jack Daniel Distillery."
+        },
+        {
+          "question": "What makes it distinct?",
+          "answer": "The official fact sheet describes charcoal mellowing once before and once after aging; verify the current bottle label for the local listing."
+        }
+      ],
+      "final_verdict": "Gentleman Jack is a double-mellowed Tennessee whiskey with a documented core profile; keep its prices and variants separate from the wider Jack Daniel's family.",
+      "meta_title": "Gentleman Jack Whiskey Guide | BevOry",
+      "meta_description": "Gentleman Jack Whiskey guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 18,
+      "featured_product_id": null,
+      "link_url": "https://pressroom.jackdaniels.com/products/",
+      "official_source_page": "https://pressroom.jackdaniels.com/products/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "needs_logo_url_resolution",
+        "source": "https://pressroom.jackdaniels.com/products/",
+        "evidence": "Official Jack Daniel’s press room lists Gentleman Jack and provides official product evidence, but a stable standalone Gentleman Jack logo URL still needs resolution."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://pressroom.jackdaniels.com/products/",
+        "evidence": "Official Jack Daniel's press room and Gentleman Jack fact sheet reviewed for recipe, double mellowing, proof and tasting profile.",
+        "strict_description": "Gentleman Jack is a Tennessee whiskey from the Jack Daniel Distillery in Lynchburg, Tennessee. The official fact sheet describes a recipe using corn, rye, barley malt and limestone-filtered water, with charcoal mellowing before and after aging and an 80-proof bottling.",
+        "strict_tasting": "The official material describes light amber colour with vanilla, caramel, almond, fruit and a gentle smoky finish. Check the exact bottle size, strength, market label and current local listing. Do not copy Gentleman Jack notes onto Old No. 7, Single Barrel or flavoured releases.",
+        "strict_enjoy": "Serve a small pour neat or over ice, or use it in a balanced whiskey highball. Pair with barbecue, fried chicken, smoked cheese or pecan pie. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-courvoisier",
+      "brand_name": "Courvoisier",
+      "slug": "courvoisier",
+      "category": "Cognac",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.courvoisier.com/app/uploads/2024/06/courvoisier-logo-wordmark.svg",
+      "logo_alt": "Courvoisier brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://www.courvoisier.com/",
+      "logo_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": "2026-09-22T05:18:09.274228+00:00",
+      "image_url": null,
+      "image_alt": "Courvoisier official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "France",
+      "country_code": "FR",
+      "country_flag": "🇫🇷",
+      "country_flag_url": "https://flagcdn.com/h20/fr.webp",
+      "description": "Courvoisier is a Cognac house founded in 1828 in Jarnac, at the heart of France's Cognac region. Its official collection spans VS, VSOP, XO and other releases; the VSOP page describes a four-cru blend with stone fruit, jasmine and gingerbread notes.",
+      "story": "Cognac records should stay separated by category, blend, maturation, bottle size and city price. The house identity is useful context, but a VSOP note must not be applied to XO, VS or a special blend.",
+      "tasting_notes": [
+        {
+          "title": "House reference",
+          "description": "The official VSOP profile names mature stone fruit, summer jasmine and gingerbread, with eaux-de-vie from four crus."
+        },
+        {
+          "title": "What to compare",
+          "description": "Separate VS, VSOP, XO and special blends by stated category, blend and maturation."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Awards, age and cru claims remain product-specific and are not copied across the house."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve a modest measure in a tulip glass, or use a younger style in a measured Sidecar-style cocktail."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with dark chocolate, roast duck, dried fruit or aged cheese."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "dark chocolate",
+            "roast duck",
+            "dried fruit",
+            "aged cheese"
+          ]
+        }
+      ],
+      "why_choose": "A strong Cognac house page that makes category and maturation the primary comparison points.",
+      "faqs": [
+        {
+          "question": "What is Courvoisier?",
+          "answer": "Courvoisier is a Cognac house founded in 1828 in Jarnac, France."
+        },
+        {
+          "question": "Is Courvoisier VSOP the same as XO?",
+          "answer": "No. VSOP, XO, VS and special blends are distinct categories and should be listed separately."
+        }
+      ],
+      "final_verdict": "Courvoisier should be navigated by expression and category, with the house history providing context and the bottle label controlling the technical facts.",
+      "meta_title": "Courvoisier Cognac Guide | BevOry",
+      "meta_description": "Courvoisier Cognac guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 19,
+      "featured_product_id": null,
+      "link_url": "https://www.courvoisier.com/",
+      "official_source_page": "https://www.courvoisier.com/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "populated_verified_first_party_asset",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "verified_official_asset_url",
+        "source": "https://www.courvoisier.com/",
+        "evidence": "Official Courvoisier site exposes a Courvoisier logo wordmark asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://www.courvoisier.com/",
+        "evidence": "Official Courvoisier house and VSOP pages reviewed for Jarnac origin, 1828 founding and product-specific tasting notes.",
+        "strict_description": "Courvoisier is a Cognac house founded in 1828 in Jarnac, at the heart of France's Cognac region. Its official collection spans VS, VSOP, XO and other releases; the VSOP page describes a four-cru blend with stone fruit, jasmine and gingerbread notes.",
+        "strict_tasting": "The official VSOP profile names mature stone fruit, summer jasmine and gingerbread, with eaux-de-vie from four crus. Separate VS, VSOP, XO and special blends by stated category, blend and maturation. Awards, age and cru claims remain product-specific and are not copied across the house.",
+        "strict_enjoy": "Serve a modest measure in a tulip glass, or use a younger style in a measured Sidecar-style cocktail. Pair with dark chocolate, roast duck, dried fruit or aged cheese. Check BevOry for reviewed city-level prices and availability."
+      }
+    },
+    {
+      "id": "brand-expansion-hornitos",
+      "brand_name": "Hornitos",
+      "slug": "hornitos",
+      "category": "Tequila",
+      "logo_emoji": "🌵",
+      "logo_url": "https://www.hornitostequila.com/sites/default/files/styles/original/public/2025-09/Hornitos_Logo_PrimaryMarkWhite_RGB_2024.png.webp?itok=D8mybE-j",
+      "logo_alt": "Hornitos brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://www.hornitostequila.com/",
+      "logo_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": "2026-09-22T05:18:09.274228+00:00",
+      "image_url": null,
+      "image_alt": "Hornitos official brand visual pending direct storage",
+      "image_status": "official_product_or_brand_page_reviewed_direct_image_not_copied_as_logo",
+      "image_license_status": "first_party_asset_review_required_before_s3_storage",
+      "country": "Mexico",
+      "country_code": "MX",
+      "country_flag": "🇲🇽",
+      "country_flag_url": "https://flagcdn.com/h20/mx.webp",
+      "description": "Hornitos is a tequila brand from the Sauza family, with products made from blue agave grown and harvested in Jalisco, Mexico. The official Reposado page describes 100% blue agave, double distillation and resting in American white oak, with apple, herbal and lightly woody notes.",
+      "story": "Hornitos should be organised by Plata, Reposado, Añejo, Cristalino and other expressions rather than as one generic tequila. Maturation, sweetness, bottle size, strength and city price belong to the exact product record.",
+      "tasting_notes": [
+        {
+          "title": "Reposado reference",
+          "description": "The official Reposado profile lists fine agave, green apple and herbal aromas, balanced agave with light wood and a warm finish."
+        },
+        {
+          "title": "What to compare",
+          "description": "Keep Plata, Reposado, Añejo and Cristalino separate by maturation, style and label."
+        },
+        {
+          "title": "Editorial guardrail",
+          "description": "Do not use a Reposado note for an unaged or longer-aged expression."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Use a measured pour in a Margarita or Paloma, or taste the exact style neat from a small glass."
+        },
+        {
+          "subheading": "Pair",
+          "description": "Pair with salsa, grilled corn, tacos or citrus-led salads."
+        },
+        {
+          "subheading": "Local check",
+          "description": "Check BevOry for reviewed city-level prices and availability."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "salsa",
+            "grilled corn",
+            "tacos",
+            "citrus-led salads"
+          ]
+        }
+      ],
+      "why_choose": "A useful tequila guide entry because it keeps blue-agave production and maturation visible at product level.",
+      "faqs": [
+        {
+          "question": "What is Hornitos?",
+          "answer": "Hornitos is a tequila brand from the Sauza family with products made from blue agave in Jalisco, Mexico."
+        },
+        {
+          "question": "What is Hornitos Reposado?",
+          "answer": "The official page describes it as 100% blue agave tequila rested in American white oak; check the exact local bottle for current details."
+        }
+      ],
+      "final_verdict": "Hornitos is best compared by tequila style and maturation; the Reposado profile is specific to that expression and should not be used for the whole range.",
+      "meta_title": "Hornitos Tequila Guide | BevOry",
+      "meta_description": "Hornitos Tequila guide: style, serving ideas, pairings and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 20,
+      "featured_product_id": null,
+      "link_url": "https://www.hornitostequila.com/",
+      "official_source_page": "https://www.hornitostequila.com/",
+      "livcheers_page": null,
+      "content_version": "brand-full-scan-v1",
+      "content_basis": "Official first. Livcheers or verified third-party material only as a fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T05:18:09.274228+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_country_code",
+        "logo_url": "populated_verified_first_party_asset",
+        "image_url": "not_populated_direct_visual_not_stored_until_asset_and_rights_are_reviewed",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city_specific_product_variant_data_only"
+      },
+      "logo_audit": {
+        "status": "verified_official_asset_url",
+        "source": "https://www.hornitostequila.com/",
+        "evidence": "Official Hornitos site exposes an official logo asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      },
+      "source_policy": {
+        "official": "Primary producer or brand page checked first.",
+        "livcheers": "Livcheers checked only when indexed and relevant.",
+        "verified_third_party": "Traceable specialist or trade source used only if first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "research_status": "reviewed",
+        "source_page": "https://www.hornitostequila.com/",
+        "evidence": "Official Hornitos Reposado page reviewed for blue agave, Jalisco origin, double distillation, American oak and tasting notes.",
+        "strict_description": "Hornitos is a tequila brand from the Sauza family, with products made from blue agave grown and harvested in Jalisco, Mexico. The official Reposado page describes 100% blue agave, double distillation and resting in American white oak, with apple, herbal and lightly woody notes.",
+        "strict_tasting": "The official Reposado profile lists fine agave, green apple and herbal aromas, balanced agave with light wood and a warm finish. Keep Plata, Reposado, Añejo and Cristalino separate by maturation, style and label. Do not use a Reposado note for an unaged or longer-aged expression.",
+        "strict_enjoy": "Use a measured pour in a Margarita or Paloma, or taste the exact style neat from a small glass. Pair with salsa, grilled corn, tacos or citrus-led salads. Check BevOry for reviewed city-level prices and availability."
+      }
+    }
+  ],
+  "audit_summary": {
+    "brands_scanned": 10,
+    "visible_content_fields_populated": 10,
+    "country_flags_complete": 10,
+    "verified_first_party_logo_urls": 4,
+    "official_page_or_product_logo_evidence": 5,
+    "needs_logo_url_resolution": 1,
+    "featured_product_relations_linked": 0,
+    "boilerplate_phrases_found": 0
+  },
+  "source_order": "official -> Livcheers -> verified third-party fallback",
+  "database_note": "This file is normalized and ready for the brand_spotlights/content_records write. Database persistence remains pending because the database connection was unavailable during this run."
+}

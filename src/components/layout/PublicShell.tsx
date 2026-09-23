@@ -1,15 +1,13 @@
-import { Bell, Bot, Settings } from "lucide-react";
+import { Bell, Bot } from "lucide-react";
 import { Link, Outlet, useLocation as useRouterLocation } from "react-router-dom";
 import UniversalSearch from "@/components/UniversalSearch";
 import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
-import { useAuth } from "@/hooks/useAuth";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
 import { citySlugFromName } from "@/lib/locations";
 
 const PublicShell = () => {
-  const { isAdmin } = useAuth();
   const { unreadCount } = useNotifications();
   const { selectedCity } = useLocation();
   const { pathname } = useRouterLocation();
@@ -46,18 +44,6 @@ const PublicShell = () => {
           <div className={`${compactHeader ? "ml-auto" : "ml-auto md:ml-0"} shrink-0`}>
             <LocationSelectorNew variant={compactHeader ? "compact" : "default"} />
           </div>
-          <div className={`${isHome || isSearch ? "" : "hidden"} min-w-0 flex-1`}>
-            <UniversalSearch />
-          </div>
-          {isAdmin && (
-            <Link
-              to="/admin"
-              className="hidden min-h-11 min-w-11 items-center justify-center rounded-xl hover:bg-secondary sm:flex"
-              aria-label="Admin panel"
-            >
-              <Settings className="h-[18px] w-[18px] text-muted-foreground" />
-            </Link>
-          )}
           <Link
             to="/notifications"
             className="relative flex min-h-11 min-w-11 items-center justify-center rounded-xl hover:bg-secondary"
@@ -71,10 +57,14 @@ const PublicShell = () => {
             )}
           </Link>
         </div>
-        {(isHome || isSearch) && <div className="mx-auto max-w-[1120px] px-4 pb-2 md:hidden"><UniversalSearch /></div>}
+        {(isHome || isSearch) && (
+          <div className="mx-auto max-w-[1120px] px-4 pb-2 md:pb-3">
+            <UniversalSearch />
+          </div>
+        )}
       </header>
 
-      <div className={`${isHome || isSearch ? "pt-[110px]" : "pt-[64px]"} md:pt-[72px]`}>
+      <div className={`${isHome || isSearch ? "pt-[110px] md:pt-[132px]" : "pt-[64px] md:pt-[72px]"}`}>
         <Outlet />
       </div>
 

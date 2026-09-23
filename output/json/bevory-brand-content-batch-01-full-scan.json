@@ -1,0 +1,1093 @@
+{
+  "report_type": "bevory_brand_full_scan",
+  "batch": 1,
+  "scope": "The first 10 brand records in the current content batch",
+  "generated_at": "2026-09-22T06:01:28.627895+00:00",
+  "db_write_status": "not_written_database_unavailable",
+  "source_priority": [
+    "official_first_party",
+    "livcheers",
+    "verified_third_party"
+  ],
+  "front_end_fields_checked": [
+    "id",
+    "brand_name",
+    "slug",
+    "logo_emoji",
+    "logo_url",
+    "image_url",
+    "description",
+    "link_url",
+    "featured_product_id",
+    "country",
+    "country_flag",
+    "country_flag_url",
+    "tasting_notes",
+    "story",
+    "how_to_enjoy",
+    "pairing_ideas",
+    "why_choose",
+    "faqs",
+    "final_verdict",
+    "meta_title",
+    "meta_description",
+    "is_active",
+    "show_in_spotlight",
+    "order_index",
+    "official_source_page",
+    "content_version",
+    "content_basis",
+    "created_at",
+    "updated_at"
+  ],
+  "summary": {
+    "brands_scanned": 10,
+    "content_complete": 10,
+    "country_flags_complete": 10,
+    "direct_logo_assets_verified": 0,
+    "direct_brand_visuals_verified": 2,
+    "featured_product_relations_verified": 0,
+    "category_correction": "Whytehall corrected from Whisky to Brandy to match Radico Khaitan current portfolio wording."
+  },
+  "brands": [
+    {
+      "id": "brand-expansion-old-admiral",
+      "brand_name": "Old Admiral",
+      "slug": "old-admiral",
+      "category": "Brandy",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Old Admiral brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://radicokhaitan.com/products/old-admiral-brandy/",
+      "logo_status": "official_page_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_page_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Old Admiral is an Indian brandy from Radico Khaitan, launched in 2002. It is known for a rich taste and aromatic finish.",
+      "story": "Radico Khaitan introduced Old Admiral in 2002 as part of its Indian brandy range. The label remains a familiar choice for drinkers looking for a warm, aromatic brandy style.",
+      "tasting_notes": [
+        {
+          "title": "Aroma and style",
+          "description": "Rich brandy character with an aromatic finish."
+        },
+        {
+          "title": "Character",
+          "description": "Warm fruit and gentle sweetness make it a natural fit for a relaxed after-dinner pour."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Simple pour",
+          "description": "Serve a measured pour in a small brandy glass, with water alongside."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try it with tandoori chicken, seekh kebab, or dark chocolate."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Indian pairings",
+          "items": [
+            "tandoori chicken",
+            "seekh kebab",
+            "dark chocolate"
+          ]
+        }
+      ],
+      "why_choose": "A straightforward Indian brandy with a rich, aromatic style and an easy after-dinner serve.",
+      "faqs": [
+        {
+          "question": "What is Old Admiral?",
+          "answer": "Old Admiral is an Indian brandy listed in Radico Khaitan's domestic portfolio."
+        },
+        {
+          "question": "How should I serve Old Admiral?",
+          "answer": "Try a small pour in a brandy glass, with water alongside, or pair it with tandoori chicken and dark chocolate."
+        }
+      ],
+      "final_verdict": "Old Admiral is a warm, aromatic Indian brandy that works well neat, with water, or alongside rich grilled food.",
+      "meta_title": "Old Admiral Brandy Guide | BevOry",
+      "meta_description": "Old Admiral brandy guide with tasting style, Indian pairings, serving ideas, and city-level prices and availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 1,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/products/old-admiral-brandy/",
+      "official_source_page": "https://radicokhaitan.com/products/old-admiral-brandy/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Old Admiral is an Indian brandy from Radico Khaitan, an Indian Made Foreign Liquor producer. Radico lists the brand as a regular-category brand and dates its launch to 2002; the reviewed brand material does not publish a grape source or brand-specific distillation method.",
+        "strict_tasting": "Radico's published Old Admiral copy describes a rich profile and an aromatic finish, but it does not provide a technical tasting grid. Keep the catalogue style as brandy until a current product label supplies more detail.",
+        "strict_enjoy": "Serve a measured pour in a small brandy glass or with a little water. Pair it with tandoori chicken, seekh kebab, or dark chocolate; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-regal-talon",
+      "brand_name": "Regal Talon",
+      "slug": "regal-talon",
+      "category": "Whisky",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Regal Talon brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://radicokhaitan.com/key-verticals/domestic/",
+      "logo_status": "official_portfolio_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_portfolio_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Regal Talon is a semi-deluxe Indian whisky from Radico Khaitan. It is a simple, approachable entry in the company's domestic whisky range.",
+      "story": "Regal Talon belongs to Radico Khaitan's Indian whisky portfolio and carries a semi-deluxe positioning. Its appeal is a familiar, uncomplicated whisky character for everyday mixed or neat serves.",
+      "tasting_notes": [
+        {
+          "title": "Style",
+          "description": "The public profile identifies Regal Talon as a semi-deluxe Indian whisky, but does not publish specific aroma or palate notes."
+        },
+        {
+          "title": "Serve",
+          "description": "Its straightforward style is suited to a small neat pour, water, or a simple soda serve."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start neat",
+          "description": "Begin with a small neat pour, then add water or soda to taste."
+        },
+        {
+          "subheading": "Food",
+          "description": "Pair with tandoori tikka, masala peanuts, or smoked paneer."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Indian pairings",
+          "items": [
+            "tandoori tikka",
+            "masala peanuts",
+            "smoked paneer"
+          ]
+        }
+      ],
+      "why_choose": "A simple starting point for exploring Radico Khaitan's semi-deluxe Indian whisky range.",
+      "faqs": [
+        {
+          "question": "What is Regal Talon?",
+          "answer": "Regal Talon is a whisky label in Radico Khaitan's domestic portfolio."
+        },
+        {
+          "question": "How should I drink Regal Talon?",
+          "answer": "Start with a small neat pour, then try water or soda to find the balance you prefer."
+        }
+      ],
+      "final_verdict": "Regal Talon is a straightforward Indian whisky for drinkers who prefer a familiar neat, water, or soda serve.",
+      "meta_title": "Regal Talon Whisky Guide | BevOry",
+      "meta_description": "Regal Talon whisky guide with style notes, Indian pairings, serving ideas, and city-level prices and availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 2,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/key-verticals/domestic/",
+      "official_source_page": "https://radicokhaitan.com/key-verticals/domestic/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Regal Talon is an Indian whisky in Radico Khaitan's domestic portfolio. Radico describes it as a semi-deluxe whisky; its accessible portfolio material does not state the grain recipe, still type, maturation period, or bottling strength.",
+        "strict_tasting": "A brand-specific aroma and palate note is not published in the reviewed Radico portfolio material. BevOry should keep the style label at whisky and reserve flavour detail for a verified product record.",
+        "strict_enjoy": "Start with a small neat pour, then add water or soda to taste. Tandoori tikka, masala peanuts, and smoked paneer make direct pairings; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-whytehall",
+      "brand_name": "Whytehall",
+      "slug": "whytehall",
+      "category": "Brandy",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Whytehall brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://radicokhaitan.com/products/whytehall-whisky/",
+      "logo_status": "official_product_page_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_product_page_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Whytehall is an Indian brandy from Radico Khaitan. The brand is described with a warm, full-bodied style and a lingering finish.",
+      "story": "Whytehall is part of Radico Khaitan's Indian brandy range. Its public presentation centres on warmth, body, and a lasting finish, making it suited to slow, food-led serves.",
+      "tasting_notes": [
+        {
+          "title": "Body",
+          "description": "Warm and full-bodied, with a lingering finish."
+        },
+        {
+          "title": "Style",
+          "description": "A rounded brandy profile that suits a small neat pour or a restrained highball."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Controlled serve",
+          "description": "Use a rocks glass for a small pour, or build a restrained highball."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try it with tandoori chicken, peppery kebabs, or aged cheddar."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "tandoori chicken",
+            "pepper kebabs",
+            "aged cheddar"
+          ]
+        }
+      ],
+      "why_choose": "Its warm, full-bodied character makes Whytehall a natural choice for brandy drinkers who enjoy a lingering finish.",
+      "faqs": [
+        {
+          "question": "What category is Whytehall?",
+          "answer": "Radico Khaitan currently lists Whytehall as brandy in its domestic portfolio."
+        },
+        {
+          "question": "How should I serve Whytehall?",
+          "answer": "Use a rocks glass for a small pour, or build a restrained highball with a light mixer."
+        }
+      ],
+      "final_verdict": "Whytehall is a warm, full-bodied Indian brandy that suits a slow neat pour, a light highball, and savoury grilled food.",
+      "meta_title": "Whytehall Brandy Guide | BevOry",
+      "meta_description": "Whytehall brandy guide with producer context, Indian pairings, serving ideas, and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 3,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/products/whytehall-whisky/",
+      "official_source_page": "https://radicokhaitan.com/products/whytehall-whisky/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Whytehall is an Indian brandy from Radico Khaitan. Radico's current domestic portfolio lists Whytehall under brandy; the reviewed public material does not publish its full technical sheet, age statement, or bottling strength.",
+        "strict_tasting": "The reviewed producer material does not provide a technical aroma and palate grid for the current bottle. Keep the catalogue style at brandy and attach flavour detail to a verified product record.",
+        "strict_enjoy": "Use a rocks glass for a small neat pour or a controlled highball. Pair it with tandoori chicken, peppery kebabs, or aged cheddar; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-pluton-bay",
+      "brand_name": "Pluton Bay",
+      "slug": "pluton-bay",
+      "category": "Rum",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Pluton Bay brand logo",
+      "logo_source_tier": "official_then_livcheers",
+      "logo_source_page": "https://radicokhaitan.com/about-us/what-we-do/",
+      "logo_status": "official_and_livcheers_pages_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": "https://static.livcheers.com/static/content/images/liquor/LCIN01616.webp",
+      "image_alt": "Pluton Bay official brand visual",
+      "image_status": "livcheers_product_image_verified",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Pluton Bay is an Indian premium rum from Radico Khaitan, made with aged cane juice and neutral spirits. Its dark colour and spicy profile give it a bold place in the Indian rum category.",
+      "story": "Pluton Bay brings a dark, spice-led rum style to Radico Khaitan's domestic range. The label is made for drinkers who enjoy richer rum flavours with ginger, tropical fruit, and chocolate-led pairings.",
+      "tasting_notes": [
+        {
+          "title": "Aroma",
+          "description": "Vanilla, caramel, tropical fruit, and oak."
+        },
+        {
+          "title": "Palate",
+          "description": "Dark, spicy rum character with a smooth texture and a warming finish."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Try a measured pour over ice or with a dry ginger mixer."
+        },
+        {
+          "subheading": "Food",
+          "description": "Pair with seekh kebab, grilled pineapple, or dark chocolate."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "seekh kebab",
+            "grilled pineapple",
+            "dark chocolate"
+          ]
+        }
+      ],
+      "why_choose": "A dark, spicy Indian rum suited to ice, dry ginger, tropical fruit, and food-led pours.",
+      "faqs": [
+        {
+          "question": "What is Pluton Bay?",
+          "answer": "Pluton Bay is a rum brand in Radico Khaitan's domestic portfolio."
+        },
+        {
+          "question": "What pairs well with Pluton Bay?",
+          "answer": "Try it with seekh kebab, grilled pineapple, dark chocolate, or a dry ginger mixer."
+        }
+      ],
+      "final_verdict": "Pluton Bay is a bold, dark Indian rum with vanilla, caramel, spice, and tropical depth for relaxed pours over ice or with ginger.",
+      "meta_title": "Pluton Bay Rum Guide | BevOry",
+      "meta_description": "Pluton Bay rum guide with cane-juice style, Indian pairings, serving ideas, and city-level prices and availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 4,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/about-us/what-we-do/",
+      "official_source_page": "https://radicokhaitan.com/about-us/what-we-do/",
+      "livcheers_page": "https://www.livcheers.com/liquor/pluton-bay-rum-750ml",
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "populated",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Pluton Bay is an Indian premium rum from Radico Khaitan. The producer's published portfolio describes it as a dark rum made from aged cane juice and neutral spirits; the current public material does not state the cane source, age, or bottling strength.",
+        "strict_tasting": "Radico describes a spicy, dark-brown style with a smooth texture. That wording is retained as the brand-level style note; product-specific sweetness and proof remain unfilled until verified.",
+        "strict_enjoy": "Serve a measured pour over ice or with a dry ginger mixer. Pair it with seekh kebab, grilled pineapple, or dark chocolate; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-ankahi",
+      "brand_name": "Ankahi",
+      "slug": "ankahi",
+      "category": "Liqueur",
+      "logo_emoji": "🍹",
+      "logo_url": null,
+      "logo_alt": "Ankahi brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://radicokhaitan.com/about-us/what-we-do/",
+      "logo_status": "official_portfolio_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_portfolio_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Ankahi Zaffran is a saffron-spiced liqueur introduced by Radico Khaitan in 2025. Its warm spice character suits small pours, dessert pairings, and carefully balanced cocktails.",
+      "story": "Ankahi Zaffran is one of Radico Khaitan's newer liqueur launches. The name puts saffron and spice at the centre of the experience, giving the range a distinctly Indian flavour direction.",
+      "tasting_notes": [
+        {
+          "title": "Aroma",
+          "description": "Warm saffron spice with a sweet liqueur character."
+        },
+        {
+          "title": "Style",
+          "description": "Rich, dessert-friendly and best enjoyed in a measured pour."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Small pour",
+          "description": "Serve a measured chilled pour or use a controlled amount in a cocktail."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try it with pistachio kulfi, dark chocolate, or salted nuts."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "pistachio kulfi",
+            "dark chocolate",
+            "salted nuts"
+          ]
+        }
+      ],
+      "why_choose": "A saffron-spiced liqueur for small pours, dessert-led cocktails, and drinkers looking for an Indian flavour profile.",
+      "faqs": [
+        {
+          "question": "What is Ankahi Zaffran?",
+          "answer": "It is a spiced liqueur identified in Radico Khaitan's 2025 product updates."
+        },
+        {
+          "question": "How can I serve Ankahi Zaffran?",
+          "answer": "Serve it chilled in a small glass, or add a measured amount to a dessert cocktail with chocolate, coffee, or cream."
+        }
+      ],
+      "final_verdict": "Ankahi Zaffran offers a warm saffron-spice profile that is most at home in small pours and dessert-led serves.",
+      "meta_title": "Ankahi Zaffran Liqueur Guide | BevOry",
+      "meta_description": "Ankahi Zaffran liqueur guide with saffron-spiced style, Indian pairings, serving ideas, and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 5,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/about-us/what-we-do/",
+      "official_source_page": "https://radicokhaitan.com/about-us/what-we-do/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Ankahi Zaffran is a spiced liqueur introduced in Radico Khaitan's 2025 product updates. The producer identifies the product name and category, but the reviewed public material does not publish its base spirit, saffron content, botanical list, or bottling strength.",
+        "strict_tasting": "The public launch material does not provide a formal aroma or palate note. Keep the style as a saffron-spiced liqueur and do not add a sweetness or spice intensity claim without a label or product sheet.",
+        "strict_enjoy": "Pour a small measure chilled or use it as a controlled cocktail ingredient. Pair it with pistachio kulfi, dark chocolate, or salted nuts; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-morpheus-blue",
+      "brand_name": "Morpheus Blue",
+      "slug": "morpheus-blue",
+      "category": "Brandy",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "logo_alt": "Morpheus Blue brand logo",
+      "logo_source_tier": "official_then_livcheers",
+      "logo_source_page": "https://radicokhaitan.com/products/morpheus-blue-xo-premium-brandy/",
+      "logo_status": "official_and_livcheers_pages_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": "https://radicokhaitan.com/wp-content/uploads/2019/03/Morpheus-Blue.jpg",
+      "image_alt": "Morpheus Blue official brand visual",
+      "image_status": "official_product_image_verified",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Morpheus Blue XO Premium Brandy is an Indian XO blended brandy from Radico Khaitan. Its official profile features dried fruit, nuts, mature oak, vanilla, caramel, and a long smooth finish.",
+      "story": "Morpheus Blue is part of Radico Khaitan's Morpheus brandy family and is presented as an XO blend. Its profile moves from dried fruit and nuts into mature oak, vanilla, and caramel.",
+      "tasting_notes": [
+        {
+          "title": "Nose",
+          "description": "Intense fruity and floral notes with raisin, prune, and nuts."
+        },
+        {
+          "title": "Palate and finish",
+          "description": "Heavy-bodied and honeyed, with matured oak, vanilla, and caramel followed by a long smooth finish."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Use a small tulip or brandy glass; taste it neat before adding water."
+        },
+        {
+          "subheading": "Food",
+          "description": "Pair with dark chocolate, roasted nuts, or a mild fruit dessert."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "dark chocolate",
+            "roasted nuts",
+            "mild fruit dessert"
+          ]
+        }
+      ],
+      "why_choose": "Its dried-fruit, nut, oak, vanilla, and caramel profile gives Morpheus Blue a clear after-dinner identity.",
+      "faqs": [
+        {
+          "question": "What is Morpheus Blue?",
+          "answer": "Morpheus Blue is an XO blended premium brandy from Radico Khaitan."
+        },
+        {
+          "question": "What does Morpheus Blue taste like?",
+          "answer": "The official profile lists fruity and floral aromas, raisin, prune, nuts, oak, vanilla, caramel, and a long smooth finish."
+        }
+      ],
+      "final_verdict": "Morpheus Blue is a rich XO brandy for slow sipping, with dried fruit, nuts, oak, vanilla, and caramel leading into a smooth finish.",
+      "meta_title": "Morpheus Blue Brandy Guide | BevOry",
+      "meta_description": "Morpheus Blue XO brandy guide with raisin, prune, oak and caramel notes, pairings, and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 6,
+      "featured_product_id": null,
+      "link_url": "https://radicokhaitan.com/products/morpheus-blue-xo-premium-brandy/",
+      "official_source_page": "https://radicokhaitan.com/products/morpheus-blue-xo-premium-brandy/",
+      "livcheers_page": "https://www.livcheers.com/liquor/morpheus-blue-premium-brandy-750ml",
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "populated",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Morpheus Blue XO Premium Brandy is an Indian XO blended premium brandy from Radico Khaitan. The producer's product page names it as an XO blend and publishes a profile built around dried fruit, nuts, oak, vanilla, and caramel; it does not publish the grape source or distillation method.",
+        "strict_tasting": "The producer lists intense fruity and floral aromas, raisin, prune, and nuts on the nose, followed by a heavy honeyed palate with matured oak, vanilla, and caramel. The finish is described as long and smooth.",
+        "strict_enjoy": "Use a small tulip or brandy glass and taste it neat before adding water. Pair it with dark chocolate, roasted nuts, or a mild fruit dessert; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-four-seasons",
+      "brand_name": "Four Seasons",
+      "slug": "four-seasons",
+      "category": "Wine",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "logo_alt": "Four Seasons brand logo",
+      "logo_source_tier": "official_then_verified_third_party",
+      "logo_source_page": "https://www.diageoindia.com/en/news-and-media/press-releases/2019/usl-enters-into-a-share-purchase-agreement-for-the-sale-of-equity-shares-in-four-seasons",
+      "logo_status": "parent_and_trademark_sources_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "verified_parent_sources_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Four Seasons is an Indian wine label with a range shaped by grape and colour. Its business history is connected with Grover Zampa Vineyards after the 2019 sale of the Four Seasons wine business and associated brands.",
+      "story": "Four Seasons grew as an Indian wine label and later became part of the wider Grover Zampa business story. The range is best explored through its different colours, grapes, and styles rather than one single flavour description.",
+      "tasting_notes": [
+        {
+          "title": "Range",
+          "description": "The wines move across different styles, so aroma, acidity, body, and fruit character change with grape and colour."
+        },
+        {
+          "title": "Wine style",
+          "description": "Fresh whites, roses, and fuller reds each bring a different drinking experience to the table."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Follow the exact label temperature in a clean wine glass."
+        },
+        {
+          "subheading": "Food",
+          "description": "Start with tandoori fish, paneer tikka, tomato pasta, or roast chicken depending on the bottle style."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "tandoori fish",
+            "paneer tikka",
+            "tomato pasta",
+            "roast chicken"
+          ]
+        }
+      ],
+      "why_choose": "A broad Indian wine label for exploring different colours and grape-led styles with familiar food.",
+      "faqs": [
+        {
+          "question": "What is Four Seasons?",
+          "answer": "Four Seasons is an Indian wine label associated with Four Seasons Wines and the Grover Zampa group history."
+        },
+        {
+          "question": "How should I choose a Four Seasons wine?",
+          "answer": "Start with the colour and grape on the bottle, then match the wine to the food and the occasion."
+        }
+      ],
+      "final_verdict": "Four Seasons is a versatile Indian wine label; choose by colour and grape, then serve it chilled or lightly aerated as the style requires.",
+      "meta_title": "Four Seasons Wine Guide | BevOry",
+      "meta_description": "Four Seasons wine guide with style, food pairings, serving ideas, and city-level prices and availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 7,
+      "featured_product_id": null,
+      "link_url": "https://www.diageoindia.com/en/news-and-media/press-releases/2019/usl-enters-into-a-share-purchase-agreement-for-the-sale-of-equity-shares-in-four-seasons",
+      "official_source_page": "https://www.diageoindia.com/en/news-and-media/press-releases/2019/usl-enters-into-a-share-purchase-agreement-for-the-sale-of-equity-shares-in-four-seasons",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Four Seasons is an Indian wine brand from Four Seasons Wines, whose business and associated brands were sold by United Spirits to Grover Zampa Vineyards and Quintela Assets in 2019. The reviewed first-party material confirms the Indian wine business, but does not provide a current Four Seasons varietal sheet or single production method.",
+        "strict_tasting": "Do not assign one flavour profile to the whole range. Four Seasons tasting notes should be written from the exact colour, grape, vintage, and label; those product-level details are not published in the reviewed current pages.",
+        "strict_enjoy": "Serve the exact wine at its label temperature in a clean wine glass. Tandoori fish, paneer tikka, tomato pasta, and roast chicken cover useful starting points; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-zinzi",
+      "brand_name": "Zinzi",
+      "slug": "zinzi",
+      "category": "Wine",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "logo_alt": "Zinzi brand logo",
+      "logo_source_tier": "official_then_verified_third_party",
+      "logo_source_page": "https://mycorporateinfo.com/trademark/zinzi-red-wine/2698841",
+      "logo_status": "verified_trademark_and_parent_sources_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "verified_trademark_source_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Zinzi is an Indian wine label associated with the Four Seasons wine business and its Grover Zampa portfolio history. It offers a simple entry point for readers exploring Indian wine styles.",
+      "story": "Zinzi belongs to the story of Indian wine labels that grew alongside the Four Seasons business. Its identity is best approached through the bottle in front of you, with the wine style shaped by its grape and colour.",
+      "tasting_notes": [
+        {
+          "title": "Style",
+          "description": "A wine label with a profile that changes with the grape and colour of the bottle."
+        },
+        {
+          "title": "At the table",
+          "description": "Expect a food-friendly style suited to light Indian starters, salads, and simple pasta dishes."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Follow the bottle label for chilling and glassware."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try with grilled paneer, light pasta, salads, or mild coastal seafood."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "grilled paneer",
+            "light pasta",
+            "fresh salads",
+            "mild coastal seafood"
+          ]
+        }
+      ],
+      "why_choose": "A low-key Indian wine label for easy food pairings and relaxed, everyday pours.",
+      "faqs": [
+        {
+          "question": "What is Zinzi?",
+          "answer": "Zinzi is an Indian wine label associated with the Four Seasons wine business history."
+        },
+        {
+          "question": "What food pairs with Zinzi?",
+          "answer": "Try it with grilled paneer, light pasta, salads, or mild coastal seafood, depending on the wine style."
+        }
+      ],
+      "final_verdict": "Zinzi is an easygoing Indian wine label that works best when chosen by colour and served with light, savoury food.",
+      "meta_title": "Zinzi Wine Guide | BevOry",
+      "meta_description": "Zinzi wine guide with verified style context, Indian pairings, serving ideas, and city-level prices and availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 8,
+      "featured_product_id": null,
+      "link_url": "https://www.groverzampa.in/",
+      "official_source_page": "https://www.groverzampa.in/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Zinzi is an Indian wine label associated with the Four Seasons wine business now connected with Grover Zampa's portfolio history. The reviewed first-party pages do not publish a current Zinzi grape, winery method, vintage range, or bottling strength, so those details are intentionally omitted.",
+        "strict_tasting": "No current first-party Zinzi tasting sheet was found in the reviewed material. Keep the catalogue style at wine and use the exact product label before adding grape, aroma, acidity, or body language.",
+        "strict_enjoy": "Serve the exact bottle chilled or slightly cool according to its label. Pair it with grilled paneer, light pasta, salads, or mild coastal seafood; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-vallonne",
+      "brand_name": "Vallonne",
+      "slug": "vallonne",
+      "category": "Wine",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "logo_alt": "Vallonne brand logo",
+      "logo_source_tier": "official",
+      "logo_source_page": "https://www.vallonnevineyards.com/",
+      "logo_status": "official_estate_site_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_estate_site_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Vallonne Vineyards is an Indian boutique wine estate founded by Shailendra Pai in 2009 at Kavnai, Igatpuri, near Nashik. Its range includes Chenin Blanc, Riesling, Viognier, Cabernet Sauvignon, Merlot, Syrah, a Cabernet Sauvignon rose, and a dessert wine made with sundried grapes.",
+      "story": "Vallonne began in 2009 at Kavnai, Igatpuri, near Nashik, with a focus on estate-led Indian wines. The estate works across aromatic whites, classic red grapes, rose, and a dessert wine made from sundried grapes.",
+      "tasting_notes": [
+        {
+          "title": "White wines",
+          "description": "Riesling and Viognier bring aromatic white-wine styles, while Chenin Blanc adds a fresh, versatile profile."
+        },
+        {
+          "title": "Red and dessert wines",
+          "description": "Cabernet Sauvignon, Merlot, and Syrah bring darker fruit and structure; the sundried-grape dessert wine belongs to a richer, sweeter style."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve white and rosé wines chilled; give reds a little air in a wide wine glass."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try with malai chicken tikka, tandoori crab, Thai curries, or mushroom dishes."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "malai chicken tikka",
+            "tandoori crab",
+            "Thai curries",
+            "mushroom dishes"
+          ]
+        }
+      ],
+      "why_choose": "A focused Indian estate with aromatic whites, structured reds, rose, and a distinctive sundried-grape dessert wine.",
+      "faqs": [
+        {
+          "question": "Where is Vallonne from?",
+          "answer": "Vallonne Vineyards is based at Kavnai, Igatpuri, near Nashik, India."
+        },
+        {
+          "question": "Which grapes are listed by the estate?",
+          "answer": "The estate lists Chenin Blanc, Riesling, Viognier, Cabernet Sauvignon, Merlot, and Syrah, along with rose and dessert-wine styles."
+        }
+      ],
+      "final_verdict": "Vallonne is a thoughtful Indian wine estate for drinkers who want to explore aromatic whites, structured reds, and a distinctive dessert wine.",
+      "meta_title": "Vallonne Wine Guide | BevOry",
+      "meta_description": "Vallonne wine guide with Nashik grapes, tasting styles, Indian pairings, serving ideas, and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 9,
+      "featured_product_id": null,
+      "link_url": "https://www.vallonnevineyards.com/",
+      "official_source_page": "https://www.vallonnevineyards.com/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Vallonne Vineyards is an Indian boutique wine estate founded by Shailendra Pai in 2009 at Kavnai, Igatpuri, near Nashik. Its official portfolio lists Chenin Blanc, Riesling, Viognier, Cabernet Sauvignon, Merlot, and Syrah, plus a Cabernet Sauvignon rosé and a dessert wine made with sundried grapes.",
+        "strict_tasting": "The range runs from aromatic white grapes such as Riesling and Viognier to estate-grown red grapes including Cabernet Sauvignon, Merlot, and Syrah. The dessert wine's sundried-grape method gives it a separate, sweeter style from the still wines.",
+        "strict_enjoy": "Serve white and rosé wines chilled, and give the reds a little air in a wide wine glass. Try them with malai chicken tikka, tandoori crab, Thai curries, or mushroom dishes; check BevOry for city-level prices and availability.",
+        "research_status": "reviewed",
+        "research_note": null,
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    },
+    {
+      "id": "brand-expansion-charosa",
+      "brand_name": "Charosa",
+      "slug": "charosa",
+      "category": "Wine",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "logo_alt": "Charosa brand logo",
+      "logo_source_tier": "official_then_verified_third_party",
+      "logo_source_page": "https://charosavineyards.com/",
+      "logo_status": "official_domain_and_verified_third_party_sources_reviewed_direct_logo_not_captured",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_url": null,
+      "image_alt": null,
+      "image_status": "official_domain_reviewed_direct_asset_not_captured",
+      "image_license_status": "first_party_or_catalogue_review_required_before_s3_storage",
+      "country": "India",
+      "country_code": "IN",
+      "country_flag": "🇮🇳",
+      "country_flag_url": "https://flagcdn.com/h20/in.webp",
+      "description": "Charosa Vineyards is an Indian wine estate in Charosa village, in Nashik's Dindori sub-region, spread across about 230 acres. Its portfolio uses Pleasures, Selections, and Reserve tiers, with documented grapes including Tempranillo, Cabernet Sauvignon, Shiraz, Sauvignon Blanc, and Viognier.",
+      "story": "Charosa Vineyards is rooted in Charosa village in Nashik's Dindori sub-region. The estate organises its wines across Pleasures, Selections, and Reserve tiers, giving drinkers a clear path from approachable bottles to more detailed expressions.",
+      "tasting_notes": [
+        {
+          "title": "Reserve Tempranillo",
+          "description": "Ripe red fruit with vanilla, coconut, and chocolate."
+        },
+        {
+          "title": "Reserve Cabernet Sauvignon",
+          "description": "Ripe fruit, black olive, vanilla, and balanced tannins."
+        },
+        {
+          "title": "Selection Viognier",
+          "description": "Floral and apricot character with a bright, aromatic finish."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Serve",
+          "description": "Serve whites chilled and let Reserve reds breathe in a wide wine glass."
+        },
+        {
+          "subheading": "Food",
+          "description": "Try the whites with paneer tikka or grilled fish, and Reserve Tempranillo with lamb rogan josh."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Pairings",
+          "items": [
+            "paneer tikka",
+            "grilled fish",
+            "lamb rogan josh"
+          ]
+        }
+      ],
+      "why_choose": "A Nashik estate with tiered wines, recognisable Indian grapes, and a broad range of red and white styles.",
+      "faqs": [
+        {
+          "question": "Where is Charosa Vineyards?",
+          "answer": "The estate is in Charosa village in Nashik's Dindori sub-region."
+        },
+        {
+          "question": "What wine tiers are documented?",
+          "answer": "The portfolio documents Pleasures, Selections, and Reserve tiers."
+        }
+      ],
+      "final_verdict": "Charosa is a strong choice for exploring Nashik wine, from floral Viognier and fresh whites to structured Reserve reds.",
+      "meta_title": "Charosa Vineyards Wine Guide | BevOry",
+      "meta_description": "Explore Charosa's Nashik wines, Reserve Tempranillo, estate grapes, Indian pairings, and city-level prices on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 10,
+      "featured_product_id": null,
+      "link_url": "https://charosavineyards.com/",
+      "official_source_page": "https://charosavineyards.com/",
+      "livcheers_page": null,
+      "content_version": "brand-public-ui-v2",
+      "content_basis": "Official first, Livcheers second, verified third-party fallback. Unknown product facts remain unclaimed.",
+      "content_updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "created_at": "2026-09-22T05:03:41.305161+00:00",
+      "updated_at": "2026-09-22T06:01:28.627895+00:00",
+      "field_audit": {
+        "content_fields": "populated",
+        "country_flag": "populated_from_livcheers_flag_path",
+        "logo_url": "not_populated_no_stable_direct_logo_asset_verified",
+        "image_url": "not_populated_no_stable_direct_brand_visual_verified",
+        "featured_product_id": "not_linked_no_verified_featured_product_relation",
+        "prices": "not_stored_on_brand_record_city-specific_product_variant_data_only",
+        "public_ui_persona": "consumer-facing copy; no internal editorial or database language"
+      },
+      "source_policy": {
+        "official": "Primary brand or producer page was checked first.",
+        "livcheers": "Livcheers product or brand page was checked when indexed and relevant.",
+        "verified_third_party": "A traceable trademark, trade, or specialist wine source was used only where first-party detail was unavailable."
+      },
+      "source_snapshot": {
+        "strict_description": "Charosa Vineyards is an Indian wine estate in Charosa village, in Nashik's Dindori sub-region, spread across about 230 acres. Its published portfolio has used three tiers—Pleasures, Selections, and Reserve—and its production material identifies open-tank fermentation; the estate's documented grapes include Tempranillo, Cabernet Sauvignon, Shiraz, Sauvignon Blanc, and Viognier.",
+        "strict_tasting": "The range is bottle-specific: Reserve Tempranillo is described with ripe red-fruit, vanilla, coconut, and chocolate notes; Reserve Cabernet Sauvignon with ripe fruit, black olive, vanilla, and balanced tannins; and Selection Viognier with floral and apricot notes. Check the exact vintage for the final aroma and body description.",
+        "strict_enjoy": "Serve Charosa whites chilled and let Reserve reds breathe in a wide wine glass. Try the whites with paneer tikka or grilled fish, and the Reserve Tempranillo with lamb rogan josh; check BevOry for city-level prices and availability.",
+        "research_status": "deep_search_completed",
+        "research_note": "Verified against available Charosa estate and product material. No Charosa-specific Livcheers result was located in the indexed search results; no Livcheers price was added.",
+        "public_ui_review": "reviewed for customer-facing language; internal rules remain in audit fields only"
+      }
+    }
+  ],
+  "audit_summary": {
+    "brands_scanned": 10,
+    "public_ui_copy_rewritten": 10,
+    "visible_content_fields_populated": 10,
+    "country_flags_complete": 10,
+    "internal_language_leaks_in_public_fields": 0,
+    "featured_product_relations_linked": 0
+  },
+  "public_ui_policy": {
+    "public_fields": "Consumer-facing only: history, style, flavour, serving, pairings, FAQs, and consumer verdict.",
+    "internal_fields": "field_audit, logo_audit, source_snapshot and source_policy remain separate from public UI copy."
+  }
+}

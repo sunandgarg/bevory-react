@@ -10,6 +10,7 @@ import MobileLayout from "@/components/layout/MobileLayout";
 import SEOHead from "@/components/SEOHead";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import BrandLogo from "@/components/brand/BrandLogo";
 
 interface Brand {
   id: string;
@@ -19,6 +20,8 @@ interface Brand {
   logo_url: string | null;
   description: string | null;
   country: string | null;
+  country_flag: string | null;
+  country_flag_url: string | null;
   show_in_spotlight: boolean | null;
   is_active: boolean | null;
 }
@@ -34,7 +37,7 @@ const Brands = () => {
     const fetchBrands = async () => {
       const { data, error } = await apiClient
         .from("brand_spotlights")
-        .select("id, brand_name, slug, logo_emoji, logo_url, description, country, show_in_spotlight, is_active")
+        .select("id, brand_name, slug, logo_emoji, logo_url, description, country, country_flag, country_flag_url, show_in_spotlight, is_active")
         .eq("is_active", true)
         .order("brand_name");
 
@@ -202,25 +205,27 @@ const BrandCard = ({ brand, index, featured, citySlug }: BrandCardProps) => (
             : "bg-secondary"
         }`}
       >
-        {brand.logo_url ? (
-          <img
-            src={brand.logo_url}
-            alt={`${brand.brand_name} logo`}
-            width={240}
-            height={240}
-            decoding="async"
-            className="w-full h-full object-contain p-2"
-            loading="lazy"
-          />
-        ) : (
-          <span className="text-4xl">{brand.logo_emoji || "🏷️"}</span>
-        )}
+        <BrandLogo
+          brandName={brand.brand_name}
+          slug={brand.slug}
+          logoUrl={brand.logo_url}
+          emoji={brand.logo_emoji}
+          className="h-full w-full"
+          imgClassName="h-full w-full p-2"
+        />
       </div>
       <p className="text-xs font-medium text-center line-clamp-2 group-hover:text-primary transition-colors">
         {brand.brand_name}
       </p>
       {brand.country && (
-        <p className="text-[10px] text-muted-foreground mt-0.5">{brand.country}</p>
+        <p className="text-[10px] text-muted-foreground mt-0.5">
+          {brand.country_flag_url ? (
+            <img src={brand.country_flag_url} alt="" width={16} height={11} loading="lazy" decoding="async" className="inline-block mr-1 h-2.5 w-4 object-cover align-[-1px]" />
+          ) : brand.country_flag ? (
+            <span className="mr-1" aria-hidden="true">{brand.country_flag}</span>
+          ) : null}
+          {brand.country}
+        </p>
       )}
     </Link>
   </motion.div>

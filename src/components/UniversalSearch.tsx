@@ -10,6 +10,7 @@ import { generateProductUrl } from "@/lib/productSlug";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
+import BrandLogo from "@/components/brand/BrandLogo";
 
 interface Brand {
   id: string;
@@ -265,11 +266,15 @@ const UniversalSearch = memo(({
                     onClick={handleResultClick}
                     className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-secondary transition-colors"
                   >
-                    {brand.logo_url ? (
-                      <img src={brand.logo_url} alt="" className="w-6 h-6 rounded object-contain" loading="lazy" />
-                    ) : (
-                      <span className="text-xl">{brand.logo_emoji || "🏷️"}</span>
-                    )}
+                    <BrandLogo
+                      brandName={brand.brand_name}
+                      slug={brand.slug}
+                      logoUrl={brand.logo_url}
+                      emoji={brand.logo_emoji}
+                      className="h-6 w-6 shrink-0 rounded"
+                      imgClassName="h-6 w-6 rounded"
+                      alt=""
+                    />
                     <span className="font-medium">{brand.brand_name}</span>
                     <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground" />
                   </Link>

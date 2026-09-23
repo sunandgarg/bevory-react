@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import OptimizedImage from "@/components/ui/OptimizedImage";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import BrandLogo from "@/components/brand/BrandLogo";
 
 interface BrandSpotlightItem {
   id: string;
@@ -15,6 +15,8 @@ interface BrandSpotlightItem {
   logo_emoji: string | null;
   logo_url: string | null;
   description: string | null;
+  country_flag: string | null;
+  country_flag_url: string | null;
   featured_product_id: string | null;
   link_url: string | null;
   is_active: boolean;
@@ -24,7 +26,7 @@ interface BrandSpotlightItem {
 const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
   const { data, error } = await apiClient
     .from("brand_spotlights")
-    .select("id, brand_name, slug, logo_emoji, logo_url, description, featured_product_id, link_url, is_active, show_in_spotlight")
+    .select("id, brand_name, slug, logo_emoji, logo_url, description, country_flag, country_flag_url, featured_product_id, link_url, is_active, show_in_spotlight")
     .eq("is_active", true)
     .eq("show_in_spotlight", true)
     .order("order_index");
@@ -72,23 +74,27 @@ const BrandSpotlight = memo(() => {
         {brands.map((brand) => (
           <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group block w-[82px] snap-start">
             <div className="w-[82px] h-[82px] rounded-lg bg-secondary flex items-center justify-center text-2xl overflow-hidden border border-border/50 group-hover:border-accent/40 transition-colors">
-              {brand.logo_url ? (
-                <OptimizedImage
-                  src={brand.logo_url}
-                  alt={`${brand.brand_name} logo`}
-                  width={164}
-                  height={164}
-                  className="w-full h-full"
-                  objectFit="contain"
-                  placeholder="blur"
-                />
-              ) : (
-                <span>{brand.logo_emoji || "🏷️"}</span>
-              )}
+              <BrandLogo
+                brandName={brand.brand_name}
+                slug={brand.slug}
+                logoUrl={brand.logo_url}
+                emoji={brand.logo_emoji}
+                className="h-full w-full"
+                imgClassName="h-full w-full"
+              />
             </div>
             <p className="text-[11px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate mt-1.5 transition-colors">
               {brand.brand_name}
             </p>
+            {(brand.country_flag_url || brand.country_flag) && (
+              <div className="flex justify-center mt-0.5" aria-label="Country of origin">
+                {brand.country_flag_url ? (
+                  <img src={brand.country_flag_url} alt="" width={16} height={11} loading="lazy" decoding="async" className="h-2.5 w-4 object-cover" />
+                ) : (
+                  <span aria-hidden="true">{brand.country_flag}</span>
+                )}
+              </div>
+            )}
           </Link>
         ))}
       </div>

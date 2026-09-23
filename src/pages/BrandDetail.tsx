@@ -20,6 +20,7 @@ import {
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
+import BrandLogo from "@/components/brand/BrandLogo";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
@@ -35,6 +36,8 @@ interface Brand {
   link_url: string | null;
   featured_product_id: string | null;
   country: string | null;
+  country_flag: string | null;
+  country_flag_url: string | null;
   tasting_notes: unknown;
   story: string | null;
   how_to_enjoy: unknown;
@@ -403,23 +406,26 @@ const BrandDetail = () => {
               <div className="p-5">
                 <div className="flex items-start gap-4">
                   <div className="w-20 h-20 rounded-2xl bg-background shadow-lg flex items-center justify-center text-4xl flex-shrink-0 overflow-hidden border border-border">
-                    {brand.logo_url ? (
-                      <OptimizedImage
-                        src={brand.logo_url}
-                        alt={`${brand.brand_name} logo`}
-                        width={80}
-                        height={80}
-                        className="w-full h-full"
-                        objectFit="contain"
-                      />
-                    ) : (
-                      <span>{brand.logo_emoji || "🏷️"}</span>
-                    )}
+                    <BrandLogo
+                      brandName={brand.brand_name}
+                      slug={brand.slug}
+                      logoUrl={brand.logo_url}
+                      emoji={brand.logo_emoji}
+                      className="h-full w-full"
+                      imgClassName="h-full w-full"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h2 className="text-2xl font-serif font-bold leading-tight">{brand.brand_name}</h2>
                     {brand.country && (
-                      <p className="text-sm text-accent font-medium mt-1" itemProp="foundingLocation">{brand.country}</p>
+                      <p className="text-sm text-accent font-medium mt-1" itemProp="foundingLocation">
+                        {brand.country_flag_url ? (
+                          <img src={brand.country_flag_url} alt="" width={20} height={14} loading="lazy" decoding="async" className="inline-block mr-1 h-3.5 w-5 object-cover align-[-2px]" />
+                        ) : brand.country_flag ? (
+                          <span className="mr-1" aria-hidden="true">{brand.country_flag}</span>
+                        ) : null}
+                        {brand.country}
+                      </p>
                     )}
                     <p className="text-sm text-muted-foreground mt-2">
                       {products.length} {products.length === 1 ? 'product' : 'products'} listed

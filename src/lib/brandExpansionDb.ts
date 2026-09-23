@@ -1,5 +1,11 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { BRAND_EXPANSION, buildBrandExpansionData } from "./brandExpansion.js";
+import { BRAND_CONTENT_BATCH_01 } from "./brandContentBatch01.js";
+import { BRAND_CONTENT_BATCH_02 } from "./brandContentBatch02.js";
+import { BRAND_CONTENT_BATCH_03 } from "./brandContentBatch03.js";
+import { BRAND_CONTENT_BATCH_04 } from "./brandContentBatch04.js";
+import { BRAND_CONTENT_BATCH_05 } from "./brandContentBatch05.js";
+import { BRAND_CONTENT_BATCH_06 } from "./brandContentBatch06.js";
 
 type JsonObject = Prisma.JsonObject;
 
@@ -34,6 +40,8 @@ const contentFields = [
   "meta_title",
   "meta_description",
   "country",
+  "country_flag",
+  "country_flag_url",
   "link_url",
   "official_source_page",
   "content_version",
@@ -55,11 +63,25 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
     const previous = recordData(existing?.data);
     const built = buildBrandExpansionData(definition, now) as JsonObject;
     const next: JsonObject = { ...built, ...previous };
+    const refreshPublicContent = Boolean(
+      BRAND_CONTENT_BATCH_01[definition.slug]
+      || BRAND_CONTENT_BATCH_02[definition.slug]
+      || BRAND_CONTENT_BATCH_03[definition.slug]
+      || BRAND_CONTENT_BATCH_04[definition.slug]
+      || BRAND_CONTENT_BATCH_05[definition.slug]
+      || BRAND_CONTENT_BATCH_06[definition.slug],
+    );
 
     for (const field of contentFields) {
-      if (!hasValue(previous[field])) next[field] = built[field];
+      if (refreshPublicContent || !hasValue(previous[field])) next[field] = built[field];
     }
-    if (!hasValue(previous.logo_emoji)) next.logo_emoji = built.logo_emoji;
+    if (refreshPublicContent || !hasValue(previous.logo_emoji)) next.logo_emoji = built.logo_emoji;
+    if (refreshPublicContent || !hasValue(previous.logo_url)) next.logo_url = built.logo_url;
+    if (refreshPublicContent) {
+      next.logo_source_tier = built.logo_source_tier;
+      next.logo_source_page = built.logo_source_page;
+      next.logo_asset_status = built.logo_asset_status;
+    }
     if (!hasValue(previous.is_active)) next.is_active = true;
     if (!hasValue(previous.show_in_spotlight)) next.show_in_spotlight = false;
     if (!hasValue(previous.order_index)) next.order_index = 0;

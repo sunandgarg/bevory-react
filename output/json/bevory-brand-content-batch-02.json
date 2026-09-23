@@ -1,0 +1,924 @@
+{
+  "batch": 2,
+  "positions": "11-20",
+  "generated_at": "2026-09-22T04:34:29.553Z",
+  "db_write_status": "pending_database_connection",
+  "logo_policy": "No placeholder, scraped marketplace, AI-generated, or unverified logo is attached. Official evidence is recorded per brand; asset storage remains pending first-party URL capture and S3/DB access.",
+  "brands": [
+    {
+      "id": "brand-expansion-vinsura",
+      "brand_name": "Vinsura",
+      "slug": "vinsura",
+      "logo_emoji": "🍷",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Vinsura is listed on BevOry under Wine. An Indian winery and label from the Nashik wine region. Grape, vintage and style are product-specific, so BevOry should keep those details attached to each bottle.",
+      "story": "The brand adds another regional wine option for readers comparing Indian wines by style, size and city availability. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "India",
+      "link_url": "https://www.vinsurawines.com/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "An Indian winery and label from the Nashik wine region. Grape, vintage and style are product-specific, so BevOry should keep those details attached to each bottle."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Serve the bottle at the temperature suited to its colour and label guidance, then pair it with food that matches its acidity and body."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "salads",
+            "grilled vegetables",
+            "tomato pasta",
+            "roast chicken"
+          ]
+        }
+      ],
+      "why_choose": "Vinsura is worth comparing when you want to explore wine through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Vinsura?",
+          "answer": "Vinsura is listed on BevOry under Wine. An Indian winery and label from the Nashik wine region. Grape, vintage and style are product-specific, so BevOry should keep those details attached to each bottle."
+        },
+        {
+          "question": "How should Vinsura be served?",
+          "answer": "Serve the bottle at the temperature suited to its colour and label guidance, then pair it with food that matches its acidity and body."
+        },
+        {
+          "question": "Does BevOry show Vinsura prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Vinsura product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Vinsura should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Vinsura Brand Guide | BevOry",
+      "meta_description": "Explore Vinsura products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://vinsurawines.com/",
+      "logo_asset_status": "official_logo_evidence",
+      "logo_identity_verified": true,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_logo_evidence",
+        "source": "https://vinsurawines.com/",
+        "evidence": "The official Vinsura site identifies its Vinsura Logo and explains the vine-leaf mark. Store only after the first-party asset URL is captured."
+      }
+    },
+    {
+      "id": "brand-expansion-suntory-toki",
+      "brand_name": "Suntory Toki",
+      "slug": "suntory-toki",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Suntory Toki is listed on BevOry under World Whisky. A Japanese whisky blend from the House of Suntory, presented as a bright, mixable style in the producer's portfolio. It is associated with Suntory Global Spirits.",
+      "story": "Its identity is especially useful for readers comparing Japanese whisky intended for highballs with richer, more oak-led pours. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "Japan",
+      "link_url": "https://house.suntory.com/toki-whisky",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A Japanese whisky blend from the House of Suntory, presented as a bright, mixable style in the producer's portfolio."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Try a measured neat pour first, then a chilled highball with plenty of ice and a clean, dry soda."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "yakitori",
+            "tempura",
+            "grilled mushrooms",
+            "lightly spiced snacks"
+          ]
+        }
+      ],
+      "why_choose": "Suntory Toki is worth comparing when you want to explore world whisky through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Suntory Toki?",
+          "answer": "Suntory Toki is listed on BevOry under World Whisky. A Japanese whisky blend from the House of Suntory, presented as a bright, mixable style in the producer's portfolio."
+        },
+        {
+          "question": "How should Suntory Toki be served?",
+          "answer": "Try a measured neat pour first, then a chilled highball with plenty of ice and a clean, dry soda."
+        },
+        {
+          "question": "Does BevOry show Suntory Toki prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Suntory Toki product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Suntory Toki should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Suntory Toki Brand Guide | BevOry",
+      "meta_description": "Explore Suntory Toki products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://house.suntory.com/toki-whisky",
+      "logo_asset_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/toki-whisky",
+        "evidence": "Official House of Suntory Toki page with official bottle/product imagery and parent brand mark. A separate Toki wordmark asset was not resolved."
+      }
+    },
+    {
+      "id": "brand-expansion-hakushu",
+      "brand_name": "Hakushu",
+      "slug": "hakushu",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Hakushu is listed on BevOry under Single Malts. A Japanese single malt whisky from the House of Suntory. The exact expression, age statement and bottling strength must be confirmed from the bottle being listed. It is associated with Suntory Global Spirits.",
+      "story": "It gives the Japanese single malt section a dedicated page without treating every Hakushu expression as identical. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "Japan",
+      "link_url": "https://house.suntory.com/hakushu-whisky",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A Japanese single malt whisky from the House of Suntory. The exact expression, age statement and bottling strength must be confirmed from the bottle being listed."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Use a clean tulip glass and begin neat. A few drops of water can open the aroma when the specific bottling benefits from it."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "sushi",
+            "grilled fish",
+            "mild cheese",
+            "roasted vegetables"
+          ]
+        }
+      ],
+      "why_choose": "Hakushu is worth comparing when you want to explore single malts through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Hakushu?",
+          "answer": "Hakushu is listed on BevOry under Single Malts. A Japanese single malt whisky from the House of Suntory. The exact expression, age statement and bottling strength must be confirmed from the bottle being listed."
+        },
+        {
+          "question": "How should Hakushu be served?",
+          "answer": "Use a clean tulip glass and begin neat. A few drops of water can open the aroma when the specific bottling benefits from it."
+        },
+        {
+          "question": "Does BevOry show Hakushu prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Hakushu product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Hakushu should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Hakushu Brand Guide | BevOry",
+      "meta_description": "Explore Hakushu products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://house.suntory.com/hakushu-whisky",
+      "logo_asset_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/hakushu-whisky",
+        "evidence": "Official Hakushu page with official product imagery and House of Suntory branding. A standalone Hakushu logo asset was not resolved."
+      }
+    },
+    {
+      "id": "brand-expansion-ao",
+      "brand_name": "Ao",
+      "slug": "ao",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Ao is listed on BevOry under World Whisky. A world whisky from the House of Suntory. It is best described through the current label, blend information and bottling strength rather than a fixed universal tasting claim. It is associated with Suntory Global Spirits.",
+      "story": "The brand is a useful guide for readers exploring blends that draw on more than one whisky tradition. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "Japan",
+      "link_url": "https://house.suntory.com/ao-whisky",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A world whisky from the House of Suntory. It is best described through the current label, blend information and bottling strength rather than a fixed universal tasting claim."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Try a measured neat pour or a restrained highball, then compare how dilution changes the profile."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "grilled meats",
+            "soy-glazed dishes",
+            "roasted nuts",
+            "dark chocolate"
+          ]
+        }
+      ],
+      "why_choose": "Ao is worth comparing when you want to explore world whisky through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Ao?",
+          "answer": "Ao is listed on BevOry under World Whisky. A world whisky from the House of Suntory. It is best described through the current label, blend information and bottling strength rather than a fixed universal tasting claim."
+        },
+        {
+          "question": "How should Ao be served?",
+          "answer": "Try a measured neat pour or a restrained highball, then compare how dilution changes the profile."
+        },
+        {
+          "question": "Does BevOry show Ao prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Ao product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Ao should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Ao Brand Guide | BevOry",
+      "meta_description": "Explore Ao products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://house.suntory.com/ao-whisky",
+      "logo_asset_status": "official_brand_page_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_brand_page_evidence",
+        "source": "https://house.suntory.com/ao-whisky",
+        "evidence": "Official Ao page with official bottle imagery and Ao design cues. A standalone downloadable logo asset was not resolved."
+      }
+    },
+    {
+      "id": "brand-expansion-kakubin",
+      "brand_name": "Kakubin",
+      "slug": "kakubin",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Kakubin is listed on BevOry under Japanese Whisky. A Japanese whisky label from Suntory, commonly associated with long mixed serves. Exact strength and product details should follow the local bottle label. It is associated with Suntory.",
+      "story": "It belongs in a city-aware catalogue because pack size, local price and availability can vary even when the label is familiar. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "Japan",
+      "link_url": "https://house.suntory.com/kakubin-whisky/kakubin",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A Japanese whisky label from Suntory, commonly associated with long mixed serves. Exact strength and product details should follow the local bottle label."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Use it in a measured highball with cold soda and a large, clear ice cube, or taste a small pour neat first."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "yakitori",
+            "fried chicken",
+            "grilled vegetables",
+            "salty snacks"
+          ]
+        }
+      ],
+      "why_choose": "Kakubin is worth comparing when you want to explore japanese whisky through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Kakubin?",
+          "answer": "Kakubin is listed on BevOry under Japanese Whisky. A Japanese whisky label from Suntory, commonly associated with long mixed serves. Exact strength and product details should follow the local bottle label."
+        },
+        {
+          "question": "How should Kakubin be served?",
+          "answer": "Use it in a measured highball with cold soda and a large, clear ice cube, or taste a small pour neat first."
+        },
+        {
+          "question": "Does BevOry show Kakubin prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Kakubin product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Kakubin should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Kakubin Brand Guide | BevOry",
+      "meta_description": "Explore Kakubin products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://house.suntory.com/kakubin-whisky/kakubin",
+      "logo_asset_status": "official_brand_asset_evidence",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_brand_asset_evidence",
+        "source": "https://house.suntory.com/kakubin-whisky/kakubin",
+        "evidence": "Official Kakubin page with official bottle/product imagery and House of Suntory branding. A standalone Kakubin logo asset was not resolved."
+      }
+    },
+    {
+      "id": "brand-expansion-knob-creek",
+      "brand_name": "Knob Creek",
+      "slug": "knob-creek",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.knobcreek.com/sites/default/files/styles/original/public/2024-07/Knob%20Creek%20logo.png.webp?itok=3taCQI4A",
+      "image_url": null,
+      "description": "Knob Creek is listed on BevOry under Bourbon. An American bourbon whiskey brand from Suntory Global Spirits. Age statements, proof and expression names vary across the range. It is associated with Suntory Global Spirits.",
+      "story": "The brand should be compared expression by expression, especially when a single family includes different proofs and maturation details. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "United States",
+      "link_url": "https://www.knobcreek.com/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "An American bourbon whiskey brand from Suntory Global Spirits. Age statements, proof and expression names vary across the range."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Serve a modest neat pour in a rocks glass, add a little water if preferred, or use a measured whiskey cocktail."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "barbecue",
+            "blue cheese",
+            "roast meats",
+            "pecan desserts"
+          ]
+        }
+      ],
+      "why_choose": "Knob Creek is worth comparing when you want to explore bourbon through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Knob Creek?",
+          "answer": "Knob Creek is listed on BevOry under Bourbon. An American bourbon whiskey brand from Suntory Global Spirits. Age statements, proof and expression names vary across the range."
+        },
+        {
+          "question": "How should Knob Creek be served?",
+          "answer": "Serve a modest neat pour in a rocks glass, add a little water if preferred, or use a measured whiskey cocktail."
+        },
+        {
+          "question": "Does BevOry show Knob Creek prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Knob Creek product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Knob Creek should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Knob Creek Brand Guide | BevOry",
+      "meta_description": "Explore Knob Creek products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://www.knobcreek.com/",
+      "logo_asset_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": null,
+      "image_license_status": "first_party_asset_pending_s3_storage",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_logo_evidence",
+        "source": "https://www.knobcreek.com/",
+        "evidence": "Official Knob Creek site exposes a Knob Creek logo asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      }
+    },
+    {
+      "id": "brand-expansion-basil-haydens",
+      "brand_name": "Basil Hayden's",
+      "slug": "basil-haydens",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.basilhaydenbourbon.com/sites/default/files/styles/original/public/2024-10/Logo.webp?itok=Lrrj2k5V",
+      "image_url": null,
+      "description": "Basil Hayden's is listed on BevOry under Bourbon. An American bourbon brand from Suntory Global Spirits. The range includes expression-specific grain, proof and maturation details that belong on individual product pages. It is associated with Suntory Global Spirits.",
+      "story": "Its lighter, more approachable positioning makes the exact bottling important when comparing it with fuller, higher-proof bourbons. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "United States",
+      "link_url": "https://www.basilhaydenbourbon.com/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "An American bourbon brand from Suntory Global Spirits. The range includes expression-specific grain, proof and maturation details that belong on individual product pages."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Start neat or over one large cube, then use a measured serve in a simple Old Fashioned-style drink."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "smoked chicken",
+            "roasted nuts",
+            "apple dessert",
+            "aged cheddar"
+          ]
+        }
+      ],
+      "why_choose": "Basil Hayden's is worth comparing when you want to explore bourbon through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Basil Hayden's?",
+          "answer": "Basil Hayden's is listed on BevOry under Bourbon. An American bourbon brand from Suntory Global Spirits. The range includes expression-specific grain, proof and maturation details that belong on individual product pages."
+        },
+        {
+          "question": "How should Basil Hayden's be served?",
+          "answer": "Start neat or over one large cube, then use a measured serve in a simple Old Fashioned-style drink."
+        },
+        {
+          "question": "Does BevOry show Basil Hayden's prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Basil Hayden's product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Basil Hayden's should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Basil Hayden's Brand Guide | BevOry",
+      "meta_description": "Explore Basil Hayden's products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://www.basilhaydenbourbon.com/",
+      "logo_asset_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": null,
+      "image_license_status": "first_party_asset_pending_s3_storage",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_brand_asset_evidence",
+        "source": "https://www.basilhaydenbourbon.com/",
+        "evidence": "Official Basil Hayden’s site exposes official brand/product imagery. A stable standalone logo asset was not resolved. Direct first-party asset URL captured for review and later S3 storage."
+      }
+    },
+    {
+      "id": "brand-expansion-gentleman-jack",
+      "brand_name": "Gentleman Jack",
+      "slug": "gentleman-jack",
+      "logo_emoji": "🥃",
+      "logo_url": null,
+      "image_url": null,
+      "description": "Gentleman Jack is listed on BevOry under Whiskey. A Tennessee whiskey expression from the Jack Daniel's family. Product-level details such as proof and bottle size should be attached to the exact listing. It is associated with Brown-Forman.",
+      "story": "A dedicated profile prevents the expression from being lost inside a broad Jack Daniel's brand page and makes variant comparison clearer. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "United States",
+      "link_url": "https://pressroom.jackdaniels.com/products/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A Tennessee whiskey expression from the Jack Daniel's family. Product-level details such as proof and bottle size should be attached to the exact listing."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Serve a small pour neat or over ice, or use it in a balanced whiskey highball."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "barbecue",
+            "fried chicken",
+            "smoked cheese",
+            "pecan pie"
+          ]
+        }
+      ],
+      "why_choose": "Gentleman Jack is worth comparing when you want to explore whiskey through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Gentleman Jack?",
+          "answer": "Gentleman Jack is listed on BevOry under Whiskey. A Tennessee whiskey expression from the Jack Daniel's family. Product-level details such as proof and bottle size should be attached to the exact listing."
+        },
+        {
+          "question": "How should Gentleman Jack be served?",
+          "answer": "Serve a small pour neat or over ice, or use it in a balanced whiskey highball."
+        },
+        {
+          "question": "Does BevOry show Gentleman Jack prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Gentleman Jack product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Gentleman Jack should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Gentleman Jack Brand Guide | BevOry",
+      "meta_description": "Explore Gentleman Jack products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://pressroom.jackdaniels.com/products/",
+      "logo_asset_status": "needs_logo_url_resolution",
+      "logo_identity_verified": false,
+      "logo_verified_at": null,
+      "image_license_status": "pending_rights_verification",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "needs_logo_url_resolution",
+        "source": "https://pressroom.jackdaniels.com/products/",
+        "evidence": "Official Jack Daniel’s press room lists Gentleman Jack and provides official product evidence, but a stable standalone Gentleman Jack logo URL still needs resolution."
+      }
+    },
+    {
+      "id": "brand-expansion-courvoisier",
+      "brand_name": "Courvoisier",
+      "slug": "courvoisier",
+      "logo_emoji": "🥃",
+      "logo_url": "https://www.courvoisier.com/app/uploads/2024/06/courvoisier-logo-wordmark.svg",
+      "image_url": null,
+      "description": "Courvoisier is listed on BevOry under Cognac. A Cognac house with expression-specific blends and age categories. The current label should control any claim about age, cru, blend or strength.",
+      "story": "Cognac is best compared by the stated category, maturation information, bottle size and intended serve. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "France",
+      "link_url": "https://www.courvoisier.com/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A Cognac house with expression-specific blends and age categories. The current label should control any claim about age, cru, blend or strength."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Serve a modest measure in a tulip glass, or use a younger style in a measured Sidecar-style cocktail."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "dark chocolate",
+            "roast duck",
+            "dried fruit",
+            "aged cheese"
+          ]
+        }
+      ],
+      "why_choose": "Courvoisier is worth comparing when you want to explore cognac through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Courvoisier?",
+          "answer": "Courvoisier is listed on BevOry under Cognac. A Cognac house with expression-specific blends and age categories. The current label should control any claim about age, cru, blend or strength."
+        },
+        {
+          "question": "How should Courvoisier be served?",
+          "answer": "Serve a modest measure in a tulip glass, or use a younger style in a measured Sidecar-style cocktail."
+        },
+        {
+          "question": "Does BevOry show Courvoisier prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Courvoisier product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Courvoisier should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Courvoisier Brand Guide | BevOry",
+      "meta_description": "Explore Courvoisier products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://www.courvoisier.com/",
+      "logo_asset_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": null,
+      "image_license_status": "first_party_asset_pending_s3_storage",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_logo_evidence",
+        "source": "https://www.courvoisier.com/",
+        "evidence": "Official Courvoisier site exposes a Courvoisier logo wordmark asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      }
+    },
+    {
+      "id": "brand-expansion-hornitos",
+      "brand_name": "Hornitos",
+      "slug": "hornitos",
+      "logo_emoji": "🌵",
+      "logo_url": "https://www.hornitostequila.com/sites/default/files/styles/original/public/2025-09/Hornitos_Logo_PrimaryMarkWhite_RGB_2024.png.webp?itok=D8mybE-j",
+      "image_url": null,
+      "description": "Hornitos is listed on BevOry under Tequila. A tequila brand from the Sauza family and Suntory Global Spirits. Blanco, reposado and other expressions should be kept separate when products are added. It is associated with Suntory Global Spirits.",
+      "story": "The useful comparison is between tequila styles, maturation and bottle size, not between a brand name and a generic agave flavour. The page keeps brand context separate from product-specific facts, so strength, ingredients, age, vintage, format and local price are added only when verified for the individual bottle.",
+      "country": "Mexico",
+      "link_url": "https://www.hornitostequila.com/",
+      "tasting_notes": [
+        {
+          "title": "Style context",
+          "description": "A tequila brand from the Sauza family and Suntory Global Spirits. Blanco, reposado and other expressions should be kept separate when products are added."
+        },
+        {
+          "title": "Compare the expression",
+          "description": "A brand can contain more than one style. Compare the exact product, declared strength, bottle size and any stated maturation or flavour information."
+        },
+        {
+          "title": "Label-led detail",
+          "description": "Use the current product label for technical facts. This page does not invent a tasting experience or fill missing details with estimates."
+        }
+      ],
+      "how_to_enjoy": [
+        {
+          "subheading": "Start with the individual bottle",
+          "description": "Use a measured pour in a Margarita or Paloma, or taste a style neat from a small glass."
+        },
+        {
+          "subheading": "Keep the serve measured",
+          "description": "Use a modest serving, clean glassware and water alongside the drink. Match the mixer and temperature to the product style."
+        },
+        {
+          "subheading": "Check local availability",
+          "description": "Prices, bottle sizes and legal availability can vary by state, retailer, city and date. BevOry shows a numeric local price only when a reviewed record exists."
+        }
+      ],
+      "pairing_ideas": [
+        {
+          "title": "Food pairing ideas",
+          "items": [
+            "salsa",
+            "grilled corn",
+            "tacos",
+            "citrus-led salads"
+          ]
+        }
+      ],
+      "why_choose": "Hornitos is worth comparing when you want to explore tequila through the exact product, bottle size and serving style. BevOry keeps city-level price information separate so an unavailable local price is not presented as an estimate.",
+      "faqs": [
+        {
+          "question": "What is Hornitos?",
+          "answer": "Hornitos is listed on BevOry under Tequila. A tequila brand from the Sauza family and Suntory Global Spirits. Blanco, reposado and other expressions should be kept separate when products are added."
+        },
+        {
+          "question": "How should Hornitos be served?",
+          "answer": "Use a measured pour in a Margarita or Paloma, or taste a style neat from a small glass."
+        },
+        {
+          "question": "Does BevOry show Hornitos prices in every city?",
+          "answer": "Only reviewed positive local price records are shown as prices. A product or brand can be discoverable without a numeric price when the selected city has no verified record."
+        },
+        {
+          "question": "What should I check before choosing a Hornitos product?",
+          "answer": "Check the exact expression, bottle size, declared strength, label details, local price date and applicable state rules before making a decision."
+        }
+      ],
+      "final_verdict": "Hornitos should be approached as a range of individual products, not as one fixed taste. Compare the exact expression, size and local availability, then follow the current bottle label for technical and serving details.",
+      "meta_title": "Hornitos Brand Guide | BevOry",
+      "meta_description": "Explore Hornitos products, styles, serving ideas and city-level price availability on BevOry.",
+      "is_active": true,
+      "show_in_spotlight": false,
+      "order_index": 0,
+      "official_source_page": "https://www.hornitostequila.com/",
+      "logo_asset_status": "verified_official_asset_url",
+      "logo_identity_verified": true,
+      "logo_verified_at": null,
+      "image_license_status": "first_party_asset_pending_s3_storage",
+      "content_version": "brand-expansion-v1",
+      "content_basis": "verified brand portfolio facts and conservative editorial guidance",
+      "content_updated_at": "2026-09-22T04:34:29.553Z",
+      "created_at": "2026-09-22T04:34:29.553Z",
+      "updated_at": "2026-09-22T04:34:29.553Z",
+      "logo_audit": {
+        "status": "official_logo_evidence",
+        "source": "https://www.hornitostequila.com/",
+        "evidence": "Official Hornitos site exposes an official logo asset in its page imagery. Direct first-party asset URL captured for review and later S3 storage."
+      }
+    }
+  ],
+  "logo_asset_summary": {
+    "direct_first_party_asset_urls": 4,
+    "official_page_or_product_evidence": 5,
+    "needs_logo_url_resolution": 1
+  }
+}

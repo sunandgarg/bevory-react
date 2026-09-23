@@ -1,9 +1,8 @@
 import { memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Bell, ChevronLeft, Settings } from "lucide-react";
+import { Bell, ChevronLeft } from "lucide-react";
 import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
-import { useAuth } from "@/hooks/useAuth";
 import { useNotifications } from "@/hooks/useNotifications";
 
 interface MobileHeaderProps {
@@ -13,7 +12,6 @@ interface MobileHeaderProps {
 }
 
 const MobileHeader = memo(({ title, showLocation = true, showBack = false }: MobileHeaderProps) => {
-  const { isAdmin } = useAuth();
   const { unreadCount } = useNotifications();
   const navigate = useNavigate();
 
@@ -39,16 +37,6 @@ const MobileHeader = memo(({ title, showLocation = true, showBack = false }: Mob
         {/* Right */}
         <div className="flex items-center gap-1">
           {showLocation && <LocationSelectorNew />}
-          
-          {isAdmin && (
-            <Link
-              to="/admin"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Admin panel"
-            >
-              <Settings className="w-[18px] h-[18px] text-muted-foreground" />
-            </Link>
-          )}
           
           <Link 
             to="/notifications" 

@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { apiClient } from "@/integrations/api/client";
 import { useLocation } from "@/hooks/useLocation";
 import { citySlugFromName } from "@/lib/locations";
+import BrandLogo from "@/components/brand/BrandLogo";
 
 interface BrandSpotlight {
   id: string;
@@ -13,6 +14,8 @@ interface BrandSpotlight {
   logo_emoji: string | null;
   logo_url: string | null;
   country: string | null;
+  country_flag: string | null;
+  country_flag_url: string | null;
 }
 
 interface ProductBrandSpotlightProps {
@@ -47,16 +50,26 @@ const ProductBrandSpotlight = ({ brandName }: ProductBrandSpotlightProps) => {
         <div className="p-4 rounded-xl bg-card border border-border hover:border-accent/50 transition-colors">
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center overflow-hidden flex-shrink-0">
-              {brand.logo_url ? (
-                <img src={brand.logo_url} alt={`${brand.brand_name} logo`} width={56} height={56} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" />
-              ) : (
-                <span className="text-3xl">{brand.logo_emoji || "🏷️"}</span>
-              )}
+              <BrandLogo
+                brandName={brand.brand_name}
+                slug={brand.slug}
+                logoUrl={brand.logo_url}
+                emoji={brand.logo_emoji}
+                className="h-full w-full"
+                imgClassName="h-full w-full p-1"
+              />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold">{brand.brand_name}</p>
               {brand.country && (
-                <p className="text-sm text-muted-foreground">{brand.country}</p>
+                <p className="text-sm text-muted-foreground">
+                  {brand.country_flag_url ? (
+                    <img src={brand.country_flag_url} alt="" width={16} height={11} loading="lazy" decoding="async" className="inline-block mr-1 h-2.5 w-4 object-cover align-[-1px]" />
+                  ) : brand.country_flag ? (
+                    <span className="mr-1" aria-hidden="true">{brand.country_flag}</span>
+                  ) : null}
+                  {brand.country}
+                </p>
               )}
               {brand.description && (
                 <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
