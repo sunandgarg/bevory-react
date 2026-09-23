@@ -19,7 +19,7 @@ export type Session = {
   user: User;
 };
 
-export const CURRENT_POLICY_VERSION = "2026-09-20";
+export const CURRENT_POLICY_VERSION = "2026-09-23";
 
 export type PolicyAcceptanceInput = {
   accepted: true;

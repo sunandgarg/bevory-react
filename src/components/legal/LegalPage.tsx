@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
-export const LEGAL_LAST_UPDATED = "20 September 2026";
+export const LEGAL_LAST_UPDATED = "23 September 2026";
 export const LEGAL_EMAIL = "bevory.main@gmail.com";
 export const LEGAL_PHONE_DISPLAY = "+91 8010321712";
 export const LEGAL_PHONE_HREF = "+918010321712";

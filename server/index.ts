@@ -32,6 +32,7 @@ import {
   googleRedirectUri,
 } from "./integrations/googleOAuth.js";
 import { phoneOtpConfigured, sendPhoneOtp, verifyPhoneOtp } from "./integrations/phoneOtp.js";
+import { geminiConfigured } from "./integrations/gemini.js";
 import {
   createLegacyRedirectResolver,
   createSeoRenderer,
@@ -158,6 +159,7 @@ app.get("/api/health", async (_req, res) => {
         googleOAuth: googleOAuthConfigured(),
         phoneOtp: phoneOtpConfigured(),
         objectStorage: objectStorageConfigured() ? "s3" : "local",
+        gemini: geminiConfigured(),
       },
     });
   } catch (error) {
@@ -325,6 +327,8 @@ app.post("/api/query", (req, res, next) => {
   return next();
 }, queryHandler);
 app.get("/api/catalog/:cityId", cityCatalogHandler);
+app.use("/api/functions/party-planner-ai", noStore, rateLimit(10, 60 * 60 * 1000));
+app.use("/api/functions/ai-recommend", noStore, rateLimit(30, 60 * 60 * 1000));
 app.post("/api/functions/:name", functionsHandler);
 
 app.post("/api/storage/upload", upload.single("file"), async (req: AuthenticatedRequest, res) => {

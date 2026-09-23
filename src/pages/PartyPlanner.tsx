@@ -12,6 +12,18 @@ import { useToast } from "@/hooks/use-toast";
 import { generateProductUrl } from "@/lib/productSlug";
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
+import ProductImage from "@/components/product/ProductImage";
+
+interface AIProduct {
+  id: string;
+  slug: string;
+  name: string;
+  brand: string;
+  volume: string;
+  unitPrice: number;
+  quantity: number;
+  imageUrl: string | null;
+}
 
 interface AIRecommendation {
   category: string;
@@ -19,6 +31,7 @@ interface AIRecommendation {
   estimatedCost: number;
   suggestions: string[];
   reasoning: string;
+  products?: AIProduct[];
 }
 
 interface AIResponse {
@@ -494,13 +507,37 @@ const PartyPlanner = () => {
                         <p className="text-xs text-muted-foreground">{rec.quantity} items</p>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {rec.suggestions.map((suggestion, i) => (
-                        <span key={i} className="px-3 py-1 rounded-full bg-secondary text-sm">
-                          {suggestion}
-                        </span>
-                      ))}
-                    </div>
+                    {rec.products?.length ? (
+                      <div className="space-y-2">
+                        {rec.products.map((product) => (
+                          <Link
+                            key={product.id}
+                            to={generateProductUrl({ citySlug, productSlug: product.slug })}
+                            className="flex items-center gap-3 rounded-lg bg-secondary/60 p-3 transition-colors hover:bg-secondary"
+                          >
+                            <ProductImage
+                              src={product.imageUrl}
+                              alt={`${product.brand} ${product.name} bottle`}
+                              className="h-14 w-12 shrink-0 rounded-lg"
+                              width={96}
+                            />
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-sm font-semibold">{product.brand} {product.name}</p>
+                              <p className="text-xs text-muted-foreground">{product.volume} · {product.quantity} × ₹{product.unitPrice.toLocaleString("en-IN")}</p>
+                            </div>
+                            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex flex-wrap gap-2">
+                        {rec.suggestions.map((suggestion, i) => (
+                          <span key={i} className="px-3 py-1 rounded-full bg-secondary text-sm">
+                            {suggestion}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </div>

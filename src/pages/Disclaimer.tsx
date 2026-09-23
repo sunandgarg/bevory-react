@@ -116,7 +116,16 @@ const Disclaimer = () => (
       or other hazardous techniques without the required expertise and safety controls.
     </p>
 
-    <h2>10. External links, embeds, and services</h2>
+    <h2>10. AI-generated answers</h2>
+    <p>
+      oRy AI and AI-assisted Party Planner output is generated automatically using page context and selected BevOry
+      catalogue records. It can misunderstand a question, omit context, or produce an inaccurate or outdated answer.
+      It is not a statement from a producer, retailer, regulator, doctor, lawyer, or other professional. Verify prices,
+      availability, ingredients, allergens, alcohol strength, serving information, and legal requirements using the
+      physical label and an appropriate authoritative source. Do not submit sensitive or confidential information.
+    </p>
+
+    <h2>11. External links, embeds, and services</h2>
     <p>
       Links and embeds may lead to websites and services we do not control, including Google and YouTube. We do not
       warrant their identity, legality, security, accessibility, privacy practices, representations, products, or
@@ -124,7 +133,7 @@ const Disclaimer = () => (
       third party's current terms and use independent judgment before interacting or sharing information.
     </p>
 
-    <h2>11. Availability, security, and technical limitations</h2>
+    <h2>12. Availability, security, and technical limitations</h2>
     <p>
       The Service may be interrupted, delayed, changed, contain broken links, display cached information, or behave
       differently across devices. No online service can be guaranteed error-free, continuously available, or immune
@@ -132,7 +141,7 @@ const Disclaimer = () => (
       account, and network security.
     </p>
 
-    <h2>12. No professional advice or reliance guarantee</h2>
+    <h2>13. No professional advice or reliance guarantee</h2>
     <p>
       BevOry content is general information and is not legal, tax, excise, medical, nutritional, financial, safety,
       licensing, investment, procurement, or other professional advice. You should obtain advice from a suitably
@@ -140,7 +149,7 @@ const Disclaimer = () => (
       own judgment and risk, subject always to rights and remedies that applicable law does not allow us to exclude.
     </p>
 
-    <h2>13. Corrections and contact</h2>
+    <h2>14. Corrections and contact</h2>
     <p>
       If you identify an inaccurate price, product record, unsafe statement, impersonation, rights concern, or other
       material issue, send the exact URL, a description, reliable supporting evidence, and your requested correction.

@@ -5,7 +5,8 @@ import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
-import { CITY_SLUGS, cityHomePath, citySlugFromName } from "@/lib/locations";
+import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
+import OryAssistant from "@/components/ai/OryAssistant";
 
 const PublicShell = () => {
   const { unreadCount } = useNotifications();
@@ -65,16 +66,7 @@ const PublicShell = () => {
         <Outlet />
       </div>
 
-      <Link
-        to={cityHomePath(citySlug)}
-        aria-label="Open oRy AI home"
-        className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1 text-foreground transition-transform hover:scale-105 active:scale-95 md:bottom-6"
-      >
-        <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-white p-1 shadow-lg">
-          <img src="/ory-ai-logo.png" alt="" width={148} height={148} className="h-full w-full rounded-full object-contain" />
-        </span>
-        <span className="text-xs font-bold">oRy AI</span>
-      </Link>
+      <OryAssistant />
     </>
   );
 };

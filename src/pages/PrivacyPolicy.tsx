@@ -49,6 +49,11 @@ const PrivacyPolicy = () => (
         recent searches, comparison choices, notification preferences, and other features you use while signed in.
       </li>
       <li>
+        <strong>AI assistant inputs:</strong> questions you send to oRy AI or the Smart Party Planner, limited recent
+        conversation context, the BevOry page you are viewing, selected city, and planning inputs such as guest count,
+        budget, and categories. Do not enter private, confidential, financial, health, identity, or account information.
+      </li>
+      <li>
         <strong>Communications:</strong> support messages, error reports, rights requests, legal notices, grievance
         records, attachments, and records needed to investigate or respond.
       </li>
@@ -100,6 +105,7 @@ const PrivacyPolicy = () => (
     <ul>
       <li>create, authenticate, secure, and administer accounts;</li>
       <li>provide city-aware discovery, saved items, reviews, comparisons, notifications, and requested support;</li>
+      <li>generate page-aware answers and catalogue-grounded party-planning output when you choose an AI feature;</li>
       <li>operate, debug, measure, protect, and improve the Service and its accessibility;</li>
       <li>detect spam, fraud, credential abuse, unlawful activity, security incidents, and Terms violations;</li>
       <li>moderate User Content, resolve disputes, enforce agreements, and protect users or third-party rights;</li>
@@ -122,8 +128,10 @@ const PrivacyPolicy = () => (
         backups, and object storage) and Cloudflare (DNS, content delivery, caching, traffic management, and security).
       </li>
       <li>
-        <strong>To feature providers you use:</strong> Google for optional Analytics and Google OAuth sign-in; Twilio
-        for phone OTP messaging; and YouTube/Google for videos you choose to load or open.
+        <strong>To feature providers you use:</strong> Google for optional Analytics, Google OAuth sign-in, and Gemini
+        processing when you submit an oRy AI or Smart Party Planner request; Twilio for phone OTP messaging; and
+        YouTube/Google for videos you choose to load or open. AI requests can include your question, selected city,
+        current BevOry page context, limited conversation history, and planning inputs needed to answer.
       </li>
       <li>
         <strong>To professional advisers and contractors:</strong> only where reasonably needed and subject to duties of
