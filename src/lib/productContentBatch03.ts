@@ -1,0 +1,335 @@
+// Producer-checked editorial. Source ledger: docs/editorial/product-batch-03-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "macallan-the-macallan-12-year-old-double-cask-3071225": {
+    productName: "The Macallan Double Cask 12", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "Double Cask 12 puts fudge and candied citrus ahead of the heavier raisin character of Macallan's Sherry Oak line. It is a creamy, unpeated Speyside malt with gentle spice.",
+    craftStory: "The Macallan distils at its Speyside estate near Craigellachie. This 12-year-old matures in sherry-seasoned American and European oak casks prepared in Jerez de la Frontera, Spain, rather than simply being finished in sherry wood.",
+    tastingNotes: { nose: "Fudge, candied orange and lemon over vanilla and soft spice.", palate: "Creamy toffee and milk-chocolate raisins develop into orange peel and light oak spice.", finish: "Medium, with sweet oak and fading citrus." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat first; a few drops of spring water can separate citrus from toffee." },
+    foodPairings: ["chicken malai tikka", "paneer with caramelised onion", "date-and-walnut barfi", "roasted almonds", "orange dark chocolate"],
+    whyBuyThis: "Its two sherry-seasoned oak types show Macallan's creamy side without the heavier Sherry Oak profile.",
+    faqs: [{ question: "Is Double Cask 12 smoky?", answer: "No. Fudge, citrus and soft spice define this unpeated malt." }, { question: "Are both cask types sherry-seasoned?", answer: "Yes. The producer uses sherry-seasoned American and European oak from Jerez." }],
+    metaTitle: "The Macallan Double Cask 12 Price, Taste & Review | BevOry", metaDescription: "Macallan Double Cask 12 brings fudge, citrus and toffee. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "macallan-the-macallan-18-years-sherry-casks-34a7cc1": {
+    productName: "The Macallan Sherry Oak 18", category: "18-Year-Old Speyside Single Malt Scotch Whisky",
+    shortOverview: "Sherry Oak 18 is a deeper, more dried-fruit-led Macallan than Double Cask 12. Ginger, dates and dark chocolate make it a slow, neat sipping malt.",
+    craftStory: "The Macallan's Speyside spirit matures for at least 18 years predominantly in sherry-seasoned European oak casks from Jerez. The annual release develops natural colour and weight from extended oak contact, not peat smoke.",
+    tastingNotes: { nose: "Dried fruit, ginger and polished oak with a dark-chocolate edge.", palate: "Full and composed, moving from dates and raisin to warming ginger and mature oak.", finish: "Long, with dark chocolate, spice and drying oak." },
+    servingGuide: { glassware: "Glencairn or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small measure neat and let it rest; add only a few drops of spring water if needed." },
+    foodPairings: ["mutton galouti kebab", "lamb rogan josh", "date-and-walnut halwa", "70% dark chocolate", "aged cheddar"],
+    whyBuyThis: "It is a direct expression of long sherry-seasoned European-oak maturation rather than added smoke.",
+    faqs: [{ question: "Is Sherry Oak 18 peated?", answer: "No. Its core flavours come from malt and sherry-seasoned oak, not peat." }, { question: "Does the release year change?", answer: "Macallan releases this expression annually; bottle labels identify the specific edition." }],
+    metaTitle: "The Macallan Sherry Oak 18 Price, Taste & Review | BevOry", metaDescription: "Macallan Sherry Oak 18 layers dates, ginger and dark chocolate. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "macallan-the-macallan-18yrs-double-cask-6d47eb2": {
+    productName: "The Macallan Double Cask 18", category: "18-Year-Old Speyside Single Malt Scotch Whisky",
+    shortOverview: "Double Cask 18 balances sweet American-oak vanilla against European-oak dried fruit and spice. It is rounder and more toffee-led than Macallan Sherry Oak 18.",
+    craftStory: "At The Macallan's Speyside estate, this malt matures for at least 18 years in American and European oak casks seasoned with sherry in Jerez. Both woods contribute through maturation rather than a brief finishing step.",
+    tastingNotes: { nose: "Toffee, vanilla and sultana with soft ginger.", palate: "Silky and full, with dried fruit, caramel and warm oak spice building gradually.", finish: "Long and mellow, leaving toffee, ginger and oak." },
+    servingGuide: { glassware: "Glencairn or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat; a few drops of spring water may reveal more dried fruit." },
+    foodPairings: ["mutton seekh kebab", "mushroom galouti", "salted caramel dark chocolate", "fig-and-walnut tart", "aged gouda"],
+    whyBuyThis: "The two sherry-seasoned oak origins give mature Macallan depth with a softer vanilla centre.",
+    faqs: [{ question: "Is Double Cask 18 the same as Sherry Oak 18?", answer: "No. Double Cask combines sherry-seasoned American and European oak; Sherry Oak centres on predominantly European oak." }, { question: "Should it be mixed?", answer: "A neat serve best preserves the detail of this older malt." }],
+    metaTitle: "The Macallan Double Cask 18 Price, Taste & Review | BevOry", metaDescription: "Macallan Double Cask 18 offers toffee, sultana and ginger. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "macallan-the-macallan-classic-cut-scotch-c8bdb03": {
+    productName: "The Macallan Classic Cut", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "Classic Cut is a higher-strength Macallan release whose flavour shifts by edition. The common theme is concentrated fruit and oak rather than peat.",
+    craftStory: "Macallan distils on its Speyside estate and selects oak-matured casks for each annual Classic Cut. Because the recipe and bottling strength change between editions, the bottle's year identifies the exact cask balance.",
+    tastingNotes: { nose: "Ripe orchard fruit, vanilla and warming oak spice.", palate: "Full and textured, with sweet malt, citrus peel and baking spice emerging as it opens.", finish: "Long and warming, with fruit and oak lingering." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat, then add spring water a few drops at a time; higher-strength editions open noticeably with dilution." },
+    foodPairings: ["galouti kebab", "tandoori mushrooms", "roasted almonds", "dark chocolate with orange", "date barfi"],
+    whyBuyThis: "It lets experienced drinkers explore a more concentrated Macallan outside the fixed age-statement range.",
+    faqs: [{ question: "Does Classic Cut taste the same every year?", answer: "No. It is an annual release; tasting notes and strength vary by edition." }, { question: "Is Classic Cut peated?", answer: "Peat is not the defining Macallan Classic Cut character; fruit and oak are more central." }],
+    metaTitle: "The Macallan Classic Cut Price, Taste & Review | BevOry", metaDescription: "Macallan Classic Cut brings concentrated fruit and oak spice. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "macallan-quest-12d6d75": {
+    productName: "The Macallan Quest", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "Quest is the fresh, citrus-led starting point of Macallan's travel-retail Quest Collection. Apple and vanilla keep it lighter than the distillery's older sherry-led malts.",
+    craftStory: "Macallan combines four cask types for Quest: American bourbon casks, sherry-seasoned American and European oak, and hogsheads. The Speyside spirit gains orchard fruit and gentle spice without an age statement.",
+    tastingNotes: { nose: "Apple, lemon and soft vanilla oak.", palate: "Bright apple and ginger move into dried fruit, nutmeg and cinnamon.", finish: "Long yet light, with gentle fruit sweetness." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Begin neat; a few drops of water brighten the apple-and-lemon notes." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "apple chaat", "roasted cashews", "mild chicken korma"],
+    whyBuyThis: "Its four-cask recipe delivers a distinctly fresher Macallan than the heavier Sherry Oak line.",
+    faqs: [{ question: "Is Quest an age-statement whisky?", answer: "No age is stated on the standard Quest label." }, { question: "Is Quest finished in sherry casks?", answer: "Sherry-seasoned casks are part of its four-cask recipe, alongside American bourbon casks and hogsheads." }],
+    metaTitle: "The Macallan Quest Price, Taste & Review | BevOry", metaDescription: "Macallan Quest offers apple, lemon and vanilla oak. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "ardbeg-10yrs-da4eeac": {
+    productName: "Ardbeg Ten", category: "10-Year-Old Islay Single Malt Scotch Whisky",
+    shortOverview: "Ardbeg Ten is intensely peated yet unusually bright with lime and coastal salt. It is a benchmark for drinkers who want smoke with energy rather than sherry sweetness.",
+    craftStory: "Ardbeg distils on Islay in copper pot stills fitted with a purifier on the lyne arm. The 10-year-old matures in bourbon casks and is bottled without chill filtration, preserving its oily peat character.",
+    tastingNotes: { nose: "Peat smoke, lemon, lime and sea spray over tar and menthol.", palate: "Oily and full, with crackling peat, brine, citrus and black pepper.", finish: "Very long and smoky, leaving espresso, anise and soft barley." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat; add a few drops of water to lift the citrus through the smoke." },
+    foodPairings: ["mutton seekh kebab", "smoked baingan bharta", "tandoori lamb chops", "charred paneer", "70% dark chocolate"],
+    whyBuyThis: "Its lime-and-brine lift makes heavy peat feel precise rather than one-note.",
+    faqs: [{ question: "Is Ardbeg Ten heavily peated?", answer: "Yes. Peat smoke is prominent, balanced by citrus and maritime salt." }, { question: "Which casks are used?", answer: "The producer identifies bourbon casks for this ten-year-old expression." }],
+    metaTitle: "Ardbeg Ten Price, Taste & Review | BevOry", metaDescription: "Ardbeg Ten combines peat, lime and sea salt. See Indian food pairings and check indicative city prices on BevOry."
+  },
+  "ardbeg-wee-beastie-5-yrs-b6ebc3b": {
+    productName: "Ardbeg Wee Beastie 5", category: "5-Year-Old Islay Single Malt Scotch Whisky",
+    shortOverview: "Wee Beastie is a younger, rawer Ardbeg than the Ten. Black pepper, tar and savoury smoke arrive before its chocolate sweetness.",
+    craftStory: "Ardbeg's peated Islay spirit spends five years in bourbon and Oloroso sherry casks. Shorter maturation leaves a more forceful smoke-and-spice profile than the distillery's older malts.",
+    tastingNotes: { nose: "Black pepper, pine resin, vanilla and smoky bacon.", palate: "Dense and punchy, with chocolate, tar, eucalyptus and anise.", finish: "Long, salty and smoky, easing into cocoa and fudge." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Try a small neat pour, then use water sparingly to open the pine and chocolate notes." },
+    foodPairings: ["mutton seekh kebab", "pepper chicken", "smoked paneer tikka", "lamb rogan josh", "70% dark chocolate"],
+    whyBuyThis: "The five-year age shows Ardbeg's peat at its most direct, with an Oloroso-softened chocolate edge.",
+    faqs: [{ question: "Is Wee Beastie older than Ardbeg Ten?", answer: "No. Wee Beastie is five years old; Ardbeg Ten is ten years old." }, { question: "Does it use sherry casks?", answer: "Yes. Bourbon and Oloroso sherry casks both shape this expression." }],
+    metaTitle: "Ardbeg Wee Beastie 5 Price, Taste & Review | BevOry", metaDescription: "Wee Beastie 5 brings pepper, tar, smoke and chocolate. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "lagavulin-16years-a389946": {
+    productName: "Lagavulin 16 Years", category: "16-Year-Old Islay Single Malt Scotch Whisky",
+    shortOverview: "Lagavulin 16 is a slow-burning Islay malt with dry peat, iodine and a deep sweetness. It feels more settled than many young smoky whiskies without losing its maritime character.",
+    craftStory: "Lagavulin distils on Islay's southern coast and matures this spirit in oak for at least 16 years. The distillery's heavily peated malt and long ageing produce smoke, salt and rounded wood rather than a delicate fruit style.",
+    tastingNotes: { nose: "Peat smoke, iodine, seaweed and dark malt sweetness.", palate: "Full and dry, with peat, salt, gentle sweetness and mature wood.", finish: "Long and elegant, with seaweed, brine and lingering smoke." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat and pause between sips; a few drops of still water can soften the peat." },
+    foodPairings: ["galouti kebab", "lamb rogan josh", "smoked fish tikka", "charred baingan bharta", "70% dark chocolate"],
+    whyBuyThis: "Its 16 years of oak maturation gives Islay smoke unusual depth and composure.",
+    faqs: [{ question: "Is Lagavulin 16 smoky?", answer: "Very. Peat smoke, iodine and seaweed are core parts of its official profile." }, { question: "Should it be served with ice?", answer: "Neat or with a little still water best reveals its layered smoke and salt." }],
+    metaTitle: "Lagavulin 16 Years Price, Taste & Review | BevOry", metaDescription: "Lagavulin 16 layers peat smoke, iodine and sea salt. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "laphroaig-10-yrs-e5530ae": {
+    productName: "Laphroaig 10 Years", category: "10-Year-Old Islay Single Malt Scotch Whisky",
+    shortOverview: "Laphroaig 10 is a forceful Islay whisky with medicinal peat, seaweed and a surprising sweet core. Its coastal character is more iodine-led than Ardbeg Ten's citrus profile.",
+    craftStory: "Laphroaig cold-smokes malted barley over Islay peat fires and distils beside the sea. The whisky matures for ten years in ex-bourbon barrels, which round the smoke with charred-oak sweetness.",
+    tastingNotes: { nose: "Peat smoke, seaweed and medicinal iodine over a faint sweetness.", palate: "Full and oily, with salt, earthy peat and a sweet malt centre.", finish: "Long, with sweet seaweed and persistent smoke." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat first; a small splash of water may expose more sweetness beneath the peat." },
+    foodPairings: ["smoked fish tikka", "mutton seekh", "charred paneer", "lamb rogan josh", "70% dark chocolate"],
+    whyBuyThis: "Its iodine-and-seaweed peat character is one of the clearest signatures in Scotch whisky.",
+    faqs: [{ question: "Is Laphroaig 10 sweet or smoky?", answer: "Both: intense medicinal peat leads, with malt sweetness underneath." }, { question: "Where is it made?", answer: "It is distilled and matured on the Scottish island of Islay." }],
+    metaTitle: "Laphroaig 10 Years Price, Taste & Review | BevOry", metaDescription: "Laphroaig 10 brings medicinal peat, seaweed and sweetness. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "laphroaig-select-single-malt-whisky-e1497c1": {
+    productName: "Laphroaig Select", category: "Islay Single Malt Scotch Whisky",
+    shortOverview: "Select is a softer, oak-rounded entry to Laphroaig's peated house style. Smoke and seaweed remain, but fruit and sweetness make the first sip less severe than the 10-year-old.",
+    craftStory: "Laphroaig combines whiskies from five cask styles at its Islay distillery. The producer names Oloroso and Pedro Ximénez sherry wood, ex-bourbon quarter casks and new American oak in the Select recipe.",
+    tastingNotes: { nose: "Light peat, sea spray, lime and red fruit.", palate: "Rounded malt sweetness carries smoke, oak and a mild seaweed note.", finish: "Medium, with soft smoke, oak and a floral lift." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat to compare its gentle peat with Laphroaig 10; add a few drops of water if desired." },
+    foodPairings: ["tandoori chicken", "mutton seekh", "smoked mushroom tikka", "salted almonds", "dark chocolate"],
+    whyBuyThis: "Its multi-cask sweetness lets new peat drinkers approach Laphroaig without losing the Islay identity.",
+    faqs: [{ question: "Is Select less smoky than Laphroaig 10?", answer: "The producer presents it as a softer, more rounded introduction to the distillery's peat." }, { question: "Does Select have an age statement?", answer: "No age is stated on the standard Select bottling." }],
+    metaTitle: "Laphroaig Select Price, Taste & Review | BevOry", metaDescription: "Laphroaig Select balances soft peat, fruit and oak. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "talisker-10-yrs-c385d2f": {
+    productName: "Talisker 10 Years", category: "10-Year-Old Island Single Malt Scotch Whisky",
+    shortOverview: "Talisker 10 pairs sea salt and peat smoke with its unmistakable chilli-pepper finish. It is a Skye malt, not an Islay whisky.",
+    craftStory: "Talisker has been distilled at Carbost on the Isle of Skye since 1830. The 10-year-old is double-distilled and aged in American oak casks, giving its maritime malt a rounded wood frame.",
+    tastingNotes: { nose: "Peat smoke, sea salt and a small citrus sweetness.", palate: "Full and warming, with barley malt, dried fruit, smoke and building pepper.", finish: "Long and peppery, with maritime salt and fading peat." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Try neat before water; a few drops draw out the citrus and sea-air notes." },
+    foodPairings: ["tandoori prawns", "mutton seekh kebab", "pepper chicken", "smoked paneer tikka", "roasted sea-salt cashews"],
+    whyBuyThis: "Its peppery finish distinguishes it from the more medicinal smoke of Islay malts.",
+    faqs: [{ question: "Is Talisker 10 from Islay?", answer: "No. Talisker is distilled on the Isle of Skye." }, { question: "Is it peated?", answer: "Yes. Peat smoke appears alongside salt and pepper in the official profile." }],
+    metaTitle: "Talisker 10 Years Price, Taste & Review | BevOry", metaDescription: "Talisker 10 combines sea salt, peat and pepper. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "talisker-skye-19b3ea0": {
+    productName: "Talisker Skye", category: "Island Single Malt Scotch Whisky",
+    shortOverview: "Talisker Skye softens the distillery's coastal pepper with fresh orange and mango. Its sweet opening makes it more approachable than Talisker 10 while retaining smoke and salt.",
+    craftStory: "Made at Carbost on the Isle of Skye, this malt matures in refill and toasted American oak, with extra emphasis on toasted casks. The wood brings roundness to Talisker's sea-air and pepper character.",
+    tastingNotes: { nose: "Fresh orange and mango above seaweed, driftwood and salt.", palate: "Soft and sweet at first, then smoke and savoury pepper gather force.", finish: "Medium and drier, with a light peaty ember." },
+    servingGuide: { glassware: "Rocks or Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat or with a little water to follow the citrus-to-pepper transition." },
+    foodPairings: ["tandoori prawns", "chicken tikka", "fish amritsari", "pepper paneer", "salted almonds"],
+    whyBuyThis: "It brings Talisker's sea-salt identity into a sweeter, citrus-led frame.",
+    faqs: [{ question: "Is Talisker Skye smoky?", answer: "Yes, but smoke is gentler than in the 10-year-old and balanced by citrus fruit." }, { question: "Which wood is used?", answer: "The producer identifies refill and toasted American oak casks." }],
+    metaTitle: "Talisker Skye Price, Taste & Review | BevOry", metaDescription: "Talisker Skye offers orange, sea salt and gentle smoke. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "talisker-storm-281d717": {
+    productName: "Talisker Storm", category: "Island Single Malt Scotch Whisky",
+    shortOverview: "Storm pushes Talisker's sea-salt and pepper character into a darker, more smoky direction. Red berries and malt sweetness stop the peat from feeling flat.",
+    craftStory: "Talisker distils Storm at Carbost on the Isle of Skye. The no-age-statement malt draws on oak maturation for a woodier, brinier character than the gentler Skye expression.",
+    tastingNotes: { nose: "Sweet malt and red berries turn toward brine, smoke and black pepper.", palate: "Medium-bodied and coating, with sweetness followed by nutty smoke and sharp spice.", finish: "Medium and dry, leaving light peat embers and pepper." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat, then try a little water to separate the berry note from the smoke." },
+    foodPairings: ["mutton seekh kebab", "smoked fish tikka", "pepper chicken", "charred mushrooms", "70% dark chocolate"],
+    whyBuyThis: "It offers a woodier and more forceful Talisker without an age-statement premium.",
+    faqs: [{ question: "Is Storm older than Talisker 10?", answer: "Storm carries no age statement, so its age cannot be inferred from the name." }, { question: "How does it differ from Skye?", answer: "Storm is darker, smokier and more pepper-led; Skye is sweeter and more citrus-led." }],
+    metaTitle: "Talisker Storm Price, Taste & Review | BevOry", metaDescription: "Talisker Storm brings brine, berries, pepper and smoke. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "paul-john-brilliance-7182fa2": {
+    productName: "Paul John Brilliance", category: "Unpeated Indian Single Malt Whisky",
+    shortOverview: "Brilliance is a honeyed, cocoa-tinged Goan single malt without peat smoke. Its soft sweetness makes it a clear starting point for Indian malt whisky.",
+    craftStory: "Paul John distils Indian six-row barley in copper pot stills at Cuncolim, Goa, then matures the spirit in American oak. Tropical ageing builds vanilla and wood character; Brilliance is bottled without chill filtration.",
+    tastingNotes: { nose: "Demerara sugar, cinnamon, honey and light spice.", palate: "Smooth and honeyed, with cocoa, malt sweetness and a crisp cereal edge.", finish: "Medium and relaxed, leaving vanilla and mild oak spice." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat first; add a few drops of water to separate cocoa from honey." },
+    foodPairings: ["chicken malai tikka", "tandoori mushrooms", "badam halwa", "roasted cashews", "apple pie"],
+    whyBuyThis: "It shows Goa's oak-matured malt character without requiring a taste for peat.",
+    faqs: [{ question: "Is Brilliance smoky?", answer: "No. It is one of Paul John's unpeated expressions." }, { question: "Where is it made?", answer: "Paul John produces its single malts at Cuncolim in Goa." }],
+    metaTitle: "Paul John Brilliance Price, Taste & Review | BevOry", metaDescription: "Paul John Brilliance offers honey, cocoa and vanilla. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "paul-john-bold-rare-7fd2aa4": {
+    productName: "Paul John Bold", category: "Peated Indian Single Malt Whisky",
+    shortOverview: "Bold places peat smoke and pepper over Paul John's familiar honeyed malt. It is a Goan whisky with a more forceful smoky edge than unpeated Brilliance.",
+    craftStory: "Paul John makes Bold from Indian six-row barley dried with peat, then distils and matures it in Goa. American-oak ageing and tropical conditions bring honey and molasses depth alongside the smoke.",
+    tastingNotes: { nose: "Peat smoke, Manuka-like honey, prickly spice and liquorice.", palate: "Silky at first, then oak honey, pepper, soot and dry molasses gather.", finish: "Medium, with smoked mocha and a coppery spice edge." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat; a few drops of spring water can reveal more honey beneath the peat." },
+    foodPairings: ["mutton seekh kebab", "smoked baingan bharta", "pepper chicken", "charred paneer", "70% dark chocolate"],
+    whyBuyThis: "Its peat-and-honey tension gives a distinct Indian alternative to coastal Scotch smoke.",
+    faqs: [{ question: "Is Paul John Bold peated?", answer: "Yes. Peat smoke is a defining part of the Bold profile." }, { question: "Is Bold made in Scotland?", answer: "No. It is distilled and matured in Goa, India." }],
+    metaTitle: "Paul John Bold Price, Taste & Review | BevOry", metaDescription: "Paul John Bold combines peat, honey and smoked mocha. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "paul-john-nirvana-f3d5974": {
+    productName: "Paul John Nirvana", category: "Unpeated Indian Single Malt Whisky",
+    shortOverview: "Nirvana is Paul John's gentlest unpeated malt, built around honeycomb and caramel pudding. It is lighter and simpler than Brilliance, suited to a first single-malt pour.",
+    craftStory: "The Goan distillery uses Indian six-row barley and copper pot stills, then matures Nirvana in ex-bourbon American oak. That wood gives vanilla and caramel while leaving the barley's mild salt note perceptible.",
+    tastingNotes: { nose: "Soft bourbon-cask vanilla, caramel pudding and honey.", palate: "Light and creamy, with honeycomb, sweet barley and a mild salty accent.", finish: "Medium and honeyed, with fading vanilla." },
+    servingGuide: { glassware: "Tulip whisky glass or highball glass", idealTemperature: "Cool room temperature (18–20°C)", recommendation: "Try neat first; soda and ice make a gentle malt highball if preferred." },
+    foodPairings: ["malai paneer tikka", "roasted cashews", "chicken korma", "caramel custard", "salted makhana"],
+    whyBuyThis: "Its easy honeycomb-and-vanilla profile lowers the barrier to Indian single malt.",
+    faqs: [{ question: "Is Nirvana peated?", answer: "No. Nirvana uses unpeated malt." }, { question: "Which casks shape Nirvana?", answer: "Ex-bourbon American oak provides its vanilla and caramel notes." }],
+    metaTitle: "Paul John Nirvana Price, Taste & Review | BevOry", metaDescription: "Paul John Nirvana brings honeycomb, caramel and vanilla. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "paul-john-oloroso-select-cask-1acd4d1": {
+    productName: "Paul John Oloroso Select", category: "Sherry-Finished Indian Single Malt Whisky",
+    shortOverview: "Oloroso Select turns Paul John's Goan malt toward apricot, nuts and dark chocolate. It is rich without the peat-led bite of Bold.",
+    craftStory: "Distilled in copper pot stills at Cuncolim, Goa, this Indian malt first matures in American bourbon barrels and is finished in Oloroso sherry casks. The finishing wood adds dried fruit and nutty spice to the sweet barley base.",
+    tastingNotes: { nose: "Peach, apricot, blood orange and a little molasses.", palate: "Soft and full, with nutty chocolate, malt sweetness and fruitcake spice.", finish: "Long and sweet-spiced, leaving coffee mocha and dark chocolate." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat after food; a few drops of water can open the fruit beneath the sherry oak." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "date-and-walnut halwa", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "Its Oloroso finish gives Indian malt a clear apricot-and-chocolate dessert register.",
+    faqs: [{ question: "Does Oloroso Select contain sherry?", answer: "It is whisky finished in casks previously used for Oloroso sherry, not a whisky-and-wine mix." }, { question: "Is it smoky?", answer: "The producer's tasting notes focus on fruit, nuts, chocolate and spice rather than peat." }],
+    metaTitle: "Paul John Oloroso Select Price, Taste & Review | BevOry", metaDescription: "Paul John Oloroso Select layers apricot, nuts and chocolate. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "paul-john-px-cask-573c068": {
+    productName: "Paul John PX Select", category: "Pedro Ximénez-Finished Indian Single Malt",
+    shortOverview: "PX Select is Paul John's sweeter sherry-cask expression, carrying figs, butterscotch and fruitcake. It is richer and darker in flavour than Oloroso Select.",
+    craftStory: "Paul John distils Indian barley in copper pot stills at Cuncolim, Goa. Handpicked Pedro Ximénez sherry casks provide the finishing stage and bring dense dried-fruit sweetness to the oak-matured malt.",
+    tastingNotes: { nose: "Fig and apricot with a small banana note.", palate: "Creamy butterscotch, sweet barley, dried fruit and Christmas-cake spice.", finish: "Long, with chocolate fudge, orange peel and wine-soaked nuts." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat after dinner; add a few drops of water if the sweetness masks the spice." },
+    foodPairings: ["mutton galouti", "date-and-walnut halwa", "dark chocolate tart", "roasted cashews", "fig barfi"],
+    whyBuyThis: "Pedro Ximénez wood gives this Goan malt a fig-and-chocolate profile distinct from the Oloroso release.",
+    faqs: [{ question: "What does PX mean?", answer: "PX abbreviates Pedro Ximénez, the sweet Spanish sherry whose casks finish this whisky." }, { question: "Is PX Select a dessert liqueur?", answer: "No. It remains single malt whisky; its sweet impression comes from the finishing casks." }],
+    metaTitle: "Paul John PX Select Price, Taste & Review | BevOry", metaDescription: "Paul John PX Select layers fig, butterscotch and chocolate. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "hennessy-vs-475bb83": {
+    productName: "Hennessy V.S", category: "Very Special Cognac",
+    shortOverview: "Hennessy V.S is the maison's bold, toasted-fruit Cognac with a strong oak accent. It has enough structure for a neat tasting but is especially useful in a simple cocktail.",
+    craftStory: "Hennessy has blended Cognac-region grape eaux-de-vie since Richard Hennessy founded the house in 1765. Double distillation in Charentais copper pot stills precedes French-oak ageing; new oak helps give V.S its toasted character.",
+    tastingNotes: { nose: "Toasted oak, vanilla and ripe fruit.", palate: "Round and robust, with fruit sweetness, warming spice and firm wood.", finish: "Medium, with toasted oak and spice lingering." },
+    servingGuide: { glassware: "Tulip Cognac glass or rocks glass", idealTemperature: "Room temperature or over one large cube", recommendation: "Taste neat, then try a restrained Cognac Old Fashioned with bitters and minimal syrup." },
+    foodPairings: ["mutton seekh", "tandoori chicken", "roasted cashews", "caramelised apple tart", "dark chocolate"],
+    whyBuyThis: "Its new-oak intensity remains noticeable when used in a short cocktail.",
+    faqs: [{ question: "Is Hennessy V.S whisky?", answer: "No. It is Cognac, a French grape brandy from the Cognac region." }, { question: "What does V.S mean?", answer: "Very Special is a Cognac age designation; the youngest eau-de-vie must meet the category's minimum ageing rule." }],
+    metaTitle: "Hennessy V.S Price, Taste & Review | BevOry", metaDescription: "Hennessy V.S brings toasted oak, fruit and spice. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "hennessy-vsop-c0eaa40": {
+    productName: "Hennessy V.S.O.P", category: "V.S.O.P Cognac",
+    shortOverview: "Hennessy V.S.O.P is silkier and more apricot-led than the younger V.S. Vanilla and mellow oak make it flexible enough for neat sipping or a careful long drink.",
+    craftStory: "The Cognac house traces V.S.O.P to a commission from the future George IV in 1817. Hennessy's Charentais-distilled grape eaux-de-vie are blended after French-oak ageing to retain the house's apricot-and-vanilla balance.",
+    tastingNotes: { nose: "Fresh sweet apricot with a gentle floral lift.", palate: "Supple and smooth, with vanilla, ripe fruit and mellow oak.", finish: "Long and warm, with soft wood and fruit." },
+    servingGuide: { glassware: "Tulip Cognac glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; one large cube gives a cooler, softer alternative." },
+    foodPairings: ["chicken malai tikka", "roasted almonds", "apricot tart", "mutton galouti", "dark chocolate"],
+    whyBuyThis: "Apricot and mellow oak make it a clear step in refinement beyond V.S.",
+    faqs: [{ question: "How does V.S.O.P differ from V.S?", answer: "V.S.O.P is a higher age category and Hennessy's version is softer and more apricot-and-vanilla-led." }, { question: "Can it be served over ice?", answer: "Yes. The producer suggests neat or over ice; taste it neat first to notice the aroma." }],
+    metaTitle: "Hennessy V.S.O.P Price, Taste & Review | BevOry", metaDescription: "Hennessy V.S.O.P offers apricot, vanilla and mellow oak. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "hennessy-xo-a1a2c99": {
+    productName: "Hennessy X.O", category: "Extra Old Cognac",
+    shortOverview: "Hennessy X.O is a darker, more layered Cognac than V.S.O.P, with candied fruit, pepper and mature oak. Its long progression makes it a bottle for slow neat tasting.",
+    craftStory: "Maurice Hennessy created X.O in 1870 for his circle in Cognac. The house blends long-aged grape eaux-de-vie matured in French oak; their wood and fruit characters develop into a structured whole.",
+    tastingNotes: { nose: "Candied orange, apricot and seasoned oak.", palate: "Dense and rounded, opening with candied fruit before pepper, vanilla and mature oak rise.", finish: "Very long, with fading spice, fruit and polished wood." },
+    servingGuide: { glassware: "Tulip Cognac or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small pour neat and let it rest; optional drops of spring water are enough." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "70% dark chocolate", "fig-and-walnut tart", "aged cheddar"],
+    whyBuyThis: "Its candied-fruit-to-pepper progression rewards patient tasting more than mixing.",
+    faqs: [{ question: "What does X.O mean?", answer: "X.O means Extra Old, a regulated Cognac age category." }, { question: "Is X.O meant for cocktails?", answer: "Its layered mature profile is best appreciated neat in a tulip glass." }],
+    metaTitle: "Hennessy X.O Price, Taste & Review | BevOry", metaDescription: "Hennessy X.O layers candied fruit, pepper and mature oak. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "hennessy-paradis-rare-cognac-e7cb51a": {
+    productName: "Hennessy Paradis", category: "Prestige Cognac",
+    shortOverview: "Paradis is a floral, silky Hennessy blend rather than a louder oak-driven Cognac. Jasmine, exotic fruit and cinnamon give it a delicate collector-level character.",
+    craftStory: "Maurice Fillioux created Paradis in 1979 from older Cognac eaux-de-vie. Hennessy ages the components in very old French oak barrels, favouring a supple texture over forceful new-oak extraction.",
+    tastingNotes: { nose: "Jasmine, dried rose, cinnamon and exotic fruit.", palate: "Silky and composed, with soft fruit, floral depth and finely integrated spice.", finish: "Long and persistent, with gentle fruit and warm oak." },
+    servingGuide: { glassware: "Fine tulip Cognac or crystal glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small measure neat; allow time for the floral nose to open without mixers or ice." },
+    foodPairings: ["saffron phirni", "roasted almonds", "mild galouti kebab", "fig tart", "70% dark chocolate"],
+    whyBuyThis: "Its very-old-oak softness lets floral and fruit detail lead where many prestige Cognacs emphasise wood.",
+    faqs: [{ question: "Is Paradis a whisky?", answer: "No. It is a prestige Cognac made from grape eaux-de-vie in France." }, { question: "How should Paradis be served?", answer: "Neat at room temperature in a small tulip glass best preserves its delicate floral aroma." }],
+    metaTitle: "Hennessy Paradis Price, Taste & Review | BevOry", metaDescription: "Hennessy Paradis brings jasmine, fruit and silky spice. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "hendricks-gin-ac1af25": {
+    productName: "Hendrick's Gin", category: "Scottish Gin",
+    shortOverview: "Hendrick's combines a traditional juniper backbone with rose and cucumber. Its floral, cool profile is especially clear in a restrained gin and tonic.",
+    craftStory: "Made in Girvan, Scotland, Hendrick's blends spirit from a Bennet copper pot still and a Carter-Head still. Rose and cucumber are added after distillation, alongside its botanical-led gin base.",
+    tastingNotes: { nose: "Juniper, rose petal, cucumber and citrus peel.", palate: "Soft and rounded, with cool cucumber followed by floral notes and gentle coriander spice.", finish: "Medium, with lingering rose and crisp juniper." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Pour over plenty of ice with dry tonic and a long cucumber slice; avoid heavy syrups." },
+    foodPairings: ["cucumber chaat", "malai paneer tikka", "tandoori prawns", "rava-fried fish", "lemon-pepper cashews"],
+    whyBuyThis: "Its recognisable cucumber-and-rose accent offers a softer counterpoint to resinous London Dry styles.",
+    faqs: [{ question: "Where is Hendrick's Gin made?", answer: "It is produced in Girvan, Scotland." }, { question: "What garnish works best?", answer: "A cucumber slice echoes its distinctive cucumber infusion without covering the botanicals." }],
+    metaTitle: "Hendrick's Gin Price, Taste & Review | BevOry", metaDescription: "Hendrick's Gin pairs rose and cucumber with juniper. Try it with Indian seafood and check indicative city prices on BevOry."
+  },
+  "hendricks-flora-adora-gin-e56bd7a": {
+    productName: "Hendrick's Flora Adora", category: "Floral Scottish Gin",
+    shortOverview: "Flora Adora pushes Hendrick's floral character forward without abandoning its juniper core. It is a bright choice for a tonic serve with minimal garnish.",
+    craftStory: "Master distiller Lesley Gracie created this limited Hendrick's expression in Girvan, Scotland. A bouquet of fragrant flowers joins the house's juniper, coriander, rose and cucumber character.",
+    tastingNotes: { nose: "Fresh flowers, rose and green juniper.", palate: "Light and silky, with sweet floral lift, coriander and a cool cucumber undertone.", finish: "Medium, leaving herbs, flowers and a crisp citrus edge." },
+    servingGuide: { glassware: "Balloon gin glass or highball", idealTemperature: "Well chilled (4–8°C)", recommendation: "Build a gin and tonic over ice with a thin cucumber slice; use a dry tonic to preserve the floral detail." },
+    foodPairings: ["malai paneer tikka", "cucumber chaat", "tandoori prawns", "lemon rice", "rava-fried fish"],
+    whyBuyThis: "It makes the original gin's floral side the main event while keeping an identifiable Hendrick's structure.",
+    faqs: [{ question: "Is Flora Adora sweet?", answer: "Its aroma is floral, but it is gin rather than a sweet liqueur." }, { question: "How does it differ from standard Hendrick's?", answer: "Flora Adora gives a stronger flower-led impression above the familiar rose and cucumber base." }],
+    metaTitle: "Hendrick's Flora Adora Price, Taste & Review | BevOry", metaDescription: "Hendrick's Flora Adora brings fresh florals, juniper and cucumber. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "hendricks-lunar-gin-a318e28": {
+    productName: "Hendrick's Lunar Gin", category: "Floral Scottish Gin",
+    shortOverview: "Lunar is a darker, more spice-leaning Hendrick's expression. Night-blooming floral notes meet warm baking spice and a citrus finish.",
+    craftStory: "Created by Hendrick's master distiller Lesley Gracie in Girvan, Lunar develops the house's botanical style in a more aromatic direction. The recipe retains a gin foundation while emphasising floral and warming spice notes.",
+    tastingNotes: { nose: "Night-blooming flowers, juniper and warm spice.", palate: "Rounded and aromatic, moving from flowers to soft baking spice and citrus.", finish: "Medium-long, with a clean citrus lift after the spice." },
+    servingGuide: { glassware: "Highball or rocks glass", idealTemperature: "Chilled (6–10°C)", recommendation: "Try a dry tonic and orange peel over ice, or a short martini with restrained vermouth." },
+    foodPairings: ["chicken tikka", "tandoori mushrooms", "pepper paneer", "spiced cashews", "orange-dark-chocolate tart"],
+    whyBuyThis: "The floral-spice balance gives Hendrick's fans a distinct alternative to the original cucumber-led serve.",
+    faqs: [{ question: "Is Lunar Gin a liqueur?", answer: "No. It is a gin in Hendrick's limited expression range." }, { question: "What mixer suits Lunar?", answer: "Dry tonic and a little orange peel support its warm spice and citrus notes." }],
+    metaTitle: "Hendrick's Lunar Gin Price, Taste & Review | BevOry", metaDescription: "Hendrick's Lunar Gin offers florals, warm spice and citrus. Find Indian food pairings and check indicative city prices on BevOry."
+  },
+  "hendricks-neptunia-gin-59f045e": {
+    productName: "Hendrick's Neptunia Gin", category: "Coastal Scottish Gin",
+    shortOverview: "Neptunia gives Hendrick's a distinctly coastal accent. Its herbal salinity and citrus finish sit alongside the house's rose and cucumber signature.",
+    craftStory: "Made at the Hendrick's distillery in Girvan, Neptunia was developed by master distiller Lesley Gracie around coastal botanicals. The expression adds a sea-air impression to the brand's established juniper, rose and cucumber profile.",
+    tastingNotes: { nose: "Juniper, coastal herbs, cucumber and bright citrus.", palate: "Fresh and lightly saline, with green herbs and citrus over soft floral notes.", finish: "Medium, with clean citrus and a faint sea-breeze impression." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Serve with dry tonic, ice and a citrus slice; keep the garnish simple so the coastal botanicals remain clear." },
+    foodPairings: ["coastal rava-fried fish", "tandoori prawns", "cucumber chaat", "lemon rice", "malai paneer tikka"],
+    whyBuyThis: "Its citrus-and-coastal profile is particularly useful with seafood and savoury snacks.",
+    faqs: [{ question: "Does Neptunia contain seawater?", answer: "The producer describes coastal botanicals and a sea-air impression, not a seawater ingredient claim." }, { question: "What makes it different from original Hendrick's?", answer: "It brings coastal herbs and a brighter citrus finish to the rose-and-cucumber base." }],
+    metaTitle: "Hendrick's Neptunia Gin Price, Taste & Review | BevOry", metaDescription: "Hendrick's Neptunia Gin pairs coastal herbs with citrus and cucumber. Try Indian seafood pairings and check city prices on BevOry."
+  },
+  "roku-gin-3a1f43e": {
+    productName: "Roku Gin", category: "Japanese Craft Gin",
+    shortOverview: "Roku is a Japanese gin built around six seasonal Japanese botanicals. Yuzu, tea and sansho pepper make its citrus-spice profile distinct from a conventional London Dry.",
+    craftStory: "House of Suntory makes Roku with sakura flower and leaf, yuzu peel, sencha, gyokuro and sansho pepper, alongside eight traditional gin botanicals. The six Japanese ingredients express different seasons and are handled to preserve their individual aromas.",
+    tastingNotes: { nose: "Yuzu zest, green tea and delicate cherry blossom.", palate: "Smooth and layered, with citrus, tea dryness, juniper and a flicker of sansho pepper.", finish: "Medium, with yuzu brightness and gentle pepper." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Serve over ice with dry tonic and thin ginger batons to frame the yuzu and tea notes." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "rava-fried fish", "ginger-soy paneer", "lemon rice"],
+    whyBuyThis: "Its yuzu, tea and sansho combination offers more detail than a simple juniper-citrus gin.",
+    faqs: [{ question: "What does Roku mean?", answer: "Roku means six in Japanese, referring to its six Japanese botanicals." }, { question: "Is Roku a flavoured liqueur?", answer: "No. It is a botanical gin with a dry, citrus-and-tea profile." }],
+    metaTitle: "Roku Gin Price, Taste & Review | BevOry", metaDescription: "Roku Gin layers yuzu, Japanese teas and sansho pepper. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "roku-gin-sakura-bloom-edition-330cddf": {
+    productName: "Roku Sakura Bloom", category: "Japanese Craft Gin",
+    shortOverview: "Sakura Bloom places cherry-blossom fragrance at the front of Roku's botanical gin style. A subtle savoury note keeps the floral profile from feeling one-dimensional.",
+    craftStory: "House of Suntory's Sakura Bloom edition develops Roku's Japanese seasonal-botanical concept. Fresh sakura flowers give the expression its floral emphasis, while its gin structure retains citrus and herbal detail.",
+    tastingNotes: { nose: "Fresh cherry blossom, light citrus and green herbs.", palate: "Silky and floral, with a gentle savoury-umami note and clean juniper support.", finish: "Medium, leaving soft blossom and citrus." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Pair with dry tonic over ice and a thin grapefruit peel; avoid sweet floral syrups." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "cucumber chaat", "rava-fried fish", "ginger rice"],
+    whyBuyThis: "It offers a noticeably blossom-led take on Roku without losing gin's savoury edge.",
+    faqs: [{ question: "Is Sakura Bloom the same as standard Roku?", answer: "No. This edition places a stronger emphasis on fresh sakura flowers." }, { question: "Does it taste like a sweet cherry drink?", answer: "No. Sakura refers to cherry blossom; the profile remains botanical and lightly savoury." }],
+    metaTitle: "Roku Sakura Bloom Price, Taste & Review | BevOry", metaDescription: "Roku Sakura Bloom brings cherry blossom, citrus and gentle umami. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "amrut-fusion-single-malt-f70a6b0": {
+    productName: "Amrut Fusion", category: "Indian Single Malt Whisky",
+    shortOverview: "Amrut Fusion combines unpeated Indian barley spirit with peated Scottish barley spirit. Barley sweetness and measured smoke give this Bengaluru malt a distinctive India-meets-Scotland profile.",
+    craftStory: "Amrut distils Indian six-row barley and peated Scottish barley separately at its Bengaluru distillery before marrying the mature whisky. American oak casks and the local climate help develop its malt, fruit and spice character.",
+    tastingNotes: { nose: "Malted barley, citrus, vanilla and a thread of peat smoke.", palate: "Full and warming, with barley sugar, orchard fruit, oak spice and gradually building smoke.", finish: "Long, with cocoa, dry oak and gentle peat lingering." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat first, then add a few drops of spring water to open the malt and smoke." },
+    foodPairings: ["mutton seekh", "lamb rogan josh", "tandoori mushrooms", "70% dark chocolate", "smoked paneer tikka"],
+    whyBuyThis: "Its blend of Indian and Scottish barley creates a genuinely distinct balance of malt sweetness and peat.",
+    faqs: [{ question: "Is Amrut Fusion made in India?", answer: "Yes. Both barley spirits are distilled and matured by Amrut in Bengaluru." }, { question: "Is Fusion heavily smoky?", answer: "It contains peated Scottish barley spirit, but its smoke is balanced by unpeated Indian malt sweetness." }],
+    metaTitle: "Amrut Fusion Price, Taste & Review | BevOry", metaDescription: "Amrut Fusion balances Indian malt sweetness, peat and cocoa. Explore Indian food pairings and check indicative city prices on BevOry."
+  },
+  "sula-rasa-syrah-7e43734": {
+    productName: "Sula Rasa Syrah", category: "Indian Red Wine",
+    shortOverview: "Rasa Syrah is Sula's full-bodied Nashik red with dark-fruit depth and a savoury spice edge. Oak ageing gives it structure suited to rich Indian dishes.",
+    craftStory: "Sula grows and sources the fruit in Maharashtra's Nashik wine region. Syrah, with a small Viognier component in producer materials, is matured in French oak; exact barrel time can vary by vintage.",
+    tastingNotes: { nose: "Blackberry, plum, pepper and a touch of mocha.", palate: "Full-bodied with dark berries, rounded tannins, vanilla and savoury spice.", finish: "Long and dry, with dark fruit, pepper and oak." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Open ahead of a meal and allow the wine to breathe; pour into a large glass rather than serving warm." },
+    foodPairings: ["nalli nihari", "mutton ghee roast", "tandoori chicken", "lamb chops", "aged cheddar"],
+    whyBuyThis: "It brings a serious, structured Nashik Syrah to rich Indian food pairing.",
+    faqs: [{ question: "Where is Sula Rasa Syrah from?", answer: "It comes from the Nashik wine region of Maharashtra, India." }, { question: "Should Rasa Syrah be chilled?", answer: "Serve slightly cool, around 16–18°C; a short chill helps in warm weather." }],
+    metaTitle: "Sula Rasa Syrah Price, Taste & Review | BevOry", metaDescription: "Sula Rasa Syrah offers dark berries, pepper and oak from Nashik. See Indian food pairings and check indicative city prices on BevOry."
+  }
+};
