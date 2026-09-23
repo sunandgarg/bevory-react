@@ -1,0 +1,335 @@
+// Producer-checked editorial. Source ledger: docs/editorial/product-batch-05-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "don-julio-blanco-274c610": {
+    productName: "Don Julio Blanco", category: "100% Blue Weber Agave Blanco Tequila",
+    shortOverview: "Don Julio Blanco puts cooked agave and citrus ahead of barrel flavour. Its dry pepper edge makes it a useful reference point for tasting the brand's aged tequilas.",
+    craftStory: "Don Julio González founded La Primavera in Atotonilco El Alto, Jalisco, in 1942. The distillery double-distils 100% Blue Weber agave in pot stills; this clear expression does not rely on oak maturation for flavour.",
+    tastingNotes: { nose: "Fresh agave, citrus peel and a touch of sweet fruit.", palate: "Clean and lively, opening with cooked agave before herbs, lime and black pepper.", finish: "Medium and dry, with lingering citrus and pepper." },
+    servingGuide: { glassware: "Small tequila tasting glass or rocks glass", idealTemperature: "Room temperature (18–20°C) or lightly chilled", recommendation: "Taste neat first, then use 45 ml with fresh lime and grapefruit soda for a Paloma." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "rava-fried fish", "paneer tikka"],
+    whyBuyThis: "Its agave-led profile works both for a measured neat tasting and a citrus-forward cocktail.",
+    faqs: [{ question: "Is Don Julio Blanco aged in oak?", answer: "No. Blanco presents the distillate's agave, citrus and pepper character without an oak-ageing stage." }, { question: "What is Don Julio Blanco made from?", answer: "The producer specifies 100% Blue Weber agave from Mexico." }],
+    metaTitle: "Don Julio Blanco Price, Taste & Review | BevOry", metaDescription: "Don Julio Blanco brings cooked agave, citrus and pepper. Try it with tandoori prawns and check indicative city prices on BevOry."
+  },
+  "don-julio-reposado-26c5c69": {
+    productName: "Don Julio Reposado", category: "100% Blue Weber Agave Reposado Tequila",
+    shortOverview: "Don Julio Reposado keeps cooked agave in view while adding honey, vanilla and warm spice. It is rounder than the Blanco without losing its Mexican agave identity.",
+    craftStory: "Made in the Jalisco Highlands from Blue Weber agave, this tequila rests for more than eight months in ex-bourbon American white-oak casks. Don Julio González began his distilling venture at La Primavera in 1942.",
+    tastingNotes: { nose: "Cooked agave, honey, vanilla and ripe banana.", palate: "Soft and rounded, with agave, light oak, chocolate and cinnamon.", finish: "Medium-long, carrying vanilla and warm wood spice." },
+    servingGuide: { glassware: "Tequila tasting glass or rocks glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat before adding a single large ice cube; it also makes a restrained Reposado Margarita." },
+    foodPairings: ["chicken malai tikka", "paneer tikka", "tandoori mushrooms", "roasted cashews"],
+    whyBuyThis: "Eight-plus months of bourbon-cask rest bring noticeable oak without burying the agave.",
+    faqs: [{ question: "How long is Don Julio Reposado aged?", answer: "The producer specifies more than eight months in ex-bourbon American white-oak casks." }, { question: "Is it sweeter than Don Julio Blanco?", answer: "Oak contributes a rounder impression of honey and vanilla, while cooked agave remains clear." }],
+    metaTitle: "Don Julio Reposado Price, Taste & Review | BevOry", metaDescription: "Don Julio Reposado adds honey, vanilla and cinnamon to cooked agave. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "don-julio-anejo-f7777b3": {
+    productName: "Don Julio Añejo", category: "100% Blue Weber Agave Añejo Tequila",
+    shortOverview: "Don Julio Añejo is a full, oak-shaped tequila with caramel and tropical fruit around its agave core. It is better approached as a slow sipping spirit than as a neutral cocktail base.",
+    craftStory: "The tequila begins with Blue Weber agave from Jalisco and matures for more than 18 months in ex-bourbon American white-oak casks. The brand traces its distillery at Atotonilco El Alto to Don Julio González's 1942 venture.",
+    tastingNotes: { nose: "Cooked agave, wild honey, tropical fruit and oak.", palate: "Rich and smooth, moving through caramel, vanilla, chocolate and baking spice.", finish: "Long, with agave sweetness and lingering oak spice." },
+    servingGuide: { glassware: "Tulip tequila glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Pour a small measure neat; a few drops of water can open the oak and fruit notes." },
+    foodPairings: ["mutton seekh kebab", "lamb rogan josh", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "It offers a clear step from reposado into deeper bourbon-cask character.",
+    faqs: [{ question: "What casks mature Don Julio Añejo?", answer: "The producer lists ex-bourbon American white-oak casks." }, { question: "How old is Don Julio Añejo?", answer: "It matures for more than 18 months, longer than the brand's Reposado." }],
+    metaTitle: "Don Julio Añejo Price, Taste & Review | BevOry", metaDescription: "Don Julio Añejo layers agave, caramel, vanilla and oak. See serving ideas, Indian pairings and indicative city prices on BevOry."
+  },
+  "don-julio-1942-03117b7": {
+    productName: "Don Julio 1942", category: "Luxury Añejo Tequila",
+    shortOverview: "Don Julio 1942 is a small-batch, long-aged tequila built around caramel, roasted agave and polished oak. Its name marks the year Don Julio González began making tequila.",
+    craftStory: "Crafted from 100% Blue Weber agave in Mexico, 1942 spends at least two and a half years in oak. The extended rest distinguishes it from the brand's standard Añejo, though the liquid still carries roasted agave beneath the wood.",
+    tastingNotes: { nose: "Rich caramel and chocolate over roasted agave.", palate: "Silky and warm, with vanilla, toasted oak and roasted agave.", finish: "Long, leaving oak and rich vanilla." },
+    servingGuide: { glassware: "Crystal tulip glass or tequila tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small pour neat; give it a minute in the glass before tasting, without sweet mixers." },
+    foodPairings: ["mutton galouti kebab", "dark chocolate with sea salt", "roasted almonds", "date-and-walnut barfi"],
+    whyBuyThis: "Its extended ageing gives a collector-style oak and vanilla profile while retaining roasted agave.",
+    faqs: [{ question: "Why is the tequila called 1942?", answer: "The year honours the start of Don Julio González's tequila-making journey." }, { question: "How long is Don Julio 1942 aged?", answer: "The producer states a minimum of two and a half years." }],
+    metaTitle: "Don Julio 1942 Price, Taste & Review | BevOry", metaDescription: "Don Julio 1942 offers caramel, roasted agave and lingering vanilla. Explore serving and pairing notes; check indicative city prices on BevOry."
+  },
+  "patron-silver-5e56b8d": {
+    productName: "Patrón Silver", category: "100% Blue Weber Agave Silver Tequila",
+    shortOverview: "Patrón Silver is a clear, unaged tequila with fruit, citrus and a light pepper finish. Its clean agave flavour suits a Margarita without needing heavy syrup.",
+    craftStory: "Hacienda Patrón in Jalisco makes this tequila in small batches from Blue Weber agave, yeast and water. The distillery uses traditional agave extraction and distillation methods; no oak ageing defines the Silver style.",
+    tastingNotes: { nose: "Fresh agave, light fruit and citrus peel.", palate: "Smooth but crisp, with sweet agave, melon-like fruit and lemon zest.", finish: "Clean and short-to-medium, ending with light pepper." },
+    servingGuide: { glassware: "Tequila tasting glass or Margarita glass", idealTemperature: "Room temperature for tasting; chilled in cocktails", recommendation: "Try neat first, or shake 45 ml with fresh lime and orange liqueur for a classic Margarita." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "fish tikka", "malai paneer tikka"],
+    whyBuyThis: "A citrus-friendly agave profile makes it versatile across sipping and classic tequila cocktails.",
+    faqs: [{ question: "Is Patrón Silver aged?", answer: "No. Silver is the brand's unaged tequila expression." }, { question: "Is Patrón Silver made from 100% agave?", answer: "Yes, the producer specifies 100% Blue Weber agave." }],
+    metaTitle: "Patrón Silver Price, Taste & Review | BevOry", metaDescription: "Patrón Silver tastes of fresh agave, citrus and light pepper. Find Indian food pairings and check indicative city prices on BevOry."
+  },
+  "patron-reposado-7931dbe": {
+    productName: "Patrón Reposado", category: "100% Blue Weber Agave Reposado Tequila",
+    shortOverview: "Patrón Reposado balances cooked agave with gentle vanilla and oak. It has more weight than Silver but remains bright enough for a Margarita or Paloma.",
+    craftStory: "Made at Hacienda Patrón in Jalisco from 100% Blue Weber agave, this tequila rests at least four months in used American, French and Hungarian oak. Traditional tahona and roller-mill extraction help preserve agave alongside barrel notes.",
+    tastingNotes: { nose: "Fresh and cooked agave with vanilla and a trace of tropical fruit.", palate: "Rounded and softly sweet, carrying cooked agave, honey and light oak.", finish: "Medium and smooth, with vanilla and mild wood spice." },
+    servingGuide: { glassware: "Tequila tasting glass or rocks glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat, then add one large cube; for a cocktail, use fresh lime in a Reposado Margarita." },
+    foodPairings: ["chicken tikka", "tandoori mushrooms", "paneer malai tikka", "spiced roasted cashews"],
+    whyBuyThis: "Its four-month minimum oak rest adds softness without trading away agave definition.",
+    faqs: [{ question: "How long does Patrón Reposado age?", answer: "At least four months, according to the producer." }, { question: "How does it differ from Patrón Silver?", answer: "Silver is unaged; Reposado gains light oak, vanilla and a rounder texture from barrel rest." }],
+    metaTitle: "Patrón Reposado Price, Taste & Review | BevOry", metaDescription: "Patrón Reposado combines cooked agave, honey and light oak. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "patron-anejo-tequila-c41a399": {
+    productName: "Patrón Añejo", category: "100% Blue Weber Agave Añejo Tequila",
+    shortOverview: "Patrón Añejo places vanilla, chocolate and wood around baked agave. Its richer texture makes a small neat pour more revealing than a heavily sweetened cocktail.",
+    craftStory: "Hacienda Patrón in Jalisco distils 100% Blue Weber agave and matures Añejo for at least 12 months in selected oak barrels. The producer describes a mix of French, Hungarian and used American whiskey oak in its aged-tequila programme.",
+    tastingNotes: { nose: "Cooked agave, caramel, vanilla and oak.", palate: "Velvety, with sweet agave, chocolate, baking spice and wood.", finish: "Long, with woody notes and restrained sweetness." },
+    servingGuide: { glassware: "Tulip tequila glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; an orange twist is enough garnish for a simple Añejo Old Fashioned." },
+    foodPairings: ["mutton seekh kebab", "galouti kebab", "70% dark chocolate", "roasted pecans"],
+    whyBuyThis: "It brings a clear oak-aged contrast to Patrón Silver while preserving baked agave flavour.",
+    faqs: [{ question: "Is Patrón Añejo older than Patrón Reposado?", answer: "Yes. Añejo spends at least 12 months in oak; Reposado rests at least four months." }, { question: "Is it a smoky tequila?", answer: "The producer notes a subtle smoky-sweet finish, not a heavily peated or mezcal-like profile." }],
+    metaTitle: "Patrón Añejo Price, Taste & Review | BevOry", metaDescription: "Patrón Añejo brings cooked agave, caramel, chocolate and oak. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "patron-patron-el-cielo-tequila-690bb7c": {
+    productName: "Patrón El Cielo", category: "Four-Times-Distilled Silver Tequila",
+    shortOverview: "Patrón El Cielo is a light, polished silver tequila with orange rind and gently sweet cooked agave. Four distillations separate it from the more peppery Patrón Silver.",
+    craftStory: "Hacienda Patrón in Jalisco developed a four-times-distilled process for this 100% Blue Weber agave expression. It is a clear silver tequila; its citrus and spice character comes from the spirit rather than oak.",
+    tastingNotes: { nose: "Sweet cooked agave, orange rind, cinnamon and a hint of vanilla.", palate: "Light and smooth, with agave sweetness, citrus peel and gentle spice.", finish: "Long and clean, leaving soft agave and orange." },
+    servingGuide: { glassware: "Small tequila tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat or over one clear cube with a thin orange slice; avoid dense mixers that erase its light texture." },
+    foodPairings: ["malai paneer tikka", "coastal rava-fried fish", "cucumber chaat", "tandoori prawns"],
+    whyBuyThis: "The unusually light four-distillation profile offers a distinct alternative to standard silver tequila.",
+    faqs: [{ question: "How many times is Patrón El Cielo distilled?", answer: "Four times, according to Patrón." }, { question: "Is Patrón El Cielo aged?", answer: "No. It is a silver tequila rather than a barrel-aged reposado or añejo." }],
+    metaTitle: "Patrón El Cielo Price, Taste & Review | BevOry", metaDescription: "Patrón El Cielo offers cooked agave, orange rind and cinnamon in a light silver style. Check indicative city prices on BevOry."
+  },
+  "1800-silver-dd2aff0": {
+    productName: "1800 Silver", category: "100% Blue Weber Agave Blanco Tequila",
+    shortOverview: "1800 Silver brings fruit and roasted-pepper spice to an unaged agave base. The medium body holds up to lime without disappearing in a Margarita.",
+    craftStory: "Made in Jalisco from Blue Weber agave, yeast and water, this clear style is described as Blanco on the producer's current site. It is double-distilled and bottled without oak ageing.",
+    tastingNotes: { nose: "Fruit, spice and black peppercorn.", palate: "Medium-bodied and balanced, with sweet prune and roasted pepper.", finish: "Medium, fading through fruit and pepper." },
+    servingGuide: { glassware: "Tequila tasting glass or Margarita glass", idealTemperature: "Room temperature for tasting; chilled in cocktails", recommendation: "Taste neat before mixing 45 ml with fresh lime and orange liqueur." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "fish tikka", "paneer quesadilla with green chutney"],
+    whyBuyThis: "Its fruit-and-pepper balance gives a Margarita more character than a neutral blanco.",
+    faqs: [{ question: "Is 1800 Silver the same style as 1800 Blanco?", answer: "The catalogue's Silver listing corresponds to the brand's clear, unaged Blanco style; verify the bottle label for the exact local release." }, { question: "Is 1800 Silver 100% agave?", answer: "The producer's current Blanco page lists 100% Blue Weber agave, yeast and water." }],
+    metaTitle: "1800 Silver Price, Taste & Review | BevOry", metaDescription: "1800 Silver brings sweet fruit, roasted pepper and agave to Margaritas. See Indian pairings and indicative city prices on BevOry."
+  },
+  "1800-reposado-e820f89": {
+    productName: "1800 Reposado", category: "100% Blue Weber Agave Reposado Tequila",
+    shortOverview: "1800 Reposado turns the brand's agave base toward caramel, mild spice and orange peel. Its oak is more noticeable than a blanco's but remains cocktail-friendly.",
+    craftStory: "A selection of double-distilled Blue Weber agave tequilas rests in new American and French oak. The producer describes a two-to-four-month rest for the expression, using char and toast to build its caramel character.",
+    tastingNotes: { nose: "Agave threaded with new-oak aroma.", palate: "Soft and buttery, with caramel, vanilla, mild spice and a faint char note.", finish: "Medium, with orange peel, white pepper and marzipan." },
+    servingGuide: { glassware: "Rocks glass or tequila tasting glass", idealTemperature: "Room temperature or over one large cube", recommendation: "Try neat, then make a Reposado Paloma with grapefruit soda and fresh lime." },
+    foodPairings: ["chicken malai tikka", "tandoori mushrooms", "paneer tikka", "roasted cashews"],
+    whyBuyThis: "New American and French oak add caramel and spice while retaining a useful agave backbone.",
+    faqs: [{ question: "Which barrels are used for 1800 Reposado?", answer: "The producer names new American and French oak barrels." }, { question: "Can 1800 Reposado be mixed?", answer: "Yes. Its caramel and citrus-peel notes work in a Margarita or Paloma." }],
+    metaTitle: "1800 Reposado Price, Taste & Review | BevOry", metaDescription: "1800 Reposado balances agave, caramel, orange peel and pepper. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "1800-anejo-a771ef2": {
+    productName: "1800 Añejo", category: "100% Blue Weber Agave Añejo Tequila",
+    shortOverview: "1800 Añejo has a dark-amber, nut-and-toffee profile with a peppery close. Its oak weight makes it a logical next pour for whisky drinkers exploring tequila.",
+    craftStory: "Blue Weber agave from Jalisco is double-distilled in copper stills, then aged for more than a year in new American and French oak. The wood supplies vanilla and toffee without removing the pepper edge of the spirit.",
+    tastingNotes: { nose: "Oak and vanilla with a restrained agave backdrop.", palate: "Full and rounded, developing toasted nuts and toffee.", finish: "Medium-long, closing on peppery spice." },
+    servingGuide: { glassware: "Tulip tequila glass or rocks glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Pour neat first; a single large cube is the simplest cooler serve." },
+    foodPairings: ["mutton galouti kebab", "lamb chops", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "Its new-oak ageing gives a pronounced toffee-and-spice character for slow sipping.",
+    faqs: [{ question: "How long is 1800 Añejo aged?", answer: "More than one year in new American and French oak, according to the producer." }, { question: "Is it made from blue agave?", answer: "Yes. 1800 specifies 100% Blue Weber agave." }],
+    metaTitle: "1800 Añejo Price, Taste & Review | BevOry", metaDescription: "1800 Añejo layers oak, vanilla, nuts and toffee over agave. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "jose-cuervo-esp-silver-abc087c": {
+    productName: "Jose Cuervo Especial Silver", category: "Blended Silver Tequila",
+    shortOverview: "Jose Cuervo Especial Silver is a crisp, lightly agave-flavoured mixing tequila. It is not the same product as the producer's 100% agave Tradicional Silver.",
+    craftStory: "Cuervo double-distils this blended tequila using blue agave from its Jalisco estate alongside permitted cane- and grain-derived sugars. The unaged silver style is designed for fresh-lime Margaritas rather than oak-led sipping.",
+    tastingNotes: { nose: "Fresh, clean agave aromas.", palate: "Light and crisp, with subtle blue-agave flavour.", finish: "Short-to-medium, warm and smooth." },
+    servingGuide: { glassware: "Margarita or highball glass", idealTemperature: "Chilled in a cocktail", recommendation: "Shake 45 ml with fresh lime juice and orange liqueur; keep the sweetener modest." },
+    foodPairings: ["spicy paneer tacos", "tandoori prawns", "cucumber chaat", "fish pakora"],
+    whyBuyThis: "Its clean profile is practical for citrus-heavy tequila cocktails at gatherings.",
+    faqs: [{ question: "Is Especial Silver 100% agave?", answer: "No. Cuervo describes it as a blended tequila and lists agave plus cane- and grain-derived sugar sources." }, { question: "How is it different from Tradicional Silver?", answer: "Tradicional Silver is a separate 100% blue-agave product; Especial Silver is a blended tequila." }],
+    metaTitle: "Jose Cuervo Especial Silver Price, Taste & Review | BevOry", metaDescription: "Jose Cuervo Especial Silver is crisp and lightly agave-led for Margaritas. Explore pairings and indicative city prices on BevOry."
+  },
+  "jose-cuervo-especial-reposado-tequila-dcfb47c": {
+    productName: "Jose Cuervo Especial Reposado", category: "Blended Reposado-Style Tequila",
+    shortOverview: "Jose Cuervo Especial Reposado is the golden member of the Especial cocktail range. Its softer, warmer profile is positioned for Margaritas rather than a 100% agave sipping comparison.",
+    craftStory: "The Cuervo family makes Especial in Jalisco as a blended tequila. The producer labels this expression Reposado but does not specify a fixed cask type or maturation period on its public product page, so the bottle label governs the exact release.",
+    tastingNotes: { nose: "Gentle cooked-agave aroma with warm sweet notes.", palate: "Rounded and light-bodied, with agave, soft caramel and mild spice.", finish: "Short-to-medium, warm and lightly sweet." },
+    servingGuide: { glassware: "Margarita or rocks glass", idealTemperature: "Chilled in a cocktail", recommendation: "Use with fresh lime in a Margarita or over ice with grapefruit soda; avoid treating it as the 100% agave Tradicional Reposado." },
+    foodPairings: ["paneer tikka tacos", "chicken fajitas with mint chutney", "cucumber chaat", "spiced corn chaat"],
+    whyBuyThis: "It offers a warmer golden profile for familiar tequila cocktails.",
+    faqs: [{ question: "Is Especial Reposado the same as Tradicional Reposado?", answer: "No. They are distinct Cuervo ranges; Tradicional is the producer's 100% blue-agave line." }, { question: "What is a good serve?", answer: "The producer highlights the Margarita; use fresh lime and restrained sweetness." }],
+    metaTitle: "Jose Cuervo Especial Reposado Price, Taste & Review | BevOry", metaDescription: "Jose Cuervo Especial Reposado is a golden tequila for fresh-lime Margaritas. See pairings and indicative city prices on BevOry."
+  },
+  "sula-brut-fc8c415": {
+    productName: "Sula Brut", category: "Indian Brut Sparkling Wine",
+    shortOverview: "Sula Brut is a fresh Nashik sparkling wine with pear, green apple and citrus. Its light body makes it a practical aperitif with fried Indian snacks.",
+    craftStory: "Sula blends mostly Chenin Blanc with Riesling and Viognier for this sparkling wine from Maharashtra. The producer's current description emphasises fruit and freshness; no fixed grape percentage or secondary-fermentation method is assumed for every release.",
+    tastingNotes: { nose: "Pear, green apple and a trace of white flowers.", palate: "Light and lively, with citrus, orchard fruit and refreshing acidity.", finish: "Short-to-medium, clean and apple-led." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Open well chilled, pour gently down the glass and serve with savoury starters rather than ice." },
+    foodPairings: ["hara bhara kebab", "onion pakora", "rava-fried fish", "chicken popcorn"],
+    whyBuyThis: "A locally made sparkling wine whose orchard-fruit freshness fits Indian starters.",
+    faqs: [{ question: "Is Sula Brut a Champagne?", answer: "No. It is an Indian sparkling wine; Champagne is a protected French regional name." }, { question: "What grapes are in Sula Brut?", answer: "Sula identifies Chenin Blanc as the main grape, with Riesling and Viognier in the blend." }],
+    metaTitle: "Sula Brut Price, Taste & Review | BevOry", metaDescription: "Sula Brut brings pear, apple and citrus bubbles to pakoras and kebabs. Check indicative city prices on BevOry."
+  },
+  "sula-dindori-reserve-viognier-c7dbda6": {
+    productName: "Sula Dindori Reserve Viognier", category: "Indian Viognier White Wine",
+    shortOverview: "This Dindori white is more textured and peach-led than a sharply acidic Sauvignon Blanc. Apricot and lychee make it particularly comfortable beside a creamy curry.",
+    craftStory: "Sula grows 100% Viognier in its Dindori estate within the Nashik region of Maharashtra. Warm days and cooler nights support ripe stone-fruit flavour while the reserve style retains a smooth mouthfeel.",
+    tastingNotes: { nose: "Soft florals, apricot, peach and lychee.", palate: "Medium-bodied and textured, with peach, ripe apricot and gentle acidity.", finish: "Medium and smooth, leaving stone fruit and a floral trace." },
+    servingGuide: { glassware: "Medium-bowl white-wine glass", idealTemperature: "Chilled (9–11°C)", recommendation: "Take it out of a very cold fridge a few minutes before pouring so the apricot aroma can open." },
+    foodPairings: ["Goan chicken xacuti", "malai paneer tikka", "prawn coconut curry", "roasted root vegetables"],
+    whyBuyThis: "Its Dindori-grown Viognier fruit handles creamy Indian spice without tasting thin.",
+    faqs: [{ question: "Is Dindori Reserve Viognier sweet?", answer: "Its ripe peach and lychee notes can seem sweet, but the producer describes a textured white rather than a dessert wine." }, { question: "Where is it grown?", answer: "At Sula's Dindori estate in the Nashik wine region." }],
+    metaTitle: "Sula Dindori Reserve Viognier Price, Taste & Review | BevOry", metaDescription: "Sula Dindori Viognier shows peach, apricot and lychee. Pair with Goan curry and check indicative city prices on BevOry."
+  },
+  "sula-dindori-chardonnay-803668a": {
+    productName: "Sula Dindori Chardonnay", category: "Indian Reserve Chardonnay White Wine",
+    shortOverview: "Sula Dindori Chardonnay combines lemon citrus with a creamy, tropical-fruit centre. It is a fuller white for food, not a lean substitute for Sauvignon Blanc.",
+    craftStory: "Fruit comes from Sula's Dindori programme in the Nashik region. The producer says the Reserve Chardonnay is partially barrel-fermented and partially aged in French oak, giving its fruit a butter-and-vanilla accent.",
+    tastingNotes: { nose: "Lemon, tropical fruit and light vanilla.", palate: "Creamy and rounded, moving from citrus to ripe stone fruit and buttery oak.", finish: "Medium, with lemon zest and soft vanilla." },
+    servingGuide: { glassware: "Chardonnay or medium-bowl white-wine glass", idealTemperature: "Chilled (10–12°C)", recommendation: "Avoid overchilling; let the glass warm slightly to reveal the oak and fruit." },
+    foodPairings: ["chicken malai tikka", "paneer in white gravy", "butter-poached fish", "mushroom risotto"],
+    whyBuyThis: "Its partial French-oak treatment gives an Indian Chardonnay useful texture for rich dishes.",
+    faqs: [{ question: "Does Sula Dindori Chardonnay use oak?", answer: "Yes. Sula says part of the wine is barrel-fermented and part is aged in French oak." }, { question: "Should it be served very cold?", answer: "No. Around 10–12°C shows more fruit and texture than ice-cold service." }],
+    metaTitle: "Sula Dindori Chardonnay Price, Taste & Review | BevOry", metaDescription: "Sula Dindori Chardonnay blends lemon, tropical fruit and creamy oak. See Indian pairings and indicative city prices on BevOry."
+  },
+  "sula-rasa-cab-sauvignon-18b2f0b": {
+    productName: "Sula RASA Cabernet Sauvignon", category: "Indian Cabernet Sauvignon Red Wine",
+    shortOverview: "RASA Cabernet Sauvignon is a structured Dindori red with black fruit, olive and vanilla. Firm fruit and oak make it more suited to a meal than a casual chilled pour.",
+    craftStory: "Sula hand-harvests Cabernet Sauvignon from its Dindori estate in Nashik. The 100% varietal wine spends roughly 14–16 months in French oak, building tannin and a vanilla edge around the fruit.",
+    tastingNotes: { nose: "Blackcurrant, blackberry, olive and vanilla.", palate: "Full and structured, with dark berry fruit, firm tannins and integrated oak.", finish: "Long, with black fruit, cedar-like wood and spice." },
+    servingGuide: { glassware: "Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Open before dinner and allow 20–30 minutes in a decanter for a young bottle." },
+    foodPairings: ["mutton seekh kebab", "lamb rogan josh", "kadai paneer", "tandoori chicken"],
+    whyBuyThis: "It shows the firm, oak-matured side of Indian Cabernet from a named Nashik estate.",
+    faqs: [{ question: "Is RASA Cabernet Sauvignon a blend?", answer: "Sula lists this wine as 100% Cabernet Sauvignon." }, { question: "How is it aged?", answer: "The producer states approximately 14–16 months in French oak barrels." }],
+    metaTitle: "Sula RASA Cabernet Sauvignon Price, Taste & Review | BevOry", metaDescription: "Sula RASA Cabernet Sauvignon shows blackcurrant, olive and French oak. Pair with kebabs; check indicative city prices on BevOry."
+  },
+  "sula-rasa-zinfandel-4667f76": {
+    productName: "Sula RASA Zinfandel", category: "Indian Zinfandel Red Wine",
+    shortOverview: "RASA Zinfandel is fruit-forward but not a sweet red: plum, raspberry and cinnamon sit over soft oak. Its supple texture makes it approachable with richly spiced food.",
+    craftStory: "Sula makes this 100% Zinfandel from Nashik-region grapes. The producer describes a short oak maturation of about three to four months; the emphasis remains on ripe berry fruit rather than a long, drying barrel regime.",
+    tastingNotes: { nose: "Plum, blueberry, raspberry and cinnamon.", palate: "Smooth and fruit-filled, with juicy berries, mild spice and modest tannin.", finish: "Medium-long, with raspberry and cinnamon lingering." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (15–17°C)", recommendation: "Pour slightly cooler than a heavy Cabernet and let the fruit open in the glass." },
+    foodPairings: ["paneer makhani", "mutton kofta", "lamb chops", "tomato-rich pasta"],
+    whyBuyThis: "Its berry-led fruit offers a softer path into premium Indian red wine.",
+    faqs: [{ question: "Is RASA Zinfandel a sweet wine?", answer: "No. Ripe berry aromas can suggest sweetness, but Sula describes a low-sweetness red." }, { question: "Does it see oak?", answer: "Yes, for a short period of about three to four months, according to the producer." }],
+    metaTitle: "Sula RASA Zinfandel Price, Taste & Review | BevOry", metaDescription: "Sula RASA Zinfandel brings plum, raspberry and cinnamon to paneer makhani or kofta. Check indicative city prices on BevOry."
+  },
+  "sula-zinfandel-rose-9a33256": {
+    productName: "Sula Zinfandel Rosé", category: "Indian Zinfandel Rosé Wine",
+    shortOverview: "Sula Zinfandel Rosé is a bright, lightly fruity wine with cranberry and citrus. Its refreshing acidity makes it a good match for pakoras and paneer chilli.",
+    craftStory: "Sula makes this Nashik Valley rosé from 100% Zinfandel grapes. Short red-grape skin contact gives the pink colour; the producer focuses on fresh fruit and balanced residual sugar rather than oak influence.",
+    tastingNotes: { nose: "Citrus, cranberry and ripe red fruit.", palate: "Light and refreshing, with cranberry fruit, balanced sweetness and brisk acidity.", finish: "Short-to-medium, clean and citrus-led." },
+    servingGuide: { glassware: "Rosé or white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Chill the bottle, then serve without ice so the berry and citrus balance stays intact." },
+    foodPairings: ["paneer chilli", "onion pakora", "cucumber chaat", "chilli chicken"],
+    whyBuyThis: "A Nashik rosé whose fruit and acidity meet spicy snacks without the weight of red wine.",
+    faqs: [{ question: "Which grape makes Sula Zinfandel Rosé?", answer: "Sula lists 100% Zinfandel." }, { question: "Is it a sparkling rosé?", answer: "No. This is the still Zinfandel Rosé listing; Sula has separate sparkling rosé labels." }],
+    metaTitle: "Sula Zinfandel Rosé Price, Taste & Review | BevOry", metaDescription: "Sula Zinfandel Rosé combines cranberry, citrus and lively acidity. Try it with pakoras; check indicative city prices on BevOry."
+  },
+  "jacobs-creek-shiraz-cabernet-ddf5870": {
+    productName: "Jacob's Creek Shiraz Cabernet", category: "Australian Shiraz-Cabernet Red Wine",
+    shortOverview: "This Classic red marries Shiraz's plum fruit to Cabernet's structure in an easy-drinking style. Mocha spice and soft tannins keep it useful for weekday food.",
+    craftStory: "Jacob's Creek, rooted in Australia's Barossa wine country, blends Shiraz and Cabernet Sauvignon for its Classic range. The producer presents it as an Australian multi-region wine made for drinking young, without claiming a fixed oak regime for every vintage.",
+    tastingNotes: { nose: "Dark cherry, plum and mocha spice.", palate: "Bright and medium-bodied, with warmed berries and soft tannins.", finish: "Medium, leaving plum and gentle spice." },
+    servingGuide: { glassware: "Standard red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour with dinner; a short chill helps on a hot day without flattening the fruit." },
+    foodPairings: ["tandoori chicken", "mutton kebab", "paneer tikka masala", "tomato pasta"],
+    whyBuyThis: "Its soft tannins make an Australian red blend straightforward with Indian mains.",
+    faqs: [{ question: "Is Shiraz Cabernet a single grape?", answer: "No. It blends Shiraz and Cabernet Sauvignon." }, { question: "Does it need long decanting?", answer: "The Classic range is made to drink young; a normal pour is usually sufficient." }],
+    metaTitle: "Jacob's Creek Shiraz Cabernet Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Shiraz Cabernet brings plum, cherry and mocha spice. See Indian pairings and indicative city prices on BevOry."
+  },
+  "jacobs-creek-chardonnay-6b6487b": {
+    productName: "Jacob's Creek Chardonnay", category: "Australian Chardonnay White Wine",
+    shortOverview: "Jacob's Creek Classic Chardonnay mixes citrus and melon with a rounded, toasty palate. It is fuller than a lean white yet still fresh enough for fish and creamy chicken.",
+    craftStory: "This Australian Chardonnay belongs to the producer's approachable Classic range. Winemaking integrates fruit and a toasty oak accent; the public product description does not fix a single vineyard or barrel schedule for every vintage.",
+    tastingNotes: { nose: "Citrus, melon and light toast.", palate: "Rounded and creamy, with vibrant fruit and toasty oak.", finish: "Medium, with citrus and a soft toast note." },
+    servingGuide: { glassware: "Wide-bowl Chardonnay glass", idealTemperature: "Chilled (10–12°C)", recommendation: "Serve cool rather than ice-cold to keep the creamy fruit visible." },
+    foodPairings: ["chicken malai tikka", "butter-poached fish", "paneer in white gravy", "creamy mushroom pasta"],
+    whyBuyThis: "It offers an accessible oak-accented Chardonnay texture without overwhelming food.",
+    faqs: [{ question: "Is this a sweet Chardonnay?", answer: "No. Its ripe fruit and creamy texture can feel soft, but the producer presents a dry-style table wine." }, { question: "What temperature suits it?", answer: "Jacob's Creek recommends 10–12°C." }],
+    metaTitle: "Jacob's Creek Chardonnay Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Chardonnay offers citrus, melon and soft toast. Pair with malai tikka and check indicative city prices on BevOry."
+  },
+  "jacobs-creek-jacob-creek-merlot-ad6ac34": {
+    productName: "Jacob's Creek Merlot", category: "Australian Merlot Red Wine",
+    shortOverview: "Jacob's Creek Classic Merlot pairs blackberry fruit with a soft, silky texture. It is a gentler red than the producer's more tannic Cabernet Sauvignon.",
+    craftStory: "Made in Australia for the producer's drink-now Classic range, this Merlot focuses on ripe fruit and an integrated mocha-oak accent. The public description does not fix one vineyard or barrel schedule across vintages.",
+    tastingNotes: { nose: "Blackberry, soft spice and a leafy trace.", palate: "Medium-bodied and smooth, with dark berries, vanilla and mocha oak.", finish: "Medium and silky, leaving berry fruit and gentle spice." },
+    servingGuide: { glassware: "Bordeaux glass", idealTemperature: "Cool room temperature (15–18°C)", recommendation: "Serve with dinner, slightly cooler than a warm room, to keep the blackberry fruit fresh." },
+    foodPairings: ["tandoori chicken", "mushroom kebab", "paneer tikka", "tomato pasta"],
+    whyBuyThis: "Its soft tannins make it a useful first Australian red for food.",
+    faqs: [{ question: "Is Jacob's Creek Merlot full-bodied?", answer: "The producer describes a medium-bodied, approachable style." }, { question: "Does it taste of oak?", answer: "A mocha-oak note supports its dark berry fruit rather than dominating it." }],
+    metaTitle: "Jacob's Creek Merlot Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Merlot offers blackberry, vanilla and silky tannins. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "jacobs-creek-jacob-shiraz-rose-9db2aee": {
+    productName: "Jacob's Creek Shiraz Rosé", category: "Australian Shiraz Rosé Wine",
+    shortOverview: "This Classic Shiraz Rosé is strawberry-led and softly sweet, with a small spice note. It suits lightly spiced food better than a tannic red would.",
+    craftStory: "Jacob's Creek makes this Australian rosé from Shiraz within its fresh, approachable Classic range. The producer focuses on red-berry character rather than a barrel-ageing programme.",
+    tastingNotes: { nose: "Strawberry, raspberry and a confectionery red-berry note.", palate: "Rounded and lush, with red berries, gentle spice and subtle sweetness.", finish: "Long for a rosé, leaving soft berry fruit." },
+    servingGuide: { glassware: "Standard white-wine glass", idealTemperature: "Chilled (6–10°C)", recommendation: "Serve cold with a lightly spiced meal; avoid adding ice to the glass." },
+    foodPairings: ["paneer tikka", "chicken malai tikka", "onion pakora", "cucumber chaat"],
+    whyBuyThis: "It offers a softer, berry-led alternative to dry rosé for mild Indian dishes.",
+    faqs: [{ question: "Is Shiraz Rosé sweet?", answer: "The producer notes subtle sweetness beneath its berry fruit." }, { question: "How cold should it be?", answer: "Jacob's Creek suggests roughly 6–10°C." }],
+    metaTitle: "Jacob's Creek Shiraz Rosé Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Shiraz Rosé brings strawberry, raspberry and gentle spice. Pair with tikka and check city prices on BevOry."
+  },
+  "jacobs-creek-jacob-creek-reserve-shiraz-barossa-b8abede": {
+    productName: "Jacob's Creek Reserve Shiraz", category: "Australian Reserve Shiraz Red Wine",
+    shortOverview: "Reserve Shiraz is a fuller Jacob's Creek red with blackberry, clove and silky oak. It has more dark-fruit weight than the easygoing Classic Shiraz Cabernet.",
+    craftStory: "The Reserve range selects premium Australian fruit for regional expression; this catalogue listing names Barossa. The producer's current Reserve Shiraz notes describe subtle oak, but the exact vineyard source should be checked against a vintage's bottle label.",
+    tastingNotes: { nose: "Blackberry, clove, allspice and vanilla-caramel oak.", palate: "Full-bodied, with spicy black fruit and oak that adds texture rather than hard edges.", finish: "Long and silky, with dark fruit and spice." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Open alongside a rich main course; let a young bottle breathe for 15–20 minutes." },
+    foodPairings: ["lamb rogan josh", "mutton ghee roast", "grilled lamb chops", "aged cheddar"],
+    whyBuyThis: "It offers a bigger, spice-led Shiraz profile for hearty Indian food.",
+    faqs: [{ question: "Is Reserve Shiraz full-bodied?", answer: "Yes. The producer describes a full-bodied wine with spicy black-fruit flavours." }, { question: "Does the wine use oak?", answer: "Yes. The current producer notes describe subtle oak adding texture." }],
+    metaTitle: "Jacob's Creek Reserve Shiraz Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Reserve Shiraz offers blackberry, clove and silky oak. Pair with lamb rogan josh; check city prices on BevOry."
+  },
+  "jacobs-creek-jacob-sparkling-rose-df8b2da": {
+    productName: "Jacob's Creek Sparkling Rosé", category: "Australian Sparkling Rosé Wine",
+    shortOverview: "Jacob's Creek Sparkling Rosé brings strawberry and redcurrant into a creamy, lightly yeasty palate. It is a fuller sparkling option than a very lean citrus-led brut.",
+    craftStory: "The producer selects Pinot Noir and Chardonnay grapes for this Australian pink sparkling wine. Pinot supplies berry fruit while Chardonnay adds citrus; yeast contact lends extra texture to the finished bubbles.",
+    tastingNotes: { nose: "Fresh strawberry, redcurrant and delicate citrus.", palate: "Generous red berry and citrus fruit with a creamy yeast-derived texture.", finish: "Soft and round, with lingering berry notes." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (about 7°C)", recommendation: "Open chilled and pour gently beside small savoury bites." },
+    foodPairings: ["hara bhara kebab", "tandoori prawns", "paneer tikka", "strawberry phirni"],
+    whyBuyThis: "Its Pinot-Chardonnay blend gives berry fruit and creamy texture without heavy tannin.",
+    faqs: [{ question: "Which grapes are used?", answer: "Jacob's Creek names Pinot Noir and Chardonnay." }, { question: "Is this wine still or sparkling?", answer: "It is a sparkling rosé with visible bubbles." }],
+    metaTitle: "Jacob's Creek Sparkling Rosé Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Sparkling Rosé offers strawberry, citrus and creamy bubbles. See pairings and indicative city prices on BevOry."
+  },
+  "fratelli-sette-vii-2021-9137cae": {
+    productName: "Fratelli Sette VII 2021", category: "Indian Sangiovese-Cabernet Red Wine",
+    shortOverview: "Sette VII 2021 is a premium Akluj red built on Sangiovese lift and Cabernet structure. Raspberry, violet and blackcurrant make it a more layered choice than Fratelli's everyday reds.",
+    craftStory: "Fratelli grows Sangiovese and Cabernet Sauvignon on rocky, sandy land by the Nira River at Akluj, Maharashtra. The producer's Sette programme uses French oak; the public house description is not a vintage-specific cellar sheet for the 2021 bottling.",
+    tastingNotes: { nose: "Raspberry, violet, blackcurrant and measured vanilla oak.", palate: "Structured yet supple, with red berries, dark currant and lively acidity.", finish: "Long, with fruit, fine tannin and gentle wood spice." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Decant for about 20 minutes before serving with dinner; avoid serving it warm." },
+    foodPairings: ["mutton seekh kebab", "lamb rogan josh", "paneer tikka", "aged cheddar"],
+    whyBuyThis: "It brings Fratelli's Italian-grape approach into a distinctly Maharashtrian estate wine.",
+    faqs: [{ question: "Which grapes define Sette?", answer: "Fratelli names Sangiovese and Cabernet Sauvignon for the core Sette blend." }, { question: "Where is Sette grown?", answer: "At Fratelli's Akluj vineyards on the Nira River in Maharashtra." }],
+    metaTitle: "Fratelli Sette VII 2021 Price, Taste & Review | BevOry", metaDescription: "Fratelli Sette VII 2021 brings raspberry, blackcurrant and oak from Akluj. See pairings and indicative city prices on BevOry."
+  },
+  "fratelli-sangiovese-b4e15df": {
+    productName: "Fratelli Sangiovese", category: "Indian Sangiovese Red Wine",
+    shortOverview: "Fratelli Sangiovese balances lively acidity with elegant tannins and light oak. It feels more savoury and food-oriented than a plush, jammy red.",
+    craftStory: "At its Akluj estate in Maharashtra, Fratelli grows a Sangiovese clone developed by its winemaker Piero Masi. The grape's acidity and the wine's restrained oak impression form the house's Italian-influenced Indian style.",
+    tastingNotes: { nose: "Red fruit and a light, elegant oak note.", palate: "Medium-bodied, with bright acidity, ripe red fruit and fine tannins.", finish: "Long and balanced, with savoury fruit and mild oak." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour with tomato-rich or roasted food; a short rest in the glass softens its acidity." },
+    foodPairings: ["tandoori chicken", "mushroom masala", "paneer tikka", "tomato pasta"],
+    whyBuyThis: "An Akluj-grown Sangiovese with useful acidity for a full Indian meal.",
+    faqs: [{ question: "Is Fratelli Sangiovese made in Italy?", answer: "No. The grape is Italian in origin, but Fratelli grows and makes this wine in Maharashtra." }, { question: "Can it age?", answer: "The producer notes Sangiovese's capacity to develop over a couple of years with careful storage." }],
+    metaTitle: "Fratelli Sangiovese Price, Taste & Review | BevOry", metaDescription: "Fratelli Sangiovese offers red fruit, lively acidity and fine tannins from Akluj. See Indian pairings and city prices on BevOry."
+  },
+  "fratelli-shiraz-rose-2faf6dc": {
+    productName: "Fratelli Shiraz Rosé", category: "Indian Dry Shiraz Rosé Wine",
+    shortOverview: "Fratelli Shiraz Rosé is a dry pink wine with strawberry, orange and lemon-flower notes. Its crisp acidity keeps the fruit bright beside spicy snacks.",
+    craftStory: "Fratelli grows Shiraz for this rosé at its Maharashtra estate, describing sandy ground as a contributor to aromatic character. The pink colour and fresh fruit are the focus; a fixed oak programme is not part of the producer's public description.",
+    tastingNotes: { nose: "Strawberry, orange and lemon blossom.", palate: "Dry and crisp, with red fruit, citrus and a mineral edge.", finish: "Medium, refreshing and lightly floral." },
+    servingGuide: { glassware: "Rosé or white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Chill before opening and serve without ice with snacks or a light meal." },
+    foodPairings: ["paneer chilli", "tandoori prawns", "onion pakora", "cucumber chaat"],
+    whyBuyThis: "It delivers a genuinely dry Indian rosé with citrus lift, not a sweet pink wine.",
+    faqs: [{ question: "Is Fratelli Shiraz Rosé sweet?", answer: "The producer describes it as dry, with crisp acidity." }, { question: "Which grape is used?", answer: "Fratelli lists Shiraz as the grape variety." }],
+    metaTitle: "Fratelli Shiraz Rosé Price, Taste & Review | BevOry", metaDescription: "Fratelli Shiraz Rosé is dry and crisp with strawberry and orange. Pair with paneer chilli; check indicative city prices on BevOry."
+  },
+  "fratelli-noi-sparkling-979511f": {
+    productName: "Fratelli NOI Sparkling", category: "Indian Sparkling White Wine",
+    shortOverview: "NOI Sparkling is an easy-drinking Indian bubbly with tropical-fruit and floral aromas. Its fresh palate works as an aperitif with salty, fried snacks.",
+    craftStory: "Fratelli's in-house winemakers make NOI as a sparkling wine within the company's Maharashtra portfolio. The producer does not publish a fixed grape blend or fermentation method on its public listing, so those details are not assigned here.",
+    tastingNotes: { nose: "Tropical fruit and a bouquet of white flowers.", palate: "Fresh and lively, with ripe fruit and light bubbles.", finish: "Short-to-medium, clean and fruity." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Serve well chilled in a narrow glass, without ice, before or alongside starters." },
+    foodPairings: ["hara bhara kebab", "onion pakora", "rava-fried fish", "salted cashews"],
+    whyBuyThis: "A fruit-and-flower led Indian sparkling wine for informal aperitif occasions.",
+    faqs: [{ question: "Is NOI Sparkling the same as NOI Sparkling Rosé?", answer: "No. They are separate Fratelli labels; the Rosé has a red-berry profile." }, { question: "Should it be served chilled?", answer: "Yes. About 6–8°C keeps the bubbles and fruit fresh." }],
+    metaTitle: "Fratelli NOI Sparkling Price, Taste & Review | BevOry", metaDescription: "Fratelli NOI Sparkling offers tropical fruit, flowers and lively bubbles. Try it with pakoras; check indicative city prices on BevOry."
+  },
+  "fratelli-noi-sparkling-rose-487e584": {
+    productName: "Fratelli NOI Sparkling Rosé", category: "Indian Sparkling Rosé Wine",
+    shortOverview: "NOI Sparkling Rosé is a fragrant pink bubbly with strawberry, blueberry and lemon zest. It brings more red-berry character than the white NOI Sparkling.",
+    craftStory: "Fratelli makes this sparkling rosé within its Maharashtra wine portfolio. Its public product page emphasises berry and citrus notes, without specifying a permanent grape formula or sparkling-wine production method across releases.",
+    tastingNotes: { nose: "Strawberry, blueberry and lemon zest.", palate: "Light and bubbly, with fresh berries and citrus brightness.", finish: "Short-to-medium, leaving lemon and red fruit." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Pour gently from a chilled bottle and match it with snacks or a fruit-led dessert." },
+    foodPairings: ["paneer tikka", "chicken popcorn", "strawberry phirni", "spiced roasted nuts"],
+    whyBuyThis: "Its berry-and-lemon profile offers a distinct Indian sparkling rosé for lighter food.",
+    faqs: [{ question: "Is NOI Sparkling Rosé a still rosé?", answer: "No. It is the sparkling rosé label in the NOI range." }, { question: "What are its main aromas?", answer: "Fratelli names strawberry, blueberry and lemon zest." }],
+    metaTitle: "Fratelli NOI Sparkling Rosé Price, Taste & Review | BevOry", metaDescription: "Fratelli NOI Sparkling Rosé brings strawberry, blueberry and lemon zest. See pairings and indicative city prices on BevOry."
+  }
+};

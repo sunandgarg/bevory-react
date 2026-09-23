@@ -2,7 +2,8 @@ import { PRODUCT_BATCH_CONTENT as BATCH_01 } from "./productContentBatch01.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_02 } from "./productContentBatch02.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_03 } from "./productContentBatch03.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_04 } from "./productContentBatch04.js";
+import { PRODUCT_BATCH_CONTENT as BATCH_05 } from "./productContentBatch05.js";
 
-export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04 };
+export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04, ...BATCH_05 };
 export const productContentBatchVersion = (slug: string): string | null =>
-  slug in BATCH_04 ? "researched-product-batch-04" : slug in BATCH_03 ? "researched-product-batch-03" : slug in BATCH_02 ? "researched-product-batch-02" : slug in BATCH_01 ? "researched-product-batch-01" : null;
+  slug in BATCH_05 ? "researched-product-batch-05" : slug in BATCH_04 ? "researched-product-batch-04" : slug in BATCH_03 ? "researched-product-batch-03" : slug in BATCH_02 ? "researched-product-batch-02" : slug in BATCH_01 ? "researched-product-batch-01" : null;
