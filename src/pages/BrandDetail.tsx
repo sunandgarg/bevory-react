@@ -397,9 +397,11 @@ const BrandDetail = () => {
                   src={brand.image_url}
                   alt={`${brand.brand_name} brand image`}
                   width={800}
-                  height={208}
-                  className="w-full h-52"
-                  objectFit="cover"
+                  height={800}
+                  aspectRatio="1/1"
+                  sizes="(max-width: 640px) 100vw, 640px"
+                  className="w-full bg-background/75 p-3 sm:p-5"
+                  objectFit="contain"
                   priority
                 />
               )}
