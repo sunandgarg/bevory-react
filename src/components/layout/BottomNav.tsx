@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Home, Search, Grid3X3, Wine, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { CITY_SLUGS } from "@/lib/locations";
 
 const NAV_ITEMS = [
   { icon: Home, label: "Home", path: "/" },
@@ -15,7 +16,7 @@ const BottomNav = memo(() => {
   const location = useLocation();
 
   const isActive = (path: string) => {
-    if (path === "/") return location.pathname === "/" || /^\/[a-z-]+$/.test(location.pathname);
+    if (path === "/") return location.pathname === "/" || CITY_SLUGS.includes(location.pathname.slice(1));
     return location.pathname.startsWith(path);
   };
 

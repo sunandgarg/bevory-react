@@ -61,6 +61,11 @@ const BRAND_PRIORITY = [
 const normalizeBrandName = (name: string) => name.toLowerCase().replace(/[’']/g, "'").trim();
 const priorityRank = (name: string) => BRAND_PRIORITY.indexOf(normalizeBrandName(name) as typeof BRAND_PRIORITY[number]);
 
+interface BrandSpotlightProps {
+  variant?: "carousel" | "grid";
+  limit?: number;
+}
+
 const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
   const { data, error } = await apiClient
     .from("brand_spotlights")
@@ -81,7 +86,7 @@ const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
   });
 };
 
-const BrandSpotlight = memo(() => {
+const BrandSpotlight = memo(({ variant = "carousel", limit }: BrandSpotlightProps) => {
   const { selectedCity } = useLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const { data: brands = [], isLoading } = useQuery({
@@ -94,11 +99,11 @@ const BrandSpotlight = memo(() => {
 
   if (isLoading) {
     return (
-      <section className="px-4">
+      <section className={variant === "carousel" ? "px-4" : ""}>
         <Skeleton className="h-5 w-32 mb-3" />
-        <div className="flex gap-2.5 overflow-x-auto">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Skeleton key={i} className="w-[68px] h-[68px] rounded-2xl flex-shrink-0" />
+        <div className={variant === "grid" ? "grid grid-cols-4 gap-2 sm:gap-3" : "flex gap-2.5 overflow-x-auto"}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].slice(0, variant === "grid" ? 8 : 6).map((i) => (
+            <Skeleton key={i} className={variant === "grid" ? "aspect-square rounded-2xl" : "h-[68px] w-[68px] flex-shrink-0 rounded-2xl"} />
           ))}
         </div>
       </section>
@@ -107,8 +112,10 @@ const BrandSpotlight = memo(() => {
 
   if (brands.length === 0) return null;
 
+  const visibleBrands = brands.slice(0, limit ?? (variant === "grid" ? 8 : 20));
+
   return (
-    <section className="px-4" aria-label="Featured Brand Spotlight">
+    <section className={variant === "carousel" ? "px-4" : ""} aria-label="Featured Brand Spotlight">
       <div className="flex items-center justify-between mb-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <h2 className="shrink-0 text-[20px] tracking-tight text-foreground">
@@ -124,8 +131,33 @@ const BrandSpotlight = memo(() => {
         </Link>
       </div>
 
+      {variant === "grid" ? (
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
+          {visibleBrands.map((brand) => (
+            <Link
+              key={brand.id}
+              to={`/${citySlug}/brand/${brand.slug || brand.id}`}
+              className="group min-w-0"
+            >
+              <div className="aspect-square overflow-hidden rounded-2xl border border-border/70 bg-card p-2 shadow-sm transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent/50 group-hover:shadow-md sm:p-4">
+                <BrandLogo
+                  brandName={brand.brand_name}
+                  slug={brand.slug}
+                  logoUrl={brand.logo_url}
+                  emoji={brand.logo_emoji}
+                  className="h-full w-full rounded-xl bg-transparent"
+                  imgClassName="h-full w-full rounded-xl object-contain"
+                />
+              </div>
+              <p className="mt-1.5 truncate text-center text-xs font-medium text-foreground sm:text-sm">
+                {brand.brand_name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      ) : (
       <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
-        {brands.slice(0, 20).map((brand) => {
+        {visibleBrands.map((brand) => {
           const hasStory = Boolean(youtubeEmbedUrl(brand.youtube_url));
           const visual = (
             <>
@@ -167,8 +199,9 @@ const BrandSpotlight = memo(() => {
           );
         })}
       </div>
+      )}
 
-      <Dialog open={Boolean(selectedStory && selectedEmbed)} onOpenChange={(open) => !open && setSelectedStory(null)}>
+      {variant === "carousel" && <Dialog open={Boolean(selectedStory && selectedEmbed)} onOpenChange={(open) => !open && setSelectedStory(null)}>
         <DialogContent className="w-[calc(100vw-24px)] max-w-3xl border-0 bg-black p-3 text-white sm:p-4">
           <DialogHeader className="pr-8 text-left">
             <DialogTitle>{selectedStory?.brand_name}</DialogTitle>
@@ -190,7 +223,7 @@ const BrandSpotlight = memo(() => {
             </div>
           )}
         </DialogContent>
-      </Dialog>
+      </Dialog>}
     </section>
   );
 });

@@ -1,25 +1,27 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { Search as SearchIcon, SlidersHorizontal, X, Star, TrendingUp } from "lucide-react";
+import { Search as SearchIcon, SlidersHorizontal, X, Star, TrendingUp, ShieldCheck } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import MobileLayout from "@/components/layout/MobileLayout";
-import { Product, useProducts } from "@/hooks/useProducts";
+import { Category, Product, useProducts } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import { Link, useSearchParams } from "react-router-dom";
 import CompareButton from "@/components/product/CompareButton";
 import FavoriteButton from "@/components/FavoriteButton";
 import SEOHead from "@/components/SEOHead";
 import { useProductUrl } from "@/hooks/useProductUrl";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
 import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/lib/searchDemand";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { PRODUCT_BATCH_SIZE } from "@/lib/catalogPagination";
+import BrandSpotlight from "@/components/home/BrandSpotlight";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 import {
   Sheet,
@@ -45,18 +47,45 @@ const Search = () => {
       : "rating";
   });
 
-  const {
-    products,
-    categories,
-    loading,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useProducts(true, "full", undefined, true);
   const { selectedCity } = useLocation();
   const { getProductUrlSafe } = useProductUrl();
   const trendingOnly = searchParams.get("sort") === "trending" || searchParams.get("trending") === "true";
   const searchIntent = useMemo(() => parseSearchIntent(debouncedQuery), [debouncedQuery]);
+  const catalogFilterActive = Boolean(
+    selectedCategory
+      || trendingOnly
+      || minRating > 0
+      || priceRange[0] > 0
+      || priceRange[1] < 50000
+      || sortBy !== "rating",
+  );
+  const isDiscoveryLanding = !debouncedQuery.trim() && !catalogFilterActive;
+  const catalogEnabled = !searchIntent.lookupTerm && !isDiscoveryLanding;
+  const {
+    products,
+    categories: catalogCategories,
+    loading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useProducts(catalogEnabled, "full", undefined, true);
+  const { data: filterCategories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async (): Promise<Category[]> => {
+      const { data, error } = await apiClient
+        .from("categories")
+        .select("id, name, slug, emoji, image_url, description")
+        .eq("is_active", true)
+        .order("order_index");
+      if (error) throw error;
+      return ((data ?? []) as Category[]).map((category) => (
+        category.slug === "beers" ? { ...category, name: "Beer" } : category
+      ));
+    },
+    staleTime: 10 * 60 * 1000,
+    enabled: showFilters,
+  });
+  const categories = catalogCategories.length > 0 ? catalogCategories : filterCategories;
 
   useEffect(() => {
     const timer = window.setTimeout(() => setDebouncedQuery(query), 250);
@@ -266,21 +295,21 @@ const Search = () => {
         canonical="/search"
         robots="noindex, follow, max-image-preview:large"
       />
-      <MobileLayout title="Search">
+      <MobileLayout title="Search" showHeader={false}>
         <div className="pb-6">
           {/* Hero Header */}
-          <header className="px-4 pt-4 pb-4">
+          <header className="px-4 pb-4 pt-5 sm:pt-7">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-4"
+              className="mb-5 text-center"
             >
-              <div className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-2">
+              <div className="mb-2 inline-flex items-center gap-2 text-sm font-medium text-accent">
                 <TrendingUp className="w-4 h-4" />
-                <span>Search the full BevOry catalog</span>
+                <span>Discover the BevOry catalogue</span>
               </div>
-              <h1 className="text-2xl font-serif font-bold text-foreground">
-                Find Your Perfect Drink
+              <h1 className="font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                Find your perfect drink
               </h1>
             </motion.div>
 
@@ -293,13 +322,13 @@ const Search = () => {
                 className="relative flex-1"
               >
                 <div className="relative">
-                  <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <SearchIcon className="absolute left-4 top-1/2 h-6 w-6 -translate-y-1/2 text-accent sm:left-5" />
                   <Input
-                    placeholder="Search drinks, brands..."
+                    placeholder="Search BevOry"
                     value={query}
                     onChange={(e) => handleQueryChange(e.target.value)}
                     aria-label="Search drinks and brands"
-                    className="pl-12 h-12 rounded-xl bg-card border-border"
+                    className="h-14 rounded-2xl border-border bg-card pl-14 pr-12 text-base shadow-sm focus-visible:border-accent sm:h-16 sm:text-lg"
                   />
                   <AnimatePresence>
                     {query && (
@@ -324,7 +353,7 @@ const Search = () => {
                     variant="outline"
                     size="icon"
                     aria-label="Open filters and sorting"
-                    className={`h-12 w-12 rounded-xl shadow-lg ${hasActiveFilters ? "border-accent text-accent bg-accent/10" : ""}`}
+                    className={`h-14 w-14 rounded-2xl shadow-sm sm:h-16 sm:w-16 ${hasActiveFilters ? "border-accent text-accent bg-accent/10" : ""}`}
                   >
                     <SlidersHorizontal className="w-5 h-5" />
                   </Button>
@@ -466,6 +495,23 @@ const Search = () => {
                 </div>
               </section>
             )}
+            {isDiscoveryLanding ? (
+              <div className="space-y-8 pb-6 pt-2">
+                <BrandSpotlight variant="grid" limit={8} />
+
+                <section className="rounded-2xl border border-border/70 bg-secondary/35 p-5" aria-labelledby="search-disclaimer">
+                  <div className="mb-3 flex items-center gap-2">
+                    <ShieldCheck className="h-5 w-5 text-accent" aria-hidden="true" />
+                    <h2 id="search-disclaimer" className="font-semibold text-foreground">Good to know</h2>
+                  </div>
+                  <ul className="space-y-2.5 pl-5 text-sm leading-6 text-muted-foreground marker:text-accent">
+                    <li>{INFORMATIONAL_PRICE_NOTICE}</li>
+                    <li>BevOry is an independent information and discovery platform. Brand names and logos belong to their respective owners.</li>
+                    <li>Please drink responsibly. Alcohol is only for adults of legal drinking age in their location.</li>
+                  </ul>
+                </section>
+              </div>
+            ) : <>
             {/* Results Info */}
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm text-muted-foreground" aria-live="polite">
@@ -502,14 +548,24 @@ const Search = () => {
                   <SearchIcon className="w-10 h-10 text-muted-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">
-                  {products.length === 0 ? "Catalog is being updated" : "No matches found"}
+                  {debouncedQuery.trim().length === 1
+                    ? "Keep typing"
+                    : debouncedQuery.trim()
+                      ? "No matches found"
+                      : products.length === 0
+                        ? "Catalogue is being updated"
+                        : "No matches found"}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {products.length === 0
-                    ? `Products for ${selectedCity?.name || "your city"} will appear as local prices are published.`
-                    : "Try a shorter search or reset your filters."}
+                  {debouncedQuery.trim().length === 1
+                    ? "Enter at least two characters to search drinks and brands."
+                    : debouncedQuery.trim()
+                      ? "Try a shorter search, another spelling, or reset your filters."
+                      : products.length === 0
+                        ? `Products for ${selectedCity?.name || "your city"} will appear as local prices are published.`
+                        : "Try a shorter search or reset your filters."}
                 </p>
-                {products.length === 0 ? (
+                {!debouncedQuery.trim() && products.length === 0 ? (
                   <Button variant="outline" asChild>
                     <Link to="/categories">Browse categories</Link>
                   </Button>
@@ -600,6 +656,7 @@ const Search = () => {
                 )}
               </>
             )}
+            </>}
           </main>
         </div>
       </MobileLayout>

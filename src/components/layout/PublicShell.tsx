@@ -16,6 +16,7 @@ const PublicShell = () => {
   const { pathname } = useRouterLocation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const isHome = pathname === "/" || CITY_SLUGS.includes(pathname.slice(1));
+  const isSearchPage = pathname === "/search";
 
   const pageHeading = (() => {
     if (isHome) return "";
@@ -60,12 +61,14 @@ const PublicShell = () => {
             )}
           </Link>
         </div>
-        <div className="mx-auto max-w-[1120px] px-4 pb-2 pt-2">
-          <UniversalSearch />
-        </div>
+        {!isSearchPage && (
+          <div className="mx-auto max-w-[1120px] px-4 pb-2 pt-2">
+            <UniversalSearch />
+          </div>
+        )}
       </header>
 
-      <div className="pt-[126px] md:pt-[136px]">
+      <div className={isSearchPage ? "pt-14 md:pt-[72px]" : "pt-[126px] md:pt-[136px]"}>
         <Outlet />
       </div>
 
