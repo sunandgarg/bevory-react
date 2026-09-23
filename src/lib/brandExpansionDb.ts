@@ -6,6 +6,12 @@ import { BRAND_CONTENT_BATCH_03 } from "./brandContentBatch03.js";
 import { BRAND_CONTENT_BATCH_04 } from "./brandContentBatch04.js";
 import { BRAND_CONTENT_BATCH_05 } from "./brandContentBatch05.js";
 import { BRAND_CONTENT_BATCH_06 } from "./brandContentBatch06.js";
+import { BRAND_CONTENT_BATCH_07 } from "./brandContentBatch07.js";
+import { BRAND_CONTENT_BATCH_08 } from "./brandContentBatch08.js";
+import { BRAND_CONTENT_BATCH_09 } from "./brandContentBatch09.js";
+import { BRAND_CONTENT_BATCH_10 } from "./brandContentBatch10.js";
+import { BRAND_CONTENT_BATCH_11 } from "./brandContentBatch11.js";
+import { BRAND_CONTENT_BATCH_12 } from "./brandContentBatch12.js";
 
 type JsonObject = Prisma.JsonObject;
 
@@ -69,7 +75,13 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
       || BRAND_CONTENT_BATCH_03[definition.slug]
       || BRAND_CONTENT_BATCH_04[definition.slug]
       || BRAND_CONTENT_BATCH_05[definition.slug]
-      || BRAND_CONTENT_BATCH_06[definition.slug],
+      || BRAND_CONTENT_BATCH_06[definition.slug]
+      || BRAND_CONTENT_BATCH_07[definition.slug]
+      || BRAND_CONTENT_BATCH_08[definition.slug]
+      || BRAND_CONTENT_BATCH_09[definition.slug]
+      || BRAND_CONTENT_BATCH_10[definition.slug]
+      || BRAND_CONTENT_BATCH_11[definition.slug]
+      || BRAND_CONTENT_BATCH_12[definition.slug],
     );
 
     for (const field of contentFields) {
@@ -81,13 +93,16 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
       next.logo_source_tier = built.logo_source_tier;
       next.logo_source_page = built.logo_source_page;
       next.logo_asset_status = built.logo_asset_status;
+      next.logo_identity_verified = built.logo_identity_verified;
+      next.logo_verified_at = built.logo_verified_at;
     }
     if (!hasValue(previous.is_active)) next.is_active = true;
     if (!hasValue(previous.show_in_spotlight)) next.show_in_spotlight = false;
     if (!hasValue(previous.order_index)) next.order_index = 0;
     if (!hasValue(previous.logo_asset_status)) next.logo_asset_status = built.logo_asset_status;
     if (!hasValue(previous.image_license_status)) next.image_license_status = built.image_license_status;
-    if (!hasValue(previous.logo_identity_verified)) next.logo_identity_verified = false;
+    if (!hasValue(previous.logo_identity_verified)) next.logo_identity_verified = built.logo_identity_verified;
+    if (!hasValue(previous.logo_verified_at)) next.logo_verified_at = built.logo_verified_at;
     if (!hasValue(previous.content_updated_at)) next.content_updated_at = now;
 
     const recordId = existing?.recordId ?? definition.recordId;

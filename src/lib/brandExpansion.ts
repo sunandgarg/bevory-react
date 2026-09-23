@@ -5,6 +5,12 @@ import { BRAND_CONTENT_BATCH_03 } from "./brandContentBatch03.js";
 import { BRAND_CONTENT_BATCH_04 } from "./brandContentBatch04.js";
 import { BRAND_CONTENT_BATCH_05 } from "./brandContentBatch05.js";
 import { BRAND_CONTENT_BATCH_06 } from "./brandContentBatch06.js";
+import { BRAND_CONTENT_BATCH_07 } from "./brandContentBatch07.js";
+import { BRAND_CONTENT_BATCH_08 } from "./brandContentBatch08.js";
+import { BRAND_CONTENT_BATCH_09 } from "./brandContentBatch09.js";
+import { BRAND_CONTENT_BATCH_10 } from "./brandContentBatch10.js";
+import { BRAND_CONTENT_BATCH_11 } from "./brandContentBatch11.js";
+import { BRAND_CONTENT_BATCH_12, BRAND_LOGOS_BATCH_12 } from "./brandContentBatch12.js";
 
 export type BrandExpansionDefinition = {
   recordId: string;
@@ -22,34 +28,54 @@ export type BrandExpansionDefinition = {
 };
 
 const COUNTRY_FLAGS: Record<string, string> = {
+  Australia: "🇦🇺",
   Barbados: "🇧🇧",
+  Belgium: "🇧🇪",
   "British Virgin Islands": "🇻🇬",
   Cuba: "🇨🇺",
+  Denmark: "🇩🇰",
   France: "🇫🇷",
+  Chile: "🇨🇱",
+  "Dominican Republic": "🇩🇴",
   India: "🇮🇳",
   Italy: "🇮🇹",
   Japan: "🇯🇵",
   Mexico: "🇲🇽",
+  "Northern Ireland": "🇬🇧",
   "Puerto Rico": "🇵🇷",
+  Russia: "🇷🇺",
   "Saint Lucia": "🇱🇨",
   Scotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  "South Africa": "🇿🇦",
+  Sweden: "🇸🇪",
+  Taiwan: "🇹🇼",
   "United Kingdom": "🇬🇧",
   "United States": "🇺🇸",
   Venezuela: "🇻🇪",
 };
 
 const COUNTRY_FLAG_URLS: Record<string, string> = {
+  Australia: "https://flagcdn.com/h20/au.webp",
   Barbados: "https://flagcdn.com/h20/bb.webp",
+  Belgium: "https://flagcdn.com/h20/be.webp",
   "British Virgin Islands": "https://flagcdn.com/h20/vg.webp",
   Cuba: "https://flagcdn.com/h20/cu.webp",
+  Denmark: "https://flagcdn.com/h20/dk.webp",
   France: "https://flagcdn.com/h20/fr.webp",
+  Chile: "https://flagcdn.com/h20/cl.webp",
+  "Dominican Republic": "https://flagcdn.com/h20/do.webp",
   India: "https://flagcdn.com/h20/in.webp",
   Italy: "https://flagcdn.com/h20/it.webp",
   Japan: "https://flagcdn.com/h20/jp.webp",
   Mexico: "https://flagcdn.com/h20/mx.webp",
+  "Northern Ireland": "https://flagcdn.com/h20/gb.webp",
   "Puerto Rico": "https://flagcdn.com/h20/pr.webp",
+  Russia: "https://flagcdn.com/h20/ru.webp",
   "Saint Lucia": "https://flagcdn.com/h20/lc.webp",
   Scotland: "https://flagcdn.com/h20/gb-sct.webp",
+  "South Africa": "https://flagcdn.com/h20/za.webp",
+  Sweden: "https://flagcdn.com/h20/se.webp",
+  Taiwan: "https://flagcdn.com/h20/tw.webp",
   "United Kingdom": "https://flagcdn.com/h20/gb.webp",
   "United States": "https://flagcdn.com/h20/us.webp",
   Venezuela: "https://flagcdn.com/h20/ve.webp",
@@ -139,6 +165,66 @@ export const BRAND_EXPANSION: BrandExpansionDefinition[] = [
   brand("brand-expansion-glenmorangie", "Glenmorangie", "glenmorangie", "Scotland", ["Single Malts"], "https://www.glenmorangie.com/", "A Highland single malt Scotch whisky made at a distillery established in 1843, known for tall stills and a delicate, citrus-led style.", "The house moves from orange, lemon, honey, peach and vanilla in its lighter expressions to richer chocolate, spice and oak in selected finishes.", "Pour a small measure into a tulip glass and taste it neat, with a few drops of water or a light highball if preferred.", ["smoked salmon", "roast chicken", "grilled prawns", "soft cheese", "peach desserts"], "🥃", "The Glenmorangie Company"),
   brand("brand-expansion-mcdowells", "McDowell's", "mcdowells", "India", ["Whisky"], "https://www.diageoindia.com/", "An Indian whisky label from United Spirits with blended whisky styles and multiple bottle formats.", "The family is best understood bottle by bottle, since blend style, format and local availability can change across the catalogue.", "Begin with a modest neat pour, then add water or soda to taste, using the selected bottle label for its exact details.", ["masala peanuts", "tandoori chicken", "chilli paneer", "kebabs", "smoky grilled snacks"], "🥃", "United Spirits"),
   brand("brand-expansion-piccini", "Piccini", "piccini", "Italy", ["Wine"], "https://www.piccini1882.it/", "An Italian wine family with Tuscan roots and a portfolio spanning Chianti, Sangiovese, Prosecco and wines from other Italian regions.", "Its collection brings classic Tuscan red fruit and savoury character together with fresh whites, sparkling wines and bottles from beyond Tuscany.", "Chill white and sparkling wines well, serve reds slightly cool, and use a clean glass matched to the style.", ["tomato pasta", "pizza", "lamb", "grilled vegetables", "seafood", "soft cheese"], "🍷"),
+  brand("brand-expansion-kingfisher", "Kingfisher", "kingfisher", "India", ["Beer"], "https://www.unitedbreweries.com/", "An Indian beer brand from United Breweries with Premium, Strong, Ultra, Ultra Max and wheat-beer styles.", "The range gives drinkers clear choices across mild lager, fuller strong beer and lighter premium expressions.", "Chill well and pour into a clean beer glass, leaving enough room for a compact head.", ["masala peanuts", "grilled fish", "biryani", "kebabs", "chilli chicken"], "🍺", "United Breweries"),
+  brand("brand-expansion-gancia", "Gancia", "gancia", "Italy", ["Wine", "Liqueurs"], "https://gancia.com/en/", "An Italian wine and aperitif house founded in 1850, with sparkling wine, Asti, Prosecco, vermouth and bitter aperitifs.", "The house connects historic Italian sparkling-wine craft with practical pre-dinner aperitif styles.", "Chill sparkling wines well, and serve aperitif bottles over ice, with soda or in a measured spritz.", ["fried starters", "soft cheese", "olives", "cured meat", "roasted nuts"], "🍾"),
+  brand("brand-expansion-jacobs-creek", "Jacob's Creek", "jacobs-creek", "Australia", ["Wine"], "https://jacobscreek.com/", "An Australian wine brand rooted in the Barossa Valley, with red, white, rose, sparkling and Double Barrel wines.", "Its range makes familiar grape styles easy to compare while keeping a clear connection to South Australian wine country.", "Chill white, rose and sparkling wines, and serve fuller reds slightly cool with food.", ["malai tikka", "chilli prawns", "lamb kebabs", "tomato pasta", "mature cheese"], "🍷", "Pernod Ricard"),
+  brand("brand-expansion-maharani", "Maharani Mahansar", "maharani", "India", ["Liqueurs"], "https://maharanimahansar.in/", "A Rajasthan heritage liqueur house using botanicals such as rose, fennel, cardamom, orange, betel leaf and spice.", "Its range translates regional ingredients and traditional pot distillation into clearly differentiated botanical liqueurs.", "Taste a small chilled pour first, then use the selected flavour in a simple highball or restrained cocktail.", ["pista kulfi", "saunf biscuits", "dark chocolate", "meetha paan desserts", "dry fruit mithai"], "🍹", "Shekhawati Heritage Herbal"),
+  brand("brand-expansion-glenlivet", "The Glenlivet", "glenlivet", "Scotland", ["Single Malts"], "https://www.theglenlivet.com/en/", "A Speyside single malt Scotch whisky whose licensed distillery dates to 1824, known for a smooth, fruit-led style.", "The range moves from approachable orchard fruit and citrus to deeper age-stated and cask-finished expressions.", "Use a tulip glass and taste neat first, adding a few drops of water if desired.", ["smoked salmon", "roast chicken", "apple tart", "mild blue cheese", "spiced paneer"], "🥃", "Pernod Ricard"),
+  brand("brand-expansion-folonari", "Folonari", "folonari", "Italy", ["Wine"], "https://folonariwines.com/", "An Italian wine label covering Pinot Grigio, Chianti, Soave, Valpolicella, Merlot and other regional styles.", "The range offers a straightforward route through crisp Italian whites, cherry-led northern reds and fuller southern bottles.", "Chill white wines well and serve reds slightly cool, giving fuller styles a few minutes in the glass.", ["grilled fish", "paneer", "tomato pasta", "lamb", "pizza"], "🍷"),
+  brand("brand-expansion-absolut", "Absolut", "absolut", "Sweden", ["Vodka"], "https://www.absolut.com/", "A Swedish vodka made in and around Ahus from Swedish winter wheat and local well water, with original and flavoured expressions.", "Its clean grain base and direct flavour names make it easy to choose a bottle for highballs and cocktails.", "Chill for a clean pour or mix with soda, tonic or ginger beer, matching the garnish to the selected flavour.", ["smoked fish", "grilled prawns", "kebabs", "citrus salad", "dark chocolate"], "🍸", "Pernod Ricard"),
+  brand("brand-expansion-tuborg", "Tuborg", "tuborg", "Denmark", ["Beer"], "https://www.tuborg.com/", "A Danish beer brand established in 1880, with light lager, Strong, Classic, Gold, White and Ice Draft styles in India.", "The family covers crisp lager, wheat-led beer and fuller strong styles for different foods and occasions.", "Chill well and pour into a clean beer glass without freezing the beer.", ["pakora", "grilled fish", "butter chicken", "kebabs", "spicy pizza"], "🍺", "Carlsberg Group"),
+  brand("brand-expansion-paul-john", "Paul John", "paul-john", "India", ["Single Malts"], "https://www.pauljohnwhisky.com/", "An Indian single malt made in Goa from Indian six-row barley and matured in charred American white oak.", "The range shows how Goa's tropical climate, peat and cask finishing shape Indian single malt.", "Taste neat in a tulip glass before adding a few drops of water, or use a younger unpeated bottle in a restrained highball.", ["grilled paneer", "smoked fish", "lamb kebabs", "roasted nuts", "dark chocolate"], "🥃", "John Distilleries"),
+  brand("brand-expansion-patron", "Patrón", "patron", "Mexico", ["Tequila"], "https://www.patrontequila.com/", "A Jalisco tequila house using Blue Weber agave, water and yeast, with brick ovens, tahona wheels and copper pot stills.", "The range makes a clear distinction between fresh Silver tequila and richer oak-matured expressions.", "Taste Silver neat or in a Margarita, and serve aged expressions neat or over one large cube.", ["ceviche", "grilled prawns", "tacos al pastor", "mole", "aged cheese", "dark chocolate"], "🌵", "Bacardi"),
+  brand("brand-expansion-yellow-tail", "Yellow Tail", "yellow-tail", "Australia", ["Wine"], "https://www.yellowtailwine.com/", "An Australian wine brand made by the Casella family in Yenda, New South Wales.", "The range covers familiar red, white, rose, Moscato and sparkling styles.", "Chill white, rose and sparkling wines, and serve fuller reds slightly cool with food.", ["malai tikka", "seekh kebab", "fruit chaat", "grilled prawns"], "🍷", "Casella Family Brands"),
+  brand("brand-expansion-fishing-cat", "Fishing Cat", "fishing-cat", "Italy", ["Wine"], "https://fishingcat.it/", "An Italian wine range centred on wines from Abruzzo and other familiar Italian regions.", "The collection connects Abruzzo grapes with well-known Italian and international varieties.", "Chill white and rose wines, and serve fuller reds slightly cool with food.", ["grilled fish", "chilli prawns", "lamb kebabs", "tomato pasta"], "🍷"),
+  brand("brand-expansion-paladin", "Paladin", "paladin", "Italy", ["Wine"], "https://www.paladin.it/en/", "A family-owned Italian winery founded near Treviso and based in Annone Veneto.", "Its range connects eastern Veneto and Friuli wine traditions through still and sparkling wines.", "Chill Prosecco and white wines, and serve Merlot and Syrah slightly cool.", ["fried starters", "tandoori fish", "mushroom pasta", "grilled lamb"], "🍷", "Casa Paladin"),
+  brand("brand-expansion-luxardo", "Luxardo", "luxardo", "Italy", ["Liqueurs", "Gin"], "https://www.luxardo.it/", "An Italian family distiller founded in Zara in 1821 and now based in Torreglia near Padua.", "Its range includes Maraschino Originale, Sambuca, Limoncello, bitters, aperitifs and cherry-led spirits.", "Use Maraschino in cocktails, serve Sambuca neat or with coffee, and chill Limoncello.", ["almond biscuits", "espresso desserts", "lemon tart", "pistachio kulfi"], "🍹", "Girolamo Luxardo"),
+  brand("brand-expansion-woodbridge", "Woodbridge", "woodbridge", "United States", ["Wine"], "https://www.woodbridgewines.com/", "A California wine brand founded by Robert Mondavi in Lodi in 1979.", "The range covers familiar red, white, rose and sweet wine styles.", "Chill white, Moscato and White Zinfandel bottles, and serve reds slightly cool.", ["butter chicken", "grilled prawns", "mushroom tikka", "roast lamb"], "🍷"),
+  brand("brand-expansion-camas", "Camas", "camas", "France", ["Wine"], "https://www.annedejoyeuse.fr/en/a-generous-range-of-wines-for-every-occasions/camas/", "A French single-varietal wine range made by the Anne de Joyeuse cooperative in Limoux.", "The collection covers IGP Pays d'Oc reds, whites and roses from familiar grapes.", "Chill white and rose wines, and serve fuller reds lightly cool.", ["galouti kebabs", "grilled lamb", "fish tikka", "mild paneer curry"], "🍷", "Anne de Joyeuse"),
+  brand("brand-expansion-svedka", "Svedka", "svedka", "Sweden", ["Vodka"], "https://svedka.com/", "A vodka brand launched in 1998 with Swedish production roots.", "Its current range includes original vodka and fruit-led flavours intended for cocktails.", "Chill the original vodka or mix it with soda, and use flavoured bottles with restrained mixers.", ["grilled prawns", "chilli paneer", "dark chocolate", "smoked fish"], "🍸", "Sazerac"),
+  brand("brand-expansion-batasiolo", "Batasiolo", "batasiolo", "Italy", ["Wine"], "https://batasiolo.com/eng/", "An Italian wine estate run by the Dogliani family in Piedmont's Langhe hills.", "Its range spans Barolo and other Langhe reds as well as Gavi, Moscato and sparkling wines.", "Chill white and sparkling wines, and give Barolo time in a wide glass.", ["grilled fish", "tomato pasta", "lamb rogan josh", "pista kulfi"], "🍷", "Dogliani family"),
+  brand("brand-expansion-penfolds", "Penfolds", "penfolds", "Australia", ["Wine"], "https://www.penfolds.com/en/", "An Australian wine house founded at Magill near Adelaide in 1844.", "Its collection includes Shiraz, Cabernet Sauvignon, Chardonnay and multi-region Bin wines.", "Chill Chardonnay, serve red wines slightly cool and give structured Bin reds time in a wide glass.", ["tandoori lobster", "pepper lamb chops", "galouti kebabs", "mature cheddar"], "🍷", "Treasury Wine Estates"),
+  brand("brand-expansion-simba", "Simba", "simba", "India", ["Beer"], "https://simbabeer.com/", "An Indian beer brand that brews in its own brewery using small-batch recipes.", "Its range includes Wit, Stout, Light and Strong beers in bottle and can formats.", "Chill and pour into a clean glass with room for foam, allowing Stout to warm slightly after pouring.", ["fish tikka", "chocolate cake", "masala peanuts", "kebabs"], "🍺"),
+  brand("brand-expansion-ballantines", "Ballantines", "ballantines", "Scotland", ["Blended Scotch"], "https://www.ballantines.com/en/", "A blended Scotch whisky house founded by George Ballantine in Edinburgh.", "The collection ranges from an approachable reference blend to mature age-stated whiskies.", "Taste neat before adding water or ice, or use a lighter expression in a cold soda highball.", ["tandoori chicken", "masala peanuts", "lamb seekh kebab", "mature cheddar"], "🥃", "Pernod Ricard"),
+  brand("brand-expansion-chivas-regal", "Chivas Regal", "chivas-regal", "Scotland", ["Blended Scotch"], "https://www.chivas.com/en/", "A blended Scotch house with Strathisla single malt at the centre of its blends.", "Its range moves from the 12 Year Old through richer age-stated and blended malt releases.", "Serve neat, over one cube or with cold soda in a tall highball.", ["galouti kebabs", "smoked chicken", "roasted almonds", "mature cheddar"], "🥃", "Pernod Ricard"),
+  brand("brand-expansion-dalmore", "Dalmore", "dalmore", "Scotland", ["Single Malts"], "https://www.thedalmore.com/en/", "A Highland single malt made beside the Cromarty Firth.", "The collection uses American oak alongside selected sherry, port and wine casks.", "Use a tulip glass, taste neat and add a few drops of water if desired.", ["pepper lamb chops", "duck kebabs", "orange dark chocolate", "aged Gouda"], "🥃", "Whyte & Mackay"),
+  brand("brand-expansion-joseph-drouhin", "Joseph Drouhin", "joseph-drouhin", "France", ["Wine"], "https://www.drouhin.com/en_US", "A family-run Burgundy wine producer founded in Beaune in 1880.", "Its collection spans major Burgundy areas through Pinot Noir, Chardonnay and Gamay.", "Chill white wines gently and serve Pinot Noir lightly cool in a broad Burgundy glass.", ["grilled pomfret", "malai tikka", "mushroom galouti", "roast duck"], "🍷", "Drouhin family"),
+  brand("brand-expansion-smirnoff", "Smirnoff", "smirnoff", "Russia", ["Vodka", "Ready-to-Drink"], "https://www.smirnoff.com/", "A vodka brand founded by P. A. Smirnov in Moscow in 1864.", "The range spans No. 21 vodka, flavoured vodkas and ready-to-drink products.", "Chill the plain vodka or mix it with soda, tonic, ginger beer or tomato juice.", ["smoked fish", "chilli paneer", "seekh kebab", "spicy corn ribs"], "🍸", "Diageo"),
+  brand("brand-expansion-1800", "1800", "1800", "Mexico", ["Tequila"], "https://www.1800tequila.com/", "A Mexican tequila house made from 100% Blue Weber agave sourced in Jalisco.", "The family covers unaged, rested, aged, filtered and flavoured tequila styles.", "Taste in a small agave-spirit glass or use Blanco and Reposado in a Margarita or Paloma.", ["ceviche", "chicken tikka", "mole-style dishes", "grilled pineapple"], "🌵", "Proximo Spirits"),
+  brand("brand-expansion-balvenie", "Balvenie", "balvenie", "Scotland", ["Single Malts"], "https://www.thebalvenie.com/en-gb/", "A Speyside single malt made in Dufftown with a strong focus on on-site craft and cask maturation.", "Its range builds on a honeyed malt style through age statements and varied cask finishes.", "Taste neat in a tulip glass before adding a few drops of water.", ["tandoori salmon", "roast chicken", "honey-glazed nuts", "apple tart"], "🥃", "William Grant & Sons"),
+  brand("brand-expansion-bushmills", "Bushmills", "bushmills", "Northern Ireland", ["World Whisky", "Single Malts"], "https://bushmills.com/", "An Irish whiskey house from Bushmills in County Antrim.", "The collection combines blended whiskey with triple-distilled age-stated single malts.", "Taste neat first, add water or ice, or use a lighter blend in a highball.", ["fish and chips", "mutton seekh", "mature cheese", "fruit cake"], "🥃", "Proximo Spirits"),
+  brand("brand-expansion-edinburgh-gin", "Edinburgh Gin", "edinburgh-gin", "Scotland", ["Gin", "Liqueurs"], "https://www.edinburghgin.com/", "A Scottish gin producer based in the centre of Edinburgh.", "Its range covers Classic London Dry, Seaside Gin, fruit-led gins and gin liqueurs.", "Serve dry styles with tonic and a simple garnish, and sweeter fruit styles with soda or sparkling wine.", ["grilled prawns", "fish tikka", "dark chocolate", "baked cheesecake"], "🍸", "Ian Macleod Distillers"),
+  brand("brand-expansion-greater-than", "Greater Than", "greater-than", "India", ["Gin"], "https://naospirits.com/", "An Indian London Dry Gin distilled by Nao Spirits in Goa.", "The core juniper and citrus profile is joined by bolder limited releases.", "Serve in a gin and tonic with citrus peel or use in a dry Martini.", ["tandoori prawns", "pepper chicken", "tiramisu", "dark-chocolate tart"], "🍸", "Nao Spirits"),
+  brand("brand-expansion-martini", "MARTINI", "martini", "Italy", ["Vermouth", "Sparkling Wine"], "https://www.martini.com/", "An Italian vermouth and sparkling wine house founded in Turin in 1863.", "The range covers classic vermouth, aperitifs, Asti and Prosecco.", "Serve vermouth chilled over ice or in a classic cocktail, and serve sparkling wines well chilled.", ["grilled prawns", "mushroom tikka", "fried starters", "fruit tart"], "🍸", "Bacardi"),
+  brand("brand-expansion-royal-challenge", "Royal Challenge", "royal-challenge", "India", ["Whisky", "Beer"], "https://www.diageoindia.com/", "An Indian blended whisky name that also appears on a distinct lager range.", "The whisky is soft and vanilla-led, while the beer provides a lighter chilled serve.", "Taste the whisky neat before adding water or soda, and serve the lager well chilled.", ["seekh kebab", "pepper chicken", "chilli paneer", "fried fish"], "🥃", "United Spirits"),
+  brand("brand-expansion-york", "York", "york", "India", ["Wine"], "https://sulavineyards.com/our-history.php", "A Nashik winery founded by the Gurnani family and acquired by Sula Vineyards in 2021.", "Its range spans white, rose, red and sparkling wines made for Indian tables.", "Chill white, rose and sparkling wines, and serve structured reds slightly cool.", ["malai tikka", "grilled pomfret", "chilli prawns", "mutton seekh kebab"], "🍷", "Sula Vineyards"),
+  brand("brand-expansion-big-banyan", "Big Banyan", "big-banyan", "India", ["Wine"], "https://bigbanyanwines.com/", "An Indian varietal wine brand founded by John Distilleries chairman Paul P. John.", "The collection covers familiar white, rose and red grape varieties.", "Chill whites and rose, and serve fuller reds slightly cool with food.", ["tandoori fish", "malai chicken", "paneer tikka", "pepper lamb chops"], "🍷", "John Distilleries"),
+  brand("brand-expansion-black-dog", "Black Dog", "black-dog", "Scotland", ["Blended Scotch"], "https://www.diageoindia.com/", "A blended Scotch whisky brand created by Walter Millard in 1883 and sold in India by United Spirits.", "The range moves from rounded fruit-led blends to a richer age-stated expression.", "Taste neat before adding water, one cube or cold soda.", ["galouti kebabs", "smoked chicken", "roasted almonds", "mature cheddar"], "🥃", "Diageo"),
+  brand("brand-expansion-desmondji", "DesmondJi", "desmondji", "India", ["Agave Spirits", "Liqueurs", "Ready-to-Drink"], "https://desmondji.com/", "An Indian craft spirits brand working with Deccan agave, mahua flowers, citrus and cane.", "Its range connects regional raw materials with neat pours and cocktail ingredients.", "Taste the spirits neat or use the agave spirit and orange liqueur in a measured Margarita.", ["tandoori prawns", "pork sorpotel", "dark chocolate", "chilli corn"], "🍹", "Agave India"),
+  brand("brand-expansion-fantini", "Fantini", "fantini", "Italy", ["Wine"], "https://www.fantiniwines.com/en/", "An Italian wine group founded in Ortona, Abruzzo, in 1994.", "It works with growers across central and southern Italy to produce regional wines.", "Chill white and rose wines, and serve fuller reds slightly cool with food.", ["grilled fish", "malai tikka", "chilli prawns", "lamb ragu"], "🍷", "Fantini Group"),
+  brand("brand-expansion-four-cousins", "Four Cousins", "four-cousins", "South Africa", ["Wine"], "https://www.fourcousins.co.za/", "A South African wine brand made by Van Loveren Family Vineyards in Robertson Valley.", "The range includes natural sweet wines, dry varietal bottles and sparkling styles.", "Chill sweet white and rose wines, and serve dry red wines slightly cool.", ["spicy chaat", "barbecue chicken", "grilled prawns", "lamb kebabs"], "🍷", "Van Loveren Family Vineyards"),
+  brand("brand-expansion-jim-beam", "Jim Beam", "jim-beam", "United States", ["Bourbon"], "https://www.jimbeam.com/", "A Kentucky straight bourbon brand with a family distilling history dating to 1795.", "The range spans classic oak-aged bourbon and darker or flavoured expressions.", "Taste neat or over one cube, or use in an Old Fashioned, Whiskey Sour or highball.", ["barbecue ribs", "pepper chicken", "pork kebabs", "pecan pie"], "🥃", "Suntory Global Spirits"),
+  brand("brand-expansion-jodhpur", "Jodhpur", "jodhpur", "United Kingdom", ["Gin"], "https://jodhpurgin.com/", "A Beveland gin brand produced in England and inspired by Indian botanicals and places.", "The collection moves from classic juniper and citrus to spice and floral-led variants.", "Serve with tonic or in a dry Martini, matching a restrained garnish to the expression.", ["tandoori prawns", "pepper chicken", "citrus salad", "malai tikka"], "🍸", "Beveland Distillers"),
+  brand("brand-expansion-bombay-sapphire", "Bombay Sapphire", "bombay-sapphire", "United Kingdom", ["Gin"], "https://www.bombaysapphire.com/our-story/", "An English London Dry Gin made at Laverstoke Mill using vapour infusion and ten botanicals.", "Carterhead stills and botanical baskets shape its juniper, citrus and spice profile.", "Serve with dry tonic and lemon peel or in a cold dry Martini.", ["tandoori prawns", "pepper chicken", "cucumber chaat", "salted almonds"], "🍸", "Bacardi"),
+  brand("brand-expansion-grey-goose", "Grey Goose", "grey-goose", "France", ["Vodka"], "https://www.greygoose.com/", "A French vodka made from Picardy winter wheat and spring water from Gensac-la-Pallue.", "Its wheat base gives the spirit a rounded, restrained profile for chilled and stirred serves.", "Serve well chilled, with soda or in a Vodka Martini.", ["smoked salmon", "malai tikka", "tandoori mushrooms", "lemon-pepper prawns"], "🍸", "Bacardi"),
+  brand("brand-expansion-hennessy", "Hennessy", "hennessy", "France", ["Cognac"], "https://www.hennessy.com/en-int/", "A Cognac house founded by Richard Hennessy in 1765 with blends from VS through XO and Paradis.", "Its eaux-de-vie and long Fillioux blending tradition create distinct fruit, spice and oak profiles by category.", "Serve in a tulip glass, over one cube or use VS in a balanced Sidecar.", ["tandoori chicken", "duck seekh kebab", "aged Comte", "dark chocolate"], "🥃", "LVMH"),
+  brand("brand-expansion-hoegaarden", "Hoegaarden", "hoegaarden", "Belgium", ["Beer"], "https://www.hoegaarden.com/", "A Belgian wheat beer from Hoegaarden brewed with coriander and orange peel.", "Its cloudy Witbier style combines soft wheat, citrus, spice and low bitterness.", "Serve chilled in a wide wheat-beer glass after gently mixing the bottle sediment.", ["tandoori fish", "chicken malai tikka", "moules-frites", "berry cheesecake"], "🍺", "AB InBev"),
+  brand("brand-expansion-laphroaig", "Laphroaig", "laphroaig", "Scotland", ["Single Malts"], "https://www.laphroaig.com/en-gb/", "An Islay single malt founded in 1815 and shaped by Kilbride water and peat-smoked barley.", "The range is known for maritime smoke, earth, medicinal notes and active cask character.", "Taste slowly in a tulip glass and add a few drops of water after the first sip.", ["tandoori lamb chops", "smoked salmon", "blue cheese", "sea-salt dark chocolate"], "🥃", "Suntory Global Spirits"),
+  brand("brand-expansion-indri", "Indri", "indri", "India", ["Single Malts"], "https://www.indri.in/", "An Indian single malt made in Indri, Haryana, from Rajasthan six-row barley.", "Copper pot distillation and northern plains maturation support triple-cask and peated expressions.", "Rest a small pour in a tulip glass and add a few drops of water if desired.", ["mutton seekh", "roasted almonds", "tandoori lamb", "smoked paneer"], "🥃", "Piccadily Distilleries"),
+  brand("brand-expansion-hendricks", "Hendrick's", "hendricks", "Scotland", ["Gin"], "https://www.hendricksgin.com/", "A Scottish gin created by Lesley Gracie using Bennett and Carter-Head stills, rose and cucumber.", "Its dual-distillate method produces a soft, floral style across Original and limited releases.", "Serve with dry tonic and cucumber or in a floral dry Martini.", ["cucumber sandwiches", "tandoori prawns", "dill-cured salmon", "rose pistachio kulfi"], "🍸", "William Grant & Sons"),
+  brand("brand-expansion-brewdog", "BrewDog", "brewdog", "Scotland", ["Beer"], "https://brewdog.com/", "A Scottish craft brewer founded in Fraserburgh in 2007 and now based in Ellon.", "Its range covers citrus-heavy IPA, hazy pale ale, lighter hoppy beer and lager.", "Serve lager well chilled and allow hop-led ales to warm slightly in the glass.", ["spicy fried chicken", "chilli paneer", "barbecue pork", "fish and chips"], "🍺"),
+  brand("brand-expansion-royal-salute", "Royal Salute", "royal-salute", "Scotland", ["Blended Scotch"], "https://www.royalsalute.com/en/", "A mature blended Scotch family created by Chivas Brothers for the 1953 coronation.", "Every permanent expression begins at 21 years, with Strathisla whisky at the range's heart.", "Serve neat in a tulip glass and allow the whisky time to open before adding water.", ["galouti kebabs", "aged Gouda", "roast duck", "walnut tart"], "🥃", "Pernod Ricard"),
+  brand("brand-expansion-robert-mondavi", "Robert Mondavi", "robert-mondavi", "United States", ["Wine"], "https://robertmondaviwinery.com/", "A Napa Valley winery founded in Oakville in 1966 with To Kalon Vineyard at its centre.", "Its defining wines include structured Cabernet Sauvignon and barrel-shaped Fume Blanc.", "Chill Fume Blanc gently and decant young Cabernet Sauvignon before serving.", ["tandoori pomfret", "goat cheese", "rogan josh", "porcini risotto"], "🍷", "Constellation Brands"),
+  brand("brand-expansion-man-family-wines", "MAN Family Wines", "man-family-wines", "South Africa", ["Wine"], "https://manwines.com/", "A South African wine producer drawing key fruit from dry-farmed Agter-Paarl vineyards.", "Its core range highlights Chenin Blanc, Pinotage and other familiar Cape varieties.", "Chill white wines and serve medium-bodied reds at a cool room temperature.", ["tandoori fish", "vegetable korma", "mutton seekh", "barbecue chicken"], "🍷", "MAN Family Wines"),
+  brand("brand-expansion-roche-mazet", "Roche Mazet", "roche-mazet", "France", ["Wine"], "https://www.rochemazet.com/en/", "A French Pays d'Oc wine label from Languedoc-Roussillon with a broad varietal range.", "Selective oak ageing supports the richer red and Chardonnay expressions.", "Chill white and sparkling wines and serve lighter reds slightly cool.", ["malai tikka", "grilled prawns", "mushroom galouti", "roast chicken"], "🍷", "Castel Freres"),
+  brand("brand-expansion-samsara", "Samsara", "samsara", "India", ["Gin"], "https://www.samsaragin.com/pages/about", "A contemporary Indian gin distilled in Goa with Indian flowers, spices and roots.", "The range spans London Dry, Indian Editions and fruit-led Secret Orchard releases.", "Serve with dry tonic and a simple garnish matched to the expression.", ["recheado prawns", "chicken cafreal", "beetroot kebab", "pepper paneer"], "🍸", "Spaceman Spirits Lab"),
+  brand("brand-expansion-six-fields", "Six Fields", "six-fields", "India", ["Beer"], "https://devans.co.in/", "An Indian beer range from DeVANS Modern Breweries with Belgian-inspired wheat beers and lagers.", "Blanche and Cult place soft wheat, citrus and spice ahead of bitterness.", "Serve wheat beer well chilled in a tall glass with room for foam.", ["fish tikka", "malai chicken", "chilli paneer", "fried calamari"], "🍺", "DeVANS Modern Breweries"),
+  brand("brand-expansion-vina-tarapaca", "Vina Tarapaca", "vina-tarapaca", "Chile", ["Wine"], "https://tarapaca.cl/", "A historic Isla de Maipo winery founded in 1874 with Cabernet Sauvignon at the centre of its portfolio.", "Its natural clos and varied soils support Cabernet, Carmenere and structured red blends.", "Decant young Gran Reserva reds and serve them at 16 to 18 degrees Celsius.", ["rogan josh", "grilled lamb chops", "smoked paneer", "tuna steak"], "🍷", "VSPT Wine Group"),
+  brand("brand-expansion-zonin", "ZONIN1821", "zonin", "Italy", ["Wine"], "https://www.zonin1821.com/en/", "An Italian family wine group rooted in Gambellara, Veneto, with vineyard history dating to 1821.", "The Zonin label covers Prosecco, regional whites and established Italian red-wine appellations.", "Serve sparkling wines well chilled and reds at the temperature suited to their region and body.", ["fried prawns", "paneer crostini", "tomato pasta", "mutton ragu"], "🍷", "ZONIN1821"),
+  brand("brand-expansion-kavalan", "Kavalan", "kavalan", "Taiwan", ["Single Malts"], "https://www.kavalanwhisky.com/", "A Taiwanese single malt made by King Car Group in Yilan County.", "Subtropical maturation and a diverse cask program create vivid fruit and oak character.", "Rest the whisky in a tulip glass and add water gradually to cask-strength releases.", ["tandoori salmon", "coconut barfi", "mutton seekh", "dark chocolate"], "🥃", "King Car Group"),
+  brand("brand-expansion-corralejo", "Corralejo", "corralejo", "Mexico", ["Tequila"], "https://corralejotequila.com/", "A 100% Blue Weber agave tequila produced at Hacienda Corralejo in Guanajuato.", "Clay ovens, a house yeast and copper and column distillation shape its agave-led range.", "Use Silver in a Margarita or Paloma and sip oak-aged releases from a small glass.", ["ceviche", "achari prawns", "lamb barbacoa", "mole chicken"], "🌵", "Tequilera Corralejo"),
+  brand("brand-expansion-haymans", "Hayman's", "haymans", "United Kingdom", ["Gin"], "https://www.haymansgin.com/", "An independent fifth-generation London gin family with roots in James Burrough's 1863 Chelsea distillery.", "The range preserves London Dry, Old Tom and other historic gin styles.", "Use London Dry in a Martini or tonic and Old Tom in a Martinez or Tom Collins.", ["pepper chicken", "tandoori prawns", "glazed pork", "orange cake"], "🍸", "Hayman family"),
+  brand("brand-expansion-ron-barcelo", "Ron Barcelo", "ron-barcelo", "Dominican Republic", ["Rum"], "https://ronbarcelo.com/en/", "A Dominican rum house founded by Julian Barcelo in 1930 and made from local sugarcane juice.", "Tropical ageing shapes Gran Anejo, Imperial and cask-finished premium releases.", "Sip Imperial neat or over ice and use Gran Anejo in spirit-led rum cocktails.", ["pork belly", "grilled pineapple", "mutton roast", "pecan tart"], "🥃", "Ron Barcelo SRL"),
   brand("brand-expansion-casamigos", "Casamigos", "casamigos", "Mexico", ["Tequila"], "https://www.casamigos.com/", "A tequila brand with expression-specific agave spirits. Blanco, reposado, anejo and flavoured releases should be kept as separate products.", "The comparison should focus on expression, maturation, declared strength, bottle size and intended serve.", "Use a measured pour in a Margarita or Paloma, or taste the specific expression neat from a small glass.", ["guacamole", "grilled seafood", "fresh salsa", "roasted peppers"], "🌵", "Diageo"),
   brand("brand-expansion-bumbu", "Bumbu", "bumbu", "Barbados", ["Rum"], "https://bumbu.com/", "A rum brand with expression-specific products. Product pages should distinguish rum style, sweetness, declared strength and bottle format.", "It gives the rum directory another international option while keeping tasting language tied to each expression.", "Use a measured serve over ice or in a restrained rum cocktail, and avoid adding sweetness without checking the bottle's profile.", ["banana desserts", "dark chocolate", "grilled pineapple", "spiced nuts"], "🥃"),
   brand("brand-expansion-chairmans-reserve", "Chairman's Reserve", "chairmans-reserve", "Saint Lucia", ["Rum"], "https://www.chairmansreserverum.com/", "A rum brand from Saint Lucia Distillers with product-specific blends and maturation details. The current label should control each product record.", "It is best compared by expression, blend, maturation, strength and bottle size rather than by colour alone.", "Taste a measured pour neat or over one cube, and use lighter expressions in a carefully balanced cocktail.", ["grilled meats", "roasted banana", "dark chocolate", "spiced dishes"], "🥃", "Saint Lucia Distillers"),
@@ -178,8 +264,16 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
   const batch04Content = BRAND_CONTENT_BATCH_04[definition.slug];
   const batch05Content = BRAND_CONTENT_BATCH_05[definition.slug];
   const batch06Content = BRAND_CONTENT_BATCH_06[definition.slug];
-  const publicContent = batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content;
-  const livcheersLogoUrl = publicContent?.logoUrl ?? getLivcheersBrandLogoUrl(definition.slug, definition.brandName);
+  const batch07Content = BRAND_CONTENT_BATCH_07[definition.slug];
+  const batch08Content = BRAND_CONTENT_BATCH_08[definition.slug];
+  const batch09Content = BRAND_CONTENT_BATCH_09[definition.slug];
+  const batch10Content = BRAND_CONTENT_BATCH_10[definition.slug];
+  const batch11Content = BRAND_CONTENT_BATCH_11[definition.slug];
+  const batch12Content = BRAND_CONTENT_BATCH_12[definition.slug];
+  const publicContent = batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content ?? batch07Content ?? batch08Content ?? batch09Content ?? batch10Content ?? batch11Content ?? batch12Content;
+  const verifiedLogoUrl = BRAND_LOGOS_BATCH_12[definition.slug] ?? publicContent?.logoUrl ?? null;
+  const logoUrl = verifiedLogoUrl ?? getLivcheersBrandLogoUrl(definition.slug, definition.brandName);
+  const logoSourceTier = logoUrl?.includes("static.livcheers.com") ? "livcheers" : "official";
   const metaTitle = truncateAtWord(`${definition.brandName} Brand Guide | BevOry`, 60);
   const metaDescription = truncateAtWord(
     `Explore ${definition.brandName} products, styles, serving ideas and city-level price availability on BevOry.`,
@@ -190,10 +284,10 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     brand_name: definition.brandName,
     slug: definition.slug,
     logo_emoji: categoryEmoji(definition.categories, definition.logoEmoji),
-    logo_url: livcheersLogoUrl,
-    logo_source_tier: "livcheers",
-    logo_source_page: livcheersLogoUrl,
-    logo_asset_status: "livcheers_slug_asset_pending_verification",
+    logo_url: logoUrl,
+    logo_source_tier: logoSourceTier,
+    logo_source_page: logoUrl,
+    logo_asset_status: verifiedLogoUrl ? "verified_remote_asset" : "livcheers_slug_asset_pending_verification",
     image_url: VERIFIED_BRAND_VISUALS[definition.slug] ?? null,
     description: publicContent?.description ?? clean(`${definition.brandName} is an ${definition.country} ${categoryText.toLowerCase()} label. ${definition.profile}${ownerText}`),
     story: publicContent?.story ?? clean(`${definition.brandName} belongs to the ${definition.country} ${categoryText.toLowerCase()} tradition. ${definition.profile}`),
@@ -226,8 +320,8 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     show_in_spotlight: false,
     order_index: 0,
     official_source_page: definition.officialUrl,
-    logo_identity_verified: false,
-    logo_verified_at: null,
+    logo_identity_verified: Boolean(verifiedLogoUrl),
+    logo_verified_at: verifiedLogoUrl ? now : null,
     image_license_status: "pending_rights_verification",
     content_version: batch01Content
       ? "brand-public-ui-v3-batch-01"
@@ -241,7 +335,19 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
               ? "brand-public-ui-v3-batch-05"
               : batch06Content
                 ? "brand-public-ui-v3-batch-06"
-                : "brand-expansion-v1",
+                : batch07Content
+                  ? "brand-public-ui-v3-batch-07"
+                  : batch08Content
+                    ? "brand-public-ui-v3-batch-08"
+                    : batch09Content
+                      ? "brand-public-ui-v3-batch-09"
+                      : batch10Content
+                        ? "brand-public-ui-v3-batch-10"
+                        : batch11Content
+                          ? "brand-public-ui-v3-batch-11"
+                          : batch12Content
+                            ? "brand-public-ui-v3-batch-12"
+                            : "brand-expansion-v1",
     content_basis: publicContent
       ? "official-first consumer copy with Livcheers logo asset fallback"
       : "verified brand portfolio facts and conservative editorial guidance",
