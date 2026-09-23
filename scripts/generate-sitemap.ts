@@ -295,7 +295,6 @@ try {
     const cityProductIds = new Set(cityPrices.map((price) => String(price.data.product_id ?? "")));
     const cityProducts = [...cityProductIds].map((id) => productById.get(id)).filter((row): row is DataRow => Boolean(row));
     const categoryIds = new Set(cityProducts.map((product) => String(product.data.category_id ?? "")).filter(Boolean));
-    const brandIds = new Set(cityProducts.map((product) => String(product.data.brand_id ?? "")).filter(Boolean));
     const categoryNames = [...categoryIds].map((id) => String(categoryById.get(id)?.data.name ?? "")).filter(Boolean);
     const cityPath = `/${city.slug}`;
     const cityHomePath = city.slug === "gurgaon" ? "/" : cityPath;
@@ -377,9 +376,8 @@ try {
       }
     }
 
-    for (const brandId of brandIds) {
-      const brand = brandById.get(brandId);
-      if (!brand) continue;
+    for (const brand of brands) {
+      const brandId = brand.id;
       const brandProducts = cityProducts.filter((product) => String(product.data.brand_id ?? "") === brandId);
       const brandName = String(brand.data.brand_name || "Brand");
       const path = `${cityPath}/brand/${brand.data.slug}`;
