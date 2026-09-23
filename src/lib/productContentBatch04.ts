@@ -1,0 +1,335 @@
+// Producer-checked editorial. Source ledger: docs/editorial/product-batch-04-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "chivas-regal-18-yrs-blended-scotch-whisky-4feca24": {
+    productName: "Chivas Regal 18", category: "18-Year-Old Blended Scotch Whisky",
+    shortOverview: "Chivas Regal 18 builds dark chocolate and dried fruit onto the house's soft Speyside-led style. Its faint smoke stays behind the toffee rather than taking over.",
+    craftStory: "Master Blender Sandy Hyslop marries malt and grain Scotch whiskies aged at least 18 years. Long oak maturation develops the blend's dried-fruit, floral and chocolate layers; the precise component casks are not disclosed as a fixed recipe.",
+    tastingNotes: { nose: "Dried fruit, buttery toffee and dark chocolate, with a little orange peel.", palate: "Velvety and full, moving from cocoa and caramel to floral notes and gentle smoke.", finish: "Long and warm, leaving chocolate and soft wood spice." },
+    servingGuide: { glassware: "Glencairn or tulip whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; one large ice cube is a cooler option that keeps the chocolate notes clear." },
+    foodPairings: ["mutton galouti kebab", "lamb rogan josh", "70% dark chocolate", "roasted almonds", "date-and-walnut barfi"],
+    whyBuyThis: "Its chocolate-led depth is a substantial step up from the lighter Chivas 12 profile.",
+    faqs: [{ question: "Is every whisky in Chivas 18 at least 18 years old?", answer: "Yes. The age statement refers to the youngest whisky in the blend." }, { question: "Is Chivas 18 heavily smoky?", answer: "No. The producer describes a mellow smokiness beneath chocolate, fruit and floral notes." }],
+    metaTitle: "Chivas Regal 18 Price, Taste & Review | BevOry", metaDescription: "Chivas Regal 18 layers dark chocolate, dried fruit and mellow smoke. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "chivas-regal-25-yrs-d52c76e": {
+    productName: "Chivas Regal 25", category: "25-Year-Old Blended Scotch Whisky",
+    shortOverview: "Chivas Regal 25 is a collector-level blend with orange, peach and marzipan rather than aggressive oak. Its creamy chocolate finish rewards an unhurried neat pour.",
+    craftStory: "Chivas created a 25-year-old luxury Scotch for early twentieth-century New York and revived the expression in 2007. Today's blend is assembled from hand-selected malt and grain Scotch whiskies aged for at least 25 years in oak.",
+    tastingNotes: { nose: "Sweet orange, peach, marzipan and toasted nuts.", palate: "Silky and rich, with chocolate orange, fondant cream and mature oak.", finish: "Long and rounded, with fading citrus and polished wood." },
+    servingGuide: { glassware: "Crystal tasting glass or Glencairn", idealTemperature: "Room temperature (18–20°C)", recommendation: "Pour a small measure neat; only a few drops of spring water are needed if the aroma feels closed." },
+    foodPairings: ["mutton galouti", "orange-infused dark chocolate", "roasted almonds", "fig tart", "aged cheddar"],
+    whyBuyThis: "It combines a historic luxury-blend identity with a mature orange-and-chocolate palate.",
+    faqs: [{ question: "What does 25 mean on Chivas Regal 25?", answer: "The youngest whisky in this Scotch blend is aged at least 25 years." }, { question: "Should Chivas 25 be mixed?", answer: "Its mature fruit and oak detail are best appreciated neat in a tasting glass." }],
+    metaTitle: "Chivas Regal 25 Price, Taste & Review | BevOry", metaDescription: "Chivas Regal 25 offers orange, peach, marzipan and chocolate. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "chivas-regal-xv-blended-scotch-whisky-9c39b8b": {
+    productName: "Chivas Regal XV", category: "15-Year-Old Blended Scotch Whisky",
+    shortOverview: "Chivas XV places stewed apple and pear ahead of the house's familiar honeyed malt. A selective Cognac-cask finish adds an extra fruit-and-spice accent.",
+    craftStory: "Chivas blends Scotch whiskies matured at least 15 years, then finishes a portion in Cognac casks. The result links Scottish malt and grain whisky to French brandy oak without turning the liquid into Cognac.",
+    tastingNotes: { nose: "Stewed red apple, orange marmalade, honey and cinnamon.", palate: "Velvety, with poached pear, butterscotch and caramel toffee.", finish: "Rounded and medium-long, with honey and gentle spice." },
+    servingGuide: { glassware: "Tulip whisky glass or highball", idealTemperature: "Room temperature or chilled with ice", recommendation: "Taste neat, then try a restrained whisky highball with cold soda; avoid sweet mixers that hide the pear." },
+    foodPairings: ["chicken malai tikka", "tandoori mushrooms", "apple-and-walnut tart", "roasted cashews", "mild paneer korma"],
+    whyBuyThis: "The Cognac-cask contribution gives this aged Chivas a fruitier edge than the core 12-year blend.",
+    faqs: [{ question: "What does XV mean?", answer: "XV is the Roman numeral for 15, the whisky's minimum age in years." }, { question: "Is Chivas XV a Cognac?", answer: "No. It is blended Scotch whisky; only a portion is finished in Cognac casks." }],
+    metaTitle: "Chivas Regal XV Price, Taste & Review | BevOry", metaDescription: "Chivas Regal XV brings apple, pear and honey with a Cognac-cask accent. See Indian pairings and check city prices on BevOry."
+  },
+  "chivas-regal-chivas-xx-ultis-83d5871": {
+    productName: "Chivas Ultis XX", category: "20-Year-Old Blended Scotch Whisky",
+    shortOverview: "Ultis XX is a fruit-rich prestige blend built around five Chivas single malts and Strathclyde grain whisky. Red apple, raspberry and milk chocolate make it softer than a smoke-led collector Scotch.",
+    craftStory: "Master Blender Sandy Hyslop designed Ultis XX to honour five predecessor blenders. Its malt and Strathclyde grain components are aged at least 20 years in European and American oak before marriage.",
+    tastingNotes: { nose: "Red apple, raspberry jam, fresh vanilla pod and butter toffee.", palate: "Smooth and sweet, with honey, milk chocolate, poached pear and apricot.", finish: "Long and gentle, leaving fruit and oak sweetness." },
+    servingGuide: { glassware: "Crystal tasting glass or Glencairn", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat in a small pour; add only a few drops of spring water after the first tasting." },
+    foodPairings: ["mutton galouti", "apricot-and-almond tart", "70% dark chocolate", "roasted cashews", "fig barfi"],
+    whyBuyThis: "Its five-malt-and-grain construction makes a nuanced, fruit-led prestige blend.",
+    faqs: [{ question: "What does XX stand for?", answer: "XX is 20 in Roman numerals, marking the minimum age of the whiskies in this blend." }, { question: "Is Ultis XX a single malt?", answer: "No. It combines five single malts with Strathclyde grain whisky." }],
+    metaTitle: "Chivas Ultis XX Price, Taste & Review | BevOry", metaDescription: "Chivas Ultis XX layers raspberry, apple, honey and milk chocolate. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "jameson-stout-edition-caskmate-3661c60": {
+    productName: "Jameson Caskmates Stout", category: "Beer-Cask-Finished Irish Whiskey",
+    shortOverview: "Caskmates Stout adds cocoa and milk-chocolate depth to Jameson's orchard-fruit whiskey. Its beer-barrel finish is noticeable without making it taste like a pint of stout.",
+    craftStory: "Jameson triple-distils pot-still and grain whiskey at Midleton, County Cork. After conventional oak ageing, the blend is finished in barrels that previously seasoned Irish craft stout, carrying subtle roasted-malt notes into the whiskey.",
+    tastingNotes: { nose: "Green apple, pear and lime zest over hazelnut and milk chocolate.", palate: "Soft and coating, with pot-still spice, light hops and cocoa bean.", finish: "Long and sweet, leaving milk chocolate and butterscotch." },
+    servingGuide: { glassware: "Rocks glass", idealTemperature: "Room temperature or over one large cube", recommendation: "Try neat before ice; a short Irish coffee can also make use of its cocoa note." },
+    foodPairings: ["mutton seekh", "roasted peanuts", "coffee-soaked tiramisu", "70% dark chocolate", "caramelised onion tart"],
+    whyBuyThis: "It delivers a tangible chocolate-and-roast twist on familiar triple-distilled Jameson.",
+    faqs: [{ question: "Does Caskmates Stout contain beer?", answer: "The whiskey is finished in stout-seasoned barrels; it is not a whiskey-and-beer premix." }, { question: "Is it as smoky as peated Scotch?", answer: "No. Its darker notes come from roasted-malt cask influence rather than peat." }],
+    metaTitle: "Jameson Caskmates Stout Price, Taste & Review | BevOry", metaDescription: "Jameson Caskmates Stout combines apple, cocoa and butterscotch. Try Indian pairings and check indicative city prices on BevOry."
+  },
+  "bushmills-original-8adb1ef": {
+    productName: "Bushmills Original", category: "Blended Irish Whiskey",
+    shortOverview: "Bushmills Original is a light Irish blend with vanilla, honey and soft grain character. It suits a ginger highball without losing its whiskey flavour.",
+    craftStory: "Bushmills traces its licensed distilling heritage to 1608 in County Antrim, Northern Ireland. Its Original combines triple-distilled single malt whiskey with lighter grain whiskey matured in oak.",
+    tastingNotes: { nose: "Vanilla, caramel and a touch of orchard fruit.", palate: "Light and smooth, with honeyed grain, toasted cereal and mild wood spice.", finish: "Medium and warming, with soft vanilla and oak." },
+    servingGuide: { glassware: "Highball or rocks glass", idealTemperature: "Chilled with ice or room temperature", recommendation: "Build a highball with cold ginger ale and a squeeze of lime, or taste neat first." },
+    foodPairings: ["chicken tikka", "masala peanuts", "paneer pakora", "apple tart", "roasted cashews"],
+    whyBuyThis: "Its gentle malt-and-grain balance is an easy entry to Bushmills without a heavy cask finish.",
+    faqs: [{ question: "Is Bushmills Original a single malt?", answer: "No. It blends Bushmills single malt with grain whiskey." }, { question: "Where is Bushmills made?", answer: "The distillery is in County Antrim, Northern Ireland." }],
+    metaTitle: "Bushmills Original Price, Taste & Review | BevOry", metaDescription: "Bushmills Original brings vanilla, honey and gentle oak. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "bushmills-black-bush-80bf462": {
+    productName: "Bushmills Black Bush", category: "Sherry-Cask Blended Irish Whiskey",
+    shortOverview: "Black Bush is richer and nuttier than Bushmills Original. Its high malt proportion and Oloroso-sherry influence bring dried fruit into an otherwise soft Irish blend.",
+    craftStory: "Bushmills marries a high proportion of its triple-distilled malt whiskey with lighter grain whiskey in County Antrim. Former Oloroso sherry and bourbon casks supply the blend's raisin, nut and vanilla tones.",
+    tastingNotes: { nose: "Sherry sweetness, raisins and toasted nuts.", palate: "Silky and full, with dried fruit, roasted almond and mellow vanilla.", finish: "Long, with lingering fruit sweetness and nutty oak." },
+    servingGuide: { glassware: "Rocks or tulip whisky glass", idealTemperature: "Room temperature or over one large cube", recommendation: "Start neat to catch the sherry notes; ice softens the richer malt texture." },
+    foodPairings: ["mutton seekh", "galouti kebab", "date-and-walnut halwa", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "It puts genuine sherry-cask richness into an accessible Irish blend.",
+    faqs: [{ question: "Is Black Bush a single malt?", answer: "No. It contains a high malt proportion blended with grain whiskey." }, { question: "Where do its raisin notes come from?", answer: "Former Oloroso sherry casks help build the dried-fruit character." }],
+    metaTitle: "Bushmills Black Bush Price, Taste & Review | BevOry", metaDescription: "Bushmills Black Bush offers raisins, toasted nuts and sherry depth. See Indian pairings and check city prices on BevOry."
+  },
+  "bushmills-aged-10-years-single-malt-irish-whiskey-1cf79cb": {
+    productName: "Bushmills 10 Year Single Malt", category: "10-Year-Old Irish Single Malt Whiskey",
+    shortOverview: "Bushmills 10 brings honey and orchard fruit to a gentle Irish single malt. Mocha and dried apricot give it more detail than the lighter Original blend.",
+    craftStory: "Triple-distilled from 100% malted barley at Bushmills in County Antrim, this whiskey spends at least ten years in former sherry and bourbon-seasoned casks. The two wood histories balance vanilla against fruit.",
+    tastingNotes: { nose: "Honey, vanilla and milk chocolate with apple tart.", palate: "Velvety, with mocha, dried apricot and toasted oak.", finish: "Long and crisp, with subtle oak and orchard fruit." },
+    servingGuide: { glassware: "Tulip whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat; a little water opens its apricot note without stripping the malt sweetness." },
+    foodPairings: ["chicken malai tikka", "roasted almonds", "apricot tart", "paneer makhani", "milk-chocolate mousse"],
+    whyBuyThis: "It offers a clear step from Bushmills blended whiskey into triple-distilled single malt.",
+    faqs: [{ question: "Is Bushmills 10 a blend?", answer: "No. It is single malt made entirely from malted barley at one distillery." }, { question: "Is it smoky?", answer: "Its producer profile centres on honey, apricot, mocha and oak, not peat smoke." }],
+    metaTitle: "Bushmills 10 Year Single Malt Price, Taste & Review | BevOry", metaDescription: "Bushmills 10 offers honey, apricot and mocha from sherry and bourbon wood. Find Indian pairings and check city prices on BevOry."
+  },
+  "bushmills-12yrs-single-malt-2ec16d1": {
+    productName: "Bushmills 12 Year Single Malt", category: "12-Year-Old Irish Single Malt Whiskey",
+    shortOverview: "Bushmills 12 is a darker, dried-fruit-led malt than its ten-year sibling. Marsala finishing lends chocolate and nut depth while the triple-distilled texture stays gentle.",
+    craftStory: "Bushmills distils 100% malted barley three times in County Antrim. The whiskey matures in former bourbon and sherry casks, then receives a Marsala-wine-cask finish before bottling at 12 years.",
+    tastingNotes: { nose: "Ripe pear, dark chocolate and toasted hazelnut.", palate: "Soft and layered, with dried fruit, floral lift and roasted nuts.", finish: "Warm and lingering, with honey and polished oak." },
+    servingGuide: { glassware: "Tulip whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat after letting the glass rest for several minutes; a few drops of water can sharpen the pear." },
+    foodPairings: ["mutton galouti", "ginger-dark-chocolate bark", "fig tart", "roasted hazelnuts", "paneer korma"],
+    whyBuyThis: "The Marsala finish brings wine-cask richness without hiding Bushmills' smooth malt core.",
+    faqs: [{ question: "What is Marsala?", answer: "Marsala is a fortified wine from Sicily; its former casks are used to finish this malt." }, { question: "How is Bushmills 12 different from Bushmills 10?", answer: "The 12-year expression has a Marsala finish and a darker fruit-and-chocolate profile." }],
+    metaTitle: "Bushmills 12 Year Single Malt Price, Taste & Review | BevOry", metaDescription: "Bushmills 12 layers pear, dark chocolate and nuts after Marsala finishing. See Indian pairings and check city prices on BevOry."
+  },
+  "bushmills-16-yrs-83c7204": {
+    productName: "Bushmills 16 Year Single Malt", category: "16-Year-Old Irish Single Malt Whiskey",
+    shortOverview: "Bushmills 16 moves from sherry fruit and honey toward a port-wine richness. Its soft triple-distilled body carries almond and berry notes without harshness.",
+    craftStory: "Triple-distilled malt spirit from County Antrim matures in Oloroso-sherry and bourbon casks, then receives a port-cask finish. The combination adds red-fruit depth to a minimum 16-year oak-aged foundation.",
+    tastingNotes: { nose: "Honey, toasted almond, red berries and dried fruit.", palate: "Rounded and silky, with plum, nuts, warm spice and mellow oak.", finish: "Long and gently sweet, with port fruit and spice." },
+    servingGuide: { glassware: "Glencairn or tulip glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat in a small pour; a few drops of water are enough to separate fruit and oak." },
+    foodPairings: ["lamb rogan josh", "mutton seekh", "roasted chestnuts", "70% dark chocolate", "fig-and-almond tart"],
+    whyBuyThis: "Its port finish gives this mature Irish malt a distinctive red-fruit turn.",
+    faqs: [{ question: "Is Bushmills 16 port-finished?", answer: "Yes. It is finished in port casks after earlier sherry- and bourbon-cask maturation." }, { question: "Should it be mixed?", answer: "A neat tasting best preserves the older malt's port-fruit detail." }],
+    metaTitle: "Bushmills 16 Year Single Malt Price, Taste & Review | BevOry", metaDescription: "Bushmills 16 combines almond, honey and port fruit. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "bushmills-bushmill-21yrs-single-malt-13ebc87": {
+    productName: "Bushmills 21 Year Single Malt", category: "21-Year-Old Irish Single Malt Whiskey",
+    shortOverview: "Bushmills 21 is a long-aged Irish malt with raisin, toffee and layered oak. Madeira finishing adds a dried-fruit accent to its exceptionally soft texture.",
+    craftStory: "Bushmills triple-distils malted barley in County Antrim and matures this expression in sherry and bourbon casks before a Madeira-cask finish. The minimum 21-year age reflects the youngest whiskey in the bottle.",
+    tastingNotes: { nose: "Raisins, dried fruit, toffee and seasoned oak.", palate: "Dense yet silky, with dark chocolate, nuts and mellow fruit sweetness.", finish: "Very long, with dried fruit and refined oak spice." },
+    servingGuide: { glassware: "Crystal tulip glass or Glencairn", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat and allow several minutes to open; optional drops of spring water are sufficient." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "70% dark chocolate", "fig barfi", "aged cheddar"],
+    whyBuyThis: "It unites long Irish single-malt ageing with a measured Madeira-wine finish.",
+    faqs: [{ question: "Is Bushmills 21 a blend?", answer: "No. It is a single malt from Bushmills' malted-barley spirit." }, { question: "What gives it the dried-fruit note?", answer: "Sherry maturation and Madeira finishing both contribute to that profile." }],
+    metaTitle: "Bushmills 21 Year Single Malt Price, Taste & Review | BevOry", metaDescription: "Bushmills 21 layers raisin, toffee and Madeira fruit. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "tanqueray-ten-0b66e86": {
+    productName: "Tanqueray No. Ten", category: "Citrus-Led Premium Gin",
+    shortOverview: "Tanqueray No. Ten is built for a clean, citrus-forward Martini. Whole citrus fruit and chamomile soften its juniper without hiding the gin's dry finish.",
+    craftStory: "Tanqueray distils the expression's citrus heart in the 500-litre Tiny Ten copper still. Fresh grapefruit and other citrus work with juniper and chamomile in a more fruit-led recipe than classic London Dry.",
+    tastingNotes: { nose: "Grapefruit peel, fresh citrus, juniper and chamomile.", palate: "Silky and dry, with bright citrus leading into herbal juniper.", finish: "Medium-long, with clean grapefruit zest and soft spice." },
+    servingGuide: { glassware: "Chilled Martini glass", idealTemperature: "Very cold (4–7°C)", recommendation: "Stir with dry vermouth and ice for a Martini; garnish with grapefruit peel instead of a sweet mixer." },
+    foodPairings: ["tandoori prawns", "rava-fried fish", "cucumber chaat", "malai paneer tikka", "lemon-pepper cashews"],
+    whyBuyThis: "Its whole-citrus heart makes a precise Martini gin rather than a simple juniper bomb.",
+    faqs: [{ question: "What is the Tiny Ten?", answer: "It is the small copper still used for No. Ten's citrus heart." }, { question: "Is No. Ten sweet?", answer: "No. It is citrus-forward but remains a dry gin." }],
+    metaTitle: "Tanqueray No. Ten Price, Taste & Review | BevOry", metaDescription: "Tanqueray No. Ten brings grapefruit, chamomile and juniper. Try Indian seafood pairings and check indicative city prices on BevOry."
+  },
+  "tanqueray-rangpur-lime-gin-db7ce8b": {
+    productName: "Tanqueray Rangpur Lime", category: "Citrus Gin",
+    shortOverview: "Rangpur Lime gives Tanqueray a sharper citrus opening than its classic London Dry. Mandarin-like fruit, ginger and bay leaf keep the finish aromatic rather than simply sour.",
+    craftStory: "Built on Tanqueray's juniper-led gin tradition, this expression adds Rangpur lime, ginger and bay leaves. Rangpur fruit carries both lime-like acidity and mandarin-like aroma.",
+    tastingNotes: { nose: "Rangpur zest, mandarin, ginger and bay leaf.", palate: "Bright and smooth, with juicy citrus over juniper and herb spice.", finish: "Medium, with clean lime zest and warm ginger." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Use dry tonic over ice and a thin lime wheel; avoid adding extra sweet cordial." },
+    foodPairings: ["tandoori prawns", "coastal rava-fried fish", "cucumber chaat", "paneer tikka", "ginger-chilli cashews"],
+    whyBuyThis: "Its Rangpur-and-ginger detail makes a distinct citrus gin for a simple tonic serve.",
+    faqs: [{ question: "Is Rangpur Lime the same as regular Tanqueray?", answer: "No. This expression adds Rangpur citrus, ginger and bay leaf to the juniper base." }, { question: "Does Rangpur taste only of lime?", answer: "The fruit also has a mandarin-like aroma, which gives the gin a rounder citrus profile." }],
+    metaTitle: "Tanqueray Rangpur Lime Price, Taste & Review | BevOry", metaDescription: "Tanqueray Rangpur Lime brings mandarin, lime and ginger. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "bombay-sapphire-sunset-edition-9d0a0ff": {
+    productName: "Bombay Sapphire Sunset", category: "Spiced London Dry Gin",
+    shortOverview: "Sunset adds a warming, bittersweet edge to Bombay Sapphire's botanical gin. Mandarin peel, white cardamom and turmeric make it suited to a dry tonic or a lighter Negroni.",
+    craftStory: "Bombay Sapphire builds Sunset on its ten-botanical gin foundation, adding three botanicals: mandarin peel, white cardamom and turmeric. The gin is made through the brand's vapour-infusion process at Laverstoke Mill in Hampshire.",
+    tastingNotes: { nose: "Piney juniper, cardamom and bright mandarin.", palate: "Dry and aromatic, with citrus peel, gentle turmeric warmth and coriander spice.", finish: "Medium, with bittersweet mandarin and warm spice." },
+    servingGuide: { glassware: "Highball or rocks glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Serve with dry tonic, an orange wheel and star anise; keep the garnish light." },
+    foodPairings: ["tandoori prawns", "malai paneer tikka", "cucumber chaat", "rava-fried fish", "cardamom-spiced cashews"],
+    whyBuyThis: "The three added botanicals bring a genuine spice-and-mandarin identity to a familiar gin.",
+    faqs: [{ question: "What is added to Bombay Sapphire Sunset?", answer: "Mandarin peel, white cardamom and turmeric join the original ten botanicals." }, { question: "Is Sunset a premixed cocktail?", answer: "No. It is a botanical gin intended to be mixed or served in a cocktail." }],
+    metaTitle: "Bombay Sapphire Sunset Price, Taste & Review | BevOry", metaDescription: "Bombay Sapphire Sunset blends mandarin, cardamom and juniper. Try Indian pairings and check indicative city prices on BevOry."
+  },
+  "absolut-citron-c21eafe": {
+    productName: "Absolut Citron", category: "Lemon-Flavoured Swedish Vodka",
+    shortOverview: "Absolut Citron adds clean lemon character to the brand's wheat-vodka base. It is the citrus-flavoured expression closely associated with the Cosmopolitan.",
+    craftStory: "Absolut produces its vodka in Åhus in southern Sweden from winter wheat and local water. Citron was launched in 1988 and adds lemon flavour after distillation rather than relying on barrel ageing.",
+    tastingNotes: { nose: "Fresh lemon peel with a faint sweet-citrus edge.", palate: "Smooth and lightly rounded, with lemon zest and a clean wheat-spirit base.", finish: "Short and crisp, leaving lemon oil rather than oak." },
+    servingGuide: { glassware: "Chilled coupe or highball", idealTemperature: "Very cold (4–7°C)", recommendation: "Shake with cranberry, lime and orange liqueur for a Cosmopolitan, or lengthen with soda." },
+    foodPairings: ["tandoori prawns", "lemon rice", "cucumber chaat", "paneer tikka", "coastal rava-fried fish"],
+    whyBuyThis: "Its clean lemon profile cuts through mixers without requiring extra citrus syrup.",
+    faqs: [{ question: "Is Absolut Citron lemon liqueur?", answer: "No. It is lemon-flavoured vodka, not a cream or sugar-led liqueur." }, { question: "Which classic cocktail uses Citron?", answer: "The Cosmopolitan is its best-known classic serve." }],
+    metaTitle: "Absolut Citron Price, Taste & Review | BevOry", metaDescription: "Absolut Citron brings clean lemon zest to Swedish vodka. Explore Indian pairings and check indicative city prices on BevOry."
+  },
+  "absolut-lime-4e4e0e5": {
+    productName: "Absolut Lime", category: "Lime-Flavoured Swedish Vodka",
+    shortOverview: "Absolut Lime leans into both lime zest and juice rather than candy-like citrus. Its clean finish suits a soda highball or a lime-forward Mule.",
+    craftStory: "Absolut makes the vodka base in Åhus, Sweden, from winter wheat and local water. Natural lime flavour is added to the distilled spirit, preserving a fresh profile without wood maturation.",
+    tastingNotes: { nose: "Fresh lime peel and bright citrus juice.", palate: "Light and rounded, with lime flesh, zest and a faint creamy softness.", finish: "Short, clean and citrus-led." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Pour over ice with soda and a lime wedge, or use in a ginger-beer Mule." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "rava-fried fish", "malai paneer tikka", "masala peanuts"],
+    whyBuyThis: "The zesty lime flavour gives simple, unsweetened mixers enough citrus lift on its own.",
+    faqs: [{ question: "How is Lime different from Citron?", answer: "Lime has a sharper green-citrus profile; Citron is lemon-led." }, { question: "Is Absolut Lime aged in barrels?", answer: "No. It is a flavoured vodka, not a barrel-aged spirit." }],
+    metaTitle: "Absolut Lime Price, Taste & Review | BevOry", metaDescription: "Absolut Lime offers fresh zest and a clean Swedish vodka base. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "absolut-raspberri-7595d18": {
+    productName: "Absolut Raspberri", category: "Raspberry-Flavoured Swedish Vodka",
+    shortOverview: "Absolut Raspberri tastes of ripe berries with a tart edge, not just added sweetness. A touch of vanilla makes its fruit profile work in a Collins or berry Mule.",
+    craftStory: "Produced and bottled in Åhus, southern Sweden, the vodka begins with Absolut's wheat-spirit base. Natural raspberry flavour creates a berry-led expression without oak maturation.",
+    tastingNotes: { nose: "Fresh raspberries and mixed berries with a hint of vanilla.", palate: "Soft and fruity, balancing mashed berry sweetness with gentle tartness.", finish: "Medium-short, with raspberry skin and vanilla." },
+    servingGuide: { glassware: "Highball or Collins glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Mix with soda, lemon and a few fresh raspberries for a restrained Collins." },
+    foodPairings: ["tandoori chicken", "paneer tikka", "dark-chocolate tart", "spiced roasted almonds", "berry kulfi"],
+    whyBuyThis: "It keeps a recognisable raspberry taste while retaining enough tartness for balanced cocktails.",
+    faqs: [{ question: "Is Raspberri a premixed cocktail?", answer: "No. It is raspberry-flavoured vodka intended for mixing or serving chilled." }, { question: "What is a simple Raspberri serve?", answer: "Soda, lemon and fresh berries in a Collins glass keep the fruit from becoming too sweet." }],
+    metaTitle: "Absolut Raspberri Price, Taste & Review | BevOry", metaDescription: "Absolut Raspberri balances sweet and tart berries with vanilla. See Indian pairings and check indicative city prices on BevOry."
+  },
+  "bacardi-black-3c2c15c": {
+    productName: "Bacardí Black", category: "Dark Caribbean Rum",
+    shortOverview: "Bacardí Black is a deeper rum for fruit-forward mixed drinks. Caramelised pineapple and dark sugar give it more weight than Bacardí Gold.",
+    craftStory: "Bacardí's Maestros de Ron blend molasses-based rum aged in oak under the Caribbean sun. The brand uses cask and charcoal choices to shape Black's dark, bold profile; it carries no fixed age statement.",
+    tastingNotes: { nose: "Caramelised pineapple, molasses and toasted oak.", palate: "Medium-bodied, with dark caramel, tropical fruit and soft smoke.", finish: "Medium, leaving toasted sugar and oak." },
+    servingGuide: { glassware: "Rocks or highball glass", idealTemperature: "Chilled with ice", recommendation: "Try a Jungle Bird with pineapple, lime and bitter aperitif, or lengthen with ginger beer." },
+    foodPairings: ["tandoori chicken", "spicy paneer tikka", "mutton seekh", "pineapple chaat", "dark-chocolate cake"],
+    whyBuyThis: "Its caramelised-pineapple depth holds up to ginger, bitter aperitif and bold food.",
+    faqs: [{ question: "Is Bacardí Black eight years old?", answer: "No fixed age is stated for Black; Bacardí Reserva Ocho is a separate age-stated rum." }, { question: "How is Black different from Gold?", answer: "Black is deeper and more caramelised-fruit-led, while Gold is lighter and softer." }],
+    metaTitle: "Bacardí Black Price, Taste & Review | BevOry", metaDescription: "Bacardí Black brings caramelised pineapple, dark sugar and oak. Try Indian pairings and check indicative city prices on BevOry."
+  },
+  "bacardi-anejo-cuatro-4-year-8066a2a": {
+    productName: "Bacardí Añejo Cuatro", category: "Four-Year-Old Gold Rum",
+    shortOverview: "Añejo Cuatro is a gentle step from mixing rum into age-stated sipping rum. Vanilla, honey and clove remain lively enough for a simple ginger highball.",
+    craftStory: "Bacardí makes its rum from sugarcane molasses, yeast and water before distillation and blending. The youngest rum in Cuatro spends at least four years in oak under the Caribbean sun.",
+    tastingNotes: { nose: "Vanilla, cinnamon and toasted oak.", palate: "Smooth and warm, with dark honey, clove and baked-bread sweetness.", finish: "Medium, leaving toffee and dry oak." },
+    servingGuide: { glassware: "Rocks or highball glass", idealTemperature: "Room temperature or chilled with ice", recommendation: "Taste neat, then try a Cuatro Highball with ginger ale and a squeeze of lime." },
+    foodPairings: ["tandoori chicken", "mutton seekh", "roasted cashews", "caramelised pineapple", "cinnamon bread pudding"],
+    whyBuyThis: "Its four-year minimum gives a defined oak profile without losing cocktail flexibility.",
+    faqs: [{ question: "What does Cuatro mean?", answer: "Cuatro means four in Spanish, referring to its minimum four years of ageing." }, { question: "Is Cuatro the same as Bacardí Gold?", answer: "No. Cuatro has a four-year age statement; Gold has no fixed age stated." }],
+    metaTitle: "Bacardí Añejo Cuatro Price, Taste & Review | BevOry", metaDescription: "Bacardí Añejo Cuatro offers vanilla, honey, clove and oak. Explore Indian pairings and check city prices on BevOry."
+  },
+  "bacardi-ocho-8yrs-2c28454": {
+    productName: "Bacardí Reserva Ocho", category: "Eight-Year-Old Dark Rum",
+    shortOverview: "Reserva Ocho trades the brightness of Bacardí's lighter rums for dried fruit and oak spice. It is structured enough for a neat tasting or a rum Old Fashioned.",
+    craftStory: "Inspired by an 1862 Bacardí family reserve, Ocho blends molasses-based rums whose youngest component has spent at least eight years in oak. Caribbean ageing develops dried apricot, spice and vanilla depth.",
+    tastingNotes: { nose: "Dried apricot, banana leaf and oaky vanilla.", palate: "Rounded and layered, with stone fruit, baking spice and oak.", finish: "Long and balanced, leaving dried fruit and gentle wood." },
+    servingGuide: { glassware: "Tulip rum glass or rocks glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; for an Old Fashioned, use minimal syrup and one large ice cube." },
+    foodPairings: ["mutton ghee roast", "tandoori chicken", "date-and-walnut barfi", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "Its eight-year minimum brings genuine aged-rum complexity to both sipping and short cocktails.",
+    faqs: [{ question: "Does Ocho mean eight years?", answer: "Yes. Its youngest rum is aged at least eight years." }, { question: "Is Reserva Ocho a white rum?", answer: "No. It is an oak-aged dark/golden rum with dried-fruit and spice notes." }],
+    metaTitle: "Bacardí Reserva Ocho Price, Taste & Review | BevOry", metaDescription: "Bacardí Reserva Ocho layers dried apricot, spice and oak. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "bacardi-grand-reserva-diez-10-year-rum-ce5c55f": {
+    productName: "Bacardí Gran Reserva Diez", category: "Ten-Year-Old Dark Rum",
+    shortOverview: "Gran Reserva Diez is Bacardí's longer-aged, more oak-led rum. Caramelised fruit and toasted wood make it a calmer neat pour than the brand's mixing range.",
+    craftStory: "Bacardí blends rums made from fermented sugarcane molasses and ages the youngest component at least ten years in oak under the Caribbean sun. Charcoal filtration refines the mature blend before bottling.",
+    tastingNotes: { nose: "Toasted oak, caramelised fruit and vanilla.", palate: "Rounded and deep, with cooked fruit, caramel and warm wood spice.", finish: "Long and warming, with lingering oak and soft smoke." },
+    servingGuide: { glassware: "Tulip rum or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small measure neat; a few drops of water can open the fruit." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "70% dark chocolate", "fig tart", "roasted cashews"],
+    whyBuyThis: "The ten-year minimum and refined oak profile make it a serious Bacardí sipping rum.",
+    faqs: [{ question: "What does Diez mean?", answer: "Diez means ten in Spanish, matching the minimum age of the rum." }, { question: "Is it the same as Reserva Ocho?", answer: "No. Diez has a ten-year minimum and a more developed oak character." }],
+    metaTitle: "Bacardí Gran Reserva Diez Price, Taste & Review | BevOry", metaDescription: "Bacardí Gran Reserva Diez brings cooked fruit, toasted oak and spice. See Indian pairings and check city prices on BevOry."
+  },
+  "bacardi-limon-517ab45": {
+    productName: "Bacardí Limón", category: "Citrus-Flavoured Rum",
+    shortOverview: "Bacardí Limón combines lemon with lime and grapefruit rather than a single citrus note. Its bright flavour is designed for long, simple mixed drinks.",
+    craftStory: "Bacardí starts with its molasses-based white rum and adds natural citrus flavour. The blend of lemon, lime and grapefruit is named after the Spanish word limón, not a barrel-age statement.",
+    tastingNotes: { nose: "Lemon zest, grapefruit peel and fresh lime.", palate: "Light and citrus-forward, with a soft rum base beneath tart fruit.", finish: "Short and crisp, leaving lemon and grapefruit." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Pour over ice with soda and fresh mint; lemonade gives a sweeter alternative." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "rava-fried fish", "malai paneer tikka", "masala peanuts"],
+    whyBuyThis: "Three distinct citrus fruits give a simple rum-and-soda more detail than lemon flavour alone.",
+    faqs: [{ question: "Is Limón a ready-to-drink lemonade?", answer: "No. It is citrus-flavoured rum; Bacardí sells separate premixed drinks." }, { question: "Which fruits flavour it?", answer: "The producer identifies lemon, lime and grapefruit." }],
+    metaTitle: "Bacardí Limón Price, Taste & Review | BevOry", metaDescription: "Bacardí Limón combines lemon, lime and grapefruit. Pair it with Indian snacks and check indicative city prices on BevOry."
+  },
+  "johnnie-walker-gold-reserve-abc15db": {
+    productName: "Johnnie Walker Gold Reserve", category: "Blended Scotch Whisky",
+    shortOverview: "Gold Label Reserve sits on the honeyed, creamy side of Johnnie Walker. Gentle vanilla spice and a trace of sweet smoke make it softer than Double Black.",
+    craftStory: "Johnnie Walker's blenders select malt and grain whiskies from Scottish regions including Speyside and the Highlands for this no-age-statement blend. Oak maturation and blending bring together honey, cream and mild spice.",
+    tastingNotes: { nose: "Honey, vanilla and soft orchard fruit.", palate: "Creamy and rounded, with sweet malt, gentle spice and a light smoky accent.", finish: "Medium, with honey and warming oak." },
+    servingGuide: { glassware: "Tulip whisky glass or highball", idealTemperature: "Room temperature or chilled with ice", recommendation: "Taste neat, then try a whisky highball with cold soda and a thin apple slice." },
+    foodPairings: ["chicken malai tikka", "paneer korma", "roasted cashews", "apple tart", "milk-chocolate mousse"],
+    whyBuyThis: "It offers a noticeably honeyed Johnnie Walker profile without the stronger smoke of Double Black.",
+    faqs: [{ question: "Does Gold Reserve have an age statement?", answer: "No. It is blended for a honeyed flavour profile rather than a stated minimum age." }, { question: "Is Gold Reserve the same as old Gold Label 18?", answer: "No. Gold Label Reserve is a different no-age-statement expression." }],
+    metaTitle: "Johnnie Walker Gold Reserve Price, Taste & Review | BevOry", metaDescription: "Johnnie Walker Gold Reserve brings honey, cream and mild smoke. See Indian pairings and check city prices on BevOry."
+  },
+  "johnnie-walker-18-yrs-c1eea07": {
+    productName: "Johnnie Walker 18", category: "18-Year-Old Blended Scotch Whisky",
+    shortOverview: "Johnnie Walker 18 balances dark chocolate with soft spice and sweet fruit. It is a mature, rounded blend for a slow neat pour rather than a smoke-heavy style.",
+    craftStory: "The blend uses hand-selected Scotch whiskies aged at least 18 years. Johnnie Walker cites Highland Blair Athol for spice, Speyside Glen Elgin for fruit and Cardhu for a creamy contribution.",
+    tastingNotes: { nose: "Ripe fruit, mellow spice and dark chocolate.", palate: "Smooth and layered, moving from sweet fruit to cocoa and warm oak.", finish: "Long and soft, with chocolate and gentle spice." },
+    servingGuide: { glassware: "Glencairn or crystal whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; a few drops of spring water can open the fruit." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "70% dark chocolate", "roasted almonds", "fig tart"],
+    whyBuyThis: "The named distillery contributions create a more defined fruit-spice-chocolate progression than a generic blend.",
+    faqs: [{ question: "Is Johnnie Walker 18 a single malt?", answer: "No. It blends Scotch whiskies from multiple distilleries." }, { question: "Are its components at least 18 years old?", answer: "Yes. The stated age applies to the youngest whisky in the blend." }],
+    metaTitle: "Johnnie Walker 18 Price, Taste & Review | BevOry", metaDescription: "Johnnie Walker 18 layers fruit, cocoa and Highland spice. Find Indian pairings and check indicative city prices on BevOry."
+  },
+  "johnnie-walker-blonde-f5823b7": {
+    productName: "Johnnie Walker Blonde", category: "Light Blended Scotch Whisky",
+    shortOverview: "Johnnie Walker Blonde turns the house style toward vanilla and bright fruit rather than smoke. It is designed for a cold, easy highball with lemonade or soda.",
+    craftStory: "Johnnie Walker's blenders combine Scottish malt and grain whiskies into a lighter no-age-statement expression. Oak maturation supplies the vanilla sweetness, while the blend is shaped for mixing rather than collector-style neat tasting.",
+    tastingNotes: { nose: "Vanilla, ripe apple and soft citrus.", palate: "Light and rounded, with orchard fruit, honeyed grain and gentle oak.", finish: "Short to medium, with vanilla and clean fruit." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Pour over ice with soda or lemonade and a lemon wedge; keep the mix long and refreshing." },
+    foodPairings: ["chicken tikka", "paneer pakora", "masala peanuts", "lemon rice", "apple tart"],
+    whyBuyThis: "Its light fruit-and-vanilla profile makes a deliberate mixing alternative to smoky Black Label.",
+    faqs: [{ question: "Is Blonde the same as Black Label?", answer: "No. Blonde is a lighter, fruitier no-age-statement blend made for mixing." }, { question: "What is an easy Blonde serve?", answer: "Use plenty of ice, cold soda or lemonade, and a lemon wedge in a highball." }],
+    metaTitle: "Johnnie Walker Blonde Price, Taste & Review | BevOry", metaDescription: "Johnnie Walker Blonde offers vanilla and bright fruit in a light blend. Try Indian pairings and check city prices on BevOry."
+  },
+  "johnnie-walker-xr-21-56d7bf8": {
+    productName: "Johnnie Walker XR 21", category: "21-Year-Old Blended Scotch Whisky",
+    shortOverview: "XR 21 leans toward honey, tropical fruit and warm spice in Johnnie Walker's luxury range. Its soft texture is different from the more smoke-forward expressions.",
+    craftStory: "Johnnie Walker marks XR 21 with a three-stage blending process inspired by Sir Alexander Walker II's notes. The Scotch whiskies used are aged at least 21 years before being brought together.",
+    tastingNotes: { nose: "Honey, ripe tropical fruit and vanilla oak.", palate: "Silky and full, with orchard fruit, gentle baking spice and honey.", finish: "Long and warm, with soft fruit and seasoned wood." },
+    servingGuide: { glassware: "Crystal tasting glass or Glencairn", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat in a small measure; add only a few drops of spring water after tasting." },
+    foodPairings: ["mutton galouti", "saffron phirni", "roasted cashews", "apricot tart", "70% dark chocolate"],
+    whyBuyThis: "It gives mature Johnnie Walker depth through a silky, honey-and-fruit profile rather than heavy peat.",
+    faqs: [{ question: "What does XR 21 mean?", answer: "It is a Johnnie Walker blend whose youngest whisky is at least 21 years old." }, { question: "Should XR 21 be used in cocktails?", answer: "Its mature detail is best appreciated neat or with minimal water." }],
+    metaTitle: "Johnnie Walker XR 21 Price, Taste & Review | BevOry", metaDescription: "Johnnie Walker XR 21 offers honey, tropical fruit and warm spice. See Indian pairings and check city prices on BevOry."
+  },
+  "johnnie-walker-island-green-1c5c872": {
+    productName: "Johnnie Walker Island Green", category: "Blended Malt Scotch Whisky",
+    shortOverview: "Island Green gives Johnnie Walker's all-malt style a stronger maritime smoke accent. Its coastal edge is more forceful than Green Label's balanced regional profile.",
+    craftStory: "Created for travel retail, Island Green blends single malts from Scottish regions rather than adding grain whisky. Diageo describes a greater emphasis on island character, with smoky Caol Ila helping shape the profile.",
+    tastingNotes: { nose: "Sea air, peat smoke, citrus and sweet malt.", palate: "Firm and malty, moving from honeyed fruit to coastal smoke and pepper.", finish: "Long and drying, with smoke and oak spice." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat to follow the smoke; a few drops of water can reveal sweeter malt." },
+    foodPairings: ["mutton seekh", "smoked paneer tikka", "coastal rava-fried fish", "lamb rogan josh", "70% dark chocolate"],
+    whyBuyThis: "It offers a smoke-forward Walker blended malt without switching to a single distillery bottle.",
+    faqs: [{ question: "Is Island Green the same as Green Label?", answer: "No. Island Green is a separate travel-retail blend with a stronger island-smoke focus." }, { question: "Does it contain grain whisky?", answer: "No. It is a blended malt made from single malt whiskies." }],
+    metaTitle: "Johnnie Walker Island Green Price, Taste & Review | BevOry", metaDescription: "Johnnie Walker Island Green brings coastal smoke, malt and pepper. Find Indian pairings and check city prices on BevOry."
+  },
+  "glenfiddich-12-yrs-sherry-cask-single-malt-scotch-929acb4": {
+    productName: "Glenfiddich 12 Sherry Cask", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "This Glenfiddich 12 keeps the distillery's orchard-fruit core but adds dried fruit and delicate sherry spice. It is a softer sherry introduction than an intensely dark cask-strength malt.",
+    craftStory: "Glenfiddich distils in Dufftown, Speyside, where the Grant family founded the distillery in 1887. This 12-year expression matures in American and European oak sherry casks and finishes in Amontillado casks from Jerez.",
+    tastingNotes: { nose: "Pear, dried fruit, honey and lightly toasted nuts.", palate: "Smooth and fruity, with apple, raisin and gentle Amontillado spice.", finish: "Medium, with dry oak and lingering fruit." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first; a few drops of spring water soften the sherry spice." },
+    foodPairings: ["chicken malai tikka", "mutton seekh", "roasted almonds", "date-and-walnut barfi", "dark chocolate"],
+    whyBuyThis: "The Amontillado finish gives familiar Glenfiddich fruit a drier, nuttier edge.",
+    faqs: [{ question: "Is this the standard Glenfiddich 12?", answer: "No. It is a separate Sherry Cask Finish expression." }, { question: "What is Amontillado?", answer: "It is a style of sherry; former Amontillado casks are used for the finish." }],
+    metaTitle: "Glenfiddich 12 Sherry Cask Price, Taste & Review | BevOry", metaDescription: "Glenfiddich 12 Sherry Cask adds dried fruit and nut spice to pear. See Indian pairings and check city prices on BevOry."
+  },
+  "absolut-grapefruit-vodka-7255715": {
+    productName: "Absolut Grapefruit", category: "Grapefruit-Flavoured Swedish Vodka",
+    shortOverview: "Absolut Grapefruit has a fresh pink-grapefruit note with measured sweetness and tartness. It gives a Paloma-style vodka highball citrus character without syrup.",
+    craftStory: "Absolut produces and bottles the vodka in Åhus, southern Sweden, using its wheat-based spirit. Natural grapefruit flavour is added after distillation; the expression is not barrel-aged.",
+    tastingNotes: { nose: "Freshly squeezed pink grapefruit and aromatic peel.", palate: "Light and rounded, with juicy grapefruit, faint sweetness and gentle bitterness.", finish: "Short and crisp, leaving pink-grapefruit zest." },
+    servingGuide: { glassware: "Highball or salt-rimmed rocks glass", idealTemperature: "Well chilled (4–8°C)", recommendation: "Mix with soda and a grapefruit wedge, or add lime for a vodka-based Paloma." },
+    foodPairings: ["tandoori prawns", "coastal rava-fried fish", "cucumber chaat", "malai paneer tikka", "chilli-lime peanuts"],
+    whyBuyThis: "Its distinct pink-grapefruit taste offers a less sweet citrus route than many flavoured vodkas.",
+    faqs: [{ question: "Is Absolut Grapefruit a premixed Paloma?", answer: "No. It is grapefruit-flavoured vodka; the Paloma-style drink is a serving suggestion." }, { question: "Where is it produced?", answer: "Absolut produces and bottles it in Åhus, Sweden." }],
+    metaTitle: "Absolut Grapefruit Price, Taste & Review | BevOry", metaDescription: "Absolut Grapefruit offers pink citrus, light sweetness and zest. Try Indian pairings and check indicative city prices on BevOry."
+  },
+  "glenfiddich-ipa-1c62014": {
+    productName: "Glenfiddich IPA Experiment", category: "Beer-Cask-Finished Speyside Single Malt",
+    shortOverview: "IPA Experiment gives Glenfiddich's pear-and-apple malt a fresh hop accent. It is whisky finished in beer-seasoned wood, not beer mixed into whisky.",
+    craftStory: "Glenfiddich Malt Master Brian Kinsman worked with Speyside brewer Seb Jones to make a bespoke craft IPA. That beer seasoned oak casks used to finish the single malt, adding a light hop-and-citrus accent.",
+    tastingNotes: { nose: "Green apple, William's pear, spring flowers and fresh hops.", palate: "Creamy vanilla opens into zesty citrus and subtle herbal hops.", finish: "Long and sweet, with an echo of green hops." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat to catch the hop aroma; add a few drops of water if the citrus feels restrained." },
+    foodPairings: ["tandoori prawns", "chicken tikka", "lemon rice", "roasted cashews", "malai paneer tikka"],
+    whyBuyThis: "Its beer-cask finish adds genuine hop character to a classic Speyside fruit profile.",
+    faqs: [{ question: "Does IPA Experiment contain beer?", answer: "It is Scotch whisky finished in casks seasoned with a craft IPA, not a whiskey-beer premix." }, { question: "Is it bitter like an IPA?", answer: "The hop note is subtle; green apple, pear and vanilla remain prominent." }],
+    metaTitle: "Glenfiddich IPA Experiment Price, Taste & Review | BevOry", metaDescription: "Glenfiddich IPA Experiment blends pear, apple and gentle hops. See Indian pairings and check indicative city prices on BevOry."
+  }
+};
