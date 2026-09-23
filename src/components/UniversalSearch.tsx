@@ -115,14 +115,16 @@ const UniversalSearch = memo(({
         setIsSearching(false);
         return;
       }
-      const { data, error } = await apiClient
-        .from("products")
-        .select("id, name, brand, rating, image_emoji, image_url, slug, category:categories(name, slug, emoji)")
-        .eq("is_active", true)
-        .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
-        .limit(PRODUCT_BATCH_SIZE);
+      const { data, error } = selectedCity?.id
+        ? await apiClient.catalog.searchCity(selectedCity.id, lookup, { offset: 0, limit: PRODUCT_BATCH_SIZE })
+        : await apiClient
+            .from("products")
+            .select("id, name, brand, rating, image_emoji, image_url, slug, category:categories(name, slug, emoji)")
+            .eq("is_active", true)
+            .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
+            .limit(PRODUCT_BATCH_SIZE);
       const results = error ? [] : fuzzyFilter(
-        (data ?? []) as SearchProduct[],
+        ((selectedCity?.id ? data?.products : data) ?? []) as SearchProduct[],
         searchQuery,
         (product) => [product.name, product.brand, product.category?.name || ""],
         0.25,

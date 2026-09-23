@@ -24,7 +24,7 @@ import {
 } from "./auth.js";
 import { ADMIN_SUMMARY_TABLES, buildAdminSummary } from "./adminSummary.js";
 import { queryHandler } from "./data.js";
-import { cityCatalogHandler, prewarmCityHomeCatalogs } from "./catalog.js";
+import { cityCatalogHandler, cityCatalogSearchHandler, prewarmCityHomeCatalogs } from "./catalog.js";
 import { functionsHandler } from "./functions.js";
 import { prisma } from "./db.js";
 import {
@@ -338,6 +338,7 @@ app.post("/api/query", (req, res, next) => {
   return next();
 }, queryHandler);
 app.get("/api/catalog/:cityId", cityCatalogHandler);
+app.get("/api/catalog/:cityId/search", cityCatalogSearchHandler);
 app.use("/api/functions/party-planner-ai", noStore, rateLimit(10, 60 * 60 * 1000));
 app.use("/api/functions/ai-recommend", noStore, rateLimit(30, 60 * 60 * 1000));
 app.post("/api/functions/:name", functionsHandler);

@@ -93,31 +93,24 @@ const Search = () => {
   }, [query]);
 
   const globalSearch = useInfiniteQuery({
-    queryKey: ["global-product-search", searchIntent.text, searchIntent.volumeMl],
+    queryKey: ["global-product-search", selectedCity?.id ?? "none", searchIntent.text, searchIntent.volumeMl],
     queryFn: async ({ pageParam }) => {
       const lookup = searchIntent.lookupTerm.replace(/[%,]/g, "");
-      const { data, error } = await apiClient
-        .from("products")
-        .select(`
-          id, name, slug, brand, brand_id, category_id, sub_category_id, price, mrp, volume,
-          rating, image_emoji, image_url, origin, origin_flag, abv, age, type_tag,
-          taste_profile, is_trending, is_all_time_favourite, available_volumes_ml,
-          category:categories(name, slug, emoji),
-          sub_category:sub_categories(name, slug, emoji)
-        `)
-        .eq("is_active", true)
-        .or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`)
-        .range(pageParam, pageParam + PRODUCT_BATCH_SIZE - 1);
+      const { data, error } = await apiClient.catalog.searchCity(
+        selectedCity!.id,
+        lookup,
+        { offset: pageParam, limit: PRODUCT_BATCH_SIZE },
+      );
       if (error) throw error;
-      const pageProducts = (data ?? []) as Product[];
+      const pageProducts = (data?.products ?? []) as Product[];
       return {
         products: pageProducts.filter((product) => productMatchesIntent(product, searchIntent)),
-        nextOffset: pageProducts.length === PRODUCT_BATCH_SIZE ? pageParam + PRODUCT_BATCH_SIZE : undefined,
+        nextOffset: data?.hasMore === true ? pageParam + pageProducts.length : undefined,
       };
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextOffset,
-    enabled: searchIntent.lookupTerm.length >= 2,
+    enabled: searchIntent.lookupTerm.length >= 2 && Boolean(selectedCity?.id),
     staleTime: 10 * 60 * 1000,
   });
   const globalMatches = useMemo(

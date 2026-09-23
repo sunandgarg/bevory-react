@@ -360,6 +360,20 @@ const catalog = {
       limit?: number;
     }>(`/catalog/${encodeURIComponent(cityId)}?view=${view}${category}${page}`);
   },
+  searchCity(cityId: string, query: string, pagination?: { offset: number; limit: number }) {
+    const params = new URLSearchParams({ q: query });
+    if (pagination) {
+      params.set("offset", String(pagination.offset));
+      params.set("limit", String(pagination.limit));
+    }
+    return request<{
+      products: Array<Record<string, unknown>>;
+      totalProducts: number;
+      hasMore: boolean;
+      offset: number;
+      limit: number;
+    }>(`/catalog/${encodeURIComponent(cityId)}/search?${params.toString()}`);
+  },
 };
 
 const admin = {

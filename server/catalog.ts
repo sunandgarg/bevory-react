@@ -212,6 +212,40 @@ export const paginateCatalog = <T extends { products: CatalogRow[]; totalProduct
   hasMore: offset + limit < payload.totalProducts,
 });
 
+const normalizeSearchValue = (value: unknown) => String(value ?? "")
+  .normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, " ")
+  .trim();
+
+const searchScore = (product: CatalogRow, query: string, tokens: string[]) => {
+  const name = normalizeSearchValue(product.name);
+  const brand = normalizeSearchValue(product.brand);
+  const category = normalizeSearchValue((product.category as CatalogRow | null)?.name);
+  const subcategory = normalizeSearchValue((product.sub_category as CatalogRow | null)?.name);
+  const haystack = `${brand} ${name} ${category} ${subcategory}`.trim();
+  if (!haystack) return 0;
+
+  let score = 0;
+  if (name === query) score += 180;
+  if (brand === query) score += 160;
+  if (name.startsWith(query)) score += 130;
+  if (brand.startsWith(query)) score += 120;
+  if (name.includes(query)) score += 90;
+  if (brand.includes(query)) score += 80;
+  if (category.includes(query) || subcategory.includes(query)) score += 35;
+
+  const matchedTokens = tokens.filter((token) => haystack.includes(token)).length;
+  if (matchedTokens === tokens.length) score += 45;
+  else if (matchedTokens > 0) score += matchedTokens * 10;
+
+  if (product.is_trending === true) score += 8;
+  if (product.is_all_time_favourite === true) score += 6;
+  score += Math.min(5, Number(product.rating ?? 0));
+  return score;
+};
+
 const catalogCacheKey = (cityId: string, view: CatalogView, categorySlug = "") => (
   view === "category" ? `${cityId}:category:${categorySlug}` : `${cityId}:${view}`
 );
@@ -354,6 +388,58 @@ export const cityCatalogHandler = async (req: Request, res: Response) => {
     return res.status(500).json({
       data: null,
       error: { message: error instanceof Error ? error.message : "Catalogue unavailable" },
+    });
+  }
+};
+
+export const cityCatalogSearchHandler = async (req: Request, res: Response) => {
+  const cityId = String(req.params.cityId ?? "").trim();
+  const query = normalizeSearchValue(req.query.q);
+  const requestedLimit = Number(req.query.limit);
+  const requestedOffset = Number(req.query.offset);
+  const limit = Number.isInteger(requestedLimit) && requestedLimit > 0
+    ? Math.min(requestedLimit, 50)
+    : 12;
+  const offset = Number.isInteger(requestedOffset) && requestedOffset > 0 ? requestedOffset : 0;
+  if (!cityId || cityId.length > 191 || !/^[a-zA-Z0-9_-]+$/.test(cityId)) {
+    return res.status(400).json({ data: null, error: { message: "A valid city is required" } });
+  }
+  if (query.length < 2) {
+    return res.json({
+      data: { products: [], totalProducts: 0, hasMore: false, offset, limit },
+      error: null,
+    });
+  }
+
+  try {
+    const tokens = query.split(" ").filter(Boolean);
+    const catalog = await getCatalogPayload(cityId, "full");
+    const ranked = catalog.products
+      .map((product) => ({ product, score: searchScore(product, query, tokens) }))
+      .filter((entry) => entry.score > 0)
+      .sort((left, right) => (
+        right.score - left.score
+        || Number(right.product.rating ?? 0) - Number(left.product.rating ?? 0)
+        || String(left.product.name ?? "").localeCompare(String(right.product.name ?? ""))
+      ))
+      .map((entry) => toCatalogCard(entry.product));
+    const page = ranked.slice(offset, offset + limit);
+    res.set("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=3600");
+    res.set("Cloudflare-CDN-Cache-Control", "public, s-maxage=300, stale-while-revalidate=3600");
+    return res.json({
+      data: {
+        products: page,
+        totalProducts: ranked.length,
+        hasMore: offset + page.length < ranked.length,
+        offset,
+        limit,
+      },
+      error: null,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      error: { message: error instanceof Error ? error.message : "Search unavailable" },
     });
   }
 };
