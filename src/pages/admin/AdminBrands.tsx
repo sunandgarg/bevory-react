@@ -44,6 +44,9 @@ interface Brand {
   logo_emoji: string | null;
   logo_url: string | null;
   image_url: string | null;
+  story_image_url: string | null;
+  youtube_url: string | null;
+  video_format: "video" | "short" | null;
   description: string | null;
   link_url: string | null;
   country: string | null;
@@ -103,6 +106,10 @@ const AdminBrands = () => {
       toast({ title: "Validation Error", description: "Please fix the highlighted fields", variant: "destructive" });
       return;
     }
+    if (editItem.youtube_url && !editItem.video_format) {
+      toast({ title: "Choose video type", description: "Select Video or YouTube Short for this spotlight story.", variant: "destructive" });
+      return;
+    }
 
     // Auto-generate slug if not set
     const slug = editItem.slug || generateSlug(editItem.brand_name);
@@ -113,6 +120,9 @@ const AdminBrands = () => {
       logo_emoji: editItem.logo_emoji,
       logo_url: editItem.logo_url,
       image_url: editItem.image_url,
+      story_image_url: editItem.story_image_url,
+      youtube_url: editItem.youtube_url,
+      video_format: editItem.video_format,
       description: editItem.description,
       link_url: editItem.link_url,
       country: editItem.country,
@@ -159,9 +169,12 @@ const AdminBrands = () => {
     id: "",
     slug: null,
     brand_name: "",
-    logo_emoji: "🏷️",
+    logo_emoji: null,
     logo_url: null,
     image_url: null,
+    story_image_url: null,
+    youtube_url: null,
+    video_format: null,
     description: null,
     link_url: null,
     country: "India",
@@ -251,7 +264,7 @@ const AdminBrands = () => {
 
   const csvOps = useCsvOperations<Brand>({
     tableName: "brand_spotlights",
-    columns: ["id", "slug", "brand_name", "logo_emoji", "logo_url", "image_url", "description", "link_url", "country", "story", "why_choose", "final_verdict", "is_active", "show_in_spotlight", "order_index", "tasting_notes", "how_to_enjoy", "pairing_ideas", "faqs", "meta_title", "meta_description"],
+    columns: ["id", "slug", "brand_name", "logo_emoji", "logo_url", "image_url", "story_image_url", "youtube_url", "video_format", "description", "link_url", "country", "story", "why_choose", "final_verdict", "is_active", "show_in_spotlight", "order_index", "tasting_notes", "how_to_enjoy", "pairing_ideas", "faqs", "meta_title", "meta_description"],
     excludeColumns: ["id"],
     formatRow: (row) => ({
       ...Object.fromEntries(Object.entries(row).map(([k, v]) => [k, v === null ? "" : typeof v === "object" ? JSON.stringify(v) : String(v)])),
@@ -358,9 +371,9 @@ const AdminBrands = () => {
             >
               <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
               <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-2xl flex-shrink-0 overflow-hidden">
-                {brand.image_url || brand.logo_url ? (
+                {brand.story_image_url || brand.logo_url || brand.image_url ? (
                   <img
-                    src={brand.image_url || brand.logo_url || ""}
+                    src={brand.story_image_url || brand.logo_url || brand.image_url || ""}
                     alt={brand.brand_name}
                     className="w-full h-full object-cover"
                   />
@@ -471,6 +484,48 @@ const AdminBrands = () => {
                       aspectHint="Wide hero banner with brand visuals"
                     />
                   </FormField>
+
+                  <div className="space-y-4 rounded-xl border border-border bg-secondary/20 p-4">
+                    <div>
+                      <h4 className="font-semibold">Homepage Spotlight Story</h4>
+                      <p className="text-xs text-muted-foreground">The image appears in the circular story. Clicking it opens the YouTube video in the correct format.</p>
+                    </div>
+                    <FormField label="Story Circle Image">
+                      <ImageUpload
+                        value={editItem?.story_image_url || null}
+                        onChange={(url) => setEditItem((p) => (p ? { ...p, story_image_url: url } : p))}
+                        folder="brands/stories"
+                        recommendedSize="1080 × 1080 px"
+                        aspectRatio="1:1 square"
+                        aspectHint="Keep the main subject centred for the circular crop"
+                      />
+                    </FormField>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <FormField label="YouTube URL" hint="Supports youtube.com, youtu.be and Shorts URLs">
+                        <Input
+                          type="url"
+                          placeholder="https://youtube.com/watch?v=..."
+                          value={editItem?.youtube_url || ""}
+                          onChange={(e) => setEditItem((p) => (p ? { ...p, youtube_url: e.target.value || null } : p))}
+                        />
+                      </FormField>
+                      <FormField label="Is it a video or short?" required={Boolean(editItem?.youtube_url)}>
+                        <Select
+                          value={editItem?.video_format || "none"}
+                          onValueChange={(value) => setEditItem((p) => (p ? { ...p, video_format: value === "none" ? null : value as "video" | "short" } : p))}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Choose format" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="none">No video</SelectItem>
+                            <SelectItem value="video">Video (16:9 popup)</SelectItem>
+                            <SelectItem value="short">YouTube Short (9:16 popup)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormField>
+                    </div>
+                  </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <FormField label="Logo Emoji">

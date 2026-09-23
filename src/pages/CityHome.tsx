@@ -6,9 +6,10 @@ import Home from "./Home";
 
 interface CityHomeProps {
   citySlug: string;
+  canonicalPath?: string;
 }
 
-const CityHome = ({ citySlug }: CityHomeProps) => {
+const CityHome = ({ citySlug, canonicalPath }: CityHomeProps) => {
   const { setCityByName, selectedCity } = useLocation();
   const city = cityFromSlug(citySlug);
   const cityName = city?.name || citySlug.split("-").map((part) => (
@@ -27,7 +28,7 @@ const CityHome = ({ citySlug }: CityHomeProps) => {
       <SEOHead
         title={`Alcohol Prices in ${cityName} | BevOry`}
         description={`Compare alcohol prices in ${cityName}. Explore whisky, beer, wine, rum and more with BevOry's local price guide.`}
-        canonical={`/${citySlug}`}
+        canonical={canonicalPath || `/${citySlug}`}
         geoPlacename={cityName}
       />
       <Home />

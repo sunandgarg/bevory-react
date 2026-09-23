@@ -32,7 +32,7 @@ const allCanonicalUrls = sitemapDocuments.flatMap((document) => (
 
 for (const [index, document] of sitemapDocuments.entries()) {
   const count = [...document.matchAll(/<url>\s*<loc>/g)].length;
-  if (count > 50_000) throw new Error(`Sitemap file ${index + 1} contains ${count} URLs`);
+  if (count > 3_000) throw new Error(`Sitemap file ${index + 1} contains ${count} URLs; BevOry's shard limit is 3,000`);
   if (Buffer.byteLength(document) > 50 * 1024 * 1024) {
     throw new Error(`Sitemap file ${index + 1} exceeds 50 MB uncompressed`);
   }

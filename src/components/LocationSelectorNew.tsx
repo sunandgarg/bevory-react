@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocation } from "@/hooks/useLocation";
 import { cn } from "@/lib/utils";
-import { POPULAR_CITIES, STATE_ORDER } from "@/lib/locations";
+import { POPULAR_CITIES, STATE_ORDER, cityHomePath } from "@/lib/locations";
 import { useNavigate, useLocation as useRouterLocation } from "react-router-dom";
 
 interface City {
@@ -72,7 +72,7 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
     // Navigate to the city route if on homepage
     const citySlug = getCitySlug(city.name);
     if (routerLocation.pathname === '/' || routerLocation.pathname.match(/^\/[a-z-]+$/)) {
-      navigate(`/${citySlug}`, { replace: true });
+      navigate(cityHomePath(citySlug), { replace: true });
     }
     
     setOpen(false);

@@ -55,7 +55,7 @@ const publicMediaBase = configuredMediaBase
 if (configuredMediaBase && !parsedConfiguredMediaBase) {
   console.warn(`Ignoring an invalid public media base; using ${DEFAULT_PUBLIC_MEDIA_BASE}`);
 }
-const sitemapUrlLimit = 20_000;
+const sitemapUrlLimit = 3_000;
 const sitemapByteLimit = 50 * 1024 * 1024;
 const prisma = new PrismaClient();
 const tableNames = [
@@ -209,6 +209,7 @@ const loadRows = async (): Promise<DataRow[]> => {
 };
 
 const staticRoutes: Array<SitemapEntry & { seo: SeoRoute }> = [
+  ["/", "Alcohol Prices in Gurgaon | BevOry", "Compare reviewed whisky, beer, wine, rum and other beverage prices in Gurgaon.", "Alcohol prices in Gurgaon"],
   ["/categories", "Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local prices.", "Drink categories"],
   ["/brands", "Beverage Brands & Products | BevOry", "Explore beverage brands, products and locally available bottle prices.", "Beverage brands"],
   ["/guide", "BevOry Guide | Drinks & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice.", "BevOry Guide"],
@@ -297,8 +298,9 @@ try {
     const brandIds = new Set(cityProducts.map((product) => String(product.data.brand_id ?? "")).filter(Boolean));
     const categoryNames = [...categoryIds].map((id) => String(categoryById.get(id)?.data.name ?? "")).filter(Boolean);
     const cityPath = `/${city.slug}`;
+    const cityHomePath = city.slug === "gurgaon" ? "/" : cityPath;
     addRoute({
-      path: cityPath,
+      path: cityHomePath,
       lastmod: latestTimestamp(cityRow.data.updated_at, cityPrices.map((price) => price.data.updated_at)),
     }, {
       title: `Alcohol Prices in ${city.name} | BevOry`,
@@ -308,11 +310,11 @@ try {
         `BevOry helps you compare reviewed bottle prices and known sizes across beverage categories in ${city.name}.`,
         categoryNames.length ? `Browse local ${categoryNames.slice(0, 8).join(", ")} prices. Listings are informational and can change at retail.` : "Listings are informational and can change at retail.",
       ],
-      breadcrumbs: [{ name: "Home", path: "/" }, { name: city.name, path: cityPath }],
+      breadcrumbs: cityHomePath === "/" ? [{ name: "Home", path: "/" }] : [{ name: "Home", path: "/" }, { name: city.name, path: cityHomePath }],
       structuredData: {
         "@type": "CollectionPage",
         name: `Alcohol prices in ${city.name}`,
-        url: `${origin}${cityPath}`,
+        url: `${origin}${cityHomePath}`,
         about: { "@type": "City", name: city.name },
       },
     });
@@ -337,7 +339,7 @@ try {
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
-          { name: city.name, path: cityPath },
+          { name: city.name, path: cityHomePath },
           { name: categoryName, path },
         ],
         structuredData: { "@type": "CollectionPage", name: `${categoryName} in ${city.name}`, url: `${origin}${path}` },
@@ -364,7 +366,7 @@ try {
           ...(subImage ? { image: subImage } : {}),
           breadcrumbs: [
             { name: "Home", path: "/" },
-            { name: city.name, path: cityPath },
+            { name: city.name, path: cityHomePath },
             { name: categoryName, path },
             { name: subName, path: subPath },
           ],
@@ -393,7 +395,7 @@ try {
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
-          { name: city.name, path: cityPath },
+          { name: city.name, path: cityHomePath },
           { name: brandName, path },
         ],
         structuredData: {
@@ -466,7 +468,7 @@ try {
       ...(image ? { image } : {}),
       breadcrumbs: [
         { name: "Home", path: "/" },
-        { name: city.name, path: `/${city.slug}` },
+        { name: city.name, path: city.slug === "gurgaon" ? "/" : `/${city.slug}` },
         ...(category ? [{ name: String(category.data.name), path: `/${city.slug}/category/${category.data.slug}` }] : []),
         { name: productName, path: basePath },
       ],
@@ -492,7 +494,7 @@ try {
         ...(image ? { image } : {}),
         breadcrumbs: [
           { name: "Home", path: "/" },
-          { name: city.name, path: `/${city.slug}` },
+          { name: city.name, path: city.slug === "gurgaon" ? "/" : `/${city.slug}` },
           { name: productName, path: basePath },
           { name: size, path },
         ],

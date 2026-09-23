@@ -76,9 +76,11 @@ const cityByName = (name?: string | null) => STATIC_CITIES.find(
 );
 
 const initialCity = () => {
-  const routeSlug = typeof window === "undefined" ? "" : window.location.pathname.split("/").filter(Boolean)[0] || "";
+  const pathname = typeof window === "undefined" ? "" : window.location.pathname;
+  const routeSlug = pathname.split("/").filter(Boolean)[0] || "";
   const routeCity = cityFromSlug(routeSlug);
   if (routeCity) return cityByName(routeCity.name) ?? null;
+  if (pathname === "/") return cityByName(DEFAULT_CITY) ?? null;
 
   try {
     const cached = JSON.parse(localStorage.getItem(LOCATION_CACHE_KEY) || "null") as { city?: City } | null;

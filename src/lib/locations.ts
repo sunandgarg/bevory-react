@@ -56,3 +56,5 @@ export const cityRecordIdFromSlug = (slug: string) => (
 export const citySlugFromName = (name?: string | null) => BEVORY_CITIES.find((city) => (
   city.name.toLowerCase() === name?.toLowerCase()
 ))?.slug;
+
+export const cityHomePath = (slug?: string | null) => slug === "gurgaon" || !slug ? "/" : `/${slug}`;

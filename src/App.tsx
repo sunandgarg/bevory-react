@@ -115,10 +115,14 @@ const App = () => (
               <Suspense fallback={<PageFallback />}>
                 <Routes>
                   <Route element={<PublicShell />}>
-                    <Route path="/" element={<Navigate to="/gurgaon" replace />} />
+                    <Route path="/" element={<CityHome citySlug="gurgaon" canonicalPath="/" />} />
 
                     {CITY_SLUGS.map(city => (
-                      <Route key={city} path={`/${city}`} element={<CityHome citySlug={city} />} />
+                      <Route
+                        key={city}
+                        path={`/${city}`}
+                        element={city === "gurgaon" ? <Navigate to="/" replace /> : <CityHome citySlug={city} />}
+                      />
                     ))}
 
                   <Route path="/auth" element={<Auth />} />

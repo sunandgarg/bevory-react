@@ -99,9 +99,10 @@ describe("origin SEO rendering", () => {
     }
   });
 
-  it("redirects root and legacy state URLs to city-first routes", () => {
-    expect(legacyRedirectPath("/")).toBe("/gurgaon");
-    expect(legacyRedirectPath("/haryana")).toBe("/gurgaon");
+  it("keeps the canonical root homepage and redirects legacy Gurgaon home URLs", () => {
+    expect(legacyRedirectPath("/")).toBeNull();
+    expect(legacyRedirectPath("/gurgaon")).toBe("/");
+    expect(legacyRedirectPath("/haryana")).toBe("/");
     expect(legacyRedirectPath("/haryana/whisky/scotch/black-dog-123")).toBe("/gurgaon/product/black-dog-123");
     expect(legacyRedirectPath("/brand/peter-scot")).toBe("/gurgaon/brand/peter-scot");
     expect(legacyRedirectPath("/brand/78575e48-2b55-4a22-9970-39dd28d337e6", {
@@ -110,7 +111,7 @@ describe("origin SEO rendering", () => {
     })).toBe("/gurgaon/brand/peter-scot");
     expect(legacyRedirectPath("/product/johnnie-walker-blonde"))
       .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
-    expect(legacyRedirectPath("/gurgaon/")).toBe("/gurgaon");
+    expect(legacyRedirectPath("/gurgaon/")).toBe("/");
     expect(legacyRedirectPath("/product/not-a-real-product")).toBeNull();
     expect(legacyRedirectPath("/delhi/product/old-black-label/750ml", {
       brandsById: {},

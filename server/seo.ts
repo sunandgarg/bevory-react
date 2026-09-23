@@ -479,7 +479,8 @@ export const legacyRedirectPath = (
   const cleanPath = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const parts = cleanPath.split("/").filter(Boolean);
 
-  if (cleanPath === "/") return "/gurgaon";
+  if (cleanPath === "/") return null;
+  if (cleanPath === "/gurgaon") return "/";
   if (parts[0] === "cocktail" && parts[1]) {
     const canonicalSlug = productIndex.cocktailAliases?.[parts[1]];
     if (canonicalSlug) return `/cocktail/${canonicalSlug}`;
@@ -489,7 +490,8 @@ export const legacyRedirectPath = (
     if (canonicalSlug) return `/${parts[0]}/product/${canonicalSlug}${parts[3] ? `/${parts[3]}` : ""}`;
   }
   if (parts.length === 1 && stateDefaultCities.has(parts[0])) {
-    return `/${stateDefaultCities.get(parts[0])}`;
+    const city = stateDefaultCities.get(parts[0]);
+    return city === "gurgaon" ? "/" : `/${city}`;
   }
   if (parts[0] === "brand" && parts[1]) {
     const slug = /^[0-9a-f-]{36}$/i.test(parts[1])

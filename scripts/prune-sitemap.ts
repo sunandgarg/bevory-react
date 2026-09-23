@@ -6,7 +6,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const routeDirectory = path.join(root, "public", "seo-routes");
 const sitemapDirectory = path.join(root, "public", "sitemaps");
 const nextDirectory = path.join(root, "public", "sitemaps-next");
-const shardSize = 20_000;
+const shardSize = 3_000;
 
 const routeFiles = (await readdir(routeDirectory))
   .filter((file) => file.endsWith(".json") && file !== "product-index.json");

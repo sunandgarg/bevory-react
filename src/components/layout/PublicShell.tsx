@@ -5,7 +5,7 @@ import LocationSelectorNew from "@/components/LocationSelectorNew";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
-import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
+import { CITY_SLUGS, cityHomePath, citySlugFromName } from "@/lib/locations";
 
 const PublicShell = () => {
   const { unreadCount } = useNotifications();
@@ -66,7 +66,7 @@ const PublicShell = () => {
       </div>
 
       <Link
-        to={`/${citySlug}`}
+        to={cityHomePath(citySlug)}
         aria-label="Open oRy AI home"
         className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1 text-foreground transition-transform hover:scale-105 active:scale-95 md:bottom-6"
       >
