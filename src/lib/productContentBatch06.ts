@@ -1,0 +1,335 @@
+// Producer-checked editorial. Source ledger: docs/editorial/product-batch-06-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "jacobs-creek-cabernet-sauvignon-d8f5429": {
+    productName: "Jacob's Creek Cabernet", category: "Australian Cabernet Sauvignon Red Wine",
+    shortOverview: "This Classic Cabernet has red berries, chocolate and pepper with firmer tannin than the Shiraz Cabernet blend. It belongs at a savoury dinner rather than beside a sweet dessert.",
+    craftStory: "Jacob's Creek makes this Australian Cabernet Sauvignon in its drink-now Classic range. Its winemakers use measured oak for complexity, without tying every release to a single vineyard or barrel recipe.",
+    tastingNotes: { nose: "Red berries, dark chocolate and black pepper.", palate: "Medium-bodied, with fresh red fruit, textural tannin and integrated oak.", finish: "Medium, drying gently with fruit and pepper." },
+    servingGuide: { glassware: "Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour with grilled food; give a young bottle 15 minutes in the glass." },
+    foodPairings: ["mutton seekh kebab", "tandoori lamb chops", "mushroom kebab", "aged cheddar"],
+    whyBuyThis: "A clear Cabernet tannin profile in a straightforward Australian style.",
+    faqs: [{ question: "Is it firmer than Jacob's Creek Shiraz Cabernet?", answer: "Yes. The single-varietal Cabernet shows tighter tannin, while the blend is softer and more plum-led." }, { question: "What glass suits this wine?", answer: "The producer recommends a Bordeaux-style glass." }],
+    metaTitle: "Jacob's Creek Cabernet Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Cabernet brings berries, chocolate and pepper. Pair with seekh kebabs and check indicative city prices on BevOry."
+  },
+  "jacobs-creek-double-barrel-shiraz-4f92635": {
+    productName: "Jacob's Creek DB Shiraz", category: "Whisky-Barrel-Finished Australian Shiraz",
+    shortOverview: "Double Barrel Shiraz adds cedar, toast and nutty oak to dark Australian fruit. A finish in aged Scotch whisky barrels gives it a different texture from the Classic range.",
+    craftStory: "The Shiraz first matures in traditional wine barrels, then finishes in aged Scotch whisky barrels. It remains wine, not a whisky blend; the finishing wood adds savoury, toasted accents.",
+    tastingNotes: { nose: "Cedar, vanilla bean, buttered toast, pecan and roast cashew.", palate: "Generous blackberry and ripe plum with integrated char and soft tannins.", finish: "Medium-long and smooth, leaving toasted wood and dark fruit." },
+    servingGuide: { glassware: "Standard red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve with a rich main course; warmth can exaggerate the barrel notes." },
+    foodPairings: ["mutton ghee roast", "lamb chops", "tandoori chicken", "70% dark chocolate"],
+    whyBuyThis: "Its whisky-barrel finish brings recognisable toast without hiding Shiraz fruit.",
+    faqs: [{ question: "Does Double Barrel Shiraz contain whisky?", answer: "No. Wine is finished in barrels that previously held whisky." }, { question: "Which barrels finish this Shiraz?", answer: "Jacob's Creek specifies aged Scotch whisky barrels." }],
+    metaTitle: "Jacob's Creek DB Shiraz Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Double Barrel Shiraz offers blackberry, cedar and toast. Pair with mutton roast; check city prices on BevOry."
+  },
+  "jacobs-creek-classic-riesling-a943387": {
+    productName: "Jacob's Creek Riesling", category: "Australian Riesling White Wine",
+    shortOverview: "This Classic Riesling is lime-bright and zesty, with green apple and a chalky close. Its acidity cuts through chilli and fried seafood.",
+    craftStory: "Jacob's Creek makes the wine in Australia as part of its fresh Classic range. The producer emphasises floral and citrus Riesling character rather than an oak-barrel profile.",
+    tastingNotes: { nose: "Lime blossom and fresh green apple.", palate: "Light and bright, with citrus fruit and zesty acidity.", finish: "Medium, clean and slightly chalky." },
+    servingGuide: { glassware: "Narrow-rim white-wine glass", idealTemperature: "Chilled (7–9°C)", recommendation: "Pour well chilled with spice-forward food." },
+    foodPairings: ["rava-fried fish", "tandoori prawns", "green-chilli paneer", "lemon chicken tikka"],
+    whyBuyThis: "Lime and brisk acidity make it a precise foil for hot, salty food.",
+    faqs: [{ question: "Is this Riesling oaky?", answer: "The producer presents a fresh citrus-led Classic wine, without describing oak maturation." }, { question: "How cold should it be?", answer: "Jacob's Creek recommends about 7–9°C." }],
+    metaTitle: "Jacob's Creek Riesling Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Riesling brings lime blossom, apple and zesty acidity. Pair with spicy fish and check city prices on BevOry."
+  },
+  "sula-brut-tropical-607d380": {
+    productName: "Sula Brut Tropicale", category: "Indian Sparkling Rosé Wine",
+    shortOverview: "Brut Tropicale is a pale-blush Nashik bubbly with peach, passion fruit and guava. Its fruit-led character is a lighter alternative to a red sparkling wine.",
+    craftStory: "Sula makes this sparkling rosé in Maharashtra using Chenin Blanc alongside red and aromatic grapes. Its published blend percentages differ across producer pages, so the fruit profile is more reliable than one fixed formula across releases.",
+    tastingNotes: { nose: "Apricot, passion fruit, peach and rose petals.", palate: "Lightly effervescent, with strawberry, yellow plum and crisp apple.", finish: "Medium, fading through peach and guava." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Open cold and pour gently with a fried seafood starter." },
+    foodPairings: ["rava-fried fish", "tandoori prawns", "anda masala", "hara bhara kebab"],
+    whyBuyThis: "Tropical fruit and red-berry bubbles offer a lively Indian aperitif.",
+    faqs: [{ question: "Is Sula Brut Tropicale a red wine?", answer: "No. It is a pale-blush sparkling rosé." }, { question: "Is it the same as Sula Brut?", answer: "No. Tropicale has a rosé colour and a more tropical, red-fruit profile." }],
+    metaTitle: "Sula Brut Tropicale Price, Taste & Review | BevOry", metaDescription: "Sula Brut Tropicale brings peach, passion fruit and guava bubbles. Pair with fried fish; check indicative city prices on BevOry."
+  },
+  "sula-reisling-white-eee8de3": {
+    productName: "Sula Riesling", category: "Indian Off-Dry Riesling White Wine",
+    shortOverview: "Sula Riesling balances light sweetness with lemon-and-grapefruit acidity. It is a gentler introduction to Riesling than a sharply dry version.",
+    craftStory: "Sula makes this 100% Riesling in the Nashik wine region. The producer calls it a Kabinett-style, off-dry white, where ripe fruit and retained sweetness are held in check by freshness.",
+    tastingNotes: { nose: "Lemon, grapefruit and a light honey note.", palate: "Light and off-dry, with citrus fruit balanced by brisk acidity.", finish: "Medium and fresh, leaving lemon and honey." },
+    servingGuide: { glassware: "Narrow-rim white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cold with chilli-forward food to let the acidity and sweetness work together." },
+    foodPairings: ["chilli chicken", "tandoori prawns", "vegetable spring rolls", "paneer tikka"],
+    whyBuyThis: "Its off-dry balance handles spice while remaining light and citrusy.",
+    faqs: [{ question: "Is Sula Riesling dry?", answer: "Sula describes it as off-dry, with sweetness balanced by acidity." }, { question: "What grape is used?", answer: "The producer lists 100% Riesling." }],
+    metaTitle: "Sula Riesling Price, Taste & Review | BevOry", metaDescription: "Sula Riesling balances lemon, grapefruit and honey with fresh acidity. Pair with chilli chicken; check city prices on BevOry."
+  },
+  "sula-sparkling-shiraz-ddbffbc": {
+    productName: "Sula Sparkling Shiraz", category: "Indian Sparkling Red Shiraz Wine",
+    shortOverview: "Sula Sparkling Shiraz is a deep-ruby red wine with bubbles, dark berries and pomegranate. It brings more fruit and body than a white brut.",
+    craftStory: "Sula makes this Nashik sparkling red from 100% Shiraz. A tank-based secondary fermentation, which the producer calls the Prosecco method, preserves a direct, fruit-forward style.",
+    tastingNotes: { nose: "Dark berries, pomegranate and sweet plum.", palate: "Medium-bodied and lively, with juicy berries, plum and gentle spice.", finish: "Medium, leaving pomegranate and dark-fruit spice." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with spiced snacks or a rich savoury dish; pour gently to retain bubbles." },
+    foodPairings: ["chilli chicken", "dabeli", "mutton rahra", "70% dark chocolate"],
+    whyBuyThis: "It pairs red-wine fruit with sparkling freshness in a distinctive Indian style.",
+    faqs: [{ question: "Which grape is used?", answer: "Sula lists 100% Shiraz." }, { question: "Is it a still Shiraz?", answer: "No. It undergoes a secondary fermentation to create bubbles." }],
+    metaTitle: "Sula Sparkling Shiraz Price, Taste & Review | BevOry", metaDescription: "Sula Sparkling Shiraz combines dark berries, plum and bubbles. Try it with dabeli; check indicative city prices on BevOry."
+  },
+  "sula-zinfandel-c75211e": {
+    productName: "Sula Zinfandel", category: "Indian Zinfandel Red Wine",
+    shortOverview: "Sula Zinfandel is a youthful red with plum, dark berries and cinnamon. It is more direct and less oak-shaped than the producer's RASA Zinfandel.",
+    craftStory: "Made from 100% Zinfandel in the Nashik wine region, this Classics wine is not barrel-aged. Sula preserves the grape's fruit-forward character rather than adding a long oak maturation.",
+    tastingNotes: { nose: "Red berries, blackberry, plum and cinnamon.", palate: "Juicy and medium-bodied, with dark fruit and mild spice.", finish: "Medium, leaving plum and a cinnamon trace." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (15–17°C)", recommendation: "A short chill before serving keeps the berry fruit bright." },
+    foodPairings: ["paneer tikka masala", "spicy noodles", "tandoori chicken", "mutton kofta"],
+    whyBuyThis: "It presents un-oaked Nashik Zinfandel fruit at its most direct.",
+    faqs: [{ question: "Is Sula Zinfandel aged in oak?", answer: "No. Sula's current Classics description says it is not barrel-aged." }, { question: "How is it different from RASA Zinfandel?", answer: "RASA has a short oak maturation; this Classics label focuses on fresh fruit." }],
+    metaTitle: "Sula Zinfandel Price, Taste & Review | BevOry", metaDescription: "Sula Zinfandel offers plum, berries and cinnamon without barrel age. Pair with tikka masala; check city prices on BevOry."
+  },
+  "sula-seco-sparkling-1636e54": {
+    productName: "Sula Seco", category: "Indian Chenin Blanc Sparkling Wine",
+    shortOverview: "Sula Seco is a light Chenin Blanc bubbly with melon, passion fruit and citrus. Its easy fruit character works as an aperitif or with fried snacks.",
+    craftStory: "Sula makes Seco from 100% Chenin Blanc within its Nashik sparkling portfolio. The producer describes a fresh fruit-led wine rather than a barrel-aged expression.",
+    tastingNotes: { nose: "Ripe melon, passion fruit and light citrus.", palate: "Lightly sparkling and juicy, with fresh Chenin fruit and soft acidity.", finish: "Medium and citrusy, lingering after the bubbles fade." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Serve cold beside savoury starters; it also suits a simple sparkling wine cocktail." },
+    foodPairings: ["onion pakora", "hara bhara kebab", "egg frittata", "yellow chicken curry"],
+    whyBuyThis: "A Chenin-based Indian bubbly with enough citrus lift for snack food.",
+    faqs: [{ question: "Which grape makes Sula Seco?", answer: "Sula lists 100% Chenin Blanc." }, { question: "Is Seco a still wine?", answer: "No. This catalogue entry is Sula's sparkling Seco." }],
+    metaTitle: "Sula Seco Price, Taste & Review | BevOry", metaDescription: "Sula Seco offers melon, passion fruit and citrus bubbles. Pair with pakoras and check indicative city prices on BevOry."
+  },
+  "sula-satori-red-dfb8e91": {
+    productName: "Sula Satori", category: "Indian Tempranillo-Zinfandel Red Wine",
+    shortOverview: "Sula Satori is a soft, fruit-led red built on cherry and plum. Its modest structure makes it comfortable beside paneer tikka masala.",
+    craftStory: "Sula's current Satori description lists a Tempranillo and Zinfandel blend made in Maharashtra. The producer does not specify a fixed oak period for this label; its identity centres on accessible red fruit.",
+    tastingNotes: { nose: "Ripe cherries, plums and red berries.", palate: "Easy-going and fruit-forward, with soft tannins and cherry-plum sweetness of fruit.", finish: "Medium, leaving ripe berry and gentle spice." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (15–17°C)", recommendation: "Serve slightly cool with a spiced vegetarian main course." },
+    foodPairings: ["paneer tikka masala", "vegetable tagine", "tandoori chicken", "tomato pasta"],
+    whyBuyThis: "Its soft Tempranillo-Zinfandel fruit is approachable for a first Indian red.",
+    faqs: [{ question: "Is Satori a Merlot?", answer: "The producer's current Satori description identifies Tempranillo and Zinfandel; check the specific bottle label because older presentation may differ." }, { question: "Does it need decanting?", answer: "Its approachable style usually needs only a normal pour, not prolonged decanting." }],
+    metaTitle: "Sula Satori Price, Taste & Review | BevOry", metaDescription: "Sula Satori brings cherry, plum and soft tannins to paneer tikka masala. Check indicative city prices on BevOry."
+  },
+  "fratelli-carbernet-franc-shiraz-7f72fb7": {
+    productName: "Fratelli Cab Franc-Shiraz", category: "Indian Cabernet Franc-Shiraz Red Wine",
+    shortOverview: "Fratelli Cabernet Franc-Shiraz pairs Cabernet Franc roundness with Shiraz pepper and plum. It is a darker, more savoury Akluj red than the winery's gentle Chenin whites.",
+    craftStory: "Fratelli grows and vinifies this blend in Maharashtra's Akluj wine country. Cabernet Franc lends concentrated fruit while Shiraz contributes pepper, vanilla and a leather-like note in the producer's tasting profile.",
+    tastingNotes: { nose: "Vanilla, leather and black pepper over dark fruit.", palate: "Rounded and substantial, with dark plum and integrated tannin.", finish: "Long, leaving plum and savoury spice." },
+    servingGuide: { glassware: "Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve with a roast or kebab meal; allow a young bottle 15–20 minutes to breathe." },
+    foodPairings: ["mutton seekh kebab", "lamb rogan josh", "chilli cheese toast", "tandoori mushrooms"],
+    whyBuyThis: "Cabernet Franc gives an uncommon Indian red blend a rounded dark-fruit centre.",
+    faqs: [{ question: "Is it a single-varietal Cabernet Franc?", answer: "No. Fratelli blends Cabernet Franc with Shiraz." }, { question: "Where is Fratelli based?", answer: "Its estate vineyards and winery are in Akluj, Maharashtra." }],
+    metaTitle: "Fratelli Cab Franc-Shiraz Price, Taste & Review | BevOry", metaDescription: "Fratelli Cabernet Franc-Shiraz brings plum, pepper and savoury depth. Pair with seekh kebabs; check city prices on BevOry."
+  },
+  "fratelli-classic-chenin-bada66c": {
+    productName: "Fratelli Classic Chenin", category: "Indian Chenin Blanc White Wine",
+    shortOverview: "Fratelli Classic Chenin is a fresh white with tropical fruit and clear acidity. Its light mineral edge makes it more useful with food than a syrupy fruit wine.",
+    craftStory: "The wine is made from Chenin Blanc at Fratelli's Akluj estate in Maharashtra. The Classic Chenin product page describes temperature-controlled stainless-steel storage to preserve fruit and freshness.",
+    tastingNotes: { nose: "Fresh tropical fruit with a faint floral edge.", palate: "Smooth yet bright, with juicy fruit and elegant acidity.", finish: "Medium, clean and lightly mineral." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Pour cool with grilled chicken or fresh seafood; avoid overchilling to the point of muting the fruit." },
+    foodPairings: ["chicken tikka", "rava-fried fish", "malai paneer tikka", "cucumber chaat"],
+    whyBuyThis: "Stainless-steel handling keeps the Akluj Chenin's fruit and acidity in focus.",
+    faqs: [{ question: "Is Classic Chenin aged in oak?", answer: "The producer's current Classic Chenin description highlights temperature-controlled stainless steel, not oak." }, { question: "What grape is it?", answer: "Fratelli lists Chenin Blanc." }],
+    metaTitle: "Fratelli Classic Chenin Price, Taste & Review | BevOry", metaDescription: "Fratelli Classic Chenin brings tropical fruit and crisp acidity to chicken tikka. Check indicative city prices on BevOry."
+  },
+  "fratelli-ms-chardonnay-sauvignon-blanc-55410ea": {
+    productName: "Fratelli MS White", category: "Indian Chardonnay-Sauvignon White Wine",
+    shortOverview: "Master Selection White combines Sauvignon freshness with Chardonnay body. Pear and melon sit over a bright base, making it a flexible food wine.",
+    craftStory: "Fratelli sources the grapes from Motewadi and Garwad near its Akluj estate. The producer describes an 80% Chardonnay and 20% Sauvignon Blanc blend, with a measured oak contribution to texture.",
+    tastingNotes: { nose: "Pear, melon and fresh citrus.", palate: "Medium-bodied, with ripe Chardonnay fruit, Sauvignon lift and restrained oak.", finish: "Medium, leaving citrus and soft fruit." },
+    servingGuide: { glassware: "Medium-bowl white-wine glass", idealTemperature: "Chilled (9–11°C)", recommendation: "Serve with a creamy but lightly spiced dish, not straight from an ice bucket." },
+    foodPairings: ["chicken malai tikka", "tandoori prawns", "paneer in white gravy", "butter-poached fish"],
+    whyBuyThis: "Its two-grape construction supplies both freshness and texture.",
+    faqs: [{ question: "Which grapes are in MS White?", answer: "Fratelli lists Chardonnay and Sauvignon Blanc, with Chardonnay the larger share in its published blend." }, { question: "Is it a single-varietal Chardonnay?", answer: "No. Sauvignon Blanc adds acidity and aromatic lift." }],
+    metaTitle: "Fratelli MS White Price, Taste & Review | BevOry", metaDescription: "Fratelli MS White blends pear, melon and citrus with gentle oak. Pair with malai tikka; check city prices on BevOry."
+  },
+  "fratelli-ms-sangiovese-cabernet-franc-syrah-cf1ba13": {
+    productName: "Fratelli MS Red", category: "Indian Sangiovese-Cabernet-Shiraz Red Wine",
+    shortOverview: "Master Selection Red brings savoury Sangiovese acidity to dark Cabernet Franc and Shiraz fruit. It has more food-friendly tang than a jammy red.",
+    craftStory: "Fratelli blends Sangiovese, Cabernet Franc and Shiraz from its Maharashtra vineyards. The producer describes French and American oak ageing for the Master Selection Red, adding smooth texture around the fruit.",
+    tastingNotes: { nose: "Red fruit, blackcurrant and a soft herbal note.", palate: "Medium-bodied, with ripe cassis, savoury spice and almost tart acidity.", finish: "Medium and dry, with fruit and gentle oak." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour with tomato-rich or roasted food; a short rest in the glass helps the acidity settle." },
+    foodPairings: ["tandoori chicken", "mutton seekh kebab", "paneer tikka masala", "tomato pasta"],
+    whyBuyThis: "The Sangiovese-led blend keeps Indian red wine savoury and energetic.",
+    faqs: [{ question: "What grapes are in MS Red?", answer: "Fratelli names Sangiovese, Cabernet Franc and Shiraz." }, { question: "Does it see oak?", answer: "The producer's Master Selection account describes French and American oak ageing." }],
+    metaTitle: "Fratelli MS Red Price, Taste & Review | BevOry", metaDescription: "Fratelli MS Red offers cassis, red fruit and savoury spice. Pair with tikka or seekh kebab; check city prices on BevOry."
+  },
+  "fratelli-ms-sangiovese-rose-wine-cb042b1": {
+    productName: "Fratelli MS Rosé", category: "Indian Sangiovese Rosé Wine",
+    shortOverview: "Master Selection Rosé is a crisp, delicately fruity pink wine rather than a sweet red in disguise. It brings Fratelli's Sangiovese grape to lighter Indian dishes.",
+    craftStory: "Fratelli makes this rosé from 100% Sangiovese grown in its Maharashtra programme. The Master Selection range was originally developed with winemakers Steven Spurrier and Piero Masi; the current rosé stresses fruit and freshness.",
+    tastingNotes: { nose: "Light summer fruit and delicate floral notes.", palate: "Smooth and light, with fresh berry fruit and crisp acidity.", finish: "Medium and clean, leaving a soft red-fruit trace." },
+    servingGuide: { glassware: "Rosé or white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cold with a lightly spiced starter or fish dish." },
+    foodPairings: ["tandoori fried fish", "malai paneer tikka", "cucumber chaat", "chicken tikka"],
+    whyBuyThis: "An Indian Sangiovese rosé with freshness for food, not just colour for a party.",
+    faqs: [{ question: "Which grape is in MS Rosé?", answer: "Fratelli lists 100% Sangiovese." }, { question: "Is MS Rosé the same as Fratelli Shiraz Rosé?", answer: "No. They are separate wines made from different grapes." }],
+    metaTitle: "Fratelli MS Rosé Price, Taste & Review | BevOry", metaDescription: "Fratelli MS Rosé offers delicate summer fruit and crisp acidity. Pair with tandoori fish; check city prices on BevOry."
+  },
+  "fratelli-sparkling-gran-brut-f274bea": {
+    productName: "Fratelli Gran Cuvée Brut", category: "Indian Traditional-Method Sparkling Wine",
+    shortOverview: "Gran Cuvée Brut is a dry, creamy Indian bubbly with bread-yeast and citrus notes. It has more lees-derived texture than a simple fruit-led sparkling wine.",
+    craftStory: "Fratelli makes this Chenin Blanc sparkling wine by the traditional bottle-fermentation method. The producer describes more than 18 months of bottle ageing before riddling and disgorgement, with zero dosage.",
+    tastingNotes: { nose: "Fresh bread yeast with light citrus and mineral notes.", palate: "Creamy and delicate, with persistent bubbles, Chenin acidity and citrus.", finish: "Long, leaving mineral freshness and a faint pastry note." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Open well chilled and pour slowly; serve without ice beside savoury starters." },
+    foodPairings: ["tandoori prawns", "rava-fried fish", "hara bhara kebab", "salted cashews"],
+    whyBuyThis: "Traditional-method ageing gives this Akluj sparkling wine a serious, savoury texture.",
+    faqs: [{ question: "Is Gran Cuvée Brut Champagne?", answer: "No. It is an Indian traditional-method sparkling wine, not a wine from France's Champagne region." }, { question: "What does zero dosage mean here?", answer: "Fratelli describes this release as zero dosage, meaning no sweetening dosage is added at disgorgement." }],
+    metaTitle: "Fratelli Gran Cuvée Brut Price, Taste & Review | BevOry", metaDescription: "Fratelli Gran Cuvée Brut offers bread, citrus and creamy bubbles. Pair with prawns; check indicative city prices on BevOry."
+  },
+  "grover-art-collection-cab-shiraz-2669086": {
+    productName: "Grover Art Cabernet-Shiraz", category: "Indian Cabernet-Shiraz Red Wine",
+    shortOverview: "Grover's Art Collection Cabernet-Shiraz is a structured dark-fruit red with black pepper and herb detail. It is a better fit for robust food than for an aperitif.",
+    craftStory: "Grover Zampa draws on its Indian vineyard programme for this Cabernet-Shiraz blend. The Art Collection label links the wine to artist Sanjay Bhattacharya; the producer does not fix one oak schedule for every vintage.",
+    tastingNotes: { nose: "Blackcurrant, blackberry, Mediterranean herbs and black pepper.", palate: "Weighty and structured, with ripe dark berries and fine-grain tannins.", finish: "Long and persistent, leaving berry fruit and spice." },
+    servingGuide: { glassware: "Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve with kebabs or a slow-cooked main; allow a young bottle a short rest in the glass." },
+    foodPairings: ["mutton seekh kebab", "lamb rogan josh", "tandoori mushrooms", "grilled lamb chops"],
+    whyBuyThis: "Its dark fruit and tannin provide backbone for heavily flavoured Indian food.",
+    faqs: [{ question: "Is this one grape?", answer: "No. Grover blends Cabernet Sauvignon and Shiraz." }, { question: "How warm should it be?", answer: "The producer recommends 16–18°C." }],
+    metaTitle: "Grover Art Cabernet-Shiraz Price, Taste & Review | BevOry", metaDescription: "Grover Art Cabernet-Shiraz offers blackcurrant, pepper and fine tannins. Pair with seekh kebabs; check city prices on BevOry."
+  },
+  "grover-art-collection-chenin-blanc-7611034": {
+    productName: "Grover Art Chenin Blanc", category: "Indian Chenin Blanc White Wine",
+    shortOverview: "This Art Collection Chenin is a fresh, medium-bodied white with pineapple, guava and grapefruit. Its crisp acidity works well with creamy seafood.",
+    craftStory: "Grover Zampa makes this Chenin Blanc within its Indian Art Collection range, whose labels feature works by Indian artists. The producer highlights fruit and freshness rather than a named cask finish.",
+    tastingNotes: { nose: "Grapefruit, pineapple, guava and freshly cut herbs.", palate: "Medium-bodied and crisp, with tropical fruit and refreshing acidity.", finish: "Medium, lingering on citrus and fruit." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve with a creamy but lightly spiced fish or chicken dish." },
+    foodPairings: ["malai paneer tikka", "prawn coconut curry", "rava-fried fish", "chicken malai tikka"],
+    whyBuyThis: "Its tropical fruit and acid make Chenin approachable without losing freshness.",
+    faqs: [{ question: "Is it a sweet dessert wine?", answer: "No. Grover describes a crisp, medium-bodied table wine." }, { question: "What grape is used?", answer: "Chenin Blanc." }],
+    metaTitle: "Grover Art Chenin Blanc Price, Taste & Review | BevOry", metaDescription: "Grover Art Chenin Blanc brings pineapple, guava and grapefruit. Pair with coastal fish; check indicative city prices on BevOry."
+  },
+  "grover-art-collection-merlot-c19de82": {
+    productName: "Grover Art Merlot", category: "Indian Merlot Red Wine",
+    shortOverview: "Grover Art Merlot is a soft red with blueberry, cherry and a little liquorice. Mellow tannins make it less severe than a Cabernet-led blend.",
+    craftStory: "Made as part of Grover Zampa's Indian Art Collection, this Merlot carries a label associated with artist Rini Dhumal. The producer's profile centres on ripe berry fruit and gentle vanilla rather than a fixed oak-ageing claim.",
+    tastingNotes: { nose: "Blueberry, red cherry, strawberry, vanilla and liquorice.", palate: "Juicy and mellow, with red berries, soft tannins and black pepper.", finish: "Medium, leaving berries and mild spice." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve slightly cool with mushrooms or roast poultry." },
+    foodPairings: ["tandoori chicken", "mushroom kebab", "paneer tikka", "70% dark chocolate"],
+    whyBuyThis: "A berry-led Merlot with enough softness for an easy Indian red-wine introduction.",
+    faqs: [{ question: "Is Grover Art Merlot heavily tannic?", answer: "No. The producer describes mellow tannins." }, { question: "What fruit notes lead?", answer: "Blueberry, cherry and strawberry are named in the producer's tasting notes." }],
+    metaTitle: "Grover Art Merlot Price, Taste & Review | BevOry", metaDescription: "Grover Art Merlot offers cherry, blueberry and mellow tannins. Pair with tandoori chicken; check city prices on BevOry."
+  },
+  "grover-art-collection-rose-cd2ecd9": {
+    productName: "Grover Art Shiraz Rosé", category: "Indian Shiraz Rosé Wine",
+    shortOverview: "Grover Art Shiraz Rosé is a light pink wine with red berries and soft texture. It is made for gentle spice rather than the weight of a mutton curry.",
+    craftStory: "Grover Zampa makes this Shiraz rosé for its Art Collection, whose label features Indian artist Rekha Rodwittya. The wine is designed around fresh berry aroma and chilled service, not long oak maturation.",
+    tastingNotes: { nose: "Berries, rose and a light cherry note.", palate: "Light-bodied and smooth, with cherry and strawberry-jam fruit.", finish: "Medium and fruity, fading through red berries." },
+    servingGuide: { glassware: "Rosé or white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with mild fish or chicken starters." },
+    foodPairings: ["tandoori fried fish", "chicken malai tikka", "cucumber chaat", "paneer tikka"],
+    whyBuyThis: "Its chilled berry profile meets lightly spiced Indian snacks without tannin weight.",
+    faqs: [{ question: "Which grape makes this rosé?", answer: "Grover lists Shiraz." }, { question: "Should it be served cold?", answer: "Yes, around 8–10°C according to the producer." }],
+    metaTitle: "Grover Art Shiraz Rosé Price, Taste & Review | BevOry", metaDescription: "Grover Art Shiraz Rosé brings berry and cherry notes to tandoori fish. Check indicative city prices on BevOry."
+  },
+  "grover-art-collection-sauvignon-blanc-cfd3fe3": {
+    productName: "Grover Art Sauvignon", category: "Indian Sauvignon Blanc White Wine",
+    shortOverview: "Grover Art Sauvignon Blanc is grassy and citrus-led with a light tropical accent. Its clean finish suits seafood and green chutney.",
+    craftStory: "Grover Zampa makes this Sauvignon Blanc in its Indian Art Collection, with label artwork associated with Rini Dhumal. The producer stresses varietal freshness and crisp acidity rather than oak.",
+    tastingNotes: { nose: "Grass, apple, lemon and a hint of peach.", palate: "Clean and refreshing, with citrus, light guava and lively acidity.", finish: "Medium, crisp and lightly herbal." },
+    servingGuide: { glassware: "Narrow-rim white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with fish, prawns or a green-herb vegetarian starter." },
+    foodPairings: ["tandoori prawns", "rava-fried fish", "hara bhara kebab", "cucumber chaat"],
+    whyBuyThis: "A crisp Indian Sauvignon with useful herbal and citrus food pairing range.",
+    faqs: [{ question: "Is this an oaky white?", answer: "The producer describes a fresh, grassy Sauvignon rather than an oak-driven wine." }, { question: "How cold should it be?", answer: "Grover suggests 8–12°C; 8–10°C is a practical starting point." }],
+    metaTitle: "Grover Art Sauvignon Price, Taste & Review | BevOry", metaDescription: "Grover Art Sauvignon brings lemon, herbs and crisp acidity. Pair with tandoori prawns; check city prices on BevOry."
+  },
+  "grover-art-collection-shiraz-0688fbd": {
+    productName: "Grover Art Shiraz", category: "Indian Shiraz Red Wine",
+    shortOverview: "Grover Art Shiraz is a juicy red with raspberry, blackberry and pepper. It has a softer fruit centre than the Art Collection Cabernet-Shiraz blend.",
+    craftStory: "Grover Zampa makes this Shiraz within its Art Collection Indian wine range. Its label features work by Paresh Maity, while the wine's producer profile centres on fruit, anise and spice.",
+    tastingNotes: { nose: "Raspberry, blackberry, anise and black pepper.", palate: "Juicy red fruit with fruitcake richness and white-pepper spice.", finish: "Long, persistent and berry-led." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve with roasted lamb or tandoori poultry." },
+    foodPairings: ["tandoori chicken", "lamb chops", "mutton seekh kebab", "mushroom kebab"],
+    whyBuyThis: "It combines Indian Shiraz berry fruit with pepper in an accessible frame.",
+    faqs: [{ question: "Is it a blend?", answer: "Grover lists this Art Collection wine as Shiraz." }, { question: "What temperature suits it?", answer: "The producer recommends 16–18°C." }],
+    metaTitle: "Grover Art Shiraz Price, Taste & Review | BevOry", metaDescription: "Grover Art Shiraz gives raspberry, blackberry and pepper. Pair with tandoori chicken; check city prices on BevOry."
+  },
+  "grover-art-collection-viognier-white-163e20a": {
+    productName: "Grover Art Viognier", category: "Indian Viognier White Wine",
+    shortOverview: "Grover Art Viognier is a textured white with apricot, pear and floral honey notes. Its richer mouthfeel suits mild coastal cooking.",
+    craftStory: "Grover Zampa makes this Viognier in its Indian Art Collection. The label is associated with Paresh Maity; the liquid is defined by ripe stone fruit and viscous texture, without a fixed cask claim on the producer page.",
+    tastingNotes: { nose: "Honeysuckle, spiced pear and apricot.", palate: "Refreshing yet rich and viscous, with peachy fruit and floral lift.", finish: "Medium, leaving apricot and soft honeyed fruit." },
+    servingGuide: { glassware: "Medium-bowl white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Let an overchilled glass warm slightly so the apricot and floral aroma can open." },
+    foodPairings: ["Goan fish curry", "malai paneer tikka", "tandoori prawns", "chicken korma"],
+    whyBuyThis: "It provides a fuller white-wine texture without needing aggressive oak.",
+    faqs: [{ question: "Is this a Sauvignon Blanc?", answer: "No. It is made from Viognier, a more textured aromatic white grape." }, { question: "How cold should it be?", answer: "Grover recommends 8–10°C." }],
+    metaTitle: "Grover Art Viognier Price, Taste & Review | BevOry", metaDescription: "Grover Art Viognier offers apricot, pear and honeysuckle. Pair with Goan fish curry; check indicative city prices on BevOry."
+  },
+  "grover-la-reserve-red-233783a": {
+    productName: "Grover La Réserve Red", category: "Indian Reserve Cabernet-Shiraz Red Wine",
+    shortOverview: "La Réserve Red is a fuller Grover blend with dark fruit, chocolate and coffee. Its velvety tannins and depth suit a slow meal.",
+    craftStory: "Grover Zampa blends Cabernet Sauvignon and Shiraz for this Indian reserve wine. The producer's account links La Réserve to consultant Michel Rolland and describes old-vine fruit in its winemaking notes.",
+    tastingNotes: { nose: "Ripe red and black fruit with a measured spice note.", palate: "Full-bodied and velvety, moving through chocolate, coffee bean and vanilla.", finish: "Long and ample, with dark fruit and oak spice." },
+    servingGuide: { glassware: "Large Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Open with dinner and give a young bottle 20 minutes of air." },
+    foodPairings: ["lamb kebab", "mutton biryani", "lamb rogan josh", "70% dark chocolate"],
+    whyBuyThis: "A serious Indian Cabernet-Shiraz with enough structure for rich food.",
+    faqs: [{ question: "What grapes are in La Réserve Red?", answer: "Grover lists Cabernet Sauvignon and Shiraz." }, { question: "Is it a light red?", answer: "No. The producer describes a full-bodied wine with velvety tannins." }],
+    metaTitle: "Grover La Réserve Red Price, Taste & Review | BevOry", metaDescription: "Grover La Réserve Red brings dark fruit, chocolate and coffee to lamb kebabs. Check indicative city prices on BevOry."
+  },
+  "grover-la-reserve-fume-blanc-41188ff": {
+    productName: "Grover Fumé Blanc", category: "French-Oak-Aged Indian Sauvignon Blanc",
+    shortOverview: "Grover Fumé Blanc is an oak-shaped Sauvignon with mango, lime leaf and a creamy middle. It is richer than the winery's fresh Art Collection Sauvignon.",
+    craftStory: "Grover Zampa ferments and ages Sauvignon Blanc for six months in French oak for this La Réserve expression. The barrel treatment brings vanilla and texture without erasing gooseberry and citrus.",
+    tastingNotes: { nose: "Mango, citrus, dry herbs, lime leaf, gooseberry and vanilla.", palate: "Creamy but fresh, with fruit, oak and underlying chalky minerality.", finish: "Long and linear, leaving citrus and soft wood." },
+    servingGuide: { glassware: "Medium-bowl white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool, not ice-cold, with roast chicken or rich fish." },
+    foodPairings: ["chicken malai tikka", "tandoori fish", "paneer in white gravy", "grilled prawns"],
+    whyBuyThis: "French oak adds texture to an Indian Sauvignon without losing its herbal lift.",
+    faqs: [{ question: "Why is it called Fumé Blanc?", answer: "It is Grover's oak-treated Sauvignon Blanc style within La Réserve." }, { question: "How long is it in oak?", answer: "The producer states six months of French-oak fermentation and ageing." }],
+    metaTitle: "Grover Fumé Blanc Price, Taste & Review | BevOry", metaDescription: "Grover Fumé Blanc brings mango, lime leaf and creamy French oak. Pair with malai tikka; check city prices on BevOry."
+  },
+  "grover-soiree-brut-53255b2": {
+    productName: "Grover Soirée Brut", category: "Indian Chenin Blanc Brut Sparkling Wine",
+    shortOverview: "Soirée Brut is a dry, fine-bubbled Chenin with lemon, pear and brioche. It is a more savoury aperitif than a sweet sparkling wine.",
+    craftStory: "Grover Zampa makes this Chenin Blanc sparkling wine with secondary fermentation in the bottle. Yeast contact contributes the toasted-bread and brioche notes that sit behind the fruit.",
+    tastingNotes: { nose: "Fresh lemon, white flowers, pear and toasted bread.", palate: "Light and creamy, with crisp acidity and persistent fine bubbles.", finish: "Long and dry, with brioche and dried apricot." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (about 6°C)", recommendation: "Open well chilled and pour with mildly spiced starters." },
+    foodPairings: ["hara bhara kebab", "tandoori prawns", "rava-fried fish", "chicken malai tikka"],
+    whyBuyThis: "Its Chenin freshness and yeast complexity give an Indian brut real aperitif range.",
+    faqs: [{ question: "Which grape is used?", answer: "Grover lists Chenin Blanc." }, { question: "Is Soirée Brut sweet?", answer: "The producer describes a dry brut finish." }],
+    metaTitle: "Grover Soirée Brut Price, Taste & Review | BevOry", metaDescription: "Grover Soirée Brut offers lemon, pear and brioche bubbles. Pair with hara bhara kebab; check city prices on BevOry."
+  },
+  "grover-soiree-rose-brut-69549de": {
+    productName: "Grover Soirée Brut Rosé", category: "Indian Shiraz Brut Rosé Sparkling Wine",
+    shortOverview: "Soirée Brut Rosé combines strawberry and red cherry with fine bubbles and a creamy first sip. It carries more berry character than the white Soirée Brut.",
+    craftStory: "Grover Zampa makes this pale-pink sparkling wine from Shiraz. The winery's traditional sparkling process creates fine effervescence and a subtle yeast note alongside the fruit.",
+    tastingNotes: { nose: "Red cherry, strawberry and a gentle yeast note.", palate: "Light and creamy at first, then fresh cherry and strawberry with good acidity.", finish: "Long and refreshing, leaving red berries." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (about 6°C)", recommendation: "Serve cold with lightly spiced chicken or a berry dessert." },
+    foodPairings: ["chicken malai tikka", "paneer tikka", "strawberry phirni", "tandoori prawns"],
+    whyBuyThis: "It brings Shiraz red-fruit flavour into a delicate Indian brut rosé.",
+    faqs: [{ question: "Is the rosé made from Shiraz?", answer: "Yes. Grover identifies Shiraz as the grape." }, { question: "Is it the same as Grover Art Shiraz Rosé?", answer: "No. Soirée Brut Rosé is sparkling; the Art Collection Shiraz Rosé is still." }],
+    metaTitle: "Grover Soirée Brut Rosé Price, Taste & Review | BevOry", metaDescription: "Grover Soirée Brut Rosé offers cherry, strawberry and fine bubbles. Pair with chicken tikka; check city prices on BevOry."
+  },
+  "yellow-tail-bubbles-sparkling-rose-wine-a90ae5a": {
+    productName: "Yellow Tail Bubbles Rosé", category: "Australian Sweet Sparkling Rosé Wine",
+    shortOverview: "Yellow Tail Bubbles Rosé is a sweet, strawberry-led sparkling wine with soft texture. It fits dessert or mild snacks better than a bone-dry seafood aperitif.",
+    craftStory: "The Casella family's Yellow Tail range is made in Australia. This pink bubbly is presented as a fruit-forward sparkling rosé; the producer does not tie every release to one declared grape blend or barrel regimen.",
+    tastingNotes: { nose: "Wild strawberry, red cherry, soft flowers and sweet musk.", palate: "Bubbly and creamy, with strawberry fruit and a hint of peach.", finish: "Medium, soft and berry-sweet." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Serve cold with a fruit dessert or lightly spiced starter; do not add ice." },
+    foodPairings: ["strawberry phirni", "fruit-and-cream tart", "paneer malai tikka", "mild chicken tikka"],
+    whyBuyThis: "It offers approachable strawberry bubbles for drinkers who prefer a sweeter rosé.",
+    faqs: [{ question: "Is Yellow Tail Bubbles Rosé dry?", answer: "No. The producer describes it as sweet and bubbly." }, { question: "Is it a still rosé?", answer: "No. It is sparkling, with fine bubbles." }],
+    metaTitle: "Yellow Tail Bubbles Rosé Price, Taste & Review | BevOry", metaDescription: "Yellow Tail Bubbles Rosé brings sweet strawberry and peach bubbles. Pair with strawberry phirni; check city prices on BevOry."
+  },
+  "yellow-tail-merlot-807cbed": {
+    productName: "Yellow Tail Merlot", category: "Australian Merlot Red Wine",
+    shortOverview: "Yellow Tail Merlot is a soft, plum-led Australian red with vanilla and mild spice. Its gentle tannins make it easier to approach than a heavily structured Cabernet.",
+    craftStory: "The Casella family makes Yellow Tail wines in Australia for a fruit-forward, accessible style. The producer's Merlot profile highlights ripe fruit and a light vanilla accent rather than a single vineyard or fixed barrel schedule.",
+    tastingNotes: { nose: "Ripe plum, mulberry, vanilla and fruitcake spice.", palate: "Soft and velvety, with dark plum, mulberry and subtle spice.", finish: "Medium and smooth, leaving plum and mild warmth." },
+    servingGuide: { glassware: "Medium-bowl red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve slightly cool with roast poultry or a mushroom main." },
+    foodPairings: ["tandoori chicken", "mushroom masala", "paneer tikka", "tomato pasta"],
+    whyBuyThis: "A soft red-fruit style for a low-fuss Indian dinner pairing.",
+    faqs: [{ question: "Is Yellow Tail Merlot tannic?", answer: "The producer describes a soft, velvety alternative to heavier red varieties." }, { question: "What fruit leads?", answer: "Plum and mulberry dominate its published tasting profile." }],
+    metaTitle: "Yellow Tail Merlot Price, Taste & Review | BevOry", metaDescription: "Yellow Tail Merlot brings plum, mulberry and vanilla to tandoori chicken. Check indicative city prices on BevOry."
+  },
+  "yellow-tail-pink-moscato-d1c8d6f": {
+    productName: "Yellow Tail Pink Moscato", category: "Australian Sweet Pink Moscato Wine",
+    shortOverview: "Yellow Tail Pink Moscato is light, sweet and gently fizzy, with strawberry and red apple. It belongs beside fruit dessert or chilli snacks rather than rich red meat.",
+    craftStory: "The Australian Yellow Tail range makes this pink Moscato as a low-alcohol, aromatic wine. Its light fizz and fruit come from the wine's sweet style, not oak maturation.",
+    tastingNotes: { nose: "Strawberry, pomegranate and soft musk.", palate: "Sweet and lightly fizzy, with ripe strawberry and red apple.", finish: "Short-to-medium, fresh and crisp after the fruit." },
+    servingGuide: { glassware: "White-wine or small sparkling-wine glass", idealTemperature: "Well chilled (6–8°C)", recommendation: "Serve cold in a small pour with dessert or spicy finger food." },
+    foodPairings: ["strawberry phirni", "fruit chaat", "chilli paneer", "rose-petal kulfi"],
+    whyBuyThis: "Its low-alcohol, strawberry-led style is a distinct alternative to dry wine.",
+    faqs: [{ question: "Is Pink Moscato dry?", answer: "No. Yellow Tail presents it as a sweet, lightly fizzy wine." }, { question: "Should it be chilled?", answer: "Yes. The producer recommends serving it well chilled." }],
+    metaTitle: "Yellow Tail Pink Moscato Price, Taste & Review | BevOry", metaDescription: "Yellow Tail Pink Moscato offers sweet strawberry, pomegranate and light fizz. Pair with fruit chaat; check city prices on BevOry."
+  },
+  "yellow-tail-shiraz-457b242": {
+    productName: "Yellow Tail Shiraz", category: "Australian Shiraz Red Wine",
+    shortOverview: "Yellow Tail Shiraz is a smooth, fruit-heavy red with cherry, plum and mocha spice. It is built for easy drinking rather than long cellar ageing.",
+    craftStory: "The Casella family produces this Shiraz in Australia within Yellow Tail's approachable wine range. The producer's published profile focuses on ripe red fruit and a vanilla-mocha accent, without specifying a fixed cask programme across releases.",
+    tastingNotes: { nose: "Red cherry, plum, vanilla, mocha and spice.", palate: "Rich and smooth, with juicy red berries and gentle vanilla.", finish: "Medium, with soft fruit and spice." },
+    servingGuide: { glassware: "Standard red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve with grilled or tandoori food; a brief chill helps in warm weather." },
+    foodPairings: ["tandoori chicken", "mutton seekh kebab", "lamb chops", "paneer tikka masala"],
+    whyBuyThis: "It offers familiar Australian Shiraz fruit without heavy tannic demands.",
+    faqs: [{ question: "Is Yellow Tail Shiraz a sweet wine?", answer: "It has ripe, sweet-seeming fruit notes, but the producer presents it as a table red rather than a dessert wine." }, { question: "What flavours stand out?", answer: "Cherry, plum, vanilla and mocha are prominent in the producer's notes." }],
+    metaTitle: "Yellow Tail Shiraz Price, Taste & Review | BevOry", metaDescription: "Yellow Tail Shiraz brings cherry, plum and mocha spice to tandoori chicken. Check indicative city prices on BevOry."
+  }
+};
