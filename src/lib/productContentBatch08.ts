@@ -1,0 +1,335 @@
+// Producer-checked editorial. Source ledger: docs/editorial/product-batch-08-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "absolut-vodka-elyx-1a71515": {
+    productName: "Absolut Elyx", category: "Single-Estate Swedish Wheat Vodka",
+    shortOverview: "Absolut Elyx is a richer, textural vodka than a neutral mixer. Fresh bread, nuts and white chocolate make it particularly suited to a dry Martini.",
+    craftStory: "Winter wheat comes from the Råbelöf estate in southern Sweden. Absolut distils Elyx in a manually operated copper column still dating to 1921 and bottles it at 42.3% ABV.",
+    tastingNotes: { nose: "Fresh bread, light cereal, white chocolate and soft spice.", palate: "Silky and full, with macadamia, creamy grain and a restrained peppery warmth.", finish: "Medium-long, smooth and nutty with mellow spice." },
+    servingGuide: { glassware: "Chilled Martini or small rocks glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Stir into a dry Martini or pour a small measure over one large cube; avoid burying its texture under sugary mixers." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "smoked almonds", "rava-fried fish"],
+    whyBuyThis: "Its estate-grown wheat and vintage copper distillation give a distinctly creamy, grain-led vodka.",
+    faqs: [{ question: "What grain makes Absolut Elyx?", answer: "Absolut uses winter wheat from the Råbelöf estate in southern Sweden." }, { question: "Is Elyx good for a Martini?", answer: "Yes. Its fuller mouthfeel and restrained spice remain perceptible in a dry Martini." }],
+    metaTitle: "Absolut Elyx Price, Taste & Review | BevOry", metaDescription: "Absolut Elyx tastes of bread, nuts and mild spice. Pair a chilled Martini with malai paneer tikka; check indicative city prices on BevOry."
+  },
+  "absolut-mandrin-b1bd4c1": {
+    productName: "Absolut Mandrin", category: "Mandarin-Flavoured Swedish Vodka",
+    shortOverview: "Mandrin brings the sweet peel and juicy centre of a mandarin to vodka without turning it into an orange liqueur. It is a bright choice for a simple soda highball.",
+    craftStory: "Absolut makes and bottles this naturally flavoured vodka in Åhus, southern Sweden. Mandarin and tangerine character is added to the brand's wheat-based vodka; the producer lists 40% ABV.",
+    tastingNotes: { nose: "Freshly peeled mandarin and sweet orange zest.", palate: "Rounded and juicy, with tangerine fruit, a creamy feel and a little spice.", finish: "Medium, with citrus peel and gentle warmth." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Cold, over ice (6–8°C)", recommendation: "Top with soda and a squeeze of lime, or use ginger beer for a citrus-led Mule." },
+    foodPairings: ["chilli paneer", "orange-glazed chicken tikka", "masala peanuts", "cucumber chaat"],
+    whyBuyThis: "Its mandarin aroma is clear enough to carry a two-ingredient highball.",
+    faqs: [{ question: "Where is Absolut Mandrin made?", answer: "The producer makes and bottles it in Åhus, Sweden." }, { question: "Is it an orange liqueur?", answer: "No. It is a mandarin-flavoured vodka, not a liqueur." }],
+    metaTitle: "Absolut Mandrin Price, Taste & Review | BevOry", metaDescription: "Absolut Mandrin offers juicy mandarin and orange zest. Try it with chilli paneer and soda; check indicative city prices on BevOry."
+  },
+  "absolut-peppar-0b3f5f4": {
+    productName: "Absolut Peppar", category: "Pepper-Flavoured Swedish Vodka",
+    shortOverview: "Absolut Peppar is deliberately savoury: cracked black-pepper warmth sits over a clean vodka base. It is most at home in a Bloody Mary rather than a sweet fruit cocktail.",
+    craftStory: "Absolut launched Peppar in 1986 as its first flavoured vodka, designed for bartenders making Bloody Marys. It is made with natural flavour in Åhus, Sweden.",
+    tastingNotes: { nose: "Freshly ground black pepper and a faint grain note.", palate: "Clean, medium-bodied vodka followed by aromatic pepper warmth.", finish: "Medium and dry, with pepper lingering rather than sugar." },
+    servingGuide: { glassware: "Tall highball glass", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Build a Bloody Mary with tomato juice, lemon and a modest pinch of chaat masala; taste before adding extra pepper." },
+    foodPairings: ["masala omelette", "tandoori mushrooms", "chicken seekh kebab", "spiced tomato bruschetta"],
+    whyBuyThis: "The built-in pepper character makes a savoury tomato cocktail easier to balance.",
+    faqs: [{ question: "Why was Absolut Peppar created?", answer: "Absolut created it for the pepper-forward Bloody Mary." }, { question: "Is Peppar sweet?", answer: "No. Its defining impression is aromatic black-pepper warmth." }],
+    metaTitle: "Absolut Peppar Price, Taste & Review | BevOry", metaDescription: "Absolut Peppar brings cracked-pepper warmth to a Bloody Mary. Pair with masala omelette; check indicative city prices on BevOry."
+  },
+  "bacardi-white-imp-rum-1ad77be": {
+    productName: "Bacardí Superior", category: "Charcoal-Filtered White Rum",
+    shortOverview: "Bacardí Superior is a light white rum built to leave room for lime, mint and sugar in a Mojito. Almond and soft vanilla distinguish it from a completely neutral spirit.",
+    craftStory: "Don Facundo Bacardí Massó introduced the rum in 1862. The producer ages it in American white-oak barrels before charcoal filtration creates its clear, light-bodied style.",
+    tastingNotes: { nose: "Almond, light fruit and a hint of lime.", palate: "Smooth and creamy with delicate vanilla and citrus.", finish: "Short, dry and crisp." },
+    servingGuide: { glassware: "Highball or chilled coupe", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Use 45 ml in a Mojito with fresh pudina (mint), lime, soda and restrained sugar, or shake a classic Daiquiri." },
+    foodPairings: ["rava-fried fish", "tandoori prawns", "coconut chicken sukka", "green chutney paneer tikka"],
+    whyBuyThis: "Its dry, subtle profile keeps a Mojito bright without masking fresh mint or lime.",
+    faqs: [{ question: "Is Bacardí Superior aged?", answer: "Yes. Bacardí says it is aged in American white oak and charcoal-filtered." }, { question: "Which cocktail suits it best?", answer: "A Mojito or Daiquiri shows its light rum character without heavy mixers." }],
+    metaTitle: "Bacardí Superior Price, Taste & Review | BevOry", metaDescription: "Bacardí Superior has almond, lime and a dry finish. Mix a Mojito with pudina; check indicative city prices on BevOry."
+  },
+  "bacardi-limon-citrus-9f5fd76": {
+    productName: "Bacardí Limón", category: "Citrus-Flavoured White Rum",
+    shortOverview: "Limón is Bacardí's three-citrus rum, not simply a lemon spirit. Lime and grapefruit sharpen its lemon-led flavour in long drinks.",
+    craftStory: "Bacardí's white-rum base comes from fermented sugarcane molasses. The Limón expression adds lemon, lime and grapefruit flavours to that light rum foundation.",
+    tastingNotes: { nose: "Lemon peel, lime zest and a grapefruit edge.", palate: "Light and citrus-forward, with lemon sweetness checked by tart lime.", finish: "Short to medium, clean and grapefruit-tinged." },
+    servingGuide: { glassware: "Highball glass", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Mix 45 ml with soda or lemonade and garnish with fresh nimbu (lime); keep the mixer unsweetened if you prefer a sharper drink." },
+    foodPairings: ["fish Amritsari", "malai paneer tikka", "tandoori prawns", "corn chaat with nimbu"],
+    whyBuyThis: "The three-citrus profile supplies both fragrance and tang to an easy rum highball.",
+    faqs: [{ question: "Which fruits flavour Bacardí Limón?", answer: "Bacardí names lemon, lime and grapefruit." }, { question: "Is Limón a white rum?", answer: "It is a flavoured rum built on Bacardí's light white-rum style." }],
+    metaTitle: "Bacardí Limón Price, Taste & Review | BevOry", metaDescription: "Bacardí Limón blends lemon, lime and grapefruit. Serve with soda beside fish Amritsari; check indicative city prices on BevOry."
+  },
+  "bombay-sapphire-london-dry-c6d91ae": {
+    productName: "Bombay Sapphire", category: "Vapour-Infused London Dry Gin",
+    shortOverview: "Bombay Sapphire balances juniper with citrus and spice in a clean London Dry style. Its lifted botanicals suit a crisp gin and tonic rather than a sweet mixer.",
+    craftStory: "The producer vapour-infuses ten botanicals, including juniper, citrus peel and coriander, rather than boiling them directly in the spirit. This method gives the gin its light, aromatic profile.",
+    tastingNotes: { nose: "Juniper, lemon peel and coriander seed.", palate: "Light and dry, with bright citrus, pine and gentle spice.", finish: "Medium and clean, leaving citrus and juniper." },
+    servingGuide: { glassware: "Large balloon or highball glass", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Pour with chilled tonic, plenty of ice and one fresh lime wedge; avoid excessive garnish." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "malai paneer tikka", "coastal rava-fried fish"],
+    whyBuyThis: "Vapour infusion gives it a lighter botanical balance than a heavy, resinous gin.",
+    faqs: [{ question: "How is Bombay Sapphire flavoured?", answer: "Its botanicals are vapour-infused during distillation." }, { question: "Is Bombay Sapphire sweet?", answer: "No. It is a dry gin; tonic or other mixers determine the sweetness of a serve." }],
+    metaTitle: "Bombay Sapphire Price, Taste & Review | BevOry", metaDescription: "Bombay Sapphire shows juniper, citrus and coriander. Pair a dry G&T with tandoori prawns; check indicative city prices on BevOry."
+  },
+  "bombay-sapphire-premier-cru-murcian-lemon-7a2f406": {
+    productName: "Bombay Premier Cru", category: "Murcian-Citrus Small-Batch Gin",
+    shortOverview: "Premier Cru Murcian Lemon shifts Bombay Sapphire's balance towards vivid lemon oil. Mandarin and Navel orange give the citrus a sweeter middle.",
+    craftStory: "The distiller sources Fino lemons, mandarins and Navel oranges from Murcia in southeast Spain. Farmers hand-pick and dry the peels, while the master distiller selects the cut for each small batch.",
+    tastingNotes: { nose: "Fresh lemon peel, mandarin and restrained juniper.", palate: "Smooth and citrus-led, with sweet orange around a bright lemon core.", finish: "Medium-long, clean and gently peppery." },
+    servingGuide: { glassware: "Balloon glass or chilled coupe", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Use in a dry gin and tonic with lemon peel, or a French 75 where the citrus can stay prominent." },
+    foodPairings: ["coastal rava-fried fish", "tandoori prawns", "cucumber chaat", "lemon-pepper paneer tikka"],
+    whyBuyThis: "It showcases a specific Murcian citrus harvest rather than generic lemon flavour.",
+    faqs: [{ question: "Which citrus fruits are used?", answer: "Bombay names Murcian Fino lemon, mandarin and sweet Navel orange." }, { question: "Is this the regular Bombay Sapphire?", answer: "No. Premier Cru is a citrus-led small-batch expression." }],
+    metaTitle: "Bombay Premier Cru Price, Taste & Review | BevOry", metaDescription: "Bombay Premier Cru centres Murcian lemon, mandarin and orange. Pair a citrus G&T with prawns; check city prices on BevOry."
+  },
+  "bombay-bramble-bombay-bramble-831a898": {
+    productName: "Bombay Bramble", category: "Blackberry-Raspberry Gin",
+    shortOverview: "Bramble adds dark-berry colour and aroma to gin without added sugar. It remains fresh enough for tonic and lemon rather than needing a sweet fruit syrup.",
+    craftStory: "Bombay builds the expression on its gin and infuses natural blackberry and raspberry fruit flavour. The producer specifically says there is no added sugar or artificial flavour.",
+    tastingNotes: { nose: "Blackberry, raspberry and a faint juniper lift.", palate: "Juicy berry fruit over dry gin botanicals, with a tart edge rather than syrupy sweetness.", finish: "Medium, leaving berries and lemony freshness." },
+    servingGuide: { glassware: "Large highball glass", idealTemperature: "Cold, over ice (5–8°C)", recommendation: "Top with tonic and squeeze in fresh lemon, as the producer suggests; add berries only if in season." },
+    foodPairings: ["chilli paneer", "beetroot chaat", "tandoori chicken", "dark-chocolate tart"],
+    whyBuyThis: "Real berry infusion gives colour and fruit while retaining a dry gin finish.",
+    faqs: [{ question: "Is Bombay Bramble sweetened?", answer: "Bombay states that no sugar is added." }, { question: "Which berries flavour it?", answer: "Blackberries and raspberries provide the fruit character." }],
+    metaTitle: "Bombay Bramble Price, Taste & Review | BevOry", metaDescription: "Bombay Bramble brings blackberry and raspberry without added sugar. Try with tonic and chilli paneer; check city prices on BevOry."
+  },
+  "jagermeister-manifest-8761357": {
+    productName: "Jägermeister Manifest", category: "German Herbal Liqueur",
+    shortOverview: "Manifest is the more layered, slower-sipping member of the Jägermeister family. Herbal warmth and oak sit behind a richer sweetness than the original's ice-cold shot profile.",
+    craftStory: "Jägermeister composes Manifest from five macerates and gives it an extended, complex maturation. It draws on the house's herbal-liqueur tradition in Wolfenbüttel, Germany.",
+    tastingNotes: { nose: "Dried herbs, orange peel and warm spice.", palate: "Dense and rounded, with herbal bitterness balanced by dark sweetness and oak.", finish: "Long, warming and spice-led." },
+    servingGuide: { glassware: "Small tulip or rocks glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Sip a small pour neat, then try a single large cube if you want to soften the herbal edge." },
+    foodPairings: ["70% dark chocolate", "mutton seekh kebab", "spiced walnut cake", "galouti kebab"],
+    whyBuyThis: "Five macerates and longer maturation give the herbal formula a more contemplative texture.",
+    faqs: [{ question: "How does Manifest differ from original Jägermeister?", answer: "Jägermeister describes Manifest as a five-macerate, more complex expression." }, { question: "Should Manifest be taken as a frozen shot?", answer: "A neat, cool-room-temperature pour better reveals its layered herbal profile." }],
+    metaTitle: "Jägermeister Manifest Price, Taste & Review | BevOry", metaDescription: "Jägermeister Manifest brings layered herbs, spice and oak. Sip beside dark chocolate; check indicative city prices on BevOry."
+  },
+  "jagermeister-jager-cold-brew-3af3460": {
+    productName: "Jäger Cold Brew", category: "Coffee-Flavoured German Herbal Liqueur",
+    shortOverview: "Jäger Cold Brew combines the original's herb-and-spice core with roasted coffee and cacao. It is a dessert-side pour rather than a replacement for brewed coffee.",
+    craftStory: "Jägermeister blends its original herbal liqueur with arabica coffee and a hint of cacao. The parent liqueur derives its character from 56 herbs, roots and spices and oak maturation.",
+    tastingNotes: { nose: "Roasted coffee, cacao and aromatic herbs.", palate: "Rich and sweet, with coffee upfront and herbal spice underneath.", finish: "Medium, leaving cocoa and a gently bitter coffee note." },
+    servingGuide: { glassware: "Small chilled rocks glass", idealTemperature: "Chilled (4–7°C)", recommendation: "Serve a small chilled pour with dessert; shake with cold espresso for a more coffee-forward drink." },
+    foodPairings: ["coffee kulfi", "70% dark chocolate", "tiramisu", "walnut brownie"],
+    whyBuyThis: "Coffee and cacao give the familiar herbal base a clear after-dinner direction.",
+    faqs: [{ question: "Does Jäger Cold Brew contain coffee?", answer: "Yes. The producer names arabica coffee and cacao." }, { question: "Is it the original Jägermeister?", answer: "No. It uses the original herbal liqueur as the base for a coffee expression." }],
+    metaTitle: "Jäger Cold Brew Price, Taste & Review | BevOry", metaDescription: "Jäger Cold Brew layers arabica coffee, cacao and herbs. Pair a chilled pour with coffee kulfi; check city prices on BevOry."
+  },
+  "sula-riesling-d41d93a": {
+    productName: "Sula Riesling", category: "Off-Dry Indian Riesling White Wine",
+    shortOverview: "Sula Riesling puts lemon and grapefruit freshness beside a gentle honeyed sweetness. The light, off-dry style handles chilli better than a heavily oaked white.",
+    craftStory: "Sula grows Riesling in its Nashik Valley wine programme and presents this as a Kabinett-style, approachable white. The producer describes it as India's first Riesling; fruit and acidity, not barrel flavour, lead the wine.",
+    tastingNotes: { nose: "Lemon, grapefruit and a touch of honey.", palate: "Light and off-dry, with citrus fruit and fresh acidity.", finish: "Medium, leaving citrus and a mild honeyed edge." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with spicy starters; do not over-chill until the fruit disappears." },
+    foodPairings: ["chilli chicken", "tandoori chicken", "vegetable spring rolls", "paneer tikka with green chutney"],
+    whyBuyThis: "A touch of sweetness makes its citrusy Riesling character easy to pair with Indian spice.",
+    faqs: [{ question: "Is Sula Riesling bone dry?", answer: "No. Sula describes an off-dry, Kabinett-style wine." }, { question: "Should it be served chilled?", answer: "Yes. Around 8–10°C keeps the citrus and sweetness balanced." }],
+    metaTitle: "Sula Riesling Price, Taste & Review | BevOry", metaDescription: "Sula Riesling offers lemon, grapefruit and gentle sweetness. Try with chilli chicken; check indicative city prices on BevOry."
+  },
+  "sula-red-zinfandel-0f4691a": {
+    productName: "Sula Zinfandel Red", category: "Indian Zinfandel Red Wine",
+    shortOverview: "Sula's red Zinfandel is fruit-forward without the weight of a dense reserve wine. Blackberry, plum and cinnamon sit beside a soft smoky edge.",
+    craftStory: "Sula makes this Nashik red from Zinfandel grapes. Producer material differs by vintage on whether a small share sees American oak, so the defining character is its ripe fruit rather than a fixed oak programme.",
+    tastingNotes: { nose: "Blackberry, red berries, plum and cinnamon.", palate: "Medium-bodied and juicy, with plum fruit, soft tannin and gentle spice.", finish: "Medium, with berry fruit and a faint smoky note." },
+    servingGuide: { glassware: "Medium red-wine glass", idealTemperature: "Slightly cool (16–18°C)", recommendation: "Serve just below warm room temperature with a medium-spiced curry." },
+    foodPairings: ["paneer makhani", "tandoori chicken", "lamb kebab", "spicy hakka noodles"],
+    whyBuyThis: "Its ripe Zinfandel fruit accommodates spice without heavy tannin.",
+    faqs: [{ question: "Is this the same as Sula Zinfandel Rosé?", answer: "No. This is the still red expression, with more body and dark fruit." }, { question: "Does every vintage have the same oak treatment?", answer: "Producer documents vary by vintage; check the bottle's release information." }],
+    metaTitle: "Sula Zinfandel Red Price, Taste & Review | BevOry", metaDescription: "Sula Zinfandel Red brings blackberry, plum and cinnamon. Pair with paneer makhani; check indicative city prices on BevOry."
+  },
+  "sula-satori-tempranillo-5168d64": {
+    productName: "Sula Satori", category: "Indian Tempranillo-Zinfandel Red Wine",
+    shortOverview: "Satori is a soft, fruit-led red built for everyday Indian meals. Cherry and plum give it more immediate appeal than a tannic, cellar-focused bottle.",
+    craftStory: "Sula's current portfolio identifies a Tempranillo-and-Zinfandel blend from its Nashik programme. The painted label refers to the Zen term Satori, while the wine focuses on ripe fruit rather than an asserted barrel regime.",
+    tastingNotes: { nose: "Ripe cherry, plum, red berries and mild spice.", palate: "Medium-bodied and smooth, with cherry-plum fruit and supple tannin.", finish: "Medium, leaving red berries and light spice." },
+    servingGuide: { glassware: "Medium red-wine glass", idealTemperature: "Slightly cool (16–18°C)", recommendation: "Pour with a spiced main; 10 minutes in the glass is usually enough for this accessible style." },
+    foodPairings: ["paneer tikka masala", "vegetable tagine", "mutton seekh kebab", "rajma masala"],
+    whyBuyThis: "Its Tempranillo-Zinfandel blend keeps a red-wine dinner supple and fruit-forward.",
+    faqs: [{ question: "Is Satori pure Tempranillo?", answer: "No. Sula lists Tempranillo blended with Zinfandel." }, { question: "Is Satori a heavy red?", answer: "It is presented as an easy-drinking, medium-bodied red." }],
+    metaTitle: "Sula Satori Price, Taste & Review | BevOry", metaDescription: "Sula Satori combines cherry, plum and soft spice. Pair with paneer tikka masala; check indicative city prices on BevOry."
+  },
+  "sula-seco-classique-c89562f": {
+    productName: "Sula Seco", category: "Indian Chenin Blanc Sparkling Wine",
+    shortOverview: "Seco is Sula's fruit-first sparkling Chenin Blanc, with melon and passion fruit over a citrus finish. It makes sense with pakoras or other salty snacks.",
+    craftStory: "Sula makes Seco from Chenin Blanc in its Nashik wine programme. The producer positions it as a lively, accessible sparkler rather than a lees-heavy traditional-method brut.",
+    tastingNotes: { nose: "Citrus peel and ripe orchard fruit.", palate: "Light and gently sweet, with melon, passion fruit and lively bubbles.", finish: "Medium, citrusy and refreshing." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Well chilled (6–8°C)", recommendation: "Chill thoroughly, open gently and pour beside hot fried snacks." },
+    foodPairings: ["onion pakora", "hara bhara kebab", "vegetable frittata", "mild yellow chicken curry"],
+    whyBuyThis: "Chenin fruit and citrus make an uncomplicated Indian sparkling-wine aperitif.",
+    faqs: [{ question: "Which grape is in Sula Seco?", answer: "Sula lists 100% Chenin Blanc." }, { question: "Is Seco the same style as Sula Brut?", answer: "No. Seco is the softer, fruitier expression; Brut is drier." }],
+    metaTitle: "Sula Seco Price, Taste & Review | BevOry", metaDescription: "Sula Seco brings Chenin bubbles, melon and a citrus finish. Pair with pakoras; check indicative city prices on BevOry."
+  },
+  "sula-sparkling-shiraz-cremant-2d7bf3c": {
+    productName: "Sula Sparkling Shiraz", category: "Indian Sparkling Shiraz Red Wine",
+    shortOverview: "This is a red wine with bubbles, not a pink brut. Dark berries, pomegranate and spice give it enough weight for dabeli or mutton rahra.",
+    craftStory: "Sula makes its Sparkling Shiraz from Shiraz grapes in the Nashik Valley. The producer describes a fruit-forward, Prosecco-style sparkling method rather than the oak focus of its Dindori reserve red.",
+    tastingNotes: { nose: "Dark berries, pomegranate and a touch of smoke.", palate: "Juicy and lightly sparkling, with berry fruit and soft spice.", finish: "Medium, leaving dark fruit and a peppery edge." },
+    servingGuide: { glassware: "Large tulip sparkling-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool, not warm, with a savoury snack; pour gently to hold the mousse." },
+    foodPairings: ["dabeli", "mutton rahra", "chilli chicken", "70% dark chocolate"],
+    whyBuyThis: "It combines the dark-fruit character of Shiraz with a celebratory sparkle.",
+    faqs: [{ question: "Is Sula Sparkling Shiraz a rosé?", answer: "No. It is a sparkling red made from Shiraz." }, { question: "Should it be chilled?", answer: "Yes. Around 8–10°C keeps its fruit and bubbles lively." }],
+    metaTitle: "Sula Sparkling Shiraz Price, Taste & Review | BevOry", metaDescription: "Sula Sparkling Shiraz offers berry, pomegranate and spice with bubbles. Pair with dabeli; check city prices on BevOry."
+  },
+  "grover-riesling-white-7220012": {
+    productName: "Grover Riesling", category: "Indian Art Collection Riesling White Wine",
+    shortOverview: "Grover's Art Collection Riesling is dry and brisk, not a sugary dessert white. Peach, pear and lime blossom meet a flinty mineral impression.",
+    craftStory: "Grover Zampa uses Riesling for this Indian Art Collection wine and ages it in concrete tanks. The producer links that handling with its fruit, floral and mineral profile, without claiming barrel flavour.",
+    tastingNotes: { nose: "Peach, pear, lime blossom and flinty mineral notes.", palate: "Dry and mellow-textured, with tropical fruit and refreshing acidity.", finish: "Medium, crisp and lightly mineral." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve chilled with a lightly spiced coastal dish or vegetables." },
+    foodPairings: ["rava-fried basa", "tandoori prawns", "baingan bharta", "bell-pepper pakora"],
+    whyBuyThis: "Concrete-tank handling preserves a dry, floral Riesling with clear acidity.",
+    faqs: [{ question: "Is Grover Riesling sweet?", answer: "The producer calls its Art Collection Riesling dry." }, { question: "Is it oak-aged?", answer: "Grover identifies concrete tanks, not oak barrels, for this wine." }],
+    metaTitle: "Grover Riesling Price, Taste & Review | BevOry", metaDescription: "Grover Riesling is dry, with peach, pear and lime blossom. Pair with rava-fried fish; check city prices on BevOry."
+  },
+  "grover-auriga-58c1c0f": {
+    productName: "Grover Auriga", category: "Indian Chenin Blanc Brut Sparkling Wine",
+    shortOverview: "Auriga is a ceremonial Chenin Blanc brut with citrus, flowers and a creamy middle. Brioche and dried apricot make the finish more layered than a simple fruit sparkler.",
+    craftStory: "Grover Zampa names Auriga after the charioteer constellation and makes its Celestial Brut from Chenin Blanc. The sparkling wine is presented with a decorative dusting of gold for celebratory service.",
+    tastingNotes: { nose: "Citrus and white flowers.", palate: "Intense fruit with creamy texture and fine bubbles.", finish: "Long and refreshing, with brioche and dried apricot." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Well chilled (6°C)", recommendation: "Chill upright and pour slowly; a small first pour keeps the bubbles in the glass." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "smoked salmon", "pistachio kulfi"],
+    whyBuyThis: "Its Chenin fruit and brioche finish suit both a toast and a light meal.",
+    faqs: [{ question: "Which grape makes Auriga?", answer: "Grover lists Chenin Blanc." }, { question: "Does Auriga have a gold decoration?", answer: "The producer presents Celestial Brut with a decorative dusting of gold." }],
+    metaTitle: "Grover Auriga Price, Taste & Review | BevOry", metaDescription: "Grover Auriga offers citrus, creamy bubbles and brioche. Pair with malai paneer tikka; check indicative city prices on BevOry."
+  },
+  "grover-sante-chenin-c11d981": {
+    productName: "Grover Santé Chenin", category: "Indian Off-Dry Chenin Blanc White Wine",
+    shortOverview: "Santé Chenin is a floral, gently sweet white designed for light food and casual pours. Its freshness keeps the sweetness from feeling heavy.",
+    craftStory: "Grover Zampa makes Santé White from Chenin Blanc and places a Mario Miranda cartoon on the label. The producer positions it as an aperitif wine rather than an oak-aged reserve.",
+    tastingNotes: { nose: "White flowers and soft orchard fruit.", palate: "Fresh and lively, with gentle sweetness and fruit.", finish: "Short to medium, floral and clean." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with a light starter, especially one with mild chilli." },
+    foodPairings: ["malai paneer tikka", "coastal fried fish", "vegetable spring rolls", "tandoori prawns"],
+    whyBuyThis: "Its floral Chenin fruit makes an approachable partner for lightly spiced starters.",
+    faqs: [{ question: "Is Santé White made from Chenin Blanc?", answer: "Yes. Grover lists Chenin Blanc for Santé White." }, { question: "Is it completely dry?", answer: "No. The producer notes a hint of sweetness." }],
+    metaTitle: "Grover Santé Chenin Price, Taste & Review | BevOry", metaDescription: "Grover Santé Chenin is floral, fresh and gently sweet. Try with malai paneer tikka; check indicative city prices on BevOry."
+  },
+  "grover-sante-shiraz-red-wine-gold-71fcaba": {
+    productName: "Grover Santé Shiraz", category: "Indian Shiraz Red Wine",
+    shortOverview: "Santé Shiraz is a soft, peppery red for spiced food rather than long cellaring. Blackberry fruit sits above a smooth, short finish.",
+    craftStory: "Grover Zampa makes Santé Red from Shiraz and uses a Mario Miranda illustration on the label. The producer describes an aperitif-friendly, fruit-led wine; no specific oak treatment is claimed.",
+    tastingNotes: { nose: "Blackberries and black pepper.", palate: "Soft red fruit and spice in a light-to-medium frame.", finish: "Short to medium, smooth and peppery." },
+    servingGuide: { glassware: "Medium red-wine glass", idealTemperature: "Slightly cool (16–18°C)", recommendation: "Serve with a medium-spiced curry; a warm room can make the alcohol feel harder." },
+    foodPairings: ["rajma masala", "mutton seekh kebab", "paneer tikka masala", "tandoori chicken"],
+    whyBuyThis: "Its soft Shiraz texture works with weekday curries without demanding a heavy roast.",
+    faqs: [{ question: "What grape is in Santé Red?", answer: "Grover identifies Shiraz." }, { question: "Is it intended for long ageing?", answer: "Grover presents it as a fresh, accessible wine for current drinking." }],
+    metaTitle: "Grover Santé Shiraz Price, Taste & Review | BevOry", metaDescription: "Grover Santé Shiraz offers blackberry and pepper with a soft finish. Pair with rajma; check indicative city prices on BevOry."
+  },
+  "grover-one-tree-hill-mulled-kadha-ba0239e": {
+    productName: "One Tree Hill Mulled Kadha", category: "Indian Spiced Mulled Shiraz Wine",
+    shortOverview: "Mulled Kadha is a ready-spiced Shiraz wine meant to be warmed, not served like a still dinner red. Ginger, tulsi and whole spices give it a recognisably Indian winter character.",
+    craftStory: "Grover Zampa builds the wine on Shiraz and lists star anise, fennel, cumin, orange peel, turmeric, cinnamon, cloves, tulsi, ginger, cardamom and lemon among its flavourings. It belongs to the One Tree Hill range from the Sahyadri Valley.",
+    tastingNotes: { nose: "Cinnamon, clove, orange peel and ginger.", palate: "Warm and spiced, with red-wine fruit beneath tulsi and cardamom.", finish: "Medium, leaving sweet spice and citrus peel." },
+    servingGuide: { glassware: "Heat-safe mug", idealTemperature: "Warm (40–60°C)", recommendation: "Heat gently within the producer's range; do not boil away the wine's aroma." },
+    foodPairings: ["gajar ka halwa", "roasted makhana", "spiced walnut cake", "tandoori mushroom skewers"],
+    whyBuyThis: "The pre-blended kadha spices remove the need to steep a mulled wine from scratch.",
+    faqs: [{ question: "Should Mulled Kadha be served cold?", answer: "No. Grover recommends warming it to 40–60°C." }, { question: "Which grape is used?", answer: "The producer names Shiraz." }],
+    metaTitle: "One Tree Hill Mulled Kadha Price, Taste & Review | BevOry", metaDescription: "One Tree Hill Mulled Kadha warms Shiraz with ginger, tulsi and spices. Pair with gajar halwa; check city prices on BevOry."
+  },
+  "grover-raya-red-2b5f035": {
+    productName: "Grover Raya Red", category: "Sahyadri Valley Shiraz Red Wine",
+    shortOverview: "Raya Red is a full-bodied Shiraz with red berries and dry herbs. Its polished tannins make it a better match for grilled kebabs than a very sweet snack.",
+    craftStory: "Grover Zampa grows the Shiraz for Raya in Maharashtra's Sahyadri Valley. The producer describes the wine as deep crimson and does not specify a barrel regime for this expression.",
+    tastingNotes: { nose: "Red berries and dried herbs.", palate: "Full-bodied and dry, with berry fruit and finely polished tannins.", finish: "Medium-long, herbal and red-fruited." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour beside grilled meat or mushrooms; a little air helps its tannins settle." },
+    foodPairings: ["mutton seekh kebab", "lamb chops", "tandoori mushrooms", "paneer tikka masala"],
+    whyBuyThis: "Sahyadri-grown Shiraz offers a full red with tannins that remain polished at the table.",
+    faqs: [{ question: "Which grape makes Raya Red?", answer: "Grover lists Shiraz." }, { question: "Where is Raya made?", answer: "The producer places its vineyards in Maharashtra's Sahyadri Valley." }],
+    metaTitle: "Grover Raya Red Price, Taste & Review | BevOry", metaDescription: "Grover Raya Red brings Sahyadri Shiraz berries, herbs and polished tannin. Pair with seekh kebab; check city prices on BevOry."
+  },
+  "grover-one-tree-hill-white-db4b071": {
+    productName: "One Tree Hill White", category: "Indian Sauvignon-Chenin-Viognier White Wine",
+    shortOverview: "One Tree Hill White brings tropical fruit and lemon-lime crispness into one easy-drinking blend. It is particularly useful beside creamy paneer or mildly spiced curry.",
+    craftStory: "Grover Zampa blends Sauvignon Blanc, Chenin Blanc and Viognier from its Sanjegaon vineyards in the Sahyadri Valley. The nearby solitary mango tree gives the range its name.",
+    tastingNotes: { nose: "Pineapple, guava, lemon and lime.", palate: "Fresh and fruit-led, with good acidity and tropical notes.", finish: "Medium, citrusy and clean." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Chill before dinner and pour with a gently spiced starter or paneer main." },
+    foodPairings: ["malai paneer tikka", "butter-garlic prawns", "vegetable korma", "cucumber chaat"],
+    whyBuyThis: "Three complementary white grapes give tropical fruit without losing Sauvignon freshness.",
+    faqs: [{ question: "Which grapes are in One Tree Hill White?", answer: "Grover lists Sauvignon Blanc, Chenin Blanc and Viognier." }, { question: "Is it a dessert wine?", answer: "No. It is a fresh table white for starters and mild curries." }],
+    metaTitle: "One Tree Hill White Price, Taste & Review | BevOry", metaDescription: "One Tree Hill White blends guava, pineapple and citrus. Pair with malai paneer tikka; check city prices on BevOry."
+  },
+  "grover-vijay-amritraj-reserve-collection-red-c79144b": {
+    productName: "Grover VA Reserve Red", category: "French-Oak-Aged Indian Red Blend",
+    shortOverview: "Vijay Amritraj Reserve Red is a structured, dark-fruited blend with pepper and violets. It calls for a richer dinner than Grover's softer Santé red.",
+    craftStory: "Grover Zampa created the reserve collection with tennis player Vijay Amritraj. Shiraz, Cabernet Sauvignon and Viognier are blended, with fine-grain French oak adding shape to the blackberry and blackcurrant fruit.",
+    tastingNotes: { nose: "Blackberry jam, blackcurrant, violet and pepper.", palate: "Rich and supple, with dark fruit, spice and integrated oak.", finish: "Long, with black fruit and a quiet pepper note." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Allow a young bottle 20 minutes of air and serve with a slow-cooked main." },
+    foodPairings: ["mutton rogan josh", "galouti kebab", "lamb chops", "tandoori mushrooms"],
+    whyBuyThis: "Viognier adds perfume to a French-oak-shaped Shiraz-Cabernet blend.",
+    faqs: [{ question: "Which grapes make VA Reserve Red?", answer: "Grover lists Shiraz, Cabernet Sauvignon and Viognier." }, { question: "Does the red use oak?", answer: "The producer describes fine-grain French oak integration." }],
+    metaTitle: "Grover VA Reserve Red Price, Taste & Review | BevOry", metaDescription: "Grover VA Reserve Red brings blackberry, violet and French-oak spice. Pair with rogan josh; check city prices on BevOry."
+  },
+  "grover-vijay-amritraj-white-58822ed": {
+    productName: "Grover VA Reserve White", category: "Barrel-Fermented Indian Viognier Wine",
+    shortOverview: "This Reserve White is a fuller Viognier, not a sharp Sauvignon-style white. Peach, dried apricot and a hint of vanilla make it comfortable beside coastal Indian food.",
+    craftStory: "Grover Zampa's Vijay Amritraj collection uses barrel-fermented Viognier for the white. French-oak integration adds vanilla around its floral and stone-fruit character.",
+    tastingNotes: { nose: "Peach, honey, dried apricot, flowers and a little vanilla.", palate: "Rich and textured, with stone fruit and a gentle oak accent.", finish: "Long and fruit-led, with apricot lingering." },
+    servingGuide: { glassware: "Medium-bowl white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool but not icy, so the peach and oak remain discernible." },
+    foodPairings: ["coastal rava-fried fish", "butter-garlic prawns", "malai paneer tikka", "Goan fish curry"],
+    whyBuyThis: "Barrel fermentation gives Indian Viognier a richer texture for seafood and creamy dishes.",
+    faqs: [{ question: "Which grape is used?", answer: "Grover identifies Viognier." }, { question: "Is the wine barrel fermented?", answer: "Yes. The producer specifies barrel fermentation and French-oak influence." }],
+    metaTitle: "Grover VA Reserve White Price, Taste & Review | BevOry", metaDescription: "Grover VA Reserve White offers peach, apricot and gentle French oak. Pair with coastal fish; check city prices on BevOry."
+  },
+  "grover-soiree-brut-methode-tradition-080d016": {
+    productName: "Grover Soirée Brut", category: "Traditional-Method Indian Chenin Blanc Sparkling Wine",
+    shortOverview: "Soirée Brut is a dry, fine-bubbled Chenin Blanc with lemon, pear and a little toasted bread. Its clean acidity suits an aperitif or a mildly spiced dinner.",
+    craftStory: "Grover Zampa makes the Chenin Blanc base wine, then carries out secondary fermentation in bottle with yeast and sugar. The producer describes a dry brut style with fine mousse.",
+    tastingNotes: { nose: "Lemon, pear, white flowers and toasted bread.", palate: "Light and creamy, with crisp acidity and fine persistent bubbles.", finish: "Medium-long and dry, leaving lemon and brioche." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Well chilled (6°C)", recommendation: "Open carefully and pour in two stages to retain the fine bubbles." },
+    foodPairings: ["hara bhara kebab", "malai paneer tikka", "tandoori prawns", "vegetable spring rolls"],
+    whyBuyThis: "Bottle fermentation adds creamy yeast character to Chenin's citrus brightness.",
+    faqs: [{ question: "Is Soirée Brut made from Chenin Blanc?", answer: "Yes. Grover identifies Chenin Blanc for the Brut." }, { question: "How are its bubbles made?", answer: "Grover describes a second fermentation in the bottle." }],
+    metaTitle: "Grover Soirée Brut Price, Taste & Review | BevOry", metaDescription: "Grover Soirée Brut offers lemon, pear and fine Chenin bubbles. Pair with hara bhara kebab; check city prices on BevOry."
+  },
+  "grover-soiree-brut-rose-methode-8ba053e": {
+    productName: "Grover Soirée Rosé", category: "Traditional-Method Indian Shiraz Sparkling Rosé",
+    shortOverview: "Soirée Brut Rosé is a pale Shiraz sparkler with cherry, strawberry and a subtle yeast note. Its brisk finish is closer to a dry aperitif than a sweet pink wine.",
+    craftStory: "Grover Zampa uses Shiraz for the rosé base wine and allows brief skin contact for its pale colour. Secondary fermentation in bottle develops its fine effervescence and creamy edge.",
+    tastingNotes: { nose: "Red cherry, strawberry and a faint bready note.", palate: "Light and creamy, with fine bubbles, red fruit and good acidity.", finish: "Long and refreshing, with cherry and strawberry." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Well chilled (6°C)", recommendation: "Pour chilled with a lightly spiced starter; avoid adding ice to the glass." },
+    foodPairings: ["tandoori chicken", "chilli paneer", "rava-fried fish", "strawberry tart"],
+    whyBuyThis: "Shiraz fruit and bottle-fermented texture make a dry rosé that can carry a meal.",
+    faqs: [{ question: "Which grape makes Soirée Rosé?", answer: "Grover uses Shiraz." }, { question: "Is it still wine?", answer: "No. It is a sparkling rosé made with secondary fermentation in bottle." }],
+    metaTitle: "Grover Soirée Rosé Price, Taste & Review | BevOry", metaDescription: "Grover Soirée Rosé brings cherry, strawberry and fine bubbles. Pair with tandoori chicken; check city prices on BevOry."
+  },
+  "jacobs-creek-chardonnay-pinot-noir-b42c9b4": {
+    productName: "JC Chardonnay Pinot Noir", category: "Australian Chardonnay-Pinot Noir Sparkling Wine",
+    shortOverview: "Jacob's Creek blends Chardonnay citrus with Pinot Noir red-currant fruit in this sparkling wine. A creamy yeast note gives the clean finish more depth.",
+    craftStory: "The Australian producer builds the wine from Chardonnay and Pinot Noir for its Classic sparkling range. Its own tasting notes describe lemon, red currant and creamy nutty yeast character.",
+    tastingNotes: { nose: "Lemon citrus and red currant.", palate: "Generous citrus fruit with a creamy, nutty yeast texture.", finish: "Soft, crisp and clean." },
+    servingGuide: { glassware: "Tulip sparkling-wine glass", idealTemperature: "Well chilled (6–8°C)", recommendation: "Serve chilled with a lightly seasoned starter to keep both citrus and red-fruit notes visible." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "soft white cheese", "rava-fried fish"],
+    whyBuyThis: "The Chardonnay-Pinot blend provides citrus, red fruit and a creamy middle in one sparkler.",
+    faqs: [{ question: "Which grapes are blended?", answer: "Jacob's Creek names Chardonnay and Pinot Noir." }, { question: "Is this a still white wine?", answer: "No. It belongs to the producer's sparkling range." }],
+    metaTitle: "JC Chardonnay Pinot Noir Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Chardonnay Pinot Noir offers citrus, red currant and creamy bubbles. Pair with prawns; check city prices on BevOry."
+  },
+  "jacobs-creek-classic-crisp-rose-3db8c89": {
+    productName: "Jacob's Creek Crisp Rosé", category: "Australian Dry-Style Rosé Wine",
+    shortOverview: "Classic Crisp Rosé is a light Australian pink wine led by red berries and fragrant spice. Its brisk finish makes it a better summer starter wine than a heavy red.",
+    craftStory: "Jacob's Creek makes this for its drink-now Classic range. The producer does not specify a grape blend on the product page, so the wine is best understood through its light body and berry-led style.",
+    tastingNotes: { nose: "Bright red berries and soft fragrant spice.", palate: "Light and crisp, with generous red-fruit flavour.", finish: "Medium and vibrant, leaving berries and fresh acidity." },
+    servingGuide: { glassware: "Rosé or white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool with a lightly spiced lunch or a tomato-led starter." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "malai paneer tikka", "tomato bruschetta"],
+    whyBuyThis: "Its berry fruit comes with enough freshness to handle a warm-weather Indian meal.",
+    faqs: [{ question: "Is Classic Crisp Rosé heavy?", answer: "No. Jacob's Creek describes it as light and refreshing." }, { question: "Does the producer state the grape blend?", answer: "The current product page does not identify a specific blend." }],
+    metaTitle: "Jacob's Creek Crisp Rosé Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Crisp Rosé offers red berries, spice and a fresh finish. Pair with cucumber chaat; check city prices on BevOry."
+  },
+  "jacobs-creek-jacob-creek-classic-sauvignon-blanc-wine-7841591": {
+    productName: "JC Sauvignon Blanc", category: "Australian Classic Sauvignon Blanc White Wine",
+    shortOverview: "Jacob's Creek Classic Sauvignon Blanc is crisp and herbaceous rather than creamy or oaky. Passionfruit gives the green notes a tropical counterpoint.",
+    craftStory: "The Australian producer makes this Sauvignon Blanc for its Classic, drink-now range. Its published profile emphasises fruit and herbaceous aromas rather than a barrel-ageing claim.",
+    tastingNotes: { nose: "Passionfruit and fresh asparagus.", palate: "Tropical fruit and green herbaceous notes with lively acidity.", finish: "Short to medium, crisp and clean." },
+    servingGuide: { glassware: "White-wine glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Chill before serving with seafood or green vegetables; avoid over-warm service." },
+    foodPairings: ["coastal rava-fried fish", "hara bhara kebab", "cucumber chaat", "tandoori prawns"],
+    whyBuyThis: "Its passionfruit-and-green profile is a clear match for fresh herbs and coastal food.",
+    faqs: [{ question: "Is this Sauvignon Blanc oak-led?", answer: "No. The producer presents a crisp fruit-and-herb profile, not an oak-driven one." }, { question: "How cold should it be served?", answer: "Jacob's Creek suggests about 6–8°C." }],
+    metaTitle: "JC Sauvignon Blanc Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Sauvignon Blanc shows passionfruit and green herbs. Pair with rava-fried fish; check city prices on BevOry."
+  },
+  "glenfiddich-reserve-cask-ab3c2f6": {
+    productName: "Glenfiddich Reserve Cask", category: "Sherry-Cask Speyside Single Malt Scotch",
+    shortOverview: "Reserve Cask is a silky Glenfiddich shaped by Spanish sherry casks. Marmalade, toasted bread and spice set it apart from the distillery's lighter orchard-fruit releases.",
+    craftStory: "Glenfiddich selects Spanish sherry casks for this Speyside malt and marries them into its Reserve Cask expression. The producer's tasting sheet names sweet spice, oak and an enduring finish.",
+    tastingNotes: { nose: "Toasted white bread, marmalade, spice and old leather.", palate: "Silky and sweet, with Spanish-oak spice developing through the sip.", finish: "Very long, with lasting sweetness and oak spice." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat first, then add a few drops of water if you want to open the cask spice." },
+    foodPairings: ["galouti kebab", "mutton seekh kebab", "lamb rogan josh", "70% dark chocolate"],
+    whyBuyThis: "Spanish sherry-cask character gives a notably richer, spicier Glenfiddich experience.",
+    faqs: [{ question: "Which casks shape Reserve Cask?", answer: "Glenfiddich specifies Spanish sherry casks." }, { question: "Is it meant for a highball?", answer: "Neat in a tasting glass is the better first serve for its cask detail." }],
+    metaTitle: "Glenfiddich Reserve Cask Price, Taste & Review | BevOry", metaDescription: "Glenfiddich Reserve Cask offers marmalade, toast and sherry-oak spice. Pair with galouti kebab; check city prices on BevOry."
+  }
+};
