@@ -15,7 +15,7 @@ import SEOHead from "@/components/SEOHead";
 import { useProductUrl } from "@/hooks/useProductUrl";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/integrations/api/client";
-import { parseSearchIntent, productMatchesIntent, SEARCH_SUGGESTIONS } from "@/lib/searchDemand";
+import { parseSearchIntent, productMatchesIntent } from "@/lib/searchDemand";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
@@ -333,14 +333,15 @@ const Search = () => {
                   <AnimatePresence>
                     {query && (
                       <motion.button
+                        type="button"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         onClick={() => handleQueryChange("")}
                         aria-label="Clear search"
-                        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full bg-muted hover:bg-muted/80"
+                        className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-muted/80"
                       >
-                        <X className="w-4 h-4 text-muted-foreground" />
+                        <X className="h-4 w-4" />
                       </motion.button>
                     )}
                   </AnimatePresence>
@@ -476,25 +477,6 @@ const Search = () => {
           </header>
 
           <main className="px-4">
-            {!query && (
-              <section className="mb-5" aria-labelledby="popular-searches">
-                <h2 id="popular-searches" className="text-xs font-semibold text-muted-foreground mb-2">
-                  Popular searches
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {SEARCH_SUGGESTIONS.map((suggestion) => (
-                    <button
-                      key={suggestion}
-                      type="button"
-                      onClick={() => handleQueryChange(suggestion)}
-                      className="px-3 py-2 rounded-lg border border-border bg-card text-xs font-medium hover:border-accent/50 transition-colors"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
-                </div>
-              </section>
-            )}
             {isDiscoveryLanding ? (
               <div className="space-y-8 pb-6 pt-2">
                 <BrandSpotlight variant="grid" limit={8} />
