@@ -26,6 +26,7 @@ const PublicShell = () => {
         ? parts[productIndex + 1]
         : parts.at(-1);
     if (!raw || raw === citySlug) return "BevOry";
+    if (raw === "beers") return "Beer";
     return raw.split("-").map((word) => word ? word[0].toUpperCase() + word.slice(1) : word).join(" ");
   })();
 
