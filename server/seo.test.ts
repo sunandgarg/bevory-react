@@ -26,6 +26,15 @@ const template = `<!doctype html><html><head>
 </head><body><div id="root"><h1>Default</h1></div><script type="module" src="/app.js"></script></body></html>`;
 
 describe("origin SEO rendering", () => {
+  it("overlays researched bottle copy on the origin SEO shell", () => {
+    const seo = enrichProductSeo("/gurgaon/product/johnnie-walker-black-label-6e8300f", {
+      title: "Black Label price in Gurgaon", description: "Old summary", heading: "Black Label",
+      canonicalPath: "/gurgaon/product/johnnie-walker-black-label-6e8300f", robots: "index, follow",
+      breadcrumbs: [], body: ["Local price guide"],
+    }, {});
+    expect(seo.body?.join(" ")).toContain("Nose: Vanilla");
+    expect(seo.faqs).toHaveLength(2);
+  });
   it("bounds the parsed SEO shard cache and refreshes recent entries", () => {
     const cache = new Map<string, Promise<number>>();
     rememberRecentPromise(cache, "a", Promise.resolve(1), 2);

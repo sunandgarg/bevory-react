@@ -5,6 +5,7 @@ import type { AuthenticatedRequest } from "./auth.js";
 import { userIsAdmin } from "./auth.js";
 import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 import { invalidateCatalogCache } from "./catalog.js";
+import { applyProductContentOverlay } from "../src/lib/productContentOverlay.js";
 
 const TABLES = new Set([
   "announcements", "app_settings", "blog_posts", "brand_spotlights", "categories",
@@ -501,7 +502,10 @@ const readTable = async (tableName: string, filters: Filter[] = []) => {
       where: databaseWhereForFilters(tableName, filters),
       select: { data: true },
     });
-  return records.map(({ data }) => toRecordData(data));
+  return records.map(({ data }) => {
+    const row = toRecordData(data);
+    return tableName === "products" ? applyProductContentOverlay(row) : row;
+  });
 };
 
 const attachRelationships = async (

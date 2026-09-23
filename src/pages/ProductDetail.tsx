@@ -62,6 +62,7 @@ interface Product {
   responsible_notice: string | null;
   author_line: string | null;
   content_updated_at: string | null;
+  product_content_version?: string | null;
   image_emoji: string | null;
   image_url: string | null;
   rating: number | null;
@@ -397,6 +398,7 @@ const ProductDetail = () => {
     : null;
   const displayReviewCount = product?.review_count || 0;
   const productLabel = product ? fullProductName(product.brand, product.name) : "";
+  const hasResearchedEditorial = product?.product_content_version === "researched-product-batch-01";
   const pageHeading = displayCityName
     ? `${productLabel} price in ${displayCityName}`
     : productLabel;
@@ -926,7 +928,7 @@ const ProductDetail = () => {
 
           {sensoryDetails.length > 0 && (
             <section aria-labelledby="sensory-guide-heading">
-              <h2 id="sensory-guide-heading" className="font-semibold mb-3">Sensory guide</h2>
+              <h2 id="sensory-guide-heading" className="font-semibold mb-3">{hasResearchedEditorial ? "Tasting notes" : "Sensory guide"}</h2>
               <dl className="divide-y divide-border border-y border-border">
                 {sensoryDetails.map(([label, value]) => (
                   <div key={label} className="py-3 grid grid-cols-[72px_1fr] gap-3 text-sm">
@@ -954,14 +956,15 @@ const ProductDetail = () => {
                   </TooltipTrigger>
                   <TooltipContent side="top" className="max-w-xs">
                     <p className="text-sm">
-                      {product.type_description ||
-                        product.product_type?.description ||
-                        `A type classification for ${product.category?.name || "beverages"}.`}
+                      {hasResearchedEditorial
+                        ? product.type_tag
+                        : product.type_description || product.product_type?.description ||
+                          `A type classification for ${product.category?.name || "beverages"}.`}
                     </p>
                   </TooltipContent>
                 </Tooltip>
               </div>
-              {(product.type_description || product.product_type?.description) && (
+              {(product.type_description || (!hasResearchedEditorial && product.product_type?.description)) && (
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {product.type_description || product.product_type?.description}
                 </p>
@@ -1008,17 +1011,17 @@ const ProductDetail = () => {
 
               {product.who_may_enjoy && (
                 <section>
-                  <h2 className="font-semibold mb-2">Who may find it useful to compare</h2>
+                  <h2 className="font-semibold mb-2">{hasResearchedEditorial ? "Why this bottle stands out" : "Who may find it useful to compare"}</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">{product.who_may_enjoy}</p>
                 </section>
               )}
 
               {(product.ingredients_note || product.production_note || product.label_guidance) && (
                 <section aria-labelledby="label-check-heading">
-                  <h2 id="label-check-heading" className="font-semibold mb-3">Before you choose</h2>
+                  <h2 id="label-check-heading" className="font-semibold mb-3">{hasResearchedEditorial ? "How it's made" : "Before you choose"}</h2>
                   <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
                     {product.ingredients_note && <p><strong className="text-foreground">Ingredients:</strong> {product.ingredients_note}</p>}
-                    {product.production_note && <p><strong className="text-foreground">Production:</strong> {product.production_note}</p>}
+                    {product.production_note && <p>{!hasResearchedEditorial && <strong className="text-foreground">Production: </strong>}{product.production_note}</p>}
                     {product.label_guidance && <p><strong className="text-foreground">Label check:</strong> {product.label_guidance}</p>}
                   </div>
                 </section>

@@ -1,3 +1,5 @@
+import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatch01.ts";
+
 const SITE_ORIGIN = "https://bevory.in";
 const CATALOG_CACHE_VERSION = "20260920-cold-start-v2";
 const CATALOG_CACHE_CONTROL = "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400";
@@ -275,6 +277,28 @@ const dynamicProductSeo = (pathname, productIndex) => {
 const enrichProductSeo = (pathname, seo, editorialIndex = {}) => {
   const parts = pathname.split("/").filter(Boolean);
   if (!cityNames.has(parts[0]) || parts[1] !== "product" || !parts[2]) return seo;
+  const researched = PRODUCT_BATCH_CONTENT[parts[2]];
+  if (researched) {
+    return {
+      ...seo,
+      description: shortDescription(`${researched.productName} in ${parts[0]}: ${researched.tastingNotes.nose} Check local prices and pairings on BevOry.`),
+      body: [
+        ...(Array.isArray(seo.body) ? seo.body.slice(0, 2) : []),
+        researched.shortOverview,
+        researched.craftStory,
+        `Nose: ${researched.tastingNotes.nose}`,
+        `Palate: ${researched.tastingNotes.palate}`,
+        `Finish: ${researched.tastingNotes.finish}`,
+        researched.servingGuide.recommendation,
+        `Food pairings: ${researched.foodPairings.join(", ")}.`,
+        researched.whyBuyThis,
+      ],
+      structuredData: seo.structuredData
+        ? { ...seo.structuredData, description: researched.shortOverview }
+        : undefined,
+      faqs: researched.faqs,
+    };
+  }
   const editorial = editorialIndex[parts[2]];
   if (!editorial) return seo;
   const editorialBody = [

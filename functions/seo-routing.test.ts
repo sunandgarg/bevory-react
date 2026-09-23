@@ -23,6 +23,16 @@ const productIndex = {
 };
 
 describe("SEO routing", () => {
+  it("serves researched bottle copy to crawlers for a batch product", () => {
+    const seo = enrichProductSeo("/gurgaon/product/johnnie-walker-black-label-6e8300f", {
+      title: "Black Label price in Gurgaon", description: "Old summary", body: ["Local price guide"],
+      structuredData: { "@type": "ProductGroup", description: "Old summary" },
+    });
+    expect(seo.body.join(" ")).toContain("Nose: Vanilla");
+    expect(seo.body.join(" ")).not.toContain("Generic filler");
+    expect(seo.structuredData.description).toContain("Black Label");
+    expect(seo.faqs).toHaveLength(2);
+  });
   it("keeps an unpriced city variant visible without indexing or inventing a price", () => {
     const seo = dynamicProductSeo(
       "/mumbai/product/johnnie-walker-black-label/180ml",
