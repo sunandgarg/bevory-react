@@ -178,9 +178,9 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
     }
   });
   const seo: SeoRoute = {
-    title: "BevOry | Compare Local Beverage Prices",
-    description: "Compare local beverage prices, bottle sizes and brands with BevOry's city-aware price guide.",
-    heading: "Compare local beverage prices with BevOry",
+    title: "BevOry: Compare Drink Prices, Brands & Bottle Sizes",
+    description: "Explore beverage brands, bottle sizes, local price guides, cocktails and planning tools across India. BevOry is informational and does not sell alcohol.",
+    heading: "Compare prices. Browse drinks. Discover brands.",
     canonicalPath: cleanPath,
     robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     breadcrumbs: [{ name: "Home", path: "/" }],

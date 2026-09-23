@@ -15,6 +15,7 @@ const CityHome = ({ citySlug, canonicalPath }: CityHomeProps) => {
   const cityName = city?.name || citySlug.split("-").map((part) => (
     part.charAt(0).toUpperCase() + part.slice(1)
   )).join(" ");
+  const isRootHomepage = canonicalPath === "/";
 
   useEffect(() => {
     // Set city if not already selected or different
@@ -26,10 +27,14 @@ const CityHome = ({ citySlug, canonicalPath }: CityHomeProps) => {
   return (
     <>
       <SEOHead
-        title={`Alcohol Prices in ${cityName} | BevOry`}
-        description={`Compare alcohol prices in ${cityName}. Explore whisky, beer, wine, rum and more with BevOry's local price guide.`}
+        title={isRootHomepage
+          ? "BevOry: Compare Drink Prices, Brands & Bottle Sizes"
+          : `Alcohol Prices in ${cityName} | BevOry`}
+        description={isRootHomepage
+          ? "Explore beverage brands, bottle sizes, local price guides, cocktails and planning tools across India. BevOry is informational and does not sell alcohol."
+          : `Compare alcohol prices in ${cityName}. Explore whisky, beer, wine, rum and more with BevOry's local price guide.`}
         canonical={canonicalPath || `/${citySlug}`}
-        geoPlacename={cityName}
+        geoPlacename={isRootHomepage ? undefined : cityName}
       />
       <Home />
     </>

@@ -209,7 +209,7 @@ const loadRows = async (): Promise<DataRow[]> => {
 };
 
 const staticRoutes: Array<SitemapEntry & { seo: SeoRoute }> = [
-  ["/", "Alcohol Prices in Gurgaon | BevOry", "Compare reviewed whisky, beer, wine, rum and other beverage prices in Gurgaon.", "Alcohol prices in Gurgaon"],
+  ["/", "BevOry: Compare Drink Prices, Brands & Bottle Sizes", "Explore beverage brands, bottle sizes, local price guides, cocktails and planning tools across India. BevOry is informational and does not sell alcohol.", "Compare prices. Browse drinks. Discover brands."],
   ["/categories", "Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local prices.", "Drink categories"],
   ["/brands", "Beverage Brands & Products | BevOry", "Explore beverage brands, products and locally available bottle prices.", "Beverage brands"],
   ["/guide", "BevOry Guide | Drinks & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice.", "BevOry Guide"],
@@ -299,25 +299,27 @@ try {
     const categoryNames = [...categoryIds].map((id) => String(categoryById.get(id)?.data.name ?? "")).filter(Boolean);
     const cityPath = `/${city.slug}`;
     const cityHomePath = city.slug === "gurgaon" ? "/" : cityPath;
-    addRoute({
-      path: cityHomePath,
-      lastmod: latestTimestamp(cityRow.data.updated_at, cityPrices.map((price) => price.data.updated_at)),
-    }, {
-      title: `Alcohol Prices in ${city.name} | BevOry`,
-      description: `Explore local beverage categories, bottle sizes and reviewed price guidance in ${city.name}.`,
-      heading: `Alcohol prices in ${city.name}`,
-      body: [
-        `BevOry helps you compare reviewed bottle prices and known sizes across beverage categories in ${city.name}.`,
-        categoryNames.length ? `Browse local ${categoryNames.slice(0, 8).join(", ")} prices. Listings are informational and can change at retail.` : "Listings are informational and can change at retail.",
-      ],
-      breadcrumbs: cityHomePath === "/" ? [{ name: "Home", path: "/" }] : [{ name: "Home", path: "/" }, { name: city.name, path: cityHomePath }],
-      structuredData: {
-        "@type": "CollectionPage",
-        name: `Alcohol prices in ${city.name}`,
-        url: `${origin}${cityHomePath}`,
-        about: { "@type": "City", name: city.name },
-      },
-    });
+    if (cityHomePath !== "/") {
+      addRoute({
+        path: cityHomePath,
+        lastmod: latestTimestamp(cityRow.data.updated_at, cityPrices.map((price) => price.data.updated_at)),
+      }, {
+        title: `Alcohol Prices in ${city.name} | BevOry`,
+        description: `Explore local beverage categories, bottle sizes and reviewed price guidance in ${city.name}.`,
+        heading: `Alcohol prices in ${city.name}`,
+        body: [
+          `BevOry helps you compare reviewed bottle prices and known sizes across beverage categories in ${city.name}.`,
+          categoryNames.length ? `Browse local ${categoryNames.slice(0, 8).join(", ")} prices. Listings are informational and can change at retail.` : "Listings are informational and can change at retail.",
+        ],
+        breadcrumbs: [{ name: "Home", path: "/" }, { name: city.name, path: cityHomePath }],
+        structuredData: {
+          "@type": "CollectionPage",
+          name: `Alcohol prices in ${city.name}`,
+          url: `${origin}${cityHomePath}`,
+          about: { "@type": "City", name: city.name },
+        },
+      });
+    }
 
     for (const categoryId of categoryIds) {
       const category = categoryById.get(categoryId);

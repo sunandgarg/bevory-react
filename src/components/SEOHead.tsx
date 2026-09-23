@@ -128,9 +128,18 @@ const SEOHead = ({
 
     // GEO targeting for local SEO
     updateMeta("geo.region", geoRegion);
-    if (geoPlacename) updateMeta("geo.placename", geoPlacename);
-    if (geoPosition) updateMeta("geo.position", geoPosition);
-    updateMeta("ICBM", geoPosition || "28.4595,77.0266"); // Default: Gurgaon
+    if (geoPlacename) {
+      updateMeta("geo.placename", geoPlacename);
+    } else {
+      document.querySelector('meta[name="geo.placename"]')?.remove();
+    }
+    if (geoPosition) {
+      updateMeta("geo.position", geoPosition);
+      updateMeta("ICBM", geoPosition);
+    } else {
+      document.querySelector('meta[name="geo.position"]')?.remove();
+      document.querySelector('meta[name="ICBM"]')?.remove();
+    }
 
     // Robots meta (allow indexing)
     updateMeta("robots", robots);

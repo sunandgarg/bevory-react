@@ -39,7 +39,7 @@ describe("origin SEO rendering", () => {
   it("preserves application hydration in server-rendered SEO documents", () => {
     const html = rewriteSeoDocument(template, resolveSeo("/gurgaon", {}));
     expect(html).toContain('<script type="module" src="/app.js"></script>');
-    expect(html).toContain("<title>BevOry | Compare Local Beverage Prices</title>");
+    expect(html).toContain("<title>BevOry: Compare Drink Prices, Brands &amp; Bottle Sizes</title>");
   });
 
   it("selects city product shards", () => {
@@ -100,6 +100,10 @@ describe("origin SEO rendering", () => {
   });
 
   it("keeps the canonical root homepage and redirects legacy Gurgaon home URLs", () => {
+    const homepage = resolveSeo("/", {});
+    expect(homepage.title).toBe("BevOry: Compare Drink Prices, Brands & Bottle Sizes");
+    expect(homepage.description).toContain("across India");
+    expect(`${homepage.title} ${homepage.description} ${homepage.heading}`).not.toContain("Gurgaon");
     expect(legacyRedirectPath("/")).toBeNull();
     expect(legacyRedirectPath("/gurgaon")).toBe("/");
     expect(legacyRedirectPath("/haryana")).toBe("/");

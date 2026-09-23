@@ -154,7 +154,7 @@ const Home = () => {
                 priced.
               </h1>
               <p className="text-[13px] leading-relaxed text-background/75 mb-5 max-w-[290px]">
-                Discover drinks in <span className="text-background font-semibold">{cityName}</span>, compare local prices, and plan every gathering with confidence.
+                Explore drinks and brands across India, compare local prices in <span className="text-background font-semibold">{cityName}</span>, and plan every gathering with confidence.
               </p>
 
               <div className="flex flex-wrap gap-2">
