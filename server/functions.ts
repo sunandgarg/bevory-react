@@ -97,14 +97,12 @@ const partyPlanSchema = {
           reasoning: { type: "string" },
         },
         required: ["categoryId", "productId", "quantity", "reasoning"],
-        additionalProperties: false,
       },
     },
     partyTips: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 4 },
     budgetSummary: { type: "string" },
   },
   required: ["selections", "partyTips", "budgetSummary"],
-  additionalProperties: false,
 };
 
 const targetQuantity = (categoryName: string, guests: number) => {
