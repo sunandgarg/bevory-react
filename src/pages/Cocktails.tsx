@@ -319,14 +319,13 @@ const Cocktails = () => {
                     <h2 className="font-serif font-semibold text-lg mb-3 flex items-center gap-2">
                       <span className="text-xl">⭐</span> Featured Cocktails
                     </h2>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-2">
                       {featuredCocktails.map((cocktail, index) => (
-                        <CocktailCard
+                        <CocktailListItem
                           key={cocktail.id}
                           cocktail={cocktail}
                           index={index}
                           href={`/cocktail/${cocktail.slug || cocktail.id}`}
-                          featured
                         />
                       ))}
                     </div>
@@ -401,48 +400,6 @@ const Cocktails = () => {
   );
 };
 
-const CocktailCard = ({
-  cocktail,
-  index,
-  href,
-  featured = false,
-}: {
-  cocktail: Cocktail;
-  index: number;
-  href: string;
-  featured?: boolean;
-}) => (
-  <Link to={href}>
-    <motion.article
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.05 }}
-    className={`p-4 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] group ${
-      featured
-        ? "bg-gradient-to-br from-accent/20 via-accent/10 to-background border border-accent/20"
-        : "bg-secondary/50 border border-border/50 hover:border-accent/30"
-    }`}
-  >
-    <CocktailVisual cocktail={cocktail} className="mb-3 h-24 w-full rounded-xl" />
-    <h3 className="font-semibold text-sm mb-1.5 line-clamp-1 group-hover:text-accent transition-colors">
-      {cocktail.name}
-    </h3>
-    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-      {cocktail.description}
-    </p>
-    <div className="flex items-center gap-2 mt-3">
-      <Badge variant="secondary" className="text-[10px] px-2 py-0.5">
-        {cocktail.base_spirit}
-      </Badge>
-      <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
-        <Clock className="w-2.5 h-2.5" />
-        {cocktail.prep_time}
-      </span>
-    </div>
-    </motion.article>
-  </Link>
-);
-
 const CocktailListItem = ({
   cocktail,
   index,
@@ -457,11 +414,11 @@ const CocktailListItem = ({
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ delay: index * 0.03 }}
-    className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border/50 cursor-pointer hover:bg-secondary hover:border-accent/30 transition-all group"
+    className="group flex min-h-[88px] items-center gap-3 rounded-2xl border border-border/60 bg-card p-3 transition-all hover:border-accent/35 hover:shadow-sm"
   >
-    <CocktailVisual cocktail={cocktail} className="h-14 w-14 flex-shrink-0 rounded-xl" />
+    <CocktailVisual cocktail={cocktail} className="h-16 w-20 flex-shrink-0 rounded-xl" />
     <div className="flex-1 min-w-0">
-      <h3 className="font-medium text-sm group-hover:text-accent transition-colors">{cocktail.name}</h3>
+      <h3 className="line-clamp-1 text-[15px] font-semibold transition-colors group-hover:text-accent">{cocktail.name}</h3>
       <div className="flex items-center gap-2 mt-1 flex-wrap">
         <Badge variant="outline" className="text-[10px] px-1.5 py-0">
           {cocktail.base_spirit}
@@ -474,7 +431,7 @@ const CocktailListItem = ({
         </span>
       </div>
     </div>
-    <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0 group-hover:text-accent transition-colors" />
+    <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
     </motion.article>
   </Link>
 );

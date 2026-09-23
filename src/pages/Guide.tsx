@@ -181,7 +181,7 @@ const Guide = () => {
                     <Star className="w-5 h-5 text-accent fill-accent" />
                     <h2 className="text-lg font-bold">Featured Stories</h2>
                   </div>
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 gap-2.5">
                     {featuredPosts.map((post, index) => (
                       <FeaturedArticleCard key={post.id} post={post} index={index} getReadTime={getReadTime} />
                     ))}
@@ -197,8 +197,7 @@ const Guide = () => {
                     <h2 className="text-lg font-bold">Latest Articles</h2>
                   </div>
                   
-                  {/* Grid Layout for larger screens, List for mobile */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-2.5">
                     {regularPosts.map((post, index) => (
                       <ArticleCard key={post.id} post={post} index={index} getReadTime={getReadTime} />
                     ))}
@@ -227,7 +226,6 @@ const Guide = () => {
   );
 };
 
-// Featured Article Card - Large Hero Style
 const FeaturedArticleCard = ({
   post,
   index,
@@ -241,65 +239,39 @@ const FeaturedArticleCard = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.1 }}
-    className="group relative rounded-xl overflow-hidden cursor-pointer border border-border"
+    className="group overflow-hidden rounded-2xl border border-accent/20 bg-card transition-all hover:border-accent/45 hover:shadow-sm"
   >
-    <Link to={`/guide/${post.slug}`}>
-      {/* Background Image or Gradient */}
-      <div className="relative h-64 sm:h-72">
+    <Link to={`/guide/${post.slug}`} className="flex min-h-[112px] items-center gap-3 p-3 sm:gap-4">
+      <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl bg-secondary sm:w-36">
         {post.cover_image_url ? (
           <img
             src={post.cover_image_url}
             alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width={288}
+            height={192}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-secondary flex items-center justify-center">
-            <span className="text-8xl">{post.cover_emoji || "📰"}</span>
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/15 to-secondary">
+            <BookOpen className="h-8 w-8 text-accent" aria-hidden="true" />
           </div>
         )}
-        
-        {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-        
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-5">
-          <div className="flex flex-wrap gap-2 mb-3">
-            {post.category && (
-              <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm">
-                {post.category}
-              </Badge>
-            )}
-            <Badge variant="secondary" className="bg-white/20 text-white backdrop-blur-sm border-0">
-              <Star className="w-3 h-3 mr-1 fill-current" /> Featured
-            </Badge>
-          </div>
-          
-          <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 line-clamp-2 group-hover:text-accent transition-colors">
-            {post.title}
-          </h3>
-          
-          <p className="text-white/80 text-sm line-clamp-2 mb-3">
-            {post.excerpt}
-          </p>
-          
-          <div className="flex items-center gap-4 text-xs text-white/70">
-            <span className="flex items-center gap-1.5">
-              <User className="w-3.5 h-3.5" />
-              {post.author || "BevOry Team"}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
-              {getReadTime(post.content)} min read
-            </span>
-            {post.published_at && (
-              <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5" />
-                {format(new Date(post.published_at), "MMM d, yyyy")}
-              </span>
-            )}
-          </div>
+      </div>
+      <div className="min-w-0 flex-1 py-0.5">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          {post.category && <Badge variant="secondary" className="h-6 rounded-full px-2.5 text-[11px]">{post.category}</Badge>}
+          {post.published_at && <span className="flex items-center gap-1 text-[11px] text-muted-foreground"><Calendar className="h-3 w-3" />{format(new Date(post.published_at), "d MMM yyyy")}</span>}
+        </div>
+        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-foreground transition-colors group-hover:text-accent sm:text-base">{post.title}</h3>
+        <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground line-clamp-1 sm:block">{post.excerpt}</p>
+        <div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground">
+          <span className="flex items-center gap-1"><User className="h-3 w-3" />{post.author || "BevOry Team"}</span>
+          <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{getReadTime(post.content)} min read</span>
         </div>
       </div>
+      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
     </Link>
   </motion.article>
 );
@@ -318,53 +290,36 @@ const ArticleCard = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.05 }}
-    className="group rounded-xl overflow-hidden bg-card border border-border hover:border-accent/40 transition-all duration-300 cursor-pointer"
+    className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:border-accent/40 hover:shadow-sm"
   >
-    <Link to={`/guide/${post.slug}`}>
-      {/* Image */}
-      <div className="relative h-40 overflow-hidden">
+    <Link to={`/guide/${post.slug}`} className="flex min-h-[100px] items-center gap-3 p-3 sm:gap-4">
+      <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-secondary sm:h-24 sm:w-32">
         {post.cover_image_url ? (
           <img
             src={post.cover_image_url}
             alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            width={256}
+            height={192}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-secondary flex items-center justify-center">
-            <span className="text-5xl">{post.cover_emoji || "📰"}</span>
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/10 to-secondary">
+            <BookOpen className="h-7 w-7 text-accent" aria-hidden="true" />
           </div>
-        )}
-        
-        {/* Category Badge */}
-        {post.category && (
-          <Badge className="absolute top-3 left-3 bg-background/80 backdrop-blur-sm text-foreground">
-            {post.category}
-          </Badge>
         )}
       </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-accent transition-colors">
-          {post.title}
-        </h3>
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-          {post.excerpt}
-        </p>
-        
-        <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              {getReadTime(post.content)} min
-            </span>
-            {post.published_at && (
-              <span>{format(new Date(post.published_at), "MMM d")}</span>
-            )}
-          </div>
-          <ChevronRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
+      <div className="min-w-0 flex-1">
+        <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+          {post.category && <Badge variant="secondary" className="h-6 rounded-full px-2.5 text-[11px]">{post.category}</Badge>}
+          {post.published_at && <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{format(new Date(post.published_at), "d MMM yyyy")}</span>}
         </div>
+        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-foreground transition-colors group-hover:text-accent sm:text-base">{post.title}</h3>
+        <p className="mt-1 hidden text-xs text-muted-foreground line-clamp-1 sm:block">{post.excerpt}</p>
+        <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-muted-foreground"><Clock className="h-3 w-3" />{getReadTime(post.content)} min read</span>
       </div>
+      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
     </Link>
   </motion.article>
 );

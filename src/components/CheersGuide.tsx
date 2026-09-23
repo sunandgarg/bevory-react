@@ -1,4 +1,4 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -50,6 +50,30 @@ const DEFAULT_GUIDES: CheersGuideItem[] = [
   stories: [{ type: "image", url: image_url, duration: 6 }],
 }));
 
+const COCKTAIL_SHORTS: CheersGuideItem[] = [
+  ["jack-cocktail-one", "Jack Daniel’s", "A bold whiskey cocktail", "/stories/jack-cocktail-amber.svg", "https://www.youtube.com/shorts/r5C8UIkmlRk"],
+  ["jim-beam-cocktail", "Jim Beam", "A bright bourbon serve", "/stories/jim-beam-cocktail.svg", "https://www.youtube.com/shorts/r0qQBJ7YtT4"],
+  ["jamun-shot", "Jamun Shot", "A desi fruit-forward shot", "/stories/jamun-shot.svg", "https://www.youtube.com/shorts/OVOWDZJXGfA"],
+  ["jagermeister-cocktail", "Jagermeister", "Herbal cocktail inspiration", "/stories/jagermeister-cocktail.svg", "https://www.youtube.com/shorts/wZ6QYERR6KU"],
+  ["white-rum-cocktail", "White Rum", "A crisp tropical mix", "/stories/white-rum.svg", "https://www.youtube.com/shorts/SmDeTwflcwQ"],
+  ["rainbow-cocktail", "Rainbow", "A colourful layered cocktail", "/stories/rainbow-cocktail.svg", "https://www.youtube.com/shorts/jn_nbJyxMq0"],
+  ["tequila-sunrise", "Tequila Sunrise", "Citrus and sunrise colours", "/stories/tequila-sunrise.svg", "https://www.youtube.com/shorts/L-LOoAuJcwA"],
+  ["vodka-cranberry", "Vodka Cranberry", "A tart ruby highball", "/stories/vodka-cranberry.svg", "https://www.youtube.com/shorts/E32B8omMvXI"],
+  ["jack-cocktail-two", "Jack Daniel’s II", "A second whiskey serve", "/stories/jack-cocktail-night.svg", "https://www.youtube.com/shorts/59Ve64hy4y8"],
+].map(([id, title, subtitle, image_url, video_url], index) => ({
+  id,
+  title,
+  subtitle,
+  image_url,
+  emoji: null,
+  link_url: null,
+  link_type: "youtube-short",
+  order_index: index + 1,
+  is_active: true,
+  stories: [{ type: "video", url: video_url, duration: 0 }],
+}));
+const COCKTAIL_SHORT_IDS = new Set(COCKTAIL_SHORTS.map((guide) => guide.id));
+
 const fetchGuides = async (): Promise<CheersGuideItem[]> => {
   const { data, error } = await apiClient
     .from("cheers_guides")
@@ -76,7 +100,11 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
     queryFn: fetchGuides,
     staleTime: 10 * 60 * 1000,
   });
-  const guides = remoteGuides.length > 0 ? remoteGuides : DEFAULT_GUIDES;
+  const guides = useMemo(() => {
+    const supplementalGuides = (remoteGuides.length > 0 ? remoteGuides : DEFAULT_GUIDES)
+      .filter((guide) => !COCKTAIL_SHORT_IDS.has(guide.id));
+    return [...COCKTAIL_SHORTS, ...supplementalGuides];
+  }, [remoteGuides]);
 
   const selectedGuide = selectedGuideIndex !== null ? guides[selectedGuideIndex] : null;
   const stories = selectedGuide?.stories || [];
@@ -85,7 +113,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
 
   // Progress timer
   useEffect(() => {
-    if (selectedGuideIndex === null || stories.length === 0 || isPaused) return;
+    if (selectedGuideIndex === null || stories.length === 0 || isPaused || currentStory?.type === "video") return;
 
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -108,7 +136,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [selectedGuideIndex, currentStoryIndex, stories.length, storyDuration, isPaused, guides.length]);
+  }, [selectedGuideIndex, currentStoryIndex, stories.length, storyDuration, isPaused, guides.length, currentStory?.type]);
 
   const handleClick = useCallback((index: number) => {
     const guide = guides[index];
@@ -172,6 +200,21 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
     }
   }, [currentStoryIndex, stories.length, selectedGuideIndex, guides.length, closeStoryViewer]);
 
+  useEffect(() => {
+    if (selectedGuideIndex === null) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeStoryViewer();
+      if (event.key === "ArrowLeft") goToPrevStory();
+      if (event.key === "ArrowRight") goToNextStory();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedGuideIndex, closeStoryViewer, goToNextStory, goToPrevStory]);
+
   if (isLoading) {
     return (
       <div className={className}>
@@ -190,37 +233,43 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
   return (
     <>
       <div className={className}>
-        <div className="flex gap-3 overflow-x-auto px-4 scrollbar-hide snap-x snap-mandatory scroll-smooth">
+        <div className="flex gap-3.5 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory scroll-smooth">
           {guides.map((guide, index) => (
             <button
               key={guide.id}
               onClick={() => handleClick(index)}
-              className="flex flex-col items-center flex-shrink-0 group"
+              type="button"
+              className="group flex w-[74px] flex-shrink-0 snap-start flex-col items-center"
+              aria-label={`Watch ${guide.title} short`}
             >
-              <div className="relative">
-                <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-400 via-orange-500 to-red-500">
-                  <div className="w-full h-full rounded-full p-[2px] bg-background">
-                    <div className="w-full h-full rounded-full bg-secondary overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+              <div className="relative rounded-full bg-gradient-to-tr from-amber-300 via-orange-500 to-fuchsia-600 p-[3px] shadow-[0_6px_20px_rgba(249,115,22,0.22)] transition-transform duration-200 group-hover:-translate-y-0.5">
+                <div className="h-[68px] w-[68px] rounded-full bg-background p-[2px]">
+                    <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-secondary transition-transform duration-200 group-hover:scale-[1.03]">
                       {guide.image_url ? (
                         <img
                           src={guide.image_url}
                           alt={guide.title}
-                          className="w-full h-full object-cover"
+                          width={128}
+                          height={128}
+                          className="h-full w-full object-cover"
                           loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <span className="text-xl">{guide.emoji || "🥂"}</span>
                       )}
-                    </div>
                   </div>
                 </div>
+                {guide.stories?.[0]?.type === "video" && (
+                  <span className="absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-foreground text-[8px] font-bold text-background" aria-hidden="true">▶</span>
+                )}
                 {guide.stories && guide.stories.length > 1 && (
                   <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold flex items-center justify-center">
                     {guide.stories.length}
                   </div>
                 )}
               </div>
-              <p className="text-[10px] mt-1.5 text-center font-medium text-muted-foreground group-hover:text-foreground transition-colors w-16 truncate">
+              <p className="mt-1.5 w-[74px] truncate text-center text-[10px] font-semibold text-muted-foreground transition-colors group-hover:text-foreground">
                 {guide.title}
               </p>
             </button>
@@ -230,18 +279,10 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
 
       {/* Story Viewer Modal */}
       {selectedGuideIndex !== null && selectedGuide && stories.length > 0 && (
-          <div
-            className="fixed inset-0 z-50 bg-black flex items-center justify-center animate-fade-in"
-            onClick={(e) => {
-              const rect = (e.target as HTMLElement).getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const width = rect.width;
-              if (x < width / 3) goToPrevStory();
-              else if (x > (width * 2) / 3) goToNextStory();
-            }}
-          >
+          <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/95 p-3 backdrop-blur-md animate-fade-in" onClick={(event) => event.target === event.currentTarget && closeStoryViewer()} role="dialog" aria-modal="true" aria-label={`${selectedGuide.title} story`}>
+            <div className="relative aspect-[9/16] h-[min(86vh,760px)] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-[28px] border border-white/15 bg-black shadow-[0_30px_100px_rgba(0,0,0,0.65)]">
             {/* Progress bars */}
-            <div className="absolute top-4 left-4 right-4 flex gap-1 z-10">
+            {stories.length > 1 && <div className="absolute top-4 left-4 right-4 flex gap-1 z-20">
               {stories.map((_, idx) => (
                 <div key={idx} className="flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden">
                   <div
@@ -257,10 +298,10 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                   />
                 </div>
               ))}
-            </div>
+            </div>}
 
             {/* Header */}
-            <div className="absolute top-8 left-4 right-4 flex items-center justify-between z-10">
+            <div className="absolute left-4 right-4 top-5 z-20 flex items-center justify-between rounded-2xl bg-black/35 px-3 py-2 backdrop-blur-md">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-secondary overflow-hidden">
                   {selectedGuide.image_url ? (
@@ -277,13 +318,19 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                 </div>
               </div>
               <div className="flex items-center gap-2">
+                {currentStory?.type !== "video" && (
+                  <button
+                    type="button"
+                    aria-label={isPaused ? "Resume story" : "Pause story"}
+                    onClick={(e) => { e.stopPropagation(); setIsPaused(!isPaused); }}
+                    className="p-2 text-white/80 hover:text-white"
+                  >
+                    {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
+                  </button>
+                )}
                 <button
-                  onClick={(e) => { e.stopPropagation(); setIsPaused(!isPaused); }}
-                  className="p-2 text-white/80 hover:text-white"
-                >
-                  {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
-                </button>
-                <button
+                  type="button"
+                  aria-label="Close story"
                   onClick={(e) => { e.stopPropagation(); closeStoryViewer(); }}
                   className="p-2 text-white/80 hover:text-white"
                 >
@@ -293,7 +340,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
             </div>
 
             {/* Story Content */}
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center">
               {currentStory?.type === "video" ? (
                 (() => {
                   const url = currentStory.url;
@@ -303,9 +350,10 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                     return (
                       <iframe
                         key={currentStory.url}
-                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&loop=1&playlist=${videoId}`}
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`}
+                        title={`${selectedGuide.title} YouTube Short`}
+                        className="h-full w-full"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       />
                     );
@@ -335,19 +383,21 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
             {/* Navigation arrows */}
             <button
               onClick={(e) => { e.stopPropagation(); goToPrevStory(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-white/50 hover:text-white"
+              aria-label="Previous story"
+              className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white/70 backdrop-blur-sm hover:text-white"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goToNextStory(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white/50 hover:text-white"
+              aria-label="Next story"
+              className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white/70 backdrop-blur-sm hover:text-white"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
 
             {/* Link button */}
-            {selectedGuide.link_url && (
+            {selectedGuide.link_url && selectedGuide.link_type !== "youtube-short" && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -367,6 +417,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                 View More
               </button>
             )}
+            </div>
           </div>
       )}
     </>
