@@ -18,6 +18,7 @@
     "db:optimize": "tsx scripts/optimize-database.ts",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "admin:upsert": "tsx scripts/upsert-admin.ts",
     "db:setup": "prisma generate && prisma db push && tsx prisma/seed.ts",
     "catalog:import": "tsx scripts/import-livcheers-catalog.ts",
     "images:migrate": "tsx scripts/migrate-images-to-s3.ts",
