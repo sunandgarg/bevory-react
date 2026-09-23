@@ -8,3 +8,16 @@ uploads/*
 !uploads/.gitkeep
 work
 *.log
+swapfile
+catalog-import
+backups
+.wrangler
+tmp
+output
+reports
+boot
+dev
+etc
+home
+opt
+catchup-scripts
