@@ -9,6 +9,10 @@ This is the release checklist for the next commit and deployment window. It reco
 - [x] Brand directory can show active brands before city-level products or prices exist.
 - [x] Explore Categories cards use a compact responsive grid.
 - [x] Public desktop pages use a centered 1120px frame for a more proportionate desktop layout.
+- [x] Wine Universe routes and interactive discovery experience are implemented.
+- [x] The fixed public header uses one universal search row across public pages.
+- [x] The oRy AI launcher uses the supplied circular mark and links to the city homepage.
+- [x] The sequential official-logo and reversible Q95 WebP/S3 pipelines are implemented.
 
 ## Database And Media
 
@@ -21,9 +25,9 @@ This is the release checklist for the next commit and deployment window. It reco
 
 ## Release And Cloud
 
-- [ ] Fetch the latest remote `main` when the execution limit returns.
-- [ ] Run lint, production build, and the full test suite.
-- [ ] Commit the pending category/desktop changes together with the database/media follow-up work that is actually complete.
+- [x] Fetch and rebase onto the latest remote `main`.
+- [x] Run lint, production build, and the full database-independent test suite (258 passed; two phone-OTP integration tests skipped).
+- [x] Commit the integrated Wine Universe, header, oRy AI and logo-pipeline changes.
 - [ ] Push `main` and deploy the current release to AWS.
 - [ ] Restart and health-check the API and frontend services.
 - [ ] Confirm CloudFront, S3, DNS, cache headers, and HTTPS after deployment.
