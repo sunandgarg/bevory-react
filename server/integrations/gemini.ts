@@ -1,6 +1,6 @@
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
-const DEFAULT_MODEL = "gemini-2.5-flash-lite";
-const FALLBACK_MODEL = "gemini-3.1-flash-lite";
+const DEFAULT_MODEL = "gemini-3.1-flash-lite";
+const FALLBACK_MODEL = "gemini-3.5-flash-lite";
 const REQUEST_TIMEOUT_MS = 15_000;
 
 type GeminiPart = { text?: string };
@@ -97,4 +97,3 @@ export const generateGeminiJson = async <T>(
     throw new Error("Gemini returned invalid structured data");
   }
 };
-

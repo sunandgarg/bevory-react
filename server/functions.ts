@@ -37,7 +37,7 @@ const positiveNumber = (value: unknown) => {
 
 const findLocation = async (cityName: string) => {
   const normalized = cityName.toLowerCase();
-  const locations = await tableRows("locations");
+  const locations = await tableRows("cities");
   return locations.find((location) => (
     String(location.name ?? "").toLowerCase() === normalized
     || String(location.slug ?? "").toLowerCase() === normalized.replace(/\s+/g, "-")

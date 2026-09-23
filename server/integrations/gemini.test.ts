@@ -25,7 +25,7 @@ describe("Gemini integration", () => {
 
   it("uses the cost-efficient model with a current Flash-Lite fallback", () => {
     expect(geminiConfigured()).toBe(true);
-    expect(configuredGeminiModels()).toEqual(["gemini-2.5-flash-lite", "gemini-3.1-flash-lite"]);
+    expect(configuredGeminiModels()).toEqual(["gemini-3.1-flash-lite", "gemini-3.5-flash-lite"]);
   });
 
   it("keeps the API key in a server request header and parses text", async () => {
@@ -36,7 +36,7 @@ describe("Gemini integration", () => {
 
     const response = await generateGeminiText("Question");
 
-    expect(response).toEqual({ text: "Grounded answer", model: "gemini-2.5-flash-lite" });
+    expect(response).toEqual({ text: "Grounded answer", model: "gemini-3.1-flash-lite" });
     const [, init] = fetchMock.mock.calls[0];
     expect((init.headers as Record<string, string>)["x-goog-api-key"]).toBe("test-server-key");
     expect(String(init.body)).not.toContain("test-server-key");
@@ -55,7 +55,7 @@ describe("Gemini integration", () => {
 
     const response = await generateGeminiText("Question");
 
-    expect(response.model).toBe("gemini-3.1-flash-lite");
+    expect(response.model).toBe("gemini-3.5-flash-lite");
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
@@ -73,4 +73,3 @@ describe("Gemini integration", () => {
     expect(response.data).toEqual({ selections: [] });
   });
 });
-
