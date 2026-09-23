@@ -11,7 +11,8 @@ import ProductImage from "@/components/product/ProductImage";
 
 interface TrendingProductsProps { defaultCategory?: string; }
 
-const CATEGORY_TABS = ["whisky", "wine", "beer", "vodka", "gin", "rum"] as const;
+const CATEGORY_TABS = ["whisky", "wine", "beers", "vodka", "gin", "rum"] as const;
+const categoryTabLabel = (slug: string) => slug === "beers" ? "Beer" : slug;
 const FAVOURITE_BRANDS = /johnnie walker|old monk|kingfisher|bacardi|absolut|magic moments|tuborg|royal stag/i;
 
 const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsProps) => {
@@ -108,7 +109,7 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
           {CATEGORY_TABS.map((tab) => (
             <button key={tab} onClick={() => handleTabClick(tab)} aria-pressed={selectedTab === tab}
               className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize whitespace-nowrap ${selectedTab === tab ? "bg-foreground text-background" : "bg-secondary text-foreground"}`}>
-              {tab}
+              {categoryTabLabel(tab)}
             </button>
           ))}
         </div>

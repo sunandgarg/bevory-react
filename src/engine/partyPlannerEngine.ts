@@ -50,6 +50,7 @@ export interface PartyPlanParams {
 // Serving calculations per category
 const CATEGORY_CONFIG: Record<string, { drinksPerPerson: number; servingsPerUnit: number; unitName: string }> = {
   beer: { drinksPerPerson: 3, servingsPerUnit: 1, unitName: "bottles" },
+  beers: { drinksPerPerson: 3, servingsPerUnit: 1, unitName: "bottles" },
   wine: { drinksPerPerson: 2, servingsPerUnit: 5, unitName: "bottles" },
   whisky: { drinksPerPerson: 2, servingsPerUnit: 12, unitName: "bottles" },
   whiskey: { drinksPerPerson: 2, servingsPerUnit: 12, unitName: "bottles" },
@@ -208,7 +209,7 @@ export const generatePartyPlan = ({
 
     // Weight based on typical consumption patterns
     let weight = 1;
-    if (slug === "beer") weight = 1.5; // Beer is often more consumed
+    if (slug === "beer" || slug === "beers") weight = 1.5; // Beer is often more consumed
     if (slug === "whisky" || slug === "whiskey") weight = 1.3;
     if (slug === "wine") weight = 1.2;
     if (slug === "champagne" || slug === "liqueurs") weight = 0.6;

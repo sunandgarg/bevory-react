@@ -543,7 +543,7 @@ const AdminCheersGuide = () => {
                             { label: "Whisky", path: "/category/whisky" },
                             { label: "Rum", path: "/category/rum" },
                             { label: "Vodka", path: "/category/vodka" },
-                            { label: "Beer", path: "/category/beer" },
+                            { label: "Beer", path: "/category/beers" },
                             { label: "Wine", path: "/category/wine" },
                             { label: "Cocktails", path: "/cocktails" },
                             { label: "Guide", path: "/guide" },

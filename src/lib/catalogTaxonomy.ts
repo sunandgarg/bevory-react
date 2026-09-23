@@ -8,7 +8,7 @@ export const LIVCHEERS_CATEGORY_DEFINITIONS = [
   ["made-in-india-whisky", "Made in India Whisky", "🥃", "Whisky produced or bottled for the Indian market."],
   ["ready-to-drink", "Ready to Drink", "🥤", "Premixed cocktails, coolers and other ready-to-drink beverages."],
   ["sparkling-wine", "Sparkling Wine", "🥂", "Sparkling wines across grapes, regions and production styles."],
-  ["beers", "Beers", "🍺", "Lagers, ales, wheat beers, stouts and other beer styles."],
+  ["beers", "Beer", "🍺", "Lagers, ales, wheat beers, stouts and other beer styles."],
   ["sake", "Sake", "🍶", "Japanese rice beverages across traditional styles."],
   ["rose-wine", "Rose Wine", "🍷", "Still and sparkling rose wines."],
   ["liqueurs", "Liqueurs", "🍹", "Fruit, cream, coffee, herbal and other liqueurs."],

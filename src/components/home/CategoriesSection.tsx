@@ -28,6 +28,7 @@ const GRADIENT_MAP: Record<string, string> = {
   rum: "from-orange-100 to-orange-50 dark:from-orange-900/30 dark:to-orange-950/20",
   vodka: "from-sky-100 to-sky-50 dark:from-sky-900/30 dark:to-sky-950/20",
   beer: "from-yellow-100 to-yellow-50 dark:from-yellow-900/30 dark:to-yellow-950/20",
+  beers: "from-yellow-100 to-yellow-50 dark:from-yellow-900/30 dark:to-yellow-950/20",
   tequila: "from-lime-100 to-lime-50 dark:from-lime-900/30 dark:to-lime-950/20",
   brandy: "from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-950/20",
 };

@@ -30,6 +30,7 @@
     "brands:expand": "tsx scripts/apply-brand-expansion.ts",
     "products:consolidate": "tsx scripts/consolidate-product-duplicates.ts",
     "products:enrich": "tsx scripts/enrich-product-content.ts",
+    "categories:normalize": "tsx scripts/normalize-category-taxonomy.ts",
     "products:image:set": "tsx scripts/set-verified-product-image.ts",
     "cocktails:normalize": "tsx scripts/normalize-cocktails.ts",
     "blog:normalize": "tsx scripts/normalize-blog-editorial.ts",

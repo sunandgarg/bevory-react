@@ -489,6 +489,9 @@ export const legacyRedirectPath = (
     const canonicalSlug = productIndex.aliases?.[parts[2]];
     if (canonicalSlug) return `/${parts[0]}/product/${canonicalSlug}${parts[3] ? `/${parts[3]}` : ""}`;
   }
+  if (cityNames.has(parts[0]) && parts[1] === "category" && parts[2] === "beer") {
+    return `/${parts[0]}/category/beers${parts[3] ? `/${parts.slice(3).join("/")}` : ""}`;
+  }
   if (parts.length === 1 && stateDefaultCities.has(parts[0])) {
     const city = stateDefaultCities.get(parts[0]);
     return city === "gurgaon" ? "/" : `/${city}`;
@@ -500,7 +503,8 @@ export const legacyRedirectPath = (
     return slug ? `/gurgaon/brand/${slug}` : null;
   }
   if (parts[0] === "category" && parts[1]) {
-    return `/gurgaon/category/${parts.slice(1).join("/")}`;
+    const categorySlug = parts[1] === "beer" ? "beers" : parts[1];
+    return `/gurgaon/category/${[categorySlug, ...parts.slice(2)].join("/")}`;
   }
   if (parts[0] === "product" && parts[1]) {
     const canonicalSlug = productIndex.aliases?.[parts[1]] || parts[1];

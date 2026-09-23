@@ -109,6 +109,9 @@ describe("origin SEO rendering", () => {
     expect(legacyRedirectPath("/haryana")).toBe("/");
     expect(legacyRedirectPath("/haryana/whisky/scotch/black-dog-123")).toBe("/gurgaon/product/black-dog-123");
     expect(legacyRedirectPath("/brand/peter-scot")).toBe("/gurgaon/brand/peter-scot");
+    expect(legacyRedirectPath("/category/beer")).toBe("/gurgaon/category/beers");
+    expect(legacyRedirectPath("/delhi/category/beer")).toBe("/delhi/category/beers");
+    expect(legacyRedirectPath("/delhi/category/beer/lager")).toBe("/delhi/category/beers/lager");
     expect(legacyRedirectPath("/brand/78575e48-2b55-4a22-9970-39dd28d337e6", {
       brandsById: { "78575e48-2b55-4a22-9970-39dd28d337e6": "peter-scot" },
       products: {},

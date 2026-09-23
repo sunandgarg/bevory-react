@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, ArrowLeft, Package } from "lucide-react";
 import MobileLayout from "@/components/layout/MobileLayout";
@@ -32,6 +32,7 @@ const CategoryDetail = () => {
     slug: string;
     subCategorySlug?: string;
   }>();
+  const canonicalCategorySlug = slug === "beer" ? "beers" : slug;
   const {
     categories,
     getProductsByCategory,
@@ -39,15 +40,15 @@ const CategoryDetail = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useProducts(true, "category", slug, true);
+  } = useProducts(true, "category", canonicalCategorySlug, true);
   const { selectedCity, routeCityReady } = useRouteCity(citySlug);
   const { getProductUrlSafe } = useProductUrl();
   const [subCategories, setSubCategories] = useState<SubCategory[]>([]);
 
-  const category = categories.find((c) => c.slug === slug);
-  const allProducts = getProductsByCategory(slug || "");
+  const category = categories.find((c) => c.slug === canonicalCategorySlug);
+  const allProducts = getProductsByCategory(canonicalCategorySlug || "");
   const canonicalCitySlug = citySlug || citySlugFromName(selectedCity?.name) || "gurgaon";
-  const categoryPath = `/${canonicalCitySlug}/category/${slug}`;
+  const categoryPath = `/${canonicalCitySlug}/category/${canonicalCategorySlug}`;
 
   // Fetch sub-categories for this category
   useEffect(() => {
@@ -113,6 +114,15 @@ const CategoryDetail = () => {
       })),
     };
   };
+
+  if (slug !== canonicalCategorySlug) {
+    return (
+      <Navigate
+        replace
+        to={`${categoryPath}${subCategorySlug ? `/${subCategorySlug}` : ""}`}
+      />
+    );
+  }
 
   if (loading || !routeCityReady) {
     return (

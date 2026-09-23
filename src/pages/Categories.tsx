@@ -17,6 +17,7 @@ const categoryGradients: Record<string, string> = {
   rum: "from-orange-500/20 to-orange-500/5",
   vodka: "from-sky-500/20 to-sky-500/5",
   beer: "from-yellow-500/20 to-yellow-500/5",
+  beers: "from-yellow-500/20 to-yellow-500/5",
   brandy: "from-purple-500/20 to-purple-500/5",
   tequila: "from-lime-500/20 to-lime-500/5",
 };
