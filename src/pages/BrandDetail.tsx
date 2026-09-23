@@ -332,7 +332,7 @@ const BrandDetail = () => {
     return (
       <MobileLayout showSearch={false} showCheersGuide={false}>
         <div className="p-4 space-y-4">
-          <Skeleton className="w-full h-56 rounded-2xl" />
+          <Skeleton className="w-full h-32 sm:h-36 rounded-2xl" />
           <Skeleton className="w-48 h-8" />
           <Skeleton className="w-full h-24" />
           <div className="grid grid-cols-2 gap-3">
@@ -391,49 +391,47 @@ const BrandDetail = () => {
             animate={{ opacity: 1, y: 0 }}
             className="px-4 pt-4"
           >
-            <div className="relative rounded-xl overflow-hidden bg-secondary/60 border border-border">
-              {brand.image_url && (
-                <OptimizedImage
-                  src={brand.image_url}
-                  alt={`${brand.brand_name} brand image`}
-                  width={800}
-                  height={800}
-                  aspectRatio="1/1"
-                  sizes="(max-width: 640px) 100vw, 640px"
-                  className="w-full bg-background/75 p-3 sm:p-5"
-                  objectFit="contain"
-                  priority
-                />
-              )}
-              <div className="p-5">
-                <div className="flex items-start gap-4">
-                  <div className="w-20 h-20 rounded-2xl bg-background shadow-lg flex items-center justify-center text-4xl flex-shrink-0 overflow-hidden border border-border">
-                    <BrandLogo
-                      brandName={brand.brand_name}
-                      slug={brand.slug}
-                      logoUrl={brand.logo_url}
-                      emoji={brand.logo_emoji}
-                      className="h-full w-full"
-                      imgClassName="h-full w-full"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-2xl font-serif font-bold leading-tight">{brand.brand_name}</h2>
-                    {brand.country && (
-                      <p className="text-sm text-accent font-medium mt-1" itemProp="foundingLocation">
-                        {brand.country_flag_url ? (
-                          <img src={brand.country_flag_url} alt="" width={20} height={14} loading="lazy" decoding="async" className="inline-block mr-1 h-3.5 w-5 object-cover align-[-2px]" />
-                        ) : brand.country_flag ? (
-                          <span className="mr-1" aria-hidden="true">{brand.country_flag}</span>
-                        ) : null}
-                        {brand.country}
-                      </p>
-                    )}
-                    <p className="text-sm text-muted-foreground mt-2">
-                      {products.length} {products.length === 1 ? 'product' : 'products'} listed
-                    </p>
-                  </div>
+            <div className="rounded-xl overflow-hidden bg-secondary/60 border border-border">
+              <div className="flex items-center gap-3 p-4 sm:gap-5 sm:p-5">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-background shadow-sm flex items-center justify-center text-3xl sm:text-4xl flex-shrink-0 overflow-hidden border border-border">
+                  <BrandLogo
+                    brandName={brand.brand_name}
+                    slug={brand.slug}
+                    logoUrl={brand.logo_url}
+                    emoji={brand.logo_emoji}
+                    className="h-full w-full"
+                    imgClassName="h-full w-full"
+                  />
                 </div>
+                <div className="flex-1 min-w-0 py-1">
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold leading-tight">{brand.brand_name}</h2>
+                  {brand.country && (
+                    <p className="text-sm text-accent font-medium mt-1" itemProp="foundingLocation">
+                      {brand.country_flag_url ? (
+                        <img src={brand.country_flag_url} alt="" width={20} height={14} loading="lazy" decoding="async" className="inline-block mr-1 h-3.5 w-5 object-cover align-[-2px]" />
+                      ) : brand.country_flag ? (
+                        <span className="mr-1" aria-hidden="true">{brand.country_flag}</span>
+                      ) : null}
+                      {brand.country}
+                    </p>
+                  )}
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {products.length} {products.length === 1 ? 'product' : 'products'} listed
+                  </p>
+                </div>
+                {brand.image_url && (
+                  <OptimizedImage
+                    src={brand.image_url}
+                    alt={`${brand.brand_name} bottle`}
+                    width={160}
+                    height={224}
+                    aspectRatio="5/7"
+                    sizes="(max-width: 640px) 64px, 80px"
+                    className="h-24 w-16 sm:h-28 sm:w-20 flex-shrink-0 rounded-xl border border-border/70 bg-background/80 p-1.5 sm:p-2"
+                    objectFit="contain"
+                    priority
+                  />
+                )}
               </div>
             </div>
           </motion.section>
