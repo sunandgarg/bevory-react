@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 export const LEGAL_LAST_UPDATED = "23 September 2026";
 export const LEGAL_EMAIL = "bevory.main@gmail.com";
@@ -49,8 +50,7 @@ const LegalPage = ({ title, description, children }: LegalPageProps) => (
           Effective and last updated: {LEGAL_LAST_UPDATED}
         </p>
         <div className="my-6 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm">
-          <strong>Important:</strong> BevOry is an information and discovery service. It does not sell, deliver,
-          distribute, fulfil, broker, or process payment for alcoholic beverages.
+          <strong>Important:</strong> {INFORMATIONAL_PRICE_NOTICE}
         </div>
         {children}
         <hr />

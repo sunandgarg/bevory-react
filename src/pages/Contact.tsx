@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 const Contact = () => (
   <div className="min-h-screen bg-background">
@@ -40,7 +41,8 @@ const Contact = () => (
 
       <div className="mt-8 p-4 rounded-xl bg-muted/50 border border-border/50">
         <p className="text-xs text-muted-foreground">
-          <strong>Note:</strong> BevOry does not offer home delivery services. Please be cautious of any fraudulent messages claiming delivery in our name. For any concerns, contact us directly using the information above.
+          <strong>Note:</strong> {INFORMATIONAL_PRICE_NOTICE} Be cautious of fraudulent messages claiming delivery in
+          our name; contact us directly using the information above.
         </p>
         <p className="mt-3 text-xs text-muted-foreground">
           For privacy, content, rights, account, or legal complaints, follow our{" "}

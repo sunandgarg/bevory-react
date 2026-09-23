@@ -136,6 +136,37 @@ const humanize = (value: string) => value
 const shortTitle = (value: string) => value.length <= 60 ? value : `${value.slice(0, 57).trim()}...`;
 const shortDescription = (value: string) => value.length <= 160 ? value : `${value.slice(0, 157).trim()}...`;
 
+const normalizeBeerSeoText = (value: string, categoryPage: boolean) => {
+  if (categoryPage) return value.replace(/\bBeers\b/g, "Beer");
+  return value
+    .replace(/\bBeers Prices\b/g, "Beer Prices")
+    .replace(/\bBrowse more Beers products\b/g, "Browse more Beer products")
+    .replace(/\bwithin (?:the )?Beers catalogue\b/g, "within the Beer catalogue");
+};
+
+const normalizeGeneratedBeerSeo = (pathname: string, generated: GeneratedSeoRoute): GeneratedSeoRoute => {
+  const categoryPage = /^\/[^/]+\/category\/beers(?:\/|$)/.test(pathname);
+  const normalize = (value: unknown) => typeof value === "string"
+    ? normalizeBeerSeoText(value, categoryPage)
+    : value;
+  return {
+    ...generated,
+    title: normalize(generated.title) as string,
+    description: normalize(generated.description) as string,
+    heading: normalize(generated.heading) as string,
+    body: Array.isArray(generated.body) ? generated.body.map((item) => normalize(item) as string) : generated.body,
+    breadcrumbs: Array.isArray(generated.breadcrumbs)
+      ? generated.breadcrumbs.map((breadcrumb) => ({
+          ...breadcrumb,
+          name: breadcrumb.name === "Beers" ? "Beer" : normalize(breadcrumb.name) as string,
+        }))
+      : generated.breadcrumbs,
+    structuredData: categoryPage && generated.structuredData
+      ? JSON.parse(normalizeBeerSeoText(JSON.stringify(generated.structuredData), true)) as Record<string, unknown>
+      : generated.structuredData,
+  };
+};
+
 const escapeHtml = (value: unknown) => String(value)
   .replace(/&/g, "&amp;")
   .replace(/</g, "&lt;")
@@ -188,15 +219,16 @@ export const resolveSeo = (pathname: string, seoRoutes: SeoRouteMap = {}): SeoRo
 
   const generated = seoRoutes[cleanPath];
   if (generated) {
+    const normalized = normalizeGeneratedBeerSeo(cleanPath, generated);
     return {
       ...seo,
-      ...generated,
-      title: typeof generated.title === "string"
-        ? generated.title.replace(/\bBevory\b/g, "BevOry")
+      ...normalized,
+      title: typeof normalized.title === "string"
+        ? normalized.title.replace(/\bBevory\b/g, "BevOry")
         : seo.title,
       canonicalPath: cleanPath,
       robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      breadcrumbs: Array.isArray(generated.breadcrumbs) ? generated.breadcrumbs : seo.breadcrumbs,
+      breadcrumbs: Array.isArray(normalized.breadcrumbs) ? normalized.breadcrumbs : seo.breadcrumbs,
     };
   }
 

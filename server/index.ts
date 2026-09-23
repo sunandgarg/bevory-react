@@ -406,9 +406,12 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
         return res.redirect(308, `${redirectPath}${query}`);
       }
       const rendered = await renderSeo(req.path);
-      res.setHeader("Cache-Control", rendered.statusCode === 404
-        ? "private, no-store"
-        : "public, max-age=0, must-revalidate");
+      if (rendered.statusCode === 404) {
+        res.setHeader("Cache-Control", "private, no-store");
+      } else {
+        res.setHeader("Cache-Control", "public, max-age=60, s-maxage=600, stale-while-revalidate=86400");
+        res.setHeader("Cloudflare-CDN-Cache-Control", "public, s-maxage=600, stale-while-revalidate=86400");
+      }
       return res.status(rendered.statusCode).type("html").send(rendered.html);
     } catch (error) {
       return next(error);

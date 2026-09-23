@@ -24,7 +24,7 @@ const MobileLayout = memo(({
   showBack = false,
   showBottomNav = true,
   showSearch = true,
-  showCheersGuide = true,
+  showCheersGuide = false,
 }: MobileLayoutProps) => {
   const navigate = useNavigate();
 

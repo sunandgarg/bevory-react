@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 const Footer = () => {
   return (
@@ -64,10 +65,7 @@ const Footer = () => {
       <div className="space-y-2 mb-6 pt-4 border-t border-primary-foreground/10">
         <p className="text-sm font-semibold text-accent">Drink Less. Drink Better. Drink Responsibly.</p>
         <p className="text-xs text-primary-foreground/50">
-          <strong className="text-primary-foreground/70">Pricing Notice:</strong> Prices come from publicly available sources and may vary. Please check with local retailers for the most accurate pricing.
-        </p>
-        <p className="text-xs text-primary-foreground/50">
-          <strong className="text-primary-foreground/70">No Delivery:</strong> BevOry does not offer home delivery services. Be cautious of fraudulent messages claiming otherwise.
+          <strong className="text-primary-foreground/70">Information Notice:</strong> {INFORMATIONAL_PRICE_NOTICE}
         </p>
         <p className="text-xs text-primary-foreground/50">
           <strong className="text-primary-foreground/70">25+ and local law:</strong> Alcohol can harm health. Never drink and drive. Access does not prove legal eligibility in your location.

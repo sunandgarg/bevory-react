@@ -1,4 +1,5 @@
 import { Bell } from "lucide-react";
+import { lazy, Suspense } from "react";
 import { Link, Outlet, useLocation as useRouterLocation } from "react-router-dom";
 import UniversalSearch from "@/components/UniversalSearch";
 import LocationSelectorNew from "@/components/LocationSelectorNew";
@@ -6,7 +7,8 @@ import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
 import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
-import OryAssistant from "@/components/ai/OryAssistant";
+
+const OryAssistant = lazy(() => import("@/components/ai/OryAssistant"));
 
 const PublicShell = () => {
   const { unreadCount } = useNotifications();
@@ -67,7 +69,9 @@ const PublicShell = () => {
         <Outlet />
       </div>
 
-      <OryAssistant />
+      <Suspense fallback={null}>
+        <OryAssistant />
+      </Suspense>
     </>
   );
 };

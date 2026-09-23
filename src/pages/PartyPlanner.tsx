@@ -13,6 +13,7 @@ import { generateProductUrl } from "@/lib/productSlug";
 import { citySlugFromName } from "@/lib/locations";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 interface AIProduct {
   id: string;
@@ -39,6 +40,7 @@ interface AIResponse {
   totalEstimatedCost: number;
   partyTips: string[];
   budgetAnalysis: string;
+  notice?: string;
 }
 
 interface Category {
@@ -136,8 +138,8 @@ const PartyPlanner = () => {
 
   const handleSharePlan = async () => {
     const planText = step === "ai-results" && aiRecommendations
-      ? `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${aiRecommendations.recommendations.map(r => `${r.category}: ${r.quantity} items - ₹${r.estimatedCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${aiRecommendations.totalEstimatedCost.toLocaleString()}\n\nPlanned with BevOry 🥂`
-      : `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${recommendations.map(r => `${r.category.name}: ${r.quantity} items - ₹${r.totalCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${totalCost.toLocaleString()}\n\nPlanned with BevOry 🥂`;
+      ? `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${aiRecommendations.recommendations.map(r => `${r.category}: ${r.quantity} items - ₹${r.estimatedCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${aiRecommendations.totalEstimatedCost.toLocaleString()}\n\n${aiRecommendations.notice || INFORMATIONAL_PRICE_NOTICE}\n\nPlanned with BevOry 🥂`
+      : `🎉 My Party Plan\n\n👥 ${guests[0]} Guests | 💰 ₹${budget[0].toLocaleString()} Budget\n📍 ${selectedCity?.name || "India"}\n\n${recommendations.map(r => `${r.category.name}: ${r.quantity} items - ₹${r.totalCost.toLocaleString()}`).join("\n")}\n\n💰 Total: ₹${totalCost.toLocaleString()}\n\n${INFORMATIONAL_PRICE_NOTICE}\n\nPlanned with BevOry 🥂`;
 
     try {
       if (navigator.share) {
@@ -487,6 +489,10 @@ const PartyPlanner = () => {
                 <p className="text-sm text-muted-foreground">{aiRecommendations.budgetAnalysis}</p>
               </div>
 
+              <p className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-muted-foreground">
+                {aiRecommendations.notice || INFORMATIONAL_PRICE_NOTICE}
+              </p>
+
               {/* AI Recommendations */}
               <div className="space-y-4">
                 {aiRecommendations.recommendations.map((rec, index) => (
@@ -624,6 +630,10 @@ const PartyPlanner = () => {
                   </div>
                 )}
               </div>
+
+              <p className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-muted-foreground">
+                {INFORMATIONAL_PRICE_NOTICE}
+              </p>
 
               {/* Recommendations */}
               {recommendations.length > 0 ? (

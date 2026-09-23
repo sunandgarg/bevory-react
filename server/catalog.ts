@@ -19,6 +19,7 @@ type CachedCatalog = {
 type CatalogView = "full" | "home" | "category";
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const MAX_FULL_CITY_CACHES = 4;
 const PUBLIC_CACHE_CONTROL = "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400";
 const cityCatalogCache = new Map<string, CachedCatalog>();
 const cityCatalogBuilds = new Map<string, Promise<ReturnType<typeof buildCityCatalog>>>();
@@ -215,7 +216,7 @@ const catalogCacheKey = (cityId: string, view: CatalogView, categorySlug = "") =
   view === "category" ? `${cityId}:category:${categorySlug}` : `${cityId}:${view}`
 );
 
-const buildCatalogPayload = async (cityId: string, view: CatalogView, categorySlug = "") => {
+const buildFullCatalogPayload = async (cityId: string) => {
   const priceRecords = await findIndexedContentData("product_prices", {
     city_id: cityId,
     price_available: true,
@@ -244,30 +245,51 @@ const buildCatalogPayload = async (cityId: string, view: CatalogView, categorySl
     prisma.contentRecord.findMany({ where: { tableName: "sub_categories" }, select: { data: true } }),
   ]);
 
-  const fullCatalog = buildCityCatalog(
+  return buildCityCatalog(
     prices,
     jsonRows(productRecords),
     jsonRows(categoryRecords),
     jsonRows(subcategoryRecords),
   );
-  if (view === "home") return buildHomeCatalog(fullCatalog);
-  if (view === "category") return buildCategoryCatalog(fullCatalog, categorySlug);
-  return fullCatalog;
 };
 
-const getCatalogPayload = async (cityId: string, view: CatalogView, categorySlug = "") => {
+const rememberCatalog = (cacheKey: string, payload: ReturnType<typeof buildCityCatalog>) => {
+  cityCatalogCache.set(cacheKey, { payload, expiresAt: Date.now() + CACHE_TTL_MS });
+  const fullKeys = [...cityCatalogCache.keys()].filter((key) => key.endsWith(":full"));
+  while (fullKeys.length > MAX_FULL_CITY_CACHES) {
+    const oldest = fullKeys.shift();
+    if (oldest) cityCatalogCache.delete(oldest);
+  }
+};
+
+const getCatalogPayload = async (
+  cityId: string,
+  view: CatalogView,
+  categorySlug = "",
+): Promise<ReturnType<typeof buildCityCatalog>> => {
   const cacheKey = catalogCacheKey(cityId, view, categorySlug);
   const cached = cityCatalogCache.get(cacheKey);
-  if (cached && cached.expiresAt > Date.now()) return cached.payload;
+  if (cached && cached.expiresAt > Date.now()) {
+    cityCatalogCache.delete(cacheKey);
+    cityCatalogCache.set(cacheKey, cached);
+    return cached.payload;
+  }
+  if (cached) cityCatalogCache.delete(cacheKey);
 
   const inFlight = cityCatalogBuilds.get(cacheKey);
   if (inFlight) return inFlight;
 
   const generation = cacheGeneration;
-  const build = buildCatalogPayload(cityId, view, categorySlug)
+  const build: Promise<ReturnType<typeof buildCityCatalog>> = (view === "full"
+    ? buildFullCatalogPayload(cityId)
+    : getCatalogPayload(cityId, "full").then((fullCatalog: ReturnType<typeof buildCityCatalog>) => (
+        view === "home"
+          ? buildHomeCatalog(fullCatalog)
+          : buildCategoryCatalog(fullCatalog, categorySlug)
+      )))
     .then((payload) => {
       if (generation === cacheGeneration) {
-        cityCatalogCache.set(cacheKey, { payload, expiresAt: Date.now() + CACHE_TTL_MS });
+        rememberCatalog(cacheKey, payload);
       }
       return payload;
     })
@@ -287,12 +309,19 @@ export const prewarmCityHomeCatalogs = async () => {
     .filter(({ data }) => toRecordData(data).is_visible !== false)
     .map(({ recordId, data }) => String(toRecordData(data).id ?? recordId).trim())
     .filter(Boolean);
+  const defaultCity = cityRecords
+    .map(({ recordId, data }) => ({ recordId, city: toRecordData(data) }))
+    .find(({ city }) => String(city.slug ?? "").toLowerCase() === "gurgaon");
+  const defaultCityId = defaultCity
+    ? String(defaultCity.city.id ?? defaultCity.recordId).trim()
+    : "";
 
   for (let index = 0; index < cityIds.length; index += 2) {
     await Promise.allSettled(cityIds.slice(index, index + 2).map((cityId) => (
       getCatalogPayload(cityId, "home")
     )));
   }
+  if (defaultCityId) await getCatalogPayload(String(defaultCityId), "full");
   return cityIds.length;
 };
 
@@ -319,6 +348,7 @@ export const cityCatalogHandler = async (req: Request, res: Response) => {
       ? paginateCatalog(payload, offset, limit)
       : payload;
     res.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    res.set("Cloudflare-CDN-Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
     return res.json({ data: responsePayload, error: null });
   } catch (error) {
     return res.status(500).json({

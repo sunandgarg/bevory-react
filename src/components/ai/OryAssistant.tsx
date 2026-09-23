@@ -3,6 +3,7 @@ import { Loader2, Send, Sparkles, X } from "lucide-react";
 import { useLocation as useRouterLocation } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
 import { useLocation } from "@/hooks/useLocation";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 type ChatMessage = {
   id: string;
@@ -54,7 +55,10 @@ const starterQuestions = (pathname: string) => {
   ];
 };
 
-const greeting = "Hi, I’m oRy AI. Ask about this page, local price information, comparisons or responsible party planning.";
+const greeting = `Hi, I’m oRy AI. Ask about this page, local price information, comparisons or responsible party planning.\n\n${INFORMATIONAL_PRICE_NOTICE}`;
+const withInformationNotice = (content: string) => content.includes(INFORMATIONAL_PRICE_NOTICE)
+  ? content
+  : `${content.trim()}\n\n${INFORMATIONAL_PRICE_NOTICE}`;
 
 const OryAssistant = () => {
   const { pathname } = useRouterLocation();
@@ -106,7 +110,7 @@ const OryAssistant = () => {
     setMessages((current) => [...current, {
       id: crypto.randomUUID(),
       role: "assistant",
-      content: error?.message || data?.content || "I could not answer that right now. Please try again shortly.",
+      content: withInformationNotice(error?.message || data?.content || "I could not answer that right now. Please try again shortly."),
       provider: data?.provider,
     }]);
     setLoading(false);
@@ -210,7 +214,7 @@ const OryAssistant = () => {
                 </button>
               </form>
               <p className="mt-2 text-[10px] leading-snug text-muted-foreground">
-                Questions and page context are processed by Google Gemini. Don’t share personal information. AI can be wrong; verify prices and labels locally.
+                Questions and page context are processed by Google Gemini. Don’t share personal information. {INFORMATIONAL_PRICE_NOTICE}
               </p>
             </div>
           </section>
@@ -221,4 +225,3 @@ const OryAssistant = () => {
 };
 
 export default OryAssistant;
-

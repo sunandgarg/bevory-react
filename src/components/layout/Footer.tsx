@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 const Footer = () => {
   return (
@@ -58,7 +59,7 @@ const Footer = () => {
             <p className="text-[10px] text-muted-foreground">© 2026 BevOry</p>
           </div>
           <p className="text-[10px] text-muted-foreground mt-2">
-            For adults aged 25+ who also meet local law. BevOry does not sell or deliver alcohol.
+            For adults aged 25+ who also meet local law. {INFORMATIONAL_PRICE_NOTICE}
           </p>
           <button
             type="button"

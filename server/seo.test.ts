@@ -71,6 +71,26 @@ describe("origin SEO rendering", () => {
     expect(html).toContain('"@type":"Product"');
   });
 
+  it("uses singular Beer in generated category metadata while preserving the plural route", () => {
+    const path = "/gurgaon/category/beers";
+    const seo = resolveSeo(path, {
+      [path]: {
+        title: "Beers Prices in Gurgaon | BevOry",
+        description: "Browse more Beers products in Gurgaon.",
+        heading: "Beers Prices in Gurgaon",
+        breadcrumbs: [{ name: "Home", path: "/" }, { name: "Beers", path }],
+        structuredData: { "@type": "CollectionPage", name: "Beers Prices in Gurgaon" },
+      },
+    });
+
+    expect(seo.canonicalPath).toBe(path);
+    expect(seo.title).toBe("Beer Prices in Gurgaon | BevOry");
+    expect(seo.heading).toBe("Beer Prices in Gurgaon");
+    expect(seo.description).toContain("Beer products");
+    expect(seo.breadcrumbs.at(-1)?.name).toBe("Beer");
+    expect(JSON.stringify(seo.structuredData)).toContain("Beer Prices");
+  });
+
   it("keeps private and unknown routes out of the index", () => {
     expect(resolveSeo("/admin", {}).robots).toContain("noindex");
     expect(resolveSeo("/not-a-real-page", {}).robots).toContain("noindex");

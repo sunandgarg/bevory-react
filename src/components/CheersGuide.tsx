@@ -1,8 +1,7 @@
-import { useState, useCallback, memo, useMemo } from "react";
+import { useState, useCallback, memo, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
-import { Skeleton } from "@/components/ui/skeleton";
-import { X, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { isValidExternalUrl, openExternalUrl } from "@/lib/urlValidation";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -30,25 +29,6 @@ interface CheersGuideItem {
 interface CheersGuideProps {
   className?: string;
 }
-
-const DEFAULT_GUIDES: CheersGuideItem[] = [
-  ["goa-after-dark", "Goa After Dark", "Beach shacks, bass and a safe ride home", "/guides/goa-after-dark.jpg"],
-  ["tropical-splash", "Tropical Splash", "Poolside energy, water breaks included", "/guides/tropical-pool-party.jpg"],
-  ["rooftop-after-hours", "Rooftop After Hours", "City lights and a sharp house-party plan", "/guides/rooftop-after-hours.jpg"],
-  ["dancefloor-survival", "Dancefloor Survival", "Pace the night without losing the mood", "/guides/dancefloor-survival.jpg"],
-  ["sunrise-reset", "Sunrise Reset", "Food, hydration and the morning after", "/guides/sunrise-reset.jpg"],
-].map(([id, title, subtitle, image_url], index) => ({
-  id,
-  title,
-  subtitle,
-  image_url,
-  emoji: null,
-  link_url: "/guide",
-  link_type: "internal",
-  order_index: (index + 1) * 10,
-  is_active: true,
-  stories: [{ type: "image", url: image_url, duration: 6 }],
-}));
 
 const COCKTAIL_SHORTS: CheersGuideItem[] = [
   ["jack-cocktail-one", "Jack Daniel’s", "A bold whiskey cocktail", "/stories/jack-cocktail-amber.svg", "https://www.youtube.com/shorts/r5C8UIkmlRk"],
@@ -92,24 +72,33 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { data: remoteGuides = [], isLoading } = useQuery({
+  const { data: remoteGuides = [] } = useQuery({
     queryKey: ["cheers-guides"],
     queryFn: fetchGuides,
     staleTime: 10 * 60 * 1000,
   });
   const guides = useMemo(() => {
-    const supplementalGuides = (remoteGuides.length > 0 ? remoteGuides : DEFAULT_GUIDES)
-      .filter((guide) => !COCKTAIL_SHORT_IDS.has(guide.id));
-    return [...COCKTAIL_SHORTS, ...supplementalGuides];
+    const remoteVideoGuides = remoteGuides.filter((guide) => (
+      !COCKTAIL_SHORT_IDS.has(guide.id)
+      && guide.stories?.some((story) => story.type === "video")
+    ));
+    return [...COCKTAIL_SHORTS, ...remoteVideoGuides];
   }, [remoteGuides]);
 
   const selectedGuide = selectedGuideIndex !== null ? guides[selectedGuideIndex] : null;
   const stories = selectedGuide?.stories || [];
   const currentStory = stories[currentStoryIndex];
   const storyDuration = (currentStory?.duration || 5) * 1000;
+
+  useEffect(() => {
+    setIsMuted(true);
+  }, [selectedGuideIndex, currentStoryIndex]);
 
   // Progress timer
   useEffect(() => {
@@ -146,6 +135,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
       setCurrentStoryIndex(0);
       setProgress(0);
       setIsPaused(false);
+      setIsMuted(true);
       return;
     }
 
@@ -173,7 +163,22 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
     setSelectedGuideIndex(null);
     setCurrentStoryIndex(0);
     setProgress(0);
+    setIsMuted(true);
   }, []);
+
+  const toggleAudio = useCallback(() => {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    iframeRef.current?.contentWindow?.postMessage(JSON.stringify({
+      event: "command",
+      func: nextMuted ? "mute" : "unMute",
+      args: [],
+    }), "*");
+    if (videoRef.current) {
+      videoRef.current.muted = nextMuted;
+      if (!nextMuted) void videoRef.current.play().catch(() => undefined);
+    }
+  }, [isMuted]);
 
   const goToPrevStory = useCallback(() => {
     if (currentStoryIndex > 0) {
@@ -214,21 +219,6 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [selectedGuideIndex, closeStoryViewer, goToNextStory, goToPrevStory]);
-
-  if (isLoading) {
-    return (
-      <div className={className}>
-        <div className="flex gap-3 overflow-x-auto pb-2 px-4 scrollbar-hide">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="flex flex-col items-center flex-shrink-0">
-              <Skeleton className="w-16 h-16 rounded-full" />
-              <Skeleton className="w-12 h-3 mt-2 rounded" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -318,7 +308,17 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                {currentStory?.type !== "video" && (
+                {currentStory?.type === "video" ? (
+                  <button
+                    type="button"
+                    aria-label={isMuted ? "Turn audio on" : "Turn audio off"}
+                    aria-pressed={!isMuted}
+                    onClick={(event) => { event.stopPropagation(); toggleAudio(); }}
+                    className="rounded-full bg-white/10 p-2 text-white/90 hover:bg-white/20 hover:text-white"
+                  >
+                    {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  </button>
+                ) : (
                   <button
                     type="button"
                     aria-label={isPaused ? "Resume story" : "Pause story"}
@@ -349,8 +349,9 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                     const videoId = ytMatch[1];
                     return (
                       <iframe
+                        ref={iframeRef}
                         key={currentStory.url}
-                        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`}
+                        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&loop=1&playlist=${videoId}&playsinline=1&enablejsapi=1`}
                         title={`${selectedGuide.title} YouTube Short`}
                         className="h-full w-full"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -360,10 +361,11 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                   }
                   return (
                     <video
+                      ref={videoRef}
                       key={currentStory.url}
                       src={url}
                       autoPlay
-                      muted
+                      muted={isMuted}
                       playsInline
                       className="max-w-full max-h-full object-contain"
                       onEnded={goToNextStory}

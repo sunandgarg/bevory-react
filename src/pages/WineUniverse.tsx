@@ -171,7 +171,7 @@ const WineUniverse = () => {
   };
 
   const saveCurrentSearch = () => {
-    const label = [query.trim(), style !== "all" ? STYLE_FILTERS.find((item) => item.value === style)?.label : "", taste ? TASTE_FILTERS.find((item) => item.value === taste)?.label : "", region !== "all" ? region : "", price !== "all" ? price.replaceAll("-", " ") : ""]
+    const label = [query.trim(), style !== "all" ? STYLE_FILTERS.find((item) => item.value === style)?.label : "", taste ? TASTE_FILTERS.find((item) => item.value === taste)?.label : "", region !== "all" ? region : "", price !== "all" ? price.replace(/-/g, " ") : ""]
       .filter(Boolean)
       .join(" · ") || "All wines";
     const saved: SavedSearch = { id: `${Date.now()}`, label, query, style, price, region, minimumRating, taste };
