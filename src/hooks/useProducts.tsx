@@ -82,6 +82,16 @@ type CatalogPage = {
   offset: number;
 };
 
+const canonicalCategory = (category: Category): Category => (
+  category.slug === "beers" ? { ...category, name: "Beer" } : category
+);
+
+const canonicalProductCategory = (product: Product): Product => (
+  product.category?.slug === "beers"
+    ? { ...product, category: { ...product.category, name: "Beer" } }
+    : product
+);
+
 const fetchCityCatalog = async (
   cityId: string,
   view: CatalogView,
@@ -91,8 +101,8 @@ const fetchCityCatalog = async (
   const { data, error } = await apiClient.catalog.getCity(cityId, view, categorySlug, pagination);
   if (error) throw error;
   return {
-    categories: (data?.categories ?? []) as Category[],
-    products: (data?.products ?? []) as Product[],
+    categories: ((data?.categories ?? []) as Category[]).map(canonicalCategory),
+    products: ((data?.products ?? []) as Product[]).map(canonicalProductCategory),
     totalProducts: Number(data?.totalProducts ?? 0),
     categoryCounts: data?.categoryCounts ?? {},
     brandNames: data?.brandNames ?? [],

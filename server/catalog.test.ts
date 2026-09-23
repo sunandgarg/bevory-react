@@ -45,6 +45,18 @@ describe("buildCityCatalog", () => {
     expect(category.categories).toHaveLength(1);
   });
 
+  it("uses Beer as the display name for the canonical beers slug", () => {
+    const catalog = buildCityCatalog(
+      [{ product_id: "beer-1", price: 180, volume_ml: 650, price_available: true }],
+      [{ id: "beer-1", name: "Lager", category_id: "beer-category", is_active: true }],
+      [{ id: "beer-category", name: "Beers", slug: "beers", is_active: true }],
+      [],
+    );
+
+    expect(catalog.categories[0]).toMatchObject({ name: "Beer", slug: "beers" });
+    expect(catalog.products[0].category).toMatchObject({ name: "Beer", slug: "beers" });
+  });
+
   it("groups every wine category into the virtual wine catalog", () => {
     const catalog = buildCityCatalog(
       [

@@ -29,6 +29,10 @@ const jsonRows = (records: Array<{ data: Prisma.JsonValue }>) =>
 
 const isActive = (row: CatalogRow) => row.is_active !== false;
 
+const canonicalCategoryName = (row: CatalogRow) => (
+  String(row.slug ?? "").toLowerCase() === "beers" ? "Beer" : row.name
+);
+
 const preferredVariant = (left: CatalogVariant, right: CatalogVariant) => {
   const leftPreferred = left.volume_ml === 750 ? 1 : 0;
   const rightPreferred = right.volume_ml === 750 ? 1 : 0;
@@ -91,7 +95,7 @@ export const buildCityCatalog = (
         is_all_time_favourite: row.is_all_time_favourite === true,
         available_variants: variants,
         category: category ? {
-          name: category.name,
+          name: canonicalCategoryName(category),
           slug: category.slug,
           emoji: category.emoji ?? null,
         } : null,
@@ -112,7 +116,7 @@ export const buildCityCatalog = (
     .sort((left, right) => Number(left.order_index ?? 0) - Number(right.order_index ?? 0))
     .map((row) => ({
       id: row.id,
-      name: row.name,
+      name: canonicalCategoryName(row),
       slug: row.slug,
       emoji: row.emoji ?? null,
       image_url: row.image_url ?? null,
