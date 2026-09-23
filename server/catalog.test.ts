@@ -45,6 +45,43 @@ describe("buildCityCatalog", () => {
     expect(category.categories).toHaveLength(1);
   });
 
+  it("groups every wine category into the virtual wine catalog", () => {
+    const catalog = buildCityCatalog(
+      [
+        { product_id: "red", price: 900, volume_ml: 750, price_available: true },
+        { product_id: "white", price: 1100, volume_ml: 750, price_available: true },
+        { product_id: "sparkling", price: 1800, volume_ml: 750, price_available: true },
+        { product_id: "champagne", price: 5000, volume_ml: 750, price_available: true },
+        { product_id: "whisky", price: 1200, volume_ml: 750, price_available: true },
+      ],
+      [
+        { id: "red", name: "Red", category_id: "red-category", is_active: true },
+        { id: "white", name: "White", category_id: "white-category", is_active: true },
+        { id: "sparkling", name: "Sparkling", category_id: "sparkling-category", is_active: true },
+        { id: "champagne", name: "Champagne", category_id: "champagne-category", is_active: true },
+        { id: "whisky", name: "Whisky", category_id: "whisky-category", is_active: true },
+      ],
+      [
+        { id: "red-category", name: "Red Wine", slug: "red-wine", is_active: true },
+        { id: "white-category", name: "White Wine", slug: "white-wine", is_active: true },
+        { id: "sparkling-category", name: "Sparkling Wine", slug: "sparkling-wine", is_active: true },
+        { id: "champagne-category", name: "Champagne", slug: "champagne", is_active: true },
+        { id: "whisky-category", name: "Whisky", slug: "whisky", is_active: true },
+      ],
+      [],
+    );
+
+    const wineCatalog = buildCategoryCatalog(catalog, "wine");
+    expect(wineCatalog.products.map((product) => product.id)).toEqual(["champagne", "red", "sparkling", "white"]);
+    expect(wineCatalog.categories.map((category) => category.slug)).toEqual([
+      "red-wine",
+      "white-wine",
+      "sparkling-wine",
+      "champagne",
+    ]);
+    expect(wineCatalog.totalProducts).toBe(4);
+  });
+
   it("returns deterministic 15-product pages with a continuation signal", () => {
     const products = Array.from({ length: 45 }, (_, index) => ({ id: `p${index + 1}` }));
     const firstPage = paginateCatalog({ products, totalProducts: products.length }, 0, 15);

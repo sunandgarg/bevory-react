@@ -182,11 +182,14 @@ export const buildHomeCatalog = (catalog: ReturnType<typeof buildCityCatalog>) =
 };
 
 export const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog>, categorySlug: string) => {
+  const matchesCategory = (slug: string) => categorySlug === "wine"
+    ? slug === "wine" || slug.includes("wine") || slug === "champagne"
+    : slug === categorySlug;
   const products = catalog.products.filter((product) => (
-    String((product.category as CatalogRow | null)?.slug ?? "") === categorySlug
+    matchesCategory(String((product.category as CatalogRow | null)?.slug ?? ""))
   ));
   return {
-    categories: catalog.categories.filter((category) => String(category.slug ?? "") === categorySlug),
+    categories: catalog.categories.filter((category) => matchesCategory(String(category.slug ?? ""))),
     products: products.map(toCatalogCard),
     totalProducts: products.length,
   };

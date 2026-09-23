@@ -114,7 +114,7 @@ const WineUniverse = () => {
   const canonicalPath = typeof window !== "undefined" && window.location.pathname !== "/"
     ? window.location.pathname
     : "/wine-universe";
-  const { products, loading, hasNextPage, fetchNextPage, isFetchingNextPage } = useProducts(true, "full", undefined, true);
+  const { products, loading, hasNextPage, fetchNextPage, isFetchingNextPage } = useProducts(true, "category", "wine", true);
   const { getProductUrlSafe } = useProductUrl();
   const [query, setQuery] = useState("");
   const [view, setView] = useState<ViewMode>("explore");
