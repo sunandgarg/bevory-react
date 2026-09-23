@@ -19,6 +19,7 @@ const Auth = lazy(() => import("./pages/Auth"));
 const Search = lazy(() => import("./pages/Search"));
 const Categories = lazy(() => import("./pages/Categories"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
+const ProductCollection = lazy(() => import("./pages/ProductCollection"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const BrandDetail = lazy(() => import("./pages/BrandDetail"));
 const PartyPlanner = lazy(() => import("./pages/PartyPlanner"));
@@ -132,6 +133,7 @@ const App = () => (
                   <Route path="/category/:slug" element={<CategoryDetail />} />
                   <Route path="/:citySlug/category/:slug/:subCategorySlug" element={<CategoryDetail />} />
                   <Route path="/:citySlug/category/:slug" element={<CategoryDetail />} />
+                  <Route path="/:citySlug/collections/:collection" element={<ProductCollection />} />
                   <Route path="/:citySlug/product/:slug/:volume" element={<ProductDetail />} />
                   <Route path="/:citySlug/product/:slug" element={<ProductDetail />} />
                   <Route path="/:citySlug/brand/:slug" element={<BrandDetail />} />

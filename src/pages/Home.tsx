@@ -63,7 +63,7 @@ const DeferredSection = ({ children, minHeight = 180 }: { children: ReactNode; m
 };
 
 const QUICK_ACTIONS = [
-  { icon: TrendingUp, label: "Trending", hint: "What's hot now", to: "/search?sort=trending", color: "text-primary" },
+  { icon: TrendingUp, label: "Trending", hint: "What's hot now", to: "trending", color: "text-primary" },
   { icon: Wine, label: "Cocktails", hint: "Recipes to try", to: "/cocktails", color: "text-accent" },
   { icon: BookOpen, label: "Guide", hint: "Know before you sip", to: "/guide", color: "text-success" },
 ] as const;
@@ -193,7 +193,7 @@ const Home = () => {
             {QUICK_ACTIONS.map((item) => (
               <Link
                 key={item.label}
-                to={item.to}
+                to={item.to === "trending" ? `/${citySlug}/collections/trending` : item.to}
                 className="group flex flex-col items-start gap-1 p-3 rounded-2xl bg-card border border-border/60 hover:border-accent/40 hover:shadow-[var(--shadow-sm)] transition-all duration-200 active:scale-[0.97]"
               >
                 <div className="w-8 h-8 rounded-xl bg-secondary/70 flex items-center justify-center mb-1 group-hover:bg-accent/10 transition-colors">

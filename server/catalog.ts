@@ -200,6 +200,32 @@ export const buildCategoryCatalog = (catalog: ReturnType<typeof buildCityCatalog
   };
 };
 
+const FAVOURITE_BRANDS = /johnnie walker|old monk|kingfisher|bacardi|absolut|magic moments|tuborg|royal stag/i;
+
+export const buildCollectionCatalog = (
+  catalog: ReturnType<typeof buildCityCatalog>,
+  collection: "favourites" | "trending",
+  categorySlug = "",
+) => {
+  const candidates = categorySlug
+    ? catalog.products.filter((product) => String((product.category as CatalogRow | null)?.slug ?? "").includes(categorySlug))
+    : catalog.products;
+  const marked = candidates.filter((product) => (
+    collection === "favourites" ? product.is_all_time_favourite === true : product.is_trending === true
+  ));
+  const products = collection === "favourites"
+    ? [...new Map([
+        ...marked,
+        ...candidates.filter((product) => FAVOURITE_BRANDS.test(`${product.brand} ${product.name}`)),
+      ].map((product) => [String(product.id), product])).values()]
+    : marked.length > 0 ? marked : candidates;
+  return {
+    products: products.map(toCatalogCard),
+    totalProducts: products.length,
+    curated: marked.length > 0,
+  };
+};
+
 export const paginateCatalog = <T extends { products: CatalogRow[]; totalProducts: number }>(
   payload: T,
   offset: number,
@@ -440,6 +466,41 @@ export const cityCatalogSearchHandler = async (req: Request, res: Response) => {
     return res.status(500).json({
       data: null,
       error: { message: error instanceof Error ? error.message : "Search unavailable" },
+    });
+  }
+};
+
+export const cityCatalogCollectionHandler = async (req: Request, res: Response) => {
+  const cityId = String(req.params.cityId ?? "").trim();
+  const collection = String(req.params.collection ?? "").trim();
+  const categorySlug = String(req.query.category ?? "").trim().toLowerCase();
+  const requestedLimit = Number(req.query.limit);
+  const requestedOffset = Number(req.query.offset);
+  const limit = Number.isInteger(requestedLimit) && requestedLimit > 0 ? Math.min(requestedLimit, 50) : 24;
+  const offset = Number.isInteger(requestedOffset) && requestedOffset > 0 ? requestedOffset : 0;
+  if (!cityId || cityId.length > 191 || !/^[a-zA-Z0-9_-]+$/.test(cityId)
+    || (collection !== "favourites" && collection !== "trending")
+    || (categorySlug && (categorySlug.length > 100 || !/^[a-z0-9-]+$/.test(categorySlug)))) {
+    return res.status(400).json({ data: null, error: { message: "A valid city and collection are required" } });
+  }
+
+  try {
+    const catalog = await getCatalogPayload(cityId, "full");
+    const result = buildCollectionCatalog(catalog, collection, categorySlug);
+    const products = result.products.slice(offset, offset + limit);
+    res.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    res.set("Cloudflare-CDN-Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+    return res.json({ data: {
+      ...result,
+      products,
+      offset,
+      limit,
+      hasMore: offset + products.length < result.totalProducts,
+    }, error: null });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      error: { message: error instanceof Error ? error.message : "Collection unavailable" },
     });
   }
 };

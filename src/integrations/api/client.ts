@@ -374,6 +374,22 @@ const catalog = {
       limit: number;
     }>(`/catalog/${encodeURIComponent(cityId)}/search?${params.toString()}`);
   },
+  getCollection(cityId: string, collection: "favourites" | "trending", categorySlug?: string, pagination?: { offset: number; limit: number }) {
+    const params = new URLSearchParams();
+    if (categorySlug) params.set("category", categorySlug);
+    if (pagination) {
+      params.set("offset", String(pagination.offset));
+      params.set("limit", String(pagination.limit));
+    }
+    return request<{
+      products: Array<Record<string, unknown>>;
+      totalProducts: number;
+      curated: boolean;
+      hasMore: boolean;
+      offset: number;
+      limit: number;
+    }>(`/catalog/${encodeURIComponent(cityId)}/collections/${collection}?${params.toString()}`);
+  },
 };
 
 const admin = {

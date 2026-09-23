@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCategoryCatalog, buildCityCatalog, buildHomeCatalog, paginateCatalog } from "./catalog.js";
+import { buildCategoryCatalog, buildCityCatalog, buildCollectionCatalog, buildHomeCatalog, paginateCatalog } from "./catalog.js";
 
 describe("buildCityCatalog", () => {
   it("returns only active products with approved city prices", () => {
@@ -104,5 +104,29 @@ describe("buildCityCatalog", () => {
     expect(firstPage.hasMore).toBe(true);
     expect(lastPage.products).toHaveLength(15);
     expect(lastPage.hasMore).toBe(false);
+  });
+
+  it("opens favourites and category trending lists from the same city catalog", () => {
+    const catalog = buildCityCatalog(
+      ["familiar", "marked", "whisky", "beer"].map((product_id) => ({
+        product_id, price: 900, volume: "750ml", price_available: true,
+      })),
+      [
+        { id: "familiar", brand: "Johnnie Walker", name: "Black Label", category_id: "whisky-category" },
+        { id: "marked", brand: "Example", name: "Favourite", category_id: "beer-category", is_all_time_favourite: true },
+        { id: "whisky", brand: "Example", name: "Whisky", category_id: "whisky-category" },
+        { id: "beer", brand: "Example", name: "Beer", category_id: "beer-category" },
+      ],
+      [
+        { id: "whisky-category", name: "World Whisky", slug: "world-whisky" },
+        { id: "beer-category", name: "Beer", slug: "beers" },
+      ],
+      [],
+    );
+
+    expect(buildCollectionCatalog(catalog, "favourites").products.map((product) => product.id))
+      .toEqual(["marked", "familiar"]);
+    expect(buildCollectionCatalog(catalog, "trending", "whisky").products.map((product) => product.id))
+      .toEqual(["whisky", "familiar"]);
   });
 });

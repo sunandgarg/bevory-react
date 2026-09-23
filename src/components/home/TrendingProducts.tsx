@@ -8,6 +8,7 @@ import { useProductUrl } from "@/hooks/useProductUrl";
 import FavoriteButton from "@/components/FavoriteButton";
 import CompareButton from "@/components/product/CompareButton";
 import ProductImage from "@/components/product/ProductImage";
+import { citySlugFromName } from "@/lib/locations";
 
 interface TrendingProductsProps { defaultCategory?: string; }
 
@@ -19,6 +20,7 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
   const [selectedTab, setSelectedTab] = useState(defaultCategory);
   const { products, loading } = useProducts(true, "home");
   const { selectedCity } = useLocation();
+  const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const { getProductUrlSafe } = useProductUrl();
 
   const productsByTab = useMemo(() => {
@@ -35,7 +37,7 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
   const allTimeFavourites = useMemo(() => {
     const marked = products.filter((product) => product.is_all_time_favourite);
     const familiar = products.filter((product) => FAVOURITE_BRANDS.test(`${product.brand} ${product.name}`));
-    return [...new Map([...marked, ...familiar, ...products].map((product) => [product.id, product])).values()].slice(0, 8);
+    return [...new Map([...marked, ...familiar].map((product) => [product.id, product])).values()].slice(0, 8);
   }, [products]);
 
   const filteredProducts = useMemo(() => {
@@ -92,18 +94,18 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
 
   return (
     <div className="px-4 space-y-7">
-      <section aria-labelledby="all-time-favourites">
+      {allTimeFavourites.length > 0 && <section aria-labelledby="all-time-favourites">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1.5"><Heart className="w-4 h-4 text-accent" /><h2 id="all-time-favourites" className="text-base font-semibold">All Time Favourites</h2></div>
-          <Link to="/search" className="text-xs flex items-center gap-0.5">See all <ChevronRight className="w-3 h-3" /></Link>
+          <Link to={`/${citySlug}/collections/favourites`} className="text-xs flex items-center gap-0.5">See all <ChevronRight className="w-3 h-3" /></Link>
         </div>
         {productRail(allTimeFavourites)}
-      </section>
+      </section>}
 
       <section aria-labelledby="trending-now">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center gap-1.5"><TrendingUp className="w-4 h-4 text-accent" /><h2 id="trending-now" className="text-base font-semibold">Trending Now</h2></div>
-          <Link to="/search?sort=trending" className="text-xs flex items-center gap-0.5">See all <ChevronRight className="w-3 h-3" /></Link>
+          <Link to={`/${citySlug}/collections/trending?category=${selectedTab}`} className="text-xs flex items-center gap-0.5">See all <ChevronRight className="w-3 h-3" /></Link>
         </div>
         <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-hide">
           {CATEGORY_TABS.map((tab) => (
