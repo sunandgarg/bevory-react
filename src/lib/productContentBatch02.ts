@@ -1,0 +1,335 @@
+// Bottle-specific editorial checked against producer material; sources in docs/editorial/product-batch-02-sources.md.
+import type { ProductPublicDetail } from "./productContentBatch01.js";
+
+export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
+  "ballantines-ballantine-finest-blended-scotch-whisky-bb8f325": {
+    productName: "Ballantine's Finest", category: "Blended Scotch Whisky",
+    shortOverview: "Ballantine's Finest is a soft, apple-and-vanilla-led Scotch designed to work equally well neat or in a long drink. Its approachable sweetness comes with a small measure of warming spice.",
+    craftStory: "Ballantine's traces the Finest recipe to 1910. More than 40 malt and grain whiskies from Scotland are blended for a consistent, rounded house style rather than a single-distillery signature.",
+    tastingNotes: { nose: "Heather honey, red apple and a little baking spice.", palate: "Light and creamy, moving from milk chocolate and apple to vanilla and malt.", finish: "Medium, fresh and gently sweet, with soft spice." },
+    servingGuide: { glassware: "Highball or tulip whisky glass", idealTemperature: "Cool room temperature or chilled over ice", recommendation: "Try a small neat pour, then add soda and ice for a clean Scotch highball." },
+    foodPairings: ["tandoori chicken", "masala peanuts", "paneer tikka", "apple chutney with cheese", "pepper mushroom fry"],
+    whyBuyThis: "Its apple, chocolate and vanilla notes make a dependable entry point to blended Scotch.",
+    faqs: [{ question: "Is Ballantine's Finest a single malt?", answer: "No. It blends malt and grain whiskies from several Scottish distilleries." }, { question: "Does Finest have an age statement?", answer: "The standard Finest bottling is not sold with an age statement." }],
+    metaTitle: "Ballantine's Finest Price, Taste & Review | BevOry", metaDescription: "Explore Ballantine's Finest: apple, chocolate and vanilla with Indian snack pairings. Check indicative city prices on BevOry."
+  },
+  "ballantines-ballantine-7yrs-bourbon-barrel-abce6fb": {
+    productName: "Ballantine's 7 American Barrel", category: "7-Year-Old Blended Scotch Whisky",
+    shortOverview: "Ballantine's 7 American Barrel adds a bourbon-cask finish to the blend's apple-and-honey core. It is sweeter and more caramel-forward than Finest without becoming heavy.",
+    craftStory: "Malt and grain whiskies are aged at least seven years in Scotland, then finished in American bourbon barrels. The finishing wood contributes vanilla and toffee alongside the blend's orchard-fruit character.",
+    tastingNotes: { nose: "Toffee apple, honey and vanilla with a light oak note.", palate: "Rounded caramel sweetness gives way to pear, red apple and creamy malt.", finish: "Longer and sweeter than Finest, with vanilla oak trailing the fruit." },
+    servingGuide: { glassware: "Rocks or highball glass", idealTemperature: "Cool room temperature or over ice", recommendation: "Try over one large cube, or make a whisky sour with fresh lemon and a restrained measure of syrup." },
+    foodPairings: ["chicken malai tikka", "roasted cashews", "caramelised onion paneer", "apple kheer", "tandoori mushrooms"],
+    whyBuyThis: "The bourbon-barrel finish brings a distinct toffee-and-vanilla step beyond Finest.",
+    faqs: [{ question: "Is this bourbon?", answer: "No. It is Scotch whisky finished in barrels that previously held bourbon." }, { question: "How old is the whisky?", answer: "The 7 on the label is a minimum seven-year age statement for the Scotch in the blend." }],
+    metaTitle: "Ballantine's 7 Price, Taste & Review | BevOry", metaDescription: "Ballantine's 7 brings toffee apple, pear and bourbon-barrel vanilla. See Indian pairings and indicative city prices on BevOry."
+  },
+  "ballantines-ballantine-aged-17-yrs-blended-scotch-whisky-6ce1253": {
+    productName: "Ballantine's 17 Years", category: "17-Year-Old Blended Scotch Whisky",
+    shortOverview: "Ballantine's 17 is a mature blend with honey, creamy vanilla and a restrained smoky accent. It rewards a slower neat tasting more than a sweet mixer.",
+    craftStory: "Scottish malt and grain whiskies in this blend mature for at least 17 years. The producer builds a balance of orchard fruit, oak and faint smoke without tying the expression to one named cask type.",
+    tastingNotes: { nose: "Vanilla, soft oak, honey and a faint thread of smoke.", palate: "Velvety and full, with honey, creamy vanilla, ripe fruit and liquorice.", finish: "Long and sweet, narrowing to oak spice and a gentle smoky trace." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat, then add a few drops of spring water if you want to separate the fruit from the oak." },
+    foodPairings: ["galouti kebab", "mutton seekh", "smoked paneer tikka", "dark chocolate", "walnut halwa"],
+    whyBuyThis: "It combines long maturation and subtle smoke without turning sharply peaty.",
+    faqs: [{ question: "Is Ballantine's 17 smoky?", answer: "It has a light smoky accent, but honey, fruit and oak remain prominent." }, { question: "Is every whisky in it 17 years old?", answer: "The stated age is the youngest whisky in the blend; some components may be older." }],
+    metaTitle: "Ballantine's 17 Years Price, Taste & Review | BevOry", metaDescription: "Taste Ballantine's 17: honey, vanilla, oak and subtle smoke. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "ballantines-ballantine-21-yrs-scotch-whisky-7c073a6": {
+    productName: "Ballantine's 21 Years", category: "21-Year-Old Blended Scotch Whisky",
+    shortOverview: "Ballantine's 21 places aromatic spice and mellow dried fruit ahead of overt smoke. Its mature, layered profile is intended for deliberate sipping.",
+    craftStory: "The blend brings together Scottish malt and grain whiskies matured for at least 21 years. Long oak ageing supports its honeyed fruit and liquorice-like spice while keeping the texture supple.",
+    tastingNotes: { nose: "Honey, apple and gentle florals over polished oak.", palate: "Rich and rounded, with liquorice, aromatic spice and dried orchard fruit.", finish: "Long and mellow, leaving dried fruit and soft oak spice." },
+    servingGuide: { glassware: "Glencairn or tulip whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Pour neat and rest it briefly in the glass; a few drops of water are enough if desired." },
+    foodPairings: ["mutton galouti", "lamb rogan josh", "fig and walnut tart", "aged cheddar", "70% dark chocolate"],
+    whyBuyThis: "Choose it for mature Scotch complexity centred on dried fruit and spice rather than peat.",
+    faqs: [{ question: "Is Ballantine's 21 a single malt?", answer: "No. It is a blend of malt and grain Scotch whiskies." }, { question: "What does the age statement mean?", answer: "Every whisky used has matured for at least 21 years." }],
+    metaTitle: "Ballantine's 21 Years Price, Taste & Review | BevOry", metaDescription: "Discover Ballantine's 21: honey, dried fruit and aromatic spice. Find Indian food pairings and indicative city prices on BevOry."
+  },
+  "ballantines-ballantine-30-yrs-1f48dfb": {
+    productName: "Ballantine's 30 Years", category: "30-Year-Old Blended Scotch Whisky",
+    shortOverview: "Ballantine's 30 is a rare, fruit-led Scotch blend built around pear, peach and floral honey. Its age and limited older component stock make it a collector-level sipping bottle.",
+    craftStory: "The producer blends Scotch whiskies aged 30 years or more, including stock from distilleries that have since closed. Extended oak maturation gives vanilla depth while preserving a surprisingly vivid fruit profile.",
+    tastingNotes: { nose: "Soft peach, pear, vanilla oak and elegant sweetness.", palate: "Full yet composed, with honey, floral fruit and vanilla unfolding slowly.", finish: "Long and graceful, with fruit and sweet oak lingering." },
+    servingGuide: { glassware: "Glencairn or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat in a small measure; use only a few drops of spring water if the aroma needs opening." },
+    foodPairings: ["mild mutton galouti", "saffron phirni", "roasted almonds", "fig and walnut tart", "70% dark chocolate"],
+    whyBuyThis: "Few blends combine a 30-year minimum age with this much pear-and-peach freshness.",
+    faqs: [{ question: "Is Ballantine's 30 peaty?", answer: "The producer's tasting notes focus on fruit, honey, florals and vanilla oak, not prominent peat." }, { question: "Should it be mixed?", answer: "A neat serve best preserves the complexity of this older blend." }],
+    metaTitle: "Ballantine's 30 Years Price, Taste & Review | BevOry", metaDescription: "Ballantine's 30 layers pear, peach, honey and vanilla oak. See thoughtful pairings and indicative city prices on BevOry."
+  },
+  "glenmorangie-the-original-41bb030": {
+    productName: "Glenmorangie The Original", category: "Highland Single Malt Scotch Whisky",
+    shortOverview: "The Original is Glenmorangie's citrus-and-vanilla house malt, with a light, floral lift. Peach and soft almond make it a recognisable introduction to Highland single malt.",
+    craftStory: "Glenmorangie distils in very tall copper pot stills at Tain in the Scottish Highlands. Bourbon-cask maturation shapes its familiar peach, vanilla and citrus profile.",
+    tastingNotes: { nose: "Peach, citrus zest and vanilla with soft floral notes.", palate: "Silky and bright, moving from orange and peach to vanilla cream and almond.", finish: "Medium and clean, with coconut-like sweetness and gentle oak." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Taste neat first, adding a few drops of spring water to lift the citrus." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "lemon rice", "almond kulfi", "mild chicken korma"],
+    whyBuyThis: "Peach and citrus give this unpeated Highland malt a clear signature.",
+    faqs: [{ question: "Is The Original smoky?", answer: "No peat smoke is central to its official citrus, peach and vanilla profile." }, { question: "Which casks shape The Original?", answer: "Bourbon casks are central to its vanilla-and-peach character." }],
+    metaTitle: "Glenmorangie The Original Price, Taste & Review | BevOry", metaDescription: "Explore Glenmorangie Original's peach, citrus and vanilla, with Indian pairings and indicative city prices on BevOry."
+  },
+  "glenmorangie-12yrs-lasanta-1e75fe9": {
+    productName: "Glenmorangie Lasanta 12 Years", category: "Sherry-Finished Highland Single Malt",
+    shortOverview: "Lasanta takes Glenmorangie's citrus-led spirit into a richer raisin-and-spice register. It is a useful contrast to the brighter Original.",
+    craftStory: "Distilled in Glenmorangie's tall Highland copper pot stills, Lasanta matures for 12 years across bourbon and sherry casks. The sherry-wood influence adds dried fruit and chocolate depth.",
+    tastingNotes: { nose: "Raisin, orange, honeycomb and a trace of warm spice.", palate: "Creamy, with chocolate hazelnut, dried fruit, toffee and cinnamon.", finish: "Long and warming, with orange, spice and sweet oak." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat, then try two or three drops of water to open the sherry fruit." },
+    foodPairings: ["galouti kebab", "mutton seekh", "date-and-walnut halwa", "70% dark chocolate", "roasted almonds"],
+    whyBuyThis: "It shows how sherry casks deepen Glenmorangie's fruit without adding peat.",
+    faqs: [{ question: "Is Lasanta peated?", answer: "Its official profile is sherry-fruit and spice-led, not peat-led." }, { question: "What makes Lasanta different from The Original?", answer: "Sherry-cask influence adds raisin, chocolate and spice to Glenmorangie's lighter spirit." }],
+    metaTitle: "Glenmorangie Lasanta 12 Years Price, Taste & Review | BevOry", metaDescription: "Lasanta 12 layers raisin, orange, chocolate and cinnamon. See Indian pairings and indicative city prices on BevOry."
+  },
+  "glenmorangie-the-quinta-ruban-ebfe07c": {
+    productName: "Glenmorangie Quinta Ruban", category: "Port-Finished Highland Single Malt",
+    shortOverview: "Quinta Ruban combines Highland citrus with the dark chocolate and berry character of port casks. It is richer than The Original while keeping a lively mint-like lift.",
+    craftStory: "Glenmorangie distils at Tain in tall copper pot stills. Bourbon casks and port casks from Portugal give Quinta Ruban its dark-fruit and chocolate character.",
+    tastingNotes: { nose: "Dark chocolate, orange and peppermint over red-berry fruit.", palate: "Velvety and full, with chocolate, walnut, berry sweetness and citrus peel.", finish: "Long, with mint, chocolate and lightly drying oak." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat to follow the chocolate-to-mint transition; add a little spring water only if desired." },
+    foodPairings: ["lamb rogan josh", "mutton seekh", "beetroot galouti", "dark chocolate tart", "walnut brownie"],
+    whyBuyThis: "Its port-cask finish delivers chocolate and mint without hiding the underlying Highland malt.",
+    faqs: [{ question: "Does Quinta Ruban contain port wine?", answer: "It is Scotch whisky matured in casks that previously held port, not a whisky-and-wine blend." }, { question: "Why does it taste chocolatey?", answer: "Port-cask influence adds dark-fruit and chocolate impressions to the Highland spirit." }],
+    metaTitle: "Glenmorangie Quinta Ruban Price, Taste & Review | BevOry", metaDescription: "Quinta Ruban brings dark chocolate, orange and mint from a port finish. See Indian pairings and indicative city prices on BevOry."
+  },
+  "glenmorangie-nectar-f8a26e6": {
+    productName: "Glenmorangie Nectar", category: "Sweet-Wine-Finished Highland Single Malt",
+    shortOverview: "Nectar is Glenmorangie's dessert-leaning single malt, with pastry, stone fruit and spice rather than peat. It is suited to a small after-dinner pour.",
+    craftStory: "Glenmorangie's Highland spirit begins in tall copper pot stills and bourbon casks. Sweet white-wine casks develop its baked-apricot and pastry character.",
+    tastingNotes: { nose: "Apricot, brioche and vanilla custard with a light citrus lift.", palate: "Silky and sweet-toned, with baked fruit, cream and nutmeg spice.", finish: "Long and dessert-like, leaving apricot and gentle oak spice." },
+    servingGuide: { glassware: "Glencairn or small dessert-wine glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve a small neat pour after food; a drop or two of water can reduce the sweetness perception." },
+    foodPairings: ["saffron phirni", "apricot halwa", "malai kulfi", "baked gujiya", "almond tart"],
+    whyBuyThis: "Its pastry-and-apricot profile makes it a distinctive unpeated after-dinner malt.",
+    faqs: [{ question: "Is Nectar a smoky whisky?", answer: "Its official profile centres on sweet wine, pastry and fruit rather than peat smoke." }, { question: "What does the sweet-wine cask add?", answer: "It brings baked fruit, pastry and honeyed notes to the whisky." }],
+    metaTitle: "Glenmorangie Nectar Price, Taste & Review | BevOry", metaDescription: "Explore Nectar's apricot, brioche and custard notes, Indian dessert pairings and indicative city prices on BevOry."
+  },
+  "glenmorangie-signet-8ee8eec": {
+    productName: "Glenmorangie Signet", category: "Highland Single Malt Scotch Whisky",
+    shortOverview: "Signet is Glenmorangie's mocha-and-dark-chocolate malt, built around an unusually intense chocolate-malt spirit. It is a slow sipping whisky, not a cocktail base.",
+    craftStory: "Glenmorangie produces its chocolate-malt spirit annually in the distillery's tall copper pot stills. Bourbon, sherry and virgin-charred-oak casks, together with older stock, build the espresso, spice and butterscotch layers.",
+    tastingNotes: { nose: "Espresso, tiramisu and dark chocolate with warm spice.", palate: "Velvety and full, bringing bitter mocha, butterscotch and charred-oak spice.", finish: "Long, with dark chocolate and coffee bitterness gently outlasting the sweetness." },
+    servingGuide: { glassware: "Glencairn or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat in a small measure; a few drops of spring water can separate mocha from spice." },
+    foodPairings: ["70% dark chocolate", "coffee kulfi", "walnut brownie", "mutton galouti", "roasted hazelnuts"],
+    whyBuyThis: "Chocolate malt and a varied cask recipe give Signet a coffee character unlike Glenmorangie's core range.",
+    faqs: [{ question: "Is Signet coffee-flavoured whisky?", answer: "No. The coffee-like notes arise from the chocolate-malt spirit and maturation, not added coffee flavour." }, { question: "Does Signet have an age statement?", answer: "It is sold without a single age statement despite including older whisky stocks." }],
+    metaTitle: "Glenmorangie Signet Price, Taste & Review | BevOry", metaDescription: "Signet layers espresso, dark chocolate and spice. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "glenlivet-founder-1233689": {
+    productName: "The Glenlivet Founder's Reserve", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "Founder's Reserve is a creamy, orange-led Glenlivet with no stated age. Its gentle fruit and toffee notes make it the lighter end of the distillery's range.",
+    craftStory: "The Glenlivet distils Speyside malt in copper pot stills, following the distillery founded by George Smith in 1824. First-fill American oak casks help give this expression its creamy vanilla texture.",
+    tastingNotes: { nose: "Zesty orange, pear and light floral malt.", palate: "Creamy and soft, with toffee apple, citrus and milk chocolate.", finish: "Medium and clean, leaving sweet fruit and vanilla." },
+    servingGuide: { glassware: "Glencairn or highball glass", idealTemperature: "Cool room temperature (18–20°C)", recommendation: "Try neat, then use chilled soda and orange peel for a restrained highball." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "orange-and-fennel salad", "roasted almonds", "mild chicken korma"],
+    whyBuyThis: "First-fill oak creaminess makes its orange-and-apple profile particularly approachable.",
+    faqs: [{ question: "How old is Founder's Reserve?", answer: "It is a no-age-statement single malt; the bottle does not claim a fixed age." }, { question: "Is it peaty?", answer: "The distillery presents it as fruity and creamy, not peat-led." }],
+    metaTitle: "Glenlivet Founder's Reserve Price, Taste & Review | BevOry", metaDescription: "Founder's Reserve offers orange, toffee apple and creamy oak. See Indian pairings and indicative city prices on BevOry."
+  },
+  "glenlivet-the-glenlivet-15-yrs-a4e4e82": {
+    productName: "The Glenlivet 15 Years", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "The Glenlivet 15 adds nutty spice to the distillery's usual fruit-led character. French oak is the defining maturation influence, not peat smoke.",
+    craftStory: "Produced at The Glenlivet in Speyside, a portion of this 15-year-old whisky is selectively matured in French Limousin oak. That wood contributes the almond and warming-spice character alongside orchard fruit.",
+    tastingNotes: { nose: "Ripe peach, sweet almond and soft baking spice.", palate: "Rounded and creamy, with orchard fruit, marzipan and cinnamon-like warmth.", finish: "Long and gently dry, leaving almond and oak spice." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat and add a few drops of spring water to lift the fruit above the oak." },
+    foodPairings: ["chicken reshmi kebab", "paneer with almond gravy", "mutton galouti", "roasted cashews", "badam halwa"],
+    whyBuyThis: "French oak brings a distinct almond-and-spice identity to a familiar Speyside malt.",
+    faqs: [{ question: "Is the whole whisky aged in French oak?", answer: "The producer describes selective French-oak maturation; it is not a claim that every cask is French oak." }, { question: "Is Glenlivet 15 smoky?", answer: "Fruit, almond and spice are the defining notes, not peat smoke." }],
+    metaTitle: "The Glenlivet 15 Years Price, Taste & Review | BevOry", metaDescription: "The Glenlivet 15 layers peach, almond and French-oak spice. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "glenlivet-the-glenlivet-18yrs-0f89a2d": {
+    productName: "The Glenlivet 18 Years", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "The Glenlivet 18 is a deeper, richer Speyside malt with ripe citrus and winter spice. Its mature oak frame stays balanced by fruit rather than dominant smoke.",
+    craftStory: "Distilled at The Glenlivet and matured for at least 18 years, the expression draws on American oak and sherry-cask influences. The cask mix adds vanilla, dried fruit and spice to the distillery's fruit-forward spirit.",
+    tastingNotes: { nose: "Ripe orange, dried fruit and polished oak.", palate: "Full and silky, moving from citrus and apricot to warming winter spice.", finish: "Long, with fruit, nutty oak and a softly drying spice trail." },
+    servingGuide: { glassware: "Glencairn or tulip whisky glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Sip neat after a short rest in the glass; use only a few drops of spring water." },
+    foodPairings: ["galouti kebab", "lamb rogan josh", "mushroom do pyaza", "70% dark chocolate", "walnut tart"],
+    whyBuyThis: "Its citrus-and-spice depth offers a clear step beyond the distillery's younger fruit-led malts.",
+    faqs: [{ question: "Is Glenlivet 18 a blended whisky?", answer: "No. It is a single malt Scotch whisky from The Glenlivet distillery." }, { question: "Is it peated?", answer: "The official profile emphasises ripe citrus and winter spice rather than peat." }],
+    metaTitle: "The Glenlivet 18 Years Price, Taste & Review | BevOry", metaDescription: "Explore The Glenlivet 18's ripe citrus, dried fruit and spice, with Indian pairings and indicative city prices on BevOry."
+  },
+  "glenfiddich-18-2484f68": {
+    productName: "Glenfiddich 18 Years", category: "Speyside Single Malt Scotch Whisky",
+    shortOverview: "Glenfiddich 18 trades the distillery's youthful pear note for baked apple, dried fruit and richer oak. It is a mature, unpeated malt suited to unhurried sipping.",
+    craftStory: "At Glenfiddich in Dufftown, malt matures for at least 18 years in American oak and Spanish Oloroso sherry casks. Small batches are married together for a consistent fruit-and-wood balance.",
+    tastingNotes: { nose: "Baked apple, dried fruit and warm oak.", palate: "Full and rounded, with dried fruit, candied citrus and polished wood.", finish: "Long and warming, leaving sweet oak and a little spice." },
+    servingGuide: { glassware: "Glencairn glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat; add a few drops of spring water only after tasting the first sip." },
+    foodPairings: ["mutton galouti", "tandoori lamb chops", "date-and-walnut halwa", "aged cheddar", "dark chocolate"],
+    whyBuyThis: "It keeps Glenfiddich's fruit character while adding meaningful sherry-cask depth.",
+    faqs: [{ question: "Which casks shape Glenfiddich 18?", answer: "The producer cites American oak and Spanish Oloroso sherry casks." }, { question: "Is it smoky?", answer: "The official tasting profile focuses on fruit and oak, not peat smoke." }],
+    metaTitle: "Glenfiddich 18 Years Price, Taste & Review | BevOry", metaDescription: "Glenfiddich 18 brings baked apple, dried fruit and oak. Find Indian pairings and indicative city prices on BevOry."
+  },
+  "glenfiddich-21-yrs-c3c33bd": {
+    productName: "Glenfiddich 21 Years", category: "Rum-Cask-Finished Speyside Single Malt",
+    shortOverview: "Glenfiddich 21 develops a tropical-fruit and toffee accent through a Caribbean rum-cask finish. Its long-aged Speyside malt remains the core of the drink.",
+    craftStory: "Glenfiddich matures this Dufftown single malt for at least 21 years before a finishing period in Caribbean rum casks. The finish adds ginger, brown sugar and fruit over the underlying oak-aged whisky.",
+    tastingNotes: { nose: "Banana, fig, toffee and a little ginger.", palate: "Silky and layered, with tropical fruit, brown sugar and warming spice.", finish: "Long and sweet-spiced, leaving ginger and mellow oak." },
+    servingGuide: { glassware: "Glencairn or crystal tasting glass", idealTemperature: "Room temperature (18–20°C)", recommendation: "Serve neat in a small measure; a few drops of spring water can reveal the fruit behind the spice." },
+    foodPairings: ["mutton galouti", "caramelised banana tart", "ginger-spiced paneer", "roasted cashews", "70% dark chocolate"],
+    whyBuyThis: "The rum-cask finish gives a tropical contrast to more conventional 21-year-old Speyside malts.",
+    faqs: [{ question: "Is Glenfiddich 21 a rum?", answer: "No. It is Scotch whisky finished in casks previously used for Caribbean rum." }, { question: "Should it go in a cocktail?", answer: "Its age and layered finish are best appreciated neat, with optional drops of water." }],
+    metaTitle: "Glenfiddich 21 Years Price, Taste & Review | BevOry", metaDescription: "Glenfiddich 21 layers tropical fruit, toffee and ginger from a rum-cask finish. See pairings and indicative city prices on BevOry."
+  },
+  "beefeater-london-dry-gin-6a145de": {
+    productName: "Beefeater London Dry Gin", category: "London Dry Gin",
+    shortOverview: "Beefeater is a juniper-forward London Dry with a clear citrus edge. Its dry structure holds up in a gin and tonic or a classic Martini.",
+    craftStory: "James Burrough's 19th-century recipe is still distilled in London. Nine botanicals, including juniper, Seville orange peel, lemon, coriander seed and angelica, are steeped for 24 hours before pot distillation.",
+    tastingNotes: { nose: "Fresh juniper, lemon peel and bitter orange with a dry herbal backdrop.", palate: "Crisp and dry; juniper leads before citrus, coriander spice and almond soften the centre.", finish: "Medium and clean, with citrus zest and a lingering pine-like note." },
+    servingGuide: { glassware: "Balloon glass or chilled Martini glass", idealTemperature: "Chilled over ice (about 4–8°C)", recommendation: "For a G&T, use plenty of ice, a measured tonic and lemon or orange peel; keep the garnish simple." },
+    foodPairings: ["tandoori prawns", "cucumber chaat", "malai paneer tikka", "rava-fried fish", "lemon-pepper mushrooms"],
+    whyBuyThis: "Its nine-botanical recipe delivers a benchmark juniper-and-citrus London Dry profile.",
+    faqs: [{ question: "Is Beefeater London Dry sweet?", answer: "No. It is a dry, juniper-led gin; tonic or other mixers determine the sweetness of the final drink." }, { question: "Is it made in London?", answer: "Yes. The producer distils it in Kennington, London." }],
+    metaTitle: "Beefeater London Dry Gin Price, Taste & Review | BevOry", metaDescription: "Beefeater London Dry brings juniper, lemon and Seville orange. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "beefeater-pink-e8ddc0c": {
+    productName: "Beefeater Pink Strawberry", category: "Strawberry-Flavoured Gin",
+    shortOverview: "Beefeater Pink adds strawberry to the brand's juniper-and-citrus base. It is fruitier and sweeter in impression than the standard London Dry.",
+    craftStory: "The London-distilled Beefeater botanical recipe provides the base, with strawberry flavour added to create the Pink expression. Juniper, citrus peel and coriander remain recognisable beneath the berry note.",
+    tastingNotes: { nose: "Ripe strawberry over lemon peel and light juniper.", palate: "Soft and fruit-forward, with strawberry sweetness meeting citrus and a dry herbal undertone.", finish: "Medium, berry-led and gently citrusy rather than sharply dry." },
+    servingGuide: { glassware: "Tall highball glass", idealTemperature: "Chilled over ice (about 4–8°C)", recommendation: "Build with tonic or soda and ice; a fresh strawberry or lemon peel is enough garnish." },
+    foodPairings: ["paneer malai tikka", "strawberry chaat", "tandoori prawns", "salted pistachios", "lemon tart"],
+    whyBuyThis: "It keeps enough gin character to prevent the strawberry note becoming a one-dimensional mixer.",
+    faqs: [{ question: "Is Beefeater Pink the same as London Dry?", answer: "No. Pink uses the familiar Beefeater gin base but adds strawberry flavour." }, { question: "What mixer works best?", answer: "Tonic keeps a firmer gin character; soda makes a less sweet, lighter serve." }],
+    metaTitle: "Beefeater Pink Strawberry Price, Taste & Review | BevOry", metaDescription: "Beefeater Pink blends strawberry, citrus and juniper. See Indian food pairings and indicative city prices on BevOry."
+  },
+  "belvedere-vodka-fefa63e": {
+    productName: "Belvedere Vodka", category: "Polish Rye Vodka",
+    shortOverview: "Belvedere is a rye-based Polish vodka with more texture and peppery character than a neutral mixer. Its vanilla-and-almond finish suits a simple, cold serve.",
+    craftStory: "Belvedere is produced in Poland from rye and purified water; the producer's current Organic Vodka uses 100% organic Polish rye. The distillery in Żyrardów dates to 1910, and no oak ageing is involved.",
+    tastingNotes: { nose: "Soft vanilla and cream with a faint grain note.", palate: "Rounded and velvety, moving from vanilla to white pepper and savoury rye spice.", finish: "Sustained, with almond, cream and a faint nutty dryness." },
+    servingGuide: { glassware: "Chilled vodka glass or Martini glass", idealTemperature: "Refrigerator-chilled (about 7–8°C)", recommendation: "Serve cold but not deeply frozen to keep the rye aroma; a dry Martini is another precise option." },
+    foodPairings: ["smoked fish tikka", "cucumber chaat", "salted cashews", "malai paneer tikka", "rava-fried prawns"],
+    whyBuyThis: "Rye gives it a perceptible pepper-and-almond signature rather than anonymous neutrality.",
+    faqs: [{ question: "Is Belvedere made from potatoes?", answer: "No. The standard Belvedere vodka is made from Polish rye and water." }, { question: "Is it aged in barrels?", answer: "No. It is an unaged distilled vodka, not a whisky." }],
+    metaTitle: "Belvedere Vodka Price, Taste & Review | BevOry", metaDescription: "Belvedere offers rye spice, vanilla and almond. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "grey-goose-grey-goose-873b162": {
+    productName: "Grey Goose Vodka", category: "French Wheat Vodka",
+    shortOverview: "Grey Goose is a French wheat vodka with a soft, round palate rather than the pepper of rye vodkas. Its subtle floral and citrus notes are clearest in a cold, uncomplicated serve.",
+    craftStory: "The producer uses soft winter wheat from Picardie and limestone-filtered spring water from Gensac-la-Pallue in the Cognac region. It is distilled once in France to retain the wheat's gentle character.",
+    tastingNotes: { nose: "Delicate florals, lemon zest and fresh bread.", palate: "Smooth and rounded, with soft wheat sweetness, almond and a flicker of citrus.", finish: "Medium, clean and slightly toffee-like with light pepper." },
+    servingGuide: { glassware: "Chilled vodka or Martini glass", idealTemperature: "Chilled (about 6–8°C)", recommendation: "Try refrigerated and neat, or stir into a dry Martini with a restrained amount of vermouth." },
+    foodPairings: ["fish amritsari", "cucumber chaat", "tandoori prawns", "malai paneer tikka", "salted almonds"],
+    whyBuyThis: "Its single-origin wheat and spring-water recipe gives an identifiable soft-wheat texture.",
+    faqs: [{ question: "Is Grey Goose a potato vodka?", answer: "No. Its base is French soft winter wheat." }, { question: "Where is it made?", answer: "It is distilled and bottled in France using Picardie wheat and water from Gensac-la-Pallue." }],
+    metaTitle: "Grey Goose Vodka Price, Taste & Review | BevOry", metaDescription: "Grey Goose brings soft wheat, florals and citrus. Discover Indian pairings and indicative city prices on BevOry."
+  },
+  "bira-white-can-f997830": {
+    productName: "Bira 91 White Can", category: "Wheat Beer",
+    shortOverview: "Bira 91 White is a pale, low-bitterness wheat beer made for a soft, refreshing serve. Its hazy appearance and citrus-spice impression separate it from a clear lager.",
+    craftStory: "Bira 91 is an Indian beer brand introduced by B9 Beverages. White is the brand's wheat-beer expression; fermentation and wheat, rather than barrel maturation, define its light body and cloudy look.",
+    tastingNotes: { nose: "Fresh wheat, citrus peel and a light spice note.", palate: "Soft and gently creamy, with grain sweetness and a bright citrus edge.", finish: "Short, refreshing and only mildly bitter." },
+    servingGuide: { glassware: "Wheat-beer glass", idealTemperature: "Well chilled (4–6°C)", recommendation: "Pour slowly into a tall glass, leaving space for the foam; serve without adding syrup or ice." },
+    foodPairings: ["paneer tikka", "fish pakora", "cucumber chaat", "chicken malai tikka", "salted makhana"],
+    whyBuyThis: "Its soft wheat texture suits drinkers who find hoppy lagers too bitter.",
+    faqs: [{ question: "Is Bira 91 White a lager?", answer: "It is marketed as a wheat beer, with a hazier and softer profile than a standard pale lager." }, { question: "Should it be served with lemon?", answer: "A citrus garnish is optional; taste it plain first to judge the beer itself." }],
+    metaTitle: "Bira 91 White Can Price, Taste & Review | BevOry", metaDescription: "Bira 91 White is a soft, citrus-led wheat beer. See Indian snack pairings and indicative city prices on BevOry."
+  },
+  "bira-blonde-a2da17d": {
+    productName: "Bira 91 Blonde", category: "Craft Lager",
+    shortOverview: "Bira 91 Blonde is a clear, hop-accented lager with a crisp finish. It is drier and more directly bitter than the brand's soft White wheat beer.",
+    craftStory: "B9 Beverages developed Blonde as a lager within the Bira 91 Indian portfolio. Malt fermentation and lager conditioning provide a clean base, while hops give it the style's brighter bitter edge.",
+    tastingNotes: { nose: "Light grain, fresh hops and a little citrus.", palate: "Crisp and medium-light, with malt sweetness giving way to hop bitterness.", finish: "Short to medium, clean and gently bitter." },
+    servingGuide: { glassware: "Pilsner or straight beer glass", idealTemperature: "Well chilled (4–6°C)", recommendation: "Pour into a cold glass in one steady motion; keep strongly spiced snacks alongside rather than in the beer." },
+    foodPairings: ["tandoori chicken", "masala peanuts", "chilli paneer", "fish fry", "aloo tikki"],
+    whyBuyThis: "Its crisp lager base provides a useful contrast to Bira 91 White's softer wheat profile.",
+    faqs: [{ question: "Is Blonde the same as White?", answer: "No. Blonde is a clearer lager; White is a hazier wheat beer." }, { question: "Is it very bitter?", answer: "Its hop character is more noticeable than White's, but it remains a refreshing lager rather than a strongly bitter IPA." }],
+    metaTitle: "Bira 91 Blonde Price, Taste & Review | BevOry", metaDescription: "Bira 91 Blonde is a crisp, hop-accented lager. Explore Indian snack pairings and indicative city prices on BevOry."
+  },
+  "bira-91-indian-pale-ale-53d91a9": {
+    productName: "Bira 91 Indian Pale Ale", category: "India Pale Ale",
+    shortOverview: "Bira 91 Indian Pale Ale is the hop-forward member of the brand's beer range. It puts aromatic fruit and a firmer bitter finish ahead of the soft grain profile of White.",
+    craftStory: "B9 Beverages introduced this India Pale Ale as part of Bira 91's Indian brewing portfolio. Its defining technique is a stronger hop emphasis in the beer, not barrel ageing or added spirit.",
+    tastingNotes: { nose: "Citrus peel and tropical-fruit hop aroma over light malt.", palate: "Medium-bodied, with a fruit-toned opening followed by assertive hop bitterness.", finish: "Medium and dry, with lingering citrus peel and hops." },
+    servingGuide: { glassware: "Tulip beer glass", idealTemperature: "Chilled (6–8°C)", recommendation: "Serve cool rather than ice-cold so the hop aroma stays perceptible; pour with a modest foam head." },
+    foodPairings: ["tandoori chicken", "mutton seekh", "chilli paneer", "spicy fish fry", "masala corn"],
+    whyBuyThis: "Choose it when you want a clearly hop-led beer rather than a mild wheat beer or lager.",
+    faqs: [{ question: "What does IPA mean here?", answer: "India Pale Ale is a beer style generally distinguished by a more prominent hop aroma and bitterness." }, { question: "Is it stronger-tasting than Bira White?", answer: "Its hop bitterness is more assertive than the soft, low-bitterness White wheat beer." }],
+    metaTitle: "Bira 91 Indian Pale Ale Price, Taste & Review | BevOry", metaDescription: "Bira 91 IPA brings citrus hops and a dry bitter finish. See Indian food pairings and indicative city prices on BevOry."
+  },
+  "corona-extra-d8e9b96": {
+    productName: "Corona Extra", category: "Mexican Pale Lager",
+    shortOverview: "Corona Extra is a light-bodied Mexican lager with restrained bitterness and a clean finish. Its familiar lime serve adds acidity; the beer itself is not a lime-flavoured drink.",
+    craftStory: "Corona began in Mexico in 1925. The producer lists barley malt, hops, corn and water for the pale lager, which is brewed for a mild, easy-drinking profile rather than strong hop intensity.",
+    tastingNotes: { nose: "Light malt, faint fruit and a restrained hop note.", palate: "Lean and crisp, with gentle grain sweetness and low bitterness.", finish: "Short, clean and lightly dry." },
+    servingGuide: { glassware: "Slim lager glass or the bottle", idealTemperature: "Well chilled (3–5°C)", recommendation: "Taste it plain first; add a lime wedge only if you want its acidic contrast." },
+    foodPairings: ["rava-fried fish", "tandoori prawns", "cucumber chaat", "chicken tikka", "masala corn"],
+    whyBuyThis: "Its mild lager profile works especially well with salty, lime-friendly coastal snacks.",
+    faqs: [{ question: "Does Corona Extra contain lime?", answer: "The standard beer is not brewed with a lime wedge; lime is an optional serving garnish." }, { question: "Is it an ale?", answer: "No. Corona Extra is a pale lager." }],
+    metaTitle: "Corona Extra Price, Taste & Review | BevOry", metaDescription: "Corona Extra is a crisp Mexican lager with light malt and low bitterness. See Indian pairings and indicative city prices on BevOry."
+  },
+  "fratelli-cabernet-sauvignon-12f0728": {
+    productName: "Fratelli Cabernet Sauvignon", category: "Indian Cabernet Sauvignon Red Wine",
+    shortOverview: "Fratelli's Cabernet Sauvignon is a ruby-coloured Akluj red with plum, tobacco and savoury pepper. Soft tannins make it less severe than many heavily extracted Cabernets.",
+    craftStory: "Cabernet Sauvignon grapes grow in Fratelli's Akluj vineyards in Maharashtra, where the producer notes a mineral character in the terroir. The wine's identity comes from its site and grape; no specific barrel regime is claimed for this bottling.",
+    tastingNotes: { nose: "Dark plum and tobacco with a faint herbal edge.", palate: "Medium to full-bodied, with black olive, pepper, dark plum and balanced acidity.", finish: "Medium, with soft tannin and a savoury plum trail." },
+    servingGuide: { glassware: "Bordeaux red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Pour slightly cool and give it 15–20 minutes in the glass; avoid serving warm in Indian summer heat." },
+    foodPairings: ["mutton ghee roast", "tandoori lamb chops", "pepper chicken", "mushroom galouti", "aged cheddar"],
+    whyBuyThis: "It combines recognisable Cabernet tobacco and dark fruit with notably gentle tannins.",
+    faqs: [{ question: "Where is this Cabernet grown?", answer: "Fratelli associates this wine with its Akluj vineyards in Maharashtra." }, { question: "Should it be refrigerated?", answer: "A brief chill can bring a warm bottle down to the ideal 16–18°C serving range." }],
+    metaTitle: "Fratelli Cabernet Sauvignon Price, Taste & Review | BevOry", metaDescription: "Fratelli Cabernet offers plum, tobacco and soft tannins. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "fratelli-chardonnay-02808fe": {
+    productName: "Fratelli Chardonnay", category: "Indian Chardonnay White Wine",
+    shortOverview: "Fratelli Chardonnay balances citrus and white flowers with a rounder, lightly buttery finish. It is a fresh Indian white rather than an aggressively oaky Chardonnay.",
+    craftStory: "Fratelli grows Chardonnay at its Akluj estate in Maharashtra. The producer describes orange, lemon and a mineral freshness; the label's rounded texture should not be mistaken for proof of a particular barrel treatment.",
+    tastingNotes: { nose: "Orange peel, lemon and white flowers.", palate: "Fresh and gently rounded, with citrus fruit and mineral tension.", finish: "Medium, with a soft buttery note after the bright citrus." },
+    servingGuide: { glassware: "Medium white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Chill for two hours, then let the glass warm slightly if the aromas seem muted." },
+    foodPairings: ["malai paneer tikka", "tandoori prawns", "fish amritsari", "chicken korma", "lemon rice"],
+    whyBuyThis: "Its citrus freshness and gentle creaminess handle both seafood and mild Indian gravies.",
+    faqs: [{ question: "Is Fratelli Chardonnay a sweet wine?", answer: "It is presented as a fresh table white, not a dessert wine; citrus and mineral notes lead." }, { question: "How cold should it be served?", answer: "About 8–10°C keeps the citrus fresh without masking the aroma." }],
+    metaTitle: "Fratelli Chardonnay Price, Taste & Review | BevOry", metaDescription: "Fratelli Chardonnay pairs citrus and white flowers with a soft finish. See Indian food pairings and indicative city prices on BevOry."
+  },
+  "fratelli-chenin-blanc-2bea1fc": {
+    productName: "Fratelli Chenin Blanc", category: "Indian Chenin Blanc White Wine",
+    shortOverview: "Fratelli Chenin Blanc is a tropical-fruit-led white with smooth acidity and a mineral edge. Brief French-oak contact adds structure without burying the fresh fruit.",
+    craftStory: "Fratelli makes this Chenin Blanc from grapes grown in Maharashtra. The producer specifies short contact with French oak, unlike its separate Classic Chenin, which is kept in temperature-controlled stainless steel.",
+    tastingNotes: { nose: "Pineapple, guava and other fresh tropical fruit.", palate: "Smooth and lively, with ripe fruit, elegant acidity and a mineral centre.", finish: "Medium and fresh, with a light oak-rounded texture." },
+    servingGuide: { glassware: "Tulip white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool, not ice-cold; let it sit for a few minutes to reveal the tropical aroma." },
+    foodPairings: ["coastal rava-fried fish", "tandoori prawns", "malai paneer tikka", "coconut chicken curry", "cucumber chaat"],
+    whyBuyThis: "Short oak contact gives this Chenin extra shape while preserving its lively tropical fruit.",
+    faqs: [{ question: "Is this the same as Classic Chenin?", answer: "No. Fratelli describes French-oak contact for Chenin Blanc and stainless-steel storage for Classic Chenin." }, { question: "Is Chenin Blanc a red wine?", answer: "No. It is a white grape variety and this bottling is a white wine." }],
+    metaTitle: "Fratelli Chenin Blanc Price, Taste & Review | BevOry", metaDescription: "Fratelli Chenin Blanc offers tropical fruit, soft acidity and light French-oak structure. See pairings and city prices on BevOry."
+  },
+  "fratelli-merlot-021df1b": {
+    productName: "Fratelli Merlot", category: "Indian Merlot Red Wine",
+    shortOverview: "Fratelli Merlot is a medium-bodied red with dark plum, chocolate and soft tannins. It is an approachable choice when a firmer Cabernet feels too drying.",
+    craftStory: "The Merlot grapes are grown for Fratelli's Indian wine range in Maharashtra. The producer highlights fruit and texture rather than a named oak programme, so this profile centres on the grape's plum character.",
+    tastingNotes: { nose: "Ripe plum, dark chocolate and a faint earthy note.", palate: "Medium-bodied and rounded, with dark plum fruit and silky tannins.", finish: "Medium, leaving soft fruit and a light cocoa impression." },
+    servingGuide: { glassware: "Medium red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Serve slightly cool; allow 10–15 minutes in the glass before pairing with food." },
+    foodPairings: ["tandoori chicken", "mutton seekh", "mushroom do pyaza", "paneer tikka", "aged cheddar"],
+    whyBuyThis: "Its soft plum-and-chocolate profile gives red-wine beginners an easy starting point.",
+    faqs: [{ question: "Is Fratelli Merlot very tannic?", answer: "The producer describes its tannins as silky and round rather than sharply drying." }, { question: "Should red wine be served warm?", answer: "No. Aim near 16–18°C; a short chill helps in hot weather." }],
+    metaTitle: "Fratelli Merlot Price, Taste & Review | BevOry", metaDescription: "Fratelli Merlot brings plum, chocolate and silky tannins. Find Indian food pairings and indicative city prices on BevOry."
+  },
+  "fratelli-shiraz-d65f538": {
+    productName: "Fratelli Shiraz", category: "Indian Shiraz Red Wine",
+    shortOverview: "Fratelli Shiraz is a peppery, dark-fruited red with a floral and earthy side. It is a stronger match for grilled and spiced food than the softer Merlot.",
+    craftStory: "Fratelli grows Shiraz for its Indian wine range in Maharashtra. The producer emphasises black pepper, floral notes, earth and leather; no single cask specification is claimed for this label.",
+    tastingNotes: { nose: "Black pepper, dark fruit and florals over earth and leather.", palate: "Medium to full-bodied, with ripe fruit, savoury spice and smooth tannins.", finish: "Medium-long, with pepper and a softly earthy fruit trail." },
+    servingGuide: { glassware: "Large red-wine glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Give it 15–20 minutes of air in the glass and pair it with a substantial dish." },
+    foodPairings: ["mutton ghee roast", "tandoori lamb chops", "pepper chicken", "smoked paneer tikka", "mushroom galouti"],
+    whyBuyThis: "Pepper and savoury earth make this Shiraz especially useful with tandoor cooking.",
+    faqs: [{ question: "Is Shiraz the same grape as Syrah?", answer: "Yes. Shiraz and Syrah are names used for the same grape variety." }, { question: "Is Fratelli Shiraz sweet?", answer: "It is a savoury table red, with fruit balanced by pepper and tannin rather than dessert-wine sweetness." }],
+    metaTitle: "Fratelli Shiraz Price, Taste & Review | BevOry", metaDescription: "Fratelli Shiraz offers pepper, dark fruit and smooth tannins. Explore Indian pairings and indicative city prices on BevOry."
+  },
+  "fratelli-sauvignon-blanc-5591300": {
+    productName: "Fratelli Sauvignon Blanc", category: "Indian Sauvignon Blanc White Wine",
+    shortOverview: "Fratelli Sauvignon Blanc is a brisk, aromatic white with grapefruit, tropical fruit and a green-chilli edge. Its acidity makes it particularly good beside coastal and herb-heavy dishes.",
+    craftStory: "Fratelli produces this Sauvignon Blanc in Maharashtra, using the grape's natural aromatic intensity as the focus. The official profile emphasises passion fruit, guava and mineral acidity rather than a named oak regime.",
+    tastingNotes: { nose: "Grapefruit and fresh tropical fruit with a green herbal lift.", palate: "Crisp and lively, with passion fruit, guava and a hint of green chilli.", finish: "Medium and mineral, with citrus acidity carrying through." },
+    servingGuide: { glassware: "Tulip white-wine glass", idealTemperature: "Chilled (8–10°C)", recommendation: "Serve cool and use a narrow glass to retain the volatile citrus and herb aromas." },
+    foodPairings: ["coastal rava-fried fish", "tandoori prawns", "cucumber and dhania chaat", "goan-style fish curry", "malai paneer tikka"],
+    whyBuyThis: "Its grapefruit-and-green-chilli profile gives a direct match for Indian seafood and herbs.",
+    faqs: [{ question: "Is Fratelli Sauvignon Blanc sweet?", answer: "It is a crisp white; its tropical fruit flavour is balanced by prominent acidity." }, { question: "What does green chilli mean in a tasting note?", answer: "It describes a fresh green aromatic impression, not actual chilli added to the wine." }],
+    metaTitle: "Fratelli Sauvignon Blanc Price, Taste & Review | BevOry", metaDescription: "Fratelli Sauvignon Blanc brings grapefruit, guava and crisp acidity. Find Indian pairings and indicative city prices on BevOry."
+  },
+  "fratelli-sette-2019-8a39931": {
+    productName: "Fratelli SETTE 2019", category: "Indian Sangiovese-Cabernet Red Wine",
+    shortOverview: "SETTE 2019 is a structured Indian red built on Sangiovese fruit and Cabernet Sauvignon backbone. Raspberry, blackcurrant and oak spice make it a food wine that benefits from air.",
+    craftStory: "Fratelli's SETTE fruit comes from estate vineyards beside the Nira River at Akluj, Maharashtra. Sangiovese brings red fruit and acidity, while Cabernet Sauvignon contributes darker fruit and structure; oak adds vanilla spice.",
+    tastingNotes: { nose: "Raspberry, violet and blackcurrant with gentle vanilla oak.", palate: "Layered dark and red fruit meets lively acidity, silky tannin and soft wood spice.", finish: "Long and vibrant, with blackcurrant and vanilla fading slowly." },
+    servingGuide: { glassware: "Large Bordeaux glass", idealTemperature: "Cool room temperature (16–18°C)", recommendation: "Decant for roughly 20–30 minutes, then serve slightly cool; do not leave it warm on the table." },
+    foodPairings: ["mutton ghee roast", "tandoori lamb chops", "galouti kebab", "mushroom pepper fry", "aged cheddar"],
+    whyBuyThis: "The Sangiovese-Cabernet pairing combines vivid acidity with enough structure for rich Indian dishes.",
+    faqs: [{ question: "Which grapes define SETTE?", answer: "Fratelli describes the standard SETTE range as a Sangiovese and Cabernet Sauvignon blend." }, { question: "Should SETTE be decanted?", answer: "A short 20–30 minute decant can open its fruit and soften the oak impression." }],
+    metaTitle: "Fratelli SETTE 2019 Price, Taste & Review | BevOry", metaDescription: "SETTE 2019 layers raspberry, blackcurrant and oak spice. Explore Indian pairings and indicative city prices on BevOry."
+  }
+};

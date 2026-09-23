@@ -35,6 +35,14 @@ describe("origin SEO rendering", () => {
     expect(seo.body?.join(" ")).toContain("Nose: Vanilla");
     expect(seo.faqs).toHaveLength(2);
   });
+  it("uses second-batch metadata and sensory copy for origin crawler pages", () => {
+    const seo = enrichProductSeo("/gurgaon/product/glenmorangie-signet-8ee8eec", {
+      title: "Old", description: "Old", heading: "Signet", canonicalPath: "/gurgaon/product/glenmorangie-signet-8ee8eec",
+      robots: "index, follow", breadcrumbs: [], body: ["Local prices"],
+    }, {});
+    expect(seo.title).toBe("Glenmorangie Signet Price, Taste & Review | BevOry");
+    expect(seo.body?.join(" ")).toContain("Nose: Espresso");
+  });
   it("bounds the parsed SEO shard cache and refreshes recent entries", () => {
     const cache = new Map<string, Promise<number>>();
     rememberRecentPromise(cache, "a", Promise.resolve(1), 2);

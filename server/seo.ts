@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fullProductName } from "../src/lib/productName.js";
-import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatch01.js";
+import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatches.js";
 
 const SITE_ORIGIN = "https://bevory.in";
 
@@ -378,7 +378,8 @@ export const enrichProductSeo = (
     ];
     return {
       ...seo,
-      description: shortDescription(`${researched.productName} in ${parts[0]}: ${researched.tastingNotes.nose} Check local prices and pairings on BevOry.`),
+      title: researched.metaTitle,
+      description: researched.metaDescription,
       body,
       structuredData: seo.structuredData
         ? { ...seo.structuredData, description: researched.shortOverview }

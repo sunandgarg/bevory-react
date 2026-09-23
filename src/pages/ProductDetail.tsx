@@ -398,7 +398,7 @@ const ProductDetail = () => {
     : null;
   const displayReviewCount = product?.review_count || 0;
   const productLabel = product ? fullProductName(product.brand, product.name) : "";
-  const hasResearchedEditorial = product?.product_content_version === "researched-product-batch-01";
+  const hasResearchedEditorial = product?.product_content_version?.startsWith("researched-product-batch-") ?? false;
   const pageHeading = displayCityName
     ? `${productLabel} price in ${displayCityName}`
     : productLabel;

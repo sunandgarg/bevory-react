@@ -33,6 +33,13 @@ describe("SEO routing", () => {
     expect(seo.structuredData.description).toContain("Black Label");
     expect(seo.faqs).toHaveLength(2);
   });
+  it("serves second-batch metadata in the Pages crawler route", () => {
+    const seo = enrichProductSeo("/gurgaon/product/fratelli-chenin-blanc-2bea1fc", {
+      title: "Old", description: "Old", body: [],
+    });
+    expect(seo.title).toBe("Fratelli Chenin Blanc Price, Taste & Review | BevOry");
+    expect(seo.body.join(" ")).toContain("French oak");
+  });
   it("keeps an unpriced city variant visible without indexing or inventing a price", () => {
     const seo = dynamicProductSeo(
       "/mumbai/product/johnnie-walker-black-label/180ml",

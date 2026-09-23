@@ -1,4 +1,4 @@
-import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatch01.ts";
+import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatches.ts";
 
 const SITE_ORIGIN = "https://bevory.in";
 const CATALOG_CACHE_VERSION = "20260920-cold-start-v2";
@@ -281,7 +281,8 @@ const enrichProductSeo = (pathname, seo, editorialIndex = {}) => {
   if (researched) {
     return {
       ...seo,
-      description: shortDescription(`${researched.productName} in ${parts[0]}: ${researched.tastingNotes.nose} Check local prices and pairings on BevOry.`),
+      title: researched.metaTitle,
+      description: researched.metaDescription,
       body: [
         ...(Array.isArray(seo.body) ? seo.body.slice(0, 2) : []),
         researched.shortOverview,

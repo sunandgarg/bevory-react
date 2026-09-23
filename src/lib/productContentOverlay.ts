@@ -1,4 +1,4 @@
-import { PRODUCT_BATCH_CONTENT } from "./productContentBatch01.js";
+import { PRODUCT_BATCH_CONTENT, productContentBatchVersion } from "./productContentBatches.js";
 
 // Read-time overlay: deliberately reversible and leaves catalogue identity, images,
 // variants and prices untouched. It can be removed without a data migration.
@@ -21,7 +21,7 @@ export const applyProductContentOverlay = (row: Record<string, unknown>): Record
     meta_title: detail.metaTitle,
     meta_description: detail.metaDescription,
     type_tag: detail.category,
-    product_content_version: "researched-product-batch-01",
+    product_content_version: productContentBatchVersion(String(row.slug ?? "")),
     // Remove old generated category boilerplate rather than mixing it with
     // bottle-specific editorial. The reviewed fields above replace it.
     taste_profile: null,
