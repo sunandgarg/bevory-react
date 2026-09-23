@@ -114,11 +114,11 @@ const Brands = () => {
 
         <main className="px-4 py-6 pb-24">
           {loading ? (
-            <div className="grid grid-cols-3 gap-4">
-              {[...Array(9)].map((_, i) => (
-                <div key={i} className="flex flex-col items-center gap-2">
-                  <Skeleton className="w-full aspect-square rounded-2xl" />
-                  <Skeleton className="h-4 w-20" />
+            <div className="grid grid-cols-4 gap-3 sm:grid-cols-5 lg:grid-cols-6">
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className="flex flex-col items-center gap-1.5">
+                  <Skeleton className="w-full aspect-square rounded-xl" />
+                  <Skeleton className="h-3 w-14" />
                 </div>
               ))}
             </div>
@@ -131,7 +131,7 @@ const Brands = () => {
                     <span className="text-lg">⭐</span>
                     <h2 className="text-base font-semibold">Featured Brands</h2>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5 lg:grid-cols-6">
                     {spotlightBrands.map((brand, index) => (
                       <BrandCard key={brand.id} brand={brand} index={index} citySlug={citySlug} featured />
                     ))}
@@ -147,7 +147,7 @@ const Brands = () => {
                     <h2 className="text-base font-semibold">All Brands</h2>
                     <span className="text-xs text-muted-foreground">({otherBrands.length})</span>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5 lg:grid-cols-6">
                     {otherBrands.map((brand, index) => (
                       <BrandCard key={brand.id} brand={brand} index={index} citySlug={citySlug} />
                     ))}
@@ -199,10 +199,10 @@ const BrandCard = ({ brand, index, featured, citySlug }: BrandCardProps) => (
       className="flex flex-col items-center group"
     >
       <div
-        className={`w-full aspect-square rounded-2xl flex items-center justify-center mb-2 overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg ${
+        className={`w-full aspect-square rounded-xl flex items-center justify-center mb-1.5 overflow-hidden border border-transparent transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-md ${
           featured
             ? "bg-gradient-to-br from-primary/10 to-accent/10 ring-1 ring-primary/20"
-            : "bg-secondary"
+            : "bg-secondary/70 group-hover:border-accent/30"
         }`}
       >
         <BrandLogo
@@ -211,14 +211,14 @@ const BrandCard = ({ brand, index, featured, citySlug }: BrandCardProps) => (
           logoUrl={brand.logo_url}
           emoji={brand.logo_emoji}
           className="h-full w-full"
-          imgClassName="h-full w-full p-2"
+          imgClassName="h-full w-full p-1.5 sm:p-2"
         />
       </div>
-      <p className="text-xs font-medium text-center line-clamp-2 group-hover:text-primary transition-colors">
+      <p className="text-[10px] sm:text-xs font-medium text-center leading-tight line-clamp-2 group-hover:text-primary transition-colors">
         {brand.brand_name}
       </p>
       {brand.country && (
-        <p className="text-[10px] text-muted-foreground mt-0.5">
+        <p className="hidden sm:block text-[10px] text-muted-foreground mt-0.5 truncate max-w-full">
           {brand.country_flag_url ? (
             <img src={brand.country_flag_url} alt="" width={16} height={11} loading="lazy" decoding="async" className="inline-block mr-1 h-2.5 w-4 object-cover align-[-1px]" />
           ) : brand.country_flag ? (

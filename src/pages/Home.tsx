@@ -244,6 +244,9 @@ const Home = () => {
           </div>
         </div>
 
+        {/* ─── Favourites and Trending ─── */}
+        <TrendingProducts />
+
         {/* ─── Wine Collection ─── */}
         <Suspense fallback={<SectionSkeleton />}>
           <WineCollection categories={categories} />
@@ -253,9 +256,6 @@ const Home = () => {
         <Suspense fallback={<SectionSkeleton />}>
           <BrandSpotlight />
         </Suspense>
-
-        {/* ─── Favourites and Trending ─── */}
-        <TrendingProducts />
 
         {/* ─── Promotional Card ─── */}
         <div className="px-4">
