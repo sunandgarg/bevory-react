@@ -11,6 +11,7 @@ interface Product {
   image_url: string | null;
   rating: number | null;
   price?: number | null;
+  price_volume?: string | null;
   category?: {
     slug?: string;
     name?: string;
@@ -48,13 +49,18 @@ const OtherProductsSection = ({ products, title = "Other Products" }: OtherProdu
               <div className="p-2">
                 <p className="text-xs text-muted-foreground line-clamp-1">{product.brand}</p>
                 <p className="font-medium text-sm line-clamp-1">{product.name}</p>
-                <div className="flex items-center justify-between mt-1">
+                <div className="flex items-end justify-between gap-1 mt-1">
                   <div className="flex items-center gap-0.5">
                     <Star className="w-3 h-3 fill-accent text-accent" />
                     <span className="text-xs">{product.rating || "—"}</span>
                   </div>
-                  {product.price && (
-                    <span className="text-xs font-medium">₹{product.price.toLocaleString()}</span>
+                  {Number(product.price) > 0 && (
+                    <div className="text-right leading-tight">
+                      <p className="text-xs font-semibold text-foreground">₹{Number(product.price).toLocaleString("en-IN")}</p>
+                      {product.price_volume && (
+                        <p className="text-[10px] text-muted-foreground">{product.price_volume}</p>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

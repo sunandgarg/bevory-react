@@ -101,6 +101,19 @@ interface DisplayVolume {
   price: number | null;
 }
 
+interface RelatedProduct {
+  id: string;
+  name: string;
+  brand: string;
+  slug: string | null;
+  image_emoji: string | null;
+  image_url: string | null;
+  rating: number | null;
+  price: number;
+  price_volume: string;
+  category?: { name: string; slug: string } | null;
+}
+
 const normalizeVolume = (value: string) => value.toLowerCase().replace(/\s+/g, "");
 const volumeSize = (value: string) => Number.parseInt(value.replace(/[^0-9]/g, "")) || 0;
 
@@ -150,16 +163,7 @@ const ProductDetail = () => {
   const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [reviewRefresh, setReviewRefresh] = useState(0);
-  const [relatedProducts, setRelatedProducts] = useState<Array<{
-    id: string;
-    name: string;
-    brand: string;
-    slug: string | null;
-    image_emoji: string | null;
-    image_url: string | null;
-    rating: number | null;
-    category?: { name: string; slug: string } | null;
-  }>>([]);
+  const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([]);
 
   const legacyCityByState: Record<string, string> = {
     delhi: "delhi",
@@ -249,14 +253,60 @@ const ProductDetail = () => {
       setLoading(false);
 
       if (productData.category_id) {
-        void apiClient
-          .from("products")
-          .select("id, name, brand, slug, image_emoji, image_url, rating, category:categories(name, slug)")
-          .eq("category_id", productData.category_id)
-          .eq("is_active", true)
-          .neq("id", productData.id)
-          .limit(6)
-          .then(({ data }: { data: typeof relatedProducts | null }) => setRelatedProducts(data ?? []));
+        void (async () => {
+          const { data: relatedData } = await apiClient
+            .from("products")
+            .select("id, name, brand, slug, image_emoji, image_url, rating, category:categories(name, slug)")
+            .eq("category_id", productData.category_id)
+            .eq("is_active", true)
+            .neq("id", productData.id)
+            .limit(24);
+
+          const candidates = (relatedData ?? []) as Array<Omit<RelatedProduct, "price" | "price_volume">>;
+          if (!priceCityId || candidates.length === 0) {
+            setRelatedProducts([]);
+            return;
+          }
+
+          const { data: relatedPriceData } = await apiClient
+            .from("product_prices")
+            .select("product_id, price, volume, volume_ml")
+            .eq("city_id", priceCityId)
+            .eq("price_available", true)
+            .neq("requires_review", true)
+            .in("product_id", candidates.map((candidate) => candidate.id));
+
+          const preferredPriceByProduct = new Map<string, {
+            price: number;
+            volume: string;
+            volumeMl: number;
+          }>();
+          for (const row of relatedPriceData ?? []) {
+            const localPrice = Number(row.price);
+            const volumeMl = Number(row.volume_ml) || volumeSize(String(row.volume || ""));
+            if (!Number.isFinite(localPrice) || localPrice <= 0) continue;
+            const current = preferredPriceByProduct.get(row.product_id);
+            const isPreferred = !current
+              || (volumeMl === 750 && current.volumeMl !== 750)
+              || ((volumeMl === 750) === (current.volumeMl === 750) && volumeMl > current.volumeMl);
+            if (isPreferred) {
+              preferredPriceByProduct.set(row.product_id, {
+                price: localPrice,
+                volume: String(row.volume || (volumeMl ? `${volumeMl}ml` : "")),
+                volumeMl,
+              });
+            }
+          }
+
+          setRelatedProducts(candidates.flatMap((candidate) => {
+            const localPrice = preferredPriceByProduct.get(candidate.id);
+            return localPrice ? [{
+              ...candidate,
+              price: localPrice.price,
+              price_volume: localPrice.volume,
+            }] : [];
+          }).slice(0, 6));
+        })();
       } else {
         setRelatedProducts([]);
       }
@@ -996,7 +1046,7 @@ const ProductDetail = () => {
               <RelatedArticles productId={product.id} brandName={product.brand} />
 
               {/* Other Products in Same Category */}
-              <OtherProductsSection products={relatedProducts as any} title={`More ${product.category?.name || "Products"}`} />
+              <OtherProductsSection products={relatedProducts} title={`More ${product.category?.name || "Products"}`} />
 
               {/* Explore Other Categories */}
               <ExploreCategories currentCategoryId={product.category_id} />
