@@ -362,10 +362,20 @@ const catalog = {
   },
 };
 
+const admin = {
+  getSummary() {
+    return request<Record<
+      "products" | "categories" | "cities" | "profiles" | "product_reviews" | "blog_posts" | "brand_spotlights" | "cocktails",
+      number
+    >>("/admin/summary");
+  },
+};
+
 export const apiClient: any = {
   from: (table: string) => new QueryBuilder(table),
   auth,
   storage,
   functions,
   catalog,
+  admin,
 };

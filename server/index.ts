@@ -16,11 +16,13 @@ import {
   signIn,
   signUp,
   userIsAdmin,
+  requireAdmin,
   validatePolicyAcceptanceBeforePhoneOtp,
   verifyOAuthState,
   type AuthenticatedRequest,
   type PolicyAcceptanceInput,
 } from "./auth.js";
+import { ADMIN_SUMMARY_TABLES, buildAdminSummary } from "./adminSummary.js";
 import { queryHandler } from "./data.js";
 import { cityCatalogHandler, prewarmCityHomeCatalogs } from "./catalog.js";
 import { functionsHandler } from "./functions.js";
@@ -166,6 +168,15 @@ app.get("/api/health", async (_req, res) => {
     console.error("Health check failed", error);
     res.status(503).json({ status: "error", error: "Database unavailable" });
   }
+});
+
+app.get("/api/admin/summary", noStore, requireAdmin, async (_req, res) => {
+  const groups = await prisma.contentRecord.groupBy({
+    by: ["tableName"],
+    where: { tableName: { in: [...ADMIN_SUMMARY_TABLES] } },
+    _count: { _all: true },
+  });
+  res.json({ data: buildAdminSummary(groups), error: null });
 });
 
 app.post("/api/auth/signup", signUpRateLimit, async (req: AuthenticatedRequest, res) => {

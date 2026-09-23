@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
-import { Plus, Pencil, Trash2, Star, DollarSign, Heart, MessageSquare, Search, Copy, Download } from "lucide-react";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Plus, Pencil, Trash2, Star, DollarSign, Heart, MessageSquare, Search, Copy, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -107,6 +107,7 @@ interface ProductPrice {
 
 // Default volume suggestions (user can add custom volumes)
 const DEFAULT_VOLUME_SUGGESTIONS = ['1000ml', '750ml', '500ml', '375ml', '180ml', '90ml'];
+const PRODUCTS_PER_PAGE = 50;
 
 interface ProductReview {
   id: string;
@@ -161,9 +162,20 @@ const AdminProducts = () => {
 
   const [sortOrder, setSortOrder] = useState<"latest" | "oldest" | "name">("latest");
   const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [page, setPage] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   
-  const fetchProducts = async () => {
-    const { data } = await apiClient.from("products").select("*").order("created_at", { ascending: false });
+  const fetchProducts = useCallback(async () => {
+    setLoading(true);
+    let request = apiClient.from("products").select("*", { count: "exact" });
+    const lookup = debouncedSearch.trim().replace(/[%,]/g, "");
+    if (lookup) request = request.or(`name.ilike.%${lookup}%,brand.ilike.%${lookup}%`);
+    if (filterCategory !== "all") request = request.eq("category_id", filterCategory);
+    request = sortOrder === "name"
+      ? request.order("name")
+      : request.order("created_at", { ascending: sortOrder === "oldest" });
+    const { data, count } = await request.range(page * PRODUCTS_PER_PAGE, (page + 1) * PRODUCTS_PER_PAGE - 1);
     if (data) {
       // Parse faqs from JSON
       const parsed = data.map(p => ({
@@ -172,8 +184,9 @@ const AdminProducts = () => {
       }));
       setProducts(parsed);
     }
+    setTotalProducts(count ?? 0);
     setLoading(false);
-  };
+  }, [debouncedSearch, filterCategory, page, sortOrder]);
 
   const fetchCategories = async () => {
     const { data } = await apiClient.from("categories").select("id, name, emoji").order("name");
@@ -269,12 +282,20 @@ const AdminProducts = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
     fetchCategories();
     fetchSubCategories();
     fetchBrands();
     fetchCities();
   }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedSearch(searchQuery), 250);
+    return () => window.clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    void fetchProducts();
+  }, [fetchProducts]);
 
   const getCategoryName = (id: string | null) => {
     if (!id) return "";
@@ -287,40 +308,10 @@ const AdminProducts = () => {
   };
 
   const filteredProducts = useMemo(() => {
-    let result = [...products];
-    
-    // Filter by search
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.name?.toLowerCase().includes(query) ||
-          p.brand?.toLowerCase().includes(query) ||
-          categories.find((c) => c.id === p.category_id)?.name?.toLowerCase().includes(query) ||
-          subCategories.find((s) => s.id === p.sub_category_id)?.name?.toLowerCase().includes(query)
-      );
-    }
-    
-    // Filter by category
-    if (filterCategory && filterCategory !== "all") {
-      result = result.filter((p) => p.category_id === filterCategory);
-    }
-    
-    // Sort
-    result.sort((a, b) => {
-      if (sortOrder === "name") {
-        return `${a.brand} ${a.name}`.localeCompare(`${b.brand} ${b.name}`);
-      }
-      // For latest/oldest, we rely on the order from DB but can reverse
-      return 0; // Already sorted by created_at from fetch
-    });
-    
-    if (sortOrder === "oldest") {
-      result.reverse();
-    }
-    
-    return result;
-  }, [products, searchQuery, categories, subCategories, sortOrder, filterCategory]);
+    return products;
+  }, [products]);
+
+  const totalPages = Math.max(1, Math.ceil(totalProducts / PRODUCTS_PER_PAGE));
 
   const handleSave = async () => {
     if (!editProduct) return;
@@ -931,12 +922,12 @@ const AdminProducts = () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-xl font-bold">Products ({filteredProducts.length})</h2>
+        <h2 className="text-xl font-bold">Products ({totalProducts.toLocaleString("en-IN")})</h2>
         <div className="flex items-center gap-2">
           <AdminSearchBar
             value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Search products..."
+            onChange={(value) => { setSearchQuery(value); setPage(0); }}
+            placeholder="Search products or brands..."
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -971,7 +962,7 @@ const AdminProducts = () => {
 
       {/* Sort & Filter Controls */}
       <div className="flex items-center gap-3 flex-wrap">
-        <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as "latest" | "oldest" | "name")}>
+        <Select value={sortOrder} onValueChange={(v) => { setSortOrder(v as "latest" | "oldest" | "name"); setPage(0); }}>
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
@@ -982,7 +973,7 @@ const AdminProducts = () => {
           </SelectContent>
         </Select>
         
-        <Select value={filterCategory} onValueChange={setFilterCategory}>
+        <Select value={filterCategory} onValueChange={(value) => { setFilterCategory(value); setPage(0); }}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter category..." />
           </SelectTrigger>
@@ -1070,6 +1061,22 @@ const AdminProducts = () => {
               </Button>
             </div>
           ))}
+        </div>
+      )}
+
+      {!loading && totalPages > 1 && (
+        <div className="flex items-center justify-between rounded-lg border border-border bg-card px-3 py-2">
+          <p className="text-xs text-muted-foreground">
+            Page {page + 1} of {totalPages}
+          </p>
+          <div className="flex gap-1">
+            <Button size="icon" variant="ghost" disabled={page === 0} onClick={() => setPage((current) => current - 1)} aria-label="Previous page">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button size="icon" variant="ghost" disabled={page + 1 >= totalPages} onClick={() => setPage((current) => current + 1)} aria-label="Next page">
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )}
 
