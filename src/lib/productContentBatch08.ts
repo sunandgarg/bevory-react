@@ -102,7 +102,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     metaTitle: "Jägermeister Manifest Price, Taste & Review | BevOry", metaDescription: "Jägermeister Manifest brings layered herbs, spice and oak. Sip beside dark chocolate; check indicative city prices on BevOry."
   },
   "jagermeister-jager-cold-brew-3af3460": {
-    productName: "Jäger Cold Brew", category: "Coffee-Flavoured German Herbal Liqueur",
+    productName: "Jägermeister Cold Brew", category: "Coffee-Flavoured German Herbal Liqueur",
     shortOverview: "Jäger Cold Brew combines the original's herb-and-spice core with roasted coffee and cacao. It is a dessert-side pour rather than a replacement for brewed coffee.",
     craftStory: "Jägermeister blends its original herbal liqueur with arabica coffee and a hint of cacao. The parent liqueur derives its character from 56 herbs, roots and spices and oak maturation.",
     tastingNotes: { nose: "Roasted coffee, cacao and aromatic herbs.", palate: "Rich and sweet, with coffee upfront and herbal spice underneath.", finish: "Medium, leaving cocoa and a gently bitter coffee note." },
@@ -110,7 +110,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     foodPairings: ["coffee kulfi", "70% dark chocolate", "tiramisu", "walnut brownie"],
     whyBuyThis: "Coffee and cacao give the familiar herbal base a clear after-dinner direction.",
     faqs: [{ question: "Does Jäger Cold Brew contain coffee?", answer: "Yes. The producer names arabica coffee and cacao." }, { question: "Is it the original Jägermeister?", answer: "No. It uses the original herbal liqueur as the base for a coffee expression." }],
-    metaTitle: "Jäger Cold Brew Price, Taste & Review | BevOry", metaDescription: "Jäger Cold Brew layers arabica coffee, cacao and herbs. Pair a chilled pour with coffee kulfi; check city prices on BevOry."
+    metaTitle: "Jägermeister Cold Brew Price, Taste & Review | BevOry", metaDescription: "Jägermeister Cold Brew layers arabica coffee, cacao and herbs. Pair a chilled pour with coffee kulfi; check city prices on BevOry."
   },
   "sula-riesling-d41d93a": {
     productName: "Sula Riesling", category: "Off-Dry Indian Riesling White Wine",
@@ -245,7 +245,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     metaTitle: "One Tree Hill White Price, Taste & Review | BevOry", metaDescription: "One Tree Hill White blends guava, pineapple and citrus. Pair with malai paneer tikka; check city prices on BevOry."
   },
   "grover-vijay-amritraj-reserve-collection-red-c79144b": {
-    productName: "Grover VA Reserve Red", category: "French-Oak-Aged Indian Red Blend",
+    productName: "Vijay Amritraj Reserve Red", category: "French-Oak-Aged Indian Red Blend",
     shortOverview: "Vijay Amritraj Reserve Red is a structured, dark-fruited blend with pepper and violets. It calls for a richer dinner than Grover's softer Santé red.",
     craftStory: "Grover Zampa created the reserve collection with tennis player Vijay Amritraj. Shiraz, Cabernet Sauvignon and Viognier are blended, with fine-grain French oak adding shape to the blackberry and blackcurrant fruit.",
     tastingNotes: { nose: "Blackberry jam, blackcurrant, violet and pepper.", palate: "Rich and supple, with dark fruit, spice and integrated oak.", finish: "Long, with black fruit and a quiet pepper note." },
@@ -253,10 +253,10 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     foodPairings: ["mutton rogan josh", "galouti kebab", "lamb chops", "tandoori mushrooms"],
     whyBuyThis: "Viognier adds perfume to a French-oak-shaped Shiraz-Cabernet blend.",
     faqs: [{ question: "Which grapes make VA Reserve Red?", answer: "Grover lists Shiraz, Cabernet Sauvignon and Viognier." }, { question: "Does the red use oak?", answer: "The producer describes fine-grain French oak integration." }],
-    metaTitle: "Grover VA Reserve Red Price, Taste & Review | BevOry", metaDescription: "Grover VA Reserve Red brings blackberry, violet and French-oak spice. Pair with rogan josh; check city prices on BevOry."
+    metaTitle: "Vijay Amritraj Reserve Red Price, Taste & Review | BevOry", metaDescription: "Vijay Amritraj Reserve Red brings blackberry, violet and French-oak spice. Pair with rogan josh; check city prices on BevOry."
   },
   "grover-vijay-amritraj-white-58822ed": {
-    productName: "Grover VA Reserve White", category: "Barrel-Fermented Indian Viognier Wine",
+    productName: "Vijay Amritraj Reserve White", category: "Barrel-Fermented Indian Viognier Wine",
     shortOverview: "This Reserve White is a fuller Viognier, not a sharp Sauvignon-style white. Peach, dried apricot and a hint of vanilla make it comfortable beside coastal Indian food.",
     craftStory: "Grover Zampa's Vijay Amritraj collection uses barrel-fermented Viognier for the white. French-oak integration adds vanilla around its floral and stone-fruit character.",
     tastingNotes: { nose: "Peach, honey, dried apricot, flowers and a little vanilla.", palate: "Rich and textured, with stone fruit and a gentle oak accent.", finish: "Long and fruit-led, with apricot lingering." },
@@ -264,7 +264,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     foodPairings: ["coastal rava-fried fish", "butter-garlic prawns", "malai paneer tikka", "Goan fish curry"],
     whyBuyThis: "Barrel fermentation gives Indian Viognier a richer texture for seafood and creamy dishes.",
     faqs: [{ question: "Which grape is used?", answer: "Grover identifies Viognier." }, { question: "Is the wine barrel fermented?", answer: "Yes. The producer specifies barrel fermentation and French-oak influence." }],
-    metaTitle: "Grover VA Reserve White Price, Taste & Review | BevOry", metaDescription: "Grover VA Reserve White offers peach, apricot and gentle French oak. Pair with coastal fish; check city prices on BevOry."
+    metaTitle: "Vijay Amritraj Reserve White Price, Taste & Review | BevOry", metaDescription: "Vijay Amritraj Reserve White offers peach, apricot and gentle French oak. Pair with coastal fish; check city prices on BevOry."
   },
   "grover-soiree-brut-methode-tradition-080d016": {
     productName: "Grover Soirée Brut", category: "Traditional-Method Indian Chenin Blanc Sparkling Wine",
@@ -289,7 +289,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     metaTitle: "Grover Soirée Rosé Price, Taste & Review | BevOry", metaDescription: "Grover Soirée Rosé brings cherry, strawberry and fine bubbles. Pair with tandoori chicken; check city prices on BevOry."
   },
   "jacobs-creek-chardonnay-pinot-noir-b42c9b4": {
-    productName: "JC Chardonnay Pinot Noir", category: "Australian Chardonnay-Pinot Noir Sparkling Wine",
+    productName: "Classic Chardonnay Pinot Noir", category: "Australian Chardonnay-Pinot Noir Sparkling Wine",
     shortOverview: "Jacob's Creek blends Chardonnay citrus with Pinot Noir red-currant fruit in this sparkling wine. A creamy yeast note gives the clean finish more depth.",
     craftStory: "The Australian producer builds the wine from Chardonnay and Pinot Noir for its Classic sparkling range. Its own tasting notes describe lemon, red currant and creamy nutty yeast character.",
     tastingNotes: { nose: "Lemon citrus and red currant.", palate: "Generous citrus fruit with a creamy, nutty yeast texture.", finish: "Soft, crisp and clean." },
@@ -297,7 +297,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     foodPairings: ["malai paneer tikka", "tandoori prawns", "soft white cheese", "rava-fried fish"],
     whyBuyThis: "The Chardonnay-Pinot blend provides citrus, red fruit and a creamy middle in one sparkler.",
     faqs: [{ question: "Which grapes are blended?", answer: "Jacob's Creek names Chardonnay and Pinot Noir." }, { question: "Is this a still white wine?", answer: "No. It belongs to the producer's sparkling range." }],
-    metaTitle: "JC Chardonnay Pinot Noir Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Chardonnay Pinot Noir offers citrus, red currant and creamy bubbles. Pair with prawns; check city prices on BevOry."
+    metaTitle: "Classic Chardonnay Pinot Noir Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Chardonnay Pinot Noir offers citrus, red currant and creamy bubbles. Pair with prawns; check city prices on BevOry."
   },
   "jacobs-creek-classic-crisp-rose-3db8c89": {
     productName: "Jacob's Creek Crisp Rosé", category: "Australian Dry-Style Rosé Wine",
@@ -311,7 +311,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     metaTitle: "Jacob's Creek Crisp Rosé Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Crisp Rosé offers red berries, spice and a fresh finish. Pair with cucumber chaat; check city prices on BevOry."
   },
   "jacobs-creek-jacob-creek-classic-sauvignon-blanc-wine-7841591": {
-    productName: "JC Sauvignon Blanc", category: "Australian Classic Sauvignon Blanc White Wine",
+    productName: "Jacob's Creek Sauvignon Blanc", category: "Australian Classic Sauvignon Blanc White Wine",
     shortOverview: "Jacob's Creek Classic Sauvignon Blanc is crisp and herbaceous rather than creamy or oaky. Passionfruit gives the green notes a tropical counterpoint.",
     craftStory: "The Australian producer makes this Sauvignon Blanc for its Classic, drink-now range. Its published profile emphasises fruit and herbaceous aromas rather than a barrel-ageing claim.",
     tastingNotes: { nose: "Passionfruit and fresh asparagus.", palate: "Tropical fruit and green herbaceous notes with lively acidity.", finish: "Short to medium, crisp and clean." },
@@ -319,7 +319,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     foodPairings: ["coastal rava-fried fish", "hara bhara kebab", "cucumber chaat", "tandoori prawns"],
     whyBuyThis: "Its passionfruit-and-green profile is a clear match for fresh herbs and coastal food.",
     faqs: [{ question: "Is this Sauvignon Blanc oak-led?", answer: "No. The producer presents a crisp fruit-and-herb profile, not an oak-driven one." }, { question: "How cold should it be served?", answer: "Jacob's Creek suggests about 6–8°C." }],
-    metaTitle: "JC Sauvignon Blanc Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Sauvignon Blanc shows passionfruit and green herbs. Pair with rava-fried fish; check city prices on BevOry."
+    metaTitle: "Jacob's Creek Sauvignon Blanc Price, Taste & Review | BevOry", metaDescription: "Jacob's Creek Sauvignon Blanc shows passionfruit and green herbs. Pair with rava-fried fish; check city prices on BevOry."
   },
   "glenfiddich-reserve-cask-ab3c2f6": {
     productName: "Glenfiddich Reserve Cask", category: "Sherry-Cask Speyside Single Malt Scotch",
