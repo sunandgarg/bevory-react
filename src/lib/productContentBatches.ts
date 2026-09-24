@@ -40,10 +40,11 @@ import { PRODUCT_BATCH_CONTENT as BATCH_39 } from "./productContentBatch39.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_40 } from "./productContentBatch40.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_41 } from "./productContentBatch41.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_42 } from "./productContentBatch42.js";
+import { PRODUCT_BATCH_CONTENT as BATCH_43 } from "./productContentBatch43.js";
 
-export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04, ...BATCH_05, ...BATCH_06, ...BATCH_07, ...BATCH_08, ...BATCH_09, ...BATCH_10, ...BATCH_11, ...BATCH_12, ...BATCH_13, ...BATCH_14, ...BATCH_15, ...BATCH_16, ...BATCH_17, ...BATCH_18, ...BATCH_19, ...BATCH_20, ...BATCH_21, ...BATCH_22, ...BATCH_23, ...BATCH_24, ...BATCH_25, ...BATCH_26, ...BATCH_27, ...BATCH_28, ...BATCH_29, ...BATCH_30, ...BATCH_31, ...BATCH_32, ...BATCH_33, ...BATCH_34, ...BATCH_35, ...BATCH_36, ...BATCH_37, ...BATCH_38, ...BATCH_39, ...BATCH_40, ...BATCH_41, ...BATCH_42 };
+export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04, ...BATCH_05, ...BATCH_06, ...BATCH_07, ...BATCH_08, ...BATCH_09, ...BATCH_10, ...BATCH_11, ...BATCH_12, ...BATCH_13, ...BATCH_14, ...BATCH_15, ...BATCH_16, ...BATCH_17, ...BATCH_18, ...BATCH_19, ...BATCH_20, ...BATCH_21, ...BATCH_22, ...BATCH_23, ...BATCH_24, ...BATCH_25, ...BATCH_26, ...BATCH_27, ...BATCH_28, ...BATCH_29, ...BATCH_30, ...BATCH_31, ...BATCH_32, ...BATCH_33, ...BATCH_34, ...BATCH_35, ...BATCH_36, ...BATCH_37, ...BATCH_38, ...BATCH_39, ...BATCH_40, ...BATCH_41, ...BATCH_42, ...BATCH_43 };
 export const productContentBatchVersion = (slug: string): string | null =>
-  slug in BATCH_42 ? "researched-product-batch-42" : slug in BATCH_41 ? "researched-product-batch-41" : slug in BATCH_40 ? "researched-product-batch-40" : productContentBatchVersionThrough39(slug);
+  slug in BATCH_43 ? "researched-product-batch-43" : slug in BATCH_42 ? "researched-product-batch-42" : slug in BATCH_41 ? "researched-product-batch-41" : slug in BATCH_40 ? "researched-product-batch-40" : productContentBatchVersionThrough39(slug);
 const productContentBatchVersionThrough39 = (slug: string): string | null =>
   slug in BATCH_39 ? "researched-product-batch-39" : productContentBatchVersionThrough38(slug);
 const productContentBatchVersionThrough38 = (slug: string): string | null =>
