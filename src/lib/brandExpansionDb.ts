@@ -51,6 +51,12 @@ import { BRAND_CONTENT_BATCH_47 } from "./brandContentBatch47.js";
 import { BRAND_CONTENT_BATCH_48 } from "./brandContentBatch48.js";
 import { BRAND_CONTENT_BATCH_49 } from "./brandContentBatch49.js";
 import { BRAND_CONTENT_BATCH_50 } from "./brandContentBatch50.js";
+import { BRAND_CONTENT_BATCH_51, BRAND_LOGOS_BATCH_51 } from "./brandContentBatch51.js";
+import { BRAND_CONTENT_BATCH_52 } from "./brandContentBatch52.js";
+import { BRAND_CONTENT_BATCH_53 } from "./brandContentBatch53.js";
+import { BRAND_CONTENT_BATCH_54 } from "./brandContentBatch54.js";
+import { BRAND_CONTENT_BATCH_55 } from "./brandContentBatch55.js";
+import { BRAND_CONTENT_BATCH_56 } from "./brandContentBatch56.js";
 
 type JsonObject = Prisma.JsonObject;
 
@@ -159,16 +165,25 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
       || BRAND_CONTENT_BATCH_47[definition.slug]
       || BRAND_CONTENT_BATCH_48[definition.slug]
       || BRAND_CONTENT_BATCH_49[definition.slug]
-      || BRAND_CONTENT_BATCH_50[definition.slug],
+      || BRAND_CONTENT_BATCH_50[definition.slug]
+      || BRAND_CONTENT_BATCH_51[definition.slug]
+      || BRAND_CONTENT_BATCH_52[definition.slug]
+      || BRAND_CONTENT_BATCH_53[definition.slug]
+      || BRAND_CONTENT_BATCH_54[definition.slug]
+      || BRAND_CONTENT_BATCH_55[definition.slug]
+      || BRAND_CONTENT_BATCH_56[definition.slug],
     );
 
     for (const field of contentFields) {
       if (refreshPublicContent || !hasValue(previous[field])) next[field] = built[field];
     }
-    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug]) next.brand_name = built.brand_name;
+    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug] || BRAND_CONTENT_BATCH_51[definition.slug] || BRAND_CONTENT_BATCH_52[definition.slug] || BRAND_CONTENT_BATCH_53[definition.slug] || BRAND_CONTENT_BATCH_54[definition.slug] || BRAND_CONTENT_BATCH_55[definition.slug] || BRAND_CONTENT_BATCH_56[definition.slug]) next.brand_name = built.brand_name;
     if (refreshPublicContent || !hasValue(previous.logo_emoji)) next.logo_emoji = built.logo_emoji;
-    // Existing image identity wins; an empty slot accepts only a checked asset.
-    const refreshLogo = !hasValue(previous.logo_url) && built.logo_identity_verified === true && hasValue(built.logo_url);
+    // Preserve existing images except exact batch 51 slug URLs confirmed broken.
+    const brokenBatch51Logo = Boolean(BRAND_LOGOS_BATCH_51[definition.slug])
+      && previous.logo_url === `https://static.livcheers.com/static/content/images/brand/${definition.slug}.webp`;
+    const refreshLogo = (!hasValue(previous.logo_url) || brokenBatch51Logo)
+      && built.logo_identity_verified === true && hasValue(built.logo_url);
     if (refreshLogo) next.logo_url = built.logo_url;
     else if (!hasValue(previous.logo_url)) next.logo_url = null;
     if (refreshLogo) {

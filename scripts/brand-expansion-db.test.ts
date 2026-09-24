@@ -13,6 +13,112 @@ const database = () => {
 };
 
 describe("brand editorial refresh", () => {
+  it("refreshes batch 55 copy without replacing a stored logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "aberlour")!;
+    const verified = rows.find((item) => item.data.slug === "3-kilos")!;
+    const pending = rows.find((item) => item.data.slug === "appleton-estate")!;
+    stored.data.logo_url = "https://bevory.in/media/aberlour-existing.webp";
+    stored.data.description = "Old copy";
+    verified.data.logo_url = null;
+    pending.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "aberlour")?.content_version).toBe("brand-public-ui-v3-batch-55");
+    expect(updates.find((data) => data.slug === "aberlour")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "3-kilos")?.logo_url).toBe("https://3kilos.de/wp-content/uploads/2024/04/cropped-3-KILOS-VODKA-LOGO-PRIMARY-583x1024.png");
+    expect(updates.find((data) => data.slug === "appleton-estate")).toBeUndefined();
+  });
+  it("refreshes batch 54 copy, preserves stored logos and fills only checked empty slots", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "remy-martin")!;
+    const verified = rows.find((item) => item.data.slug === "cazulo")!;
+    const pending = rows.find((item) => item.data.slug === "1800-tequila")!;
+    stored.data.logo_url = "https://bevory.in/media/remy-existing.webp";
+    stored.data.description = "Old copy";
+    verified.data.logo_url = null;
+    pending.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "remy-martin")?.content_version).toBe("brand-public-ui-v3-batch-54");
+    expect(updates.find((data) => data.slug === "remy-martin")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "cazulo")?.logo_url).toBe("https://cazulofeni.com/images/cazulo-logo.png");
+    expect(updates.find((data) => data.slug === "1800-tequila")).toBeUndefined();
+  });
+  it("refreshes batch 53 copy while preserving a stored logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const row = rows.find((item) => item.data.slug === "akashi")!;
+    row.data.description = "Old public copy";
+    row.data.logo_url = "https://bevory.in/media/akashi-existing.webp";
+    await applyBrandExpansion(prisma, newDate);
+    const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "akashi");
+    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-53");
+    expect(updated?.description).not.toBe("Old public copy");
+    expect(updated?.logo_url).toBe(row.data.logo_url);
+  });
+  it("fills only visually verified missing batch 53 logos", async () => {
+    const { prisma, rows, upsert } = database();
+    const verified = rows.find((item) => item.data.slug === "gekkeikan")!;
+    const unverified = rows.find((item) => item.data.slug === "nikka")!;
+    verified.data.logo_url = null;
+    unverified.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "gekkeikan")?.logo_url).toBe("https://www.gekkeikan.com/lib/img/common/header/img_logo.svg");
+    expect(updates.find((data) => data.slug === "nikka")).toBeUndefined();
+  });
+  it("refreshes batch 52 public fields without touching a stored logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const row = rows.find((item) => item.data.slug === "penfolds")!;
+    row.data.description = "Old public copy";
+    row.data.logo_url = "https://bevory.in/media/penfolds-existing.webp";
+    await applyBrandExpansion(prisma, newDate);
+    const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "penfolds");
+    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-52");
+    expect(updated?.description).not.toBe("Old public copy");
+    expect(updated?.logo_url).toBe(row.data.logo_url);
+  });
+  it("refreshes batch 51 copy and preserves a stored logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const row = rows.find((item) => item.data.slug === "old-admiral")!;
+    row.data.logo_url = "https://bevory.in/media/old-admiral-original.webp";
+    row.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "old-admiral");
+    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-51");
+    expect(updated?.description).not.toBe("Old public copy");
+    expect(updated?.logo_url).toBe(row.data.logo_url);
+  });
+
+  it("repairs only the known broken Morpheus Blue logo URL", async () => {
+    const { prisma, rows, upsert } = database();
+    const row = rows.find((item) => item.data.slug === "morpheus-blue")!;
+    row.data.logo_url = "https://static.livcheers.com/static/content/images/brand/morpheus-blue.webp";
+    await applyBrandExpansion(prisma, newDate);
+    const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "morpheus-blue");
+    expect(updated?.logo_url).toBe("https://static.livcheers.com/static/content/images/brand/morpheus.webp");
+    row.data.logo_url = "https://bevory.in/media/morpheus-custom.webp";
+    row.data.description = "Old public copy";
+    upsert.mockClear();
+    await applyBrandExpansion(prisma, newDate);
+    const preserved = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "morpheus-blue");
+    expect(preserved?.logo_url).toBe("https://bevory.in/media/morpheus-custom.webp");
+  });
+  it("replaces the broken Piccini slug image without replacing a custom logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const row = rows.find((item) => item.data.slug === "piccini")!;
+    row.data.logo_url = "https://static.livcheers.com/static/content/images/brand/piccini.webp";
+    await applyBrandExpansion(prisma, newDate);
+    const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "piccini");
+    expect(updated?.logo_url).toBe("https://www.winesellersltd.com/wp-content/uploads/2023/06/Piccini_logo.png");
+    expect(updated?.logo_source_tier).toBe("verified_third_party");
+    row.data.logo_url = "https://bevory.in/media/piccini-custom.webp";
+    row.data.description = "Old public copy";
+    upsert.mockClear();
+    await applyBrandExpansion(prisma, newDate);
+    const preserved = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "piccini");
+    expect(preserved?.logo_url).toBe("https://bevory.in/media/piccini-custom.webp");
+  });
   it("refreshes batch 50 copy without changing an older brand's stored logo", async () => {
     const { prisma, rows, upsert } = database();
     const sauza = rows.find((item) => item.data.slug === "sauza")!;
