@@ -246,6 +246,12 @@ sudo docker compose -f deploy/docker-compose.production.yml run --rm --no-deps a
 sudo docker compose -f deploy/docker-compose.production.yml up -d
 ```
 
+The API mounts the host's generated `public/seo-routes`, `public/sitemaps`,
+and `public/sitemap.xml` read-only. After content changes, regenerate these
+files with the documented `pnpm sitemap` command below, then recreate the API
+container so the SEO route cache sees the new files. Keep the host files in
+place when syncing source; they are production data, not disposable build output.
+
 Schema changes require a separately reviewed migration and a managed-database
 snapshot. Never accept a Prisma `db push` warning that proposes dropping
 `filter_city_id`, `filter_price_available`, `filter_product_id`,
