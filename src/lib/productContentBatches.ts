@@ -37,9 +37,12 @@ import { PRODUCT_BATCH_CONTENT as BATCH_36 } from "./productContentBatch36.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_37 } from "./productContentBatch37.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_38 } from "./productContentBatch38.js";
 import { PRODUCT_BATCH_CONTENT as BATCH_39 } from "./productContentBatch39.js";
+import { PRODUCT_BATCH_CONTENT as BATCH_40 } from "./productContentBatch40.js";
 
-export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04, ...BATCH_05, ...BATCH_06, ...BATCH_07, ...BATCH_08, ...BATCH_09, ...BATCH_10, ...BATCH_11, ...BATCH_12, ...BATCH_13, ...BATCH_14, ...BATCH_15, ...BATCH_16, ...BATCH_17, ...BATCH_18, ...BATCH_19, ...BATCH_20, ...BATCH_21, ...BATCH_22, ...BATCH_23, ...BATCH_24, ...BATCH_25, ...BATCH_26, ...BATCH_27, ...BATCH_28, ...BATCH_29, ...BATCH_30, ...BATCH_31, ...BATCH_32, ...BATCH_33, ...BATCH_34, ...BATCH_35, ...BATCH_36, ...BATCH_37, ...BATCH_38, ...BATCH_39 };
+export const PRODUCT_BATCH_CONTENT = { ...BATCH_01, ...BATCH_02, ...BATCH_03, ...BATCH_04, ...BATCH_05, ...BATCH_06, ...BATCH_07, ...BATCH_08, ...BATCH_09, ...BATCH_10, ...BATCH_11, ...BATCH_12, ...BATCH_13, ...BATCH_14, ...BATCH_15, ...BATCH_16, ...BATCH_17, ...BATCH_18, ...BATCH_19, ...BATCH_20, ...BATCH_21, ...BATCH_22, ...BATCH_23, ...BATCH_24, ...BATCH_25, ...BATCH_26, ...BATCH_27, ...BATCH_28, ...BATCH_29, ...BATCH_30, ...BATCH_31, ...BATCH_32, ...BATCH_33, ...BATCH_34, ...BATCH_35, ...BATCH_36, ...BATCH_37, ...BATCH_38, ...BATCH_39, ...BATCH_40 };
 export const productContentBatchVersion = (slug: string): string | null =>
+  slug in BATCH_40 ? "researched-product-batch-40" : productContentBatchVersionThrough39(slug);
+const productContentBatchVersionThrough39 = (slug: string): string | null =>
   slug in BATCH_39 ? "researched-product-batch-39" : productContentBatchVersionThrough38(slug);
 const productContentBatchVersionThrough38 = (slug: string): string | null =>
   slug in BATCH_38 ? "researched-product-batch-38" : productContentBatchVersionThrough37(slug);
