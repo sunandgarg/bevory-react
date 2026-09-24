@@ -13,6 +13,78 @@ const database = () => {
 };
 
 describe("brand editorial refresh", () => {
+  it("refreshes batch 60 while preserving stored logos and leaving unverified slots empty", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "haku")!;
+    const mapped = rows.find((item) => item.data.slug === "hakutsuru")!;
+    const unresolved = rows.find((item) => item.data.slug === "grand-macnish")!;
+    stored.data.logo_url = "https://bevory.in/media/haku-existing.webp";
+    stored.data.description = "Older copy";
+    mapped.data.logo_url = null;
+    unresolved.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "haku")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "haku")?.content_version).toBe("brand-public-ui-v3-batch-60");
+    expect(updates.find((data) => data.slug === "hakutsuru")?.logo_url).toBe(buildBrandExpansionData(BRAND_EXPANSION.find((item) => item.slug === "hakutsuru")!).logo_url);
+    expect(unresolved.data.logo_url).toBeNull();
+    expect(updates.find((data) => data.slug === "grand-macnish")).toBeUndefined();
+  });
+
+  it("refreshes batch 59 copy without replacing stored or inventing missing logos", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "el-jimador")!;
+    const mapped = rows.find((item) => item.data.slug === "four-pillars")!;
+    const unresolved = rows.find((item) => item.data.slug === "espolon")!;
+    stored.data.logo_url = "https://bevory.in/media/el-jimador-existing.webp";
+    stored.data.description = "Older copy";
+    mapped.data.logo_url = null;
+    unresolved.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "el-jimador")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "el-jimador")?.content_version).toBe("brand-public-ui-v3-batch-59");
+    expect(updates.find((data) => data.slug === "four-pillars")?.logo_url).toBe("https://fourpillarsgin.com/cdn/shop/files/logo-full.svg");
+    expect(unresolved.data.logo_url).toBeNull();
+    expect(updates.find((data) => data.slug === "espolon")).toBeUndefined();
+  });
+
+  it("refreshes batch 58 copy while preserving stored logos and leaving unverified slots blank", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "skyy")!;
+    const mapped = rows.find((item) => item.data.slug === "ricard")!;
+    const unresolved = rows.find((item) => item.data.slug === "barsol")!;
+    stored.data.logo_url = "https://bevory.in/media/skyy-existing.webp";
+    stored.data.description = "Older copy";
+    mapped.data.logo_url = null;
+    unresolved.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "skyy")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "skyy")?.content_version).toBe("brand-public-ui-v3-batch-58");
+    expect(updates.find((data) => data.slug === "ricard")?.logo_url).toBe("https://www.pernod-ricard.com/sites/default/files/2021-04/brand-ricard-logo-600px.png");
+    expect(unresolved.data.logo_url).toBeNull();
+    expect(updates.find((data) => data.slug === "barsol")).toBeUndefined();
+  });
+
+  it("refreshes batch 57 copy without replacing stored logos or guessing missing ones", async () => {
+    const { prisma, rows, upsert } = database();
+    const stored = rows.find((item) => item.data.slug === "corona")!;
+    const mapped = rows.find((item) => item.data.slug === "drambuie")!;
+    const unresolved = rows.find((item) => item.data.slug === "peter-scot")!;
+    stored.data.logo_url = "https://bevory.in/media/corona-existing.webp";
+    stored.data.description = "Older copy";
+    mapped.data.logo_url = null;
+    unresolved.data.logo_url = null;
+    await applyBrandExpansion(prisma, newDate);
+    const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
+    expect(updates.find((data) => data.slug === "corona")?.logo_url).toBe(stored.data.logo_url);
+    expect(updates.find((data) => data.slug === "corona")?.content_version).toBe("brand-public-ui-v3-batch-57");
+    expect(updates.find((data) => data.slug === "drambuie")?.logo_url).toBe("https://www.williamgrant.com/assets/OurBrands/DRAMBUIE_LOGO_FULL_COLOUR_CMYK-v2-50.png");
+    expect(unresolved.data.logo_url).toBeNull();
+    expect(updates.find((data) => data.slug === "peter-scot")).toBeUndefined();
+  });
+
   it("refreshes batch 55 copy without replacing a stored logo", async () => {
     const { prisma, rows, upsert } = database();
     const stored = rows.find((item) => item.data.slug === "aberlour")!;

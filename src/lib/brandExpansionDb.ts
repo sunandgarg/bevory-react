@@ -57,6 +57,10 @@ import { BRAND_CONTENT_BATCH_53 } from "./brandContentBatch53.js";
 import { BRAND_CONTENT_BATCH_54 } from "./brandContentBatch54.js";
 import { BRAND_CONTENT_BATCH_55 } from "./brandContentBatch55.js";
 import { BRAND_CONTENT_BATCH_56 } from "./brandContentBatch56.js";
+import { BRAND_CONTENT_BATCH_57 } from "./brandContentBatch57.js";
+import { BRAND_CONTENT_BATCH_58 } from "./brandContentBatch58.js";
+import { BRAND_CONTENT_BATCH_59 } from "./brandContentBatch59.js";
+import { BRAND_CONTENT_BATCH_60 } from "./brandContentBatch60.js";
 
 type JsonObject = Prisma.JsonObject;
 
@@ -171,13 +175,17 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
       || BRAND_CONTENT_BATCH_53[definition.slug]
       || BRAND_CONTENT_BATCH_54[definition.slug]
       || BRAND_CONTENT_BATCH_55[definition.slug]
-      || BRAND_CONTENT_BATCH_56[definition.slug],
+      || BRAND_CONTENT_BATCH_56[definition.slug]
+      || BRAND_CONTENT_BATCH_57[definition.slug]
+      || BRAND_CONTENT_BATCH_58[definition.slug]
+      || BRAND_CONTENT_BATCH_59[definition.slug]
+      || BRAND_CONTENT_BATCH_60[definition.slug],
     );
 
     for (const field of contentFields) {
       if (refreshPublicContent || !hasValue(previous[field])) next[field] = built[field];
     }
-    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug] || BRAND_CONTENT_BATCH_51[definition.slug] || BRAND_CONTENT_BATCH_52[definition.slug] || BRAND_CONTENT_BATCH_53[definition.slug] || BRAND_CONTENT_BATCH_54[definition.slug] || BRAND_CONTENT_BATCH_55[definition.slug] || BRAND_CONTENT_BATCH_56[definition.slug]) next.brand_name = built.brand_name;
+    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug] || BRAND_CONTENT_BATCH_51[definition.slug] || BRAND_CONTENT_BATCH_52[definition.slug] || BRAND_CONTENT_BATCH_53[definition.slug] || BRAND_CONTENT_BATCH_54[definition.slug] || BRAND_CONTENT_BATCH_55[definition.slug] || BRAND_CONTENT_BATCH_56[definition.slug] || BRAND_CONTENT_BATCH_57[definition.slug] || BRAND_CONTENT_BATCH_58[definition.slug] || BRAND_CONTENT_BATCH_59[definition.slug] || BRAND_CONTENT_BATCH_60[definition.slug]) next.brand_name = built.brand_name;
     if (refreshPublicContent || !hasValue(previous.logo_emoji)) next.logo_emoji = built.logo_emoji;
     // Preserve existing images except exact batch 51 slug URLs confirmed broken.
     const brokenBatch51Logo = Boolean(BRAND_LOGOS_BATCH_51[definition.slug])

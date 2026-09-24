@@ -56,6 +56,10 @@ import { BRAND_CONTENT_BATCH_53, BRAND_LOGOS_BATCH_53 } from "../src/lib/brandCo
 import { BRAND_CONTENT_BATCH_54, BRAND_LOGOS_BATCH_54 } from "../src/lib/brandContentBatch54.js";
 import { BRAND_CONTENT_BATCH_55, BRAND_LOGOS_BATCH_55 } from "../src/lib/brandContentBatch55.js";
 import { BRAND_CONTENT_BATCH_56, BRAND_LOGOS_BATCH_56 } from "../src/lib/brandContentBatch56.js";
+import { BRAND_CONTENT_BATCH_57, BRAND_LOGOS_BATCH_57 } from "../src/lib/brandContentBatch57.js";
+import { BRAND_CONTENT_BATCH_58, BRAND_LOGOS_BATCH_58 } from "../src/lib/brandContentBatch58.js";
+import { BRAND_CONTENT_BATCH_59, BRAND_LOGOS_BATCH_59 } from "../src/lib/brandContentBatch59.js";
+import { BRAND_CONTENT_BATCH_60, BRAND_LOGOS_BATCH_60 } from "../src/lib/brandContentBatch60.js";
 import { VERIFIED_BRAND_LOGO_REPAIRS } from "../src/lib/brandLogoRepairs.js";
 
 describe("brand expansion editorial data", () => {
@@ -82,6 +86,34 @@ describe("brand expansion editorial data", () => {
       expect(text).not.toMatch(/according to (?:the )?(?:source|references?)|sources suggest/i);
       expect(data.meta_title.length).toBeLessThanOrEqual(60);
       expect(data.meta_description.length).toBeLessThanOrEqual(160);
+      if (BRAND_CONTENT_BATCH_60[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_60[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_59[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_59[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_58[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_58[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_57[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_57[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
       if (BRAND_CONTENT_BATCH_56[definition.slug]) {
         const verifiedLogo = BRAND_LOGOS_BATCH_56[definition.slug];
         expect(data.logo_url).toBe(verifiedLogo ?? null);
@@ -222,7 +254,7 @@ describe("brand expansion editorial data", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toMatch(/^lc-brand-/);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_58[slug] ?? BRAND_CONTENT_BATCH_57[slug] ?? content).description);
       expect(data.story).toBe(content.story);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
       expect(data.how_to_enjoy).toEqual(content.howToEnjoy);
@@ -242,13 +274,13 @@ describe("brand expansion editorial data", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       expect(definition).toBeDefined();
       const data = buildBrandExpansionData(definition);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_57[slug] ?? BRAND_CONTENT_BATCH_56[slug] ?? content).description);
       expect(data.story).toBe(content.story);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
       expect(data.how_to_enjoy).toEqual(content.howToEnjoy);
       expect(data.pairing_ideas).toEqual(content.pairingIdeas);
       expect(data.faqs).toEqual(content.faqs);
-      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_56[slug] ? "brand-public-ui-v3-batch-56" : "brand-public-ui-v3-batch-19");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_57[slug] ? "brand-public-ui-v3-batch-57" : BRAND_CONTENT_BATCH_56[slug] ? "brand-public-ui-v3-batch-56" : "brand-public-ui-v3-batch-19");
       expect(data.country_flag_url).toMatch(/^https:/);
       expect(BRAND_SOURCES_BATCH_19[slug].length).toBeGreaterThan(0);
       expect(data.logo_identity_verified).toBe(Boolean(BRAND_LOGOS_BATCH_19[slug]));
@@ -262,9 +294,9 @@ describe("brand expansion editorial data", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       expect(definition).toBeDefined();
       const data = buildBrandExpansionData(definition);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_58[slug] ?? BRAND_CONTENT_BATCH_57[slug] ?? content).description);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-20");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_58[slug] ? "brand-public-ui-v3-batch-58" : BRAND_CONTENT_BATCH_57[slug] ? "brand-public-ui-v3-batch-57" : "brand-public-ui-v3-batch-20");
       expect(data.country_flag_url).toMatch(/^https:/);
       expect(BRAND_SOURCES_BATCH_20[slug].length).toBeGreaterThan(0);
       expect(data.logo_identity_verified).toBe(Boolean(BRAND_LOGOS_BATCH_20[slug]));
@@ -281,14 +313,14 @@ describe("brand expansion editorial data", () => {
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toBe(`lc-brand-${id}`);
       expect(BRAND_SOURCES_BATCH_21[slug].length).toBeGreaterThan(0);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_59[slug] ?? BRAND_CONTENT_BATCH_58[slug] ?? content).description);
       expect(data.story).toBe(content.story);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
       expect(data.how_to_enjoy).toEqual(content.howToEnjoy);
       expect(data.pairing_ideas).toEqual(content.pairingIdeas);
       expect(data.faqs).toEqual(content.faqs);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-21");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_59[slug] ? "brand-public-ui-v3-batch-59" : BRAND_CONTENT_BATCH_58[slug] ? "brand-public-ui-v3-batch-58" : "brand-public-ui-v3-batch-21");
       expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_21[slug] ?? null);
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }
@@ -305,10 +337,10 @@ describe("brand expansion editorial data", () => {
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toBe(`lc-brand-${id}`);
       expect(BRAND_SOURCES_BATCH_22[slug].length).toBeGreaterThan(0);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_60[slug] ?? BRAND_CONTENT_BATCH_59[slug] ?? content).description);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-22");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_60[slug] ? "brand-public-ui-v3-batch-60" : BRAND_CONTENT_BATCH_59[slug] ? "brand-public-ui-v3-batch-59" : "brand-public-ui-v3-batch-22");
       expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_22[slug] ?? null);
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }
@@ -325,10 +357,10 @@ describe("brand expansion editorial data", () => {
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toBe(`lc-brand-${id}`);
       expect(BRAND_SOURCES_BATCH_23[slug].length).toBeGreaterThan(0);
-      expect(data.description).toBe(content.description);
+      expect(data.description).toBe((BRAND_CONTENT_BATCH_60[slug] ?? content).description);
       expect(data.tasting_notes).toEqual(content.tastingNotes);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-23");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_60[slug] ? "brand-public-ui-v3-batch-60" : "brand-public-ui-v3-batch-23");
       expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_23[slug] ?? null);
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }

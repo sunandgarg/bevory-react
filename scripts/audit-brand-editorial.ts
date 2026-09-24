@@ -42,6 +42,10 @@ import { BRAND_CONTENT_BATCH_53 } from "../src/lib/brandContentBatch53.js";
 import { BRAND_CONTENT_BATCH_54 } from "../src/lib/brandContentBatch54.js";
 import { BRAND_CONTENT_BATCH_55, BRAND_FULL_FACT_CHECK_PENDING_BATCH_55 } from "../src/lib/brandContentBatch55.js";
 import { BRAND_CONTENT_BATCH_56 } from "../src/lib/brandContentBatch56.js";
+import { BRAND_CONTENT_BATCH_57 } from "../src/lib/brandContentBatch57.js";
+import { BRAND_CONTENT_BATCH_58 } from "../src/lib/brandContentBatch58.js";
+import { BRAND_CONTENT_BATCH_59 } from "../src/lib/brandContentBatch59.js";
+import { BRAND_CONTENT_BATCH_60 } from "../src/lib/brandContentBatch60.js";
 import { auditCatalogueRows, auditPublicBrandFields, publicBrandFields as publicFields } from "./brand-editorial-audit-lib.js";
 
 // A structural scan is not a factual sign-off. Keep the two statuses separate.
@@ -104,6 +108,10 @@ for (const row of results) {
   if (BRAND_CONTENT_BATCH_54[row.slug]) row.contentResearch = "researched_batch_54";
   if (BRAND_CONTENT_BATCH_55[row.slug]) row.contentResearch = BRAND_FULL_FACT_CHECK_PENDING_BATCH_55.has(row.slug) ? "revised_batch_55_pending_full_factual_revalidation" : "revised_batch_55";
   if (BRAND_CONTENT_BATCH_56[row.slug]) row.contentResearch = "revised_batch_56_inherited_claims_pending_full_factual_revalidation";
+  if (BRAND_CONTENT_BATCH_57[row.slug]) row.contentResearch = "revised_batch_57_inherited_claims_pending_full_factual_revalidation";
+  if (BRAND_CONTENT_BATCH_58[row.slug]) row.contentResearch = "revised_batch_58_inherited_claims_pending_full_factual_revalidation";
+  if (BRAND_CONTENT_BATCH_59[row.slug]) row.contentResearch = "revised_batch_59_inherited_claims_pending_full_factual_revalidation";
+  if (BRAND_CONTENT_BATCH_60[row.slug]) row.contentResearch = "revised_batch_60_inherited_claims_pending_full_factual_revalidation";
 }
 const covered = new Set(BRAND_EXPANSION.map((item) => item.slug));
 const coveredIds = new Set(BRAND_EXPANSION.map((item) => item.recordId));
@@ -115,9 +123,9 @@ const summary = {
   snapshotModifiedAt: (await stat(snapshotPath)).mtime.toISOString(),
   catalogueRows: snapshot.data.length,
   locallyAuthored: results.length,
-  newBatch: Object.keys(BRAND_CONTENT_BATCH_56).length,
+  newBatch: Object.keys(BRAND_CONTENT_BATCH_60).length,
   newlyAuthoredThisBatch: 0,
-  revisedExistingThisBatch: Object.keys(BRAND_CONTENT_BATCH_56).length,
+  revisedExistingThisBatch: Object.keys(BRAND_CONTENT_BATCH_60).length,
   outsideAuthoredSet: remaining.length,
   liveMatchesLocal: results.filter((item) => item.liveMatchesLocal).length,
   structuralIssues: results.filter((item) => item.structuralIssues.length).length,
@@ -133,6 +141,14 @@ const summary = {
 const directory = path.resolve("docs/editorial/reports");
 await mkdir(directory, { recursive: true });
 await writeFile(path.join(directory, "brand-progress.json"), JSON.stringify({ summary, brands: results, catalogueAudit, remainingCatalogueRows: remaining }, null, 2) + "\n");
+await writeFile(path.join(directory, "brand-lists-comma-separated.txt"), [
+  `Authored locally (${results.length}; not a live-publication claim):`,
+  results.map((row) => row.name).sort((a, b) => a.localeCompare(b)).join(", "),
+  "",
+  `Catalogue rows outside authored set (${remaining.length}; may include duplicate brand identities):`,
+  remaining.map((row) => String(row.name ?? "")).sort((a, b) => a.localeCompare(b)).join(", "),
+  "",
+].join("\n"));
 await writeFile(path.join(directory, "batch-25-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_25, null, 2) + "\n");
 await writeFile(path.join(directory, "batch-26-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_26, null, 2) + "\n");
 await writeFile(path.join(directory, "batch-27-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_27, null, 2) + "\n");
@@ -164,10 +180,14 @@ await writeFile(path.join(directory, "batch-53-public-content.json"), JSON.strin
 await writeFile(path.join(directory, "batch-54-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_54, null, 2) + "\n");
 await writeFile(path.join(directory, "batch-55-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_55, null, 2) + "\n");
 await writeFile(path.join(directory, "batch-56-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_56, null, 2) + "\n");
+await writeFile(path.join(directory, "batch-57-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_57, null, 2) + "\n");
+await writeFile(path.join(directory, "batch-58-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_58, null, 2) + "\n");
+await writeFile(path.join(directory, "batch-59-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_59, null, 2) + "\n");
+await writeFile(path.join(directory, "batch-60-public-content.json"), JSON.stringify(BRAND_CONTENT_BATCH_60, null, 2) + "\n");
 await writeFile(path.join(directory, "brand-progress.md"), [
   "# Brand Editorial Progress", "", "**NOT COMPLETE: factual and logo review remain open.**", "",
   `- Catalogue rows: ${summary.catalogueRows}`,
-  `- Locally authored guides: ${summary.locallyAuthored}; revised existing guides in batch 56: ${summary.revisedExistingThisBatch}; newly authored: ${summary.newlyAuthoredThisBatch}`,
+  `- Locally authored guides: ${summary.locallyAuthored}; revised existing guides in batch 60: ${summary.revisedExistingThisBatch}; newly authored: ${summary.newlyAuthoredThisBatch}`,
   `- Catalogue rows outside the authored set: ${summary.outsideAuthoredSet}`,
   `- Local guides matching the captured live public content: ${summary.liveMatchesLocal}`,
   `- Structural follow-ups: ${summary.structuralIssues}; logo follow-ups: ${summary.logoFollowUps}; logo assets not checked by this audit: ${summary.logoAssetsNotCheckedByThisAudit}`,
@@ -176,14 +196,14 @@ await writeFile(path.join(directory, "brand-progress.md"), [
   `- Live rows with missing logo/country/flag fields: ${summary.liveRowsWithMissingAssets}`,
   `- Identity-review candidates (not automatically merged or deleted): ${summary.identityReviewCandidates}`,
   "", summary.caveat, "", "## This Batch", "",
-  ...results.filter((row) => BRAND_CONTENT_BATCH_56[row.slug]).map((row) => `- ${row.name}: consumer summary revised; inherited claims still need full fact check; flag present; ${row.existingStoredLogo ? "stored logo preserved" : row.logoUrl ? "previously mapped logo ready for empty slot" : "logo still missing; requires visual identity review"}; ${row.liveMatchesLocal ? "matches snapshot" : "not published"}.`),
+  ...results.filter((row) => BRAND_CONTENT_BATCH_60[row.slug]).map((row) => `- ${row.name}: description and conclusion revised; inherited claims still need full fact check; flag present; ${row.existingStoredLogo ? "stored logo preserved" : row.logoUrl ? "previously mapped logo ready for empty slot" : "logo still missing; requires visual identity review"}; ${row.liveMatchesLocal ? "matches snapshot" : "not published"}.`),
   "", "## All Earlier Brands", "",
-  ...results.filter((row) => !BRAND_CONTENT_BATCH_56[row.slug]).map((row) => `- ${row.name}: ${row.structuralIssues.length ? row.structuralIssues.join("; ") : "structural scan passed"}; logo ${row.logoNeedsWork ? "needs follow-up" : row.logoFetch === "decodable" ? "decodable in this audit" : "not checked in this audit"}; ${row.contentResearch}.`),
+  ...results.filter((row) => !BRAND_CONTENT_BATCH_60[row.slug]).map((row) => `- ${row.name}: ${row.structuralIssues.length ? row.structuralIssues.join("; ") : "structural scan passed"}; logo ${row.logoNeedsWork ? "needs follow-up" : row.logoFetch === "decodable" ? "decodable in this audit" : "not checked in this audit"}; ${row.contentResearch}.`),
   "", "## Remaining Catalogue Rows", "",
   "These entries have not been rewritten. Each has a row in the accompanying JSON with exact public-field, asset and identity-review findings.", "",
   ...remaining.map((row) => `- ${row.name} (${row.slug}): ${row.publicFieldIssues.length} public-field issues; ${row.missingAssets.length ? `missing ${row.missingAssets.join(", ")}` : "asset URLs present, not verified"}${row.identityReview.length ? `; ${row.identityReview.join(", ")}` : ""}.`),
   "", "## Publication", "",
-  "This read-only audit does not publish data. Batches 51 through 55 remain local and unpublished. The catalogue snapshot predates the latest production release, so its live-match counts are historical rather than a current production check. No schema push, seed, database reset or production write is part of this audit.",
+  "This read-only audit does not publish data. Batches 57 through 60 remain local and unpublished. Snapshot live-match counts describe its capture time, not a current production check. No schema push, seed, database reset or production write is part of this audit.",
   "After authentication, take a database backup, deploy the tested source, run brands:expand without db:setup, regenerate affected prerendered brand pages, and compare the live API and HTML against the saved content.", "",
 ].join("\n"));
 console.log(JSON.stringify(summary, null, 2));
