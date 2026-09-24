@@ -171,14 +171,14 @@ export const BRAND_CONTENT_BATCH_06: Record<string, BrandPublicContent> = {
     metaDescription: "Glenmorangie Highland whisky guide with citrus, peach and vanilla notes, food pairings, serving ideas, and city prices.",
   },
   mcdowells: {
-    description: "McDowell's is an Indian whisky label from United Spirits. Its local range includes blended whisky styles and different bottle sizes, so the selected expression and city listing should guide the price and serve.",
+    description: "McDowell's is an Indian whisky label from United Spirits. Its blended whisky range is closely associated with familiar water-and-soda serves in India.",
     story: "McDowell's became a familiar Indian whisky name through United Spirits' wide distribution and accessible range. The brand is best understood bottle by bottle, since blend style, format and local availability can change across the catalogue.",
     tastingNotes: [
       { title: "Blended whisky style", description: "The family generally suits a familiar grain-and-malt whisky direction with caramel, oak and warm spice around the finish." },
       { title: "Serve-led character", description: "A neat pour shows more of the blend, while water, soda or a highball softens the oak and makes the drink longer." },
     ],
     howToEnjoy: [
-      { subheading: "Serve", description: "Begin with a modest neat pour, then add water or soda to taste. Use the bottle label for the exact expression and strength." },
+      { subheading: "Serve", description: "Begin with a small neat pour, then add water or soda to taste." },
       { subheading: "Food", description: "Pair it with masala peanuts, tandoori chicken, chilli paneer, kebabs, or smoky grilled snacks." },
     ],
     pairingIdeas: [{ title: "Indian pairings", items: ["masala peanuts", "tandoori chicken", "chilli paneer", "kebabs", "smoky grilled snacks"] }],

@@ -17,7 +17,7 @@ export const BRAND_CONTENT_BATCH_03: Record<string, BrandPublicContent> = {
     whyChoose: "A long-established Jalisco tequila house with fresh and lightly rested styles that work equally well neat or in classic agave cocktails.",
     faqs: [
       { question: "What is Sauza?", answer: "Sauza is a Mexican tequila house associated with Jalisco and blue Weber agave." },
-      { question: "Which Sauza style should I try first?", answer: "Choose blanco for a fresher agave-led pour or reposado for softer citrus and light oak; check the exact bottle label for current details." },
+      { question: "Which Sauza style should I try first?", answer: "Choose Blanco for a fresher agave-led pour or Reposado for softer citrus and light oak." },
     ],
     finalVerdict: "Sauza offers a clear route into Jalisco tequila, from fresh agave and citrus in blanco to softer wood in reposado.",
     metaTitle: "Sauza Tequila Guide | BevOry",
@@ -66,7 +66,7 @@ export const BRAND_CONTENT_BATCH_03: Record<string, BrandPublicContent> = {
     metaDescription: "D'USSÉ Cognac guide with VSOP and XO tasting notes, serving ideas, food pairings, and city prices on BevOry.",
   },
   cazadores: {
-    description: "Cazadores is a Mexican tequila brand with blanco, reposado, and aged expressions. Its pages are best read by tequila style, maturation, bottle size, and the exact local label.",
+    description: "Cazadores is a Mexican tequila brand with Blanco, Reposado and aged expressions. Fresh agave leads the lighter styles, while maturation brings a softer, oak-led character.",
     story: "Cazadores belongs to the Jalisco tequila tradition and offers a broad route through fresh agave-led and oak-influenced styles. The expression name matters because resting and maturation change the balance of agave, fruit, spice, and wood.",
     tastingNotes: [
       { title: "Blanco", description: "A fresher tequila direction where clean agave and bright citrus can lead." },
@@ -80,7 +80,7 @@ export const BRAND_CONTENT_BATCH_03: Record<string, BrandPublicContent> = {
     whyChoose: "A tequila range that lets drinkers compare fresh agave with the softer fruit, spice, and oak of rested expressions.",
     faqs: [
       { question: "What is Cazadores?", answer: "Cazadores is a Mexican tequila brand with blanco, reposado, and aged styles." },
-      { question: "How should I choose a Cazadores bottle?", answer: "Start with blanco for fresh agave, reposado for light oak, or an aged style for a fuller and softer pour; check the exact label for details." },
+      { question: "How should I choose a Cazadores bottle?", answer: "Try Blanco for fresh agave, Reposado for light oak or an aged expression for a fuller, softer pour." },
     ],
     finalVerdict: "Cazadores is a practical way to explore tequila by maturation, from fresh agave in blanco to softer oak-led styles.",
     metaTitle: "Cazadores Tequila Guide | BevOry",
@@ -109,7 +109,7 @@ export const BRAND_CONTENT_BATCH_03: Record<string, BrandPublicContent> = {
   },
   "noilly-prat": {
     description: "Noilly Prat is a French vermouth made in Marseillan from dry white wines macerated with herbs and spices. Its range includes Original Dry, Extra Dry, Ambré, and Rouge, each suited to a different cocktail or table role.",
-    story: "The house has more than 200 years of vermouth-making history in Marseillan. Its traditional process includes dodinage, the hand-stirring of botanicals, while Original Dry and Extra Dry also use outdoor ageing in the house's published method.",
+    story: "The house has more than 200 years of vermouth-making history in Marseillan. Its process includes dodinage, the hand-stirring of botanicals, and outdoor ageing for Original Dry and Extra Dry.",
     tastingNotes: [
       { title: "Dry styles", description: "Original Dry and Extra Dry bring herbal, spice, and dry wine-led directions for aperitif and Martini-style serves." },
       { title: "Ambré and Rouge", description: "The sweeter and darker styles move toward richer spice, fruit, and caramel-like notes." },

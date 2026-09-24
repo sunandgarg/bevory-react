@@ -1,10 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { buildBrandProfile } from "./enrich-brand-content.js";
+import { buildBrandProfile, hasManagedBrandEditorial } from "./enrich-brand-content.js";
 
 const category = { id: "whisky", data: { id: "whisky", name: "World Whisky", slug: "world-whisky" } };
 const subcategory = { id: "bourbon", data: { id: "bourbon", name: "Bourbon", slug: "world-whisky-bourbon" } };
 
 describe("brand content enrichment", () => {
+  it("protects edited guides by ID, slug or editorial version", () => {
+    expect(hasManagedBrandEditorial({ id: "lc-brand-628310acccd74a85fde04d18", data: {} })).toBe(true);
+    expect(hasManagedBrandEditorial({ id: "legacy-id", data: { slug: "3-kilos" } })).toBe(true);
+    expect(hasManagedBrandEditorial({ id: "future-brand", data: { content_version: "brand-public-ui-v4-batch-25" } })).toBe(true);
+    expect(hasManagedBrandEditorial({ id: "other", data: { content_version: "catalogue-profile-v1" } })).toBe(false);
+  });
   it("builds a factual catalogue profile without unsupported origin claims", () => {
     const profile = buildBrandProfile({
       brand: { id: "brand-1", data: { brand_name: "Example Reserve" } },

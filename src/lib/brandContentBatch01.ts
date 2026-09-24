@@ -53,20 +53,20 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     metaDescription: "Old Admiral brandy guide with tasting style, Indian pairings, serving ideas, and city-level prices on BevOry.",
   },
   "regal-talon": {
-    description: "Regal Talon is a semi-deluxe Indian whisky from Radico Khaitan. It is a simple, approachable entry in the company's domestic whisky range.",
-    story: "Regal Talon sits in Radico Khaitan's Indian whisky range and carries a semi-deluxe positioning. Its straightforward style suits familiar neat, water, or soda serves.",
+    description: "Regal Talon is an Indian grain whisky from Radico Khaitan, blending Indian grain spirits with imported Scotch malts. Fruit and wood aromas meet a lightly peated, saline edge.",
+    story: "Radico Khaitan began as Rampur Distillery in 1943 before building its own Indian spirits portfolio. Regal Talon belongs to the company's grain-whisky range, bringing Scotch malt character into an Indian blend.",
     tastingNotes: [
-      { title: "Style", description: "The published profile identifies Regal Talon as a semi-deluxe Indian whisky but does not publish a technical aroma or palate grid." },
-      { title: "Serve", description: "Its uncomplicated style is suited to a small neat pour, water, or a simple soda serve." },
+      { title: "Fruit and wood", description: "Fruity aromas meet a woody character over the grain-led body." },
+      { title: "Light peat", description: "Gentle peat and a saline note add contrast to the fruit." },
     ],
     howToEnjoy: [
       { subheading: "Start neat", description: "Begin with a small neat pour, then add water or soda to taste." },
       { subheading: "Food", description: "Pair it with tandoori tikka, masala peanuts, or smoked paneer." },
     ],
     pairingIdeas: [{ title: "Indian pairings", items: ["tandoori tikka", "masala peanuts", "smoked paneer"] }],
-    whyChoose: "A simple starting point for exploring a semi-deluxe Indian whisky style with familiar food.",
+    whyChoose: "Regal Talon offers fruit, wood and a touch of peat in a grain-led Indian blend.",
     faqs: [
-      { question: "What is Regal Talon?", answer: "Regal Talon is a semi-deluxe Indian whisky from Radico Khaitan." },
+      { question: "What is Regal Talon made from?", answer: "Radico Khaitan blends Indian grain spirits with imported Scotch malts to make Regal Talon." },
       { question: "How should I drink Regal Talon?", answer: "Start with a small neat pour, then try water or soda to find the balance you prefer." },
     ],
     finalVerdict: "Regal Talon is a straightforward Indian whisky for drinkers who prefer a familiar neat, water, or soda serve.",
@@ -74,23 +74,23 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     metaDescription: "Regal Talon whisky guide with style notes, Indian pairings, serving ideas, and city-level prices on BevOry.",
   },
   whytehall: {
-    description: "Whytehall is an Indian brandy from Radico Khaitan. Its published profile centres on a warm, full-bodied style and a lingering finish.",
-    story: "Whytehall is part of Radico Khaitan's Indian brandy range. Its public presentation centres on warmth, body, and a lasting finish, making it suited to slow, food-led serves.",
+    description: "Whytehall Premium Brandy is an Indian brandy from Radico Khaitan. A rounded, fruity opening leads to a long, gently developing finish.",
+    story: "Radico Khaitan's roots lie in Rampur Distillery, which began operating in 1943. Whytehall Premium Brandy forms part of its Indian brandy portfolio alongside Old Admiral and Morpheus.",
     tastingNotes: [
-      { title: "Body", description: "Warm and full-bodied, with a lingering finish." },
-      { title: "Style", description: "A rounded brandy profile that suits a small neat pour or a restrained highball." },
+      { title: "Fruit", description: "A fruity opening gives the brandy a rounded first impression." },
+      { title: "Finish", description: "The soft fruit-led palate develops into a long, gently lingering finish." },
     ],
     howToEnjoy: [
       { subheading: "Controlled serve", description: "Use a rocks glass for a small pour, or build a restrained highball." },
       { subheading: "Food", description: "Try it with tandoori chicken, pepper kebabs, or aged cheddar." },
     ],
     pairingIdeas: [{ title: "Pairings", items: ["tandoori chicken", "pepper kebabs", "aged cheddar"] }],
-    whyChoose: "Its warm, full-bodied character makes Whytehall a natural choice for brandy drinkers who enjoy a lingering finish.",
+    whyChoose: "Whytehall Premium Brandy suits drinkers who prefer a rounded, fruity opening and a long finish.",
     faqs: [
       { question: "What category is Whytehall?", answer: "Whytehall is an Indian brandy from Radico Khaitan." },
       { question: "How should I serve Whytehall?", answer: "Use a rocks glass for a small pour, or build a restrained highball with a light mixer." },
     ],
-    finalVerdict: "Whytehall is a warm, full-bodied Indian brandy that suits a slow neat pour, a light highball, and savoury grilled food.",
+    finalVerdict: "A fruit-led Indian brandy for a small after-dinner pour alongside grilled food or aged cheese.",
     metaTitle: "Whytehall Brandy Guide | BevOry",
     metaDescription: "Whytehall brandy guide with producer context, Indian pairings, serving ideas, and city-level prices on BevOry.",
   },
@@ -137,7 +137,7 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     metaDescription: "Ankahi Zaffran liqueur guide with saffron-spiced style, Indian pairings, serving ideas, and city-level prices on BevOry.",
   },
   "morpheus-blue": {
-    description: "Morpheus Blue XO Premium Brandy is an Indian XO blended brandy from Radico Khaitan. Its published profile features dried fruit, nuts, mature oak, vanilla, caramel, and a long smooth finish.",
+    description: "Morpheus Blue XO Premium Brandy is an Indian XO blended brandy from Radico Khaitan. Dried fruit, nuts, mature oak, vanilla and caramel build a rounded, lingering profile.",
     story: "Morpheus Blue is part of Radico Khaitan's Morpheus brandy family and is presented as an XO blend. Its profile moves from dried fruit and nuts into mature oak, vanilla, and caramel.",
     tastingNotes: [
       { title: "Nose", description: "Intense fruity and floral notes with raisin, prune, and nuts." },
@@ -151,7 +151,7 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     whyChoose: "Its dried-fruit, nut, oak, vanilla, and caramel profile gives Morpheus Blue a clear after-dinner identity.",
     faqs: [
       { question: "What is Morpheus Blue?", answer: "Morpheus Blue is an XO blended premium brandy from Radico Khaitan." },
-      { question: "What does Morpheus Blue taste like?", answer: "Its published profile lists fruity and floral aromas, raisin, prune, nuts, oak, vanilla, caramel, and a long smooth finish." },
+      { question: "What does Morpheus Blue taste like?", answer: "Raisin, prune and floral aromas lead into nuts, oak, vanilla and caramel, followed by a long, smooth finish." },
     ],
     finalVerdict: "Morpheus Blue is a rich XO brandy for slow sipping, with dried fruit, nuts, oak, vanilla, and caramel leading into a smooth finish.",
     metaTitle: "Morpheus Blue Brandy Guide | BevOry",
@@ -165,7 +165,7 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
       { title: "Wine style", description: "Fresh whites, roses, and fuller reds each bring a different drinking experience to the table." },
     ],
     howToEnjoy: [
-      { subheading: "Serve", description: "Follow the exact label temperature in a clean wine glass." },
+      { subheading: "Serve", description: "Chill the whites and serve reds slightly cool in a medium wine glass." },
       { subheading: "Food", description: "Start with tandoori fish, paneer tikka, tomato pasta, or roast chicken depending on the bottle style." },
     ],
     pairingIdeas: [{ title: "Pairings", items: ["tandoori fish", "paneer tikka", "tomato pasta", "roast chicken"] }],
@@ -180,13 +180,13 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
   },
   zinzi: {
     description: "Zinzi is an Indian wine label associated with the Four Seasons wine business and its Grover Zampa portfolio history. It offers a simple entry point for exploring Indian wine styles.",
-    story: "Zinzi belongs to the story of Indian wine labels that grew alongside the Four Seasons business. Its identity is best approached through the bottle in front of you, with the wine style shaped by its grape and colour.",
+    story: "Zinzi developed alongside Four Seasons as an accessible Indian wine label. The Four Seasons wine business and its associated brands changed hands in 2019 through a sale to Grover Zampa.",
     tastingNotes: [
       { title: "Style", description: "The profile changes with the grape and colour of the bottle." },
       { title: "At the table", description: "Its food-friendly role suits light Indian starters, salads, and simple pasta dishes." },
     ],
     howToEnjoy: [
-      { subheading: "Serve", description: "Follow the bottle label for chilling and glassware." },
+      { subheading: "Serve", description: "Chill white wines and pour reds slightly cool into a medium wine glass." },
       { subheading: "Food", description: "Try it with grilled paneer, light pasta, salads, or mild coastal seafood." },
     ],
     pairingIdeas: [{ title: "Pairings", items: ["grilled paneer", "light pasta", "fresh salads", "mild coastal seafood"] }],
@@ -221,11 +221,10 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     metaDescription: "Vallonne wine guide with Nashik grapes, tasting styles, Indian pairings, serving ideas, and city-level prices on BevOry.",
   },
   charosa: {
-    description: "Charosa Vineyards is an Indian wine estate in Charosa village, in Nashik's Dindori sub-region, spread across about 230 acres. Its portfolio uses Pleasures, Selections, and Reserve tiers, with documented grapes including Tempranillo, Cabernet Sauvignon, Shiraz, Sauvignon Blanc, and Viognier.",
+    description: "Charosa Vineyards is an Indian wine estate in Charosa village, in Nashik's Dindori sub-region, spread across about 230 acres. Its Pleasures, Selections and Reserve wines include Tempranillo, Cabernet Sauvignon, Shiraz, Sauvignon Blanc and Viognier.",
     story: "Charosa Vineyards is rooted in Charosa village in Nashik's Dindori sub-region. The estate organises its wines across Pleasures, Selections, and Reserve tiers, giving drinkers a clear path from approachable bottles to more detailed expressions.",
     tastingNotes: [
       { title: "Reserve Tempranillo", description: "Ripe red fruit with vanilla, coconut, and chocolate." },
-      { title: "Reserve Cabernet Sauvignon", description: "Ripe fruit, black olive, vanilla, and balanced tannins." },
       { title: "Selection Viognier", description: "Floral and apricot character with a bright, aromatic finish." },
     ],
     howToEnjoy: [
@@ -236,7 +235,7 @@ export const BRAND_CONTENT_BATCH_01: Record<string, BrandPublicContent> = {
     whyChoose: "A Nashik estate with tiered wines, recognisable Indian grapes, and a broad range of red and white styles.",
     faqs: [
       { question: "Where is Charosa Vineyards?", answer: "The estate is in Charosa village in Nashik's Dindori sub-region." },
-      { question: "What wine tiers are documented?", answer: "The portfolio documents Pleasures, Selections, and Reserve tiers." },
+      { question: "What are Charosa's wine ranges?", answer: "The estate offers Pleasures, Selections and Reserve ranges, including varietal whites and oak-aged reds." },
     ],
     finalVerdict: "Charosa is a strong choice for exploring Nashik wine, from floral Viognier and fresh whites to structured Reserve reds.",
     metaTitle: "Charosa Vineyards Wine Guide | BevOry",

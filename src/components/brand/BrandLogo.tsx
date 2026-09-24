@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import { getBrandLogoSources } from "@/lib/brandAssets";
+import { brandLogoNeedsDarkSurface, getBrandLogoSources } from "@/lib/brandAssets";
 
 interface BrandLogoProps {
   brandName: string;
@@ -44,7 +44,7 @@ const BrandLogo = ({
   }
 
   return (
-    <span className={cn("inline-flex items-center justify-center", className)}>
+    <span className={cn("inline-flex items-center justify-center", className, brandLogoNeedsDarkSurface(sources[sourceIndex]) && "bg-neutral-900")}>
       <img
         src={sources[sourceIndex]}
         alt={alt || `${brandName} logo`}

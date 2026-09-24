@@ -17,7 +17,7 @@ export const BRAND_CONTENT_BATCH_05: Record<string, BrandPublicContent> = {
     whyChoose: "A major Indian wine house with clear Nashik and Dindori identity, plus enough grape variety to explore fresh whites, rosé, and structured reds.",
     faqs: [
       { question: "What is Sula?", answer: "Sula is an Indian wine producer founded by Rajeev Samant in Nashik in 1996." },
-      { question: "Which grapes are used by Sula?", answer: "The published range includes Cabernet Sauvignon, Shiraz, Zinfandel, Viognier, Chardonnay, and Chenin Blanc, among other varieties." },
+      { question: "Which grapes are used by Sula?", answer: "Sula works with Cabernet Sauvignon, Shiraz, Zinfandel, Viognier, Chardonnay and Chenin Blanc, among other varieties." },
     ],
     finalVerdict: "Sula is a strong starting point for Indian wine, especially when you want to compare Nashik fruit, Dindori reds, and fresh white-grape styles.",
     metaTitle: "Sula Vineyards Wine Guide | BevOry",
@@ -59,7 +59,7 @@ export const BRAND_CONTENT_BATCH_05: Record<string, BrandPublicContent> = {
     whyChoose: "A long-running Indian wine house with two important vineyard regions and a range that covers everyday freshness through richer, structured bottles.",
     faqs: [
       { question: "What is Grover wine?", answer: "Grover is an Indian wine producer with vineyards in Nashik Valley and Nandi Hills." },
-      { question: "Which grapes does Grover use?", answer: "Its published wines include Chenin Blanc, Sauvignon Blanc, Viognier, Shiraz, Cabernet Sauvignon, and other varieties." },
+      { question: "Which grapes does Grover use?", answer: "Grover makes wines from Chenin Blanc, Sauvignon Blanc, Viognier, Shiraz and Cabernet Sauvignon, among other grapes." },
     ],
     finalVerdict: "Grover is a useful guide to Indian wine diversity, from citrus-led whites and rosé to berry-rich reds and sparkling bottles.",
     metaTitle: "Grover Zampa Wine Guide | BevOry",
@@ -80,7 +80,7 @@ export const BRAND_CONTENT_BATCH_05: Record<string, BrandPublicContent> = {
     whyChoose: "A broad Indian vodka family that makes it easy to move from clean grain vodka into fruit, spice, and ready-to-drink cocktail styles.",
     faqs: [
       { question: "What is Magic Moments?", answer: "Magic Moments is an Indian vodka brand from Radico Khaitan, launched in 2006." },
-      { question: "What flavours are available?", answer: "The published range includes plain vodka plus Remix and Verve flavours such as orange, green apple, lemon, lemongrass and ginger, and raspberry." },
+      { question: "What flavours does Magic Moments make?", answer: "Alongside plain vodka, Remix and Verve include orange, green apple, lemon, lemongrass and ginger, and raspberry flavours." },
     ],
     finalVerdict: "Magic Moments is one of India's most recognisable vodka families, with a clean grain base and a large flavoured range for cocktails.",
     metaTitle: "Magic Moments Vodka Guide | BevOry",
@@ -129,7 +129,7 @@ export const BRAND_CONTENT_BATCH_05: Record<string, BrandPublicContent> = {
     metaDescription: "Johnnie Walker Scotch guide with Red, Black, Green and Blue Label styles, food pairings, serving ideas, and city prices on BevOry.",
   },
   "virgin-hills": {
-    description: "Virgin Hills is an Indian wine brand built around the idea of wines from and for India. Its published collection includes Sauvignon Blanc, Chenin Blanc, Shiraz, Cabernet Shiraz, Zinfandel Rosé, Merlot, and dessert wines.",
+    description: "Virgin Hills is an Indian wine brand with a range of reds, whites, rose and dessert wines. Sauvignon Blanc, Chenin Blanc, Shiraz, Cabernet Shiraz, Zinfandel Rose and Merlot feature in the collection.",
     story: "Virgin Hills was founded by winemaker and director Kunal Chug with a focus on independent, premium wines and limited-production vineyard character. The range gives Indian drinkers a choice of fresh whites, rosé, reds, and sweet bottles.",
     tastingNotes: [
       { title: "White and rosé", description: "Sauvignon Blanc and Chenin Blanc bring fresh citrus and fruit, while Zinfandel Rosé adds a brighter berry-led style." },
@@ -143,7 +143,7 @@ export const BRAND_CONTENT_BATCH_05: Record<string, BrandPublicContent> = {
     whyChoose: "An Indian wine collection with both everyday variety and limited-production ambition, covering crisp whites, rosé, structured reds, and dessert pours.",
     faqs: [
       { question: "What is Virgin Hills?", answer: "Virgin Hills is an Indian wine brand built around the idea of wines from and for India." },
-      { question: "Which Virgin Hills wines are available?", answer: "The published collection includes Sauvignon Blanc, Chenin Blanc, Shiraz, Cabernet Shiraz, Zinfandel Rosé, Merlot, and dessert wines." },
+      { question: "Which styles does Virgin Hills make?", answer: "The collection includes Sauvignon Blanc, Chenin Blanc, Shiraz, Cabernet Shiraz, Zinfandel Rose, Merlot and dessert wines." },
     ],
     finalVerdict: "Virgin Hills is a useful Indian wine range for moving from fresh, chilled whites to fuller reds and sweet dessert wines.",
     metaTitle: "Virgin Hills Wine Guide | BevOry",

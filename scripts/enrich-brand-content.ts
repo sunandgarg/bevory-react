@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { BRAND_EXPANSION } from "../src/lib/brandExpansion.js";
 
 type JsonObject = Record<string, unknown>;
 
@@ -7,6 +8,13 @@ type CatalogueRow = {
   id: string;
   data: JsonObject;
 };
+
+const editorialBrandIds = new Set(BRAND_EXPANSION.map((brand) => brand.recordId));
+const editorialBrandSlugs = new Set(BRAND_EXPANSION.map((brand) => brand.slug));
+
+export const hasManagedBrandEditorial = (brand: CatalogueRow) => editorialBrandIds.has(brand.id)
+  || editorialBrandSlugs.has(String(brand.data.slug ?? ""))
+  || /^brand-public-ui-/.test(String(brand.data.content_version ?? ""));
 
 type CategoryGuidance = {
   emoji: string;
@@ -437,6 +445,7 @@ const main = async () => {
     mode: apply ? "apply" : "dry-run",
     brands: brands.length,
     enriched: 0,
+    editorialBrandsProtected: 0,
     withoutProducts: 0,
     representativeImagesAdded: 0,
     verifiedLogosPreserved: 0,
@@ -446,6 +455,11 @@ const main = async () => {
   };
 
   for (const brand of brands) {
+    // Catalogue-derived templates must never replace the separately edited guides, even with --force.
+    if (hasManagedBrandEditorial(brand)) {
+      report.editorialBrandsProtected += 1;
+      continue;
+    }
     const linkedProducts = productsByBrandId.get(brand.id) ?? [];
     if (!linkedProducts.length) {
       report.withoutProducts += 1;

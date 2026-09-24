@@ -11,6 +11,45 @@ import { BRAND_CONTENT_BATCH_09 } from "./brandContentBatch09.js";
 import { BRAND_CONTENT_BATCH_10 } from "./brandContentBatch10.js";
 import { BRAND_CONTENT_BATCH_11 } from "./brandContentBatch11.js";
 import { BRAND_CONTENT_BATCH_12, BRAND_LOGOS_BATCH_12 } from "./brandContentBatch12.js";
+import { BRAND_CONTENT_BATCH_13, BRAND_LOGOS_BATCH_13 } from "./brandContentBatch13.js";
+import { BRAND_CONTENT_BATCH_14, BRAND_LOGOS_BATCH_14 } from "./brandContentBatch14.js";
+import { BRAND_CONTENT_BATCH_15, BRAND_LOGOS_BATCH_15 } from "./brandContentBatch15.js";
+import { BRAND_CONTENT_BATCH_16, BRAND_LOGOS_BATCH_16 } from "./brandContentBatch16.js";
+import { BRAND_CONTENT_BATCH_17, BRAND_IDENTITIES_BATCH_17, BRAND_SOURCES_BATCH_17, BRAND_LOGOS_BATCH_17 } from "./brandContentBatch17.js";
+import { BRAND_CONTENT_BATCH_18, BRAND_IDENTITIES_BATCH_18, BRAND_SOURCES_BATCH_18, BRAND_LOGOS_BATCH_18 } from "./brandContentBatch18.js";
+import { BRAND_CONTENT_BATCH_19, BRAND_IDENTITIES_BATCH_19, BRAND_SOURCES_BATCH_19, BRAND_LOGOS_BATCH_19 } from "./brandContentBatch19.js";
+import { BRAND_CONTENT_BATCH_20, BRAND_IDENTITIES_BATCH_20, BRAND_SOURCES_BATCH_20, BRAND_LOGOS_BATCH_20 } from "./brandContentBatch20.js";
+import { BRAND_CONTENT_BATCH_21, BRAND_IDENTITIES_BATCH_21, BRAND_SOURCES_BATCH_21, BRAND_LOGOS_BATCH_21 } from "./brandContentBatch21.js";
+import { BRAND_CONTENT_BATCH_22, BRAND_IDENTITIES_BATCH_22, BRAND_SOURCES_BATCH_22, BRAND_LOGOS_BATCH_22 } from "./brandContentBatch22.js";
+import { BRAND_CONTENT_BATCH_23, BRAND_IDENTITIES_BATCH_23, BRAND_SOURCES_BATCH_23, BRAND_LOGOS_BATCH_23 } from "./brandContentBatch23.js";
+import { BRAND_CONTENT_BATCH_24, BRAND_IDENTITIES_BATCH_24, BRAND_SOURCES_BATCH_24, BRAND_LOGOS_BATCH_24 } from "./brandContentBatch24.js";
+import { BRAND_CONTENT_BATCH_25, BRAND_IDENTITIES_BATCH_25, BRAND_SOURCES_BATCH_25 } from "./brandContentBatch25.js";
+import { BRAND_CONTENT_BATCH_26, BRAND_IDENTITIES_BATCH_26, BRAND_SOURCES_BATCH_26 } from "./brandContentBatch26.js";
+import { BRAND_CONTENT_BATCH_27, BRAND_IDENTITIES_BATCH_27, BRAND_SOURCES_BATCH_27 } from "./brandContentBatch27.js";
+import { BRAND_CONTENT_BATCH_28, BRAND_IDENTITIES_BATCH_28, BRAND_LOGOS_BATCH_28, BRAND_SOURCES_BATCH_28 } from "./brandContentBatch28.js";
+import { BRAND_CONTENT_BATCH_29, BRAND_IDENTITIES_BATCH_29, BRAND_LOGOS_BATCH_29, BRAND_SOURCES_BATCH_29 } from "./brandContentBatch29.js";
+import { BRAND_CONTENT_BATCH_30, BRAND_IDENTITIES_BATCH_30, BRAND_LOGOS_BATCH_30, BRAND_SOURCES_BATCH_30 } from "./brandContentBatch30.js";
+import { BRAND_CONTENT_BATCH_31, BRAND_IDENTITIES_BATCH_31, BRAND_LOGOS_BATCH_31, BRAND_SOURCES_BATCH_31 } from "./brandContentBatch31.js";
+import { BRAND_CONTENT_BATCH_32, BRAND_IDENTITIES_BATCH_32, BRAND_LOGOS_BATCH_32, BRAND_SOURCES_BATCH_32 } from "./brandContentBatch32.js";
+import { BRAND_CONTENT_BATCH_33, BRAND_IDENTITIES_BATCH_33, BRAND_LOGOS_BATCH_33, BRAND_SOURCES_BATCH_33 } from "./brandContentBatch33.js";
+import { BRAND_CONTENT_BATCH_34, BRAND_IDENTITIES_BATCH_34, BRAND_LOGOS_BATCH_34, BRAND_SOURCES_BATCH_34 } from "./brandContentBatch34.js";
+import { BRAND_CONTENT_BATCH_35, BRAND_IDENTITIES_BATCH_35, BRAND_LOGOS_BATCH_35, BRAND_SOURCES_BATCH_35 } from "./brandContentBatch35.js";
+import { BRAND_CONTENT_BATCH_36, BRAND_IDENTITIES_BATCH_36, BRAND_LOGOS_BATCH_36, BRAND_SOURCES_BATCH_36 } from "./brandContentBatch36.js";
+import { BRAND_CONTENT_BATCH_37, BRAND_IDENTITIES_BATCH_37, BRAND_LOGOS_BATCH_37, BRAND_SOURCES_BATCH_37 } from "./brandContentBatch37.js";
+import { BRAND_CONTENT_BATCH_38, BRAND_IDENTITIES_BATCH_38, BRAND_LOGOS_BATCH_38, BRAND_SOURCES_BATCH_38 } from "./brandContentBatch38.js";
+import { BRAND_CONTENT_BATCH_39, BRAND_IDENTITIES_BATCH_39, BRAND_LOGOS_BATCH_39, BRAND_SOURCES_BATCH_39 } from "./brandContentBatch39.js";
+import { BRAND_CONTENT_BATCH_40, BRAND_IDENTITIES_BATCH_40, BRAND_LOGOS_BATCH_40, BRAND_SOURCES_BATCH_40 } from "./brandContentBatch40.js";
+import { BRAND_CONTENT_BATCH_41, BRAND_IDENTITIES_BATCH_41, BRAND_LOGOS_BATCH_41, BRAND_SOURCES_BATCH_41 } from "./brandContentBatch41.js";
+import { BRAND_CONTENT_BATCH_42, BRAND_IDENTITIES_BATCH_42, BRAND_LOGOS_BATCH_42, BRAND_SOURCES_BATCH_42 } from "./brandContentBatch42.js";
+import { BRAND_CONTENT_BATCH_43, BRAND_IDENTITIES_BATCH_43, BRAND_LOGOS_BATCH_43, BRAND_SOURCES_BATCH_43 } from "./brandContentBatch43.js";
+import { BRAND_CONTENT_BATCH_44, BRAND_IDENTITIES_BATCH_44, BRAND_LOGOS_BATCH_44, BRAND_SOURCES_BATCH_44 } from "./brandContentBatch44.js";
+import { BRAND_CONTENT_BATCH_45, BRAND_IDENTITIES_BATCH_45, BRAND_LOGOS_BATCH_45, BRAND_SOURCES_BATCH_45 } from "./brandContentBatch45.js";
+import { BRAND_CONTENT_BATCH_46, BRAND_IDENTITIES_BATCH_46, BRAND_LOGOS_BATCH_46, BRAND_SOURCES_BATCH_46 } from "./brandContentBatch46.js";
+import { BRAND_CONTENT_BATCH_47, BRAND_IDENTITIES_BATCH_47, BRAND_LOGOS_BATCH_47, BRAND_SOURCES_BATCH_47 } from "./brandContentBatch47.js";
+import { BRAND_CONTENT_BATCH_48, BRAND_IDENTITIES_BATCH_48, BRAND_LOGOS_BATCH_48, BRAND_SOURCES_BATCH_48 } from "./brandContentBatch48.js";
+import { BRAND_CONTENT_BATCH_49 } from "./brandContentBatch49.js";
+import { BRAND_CONTENT_BATCH_50 } from "./brandContentBatch50.js";
+import { VERIFIED_BRAND_LOGO_REPAIRS } from "./brandLogoRepairs.js";
 
 export type BrandExpansionDefinition = {
   recordId: string;
@@ -28,57 +67,131 @@ export type BrandExpansionDefinition = {
 };
 
 const COUNTRY_FLAGS: Record<string, string> = {
+  Argentina: "🇦🇷",
   Australia: "🇦🇺",
+  Austria: "🇦🇹",
   Barbados: "🇧🇧",
   Belgium: "🇧🇪",
+  Brazil: "🇧🇷",
+  Bhutan: "🇧🇹",
   "British Virgin Islands": "🇻🇬",
+  Canada: "🇨🇦",
   Cuba: "🇨🇺",
+  "Czech Republic": "🇨🇿",
   Denmark: "🇩🇰",
   France: "🇫🇷",
+  Finland: "🇫🇮",
+  Germany: "🇩🇪",
+  Greece: "🇬🇷",
+  Georgia: "🇬🇪",
   Chile: "🇨🇱",
+  China: "🇨🇳",
+  Colombia: "🇨🇴",
   "Dominican Republic": "🇩🇴",
+  Estonia: "🇪🇪",
   India: "🇮🇳",
+  Ireland: "🇮🇪",
   Italy: "🇮🇹",
+  Jamaica: "🇯🇲",
+  Latvia: "🇱🇻",
+  Lithuania: "🇱🇹",
+  Martinique: "🇲🇶",
   Japan: "🇯🇵",
+  Philippines: "🇵🇭",
   Mexico: "🇲🇽",
+  Nepal: "🇳🇵",
+  Mauritius: "🇲🇺",
+  Montenegro: "🇲🇪",
+  Netherlands: "🇳🇱",
+  "New Zealand": "🇳🇿",
+  Guatemala: "🇬🇹",
+  Guyana: "🇬🇾",
+  Nicaragua: "🇳🇮",
   "Northern Ireland": "🇬🇧",
   "Puerto Rico": "🇵🇷",
+  Poland: "🇵🇱",
+  Peru: "🇵🇪",
+  Portugal: "🇵🇹",
+  Spain: "🇪🇸",
   Russia: "🇷🇺",
+  Seychelles: "🇸🇨",
   "Saint Lucia": "🇱🇨",
   Scotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
   "South Africa": "🇿🇦",
+  "South Korea": "🇰🇷",
   Sweden: "🇸🇪",
   Taiwan: "🇹🇼",
+  Thailand: "🇹🇭",
+  "Trinidad and Tobago": "🇹🇹",
   "United Kingdom": "🇬🇧",
   "United States": "🇺🇸",
+  Ukraine: "🇺🇦",
   Venezuela: "🇻🇪",
+  Vietnam: "🇻🇳",
 };
 
 const COUNTRY_FLAG_URLS: Record<string, string> = {
+  Argentina: "https://flagcdn.com/h20/ar.webp",
   Australia: "https://flagcdn.com/h20/au.webp",
+  Austria: "https://flagcdn.com/h20/at.webp",
   Barbados: "https://flagcdn.com/h20/bb.webp",
   Belgium: "https://flagcdn.com/h20/be.webp",
+  Brazil: "https://flagcdn.com/h20/br.webp",
+  Bhutan: "https://flagcdn.com/h20/bt.webp",
   "British Virgin Islands": "https://flagcdn.com/h20/vg.webp",
+  Canada: "https://flagcdn.com/h20/ca.webp",
   Cuba: "https://flagcdn.com/h20/cu.webp",
+  "Czech Republic": "https://flagcdn.com/h20/cz.webp",
   Denmark: "https://flagcdn.com/h20/dk.webp",
   France: "https://flagcdn.com/h20/fr.webp",
+  Finland: "https://flagcdn.com/h20/fi.webp",
+  Germany: "https://flagcdn.com/h20/de.webp",
+  Greece: "https://flagcdn.com/h20/gr.webp",
+  Georgia: "https://flagcdn.com/h20/ge.webp",
   Chile: "https://flagcdn.com/h20/cl.webp",
+  China: "https://flagcdn.com/h20/cn.webp",
   "Dominican Republic": "https://flagcdn.com/h20/do.webp",
+  Colombia: "https://flagcdn.com/h20/co.webp",
+  Estonia: "https://flagcdn.com/h20/ee.webp",
   India: "https://flagcdn.com/h20/in.webp",
+  Ireland: "https://flagcdn.com/h20/ie.webp",
   Italy: "https://flagcdn.com/h20/it.webp",
+  Jamaica: "https://flagcdn.com/h20/jm.webp",
+  Latvia: "https://flagcdn.com/h20/lv.webp",
+  Lithuania: "https://flagcdn.com/h20/lt.webp",
+  Martinique: "https://flagcdn.com/h20/mq.webp",
   Japan: "https://flagcdn.com/h20/jp.webp",
+  Philippines: "https://flagcdn.com/h20/ph.webp",
   Mexico: "https://flagcdn.com/h20/mx.webp",
+  Nepal: "https://flagcdn.com/h20/np.webp",
+  Mauritius: "https://flagcdn.com/h20/mu.webp",
+  Montenegro: "https://flagcdn.com/h20/me.webp",
+  Netherlands: "https://flagcdn.com/h20/nl.webp",
+  "New Zealand": "https://flagcdn.com/h20/nz.webp",
+  Guatemala: "https://flagcdn.com/h20/gt.webp",
+  Guyana: "https://flagcdn.com/h20/gy.webp",
+  Nicaragua: "https://flagcdn.com/h20/ni.webp",
   "Northern Ireland": "https://flagcdn.com/h20/gb.webp",
   "Puerto Rico": "https://flagcdn.com/h20/pr.webp",
+  Poland: "https://flagcdn.com/h20/pl.webp",
+  Peru: "https://flagcdn.com/h20/pe.webp",
+  Portugal: "https://flagcdn.com/h20/pt.webp",
+  Spain: "https://flagcdn.com/h20/es.webp",
   Russia: "https://flagcdn.com/h20/ru.webp",
+  Seychelles: "https://flagcdn.com/h20/sc.webp",
   "Saint Lucia": "https://flagcdn.com/h20/lc.webp",
   Scotland: "https://flagcdn.com/h20/gb-sct.webp",
   "South Africa": "https://flagcdn.com/h20/za.webp",
+  "South Korea": "https://flagcdn.com/h20/kr.webp",
   Sweden: "https://flagcdn.com/h20/se.webp",
   Taiwan: "https://flagcdn.com/h20/tw.webp",
+  Thailand: "https://flagcdn.com/h20/th.webp",
+  "Trinidad and Tobago": "https://flagcdn.com/h20/tt.webp",
   "United Kingdom": "https://flagcdn.com/h20/gb.webp",
   "United States": "https://flagcdn.com/h20/us.webp",
+  Ukraine: "https://flagcdn.com/h20/ua.webp",
   Venezuela: "https://flagcdn.com/h20/ve.webp",
+  Vietnam: "https://flagcdn.com/h20/vn.webp",
 };
 
 const VERIFIED_BRAND_VISUALS: Record<string, string> = {
@@ -233,6 +346,215 @@ export const BRAND_EXPANSION: BrandExpansionDefinition[] = [
   brand("brand-expansion-sailor-jerry", "Sailor Jerry", "sailor-jerry", "United States", ["Rum"], "https://sailorjerry.com/", "A spiced rum brand. Spicing, sweetness and strength should be treated as product-level details rather than assumed for every release.", "It is useful for readers comparing spiced rum in simple mixed drinks and food-led serves.", "Use a measured serve with cola, ginger beer or citrus, while keeping extra sweetener modest.", ["barbecue", "ginger desserts", "grilled pineapple", "spiced snacks"], "🥃", "William Grant & Sons"),
   brand("brand-expansion-michelob-ultra", "Michelob Ultra", "michelob-ultra", "United States", ["Beer"], "https://www.michelobultra.com/", "A beer brand from AB InBev. Exact style, strength, pack format and local availability should be verified for each Indian market.", "A city-aware page can separate the brand from other AB InBev beer labels and show only verified local records.", "Serve well chilled in a clean beer glass or directly from the pack, following the label and local availability.", ["burgers", "grilled corn", "salads", "crispy starters"], "🍺", "AB InBev"),
   brand("brand-expansion-goose-island", "Goose Island", "goose-island", "United States", ["Beer"], "https://www.gooseisland.com/", "A craft beer brand with beer-style-specific releases. Product pages should identify the beer style, pack size, strength and freshness guidance.", "The brand belongs in a craft beer directory where readers can compare styles rather than treating every beer as a standard lager.", "Chill to suit the style and pour into a clean glass with room for aroma and head.", ["pizza", "fried chicken", "spiced starters", "aged cheese"], "🍺", "AB InBev"),
+  brand("lc-brand-db4b593cedf2b826cdea6a75", "Beluga", "beluga", "Montenegro", ["Vodka"], "https://vodka-beluga.com/", "A super-premium vodka produced by Noblewood from organic grain spirit made in Latvia and finished in Montenegro.", "Its core range moves from the clean Noble expression to the richer Gold Line.", "Serve chilled in a small stemmed glass or use a measured pour in a Vodka Martini.", ["smoked salmon", "salted cucumber", "tandoori prawns", "potato blini"], "🍸", "Noblewood Group"),
+  brand("lc-brand-eec52c1317f0c3f80b7278da", "Maya Pistola", "maya-pistola", "India", ["Agave Spirits"], "https://www.pistola.in/about", "An Indian agave spirit made from mature Agave americana grown on the Deccan Plateau.", "Wooden-vat fermentation, part-copper pot distillation and coastal oak maturation shape its identity.", "Sip neat or use Joven in a Margarita and Reposado in a spirit-forward Paloma.", ["achari prawns", "chilli corn", "pork sorpotel", "lamb barbacoa"], "🌵", "Maya Pistola Agavepura"),
+  brand("lc-brand-c1a1e4aa1037bae1586d8d1f", "Morpheus", "morpheus", "India", ["Brandy"], "https://radicokhaitan.com/products/morpheus-xo-brandy/", "A premium Indian brandy from Radico Khaitan with dried-fruit, floral, vanilla and mature-wood notes.", "Morpheus XO is named for the winged Greek god of dreams.", "Serve a small measure in a tulip glass, neat or with a few drops of water.", ["mutton seekh", "pepper chicken", "fruit cake", "dark chocolate"], "🥃", "Radico Khaitan"),
+  brand("lc-brand-d050fd1ff294e1173d1dd508", "Diplomatico", "ron-diplomatico", "Venezuela", ["Rum"], "https://www.rondiplomatico.com/our-story/", "A Venezuelan rum made from local sugarcane molasses using pot, kettle and column distillation.", "Ex-bourbon and ex-whiskey casks shape Reserva Exclusiva, Mantuano and the wider range.", "Sip Reserva Exclusiva or use Mantuano in a Rum Old Fashioned.", ["pork belly", "grilled pineapple", "mutton roast", "pecan tart"], "🥃", "Brown-Forman"),
+  brand("lc-brand-e49c56641b7ba80097d0443c", "Akashi", "akashi", "Japan", ["Japanese Whisky"], "https://www.ei-sake.jp/en/", "A Japanese whisky label from Eigashima Shuzo and its White Oak distillery in Akashi, Hyogo.", "The range covers light blends, single malt and cask-finished whisky.", "Taste single malt neat and use the blend in a cold highball.", ["yakitori", "miso-glazed mushrooms", "chicken teriyaki", "sesame paneer"], "🥃", "Eigashima Shuzo"),
+  brand("lc-brand-218d373c2875fac885aed35c", "Blue Moon", "blue-moon", "United States", ["Beer"], "https://www.bluemoonbrewingcompany.com/en-GB/story", "An American Belgian-style wheat ale created by Keith Villa in Denver in 1995.", "White wheat, oats, Valencia orange peel and coriander create its cloudy citrus profile.", "Serve chilled in a wheat-beer glass with an orange wheel.", ["fish tikka", "chicken malai tikka", "fried calamari", "citrus salad"], "🍺", "Molson Coors"),
+  brand("lc-brand-448d6731ee98ea8d5c97cd65", "Budweiser", "budweiser", "United States", ["Beer"], "https://www.anheuser-busch.com/", "An American-style lager created by Adolphus Busch in St. Louis in 1876.", "Rice, barley malt and beechwood lagering support a light, clean and gently sweet beer.", "Serve well chilled in a tall lager glass.", ["chicken wings", "seekh kebab", "masala fries", "grilled corn"], "🍺", "AB InBev"),
+  brand("lc-brand-2b1c9cd7e36108c9e56b5e83", "Captain Morgan", "captain-morgan", "Jamaica", ["Rum"], "https://www.captainmorgan.com/en", "A Caribbean rum brand launched in 1982 and named for the Welsh privateer Henry Morgan.", "Original Spiced Gold leads a range of spiced, dark and white rum expressions.", "Mix Spiced Gold with cola and lime or use white rum in a Daiquiri.", ["barbecue chicken", "jerk-spiced paneer", "grilled pineapple", "ginger cake"], "🥃", "Diageo"),
+  brand("lc-brand-b3733477164d87458b778ce7", "Carlsberg", "carlsberg", "Denmark", ["Beer"], "https://www.carlsberggroup.com/175-years/a-history-of-brewing/j-c-jacobsen/", "A Danish lager brand founded by J.C. Jacobsen at Valby, Copenhagen, in 1847.", "Pale malt, herbal hops and a dry finish define the flagship beer.", "Serve well chilled in a tall lager glass with room for a compact head.", ["fish fry", "chilli paneer", "chicken tikka", "salted peanuts"], "🍺", "Carlsberg Group"),
+  brand("lc-brand-4894395267f859141ba86dc6", "Clase Azul", "clase-azul", "Mexico", ["Tequila"], "https://www.claseazul.com/", "A luxury tequila house founded by Arturo Lomeli using Blue Weber agave from Los Altos de Jalisco.", "Reposado is known for its cobalt-painted ceramic decanter finished by Mexican artisans.", "Sip Reposado from a small agave-spirit glass or use Plata in a refined Margarita.", ["lamb barbacoa", "mole chicken", "ceviche", "tandoori prawns"], "🌵", "Clase Azul Mexico"),
+  brand("lc-brand-852ce7fc856d61694e333742", "The Glen Grant", "glengrant", "Scotland", ["Single Malts"], "https://www.theglengrant.com/our-story/", "A Speyside single malt founded by John and James Grant in Rothes in 1840.", "Tall stills and water-cooling purifiers create a light, orchard-fruited spirit.", "Serve in a tulip glass and add a few drops of water after the first sip.", ["tandoori salmon", "roast chicken", "almond kheer", "mild aged cheddar"], "🥃", "Campari Group"),
+  brand("lc-brand-d18156fb3ecd86021560d68c", "Hardys", "hardys", "Australia", ["Wine"], "https://hardyswines.com/", "An Australian wine brand founded by Thomas Hardy in South Australia in 1853.", "Shiraz, Cabernet Sauvignon, Chardonnay and Sauvignon Blanc run through its broad range.", "Chill white wines and serve fuller reds slightly cool with food.", ["malai tikka", "grilled prawns", "mutton seekh", "barbecue chicken"], "🍷", "Accolade Wines"),
+  brand("lc-brand-b53f9a608e7b653326769940", "Jura", "jura", "Scotland", ["Single Malts"], "https://www.jurawhisky.com/en-gb/distillery/", "An island single malt made at the only whisky distillery on the Isle of Jura.", "Tall stills and bourbon, sherry and wine casks support a fruit-led style with measured smoke.", "Taste neat in a tulip glass before adding a few drops of water.", ["tandoori lamb", "smoked paneer", "roast mushrooms", "dark chocolate"], "🥃", "Whyte & Mackay"),
+  brand("lc-brand-2c48fcf58b16608870edc19a", "Louis Jadot", "louis-jadot", "France", ["Wine"], "https://www.louisjadot.com/", "A Burgundy producer and negociant founded in Beaune in 1859.", "Pinot Noir and Chardonnay stretch from regional Bourgogne to Premier Cru and Grand Cru sites.", "Chill Chardonnay gently and serve Pinot Noir slightly cool in a broad Burgundy glass.", ["tandoori fish", "roast chicken", "mushroom galouti", "duck breast"], "🍷", "Maison Louis Jadot"),
+  brand("lc-brand-050dd98dbff4d26eb0adb91a", "Nikka", "nikka", "Japan", ["Japanese Whisky"], "https://www.nikka.com/en/about/", "A Japanese whisky company founded by Masataka Taketsuru in 1934.", "Yoichi malt, Miyagikyo malt and Coffey-still grain give the range several distinct styles.", "Taste stronger blends with a little water and use lighter bottles in a cold highball.", ["yakitori", "mutton seekh", "roasted corn", "caramel pudding"], "🥃", "Asahi Group"),
+  brand("lc-brand-6081eb352601fe65f2e61996", "Gekkeikan", "gekkeikan", "Japan", ["Sake"], "https://www.gekkeikan.com/", "A Japanese sake house founded by Jiemon Okura in Fushimi, Kyoto, in 1637.", "Fushimi's soft water supports traditional, junmai, nama, nigori and sparkling sake styles.", "Serve lighter sake chilled and fuller traditional sake cool or gently warmed.", ["sushi", "miso aubergine", "tandoori fish", "mushroom gyoza"], "🍶", "Gekkeikan Sake Company"),
+  brand("lc-brand-ce2ddd80144578619284d8d9", "Gato Negro", "gato-negro", "Chile", ["Wine"], "https://vsptwinegroup.com/en/marcas/everyday-wines/gato-negro/", "A Chilean varietal wine brand made by Vina San Pedro from Central Valley fruit.", "Cabernet Sauvignon, Carmenere, Merlot, Chardonnay and Sauvignon Blanc lead the range.", "Serve white wines chilled and reds slightly cool with food.", ["mutton keema", "grilled lamb", "chilli paneer", "roast vegetables"], "🍷", "VSPT Wine Group"),
+  brand("lc-brand-a62a6a58ee1e8414d6a01b1e", "Geist", "geist", "India", ["Beer"], "https://www.geist.in/", "A Bengaluru craft beer company brewing wheat beer, lager, stout, IPA and Belgian-style ale.", "Its distribution brewery opened in Nimbekaipura in 2017 inside a converted plywood factory.", "Serve wheat beers chilled in a tall glass with room for foam.", ["fish tikka", "chilli paneer", "pork ribs", "mushroom pepper fry"], "🍺", "Geist Brewing Co."),
+  brand("lc-brand-0a57091c4633593f6c112d8c", "Pasqua", "pasqua", "Italy", ["Wine"], "https://pasqua.it/roots/", "A family-owned Veronese winery founded in 1925 and known for Veneto wines.", "Amarone, Valpolicella Ripasso, Soave and modern rose projects anchor its portfolio.", "Chill white and rose wines, and decant Amarone before serving at 16 to 18 degrees Celsius.", ["grilled prawns", "paneer tikka", "rogan josh", "braised lamb"], "🍷", "Pasqua family"),
+  brand("lc-brand-d885c34e23051f88fdf9fd37", "Barton & Guestier", "b-and-g", "France", ["Wine"], "https://www.barton-guestier.com/", "A Bordeaux wine house whose history begins with Irish merchant Thomas Barton in 1725.", "The range covers Bordeaux blends and wines from several other French regions.", "Serve younger reds slightly cool and decant firmer Haut-Medoc bottles.", ["seekh kebab", "mushroom galouti", "rogan josh", "roast lamb"], "🍷", "Barton & Guestier"),
+  brand("lc-brand-56f8573ff55bb12a2ff49ef9", "19 Crimes", "19-crimes", "Australia", ["Wine"], "https://19crimes.com/", "An Australian wine label from Treasury Wine Estates built around the stories of British convicts transported to Australia.", "Fruit-forward reds lead a range that also includes white and sparkling wines.", "Serve reds slightly cool with a little air and chill white or sparkling bottles.", ["mutton seekh kebab", "smoky paneer tikka", "barbecue ribs", "mushroom burger"], "🍷", "Treasury Wine Estates"),
+  brand("lc-brand-2159433528245352a3663c54", "Baileys", "baileys", "Ireland", ["Liqueurs"], "https://www.baileys.com/en/stories/baileys-history", "An Irish cream liqueur made with Irish dairy cream, Irish whiskey and spirits, chocolate and vanilla flavours.", "Its dense, dessert-led texture works over ice, with coffee and beside chocolate.", "Serve chilled or over one large cube in a short glass.", ["tiramisu", "chocolate brownie", "coffee kulfi", "toasted hazelnuts"], "🍹", "Diageo"),
+  brand("lc-brand-40b38411ceeb2eeb2644a736", "Black & White", "black-and-white", "Scotland", ["Whisky"], "https://www.diageobaracademy.com/en-us/home/our-brands/black-white", "A light blended Scotch created by James Buchanan and named for its black-and-white bottle presentation.", "Cereal, citrus and gentle spice make it suited to simple highballs.", "Serve over hard ice with soda, ginger ale or a strip of lemon peel.", ["masala peanuts", "fish fingers", "chicken tikka", "vegetable cutlets"], "🥃", "Diageo"),
+  brand("lc-brand-f949df774ea083c8ff753c27", "Blenders Pride", "blenders-pride", "India", ["Whisky"], "https://www.pernod-ricard.com/en/brands/blenders-pride", "A premium Indian blend of grain spirit and imported Scotch malts from Chivas Brothers.", "Orchard fruit, vanilla and oak define its polished house style.", "Taste neat first, then add water or build a restrained soda highball.", ["galouti kebabs", "tandoori mushrooms", "pepper chicken", "roasted cashews"], "🥃", "Pernod Ricard India"),
+  brand("lc-brand-fd837d84c79a749f5bbe1f82", "Cotswolds", "cotswolds", "United Kingdom", ["Single Malts", "Gin"], "https://www.cotswoldsdistillery.com/pages/our-story", "An English distillery founded by Daniel Szor in 2014, producing single malt whisky and botanical-rich dry gin.", "Local barley shapes the whisky, while juniper and citrus lead the gin.", "Serve whisky in a tulip glass and gin over hard ice with crisp tonic.", ["roast lamb", "mushroom galouti", "tandoori prawns", "goat-cheese salad"], "🥃", "Cotswolds Distillery"),
+  brand("lc-brand-c4a270c2205f7c59eab7f924", "Don Julio", "don-julio", "Mexico", ["Tequila"], "https://www.donjulio.com/en-ca/our-story", "A Highland Jalisco tequila house founded by Don Julio Gonzalez and made from 100% Blue Weber agave.", "Blanco preserves citrus and pepper, while oak-aged bottles add vanilla and caramel.", "Sip from a narrow agave glass or use Blanco in a fresh Margarita.", ["ceviche", "tandoori prawns", "lamb barbacoa", "grilled corn"], "🌵", "Diageo"),
+  brand("lc-brand-7ddc1b5dccd476b8a3d473e7", "Flor de Caña", "flor-de-cana", "Nicaragua", ["Rum"], "https://www.flordecana.com/", "A Nicaraguan aged rum from the Pellas family, made near the San Cristobal volcano.", "Column distillation and American oak maturation create a dry profile of fruit, nuts and oak.", "Sip older bottles neat or use younger aged rum in a restrained Old Fashioned.", ["pork ribs", "mutton roast", "grilled pineapple", "pecan tart"], "🥃", "Compañía Licorera de Nicaragua"),
+  brand("lc-brand-73e665dc07cdc36defdebe08", "Grant's", "grants", "Scotland", ["Whisky"], "https://www.grantswhisky.com/en/our-distillery/", "A family-owned blended Scotch built around grain whisky from Girvan Distillery.", "Pear, vanilla, malt and gentle spice make it flexible neat or with soda.", "Taste neat before adding water or cold soda and lemon.", ["chicken tikka", "hara bhara kebab", "roasted almonds", "mature cheddar"], "🥃", "William Grant & Sons"),
+  brand("lc-brand-90e6b8626e8ff4c0ce06d7d2", "Jameson", "jameson", "Ireland", ["Whiskey"], "https://www.jamesonwhiskey.com/en-us/our-whiskey/jameson-irish-whiskey/", "A triple-distilled Irish blend of pot still and grain whiskeys, founded at Bow Street in 1780.", "Apple, vanilla and gentle pot-still spice run through the core style.", "Serve neat, with ginger ale and lime, or as a cold highball.", ["butter chicken", "glazed pork", "chilli paneer", "apple crumble"], "🥃", "Irish Distillers"),
+  brand("lc-brand-d2a1e172460424442948c392", "Jose Cuervo", "jose-cuervo", "Mexico", ["Tequila"], "https://global.cuervo.com/history-of-jose-cuervo/", "A historic Jalisco tequila house whose commercial licence dates to 1795.", "The range moves from Especial mixto bottles to 100% agave Tradicional and Reserva releases.", "Sip Tradicional from a narrow glass or shake it with fresh lime in a Margarita.", ["ceviche", "fish tacos", "achari paneer", "grilled prawns"], "🌵", "Becle"),
+  brand("lc-brand-071c7826d88f7956560bd58f", "Kendall-Jackson", "kendall-jackson", "United States", ["Wine"], "https://www.kj.com/about.html", "A California winery founded by Jess Jackson in 1982 and best known for Vintner's Reserve Chardonnay.", "Cool coastal fruit supports ripe, oak-shaped Chardonnay and structured red wines.", "Chill Chardonnay gently and serve Cabernet slightly cool in a broad glass.", ["malai tikka", "grilled fish", "lamb chops", "mushroom galouti"], "🍷", "Jackson Family Wines"),
+  brand("lc-brand-f48dcfcb702e94eef46febe9", "KRSMA", "krsma", "India", ["Wine"], "https://www.krsmaestates.com/about-us/", "An estate winery founded by Krishna and Uma Chigurupati in the Hampi Hills of Karnataka.", "Cabernet Sauvignon and Sangiovese lead its structured, site-driven red wines.", "Decant fuller reds and serve them slightly below warm room temperature.", ["lamb seekh", "tomato-rich pasta", "paneer tikka", "mushroom pizza"], "🍷", "KRSMA Estates"),
+  brand("lc-brand-cb5acda3117fa1befa945e03", "M. Chapoutier", "m-chapoutier", "France", ["Wine"], "https://www.chapoutier.com/en/the-maison/", "A family wine house based in Tain-l'Hermitage in France's northern Rhône Valley.", "Syrah and Marsanne anchor a portfolio shaped by biodynamic farming and site-specific wines.", "Give Syrah air and chill Marsanne-based whites lightly.", ["rogan josh", "grilled lamb", "mushroom galouti", "herb-roasted chicken"], "🍷", "Chapoutier family"),
+  brand("lc-brand-35e6e691a006b2d075fc4520", "Moët & Chandon", "moet-and-chandon", "France", ["Champagne"], "https://www.moet.com/en-us", "An Épernay Champagne house founded by Claude Moët in 1743.", "Pinot Noir, Pinot Meunier and Chardonnay create its fruit-led, brioche-edged house style.", "Chill to 8 to 10 degrees Celsius and serve in a tulip-shaped white-wine glass.", ["tandoori prawns", "tempura vegetables", "sushi", "soft-rind cheese"], "🍾", "LVMH"),
+  brand("lc-brand-fb5f3ef089654a6c8b8dd73e", "Rémy Martin", "remy-martin", "France", ["Cognac"], "https://www.remymartin.com/en-uk/who-we-are/our-history/", "A Cognac house founded in 1724 and specialised in Fine Champagne blends.", "Grande and Petite Champagne eaux-de-vie give its Cognacs floral fruit, spice and ageing depth.", "Serve at room temperature in a tulip glass without excessive hand warming.", ["galouti kebab", "roast duck", "fruit cake", "dark chocolate"], "🥃", "Rémy Cointreau"),
+  brand("lc-brand-12d9a76e5755c7225aecdc4e", "Zacapa", "ron-zacapa", "Guatemala", ["Rum"], "https://www.zacaparum.com/en/our-story/aged-above-clouds", "A Guatemalan rum made from concentrated first-press sugarcane juice and matured in the highlands.", "Solera-style cask ageing builds caramel, dried fruit, cocoa and sweet oak.", "Sip neat or over one large cube in a short glass.", ["pork belly", "mutton roast", "grilled pineapple", "pecan pie"], "🥃", "Diageo"),
+  brand("lc-brand-e234ee35f82c5dd3f2f20ef0", "The Singleton", "singleton", "Scotland", ["Single Malts"], "https://www.diageo.com/en/our-brands/scotch-whisky/the-singleton", "A single malt family drawn from Glen Ord, Dufftown and Glendullan distilleries.", "Long fermentation, slow distillation and American and European oak support a smooth, fruit-led style.", "Taste in a tulip glass, then add a few drops of water.", ["roast chicken", "tandoori salmon", "mushroom galouti", "almond tart"], "🥃", "Diageo"),
+  brand("lc-brand-46bc2a5e913418953a4859e6", "Talisker", "talisker", "Scotland", ["Single Malts"], "https://www.malts.com/en-row/distilleries/talisker", "A coastal single malt made at Carbost on Scotland's Isle of Skye.", "Sea salt, cracked pepper, sweet malt and peat smoke define the distillery character.", "Serve in a tulip glass and add water after the first sip.", ["smoked salmon", "tandoori fish", "pepper lamb", "charred aubergine"], "🥃", "Diageo"),
+  brand("lc-brand-704ffbac348f2757454c3e03", "Tanqueray", "tanqueray", "United Kingdom", ["Gin"], "https://www.tanqueray.com/en-gb", "A London Dry gin founded by Charles Tanqueray in 1830 and now distilled at Cameronbridge in Scotland.", "Juniper, coriander, angelica and liquorice create its firm, dry botanical profile.", "Serve with crisp tonic and lime or stir into a cold Martini.", ["tandoori prawns", "coriander chicken", "goat-cheese salad", "lemon-pepper paneer"], "🍸", "Diageo"),
+  brand("lc-brand-fdd2e7c06ebf4c5a8d5afe1a", "William Lawson's", "william-lawsons", "Scotland", ["Whisky"], "https://www.williamlawsons.com/our-story/", "A smoke-free blended Scotch built around malt whisky from Macduff Distillery in the Highlands.", "Cereal, apple, vanilla and spice give it a bold but accessible profile.", "Serve over ice with cola, ginger ale or apple juice.", ["pepper chicken", "seekh kebab", "masala fries", "smoked paneer"], "🥃", "Bacardi"),
+  brand("lc-brand-21e6a1906e7efb8686c1f32d", "100 Pipers", "100-pipers", "Scotland", ["Whisky"], "https://www.pernod-ricard.com/en/brands/100-pipers", "A blended Scotch built around Speyside malt whiskies and grain whisky.", "Fruit, malt and restrained smoke define its accessible style.", "Serve neat, with water or in a cold soda highball.", ["chicken tikka", "mutton seekh kebab", "smoked paneer", "roasted peanuts"], "🥃", "Pernod Ricard"),
+  brand("lc-brand-232df857db5e72521b783719", "8 PM", "8-pm", "India", ["Whisky"], "https://radicokhaitan.com/brands/8pm-whisky/", "An Indian whisky introduced by Radico Khaitan in 1998.", "Sweet grain, caramel and pepper shape the blend.", "Serve over ice with water or soda.", ["masala peanuts", "chicken pakora", "paneer tikka", "pepper mutton"], "🥃", "Radico Khaitan"),
+  brand("lc-brand-e66c36af3da2d10f18120d3d", "Albert Bichot", "albert-bichot", "France", ["Wine"], "https://www.albert-bichot.com/", "A family-owned Burgundy house based in Beaune with six estates across the region.", "Pinot Noir and Chardonnay lead a range from regional wines to Grand Cru sites.", "Serve Pinot Noir slightly cool and Chardonnay lightly chilled.", ["tandoori fish", "roast chicken", "mushroom galouti", "duck breast"], "🍷", "Bichot family"),
+  brand("lc-brand-05796dbe30555ab6f3b460dd", "Alexis Lichine", "alexis-lichine", "France", ["Wine"], "https://www.groupegcf.fr/le-groupe-lgcf/notre-histoire.html", "A French wine label named for the influential writer, merchant and Bordeaux proprietor Alexis Lichine.", "The range covers approachable French red, white and rose wines.", "Chill whites and rose, and serve reds slightly cool.", ["grilled fish", "malai tikka", "mushroom kebab", "roast chicken"], "🍷", "Les Grands Chais de France"),
+  brand("lc-brand-f6a8a11496f847d6eba318ce", "All Seasons", "all-season", "India", ["Whisky"], "https://www.oasisgrp.in/", "An Indian reserve whisky from Oasis Group.", "Caramel, dried fruit and oak spice shape its easy-drinking profile.", "Serve neat, over one cube or with soda.", ["mutton seekh", "tandoori mushroom", "pepper chicken", "roasted cashews"], "🥃", "Oasis Group"),
+  brand("lc-brand-d4d4460389f1f9550b991e4d", "Baron Philippe de Rothschild", "baron-philippe", "France", ["Wine"], "https://www.bpdr.com/", "A Pauillac family wine company behind Chateau Mouton Rothschild and Mouton Cadet.", "Bordeaux red and white varieties anchor its branded wines.", "Serve reds slightly cool and whites gently chilled.", ["rogan josh", "lamb chops", "mushroom galouti", "tandoori fish"], "🍷", "Rothschild family"),
+  brand("lc-brand-17a6534de6fca09fda702f93", "Bouchard Aine & Fils", "bouchard", "France", ["Wine"], "https://www.bouchard-aine.fr/en/", "A historic Burgundy wine house based in Beaune.", "Pinot Noir and Chardonnay lead its regional and appellation wines.", "Use broad Burgundy glassware and serve both colours cool.", ["roast chicken", "mushroom galouti", "duck breast", "tandoori fish"], "🍷", "Boisset family"),
+  brand("lc-brand-5a3a14e1fa90a1339bf26ce8", "Cazulo", "cazulo", "India", ["Feni"], "https://cazulofeni.com/", "A Goan feni house producing cashew and coconut spirits.", "Tropical fruit, floral palm notes and earthy spice define the range.", "Sip cool or mix with tonic, soda and citrus.", ["recheado fish", "pork vindaloo", "chilli prawns", "cashew xacuti"], "🥃", "Fazenda Cazulo"),
+  brand("lc-brand-b1d9431886cc6374ed02b176", "Chandon", "chandon", "India", ["Sparkling Wine"], "https://www.chandon.co.in/", "An Indian sparkling-wine producer based in Dindori, Nashik.", "Chenin Blanc, Chardonnay and Pinot Noir support its Brut and Rose styles.", "Serve at 8 to 10 degrees Celsius in a tulip glass.", ["tandoori prawns", "papdi chaat", "tempura vegetables", "sushi"], "🍾", "LVMH"),
+  brand("lc-brand-34562203a56144b8be851bbe", "Cinzano", "cinzano", "Italy", ["Vermouth", "Sparkling Wine"], "https://cinzano.com/en/", "A Turin house of vermouth and sparkling wine founded in 1757.", "Herbs, citrus and bittersweet spice lead its vermouth styles.", "Serve cold over ice with soda or in classic cocktails.", ["salted almonds", "green olives", "bruschetta", "fried calamari"], "🍹", "Caffo Group"),
+  brand("lc-brand-c5183787266d84f5ea69b173", "Emiliana", "emiliana", "Chile", ["Wine"], "https://www.emiliana.cl/en/", "A Chilean producer focused on organic and biodynamic vineyards.", "Carmenere, Syrah, Cabernet Sauvignon and Chardonnay feature across its range.", "Chill whites and give structured reds air.", ["tandoori prawns", "ceviche", "rogan josh", "lamb chops"], "🍷", "Vinedos Emiliana"),
+  brand("lc-brand-5fc53913e825bd0fde17da87", "Fruzzante", "fruzzante", "India", ["Fruit Wine"], "https://fruzzante.com/", "An Indian fruit-wine brand from Hill Zill Wines in Maharashtra.", "Chikoo and other local fruits create gently sparkling, fruit-led wines.", "Serve well chilled in a white-wine or tulip glass.", ["chilli paneer", "glazed chicken", "fruit chaat", "coconut pudding"], "🍷", "Hill Zill Wines"),
+  brand("lc-brand-31a1d3572cca1d45d72057e9", "Lindeman's", "lindemans", "Australia", ["Wine"], "https://www.lindemans.com/en-au", "An Australian wine brand founded by Henry Lindeman in the Hunter Valley in 1843.", "Chardonnay and Shiraz lead its approachable Bin range.", "Chill Chardonnay and serve Shiraz slightly cool.", ["malai tikka", "grilled prawns", "mutton seekh", "barbecue chicken"], "🍷", "Treasury Wine Estates"),
+  brand("lc-brand-363c7b54b1f03ace8f0547ce", "Luis Felipe Edwards", "luis-felipe", "Chile", ["Wine"], "https://www.lfewines.com/", "A family-owned Chilean winery with vineyards in Colchagua, Leyda and Maule.", "Cabernet Sauvignon, Carmenere, Syrah and Sauvignon Blanc show distinct valley profiles.", "Chill coastal whites and air fuller Colchagua reds.", ["fish tikka", "ceviche", "lamb chops", "rajma galouti"], "🍷", "Edwards family"),
+  brand("lc-brand-4daf8de9488c87b40fe59095", "Premius", "premius", "France", ["Wine"], "https://www.yvon-mau.com/en/our-wines/premius/", "A modern Bordeaux wine range from the merchant house Yvon Mau.", "Merlot-led red blends and crisp whites balance ripe fruit with measured oak.", "Air reds briefly and serve whites chilled.", ["rogan josh", "grilled lamb", "mushroom galouti", "tandoori fish"], "🍷", "Henkell Freixenet"),
+  brand("lc-brand-f7a92a5d0e0bdda44d7409de", "Tenjaku", "tenjaku", "Japan", ["Japanese Whisky", "Vodka"], "https://tenjaku-spirits.com/", "A Japanese spirits brand created in Fuefuki in Yamanashi Prefecture.", "Whisky and rice vodka share local spring water and clean, approachable profiles.", "Serve whisky as a highball and vodka well chilled.", ["yakitori", "miso aubergine", "sesame paneer", "sushi"], "🥃", "Tenjaku"),
+  brand("lc-brand-693e1878e137bdc91df29d52", "Tomintoul", "tomintoul", "Scotland", ["Single Malts"], "https://www.tomintoulwhisky.com/", "A Speyside single malt made in the Livet glen near Tomintoul village.", "Orchard fruit and malt define the core range, while Old Ballantruan brings peat smoke.", "Taste neat in a tulip glass before adding water.", ["roast chicken", "almond kheer", "tandoori lamb", "smoked paneer"], "🥃", "Angus Dundee"),
+  brand("lc-brand-f0861ddf3e69595f671c89bf", "Valdivieso", "valdivieso", "Chile", ["Wine", "Sparkling Wine"], "https://www.valdiviesowines.com/", "Chile's historic sparkling-wine house, founded in Santiago in 1879.", "Traditional-method sparkling wines and Curico Valley still wines span the range.", "Chill sparkling wine and air fuller reds.", ["papdi chaat", "fried prawns", "lamb chops", "rogan josh"], "🍾", "Grupo Valdivieso"),
+  brand("lc-brand-b5d9ef5eea3ff9f3eceb5337", "Ventisquero", "ventisquero", "Chile", ["Wine"], "https://www.ventisquero.com/en/home.html", "A Chilean wine producer with estate vineyards from Maipo Costa to the Atacama Desert.", "Coastal whites and site-led red wines reveal the range of its vineyards.", "Chill whites and serve structured reds slightly cool.", ["ceviche", "tandoori fish", "mutton seekh", "roast lamb"], "🍷", "Ventisquero Wine Estates"),
+  brand("lc-brand-ddd16a096a357d22057b2548", "Viu Manent", "viu-manent", "Chile", ["Wine"], "https://www.viumanent.cl/en/", "A family-owned winery at Hacienda San Carlos de Cunaco in the Colchagua Valley.", "Old-vine Malbec leads a portfolio of expressive Chilean wines.", "Decant fuller Malbec and chill Chardonnay gently.", ["lamb seekh", "rogan josh", "grilled portobello", "malai tikka"], "🍷", "Viu family"),
+  brand("lc-brand-5aca6f08b6780157a0da46aa", "1664", "1664", "France", ["Beer"], "https://www.1664blanc.com/", "A French beer family rooted in Strasbourg and led internationally by 1664 Blanc wheat beer.", "Orange peel, coriander and wheat give Blanc its soft citrus and spice profile.", "Serve well chilled in a stemmed wheat-beer glass.", ["tandoori fish", "chicken malai tikka", "citrus salad", "fried calamari"], "🍺", "Carlsberg Group"),
+  brand("lc-brand-8f81702c394c523b3b1b4c93", "1800 Tequila", "1800-tequila", "Mexico", ["Tequila"], "https://www.1800tequila.com/", "A 100 percent Blue Weber agave tequila produced in Jalisco by the Beckmann family.", "Slow oven cooking, copper distillation and expression-specific oak ageing shape the range.", "Sip neat or use Silver in a fresh Margarita.", ["fish tacos", "achari prawns", "guacamole", "grilled pineapple"], "🌵", "Proximo Spirits"),
+  brand("lc-brand-511e17a2506d86ab310c0963", "818 Tequila", "818-tequila", "Mexico", ["Tequila"], "https://drink818.com/", "A Jalisco tequila founded by Kendall Jenner and made at Grupo Solave in Amatitan.", "Los Valles agave, brick ovens, tahona extraction and copper distillation define its production.", "Taste neat or shake Blanco in a restrained Margarita.", ["ceviche", "chilli paneer", "tandoori chicken", "fish tacos"], "🌵", "818 Spirits"),
+  brand("lc-brand-0f6d0e7a1b347beaf5266396", "Aberfeldy", "aberfeldy", "Scotland", ["Single Malts"], "https://www.aberfeldy.com/", "A Highland single malt made beside the Pitilie Burn in Perthshire.", "Honey, orchard fruit and a waxy texture define the house style.", "Serve neat in a tulip glass and add water gradually.", ["tandoori salmon", "roast chicken", "almond kheer", "mature cheddar"], "🥃", "Bacardi"),
+  brand("lc-brand-1aaeed452e0ab9208376250e", "Aberlour", "aberlour", "Scotland", ["Single Malts"], "https://www.aberlour.com/", "A Speyside single malt founded by James Fleming in 1879.", "American oak and Oloroso sherry casks bring orchard fruit, dried fruit and warming spice.", "Taste neat before adding a few drops of water.", ["mutton seekh", "fruit cake", "dark chocolate", "roast duck"], "🥃", "Pernod Ricard"),
+  brand("lc-brand-a62132d277893a183ba0d307", "AIX Provence", "aix-provence", "France", ["Wine"], "https://aixrose.com/", "The signature rose of Maison Saint Aix in the Coteaux d'Aix-en-Provence appellation.", "Grenache, Syrah and Cinsault deliver dry red-fruit freshness and mineral length.", "Serve chilled in a medium white-wine glass.", ["tandoori prawns", "grilled fish", "watermelon-feta salad", "mezze"], "🍷", "Maison Saint Aix"),
+  brand("lc-brand-4c0df2bfe90b0a1d66ff6bbc", "Allan Scott", "allan-scott", "New Zealand", ["Wine"], "https://www.allanscott.com/", "A family winery on Jacksons Road in Marlborough founded by Allan and Cathy Scott.", "Sauvignon Blanc leads a cool-climate range that includes Pinot Noir and Chardonnay.", "Chill Sauvignon Blanc and serve Pinot Noir slightly cool.", ["tandoori fish", "hara bhara kebab", "roast duck", "mushroom galouti"], "🍷", "Scott family"),
+  brand("lc-brand-0cab16952fb15b9bcac34b3b", "Allegrini Amarone", "allegrini-amarone", "Italy", ["Wine"], "https://allegrini.it/en/", "A Valpolicella Classica wine producer based in Fumane in Italy's Veneto region.", "Appassimento and Corvina-led blends create concentrated fruit, spice and polished tannin.", "Decant fuller wines and serve at 16 to 18 degrees Celsius.", ["mutton rogan josh", "braised lamb", "wild-mushroom pasta", "aged Parmigiano"], "🍷", "Allegrini family"),
+  brand("lc-brand-a1b70cee4c7b5b5a8a70499e", "Alta Vista", "alta-vista", "Argentina", ["Wine"], "https://altavistawines.com/", "An Argentine winery founded by Count Patrick d'Aulan with vineyards across Mendoza.", "Estate and single-vineyard Malbec bottlings place Andean fruit and site character at the centre.", "Decant structured Malbec and serve slightly cool.", ["mutton seekh", "grilled lamb chops", "smoky paneer", "beef empanadas"], "🍷", "d'Aulan family"),
+  brand("lc-brand-b9e83cab7d63cce0c3140b77", "Amarula", "amarula", "South Africa", ["Cream Liqueur"], "https://amarula.com/", "A South African cream liqueur made with spirit distilled from fermented marula fruit.", "Caramel, vanilla and tropical fruit sit within a smooth dairy-cream texture.", "Serve chilled, over ice or in iced coffee.", ["coffee kulfi", "chocolate brownie", "malva pudding", "roasted hazelnuts"], "🍹", "Distell"),
+  brand("lc-brand-7f293243bd679844b135bf68", "Amstel", "amstel", "Netherlands", ["Beer"], "https://www.amstel.com/", "A Dutch lager founded in Amsterdam in 1870 and named for the Amstel River.", "Pale malt, mild hop bitterness and clean carbonation define its classic lager profile.", "Serve well chilled in a tall lager glass.", ["masala fries", "chicken wings", "fish fry", "grilled corn"], "🍺", "Heineken"),
+  brand("lc-brand-10a942d9d8535c7e9c3d3d2b", "Angostura", "angostura", "Trinidad and Tobago", ["Rum", "Bitters"], "https://angostura.com/", "A Trinidad and Tobago house known for aromatic bitters and column-distilled rum.", "Molasses fermentation, continuous distillation and charred bourbon casks shape the rum range.", "Sip aged rum neat or use the bitters in measured cocktail dashes.", ["jerk chicken", "mutton pepper fry", "grilled pineapple", "dark chocolate"], "🥃", "House of Angostura"),
+  brand("lc-brand-ea1895d08a726e06768ec94d", "Antiquity Blue", "antiquity-blue", "India", ["Indian Whisky"], "https://www.diageoindia.com/en/brands/brand-explorer/antiquity", "An Indian premium whisky from United Spirits, part of Diageo India.", "Indian malt and grain whiskies are combined with imported Scotch malts for a rounded oak-led style.", "Serve neat, over one cube or with a small splash of water.", ["galouti kebabs", "mutton seekh", "smoked paneer", "walnut cake"], "🥃", "Diageo India"),
+  brand("lc-brand-40008bf4d783f83a5f76401b", "Aperol", "aperol", "Italy", ["Aperitif"], "https://www.aperol.com/", "An Italian aperitif created in Padua by brothers Luigi and Silvio Barbieri in 1919.", "Orange, gentian, cinchona and herbs create its bittersweet citrus profile.", "Build an Aperol Spritz over ice with Prosecco and soda.", ["papdi chaat", "bruschetta", "fried prawns", "olives"], "🍹", "Campari Group"),
+  brand("lc-brand-15eb16299028dfb8478236d6", "Appleton Estate", "appleton-estate", "Jamaica", ["Rum"], "https://www.appletonestate.com/", "A Jamaican rum estate in the Nassau Valley with production history dating to 1749.", "Pot and column distillates mature in Jamaica to build orange peel, spice and molasses depth.", "Sip aged expressions neat or use Signature in a Daiquiri.", ["jerk chicken", "pork belly", "grilled pineapple", "pecan tart"], "🥃", "Campari Group"),
+  brand("lc-brand-b6cfbfe0accd700743dd23a0", "Ardbeg", "ardbeg", "Scotland", ["Single Malts"], "https://www.ardbeg.com/", "A heavily peated Islay single malt founded on the island's south coast in 1815.", "Peat smoke, citrus, maritime notes and oily texture define its bourbon-cask-led spirit.", "Taste neat in a tulip glass before adding water.", ["smoked mutton seekh", "tandoori prawns", "blue cheese", "dark chocolate"], "🥃", "LVMH"),
+  brand("lc-brand-7d3823ead187490bdfd40b7c", "Auchentoshan", "auchentoshan", "Scotland", ["Single Malts"], "https://www.auchentoshan.com/", "A Lowland single malt near Glasgow known for triple distillation.", "Unpeated malt and a light spirit highlight citrus, orchard fruit and varied cask finishes.", "Taste in a tulip glass or use American Oak in a highball.", ["chicken malai tikka", "roast duck", "mushroom tart", "lemon cake"], "🥃", "Suntory Global Spirits"),
+  brand("lc-brand-7430a3be93e8686df2aefef4", "Barefoot", "barefoot", "United States", ["Wine"], "https://www.barefootwine.com/", "A California wine brand owned by E and J Gallo with still, sparkling and flavoured wines.", "Moscato and familiar international grape varieties lead its fruit-forward range.", "Serve Moscato chilled and red wines slightly cool.", ["chilli paneer", "fruit tart", "barbecue chicken", "mushroom kebab"], "🍷", "E and J Gallo"),
+  brand("lc-brand-491a1d4545f9208a25ca81fb", "Beefeater", "beefeater", "United Kingdom", ["Gin"], "https://www.beefeatergin.com/", "A London Dry gin created by James Burrough and distilled in Kennington, London.", "Nine botanicals give it firm juniper, bright citrus and dry root spice.", "Serve with dry tonic and lemon or in a cold Martini.", ["tandoori prawns", "coriander chicken", "lemon-pepper paneer", "smoked salmon"], "🍸", "Pernod Ricard"),
+  brand("lc-brand-37d4c6a3a3c8e96a36c46972", "Belvedere", "belvedere", "Poland", ["Vodka"], "https://www.belvederevodka.com/", "A Polish vodka made at the Polmos Zyrardow distillery from Polish rye and well water.", "Rye brings cream, white pepper and almond character to its clean texture.", "Serve chilled in a small stemmed glass or in a Vodka Martini.", ["smoked salmon", "potato blini", "salted cucumber", "tandoori prawns"], "🍸", "LVMH"),
+  ...BRAND_IDENTITIES_BATCH_17.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_17[slug];
+    const officialUrl = slug === "akori" ? "https://www.campeny.com/" : BRAND_SOURCES_BATCH_17[slug][0];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], officialUrl, content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_18.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_18[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_18[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_19.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_19[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_19[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_20.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_20[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_20[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_21.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_21[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_21[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_22.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_22[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_22[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_23.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_23[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_23[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_24.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_24[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_24[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_25.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_25[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_25[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_26.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_26[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_26[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_27.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_27[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_27[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_28.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_28[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_28[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_29.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_29[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_29[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_30.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_30[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_30[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_31.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_31[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_31[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_32.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_32[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_32[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_33.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_33[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_33[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_34.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_34[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_34[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_35.filter(([slug]) => slug !== "sula" && slug !== "svedka").map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_35[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_35[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_36.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_36[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_36[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_37.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_37[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_37[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_38.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_38[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_38[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_39.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_39[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_39[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_40.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_40[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_40[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_41.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_41[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_41[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_42.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_42[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_42[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_43.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_43[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_43[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_44.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_44[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_44[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_45.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_45[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_45[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_46.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_46[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_46[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_47.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_47[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_47[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_48.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_48[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_48[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
 ];
 
 const clean = (value: string) => value
@@ -270,10 +592,49 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
   const batch10Content = BRAND_CONTENT_BATCH_10[definition.slug];
   const batch11Content = BRAND_CONTENT_BATCH_11[definition.slug];
   const batch12Content = BRAND_CONTENT_BATCH_12[definition.slug];
-  const publicContent = batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content ?? batch07Content ?? batch08Content ?? batch09Content ?? batch10Content ?? batch11Content ?? batch12Content;
-  const verifiedLogoUrl = BRAND_LOGOS_BATCH_12[definition.slug] ?? publicContent?.logoUrl ?? null;
-  const logoUrl = verifiedLogoUrl ?? getLivcheersBrandLogoUrl(definition.slug, definition.brandName);
-  const logoSourceTier = logoUrl?.includes("static.livcheers.com") ? "livcheers" : "official";
+  const batch13Content = BRAND_CONTENT_BATCH_13[definition.slug];
+  const batch14Content = BRAND_CONTENT_BATCH_14[definition.slug];
+  const batch15Content = BRAND_CONTENT_BATCH_15[definition.slug];
+  const batch16Content = BRAND_CONTENT_BATCH_16[definition.slug];
+  const batch17Content = BRAND_CONTENT_BATCH_17[definition.slug];
+  const batch18Content = BRAND_CONTENT_BATCH_18[definition.slug];
+  const batch19Content = BRAND_CONTENT_BATCH_19[definition.slug];
+  const batch20Content = BRAND_CONTENT_BATCH_20[definition.slug];
+  const batch21Content = BRAND_CONTENT_BATCH_21[definition.slug];
+  const batch22Content = BRAND_CONTENT_BATCH_22[definition.slug];
+  const batch23Content = BRAND_CONTENT_BATCH_23[definition.slug];
+  const batch24Content = BRAND_CONTENT_BATCH_24[definition.slug];
+  const batch25Content = BRAND_CONTENT_BATCH_25[definition.slug];
+  const batch26Content = BRAND_CONTENT_BATCH_26[definition.slug];
+  const batch27Content = BRAND_CONTENT_BATCH_27[definition.slug];
+  const batch28Content = BRAND_CONTENT_BATCH_28[definition.slug];
+  const batch29Content = BRAND_CONTENT_BATCH_29[definition.slug];
+  const batch30Content = BRAND_CONTENT_BATCH_30[definition.slug];
+  const batch31Content = BRAND_CONTENT_BATCH_31[definition.slug];
+  const batch32Content = BRAND_CONTENT_BATCH_32[definition.slug];
+  const batch33Content = BRAND_CONTENT_BATCH_33[definition.slug];
+  const batch34Content = BRAND_CONTENT_BATCH_34[definition.slug];
+  const batch35Content = BRAND_CONTENT_BATCH_35[definition.slug];
+  const batch36Content = BRAND_CONTENT_BATCH_36[definition.slug];
+  const batch37Content = BRAND_CONTENT_BATCH_37[definition.slug];
+  const batch38Content = BRAND_CONTENT_BATCH_38[definition.slug];
+  const batch39Content = BRAND_CONTENT_BATCH_39[definition.slug];
+  const batch40Content = BRAND_CONTENT_BATCH_40[definition.slug];
+  const batch41Content = BRAND_CONTENT_BATCH_41[definition.slug];
+  const batch42Content = BRAND_CONTENT_BATCH_42[definition.slug];
+  const batch43Content = BRAND_CONTENT_BATCH_43[definition.slug];
+  const batch44Content = BRAND_CONTENT_BATCH_44[definition.slug];
+  const batch45Content = BRAND_CONTENT_BATCH_45[definition.slug];
+  const batch46Content = BRAND_CONTENT_BATCH_46[definition.slug];
+  const batch47Content = BRAND_CONTENT_BATCH_47[definition.slug];
+  const batch48Content = BRAND_CONTENT_BATCH_48[definition.slug];
+  const batch49Content = BRAND_CONTENT_BATCH_49[definition.slug];
+  const batch50Content = BRAND_CONTENT_BATCH_50[definition.slug];
+  const publicContent = batch50Content ?? batch49Content ?? batch48Content ?? batch47Content ?? batch46Content ?? batch45Content ?? batch44Content ?? batch43Content ?? batch42Content ?? batch41Content ?? batch40Content ?? batch39Content ?? batch38Content ?? batch37Content ?? batch36Content ?? batch35Content ?? batch34Content ?? batch33Content ?? batch32Content ?? batch31Content ?? batch30Content ?? batch29Content ?? batch28Content ?? batch27Content ?? batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content ?? batch07Content ?? batch08Content ?? batch09Content ?? batch10Content ?? batch11Content ?? batch12Content ?? batch13Content ?? batch14Content ?? batch15Content ?? batch16Content ?? batch17Content ?? batch18Content ?? batch19Content ?? batch20Content ?? batch21Content ?? batch22Content ?? batch23Content ?? batch24Content ?? batch25Content ?? batch26Content;
+  if (!publicContent) throw new Error(`Missing authored brand content for ${definition.slug}; refusing to publish template copy`);
+  const verifiedLogoUrl = VERIFIED_BRAND_LOGO_REPAIRS[definition.slug] ?? BRAND_LOGOS_BATCH_48[definition.slug] ?? BRAND_LOGOS_BATCH_47[definition.slug] ?? BRAND_LOGOS_BATCH_46[definition.slug] ?? BRAND_LOGOS_BATCH_45[definition.slug] ?? BRAND_LOGOS_BATCH_44[definition.slug] ?? BRAND_LOGOS_BATCH_43[definition.slug] ?? BRAND_LOGOS_BATCH_42[definition.slug] ?? BRAND_LOGOS_BATCH_41[definition.slug] ?? BRAND_LOGOS_BATCH_40[definition.slug] ?? BRAND_LOGOS_BATCH_39[definition.slug] ?? BRAND_LOGOS_BATCH_38[definition.slug] ?? BRAND_LOGOS_BATCH_37[definition.slug] ?? BRAND_LOGOS_BATCH_36[definition.slug] ?? BRAND_LOGOS_BATCH_35[definition.slug] ?? BRAND_LOGOS_BATCH_34[definition.slug] ?? BRAND_LOGOS_BATCH_33[definition.slug] ?? BRAND_LOGOS_BATCH_32[definition.slug] ?? BRAND_LOGOS_BATCH_31[definition.slug] ?? BRAND_LOGOS_BATCH_30[definition.slug] ?? BRAND_LOGOS_BATCH_29[definition.slug] ?? BRAND_LOGOS_BATCH_28[definition.slug] ?? BRAND_LOGOS_BATCH_24[definition.slug] ?? BRAND_LOGOS_BATCH_23[definition.slug] ?? BRAND_LOGOS_BATCH_22[definition.slug] ?? BRAND_LOGOS_BATCH_21[definition.slug] ?? BRAND_LOGOS_BATCH_20[definition.slug] ?? BRAND_LOGOS_BATCH_19[definition.slug] ?? BRAND_LOGOS_BATCH_18[definition.slug] ?? BRAND_LOGOS_BATCH_17[definition.slug] ?? BRAND_LOGOS_BATCH_16[definition.slug] ?? BRAND_LOGOS_BATCH_15[definition.slug] ?? BRAND_LOGOS_BATCH_14[definition.slug] ?? BRAND_LOGOS_BATCH_13[definition.slug] ?? BRAND_LOGOS_BATCH_12[definition.slug] ?? publicContent?.logoUrl ?? (batch49Content ? (batch05Content?.logoUrl ?? batch06Content?.logoUrl ?? batch07Content?.logoUrl ?? batch09Content?.logoUrl ?? batch10Content?.logoUrl ?? batch11Content?.logoUrl ?? batch12Content?.logoUrl) : null) ?? (batch50Content ? (batch01Content?.logoUrl ?? batch02Content?.logoUrl ?? batch03Content?.logoUrl ?? batch04Content?.logoUrl) : null) ?? null;
+  const logoUrl = verifiedLogoUrl ?? (batch48Content || batch47Content || batch46Content || batch45Content || batch44Content || batch43Content || batch42Content || batch41Content || batch40Content || batch20Content || batch21Content || batch22Content || batch23Content || batch24Content || batch25Content || batch26Content || batch27Content || batch28Content || batch29Content || batch30Content || batch31Content || batch32Content || batch33Content || batch34Content || batch36Content || batch37Content || batch38Content || batch39Content || (batch35Content && definition.slug !== "sula" && definition.slug !== "svedka") ? null : getLivcheersBrandLogoUrl(definition.slug, definition.brandName));
+  const logoSourceTier = logoUrl ? (logoUrl.includes("static.livcheers.com") ? "livcheers" : "official") : null;
   const metaTitle = truncateAtWord(`${definition.brandName} Brand Guide | BevOry`, 60);
   const metaDescription = truncateAtWord(
     `Explore ${definition.brandName} products, styles, serving ideas and city-level price availability on BevOry.`,
@@ -287,7 +648,7 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     logo_url: logoUrl,
     logo_source_tier: logoSourceTier,
     logo_source_page: logoUrl,
-    logo_asset_status: verifiedLogoUrl ? "verified_remote_asset" : "livcheers_slug_asset_pending_verification",
+    logo_asset_status: verifiedLogoUrl ? "verified_remote_asset" : logoUrl ? "livcheers_slug_asset_pending_verification" : "missing_verified_asset",
     image_url: VERIFIED_BRAND_VISUALS[definition.slug] ?? null,
     description: publicContent?.description ?? clean(`${definition.brandName} is an ${definition.country} ${categoryText.toLowerCase()} label. ${definition.profile}${ownerText}`),
     story: publicContent?.story ?? clean(`${definition.brandName} belongs to the ${definition.country} ${categoryText.toLowerCase()} tradition. ${definition.profile}`),
@@ -323,7 +684,17 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     logo_identity_verified: Boolean(verifiedLogoUrl),
     logo_verified_at: verifiedLogoUrl ? now : null,
     image_license_status: "pending_rights_verification",
-    content_version: batch01Content
+    content_version: batch50Content ? "brand-public-ui-v3-batch-50" : batch49Content ? "brand-public-ui-v3-batch-49" : batch48Content ? "brand-public-ui-v3-batch-48" : batch47Content ? "brand-public-ui-v3-batch-47" : batch46Content ? "brand-public-ui-v3-batch-46" : batch45Content ? "brand-public-ui-v3-batch-45" : batch44Content ? "brand-public-ui-v3-batch-44" : batch43Content ? "brand-public-ui-v3-batch-43" : batch42Content ? "brand-public-ui-v3-batch-42" : batch41Content ? "brand-public-ui-v3-batch-41" : batch40Content ? "brand-public-ui-v3-batch-40" : batch39Content
+      ? "brand-public-ui-v3-batch-39"
+      : batch38Content
+      ? "brand-public-ui-v3-batch-38"
+      : batch37Content
+      ? "brand-public-ui-v3-batch-37"
+      : batch36Content
+      ? "brand-public-ui-v3-batch-36"
+      : batch35Content
+      ? "brand-public-ui-v3-batch-35"
+      : batch01Content
       ? "brand-public-ui-v3-batch-01"
       : batch02Content
         ? "brand-public-ui-v3-batch-02"
@@ -347,7 +718,53 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
                           ? "brand-public-ui-v3-batch-11"
                           : batch12Content
                             ? "brand-public-ui-v3-batch-12"
-                            : "brand-expansion-v1",
+                            : batch13Content
+                              ? "brand-public-ui-v3-batch-13"
+                              : batch14Content
+                                ? "brand-public-ui-v3-batch-14"
+                                : batch15Content
+                                  ? "brand-public-ui-v3-batch-15"
+                                  : batch16Content
+                                    ? "brand-public-ui-v3-batch-16"
+                                    : batch17Content
+                                      ? "brand-public-ui-v3-batch-17"
+                    : batch18Content
+                      ? "brand-public-ui-v3-batch-18"
+                      : batch19Content
+                        ? "brand-public-ui-v3-batch-19"
+                        : batch20Content
+                          ? "brand-public-ui-v3-batch-20"
+                          : batch21Content
+                            ? "brand-public-ui-v3-batch-21"
+                          : batch22Content
+                            ? "brand-public-ui-v3-batch-22"
+                          : batch23Content
+                            ? "brand-public-ui-v3-batch-23"
+                          : batch24Content
+                            ? "brand-public-ui-v3-batch-24"
+                          : batch25Content
+                            ? "brand-public-ui-v3-batch-25"
+                          : batch26Content
+                            ? "brand-public-ui-v3-batch-26"
+                          : batch27Content
+                            ? "brand-public-ui-v3-batch-27"
+                          : batch28Content
+                            ? "brand-public-ui-v3-batch-28"
+                          : batch35Content
+                            ? "brand-public-ui-v3-batch-35"
+                          : batch34Content
+                            ? "brand-public-ui-v3-batch-34"
+                          : batch33Content
+                            ? "brand-public-ui-v3-batch-33"
+                          : batch32Content
+                            ? "brand-public-ui-v3-batch-32"
+                          : batch31Content
+                            ? "brand-public-ui-v3-batch-31"
+                          : batch30Content
+                            ? "brand-public-ui-v3-batch-30"
+                          : batch29Content
+                            ? "brand-public-ui-v3-batch-29"
+                        : "brand-expansion-v1",
     content_basis: publicContent
       ? "official-first consumer copy with Livcheers logo asset fallback"
       : "verified brand portfolio facts and conservative editorial guidance",

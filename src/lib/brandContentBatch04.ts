@@ -25,7 +25,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
   },
   bumbu: {
     description: "Bumbu is a Caribbean rum brand whose flagship rum is distilled and blended in Barbados. The range combines rum with a warm, spiced character suited to slow pours, ice, and restrained cocktails.",
-    story: "Bumbu draws on Caribbean rum tradition and the historic idea of blending rum with local fruit and spice. Its Barbados connection gives the flagship a clear island identity, while other expressions should be read by their individual label.",
+    story: "Bumbu draws on the Caribbean tradition of blending rum with local fruit and spice. Its flagship has a Barbados connection, while the XO takes the range to Panama.",
     tastingNotes: [
       { title: "Style", description: "Warm spice, gentle sweetness, and rounded rum depth shape the flagship direction." },
       { title: "Texture", description: "A soft, smooth feel makes it approachable over ice while keeping enough flavour for a simple mixed serve." },
@@ -45,7 +45,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
     metaDescription: "Bumbu rum guide with Barbados style, tasting notes, serving ideas, food pairings, and city-level prices on BevOry.",
   },
   "chairmans-reserve": {
-    description: "Chairman's Reserve is a rum brand from Saint Lucia Distillers. Its original blend combines Coffey and pot-still rums, with additional ageing in ex-bourbon barrels and a published profile of raisin, honey, vanilla, tropical fruit, walnut, and soft spice.",
+    description: "Chairman's Reserve is a rum brand from Saint Lucia Distillers. Its original blend combines Coffey and pot-still rums aged in ex-bourbon barrels, bringing raisin, honey, vanilla, tropical fruit and walnut flavours.",
     story: "The brand is rooted in Saint Lucia's rum-making tradition and in the work of Saint Lucia Distillers. Its range rewards comparison by blend, still, cask, and maturation rather than by colour alone.",
     tastingNotes: [
       { title: "Original blend", description: "Sweet raisins, cigar tobacco, amber honey, and vanilla lead into grilled tropical fruit and candied walnut." },
@@ -59,7 +59,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
     whyChoose: "A Saint Lucian rum range with pot-still and Coffey-still depth, ex-bourbon influence, and a clear dark-fruit and spice profile.",
     faqs: [
       { question: "What is Chairman's Reserve?", answer: "Chairman's Reserve is a rum brand made by Saint Lucia Distillers in Saint Lucia." },
-      { question: "What does Chairman's Reserve taste like?", answer: "The original blend is published with raisin, honey, vanilla, tropical fruit, walnut, tobacco, and soft spice notes." },
+      { question: "What does Chairman's Reserve taste like?", answer: "The original blend combines raisin, honey, vanilla, tropical fruit, walnut, tobacco and soft spice." },
     ],
     finalVerdict: "Chairman's Reserve is a rich Saint Lucian rum for drinkers who enjoy dark fruit, honey, vanilla, oak, and soft spice in a slow pour.",
     metaTitle: "Chairman's Reserve Rum Guide | BevOry",
@@ -67,7 +67,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
   },
   "dead-mans-fingers": {
     description: "Dead Man's Fingers is a rum brand born inside the Rum and Crab Shack in St Ives, Cornwall. Its lineup includes spiced, white, mango, passion fruit, pineapple, cherry, banana, and coconut expressions.",
-    story: "The brand began with a spiced rum inspired by the food and flavours around a Cornish seafood restaurant. Its style is deliberately flavour-led, with saffron cake, Pedro Ximénez ice cream, vanilla, cinnamon, nutmeg, and orange in the published spiced profile.",
+    story: "The brand began with a spiced rum inspired by the food around a Cornish seafood restaurant. Saffron cake and Pedro Ximénez ice cream helped shape its flavour, alongside vanilla, cinnamon, nutmeg and orange.",
     tastingNotes: [
       { title: "Spiced", description: "Saffron cake and Pedro Ximénez ice cream sit beside creamy caramel, vanilla, cinnamon, nutmeg, and orange." },
       { title: "Flavoured range", description: "Fruit and coconut expressions shift the balance toward mango, passion fruit, pineapple, cherry, banana, or coconut sweetness." },
@@ -80,7 +80,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
     whyChoose: "A flavour-led rum collection for drinkers who want spiced, tropical fruit, or coconut expressions rather than one fixed rum style.",
     faqs: [
       { question: "What is Dead Man's Fingers?", answer: "Dead Man's Fingers is a rum brand that began at the Rum and Crab Shack in St Ives, Cornwall." },
-      { question: "What flavours are available?", answer: "The published range includes spiced, white, mango, passion fruit, pineapple, cherry, banana, and coconut expressions." },
+      { question: "What flavours does Dead Man's Fingers make?", answer: "The range includes spiced, white, mango, passion fruit, pineapple, cherry, banana and coconut expressions." },
     ],
     finalVerdict: "Dead Man's Fingers is a playful, flavour-led rum range, with the spiced bottle bringing saffron cake, vanilla, citrus, and baking spice to the glass.",
     metaTitle: "Dead Man's Fingers Rum Guide | BevOry",
@@ -88,7 +88,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
   },
   pussers: {
     description: "Pusser's is a Caribbean rum brand associated with the British Virgin Islands and naval-style rum tradition. Its bottlings are expression-specific, ranging from fuller sipping rums to classic cocktail-friendly styles.",
-    story: "Pusser's is closely linked with the Painkiller, the official cocktail of the British Virgin Islands. That connection makes the brand a natural fit for tropical serves, while the individual rum should guide the sweetness, strength, and garnish.",
+    story: "Pusser's is closely linked with the Painkiller cocktail and its British Virgin Islands setting. The combination of rum, pineapple, orange and coconut has become a familiar way to enjoy its navy-rum character.",
     tastingNotes: [
       { title: "House direction", description: "Fuller molasses, oak, dried fruit, and warm spice can shape the darker rum direction." },
       { title: "Cocktail role", description: "The profile works particularly well with pineapple, coconut, orange, and nutmeg in a balanced tropical serve." },
@@ -108,7 +108,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
     metaDescription: "Pusser's rum guide with Caribbean style, Painkiller serves, food pairings, serving ideas, and city-level prices on BevOry.",
   },
   "sailor-jerry": {
-    description: "Sailor Jerry is a spiced Caribbean rum brand developed from research into maritime rum traditions. Its published flavour profile centres on almond and vanilla with cassia and cinnamon, giving it a bold, smooth cocktail style.",
+    description: "Sailor Jerry is a spiced Caribbean rum brand inspired by maritime rum traditions. Almond, vanilla, cassia and cinnamon give it a sweet, warming cocktail style.",
     story: "The brand honours Norman 'Sailor Jerry' Collins, the American tattoo artist known for precise nautical designs. Its rum recipe follows the old practice of using natural spices to give Caribbean rum a richer and more distinctive character.",
     tastingNotes: [
       { title: "Aroma", description: "Vanilla and cinnamon lead with a warm, aromatic spice character." },
@@ -122,7 +122,7 @@ export const BRAND_CONTENT_BATCH_04: Record<string, BrandPublicContent> = {
     whyChoose: "A clearly spiced Caribbean rum with vanilla, almond, cassia, and cinnamon that holds its shape in simple mixed drinks.",
     faqs: [
       { question: "What is Sailor Jerry?", answer: "Sailor Jerry is a spiced Caribbean rum brand inspired by maritime rum traditions and Norman 'Sailor Jerry' Collins." },
-      { question: "What does Sailor Jerry taste like?", answer: "The published profile includes almond, vanilla, cassia, and cinnamon." },
+      { question: "What does Sailor Jerry taste like?", answer: "Almond and vanilla bring sweetness, while cassia and cinnamon add warming spice." },
     ],
     finalVerdict: "Sailor Jerry is a bold, vanilla-and-spice-led rum for measured serves with cola, ginger, citrus, or grilled food.",
     metaTitle: "Sailor Jerry Spiced Rum Guide | BevOry",
