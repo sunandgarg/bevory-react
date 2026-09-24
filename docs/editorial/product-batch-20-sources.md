@@ -1,0 +1,38 @@
+# Product editorial batch 20 — research and identity ledger
+
+These 30 records are overlays on existing product URLs. They do not change prices, inventory or product identity. Producer pages support stated brand history, named grapes and published style details. The descriptions and Indian pairings are editorial guidance, not first-hand tasting notes or a guarantee across vintages and markets. A label/photo and current technical sheet should be checked before adding exact grape percentages, alcohol, sweetness, oak vessels or regional claims not documented below.
+
+| Existing product slug | Primary source | Editorial qualification |
+| --- | --- | --- |
+| `woodbridge-pinot-noir-4af3e92` | [Woodbridge Pinot Noir](https://www.woodbridgewines.com/wine/pinot-noir/) | Producer gives fruit, toast and oak note; no cask specification. |
+| `woodbridge-by-robert-mondavi-moscato-5e747e8` | [Woodbridge Moscato](https://www.woodbridgewines.com/wine/moscato/) | Confirm sweetness from current imported label. |
+| `woodbridge-chardonnay-331c882` | [Woodbridge Chardonnay](https://www.woodbridgewines.com/products/chardonnay) | Distinct from the separately labelled Buttery and Lightly Oaked bottles. |
+| `woodbridge-carbnet-sauvignon-ec7a05a` | [Woodbridge Cabernet Sauvignon](https://www.woodbridgewines.com/wine/cabernet-sauvignon/) | Catalogue slug misspells Cabernet; public product name is corrected. |
+| `woodbridge-merlot-a1d79d2` | [Woodbridge Merlot](https://www.woodbridgewines.com/wine/merlot/) | Producer notes vanilla oak without exact cask regime. |
+| `woodbridge-pinot-grigio-d5297fd` | [Woodbridge Pinot Grigio](https://www.woodbridgewines.com/wine/pinot-grigio/) | California wine despite Italian grape name. |
+| `woodbridge-sauvignon-blanc-9e199f9` | [Woodbridge Sauvignon Blanc](https://www.woodbridgewines.com/wine/sauvignon-blanc/) | Producer names lemongrass, starfruit, lime and Meyer lemon. |
+| `sensi-soro-toscana-bianco-a559fd0` | [Sensi company history](https://www.sensivini.it/en/company-en/) | Exact Soro Bianco producer sheet not located; wine-specific palate is style guidance. Validate current bottle and blend. |
+| `sensi-soro-toscana-rosso-f8a4eb7` | [Sensi company history](https://www.sensivini.it/en/company-en/), [state listing](https://tsbcl.nic.in/open_record.php?ID=272) | State listing confirms Soro Toscana Rosso; current producer technical sheet not located. |
+| `sensi-collezione-cabernet-terre-siciliane-68676f1` | [Sensi Collezione range](https://www.sensivini.it/en/sensi-wines-en/) | Exact current Cabernet sheet not located; verify Sicily designation/varietal on bottle. |
+| `sensi-collezione-nero-d-avola-igt-sicily-9fe9a81` | [Sensi Nero d'Avola sheet](https://www.sensivini.it/it/fpdf/scheda.php?lang=en&vino=collezione-nero-davola) | Sheet specifies steel and micro-oxygenation; confirm current vintage. |
+| `sensi-pinot-nior-collezione-3c2f3bd` | [Sensi history](https://www.sensivini.it/en/company-en/), [producer represented in India awards](https://www.newsvoir.com/images/article/file/12629_1_Final%20-%20India%20Wine%20Awards%202019%20-%20Post%20Event%20Release.pdf) | Catalogue slug misspells Pinot Noir; historic IGT Veneto evidence, but current label needs confirmation. |
+| `sensi-collezione-chianti-10d9c8d` | [Sensi Collezione Chianti](https://www.sensivini.it/en/collezione-chianti-docg-en/) | Chianti DOCG, not Chianti Classico; exact blend vintage-dependent. |
+| `sensi-collezione-merlot-siciliane-44247f6` | [Sensi Collezione range](https://www.sensivini.it/en/sensi-wines-en/) | Exact current Merlot technical sheet not located; verify Terre Siciliane label. |
+| `sensi-collezione-sangiovese-406e1b2` | [Sensi Collezione Sangiovese](https://www.sensivini.it/en/collezione-sangiovese-toscana-en/) | Toscana IGT, distinct from Chianti DOCG. |
+| `sensi-collezione-shiraz-833343d` | [Sensi Collezione range](https://www.sensivini.it/en/sensi-wines-en/) | Exact current Shiraz sheet not located; origin and oak not stated publicly. |
+| `sula-mosaic-chenin-sauvignon-white-bebf47c` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf), [state product registration](https://tsbcl.nic.in/open_record.php?ID=249) | State register identifies Chenin/Sauvignon; proportions and sensory profile are not on producer sheet. |
+| `sula-samara-white-wine-ae54b71` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Likely same liquid as shorter-name Samara White URL; do not create duplicate indexable pages without identity review. |
+| `sula-samara-white-651906e` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Likely alias of the longer-name Samara White listing; compare bottle size/GTIN and canonicalise if identical. |
+| `sula-madera-red-wine-b6570fb` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Label confirmed; precise blend and tasting profile require current bottle-specific sheet. |
+| `sula-samara-red-wine-245696b` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Likely same liquid as repeated-prefix Samara Red URL; identity review recommended. |
+| `sula-madera-white-wine-b563505` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Label confirmed; exact grape blend and palate require bottle-specific verification. |
+| `sula-madera-rose-155477f` | [Sula brand history](https://sulavineyards.com/our-people.php), [2022–23 producer portfolio](https://sulavineyards.com/files/0623/Annual%20Report%2022-23.pdf) | Current producer portfolio does not clearly show this rosé; confirm bottle and current distribution before treating as an active product. |
+| `sula-port-1000-75689bb` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Indian label; no Portuguese origin or specific fortification claim. Verify sweetness from bottle. |
+| `sula-mosaic-grenache-syrah-red-035d850` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Mosaic Red label confirmed; grape names from catalogue require bottle check, and proportions unknown. |
+| `sula-port-gold-red-wine-88cbf5e` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Separate from Port 1000; exact production/fortification details unknown. |
+| `sula-sula-samara-red-wine-244ab0f` | [Sula annual portfolio](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf) | Repeated-prefix alias is likely the same Samara Red; canonicalise after GTIN/size review. |
+| `hoegaarden-witbier-be0f0a7` | [Hoegaarden beer range](https://www.hoegaarden.com/beer), [Hoegaarden history](https://www.hoegaarden.com/history) | Orange peel and coriander supported by brand. |
+| `hoegaarden-witbier-rosee-bc6db01` | [Hoegaarden Rosée](https://www.hoegaarden.com/rosee) | Raspberry flavour supported; verify India-market ABV on package. |
+| `hoegaarden-witbier-nectarine-c3f978c` | [AB InBev India brand portfolio](https://www.ab-inbev.com/assets/pdfs/AB%20InBev%20EMTN%20Update%202023%20-%20Base%20Prospectus.pdf) | Existence in India supported; exact recipe and specific sensory notes need bottle/technical-sheet review. |
+
+Several entries lack an exact current producer technical sheet. Do not convert style-level palate guidance into hard claims about grape percentages, ABV, oak, or vintage. The Samara alias pairs in particular should be deduplicated or canonicalised before expecting independent SEO performance from them. SEO ranking is not guaranteed by adding these overlays.
