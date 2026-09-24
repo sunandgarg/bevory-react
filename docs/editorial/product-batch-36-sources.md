@@ -1,0 +1,22 @@
+# Product editorial batch 36 — source ledger
+
+Thirty existing BevOry product slugs were selected because the attachment supplied editorial rules but no product list. Pairings and serving ideas are editorial recommendations, not manufacturer claims. Tasting descriptions are written for the listed expression where a producer page exists; where only a range page exists, they should be independently bottle-checked before being presented as definitive sensory findings.
+
+| Products | Primary evidence |
+| --- | --- |
+| The Source Cabernet, Sauvignon Blanc Reserve, Moscato, Chenin Blanc Reserve, Grenache Rosé | [Sula annual report](https://sulavineyards.com/files/0724/Annual%20Report%2023-24.pdf), [Sula wine guide](https://sulavineyards.com/pdf/The-wines-of-sula-vineyards.pdf) |
+| RĀSĀ Cabernet and Zinfandel | [RĀSĀ portfolio](https://sulavineyards.com/rasa.php), [Sula red-wine guide](https://sulavineyards.com/guide-to-red-wines.php) |
+| Four Cousins Collection Merlot, Natural Sweet Red, Natural Sweet Rosé, Natural Sweet White, Collection Sauvignon Blanc | [Merlot](https://www.fourcousins.co.za/four-cousins-collection-merlot), [Sweet Red](https://www.fourcousins.co.za/four-cousins-natural-sweet-red), [Sweet Rosé](https://www.fourcousins.co.za/four-cousins-sweet-rose), [Sweet White](https://www.fourcousins.co.za/four-cousins-natural-sweet-white), [Sauvignon Blanc](https://www.fourcousins.co.za/four-cousins-collection-sauvignon-b) |
+| Barceló Dorado, Imperial 40th Anniversary, Gran Añejo Dark, Imperial, Blanco Añejo | [Producer portfolio](https://ronbarcelo.com/en/our-rums/), [Dorado](https://ronbarcelo.com/en/rum/dorado-anejado/), [40th Anniversary](https://ronbarcelo.com/en/rum/imperial-premium-blend-40-aniversario/), [Dark](https://ronbarcelo.com/en/rum/gran-anejo-dark/), [Imperial](https://ronbarcelo.com/rum/imperial/), [Blanco](https://ronbarcelo.com/rum/blanco-anejado/) |
+| Beluga Celebration, Noble, Gold Line, Transatlantic Racing | [Current portfolio](https://vodka-beluga.com/collection/vodka-portfolio/), [former producer portfolio](https://novabev.com/en/brands/vodka/beluga/) |
+| Kingfisher Ultra Max, Premium Malt Strong, Ultra Witbier | [United Breweries annual report](https://www.unitedbreweries.com/sites/united-breweries/files/united-breweries/results-reports-webcasts-presentations/annual-report/Annual_Report_2024-2025.pdf), [Witbier launch](https://www.unitedbreweries.com/pdf/Material%20Events/Launch%20of%20Kingfisher%20Ultra%20Witbier.pdf), [Ultra Max tasting award](https://www.worldbeerawards.com/winner-beer/bronze-59929-world-beer-awards-2025) |
+| Budweiser Magnum beer, Magnum Double Barrel whisky | [Budweiser APAC](https://www.budweiserapac.com/), [AB InBev annual report](https://www.abinbev.com/assets/pressreleases/2023/AB%20InBev_2022%20Annual%20Report_FINAL.pdf) |
+| Morpheus XO, Blue XO | [Radico portfolio](https://radicokhaitan.com/), [Blue XO product page](https://radicokhaitan.com/products/morpheus-blue-xo-premium-brandy/), [producer release](https://radicokhaitan.com/wp-content/uploads/2024/05/Press-Release-May-27-2024.pdf) |
+| Black Dog Triple Gold Reserve, Black Centenary | [Diageo India report](https://www.diageoindia.com/~/media/Files/D/Diageo-V2/Diageo-India/investors/financials/results-reports-and-presentations/usl_annual_report_2014-2015.pdf), [2024–25 report](https://www.diageoindia.com/~/media/Files/D/Diageo-V2/Diageo-India/investors/financials/results-reports-and-presentations/united-spirits-limited-annual-report-2024-25.pdf) |
+
+## Editorial cautions
+
+- `ron-barcelo-imperial-40-yrs-e4f1788` has a misleading stored slug. The official edition marks Imperial's **40th anniversary**, not forty years of cask ageing. Public copy corrects this; the URL remains stable.
+- Beluga production and ownership changed across markets. No universal country-of-origin claim is made; the local bottle label remains authoritative.
+- `kingfisher-premium-malt-strong-d8ff2f1`, `budweiser-magnum-double-barrel-7cf140d` and `black-dog-black-centenary-3398d28` need pack-level verification before asserting exact recipe, cask specification or producer tasting sheet. The current prose avoids such precise assertions. Their sensory descriptions are editorial style assessments, not quoted producer notes.
+- Editorial deployment is a code release. It does not alter bottle prices, stock, or database rows, and it cannot guarantee indexing or ranking.
