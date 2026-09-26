@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
@@ -19,14 +19,6 @@ const Contact = () => (
           <div>
             <h3 className="font-semibold text-sm mb-1">Email</h3>
             <a href="mailto:bevory.main@gmail.com" className="text-sm text-primary hover:underline">bevory.main@gmail.com</a>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border/50">
-          <div className="p-2.5 rounded-lg bg-primary/10"><Phone className="h-5 w-5 text-primary" /></div>
-          <div>
-            <h3 className="font-semibold text-sm mb-1">Phone</h3>
-            <a href="tel:+918010321712" className="text-sm text-foreground">+91 8010321712</a>
           </div>
         </div>
 
