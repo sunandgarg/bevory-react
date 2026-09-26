@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, Wallet, Sparkles, ChevronRight, PartyPopper, Star, Check, Wand2, Loader2, Grid3X3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import MobileLayout from "@/components/layout/MobileLayout";
 import { usePartyPlanner } from "@/hooks/usePartyPlanner";
+import { fetchActiveCategories } from "@/hooks/useProducts";
 import { useLocation } from "@/hooks/useLocation";
 import { Link } from "react-router-dom";
 import { apiClient } from "@/integrations/api/client";
@@ -43,20 +45,12 @@ interface AIResponse {
   notice?: string;
 }
 
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  emoji: string | null;
-}
-
 const PartyPlanner = () => {
   const [guests, setGuests] = useState([10]);
   const [budget, setBudget] = useState([5000]);
   const [step, setStep] = useState<"input" | "categories" | "results" | "ai-results">("input");
   const [aiLoading, setAiLoading] = useState(false);
   const [aiRecommendations, setAiRecommendations] = useState<AIResponse | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [recommendationType, setRecommendationType] = useState<"quick" | "ai">("quick");
   
@@ -65,16 +59,12 @@ const PartyPlanner = () => {
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const { toast } = useToast();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const { data } = await apiClient
-        .from("categories")
-        .select("id, name, slug, emoji")
-        .order("name");
-      if (data) setCategories(data);
-    };
-    fetchCategories();
-  }, []);
+  const { data: categories = [], isLoading: categoriesLoading, isError: categoriesError, refetch: retryCategories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchActiveCategories,
+    staleTime: 10 * 60 * 1000,
+  });
+  const activeSelectedCategories = selectedCategories.filter(id => categories.some(category => category.id === id));
 
   const handleProceedToCategories = (type: "quick" | "ai") => {
     setRecommendationType(type);
@@ -90,7 +80,7 @@ const PartyPlanner = () => {
   };
 
   const handleGetRecommendations = async () => {
-    await getRecommendations(guests[0], budget[0], selectedCategories);
+    await getRecommendations(guests[0], budget[0], activeSelectedCategories);
     setStep("results");
   };
 
@@ -174,7 +164,7 @@ const PartyPlanner = () => {
   };
 
   const handleConfirmCategories = () => {
-    if (selectedCategories.length === 0) {
+    if (activeSelectedCategories.length === 0) {
       toast({
         title: "Select Categories",
         description: "Please select at least one category",
@@ -362,20 +352,28 @@ const PartyPlanner = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground">
-                    {selectedCategories.length} selected
+                    {activeSelectedCategories.length} selected
                   </span>
                   <Button 
                     variant="ghost" 
                     size="sm"
+                    disabled={categoriesLoading || categoriesError || categories.length === 0}
                     onClick={() => setSelectedCategories(categories.map(c => c.id))}
                   >
                     Select All
                   </Button>
                 </div>
-                {categories.length === 0 ? (
+                {categoriesLoading ? (
                   <div className="col-span-2 text-center py-8 text-muted-foreground">
                     Loading categories...
                   </div>
+                ) : categoriesError ? (
+                  <div role="alert" className="text-center py-8 text-muted-foreground">
+                    <p>Could not load categories. Please try again.</p>
+                    <Button variant="outline" className="mt-3" onClick={() => retryCategories()}>Retry</Button>
+                  </div>
+                ) : categories.length === 0 ? (
+                  <p className="text-center py-8 text-muted-foreground">No active categories are available right now.</p>
                 ) : (
                   <div className="grid grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pb-2">
                     {categories.map((category) => {
@@ -383,6 +381,7 @@ const PartyPlanner = () => {
                       return (
                         <button
                           key={category.id}
+                          aria-pressed={isSelected}
                           onClick={() => toggleCategory(category.id)}
                           className={`p-4 rounded-xl border-2 transition-all text-left ${
                             isSelected 
@@ -422,7 +421,7 @@ const PartyPlanner = () => {
                     : ""
                 }`}
                 onClick={handleConfirmCategories}
-                disabled={loading || aiLoading}
+                disabled={loading || aiLoading || categoriesLoading || categoriesError || activeSelectedCategories.length === 0}
               >
                 {aiLoading || loading ? (
                   <>
