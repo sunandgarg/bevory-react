@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation as useRouterLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +32,7 @@ interface FAQ {
 }
 
 interface Product {
+  resolvedFrom?: string;
   id: string;
   slug: string | null;
   name: string;
@@ -184,6 +185,7 @@ const ProductDetail = () => {
   const { addToCompare, isInCompare, setShowCompareSheet } = useCompare();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const routerLocation = useRouterLocation();
   const requestedVolume = volume ? normalizeVolume(volume) : null;
   const priceCityId = routeCity
     ? cityRecordIdFromSlug(routeCity.slug)
@@ -248,6 +250,8 @@ const ProductDetail = () => {
       // Parse FAQs
       const parsedProduct = {
         ...productData,
+        resolvedFrom: effectiveSlug,
+        slug: productData.public_slug || productData.slug,
         faqs: Array.isArray(productData.faqs) ? (productData.faqs as unknown as FAQ[]) : [],
       };
 
@@ -393,6 +397,12 @@ const ProductDetail = () => {
       productSlug: product?.slug || product?.id,
     }, requestedVolume)
     : productPath;
+
+  useEffect(() => {
+    if (product?.resolvedFrom === effectiveSlug && canonicalPath && routerLocation.pathname !== canonicalPath) {
+      navigate(`${canonicalPath}${routerLocation.search}${routerLocation.hash}`, { replace: true });
+    }
+  }, [product?.resolvedFrom, effectiveSlug, canonicalPath, routerLocation.pathname, routerLocation.search, routerLocation.hash, navigate]);
 
   const displayRating = product?.rating && product.rating > 0
     ? Number(product.rating).toFixed(1)

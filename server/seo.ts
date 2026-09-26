@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fullProductName } from "../src/lib/productName.js";
 import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatches.js";
+import { buildProductRoutes, mapProductUrls, publicProductPath } from "../src/lib/productRoutes.js";
 
 const SITE_ORIGIN = "https://bevory.in";
 
@@ -529,6 +530,11 @@ const legacyProductTargets = new Map([
 
 const emptyProductIndex: ProductSeoIndex = { products: {}, brandsById: {} };
 
+const routesForSeoIndex = (index: ProductSeoIndex) => buildProductRoutes([
+  ...Object.keys(index.products).map(slug => ({ slug })),
+  ...Object.entries(index.aliases || {}).map(([slug, canonical_slug]) => ({ slug, canonical_slug, is_active: false })),
+]);
+
 export const legacyRedirectPath = (
   pathname: string,
   productIndex: ProductSeoIndex = emptyProductIndex,
@@ -591,6 +597,7 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => emptyProductIndex);
+  const publicRoutes = productIndex.then(routesForSeoIndex);
   const aliasCache = new Map<string, Promise<Record<string, string>>>();
   const maxCacheEntries = seoRouteCacheEntries();
 
@@ -614,7 +621,9 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
     const aliases = productAliasBucketForPath(pathname)
       ? await loadAliases(pathname)
       : baseIndex.aliases;
-    return legacyRedirectPath(pathname, { ...baseIndex, ...(aliases ? { aliases } : {}) });
+    const legacy = legacyRedirectPath(pathname, { ...baseIndex, ...(aliases ? { aliases } : {}) });
+    const target = publicProductPath(legacy || pathname, await publicRoutes);
+    return target !== pathname ? target : null;
   };
 };
 
@@ -626,6 +635,7 @@ export const createSeoRenderer = (clientDist: string) => {
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => ({ products: {}, brandsById: {} }));
+  const publicRoutes = productIndex.then(routesForSeoIndex);
 
   const loadSeoRoutes = (pathname: string) => {
     const bucket = seoBucketForPath(pathname);
@@ -651,11 +661,18 @@ export const createSeoRenderer = (clientDist: string) => {
   };
 
   return async (pathname: string) => {
+    const routes = await publicRoutes;
+    const parts = pathname.split("/").filter(Boolean);
+    // SEO/editorial files retain stable catalogue slugs; the public URL need not.
+    if (parts[1] === "product" && routes.storedByUrl.has(parts[2])) {
+      parts[2] = routes.storedByUrl.get(parts[2])!;
+      pathname = `/${parts.join("/")}`;
+    }
     const generated = resolveSeo(pathname, await loadSeoRoutes(pathname));
     const dynamic = generated.robots.startsWith("noindex")
       ? resolveDynamicProductSeo(pathname, await productIndex)
       : null;
-    const route = enrichProductSeo(pathname, dynamic || generated, await loadProductEditorial(pathname));
+    const route = mapProductUrls(enrichProductSeo(pathname, dynamic || generated, await loadProductEditorial(pathname)), routes);
     return {
       html: rewriteSeoDocument(await template, route),
       statusCode: route.statusCode || 200,

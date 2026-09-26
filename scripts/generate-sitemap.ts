@@ -4,6 +4,7 @@ import { PrismaClient, type Prisma } from "@prisma/client";
 import { BEVORY_CITIES, CITY_SLUGS } from "../src/lib/locations.js";
 import { DEMAND_GUIDES } from "../src/lib/demandGuides.js";
 import { fullProductName } from "../src/lib/productName.js";
+import { buildProductRoutes, publicProductPath } from "../src/lib/productRoutes.js";
 import {
   DEFAULT_PUBLIC_MEDIA_BASE,
   parsePublicMediaBase,
@@ -247,6 +248,7 @@ try {
     && Number(row.data.price) > 0
   ));
   const allProducts = byTable("products").filter((row) => row.data.slug);
+  const publicProductRoutes = buildProductRoutes(allProducts.map(row => row.data));
   const products = allProducts.filter((row) => row.data.is_active !== false);
   const categories = byTable("categories").filter((row) => row.data.is_active !== false && row.data.slug);
   const subcategories = byTable("sub_categories").filter((row) => row.data.is_active !== false && row.data.slug);
@@ -283,9 +285,10 @@ try {
   );
 
   const addRoute = (entry: SitemapEntry, seo: SeoRoute) => {
-    if (!entryPaths.has(entry.path)) {
-      entries.push(entry);
-      entryPaths.add(entry.path);
+    const publicPath = publicProductPath(entry.path, publicProductRoutes);
+    if (!entryPaths.has(publicPath)) {
+      entries.push({ ...entry, path: publicPath });
+      entryPaths.add(publicPath);
     }
     seoRoutes[entry.path] = seo;
   };
