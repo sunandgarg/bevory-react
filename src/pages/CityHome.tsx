@@ -18,11 +18,12 @@ const CityHome = ({ citySlug, canonicalPath }: CityHomeProps) => {
   const isRootHomepage = canonicalPath === "/";
 
   useEffect(() => {
+    if (isRootHomepage) return;
     // Set city if not already selected or different
     if (!selectedCity || selectedCity.name.toLowerCase() !== cityName.toLowerCase()) {
       setCityByName(cityName);
     }
-  }, [cityName, setCityByName, selectedCity]);
+  }, [cityName, setCityByName, selectedCity, isRootHomepage]);
 
   return (
     <>

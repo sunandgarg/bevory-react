@@ -7,27 +7,30 @@ import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { useLocation } from "@/hooks/useLocation";
 import { useNotifications } from "@/hooks/useNotifications";
 import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
+import { PublicNavigationProvider, usePublicNavigation } from "@/hooks/usePublicNavigation";
+import { productHeadingFromSlug } from "@/lib/pageNavigation";
 
 const OryAssistant = lazy(() => import("@/components/ai/OryAssistant"));
 
-const PublicShell = () => {
+const PublicShellContent = () => {
   const { unreadCount } = useNotifications();
   const { selectedCity } = useLocation();
   const { pathname } = useRouterLocation();
+  const { pageTitle } = usePublicNavigation();
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const isHome = pathname === "/" || CITY_SLUGS.includes(pathname.slice(1));
   const isSearchPage = pathname === "/search";
 
   const pageHeading = (() => {
     if (isHome) return "";
+    if (pageTitle) return pageTitle;
     const parts = pathname.split("/").filter(Boolean);
     const categoryIndex = parts.indexOf("category");
     const productIndex = parts.indexOf("product");
+    if (productIndex >= 0) return productHeadingFromSlug(parts[productIndex + 1] || "");
     const raw = categoryIndex >= 0
       ? parts[categoryIndex + 1]
-      : productIndex >= 0
-        ? parts[productIndex + 1]
-        : parts.at(-1);
+      : parts.at(-1);
     if (!raw || raw === citySlug) return "BevOry";
     if (raw === "beers") return "Beer";
     return raw.split("-").map((word) => word ? word[0].toUpperCase() + word.slice(1) : word).join(" ");
@@ -78,5 +81,7 @@ const PublicShell = () => {
     </>
   );
 };
+
+const PublicShell = () => <PublicNavigationProvider><PublicShellContent /></PublicNavigationProvider>;
 
 export default PublicShell;

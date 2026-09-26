@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import MobileLayout from "@/components/layout/MobileLayout";
 import { apiClient } from "@/integrations/api/client";
 import { useRouteCity } from "@/hooks/useRouteCity";
+import { usePublicPageTitle } from "@/hooks/usePublicNavigation";
 import { useCompare } from "@/components/home/CompareProducts";
 import { useToast } from "@/hooks/use-toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -398,6 +399,7 @@ const ProductDetail = () => {
     : null;
   const displayReviewCount = product?.review_count || 0;
   const productLabel = product ? fullProductName(product.brand, product.name) : "";
+  usePublicPageTitle(productLabel);
   const hasResearchedEditorial = product?.product_content_version?.startsWith("researched-product-batch-") ?? false;
   const pageHeading = displayCityName
     ? `${productLabel} price in ${displayCityName}`
@@ -673,7 +675,7 @@ const ProductDetail = () => {
       navigate(generateProductUrl({
         cityName: city.name,
         productSlug: product.slug || product.id,
-      }));
+      }), { replace: true });
     }
     toast({
       title: `City changed to ${city.name}`,

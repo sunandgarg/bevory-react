@@ -1,6 +1,6 @@
 import { memo, ReactNode, lazy, Suspense } from "react";
 import { ChevronLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { usePublicNavigation } from "@/hooks/usePublicNavigation";
 import BottomNav from "./BottomNav";
 
 const CheersGuide = lazy(() => import("@/components/CheersGuide"));
@@ -26,7 +26,7 @@ const MobileLayout = memo(({
   showSearch = true,
   showCheersGuide = false,
 }: MobileLayoutProps) => {
-  const navigate = useNavigate();
+  const { back } = usePublicNavigation();
 
   return (
     <div className="min-h-screen bg-background custom-scrollbar md:mx-auto md:max-w-[1120px] md:border-x md:border-border/50">
@@ -34,7 +34,7 @@ const MobileLayout = memo(({
         <div className="flex min-h-12 items-center gap-2 border-b border-border/50 bg-background px-4">
           {showBack && (
             <button
-              onClick={() => navigate(-1)}
+              onClick={back}
               className="-ml-2 flex min-h-11 min-w-11 items-center justify-center rounded-lg hover:bg-secondary"
               aria-label="Go back"
             >
