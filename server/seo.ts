@@ -430,7 +430,8 @@ const routeSchema = (seo: SeoRoute) => {
         isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
         inLanguage: "en-IN",
       },
-      {
+      // Google requires at least two entries; the homepage has no breadcrumb trail.
+      ...(seo.breadcrumbs.length >= 2 ? [{
         "@type": "BreadcrumbList",
         itemListElement: seo.breadcrumbs.map((item, index) => ({
           "@type": "ListItem",
@@ -438,7 +439,7 @@ const routeSchema = (seo: SeoRoute) => {
           name: item.name,
           item: `${SITE_ORIGIN}${item.path}`,
         })),
-      },
+      }] : []),
       ...(seo.structuredData ? [seo.structuredData] : []),
       ...(seo.faqs?.length ? [{
         "@type": "FAQPage",

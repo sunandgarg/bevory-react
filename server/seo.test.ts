@@ -26,6 +26,34 @@ const template = `<!doctype html><html><head>
 </head><body><div id="root"><h1>Default</h1></div><script type="module" src="/app.js"></script></body></html>`;
 
 describe("origin SEO rendering", () => {
+  it.each([{ breadcrumbs: [] }, { breadcrumbs: [{ name: "Home", path: "/" }] }])("omits insufficient breadcrumb trails without changing homepage SEO", ({ breadcrumbs }) => {
+    const seo = { ...resolveSeo("/", {}), breadcrumbs };
+    const html = rewriteSeoDocument(template, seo);
+    expect(html).not.toContain('"@type":"BreadcrumbList"');
+    expect(html).toContain('"@type":"WebPage"');
+    expect(html).toContain('href="https://bevory.in/"');
+    expect(html).toContain(`<meta name="robots" content="${seo.robots}">`);
+    expect(html).toContain('<script type="module" src="/app.js"></script>');
+    expect(html).toContain(seo.heading);
+  });
+
+  it("retains complete inner-page breadcrumb trails and product schema", () => {
+    const path = "/pune/product/johnnie-walker-red-label/750ml";
+    const breadcrumbs = [{ name: "Home", path: "/" }, { name: "Pune", path: "/pune" }, { name: "Johnnie Walker Red Label", path }];
+    const product = { "@type": "Product", name: "Johnnie Walker Red Label", sku: "stable-product-id" };
+    const seo = { ...resolveSeo(path, {}), breadcrumbs, structuredData: product, robots: "index, follow" };
+    const html = rewriteSeoDocument(template, seo);
+    expect(html).toContain(JSON.stringify({
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem", position: index + 1, name: item.name, item: `https://bevory.in${item.path}`,
+      })),
+    }));
+    expect(html).toContain(JSON.stringify(product));
+    expect(html).toContain(`href="https://bevory.in${path}"`);
+    expect(html).toContain('<meta name="robots" content="index, follow">');
+  });
+
   it("overlays researched bottle copy on the origin SEO shell", () => {
     const seo = enrichProductSeo("/gurgaon/product/johnnie-walker-black-label-6e8300f", {
       title: "Black Label price in Gurgaon", description: "Old summary", heading: "Black Label",
