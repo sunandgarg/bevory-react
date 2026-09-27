@@ -61,6 +61,79 @@ import { BRAND_CONTENT_BATCH_57 } from "./brandContentBatch57.js";
 import { BRAND_CONTENT_BATCH_58 } from "./brandContentBatch58.js";
 import { BRAND_CONTENT_BATCH_59 } from "./brandContentBatch59.js";
 import { BRAND_CONTENT_BATCH_60 } from "./brandContentBatch60.js";
+import { BRAND_CONTENT_BATCH_61 } from "./brandContentBatch61.js";
+import { BRAND_CONTENT_BATCH_62 } from "./brandContentBatch62.js";
+import { BRAND_CONTENT_BATCH_63 } from "./brandContentBatch63.js";
+import { BRAND_CONTENT_BATCH_64 } from "./brandContentBatch64.js";
+import { BRAND_CONTENT_BATCH_65 } from "./brandContentBatch65.js";
+import { BRAND_CONTENT_BATCH_66 } from "./brandContentBatch66.js";
+import { BRAND_CONTENT_BATCH_67 } from "./brandContentBatch67.js";
+import { BRAND_CONTENT_BATCH_68 } from "./brandContentBatch68.js";
+import { BRAND_CONTENT_BATCH_69 } from "./brandContentBatch69.js";
+import { BRAND_CONTENT_BATCH_70 } from "./brandContentBatch70.js";
+import { BRAND_CONTENT_BATCH_71 } from "./brandContentBatch71.js";
+import { BRAND_CONTENT_BATCH_72 } from "./brandContentBatch72.js";
+import { BRAND_CONTENT_BATCH_73 } from "./brandContentBatch73.js";
+import { BRAND_CONTENT_BATCH_74 } from "./brandContentBatch74.js";
+import { BRAND_CONTENT_BATCH_75 } from "./brandContentBatch75.js";
+import { BRAND_CONTENT_BATCH_76 } from "./brandContentBatch76.js";
+import { BRAND_CONTENT_BATCH_77 } from "./brandContentBatch77.js";
+import { BRAND_CONTENT_BATCH_78 } from "./brandContentBatch78.js";
+import { BRAND_CONTENT_BATCH_79 } from "./brandContentBatch79.js";
+import { BRAND_CONTENT_BATCH_80 } from "./brandContentBatch80.js";
+import { BRAND_CONTENT_BATCH_81 } from "./brandContentBatch81.js";
+import { BRAND_CONTENT_BATCH_82 } from "./brandContentBatch82.js";
+import { BRAND_CONTENT_BATCH_83 } from "./brandContentBatch83.js";
+import { BRAND_CONTENT_BATCH_84 } from "./brandContentBatch84.js";
+import { BRAND_CONTENT_BATCH_85 } from "./brandContentBatch85.js";
+import { BRAND_CONTENT_BATCH_86 } from "./brandContentBatch86.js";
+import { BRAND_CONTENT_BATCH_87 } from "./brandContentBatch87.js";
+import { BRAND_CONTENT_BATCH_88 } from "./brandContentBatch88.js";
+import { BRAND_CONTENT_BATCH_89 } from "./brandContentBatch89.js";
+import { BRAND_CONTENT_BATCH_90 } from "./brandContentBatch90.js";
+import { BRAND_CONTENT_BATCH_91 } from "./brandContentBatch91.js";
+import { BRAND_CONTENT_BATCH_92 } from "./brandContentBatch92.js";
+import { BRAND_CONTENT_BATCH_93 } from "./brandContentBatch93.js";
+import { BRAND_CONTENT_BATCH_94 } from "./brandContentBatch94.js";
+import { BRAND_CONTENT_BATCH_95 } from "./brandContentBatch95.js";
+import { BRAND_CONTENT_BATCH_96 } from "./brandContentBatch96.js";
+import { BRAND_CONTENT_BATCH_97 } from "./brandContentBatch97.js";
+import { BRAND_CONTENT_BATCH_98 } from "./brandContentBatch98.js";
+import { BRAND_CONTENT_BATCH_99 } from "./brandContentBatch99.js";
+import { BRAND_CONTENT_BATCH_100 } from "./brandContentBatch100.js";
+import { BRAND_CONTENT_BATCH_101 } from "./brandContentBatch101.js";
+import { BRAND_CONTENT_BATCH_102 } from "./brandContentBatch102.js";
+import { BRAND_CONTENT_BATCH_103 } from "./brandContentBatch103.js";
+import { BRAND_CONTENT_BATCH_104 } from "./brandContentBatch104.js";
+import { BRAND_CONTENT_BATCH_105 } from "./brandContentBatch105.js";
+import { BRAND_CONTENT_BATCH_106 } from "./brandContentBatch106.js";
+import { BRAND_CONTENT_BATCH_107 } from "./brandContentBatch107.js";
+import { BRAND_CONTENT_BATCH_108 } from "./brandContentBatch108.js";
+import { BRAND_CONTENT_BATCH_109 } from "./brandContentBatch109.js";
+import { BRAND_CONTENT_BATCH_110 } from "./brandContentBatch110.js";
+import { BRAND_CONTENT_BATCH_111 } from "./brandContentBatch111.js";
+import { BRAND_CONTENT_BATCH_112 } from "./brandContentBatch112.js";
+import { BRAND_CONTENT_BATCH_113 } from "./brandContentBatch113.js";
+import { BRAND_CONTENT_BATCH_114 } from "./brandContentBatch114.js";
+import { BRAND_CONTENT_BATCH_115 } from "./brandContentBatch115.js";
+import { BRAND_CONTENT_BATCH_116 } from "./brandContentBatch116.js";
+import { BRAND_CONTENT_BATCH_117 } from "./brandContentBatch117.js";
+import { BRAND_CONTENT_BATCH_118 } from "./brandContentBatch118.js";
+import { BRAND_CONTENT_BATCH_119 } from "./brandContentBatch119.js";
+import { BRAND_CONTENT_BATCH_120 } from "./brandContentBatch120.js";
+import { BRAND_CONTENT_BATCH_121 } from "./brandContentBatch121.js";
+import { BRAND_CONTENT_BATCH_122 } from "./brandContentBatch122.js";
+import { BRAND_CONTENT_BATCH_123 } from "./brandContentBatch123.js";
+import { BRAND_CONTENT_BATCH_124 } from "./brandContentBatch124.js";
+import { BRAND_CONTENT_BATCH_125 } from "./brandContentBatch125.js";
+import { BRAND_CONTENT_BATCH_126 } from "./brandContentBatch126.js";
+import { BRAND_CONTENT_BATCH_127 } from "./brandContentBatch127.js";
+import { BRAND_CONTENT_BATCH_128 } from "./brandContentBatch128.js";
+import { BRAND_CONTENT_BATCH_129 } from "./brandContentBatch129.js";
+import { BRAND_CONTENT_BATCH_130 } from "./brandContentBatch130.js";
+import { BRAND_CONTENT_BATCH_131 } from "./brandContentBatch131.js";
+import { BRAND_CONTENT_BATCH_132 } from "./brandContentBatch132.js";
+import { BRAND_CONTENT_BATCH_133 } from "./brandContentBatch133.js";
 
 type JsonObject = Prisma.JsonObject;
 
@@ -179,13 +252,86 @@ export async function applyBrandExpansion(prisma: PrismaClient, now = new Date()
       || BRAND_CONTENT_BATCH_57[definition.slug]
       || BRAND_CONTENT_BATCH_58[definition.slug]
       || BRAND_CONTENT_BATCH_59[definition.slug]
-      || BRAND_CONTENT_BATCH_60[definition.slug],
+      || BRAND_CONTENT_BATCH_60[definition.slug]
+      || BRAND_CONTENT_BATCH_61[definition.slug]
+      || BRAND_CONTENT_BATCH_62[definition.slug]
+      || BRAND_CONTENT_BATCH_63[definition.slug]
+      || BRAND_CONTENT_BATCH_64[definition.slug]
+      || BRAND_CONTENT_BATCH_65[definition.slug]
+      || BRAND_CONTENT_BATCH_66[definition.slug]
+      || BRAND_CONTENT_BATCH_67[definition.slug]
+      || BRAND_CONTENT_BATCH_68[definition.slug]
+      || BRAND_CONTENT_BATCH_69[definition.slug]
+      || BRAND_CONTENT_BATCH_70[definition.slug]
+      || BRAND_CONTENT_BATCH_71[definition.slug]
+      || BRAND_CONTENT_BATCH_72[definition.slug]
+      || BRAND_CONTENT_BATCH_73[definition.slug]
+      || BRAND_CONTENT_BATCH_74[definition.slug]
+      || BRAND_CONTENT_BATCH_75[definition.slug]
+      || BRAND_CONTENT_BATCH_76[definition.slug]
+      || BRAND_CONTENT_BATCH_77[definition.slug]
+      || BRAND_CONTENT_BATCH_78[definition.slug]
+      || BRAND_CONTENT_BATCH_79[definition.slug]
+      || BRAND_CONTENT_BATCH_80[definition.slug]
+      || BRAND_CONTENT_BATCH_81[definition.slug]
+      || BRAND_CONTENT_BATCH_82[definition.slug]
+      || BRAND_CONTENT_BATCH_83[definition.slug]
+      || BRAND_CONTENT_BATCH_84[definition.slug]
+      || BRAND_CONTENT_BATCH_85[definition.slug]
+      || BRAND_CONTENT_BATCH_86[definition.slug]
+      || BRAND_CONTENT_BATCH_87[definition.slug]
+      || BRAND_CONTENT_BATCH_88[definition.slug]
+      || BRAND_CONTENT_BATCH_89[definition.slug]
+      || BRAND_CONTENT_BATCH_90[definition.slug]
+      || BRAND_CONTENT_BATCH_91[definition.slug]
+      || BRAND_CONTENT_BATCH_92[definition.slug]
+      || BRAND_CONTENT_BATCH_93[definition.slug]
+      || BRAND_CONTENT_BATCH_94[definition.slug]
+      || BRAND_CONTENT_BATCH_95[definition.slug]
+      || BRAND_CONTENT_BATCH_96[definition.slug]
+      || BRAND_CONTENT_BATCH_97[definition.slug]
+      || BRAND_CONTENT_BATCH_98[definition.slug]
+      || BRAND_CONTENT_BATCH_99[definition.slug]
+      || BRAND_CONTENT_BATCH_100[definition.slug]
+      || BRAND_CONTENT_BATCH_101[definition.slug]
+      || BRAND_CONTENT_BATCH_102[definition.slug]
+      || BRAND_CONTENT_BATCH_103[definition.slug]
+      || BRAND_CONTENT_BATCH_104[definition.slug]
+      || BRAND_CONTENT_BATCH_105[definition.slug]
+      || BRAND_CONTENT_BATCH_106[definition.slug]
+      || BRAND_CONTENT_BATCH_107[definition.slug]
+      || BRAND_CONTENT_BATCH_108[definition.slug]
+      || BRAND_CONTENT_BATCH_109[definition.slug]
+      || BRAND_CONTENT_BATCH_110[definition.slug]
+      || BRAND_CONTENT_BATCH_111[definition.slug]
+      || BRAND_CONTENT_BATCH_112[definition.slug]
+      || BRAND_CONTENT_BATCH_113[definition.slug]
+      || BRAND_CONTENT_BATCH_114[definition.slug]
+      || BRAND_CONTENT_BATCH_115[definition.slug]
+      || BRAND_CONTENT_BATCH_116[definition.slug]
+      || BRAND_CONTENT_BATCH_117[definition.slug]
+      || BRAND_CONTENT_BATCH_118[definition.slug]
+      || BRAND_CONTENT_BATCH_119[definition.slug]
+      || BRAND_CONTENT_BATCH_120[definition.slug]
+      || BRAND_CONTENT_BATCH_121[definition.slug]
+      || BRAND_CONTENT_BATCH_122[definition.slug]
+      || BRAND_CONTENT_BATCH_123[definition.slug]
+      || BRAND_CONTENT_BATCH_124[definition.slug]
+      || BRAND_CONTENT_BATCH_125[definition.slug]
+      || BRAND_CONTENT_BATCH_126[definition.slug]
+      || BRAND_CONTENT_BATCH_127[definition.slug]
+      || BRAND_CONTENT_BATCH_128[definition.slug]
+      || BRAND_CONTENT_BATCH_129[definition.slug]
+      || BRAND_CONTENT_BATCH_130[definition.slug]
+      || BRAND_CONTENT_BATCH_131[definition.slug]
+      || BRAND_CONTENT_BATCH_132[definition.slug]
+      || BRAND_CONTENT_BATCH_133[definition.slug],
     );
 
     for (const field of contentFields) {
       if (refreshPublicContent || !hasValue(previous[field])) next[field] = built[field];
     }
-    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug] || BRAND_CONTENT_BATCH_51[definition.slug] || BRAND_CONTENT_BATCH_52[definition.slug] || BRAND_CONTENT_BATCH_53[definition.slug] || BRAND_CONTENT_BATCH_54[definition.slug] || BRAND_CONTENT_BATCH_55[definition.slug] || BRAND_CONTENT_BATCH_56[definition.slug] || BRAND_CONTENT_BATCH_57[definition.slug] || BRAND_CONTENT_BATCH_58[definition.slug] || BRAND_CONTENT_BATCH_59[definition.slug] || BRAND_CONTENT_BATCH_60[definition.slug]) next.brand_name = built.brand_name;
+    if (BRAND_CONTENT_BATCH_41[definition.slug] || BRAND_CONTENT_BATCH_42[definition.slug] || BRAND_CONTENT_BATCH_43[definition.slug] || BRAND_CONTENT_BATCH_44[definition.slug] || BRAND_CONTENT_BATCH_45[definition.slug] || BRAND_CONTENT_BATCH_46[definition.slug] || BRAND_CONTENT_BATCH_47[definition.slug] || BRAND_CONTENT_BATCH_48[definition.slug] || BRAND_CONTENT_BATCH_49[definition.slug] || BRAND_CONTENT_BATCH_50[definition.slug] || BRAND_CONTENT_BATCH_51[definition.slug] || BRAND_CONTENT_BATCH_52[definition.slug] || BRAND_CONTENT_BATCH_53[definition.slug] || BRAND_CONTENT_BATCH_54[definition.slug] || BRAND_CONTENT_BATCH_55[definition.slug] || BRAND_CONTENT_BATCH_56[definition.slug] || BRAND_CONTENT_BATCH_57[definition.slug] || BRAND_CONTENT_BATCH_58[definition.slug] || BRAND_CONTENT_BATCH_59[definition.slug] || BRAND_CONTENT_BATCH_60[definition.slug] || BRAND_CONTENT_BATCH_61[definition.slug] || BRAND_CONTENT_BATCH_62[definition.slug] || BRAND_CONTENT_BATCH_63[definition.slug] || BRAND_CONTENT_BATCH_64[definition.slug] || BRAND_CONTENT_BATCH_65[definition.slug] || BRAND_CONTENT_BATCH_66[definition.slug] || BRAND_CONTENT_BATCH_67[definition.slug] || BRAND_CONTENT_BATCH_68[definition.slug] || BRAND_CONTENT_BATCH_69[definition.slug] || BRAND_CONTENT_BATCH_70[definition.slug] || BRAND_CONTENT_BATCH_71[definition.slug] || BRAND_CONTENT_BATCH_72[definition.slug] || BRAND_CONTENT_BATCH_73[definition.slug] || BRAND_CONTENT_BATCH_74[definition.slug] || BRAND_CONTENT_BATCH_75[definition.slug] || BRAND_CONTENT_BATCH_76[definition.slug] || BRAND_CONTENT_BATCH_77[definition.slug] || BRAND_CONTENT_BATCH_78[definition.slug] || BRAND_CONTENT_BATCH_79[definition.slug] || BRAND_CONTENT_BATCH_80[definition.slug] || BRAND_CONTENT_BATCH_81[definition.slug] || BRAND_CONTENT_BATCH_82[definition.slug] || BRAND_CONTENT_BATCH_83[definition.slug] || BRAND_CONTENT_BATCH_84[definition.slug] || BRAND_CONTENT_BATCH_85[definition.slug] || BRAND_CONTENT_BATCH_86[definition.slug] || BRAND_CONTENT_BATCH_87[definition.slug] || BRAND_CONTENT_BATCH_88[definition.slug] || BRAND_CONTENT_BATCH_89[definition.slug] || BRAND_CONTENT_BATCH_90[definition.slug] || BRAND_CONTENT_BATCH_91[definition.slug] || BRAND_CONTENT_BATCH_92[definition.slug] || BRAND_CONTENT_BATCH_93[definition.slug] || BRAND_CONTENT_BATCH_94[definition.slug] || BRAND_CONTENT_BATCH_95[definition.slug] || BRAND_CONTENT_BATCH_96[definition.slug] || BRAND_CONTENT_BATCH_97[definition.slug] || BRAND_CONTENT_BATCH_98[definition.slug] || BRAND_CONTENT_BATCH_99[definition.slug] || BRAND_CONTENT_BATCH_100[definition.slug] || BRAND_CONTENT_BATCH_101[definition.slug] || BRAND_CONTENT_BATCH_102[definition.slug] || BRAND_CONTENT_BATCH_103[definition.slug] || BRAND_CONTENT_BATCH_104[definition.slug] || BRAND_CONTENT_BATCH_105[definition.slug] || BRAND_CONTENT_BATCH_106[definition.slug] || BRAND_CONTENT_BATCH_107[definition.slug] || BRAND_CONTENT_BATCH_108[definition.slug] || BRAND_CONTENT_BATCH_109[definition.slug] || BRAND_CONTENT_BATCH_110[definition.slug] || BRAND_CONTENT_BATCH_111[definition.slug] || BRAND_CONTENT_BATCH_112[definition.slug] || BRAND_CONTENT_BATCH_113[definition.slug] || BRAND_CONTENT_BATCH_114[definition.slug] || BRAND_CONTENT_BATCH_115[definition.slug] || BRAND_CONTENT_BATCH_116[definition.slug] || BRAND_CONTENT_BATCH_117[definition.slug] || BRAND_CONTENT_BATCH_118[definition.slug] || BRAND_CONTENT_BATCH_119[definition.slug] || BRAND_CONTENT_BATCH_120[definition.slug] || BRAND_CONTENT_BATCH_121[definition.slug] || BRAND_CONTENT_BATCH_122[definition.slug] || BRAND_CONTENT_BATCH_123[definition.slug] || BRAND_CONTENT_BATCH_124[definition.slug] || BRAND_CONTENT_BATCH_125[definition.slug] || BRAND_CONTENT_BATCH_126[definition.slug] || BRAND_CONTENT_BATCH_127[definition.slug] || BRAND_CONTENT_BATCH_128[definition.slug] || BRAND_CONTENT_BATCH_129[definition.slug] || BRAND_CONTENT_BATCH_130[definition.slug] || BRAND_CONTENT_BATCH_131[definition.slug] || BRAND_CONTENT_BATCH_132[definition.slug] || BRAND_CONTENT_BATCH_133[definition.slug]) next.brand_name = built.brand_name;
     if (refreshPublicContent || !hasValue(previous.logo_emoji)) next.logo_emoji = built.logo_emoji;
     // Preserve existing images except exact batch 51 slug URLs confirmed broken.
     const brokenBatch51Logo = Boolean(BRAND_LOGOS_BATCH_51[definition.slug])

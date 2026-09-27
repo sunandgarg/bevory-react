@@ -5,6 +5,7 @@ import {
   BRAND_LOGOS_BATCH_54,
   BRAND_SOURCES_BATCH_54,
 } from "../src/lib/brandContentBatch54.js";
+import { BRAND_CONTENT_BATCH_133, BRAND_LOGOS_BATCH_133 } from "../src/lib/brandContentBatch133.js";
 import { BRAND_EXPANSION, buildBrandExpansionData } from "../src/lib/brandExpansion.js";
 import { auditPublicBrandFields } from "./brand-editorial-audit-lib.js";
 
@@ -22,13 +23,13 @@ describe("brand batch 54", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug);
       expect(definition, slug).toBeDefined();
       const row = buildBrandExpansionData(definition!);
-      expect(row.content_version).toBe("brand-public-ui-v3-batch-54");
+      expect(row.content_version).toBe(BRAND_CONTENT_BATCH_133[slug] ? "brand-public-ui-v3-batch-133" : "brand-public-ui-v3-batch-54");
       expect(auditPublicBrandFields(row), slug).toEqual([]);
       expect(row.country_flag_url).toMatch(/^https:/);
       expect(BRAND_SOURCES_BATCH_54[slug].length).toBeGreaterThan(0);
       expect(JSON.stringify(BRAND_CONTENT_BATCH_54[slug]), slug).not.toMatch(blocked);
       expect(BRAND_CONTENT_BATCH_54[slug].metaDescription.length).toBeLessThanOrEqual(155);
-      expect(row.logo_url).toBe(BRAND_LOGOS_BATCH_54[slug] ?? null);
+      expect(row.logo_url).toBe(BRAND_CONTENT_BATCH_133[slug] ? (BRAND_LOGOS_BATCH_133[slug] ?? null) : (BRAND_LOGOS_BATCH_54[slug] ?? null));
     }
   });
 });

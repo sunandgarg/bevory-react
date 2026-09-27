@@ -59,6 +59,79 @@ import { BRAND_CONTENT_BATCH_57, BRAND_LOGOS_BATCH_57 } from "./brandContentBatc
 import { BRAND_CONTENT_BATCH_58, BRAND_LOGOS_BATCH_58 } from "./brandContentBatch58.js";
 import { BRAND_CONTENT_BATCH_59, BRAND_LOGOS_BATCH_59 } from "./brandContentBatch59.js";
 import { BRAND_CONTENT_BATCH_60, BRAND_LOGOS_BATCH_60 } from "./brandContentBatch60.js";
+import { BRAND_CONTENT_BATCH_61, BRAND_IDENTITIES_BATCH_61, BRAND_LOGOS_BATCH_61, BRAND_SOURCES_BATCH_61 } from "./brandContentBatch61.js";
+import { BRAND_CONTENT_BATCH_62, BRAND_IDENTITIES_BATCH_62, BRAND_LOGOS_BATCH_62, BRAND_SOURCES_BATCH_62 } from "./brandContentBatch62.js";
+import { BRAND_CONTENT_BATCH_63, BRAND_IDENTITIES_BATCH_63, BRAND_LOGOS_BATCH_63, BRAND_SOURCES_BATCH_63 } from "./brandContentBatch63.js";
+import { BRAND_CONTENT_BATCH_64, BRAND_IDENTITIES_BATCH_64, BRAND_LOGOS_BATCH_64, BRAND_SOURCES_BATCH_64 } from "./brandContentBatch64.js";
+import { BRAND_CONTENT_BATCH_65, BRAND_IDENTITIES_BATCH_65, BRAND_LOGOS_BATCH_65, BRAND_SOURCES_BATCH_65 } from "./brandContentBatch65.js";
+import { BRAND_CONTENT_BATCH_66, BRAND_IDENTITIES_BATCH_66, BRAND_LOGOS_BATCH_66, BRAND_SOURCES_BATCH_66 } from "./brandContentBatch66.js";
+import { BRAND_CONTENT_BATCH_67, BRAND_IDENTITIES_BATCH_67, BRAND_LOGOS_BATCH_67, BRAND_SOURCES_BATCH_67 } from "./brandContentBatch67.js";
+import { BRAND_CONTENT_BATCH_68, BRAND_IDENTITIES_BATCH_68, BRAND_LOGOS_BATCH_68, BRAND_SOURCES_BATCH_68 } from "./brandContentBatch68.js";
+import { BRAND_CONTENT_BATCH_69, BRAND_IDENTITIES_BATCH_69, BRAND_LOGOS_BATCH_69, BRAND_SOURCES_BATCH_69 } from "./brandContentBatch69.js";
+import { BRAND_CONTENT_BATCH_70, BRAND_IDENTITIES_BATCH_70, BRAND_LOGOS_BATCH_70, BRAND_SOURCES_BATCH_70 } from "./brandContentBatch70.js";
+import { BRAND_CONTENT_BATCH_71, BRAND_IDENTITIES_BATCH_71, BRAND_LOGOS_BATCH_71, BRAND_SOURCES_BATCH_71 } from "./brandContentBatch71.js";
+import { BRAND_CONTENT_BATCH_72, BRAND_IDENTITIES_BATCH_72, BRAND_LOGOS_BATCH_72, BRAND_SOURCES_BATCH_72 } from "./brandContentBatch72.js";
+import { BRAND_CONTENT_BATCH_73, BRAND_IDENTITIES_BATCH_73, BRAND_LOGOS_BATCH_73, BRAND_SOURCES_BATCH_73 } from "./brandContentBatch73.js";
+import { BRAND_CONTENT_BATCH_74, BRAND_IDENTITIES_BATCH_74, BRAND_LOGOS_BATCH_74, BRAND_SOURCES_BATCH_74 } from "./brandContentBatch74.js";
+import { BRAND_CONTENT_BATCH_75, BRAND_IDENTITIES_BATCH_75, BRAND_LOGOS_BATCH_75, BRAND_SOURCES_BATCH_75 } from "./brandContentBatch75.js";
+import { BRAND_CONTENT_BATCH_76, BRAND_IDENTITIES_BATCH_76, BRAND_LOGOS_BATCH_76, BRAND_SOURCES_BATCH_76 } from "./brandContentBatch76.js";
+import { BRAND_CONTENT_BATCH_77, BRAND_IDENTITIES_BATCH_77, BRAND_LOGOS_BATCH_77, BRAND_SOURCES_BATCH_77 } from "./brandContentBatch77.js";
+import { BRAND_CONTENT_BATCH_78, BRAND_IDENTITIES_BATCH_78, BRAND_LOGOS_BATCH_78, BRAND_SOURCES_BATCH_78 } from "./brandContentBatch78.js";
+import { BRAND_CONTENT_BATCH_79, BRAND_IDENTITIES_BATCH_79, BRAND_LOGOS_BATCH_79, BRAND_SOURCES_BATCH_79 } from "./brandContentBatch79.js";
+import { BRAND_CONTENT_BATCH_80, BRAND_IDENTITIES_BATCH_80, BRAND_LOGOS_BATCH_80, BRAND_SOURCES_BATCH_80 } from "./brandContentBatch80.js";
+import { BRAND_CONTENT_BATCH_81, BRAND_IDENTITIES_BATCH_81, BRAND_LOGOS_BATCH_81, BRAND_SOURCES_BATCH_81 } from "./brandContentBatch81.js";
+import { BRAND_CONTENT_BATCH_82, BRAND_IDENTITIES_BATCH_82, BRAND_LOGOS_BATCH_82, BRAND_SOURCES_BATCH_82 } from "./brandContentBatch82.js";
+import { BRAND_CONTENT_BATCH_83, BRAND_IDENTITIES_BATCH_83, BRAND_LOGOS_BATCH_83, BRAND_SOURCES_BATCH_83 } from "./brandContentBatch83.js";
+import { BRAND_CONTENT_BATCH_84, BRAND_IDENTITIES_BATCH_84, BRAND_LOGOS_BATCH_84, BRAND_SOURCES_BATCH_84 } from "./brandContentBatch84.js";
+import { BRAND_CONTENT_BATCH_85, BRAND_IDENTITIES_BATCH_85, BRAND_LOGOS_BATCH_85, BRAND_SOURCES_BATCH_85 } from "./brandContentBatch85.js";
+import { BRAND_CONTENT_BATCH_86, BRAND_IDENTITIES_BATCH_86, BRAND_LOGOS_BATCH_86, BRAND_SOURCES_BATCH_86 } from "./brandContentBatch86.js";
+import { BRAND_CONTENT_BATCH_87, BRAND_IDENTITIES_BATCH_87, BRAND_LOGOS_BATCH_87, BRAND_SOURCES_BATCH_87 } from "./brandContentBatch87.js";
+import { BRAND_CONTENT_BATCH_88, BRAND_IDENTITIES_BATCH_88, BRAND_LOGOS_BATCH_88, BRAND_SOURCES_BATCH_88 } from "./brandContentBatch88.js";
+import { BRAND_CONTENT_BATCH_89, BRAND_IDENTITIES_BATCH_89, BRAND_LOGOS_BATCH_89, BRAND_SOURCES_BATCH_89 } from "./brandContentBatch89.js";
+import { BRAND_CONTENT_BATCH_90, BRAND_IDENTITIES_BATCH_90, BRAND_LOGOS_BATCH_90, BRAND_SOURCES_BATCH_90 } from "./brandContentBatch90.js";
+import { BRAND_CONTENT_BATCH_91, BRAND_IDENTITIES_BATCH_91, BRAND_LOGOS_BATCH_91, BRAND_SOURCES_BATCH_91 } from "./brandContentBatch91.js";
+import { BRAND_CONTENT_BATCH_92, BRAND_IDENTITIES_BATCH_92, BRAND_LOGOS_BATCH_92, BRAND_SOURCES_BATCH_92 } from "./brandContentBatch92.js";
+import { BRAND_CONTENT_BATCH_93, BRAND_IDENTITIES_BATCH_93, BRAND_LOGOS_BATCH_93, BRAND_SOURCES_BATCH_93 } from "./brandContentBatch93.js";
+import { BRAND_CONTENT_BATCH_94, BRAND_IDENTITIES_BATCH_94, BRAND_LOGOS_BATCH_94, BRAND_SOURCES_BATCH_94 } from "./brandContentBatch94.js";
+import { BRAND_CONTENT_BATCH_95, BRAND_IDENTITIES_BATCH_95, BRAND_LOGOS_BATCH_95, BRAND_SOURCES_BATCH_95 } from "./brandContentBatch95.js";
+import { BRAND_CONTENT_BATCH_96, BRAND_IDENTITIES_BATCH_96, BRAND_LOGOS_BATCH_96, BRAND_SOURCES_BATCH_96 } from "./brandContentBatch96.js";
+import { BRAND_CONTENT_BATCH_97, BRAND_IDENTITIES_BATCH_97, BRAND_LOGOS_BATCH_97, BRAND_SOURCES_BATCH_97 } from "./brandContentBatch97.js";
+import { BRAND_CONTENT_BATCH_98, BRAND_IDENTITIES_BATCH_98, BRAND_LOGOS_BATCH_98, BRAND_SOURCES_BATCH_98 } from "./brandContentBatch98.js";
+import { BRAND_CONTENT_BATCH_99, BRAND_IDENTITIES_BATCH_99, BRAND_LOGOS_BATCH_99, BRAND_SOURCES_BATCH_99 } from "./brandContentBatch99.js";
+import { BRAND_CONTENT_BATCH_100, BRAND_IDENTITIES_BATCH_100, BRAND_LOGOS_BATCH_100, BRAND_SOURCES_BATCH_100 } from "./brandContentBatch100.js";
+import { BRAND_CONTENT_BATCH_101, BRAND_IDENTITIES_BATCH_101, BRAND_LOGOS_BATCH_101, BRAND_SOURCES_BATCH_101 } from "./brandContentBatch101.js";
+import { BRAND_CONTENT_BATCH_102, BRAND_IDENTITIES_BATCH_102, BRAND_LOGOS_BATCH_102, BRAND_SOURCES_BATCH_102 } from "./brandContentBatch102.js";
+import { BRAND_CONTENT_BATCH_103, BRAND_IDENTITIES_BATCH_103, BRAND_LOGOS_BATCH_103, BRAND_SOURCES_BATCH_103 } from "./brandContentBatch103.js";
+import { BRAND_CONTENT_BATCH_104, BRAND_IDENTITIES_BATCH_104, BRAND_LOGOS_BATCH_104, BRAND_SOURCES_BATCH_104 } from "./brandContentBatch104.js";
+import { BRAND_CONTENT_BATCH_105, BRAND_IDENTITIES_BATCH_105, BRAND_LOGOS_BATCH_105, BRAND_SOURCES_BATCH_105 } from "./brandContentBatch105.js";
+import { BRAND_CONTENT_BATCH_106, BRAND_IDENTITIES_BATCH_106, BRAND_LOGOS_BATCH_106, BRAND_SOURCES_BATCH_106 } from "./brandContentBatch106.js";
+import { BRAND_CONTENT_BATCH_107, BRAND_IDENTITIES_BATCH_107, BRAND_LOGOS_BATCH_107, BRAND_SOURCES_BATCH_107 } from "./brandContentBatch107.js";
+import { BRAND_CONTENT_BATCH_108, BRAND_LOGOS_BATCH_108 } from "./brandContentBatch108.js";
+import { BRAND_CONTENT_BATCH_109, BRAND_LOGOS_BATCH_109 } from "./brandContentBatch109.js";
+import { BRAND_CONTENT_BATCH_110, BRAND_LOGOS_BATCH_110 } from "./brandContentBatch110.js";
+import { BRAND_CONTENT_BATCH_111, BRAND_LOGOS_BATCH_111 } from "./brandContentBatch111.js";
+import { BRAND_CONTENT_BATCH_112, BRAND_LOGOS_BATCH_112 } from "./brandContentBatch112.js";
+import { BRAND_CONTENT_BATCH_113, BRAND_LOGOS_BATCH_113 } from "./brandContentBatch113.js";
+import { BRAND_CONTENT_BATCH_114, BRAND_LOGOS_BATCH_114 } from "./brandContentBatch114.js";
+import { BRAND_CONTENT_BATCH_115, BRAND_LOGOS_BATCH_115 } from "./brandContentBatch115.js";
+import { BRAND_CONTENT_BATCH_116, BRAND_LOGOS_BATCH_116 } from "./brandContentBatch116.js";
+import { BRAND_CONTENT_BATCH_117, BRAND_LOGOS_BATCH_117 } from "./brandContentBatch117.js";
+import { BRAND_CONTENT_BATCH_118, BRAND_LOGOS_BATCH_118 } from "./brandContentBatch118.js";
+import { BRAND_CONTENT_BATCH_119, BRAND_LOGOS_BATCH_119 } from "./brandContentBatch119.js";
+import { BRAND_CONTENT_BATCH_120, BRAND_LOGOS_BATCH_120 } from "./brandContentBatch120.js";
+import { BRAND_CONTENT_BATCH_121, BRAND_LOGOS_BATCH_121 } from "./brandContentBatch121.js";
+import { BRAND_CONTENT_BATCH_122, BRAND_LOGOS_BATCH_122 } from "./brandContentBatch122.js";
+import { BRAND_CONTENT_BATCH_123, BRAND_LOGOS_BATCH_123 } from "./brandContentBatch123.js";
+import { BRAND_CONTENT_BATCH_124, BRAND_LOGOS_BATCH_124 } from "./brandContentBatch124.js";
+import { BRAND_CONTENT_BATCH_125, BRAND_LOGOS_BATCH_125 } from "./brandContentBatch125.js";
+import { BRAND_CONTENT_BATCH_126, BRAND_LOGOS_BATCH_126 } from "./brandContentBatch126.js";
+import { BRAND_CONTENT_BATCH_127, BRAND_LOGOS_BATCH_127 } from "./brandContentBatch127.js";
+import { BRAND_CONTENT_BATCH_128, BRAND_LOGOS_BATCH_128 } from "./brandContentBatch128.js";
+import { BRAND_CONTENT_BATCH_129, BRAND_LOGOS_BATCH_129 } from "./brandContentBatch129.js";
+import { BRAND_CONTENT_BATCH_130, BRAND_LOGOS_BATCH_130 } from "./brandContentBatch130.js";
+import { BRAND_CONTENT_BATCH_131, BRAND_LOGOS_BATCH_131 } from "./brandContentBatch131.js";
+import { BRAND_CONTENT_BATCH_132, BRAND_LOGOS_BATCH_132 } from "./brandContentBatch132.js";
+import { BRAND_CONTENT_BATCH_133, BRAND_LOGOS_BATCH_133 } from "./brandContentBatch133.js";
 import { VERIFIED_BRAND_LOGO_REPAIRS } from "./brandLogoRepairs.js";
 
 export type BrandExpansionDefinition = {
@@ -82,8 +155,10 @@ const COUNTRY_FLAGS: Record<string, string> = {
   Austria: "🇦🇹",
   Barbados: "🇧🇧",
   Belgium: "🇧🇪",
+  "Bosnia and Herzegovina": "🇧🇦",
   Brazil: "🇧🇷",
   Bhutan: "🇧🇹",
+  Bulgaria: "🇧🇬",
   "British Virgin Islands": "🇻🇬",
   Canada: "🇨🇦",
   Cuba: "🇨🇺",
@@ -104,6 +179,7 @@ const COUNTRY_FLAGS: Record<string, string> = {
   Italy: "🇮🇹",
   Jamaica: "🇯🇲",
   Latvia: "🇱🇻",
+  Lebanon: "🇱🇧",
   Lithuania: "🇱🇹",
   Martinique: "🇲🇶",
   Japan: "🇯🇵",
@@ -129,7 +205,9 @@ const COUNTRY_FLAGS: Record<string, string> = {
   Scotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
   "South Africa": "🇿🇦",
   "South Korea": "🇰🇷",
+  "Sri Lanka": "🇱🇰",
   Sweden: "🇸🇪",
+  Switzerland: "🇨🇭",
   Taiwan: "🇹🇼",
   Thailand: "🇹🇭",
   "Trinidad and Tobago": "🇹🇹",
@@ -146,8 +224,10 @@ const COUNTRY_FLAG_URLS: Record<string, string> = {
   Austria: "https://flagcdn.com/h20/at.webp",
   Barbados: "https://flagcdn.com/h20/bb.webp",
   Belgium: "https://flagcdn.com/h20/be.webp",
+  "Bosnia and Herzegovina": "https://flagcdn.com/h20/ba.webp",
   Brazil: "https://flagcdn.com/h20/br.webp",
   Bhutan: "https://flagcdn.com/h20/bt.webp",
+  Bulgaria: "https://flagcdn.com/h20/bg.webp",
   "British Virgin Islands": "https://flagcdn.com/h20/vg.webp",
   Canada: "https://flagcdn.com/h20/ca.webp",
   Cuba: "https://flagcdn.com/h20/cu.webp",
@@ -168,6 +248,7 @@ const COUNTRY_FLAG_URLS: Record<string, string> = {
   Italy: "https://flagcdn.com/h20/it.webp",
   Jamaica: "https://flagcdn.com/h20/jm.webp",
   Latvia: "https://flagcdn.com/h20/lv.webp",
+  Lebanon: "https://flagcdn.com/h20/lb.webp",
   Lithuania: "https://flagcdn.com/h20/lt.webp",
   Martinique: "https://flagcdn.com/h20/mq.webp",
   Japan: "https://flagcdn.com/h20/jp.webp",
@@ -193,7 +274,9 @@ const COUNTRY_FLAG_URLS: Record<string, string> = {
   Scotland: "https://flagcdn.com/h20/gb-sct.webp",
   "South Africa": "https://flagcdn.com/h20/za.webp",
   "South Korea": "https://flagcdn.com/h20/kr.webp",
+  "Sri Lanka": "https://flagcdn.com/h20/lk.webp",
   Sweden: "https://flagcdn.com/h20/se.webp",
+  Switzerland: "https://flagcdn.com/h20/ch.webp",
   Taiwan: "https://flagcdn.com/h20/tw.webp",
   Thailand: "https://flagcdn.com/h20/th.webp",
   "Trinidad and Tobago": "https://flagcdn.com/h20/tt.webp",
@@ -436,6 +519,194 @@ export const BRAND_EXPANSION: BrandExpansionDefinition[] = [
   brand("lc-brand-7430a3be93e8686df2aefef4", "Barefoot", "barefoot", "United States", ["Wine"], "https://www.barefootwine.com/", "A California wine brand owned by E and J Gallo with still, sparkling and flavoured wines.", "Moscato and familiar international grape varieties lead its fruit-forward range.", "Serve Moscato chilled and red wines slightly cool.", ["chilli paneer", "fruit tart", "barbecue chicken", "mushroom kebab"], "🍷", "E and J Gallo"),
   brand("lc-brand-491a1d4545f9208a25ca81fb", "Beefeater", "beefeater", "United Kingdom", ["Gin"], "https://www.beefeatergin.com/", "A London Dry gin created by James Burrough and distilled in Kennington, London.", "Nine botanicals give it firm juniper, bright citrus and dry root spice.", "Serve with dry tonic and lemon or in a cold Martini.", ["tandoori prawns", "coriander chicken", "lemon-pepper paneer", "smoked salmon"], "🍸", "Pernod Ricard"),
   brand("lc-brand-37d4c6a3a3c8e96a36c46972", "Belvedere", "belvedere", "Poland", ["Vodka"], "https://www.belvederevodka.com/", "A Polish vodka made at the Polmos Zyrardow distillery from Polish rye and well water.", "Rye brings cream, white pepper and almond character to its clean texture.", "Serve chilled in a small stemmed glass or in a Vodka Martini.", ["smoked salmon", "potato blini", "salted cucumber", "tandoori prawns"], "🍸", "LVMH"),
+  ...BRAND_IDENTITIES_BATCH_61.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_61[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_61[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_62.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_62[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_62[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_63.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_63[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_63[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_64.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_64[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_64[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_65.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_65[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_65[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_66.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_66[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_66[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_67.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_67[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_67[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_68.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_68[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_68[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_69.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_69[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_69[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_70.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_70[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_70[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_71.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_71[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_71[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_72.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_72[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_72[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_73.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_73[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_73[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_74.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_74[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_74[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_75.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_75[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_75[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_76.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_76[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_76[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_77.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_77[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_77[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_78.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_78[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_78[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_79.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_79[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_79[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_80.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_80[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_80[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_81.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_81[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_81[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_82.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_82[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_82[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_83.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_83[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_83[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_84.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_84[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_84[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_85.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_85[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_85[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_86.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_86[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_86[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_87.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_87[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_87[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_88.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_88[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_88[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_89.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_89[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_89[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_90.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_90[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_90[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_91.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_91[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_91[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_92.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_92[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_92[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_93.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_93[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_93[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_94.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_94[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_94[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_95.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_95[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_95[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_96.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_96[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_96[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_97.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_97[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_97[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_98.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_98[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_98[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_99.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_99[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_99[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_100.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_100[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_100[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_101.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_101[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_101[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_102.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_102[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_102[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_103.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_103[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_103[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_104.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_104[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_104[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_105.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_105[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_105[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_106.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_106[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_106[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
+  ...BRAND_IDENTITIES_BATCH_107.map(([slug, name, country, category, id]) => {
+    const content = BRAND_CONTENT_BATCH_107[slug];
+    return brand(`lc-brand-${id}`, name, slug, country, [category], BRAND_SOURCES_BATCH_107[slug][0], content.description, content.whyChoose, content.howToEnjoy[0].description, content.pairingIdeas.flatMap((pairing) => pairing.items), "");
+  }),
   ...BRAND_IDENTITIES_BATCH_17.map(([slug, name, country, category, id]) => {
     const content = BRAND_CONTENT_BATCH_17[slug];
     const officialUrl = slug === "akori" ? "https://www.campeny.com/" : BRAND_SOURCES_BATCH_17[slug][0];
@@ -650,7 +921,80 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
   const batch58Content = BRAND_CONTENT_BATCH_58[definition.slug];
   const batch59Content = BRAND_CONTENT_BATCH_59[definition.slug];
   const batch60Content = BRAND_CONTENT_BATCH_60[definition.slug];
-  const publicContent = batch60Content ?? batch59Content ?? batch58Content ?? batch57Content ?? batch56Content ?? batch55Content ?? batch54Content ?? batch53Content ?? batch52Content ?? batch51Content ?? batch50Content ?? batch49Content ?? batch48Content ?? batch47Content ?? batch46Content ?? batch45Content ?? batch44Content ?? batch43Content ?? batch42Content ?? batch41Content ?? batch40Content ?? batch39Content ?? batch38Content ?? batch37Content ?? batch36Content ?? batch35Content ?? batch34Content ?? batch33Content ?? batch32Content ?? batch31Content ?? batch30Content ?? batch29Content ?? batch28Content ?? batch27Content ?? batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content ?? batch07Content ?? batch08Content ?? batch09Content ?? batch10Content ?? batch11Content ?? batch12Content ?? batch13Content ?? batch14Content ?? batch15Content ?? batch16Content ?? batch17Content ?? batch18Content ?? batch19Content ?? batch20Content ?? batch21Content ?? batch22Content ?? batch23Content ?? batch24Content ?? batch25Content ?? batch26Content;
+  const batch61Content = BRAND_CONTENT_BATCH_61[definition.slug];
+  const batch62Content = BRAND_CONTENT_BATCH_62[definition.slug];
+  const batch63Content = BRAND_CONTENT_BATCH_63[definition.slug];
+  const batch64Content = BRAND_CONTENT_BATCH_64[definition.slug];
+  const batch65Content = BRAND_CONTENT_BATCH_65[definition.slug];
+  const batch66Content = BRAND_CONTENT_BATCH_66[definition.slug];
+  const batch67Content = BRAND_CONTENT_BATCH_67[definition.slug];
+  const batch68Content = BRAND_CONTENT_BATCH_68[definition.slug];
+  const batch69Content = BRAND_CONTENT_BATCH_69[definition.slug];
+  const batch70Content = BRAND_CONTENT_BATCH_70[definition.slug];
+  const batch71Content = BRAND_CONTENT_BATCH_71[definition.slug];
+  const batch72Content = BRAND_CONTENT_BATCH_72[definition.slug];
+  const batch73Content = BRAND_CONTENT_BATCH_73[definition.slug];
+  const batch74Content = BRAND_CONTENT_BATCH_74[definition.slug];
+  const batch75Content = BRAND_CONTENT_BATCH_75[definition.slug];
+  const batch76Content = BRAND_CONTENT_BATCH_76[definition.slug];
+  const batch77Content = BRAND_CONTENT_BATCH_77[definition.slug];
+  const batch78Content = BRAND_CONTENT_BATCH_78[definition.slug];
+  const batch79Content = BRAND_CONTENT_BATCH_79[definition.slug];
+  const batch80Content = BRAND_CONTENT_BATCH_80[definition.slug];
+  const batch81Content = BRAND_CONTENT_BATCH_81[definition.slug];
+  const batch82Content = BRAND_CONTENT_BATCH_82[definition.slug];
+  const batch83Content = BRAND_CONTENT_BATCH_83[definition.slug];
+  const batch84Content = BRAND_CONTENT_BATCH_84[definition.slug];
+  const batch85Content = BRAND_CONTENT_BATCH_85[definition.slug];
+  const batch86Content = BRAND_CONTENT_BATCH_86[definition.slug];
+  const batch87Content = BRAND_CONTENT_BATCH_87[definition.slug];
+  const batch88Content = BRAND_CONTENT_BATCH_88[definition.slug];
+  const batch89Content = BRAND_CONTENT_BATCH_89[definition.slug];
+  const batch90Content = BRAND_CONTENT_BATCH_90[definition.slug];
+  const batch91Content = BRAND_CONTENT_BATCH_91[definition.slug];
+  const batch92Content = BRAND_CONTENT_BATCH_92[definition.slug];
+  const batch93Content = BRAND_CONTENT_BATCH_93[definition.slug];
+  const batch94Content = BRAND_CONTENT_BATCH_94[definition.slug];
+  const batch95Content = BRAND_CONTENT_BATCH_95[definition.slug];
+  const batch96Content = BRAND_CONTENT_BATCH_96[definition.slug];
+  const batch97Content = BRAND_CONTENT_BATCH_97[definition.slug];
+  const batch98Content = BRAND_CONTENT_BATCH_98[definition.slug];
+  const batch99Content = BRAND_CONTENT_BATCH_99[definition.slug];
+  const batch100Content = BRAND_CONTENT_BATCH_100[definition.slug];
+  const batch101Content = BRAND_CONTENT_BATCH_101[definition.slug];
+  const batch102Content = BRAND_CONTENT_BATCH_102[definition.slug];
+  const batch103Content = BRAND_CONTENT_BATCH_103[definition.slug];
+  const batch104Content = BRAND_CONTENT_BATCH_104[definition.slug];
+  const batch105Content = BRAND_CONTENT_BATCH_105[definition.slug];
+  const batch106Content = BRAND_CONTENT_BATCH_106[definition.slug];
+  const batch107Content = BRAND_CONTENT_BATCH_107[definition.slug];
+  const batch108Content = BRAND_CONTENT_BATCH_108[definition.slug];
+  const batch109Content = BRAND_CONTENT_BATCH_109[definition.slug];
+  const batch110Content = BRAND_CONTENT_BATCH_110[definition.slug];
+  const batch111Content = BRAND_CONTENT_BATCH_111[definition.slug];
+  const batch112Content = BRAND_CONTENT_BATCH_112[definition.slug];
+  const batch113Content = BRAND_CONTENT_BATCH_113[definition.slug];
+  const batch114Content = BRAND_CONTENT_BATCH_114[definition.slug];
+  const batch115Content = BRAND_CONTENT_BATCH_115[definition.slug];
+  const batch116Content = BRAND_CONTENT_BATCH_116[definition.slug];
+  const batch117Content = BRAND_CONTENT_BATCH_117[definition.slug];
+  const batch118Content = BRAND_CONTENT_BATCH_118[definition.slug];
+  const batch119Content = BRAND_CONTENT_BATCH_119[definition.slug];
+  const batch120Content = BRAND_CONTENT_BATCH_120[definition.slug];
+  const batch121Content = BRAND_CONTENT_BATCH_121[definition.slug];
+  const batch122Content = BRAND_CONTENT_BATCH_122[definition.slug];
+  const batch123Content = BRAND_CONTENT_BATCH_123[definition.slug];
+  const batch124Content = BRAND_CONTENT_BATCH_124[definition.slug];
+  const batch125Content = BRAND_CONTENT_BATCH_125[definition.slug];
+  const batch126Content = BRAND_CONTENT_BATCH_126[definition.slug];
+  const batch127Content = BRAND_CONTENT_BATCH_127[definition.slug];
+  const batch128Content = BRAND_CONTENT_BATCH_128[definition.slug];
+  const batch129Content = BRAND_CONTENT_BATCH_129[definition.slug];
+  const batch130Content = BRAND_CONTENT_BATCH_130[definition.slug];
+  const batch131Content = BRAND_CONTENT_BATCH_131[definition.slug];
+  const batch132Content = BRAND_CONTENT_BATCH_132[definition.slug];
+  const batch133Content = BRAND_CONTENT_BATCH_133[definition.slug];
+  const publicContent = batch133Content ?? batch132Content ?? batch131Content ?? batch130Content ?? batch129Content ?? batch128Content ?? batch127Content ?? batch126Content ?? batch125Content ?? batch124Content ?? batch123Content ?? batch122Content ?? batch121Content ?? batch120Content ?? batch119Content ?? batch118Content ?? batch117Content ?? batch116Content ?? batch115Content ?? batch114Content ?? batch113Content ?? batch112Content ?? batch111Content ?? batch110Content ?? batch109Content ?? batch108Content ?? batch107Content ?? batch106Content ?? batch105Content ?? batch104Content ?? batch103Content ?? batch102Content ?? batch101Content ?? batch100Content ?? batch99Content ?? batch98Content ?? batch97Content ?? batch96Content ?? batch95Content ?? batch94Content ?? batch93Content ?? batch92Content ?? batch91Content ?? batch90Content ?? batch89Content ?? batch88Content ?? batch87Content ?? batch86Content ?? batch85Content ?? batch84Content ?? batch83Content ?? batch82Content ?? batch81Content ?? batch80Content ?? batch79Content ?? batch78Content ?? batch77Content ?? batch76Content ?? batch75Content ?? batch74Content ?? batch73Content ?? batch72Content ?? batch71Content ?? batch70Content ?? batch69Content ?? batch68Content ?? batch67Content ?? batch66Content ?? batch65Content ?? batch64Content ?? batch63Content ?? batch62Content ?? batch61Content ?? batch60Content ?? batch59Content ?? batch58Content ?? batch57Content ?? batch56Content ?? batch55Content ?? batch54Content ?? batch53Content ?? batch52Content ?? batch51Content ?? batch50Content ?? batch49Content ?? batch48Content ?? batch47Content ?? batch46Content ?? batch45Content ?? batch44Content ?? batch43Content ?? batch42Content ?? batch41Content ?? batch40Content ?? batch39Content ?? batch38Content ?? batch37Content ?? batch36Content ?? batch35Content ?? batch34Content ?? batch33Content ?? batch32Content ?? batch31Content ?? batch30Content ?? batch29Content ?? batch28Content ?? batch27Content ?? batch01Content ?? batch02Content ?? batch03Content ?? batch04Content ?? batch05Content ?? batch06Content ?? batch07Content ?? batch08Content ?? batch09Content ?? batch10Content ?? batch11Content ?? batch12Content ?? batch13Content ?? batch14Content ?? batch15Content ?? batch16Content ?? batch17Content ?? batch18Content ?? batch19Content ?? batch20Content ?? batch21Content ?? batch22Content ?? batch23Content ?? batch24Content ?? batch25Content ?? batch26Content;
   if (!publicContent) throw new Error(`Missing authored brand content for ${definition.slug}; refusing to publish template copy`);
   const priorLogoUrl = batch52Content || batch53Content || batch54Content ? [batch01Content, batch02Content, batch03Content, batch04Content, batch05Content, batch06Content, batch07Content, batch08Content, batch09Content, batch10Content, batch11Content, batch12Content, batch13Content, batch14Content, batch15Content, batch16Content].map((content) => content?.logoUrl).find(Boolean) : null;
   const verifiedLogoUrl = VERIFIED_BRAND_LOGO_REPAIRS[definition.slug] ?? BRAND_LOGOS_BATCH_48[definition.slug] ?? BRAND_LOGOS_BATCH_47[definition.slug] ?? BRAND_LOGOS_BATCH_46[definition.slug] ?? BRAND_LOGOS_BATCH_45[definition.slug] ?? BRAND_LOGOS_BATCH_44[definition.slug] ?? BRAND_LOGOS_BATCH_43[definition.slug] ?? BRAND_LOGOS_BATCH_42[definition.slug] ?? BRAND_LOGOS_BATCH_41[definition.slug] ?? BRAND_LOGOS_BATCH_40[definition.slug] ?? BRAND_LOGOS_BATCH_39[definition.slug] ?? BRAND_LOGOS_BATCH_38[definition.slug] ?? BRAND_LOGOS_BATCH_37[definition.slug] ?? BRAND_LOGOS_BATCH_36[definition.slug] ?? BRAND_LOGOS_BATCH_35[definition.slug] ?? BRAND_LOGOS_BATCH_34[definition.slug] ?? BRAND_LOGOS_BATCH_33[definition.slug] ?? BRAND_LOGOS_BATCH_32[definition.slug] ?? BRAND_LOGOS_BATCH_31[definition.slug] ?? BRAND_LOGOS_BATCH_30[definition.slug] ?? BRAND_LOGOS_BATCH_29[definition.slug] ?? BRAND_LOGOS_BATCH_28[definition.slug] ?? BRAND_LOGOS_BATCH_24[definition.slug] ?? BRAND_LOGOS_BATCH_23[definition.slug] ?? BRAND_LOGOS_BATCH_22[definition.slug] ?? BRAND_LOGOS_BATCH_21[definition.slug] ?? BRAND_LOGOS_BATCH_20[definition.slug] ?? BRAND_LOGOS_BATCH_19[definition.slug] ?? BRAND_LOGOS_BATCH_18[definition.slug] ?? BRAND_LOGOS_BATCH_17[definition.slug] ?? BRAND_LOGOS_BATCH_16[definition.slug] ?? BRAND_LOGOS_BATCH_15[definition.slug] ?? BRAND_LOGOS_BATCH_14[definition.slug] ?? BRAND_LOGOS_BATCH_13[definition.slug] ?? BRAND_LOGOS_BATCH_12[definition.slug] ?? publicContent?.logoUrl ?? (batch51Content ? (batch05Content?.logoUrl ?? batch06Content?.logoUrl ?? batch07Content?.logoUrl ?? batch08Content?.logoUrl ?? batch09Content?.logoUrl ?? batch10Content?.logoUrl ?? batch11Content?.logoUrl) : null) ?? (batch49Content ? (batch05Content?.logoUrl ?? batch06Content?.logoUrl ?? batch07Content?.logoUrl ?? batch09Content?.logoUrl ?? batch10Content?.logoUrl ?? batch11Content?.logoUrl ?? batch12Content?.logoUrl) : null) ?? (batch50Content ? (batch01Content?.logoUrl ?? batch02Content?.logoUrl ?? batch03Content?.logoUrl ?? batch04Content?.logoUrl) : null) ?? null;
@@ -662,7 +1006,80 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
   const batch58LogoUrl = BRAND_LOGOS_BATCH_58[definition.slug] ?? null;
   const batch59LogoUrl = BRAND_LOGOS_BATCH_59[definition.slug] ?? null;
   const batch60LogoUrl = BRAND_LOGOS_BATCH_60[definition.slug] ?? null;
-  const logoUrl = batch60Content ? batch60LogoUrl : batch59Content ? batch59LogoUrl : batch58Content ? batch58LogoUrl : batch57Content ? batch57LogoUrl : batch56Content ? (BRAND_LOGOS_BATCH_56[definition.slug] ?? null) : batch55Content ? batch55LogoUrl : batch54Content ? batch54LogoUrl : batch53Content ? batch53LogoUrl : batch51LogoUrl ?? verifiedLogoUrl ?? priorLogoUrl ?? (batch48Content || batch47Content || batch46Content || batch45Content || batch44Content || batch43Content || batch42Content || batch41Content || batch40Content || batch20Content || batch21Content || batch22Content || batch23Content || batch24Content || batch25Content || batch26Content || batch27Content || batch28Content || batch29Content || batch30Content || batch31Content || batch32Content || batch33Content || batch34Content || batch36Content || batch37Content || batch38Content || batch39Content || (batch35Content && definition.slug !== "sula" && definition.slug !== "svedka") ? null : getLivcheersBrandLogoUrl(definition.slug, definition.brandName));
+  const batch61LogoUrl = BRAND_LOGOS_BATCH_61[definition.slug] ?? null;
+  const batch62LogoUrl = BRAND_LOGOS_BATCH_62[definition.slug] ?? null;
+  const batch63LogoUrl = BRAND_LOGOS_BATCH_63[definition.slug] ?? null;
+  const batch64LogoUrl = BRAND_LOGOS_BATCH_64[definition.slug] ?? null;
+  const batch65LogoUrl = BRAND_LOGOS_BATCH_65[definition.slug] ?? null;
+  const batch66LogoUrl = BRAND_LOGOS_BATCH_66[definition.slug] ?? null;
+  const batch67LogoUrl = BRAND_LOGOS_BATCH_67[definition.slug] ?? null;
+  const batch68LogoUrl = BRAND_LOGOS_BATCH_68[definition.slug] ?? null;
+  const batch69LogoUrl = BRAND_LOGOS_BATCH_69[definition.slug] ?? null;
+  const batch70LogoUrl = BRAND_LOGOS_BATCH_70[definition.slug] ?? null;
+  const batch71LogoUrl = BRAND_LOGOS_BATCH_71[definition.slug] ?? null;
+  const batch72LogoUrl = BRAND_LOGOS_BATCH_72[definition.slug] ?? null;
+  const batch73LogoUrl = BRAND_LOGOS_BATCH_73[definition.slug] ?? null;
+  const batch74LogoUrl = BRAND_LOGOS_BATCH_74[definition.slug] ?? null;
+  const batch75LogoUrl = BRAND_LOGOS_BATCH_75[definition.slug] ?? null;
+  const batch76LogoUrl = BRAND_LOGOS_BATCH_76[definition.slug] ?? null;
+  const batch77LogoUrl = BRAND_LOGOS_BATCH_77[definition.slug] ?? null;
+  const batch78LogoUrl = BRAND_LOGOS_BATCH_78[definition.slug] ?? null;
+  const batch79LogoUrl = BRAND_LOGOS_BATCH_79[definition.slug] ?? null;
+  const batch80LogoUrl = BRAND_LOGOS_BATCH_80[definition.slug] ?? null;
+  const batch81LogoUrl = BRAND_LOGOS_BATCH_81[definition.slug] ?? null;
+  const batch82LogoUrl = BRAND_LOGOS_BATCH_82[definition.slug] ?? null;
+  const batch83LogoUrl = BRAND_LOGOS_BATCH_83[definition.slug] ?? null;
+  const batch84LogoUrl = BRAND_LOGOS_BATCH_84[definition.slug] ?? null;
+  const batch85LogoUrl = BRAND_LOGOS_BATCH_85[definition.slug] ?? null;
+  const batch86LogoUrl = BRAND_LOGOS_BATCH_86[definition.slug] ?? null;
+  const batch87LogoUrl = BRAND_LOGOS_BATCH_87[definition.slug] ?? null;
+  const batch88LogoUrl = BRAND_LOGOS_BATCH_88[definition.slug] ?? null;
+  const batch89LogoUrl = BRAND_LOGOS_BATCH_89[definition.slug] ?? null;
+  const batch90LogoUrl = BRAND_LOGOS_BATCH_90[definition.slug] ?? null;
+  const batch91LogoUrl = BRAND_LOGOS_BATCH_91[definition.slug] ?? null;
+  const batch92LogoUrl = BRAND_LOGOS_BATCH_92[definition.slug] ?? null;
+  const batch93LogoUrl = BRAND_LOGOS_BATCH_93[definition.slug] ?? null;
+  const batch94LogoUrl = BRAND_LOGOS_BATCH_94[definition.slug] ?? null;
+  const batch95LogoUrl = BRAND_LOGOS_BATCH_95[definition.slug] ?? null;
+  const batch96LogoUrl = BRAND_LOGOS_BATCH_96[definition.slug] ?? null;
+  const batch97LogoUrl = BRAND_LOGOS_BATCH_97[definition.slug] ?? null;
+  const batch98LogoUrl = BRAND_LOGOS_BATCH_98[definition.slug] ?? null;
+  const batch99LogoUrl = BRAND_LOGOS_BATCH_99[definition.slug] ?? null;
+  const batch100LogoUrl = BRAND_LOGOS_BATCH_100[definition.slug] ?? null;
+  const batch101LogoUrl = BRAND_LOGOS_BATCH_101[definition.slug] ?? null;
+  const batch102LogoUrl = BRAND_LOGOS_BATCH_102[definition.slug] ?? null;
+  const batch103LogoUrl = BRAND_LOGOS_BATCH_103[definition.slug] ?? null;
+  const batch104LogoUrl = BRAND_LOGOS_BATCH_104[definition.slug] ?? null;
+  const batch105LogoUrl = BRAND_LOGOS_BATCH_105[definition.slug] ?? null;
+  const batch106LogoUrl = BRAND_LOGOS_BATCH_106[definition.slug] ?? null;
+  const batch107LogoUrl = BRAND_LOGOS_BATCH_107[definition.slug] ?? null;
+  const batch108LogoUrl = BRAND_LOGOS_BATCH_108[definition.slug] ?? null;
+  const batch109LogoUrl = BRAND_LOGOS_BATCH_109[definition.slug] ?? null;
+  const batch110LogoUrl = BRAND_LOGOS_BATCH_110[definition.slug] ?? null;
+  const batch111LogoUrl = BRAND_LOGOS_BATCH_111[definition.slug] ?? null;
+  const batch112LogoUrl = BRAND_LOGOS_BATCH_112[definition.slug] ?? null;
+  const batch113LogoUrl = BRAND_LOGOS_BATCH_113[definition.slug] ?? null;
+  const batch114LogoUrl = BRAND_LOGOS_BATCH_114[definition.slug] ?? null;
+  const batch115LogoUrl = BRAND_LOGOS_BATCH_115[definition.slug] ?? null;
+  const batch116LogoUrl = BRAND_LOGOS_BATCH_116[definition.slug] ?? null;
+  const batch117LogoUrl = BRAND_LOGOS_BATCH_117[definition.slug] ?? null;
+  const batch118LogoUrl = BRAND_LOGOS_BATCH_118[definition.slug] ?? null;
+  const batch119LogoUrl = BRAND_LOGOS_BATCH_119[definition.slug] ?? null;
+  const batch120LogoUrl = BRAND_LOGOS_BATCH_120[definition.slug] ?? null;
+  const batch121LogoUrl = BRAND_LOGOS_BATCH_121[definition.slug] ?? null;
+  const batch122LogoUrl = BRAND_LOGOS_BATCH_122[definition.slug] ?? null;
+  const batch123LogoUrl = BRAND_LOGOS_BATCH_123[definition.slug] ?? null;
+  const batch124LogoUrl = BRAND_LOGOS_BATCH_124[definition.slug] ?? null;
+  const batch125LogoUrl = BRAND_LOGOS_BATCH_125[definition.slug] ?? null;
+  const batch126LogoUrl = BRAND_LOGOS_BATCH_126[definition.slug] ?? null;
+  const batch127LogoUrl = BRAND_LOGOS_BATCH_127[definition.slug] ?? null;
+  const batch128LogoUrl = BRAND_LOGOS_BATCH_128[definition.slug] ?? null;
+  const batch129LogoUrl = BRAND_LOGOS_BATCH_129[definition.slug] ?? null;
+  const batch130LogoUrl = BRAND_LOGOS_BATCH_130[definition.slug] ?? null;
+  const batch131LogoUrl = BRAND_LOGOS_BATCH_131[definition.slug] ?? null;
+  const batch132LogoUrl = BRAND_LOGOS_BATCH_132[definition.slug] ?? null;
+  const batch133LogoUrl = BRAND_LOGOS_BATCH_133[definition.slug] ?? null;
+  const logoUrl = batch133Content ? batch133LogoUrl : batch132Content ? batch132LogoUrl : batch131Content ? batch131LogoUrl : batch130Content ? batch130LogoUrl : batch129Content ? batch129LogoUrl : batch128Content ? batch128LogoUrl : batch127Content ? batch127LogoUrl : batch126Content ? batch126LogoUrl : batch125Content ? batch125LogoUrl : batch124Content ? batch124LogoUrl : batch123Content ? batch123LogoUrl : batch122Content ? batch122LogoUrl : batch121Content ? batch121LogoUrl : batch120Content ? batch120LogoUrl : batch119Content ? batch119LogoUrl : batch118Content ? batch118LogoUrl : batch117Content ? batch117LogoUrl : batch116Content ? batch116LogoUrl : batch115Content ? batch115LogoUrl : batch114Content ? batch114LogoUrl : batch113Content ? batch113LogoUrl : batch112Content ? batch112LogoUrl : batch111Content ? batch111LogoUrl : batch110Content ? batch110LogoUrl : batch109Content ? batch109LogoUrl : batch108Content ? batch108LogoUrl : batch107Content ? batch107LogoUrl : batch106Content ? batch106LogoUrl : batch105Content ? batch105LogoUrl : batch104Content ? batch104LogoUrl : batch103Content ? batch103LogoUrl : batch102Content ? batch102LogoUrl : batch101Content ? batch101LogoUrl : batch100Content ? batch100LogoUrl : batch99Content ? batch99LogoUrl : batch98Content ? batch98LogoUrl : batch97Content ? batch97LogoUrl : batch96Content ? batch96LogoUrl : batch95Content ? batch95LogoUrl : batch94Content ? batch94LogoUrl : batch93Content ? batch93LogoUrl : batch92Content ? batch92LogoUrl : batch91Content ? batch91LogoUrl : batch90Content ? batch90LogoUrl : batch89Content ? batch89LogoUrl : batch88Content ? batch88LogoUrl : batch87Content ? batch87LogoUrl : batch86Content ? batch86LogoUrl : batch85Content ? batch85LogoUrl : batch84Content ? batch84LogoUrl : batch83Content ? batch83LogoUrl : batch82Content ? batch82LogoUrl : batch81Content ? batch81LogoUrl : batch80Content ? batch80LogoUrl : batch79Content ? batch79LogoUrl : batch78Content ? batch78LogoUrl : batch77Content ? batch77LogoUrl : batch76Content ? batch76LogoUrl : batch75Content ? batch75LogoUrl : batch74Content ? batch74LogoUrl : batch73Content ? batch73LogoUrl : batch72Content ? batch72LogoUrl : batch71Content ? batch71LogoUrl : batch70Content ? batch70LogoUrl : batch69Content ? batch69LogoUrl : batch68Content ? batch68LogoUrl : batch67Content ? batch67LogoUrl : batch66Content ? batch66LogoUrl : batch65Content ? batch65LogoUrl : batch64Content ? batch64LogoUrl : batch63Content ? batch63LogoUrl : batch62Content ? batch62LogoUrl : batch61Content ? batch61LogoUrl : batch60Content ? batch60LogoUrl : batch59Content ? batch59LogoUrl : batch58Content ? batch58LogoUrl : batch57Content ? batch57LogoUrl : batch56Content ? (BRAND_LOGOS_BATCH_56[definition.slug] ?? null) : batch55Content ? batch55LogoUrl : batch54Content ? batch54LogoUrl : batch53Content ? batch53LogoUrl : batch51LogoUrl ?? verifiedLogoUrl ?? priorLogoUrl ?? (batch48Content || batch47Content || batch46Content || batch45Content || batch44Content || batch43Content || batch42Content || batch41Content || batch40Content || batch20Content || batch21Content || batch22Content || batch23Content || batch24Content || batch25Content || batch26Content || batch27Content || batch28Content || batch29Content || batch30Content || batch31Content || batch32Content || batch33Content || batch34Content || batch36Content || batch37Content || batch38Content || batch39Content || (batch35Content && definition.slug !== "sula" && definition.slug !== "svedka") ? null : getLivcheersBrandLogoUrl(definition.slug, definition.brandName));
   const logoSourceTier = logoUrl ? (logoUrl.includes("static.livcheers.com") ? "livcheers" : batch51LogoUrl && definition.slug === "piccini" ? "verified_third_party" : "official") : null;
   const metaTitle = truncateAtWord(`${definition.brandName} Brand Guide | BevOry`, 60);
   const metaDescription = truncateAtWord(
@@ -677,7 +1094,7 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     logo_url: logoUrl,
     logo_source_tier: logoSourceTier,
     logo_source_page: logoUrl,
-    logo_asset_status: batch60Content ? (batch60LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch59Content ? (batch59LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch58Content ? (batch58LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch57Content ? (batch57LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch56Content ? (BRAND_LOGOS_BATCH_56[definition.slug] ? "verified_remote_asset" : "missing_verified_asset") : batch55Content ? (batch55LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch54Content ? (batch54LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch53Content ? (batch53LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch51LogoUrl || verifiedLogoUrl || priorLogoUrl ? "verified_remote_asset" : logoUrl ? "livcheers_slug_asset_pending_verification" : "missing_verified_asset",
+    logo_asset_status: batch133Content ? (batch133LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch132Content ? (batch132LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch131Content ? (batch131LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch130Content ? (batch130LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch129Content ? (batch129LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch128Content ? (batch128LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch127Content ? (batch127LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch126Content ? (batch126LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch125Content ? (batch125LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch124Content ? (batch124LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch123Content ? (batch123LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch122Content ? (batch122LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch121Content ? (batch121LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch120Content ? (batch120LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch119Content ? (batch119LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch118Content ? (batch118LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch117Content ? (batch117LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch116Content ? (batch116LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch115Content ? (batch115LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch114Content ? (batch114LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch113Content ? (batch113LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch112Content ? (batch112LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch111Content ? (batch111LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch110Content ? (batch110LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch109Content ? (batch109LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch108Content ? (batch108LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch107Content ? (batch107LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch106Content ? (batch106LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch105Content ? (batch105LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch104Content ? (batch104LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch103Content ? (batch103LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch102Content ? (batch102LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch101Content ? (batch101LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch100Content ? (batch100LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch99Content ? (batch99LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch98Content ? (batch98LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch97Content ? (batch97LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch96Content ? (batch96LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch95Content ? (batch95LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch94Content ? (batch94LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch93Content ? (batch93LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch92Content ? (batch92LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch91Content ? (batch91LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch90Content ? (batch90LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch89Content ? (batch89LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch88Content ? (batch88LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch87Content ? (batch87LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch86Content ? (batch86LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch85Content ? (batch85LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch84Content ? (batch84LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch83Content ? (batch83LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch82Content ? (batch82LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch81Content ? (batch81LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch80Content ? (batch80LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch79Content ? (batch79LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch78Content ? (batch78LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch77Content ? (batch77LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch76Content ? (batch76LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch75Content ? (batch75LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch74Content ? (batch74LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch73Content ? (batch73LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch72Content ? (batch72LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch71Content ? (batch71LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch70Content ? (batch70LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch69Content ? (batch69LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch68Content ? (batch68LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch67Content ? (batch67LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch66Content ? (batch66LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch65Content ? (batch65LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch64Content ? (batch64LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch63Content ? (batch63LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch62Content ? (batch62LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch61Content ? (batch61LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch60Content ? (batch60LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch59Content ? (batch59LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch58Content ? (batch58LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch57Content ? (batch57LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch56Content ? (BRAND_LOGOS_BATCH_56[definition.slug] ? "verified_remote_asset" : "missing_verified_asset") : batch55Content ? (batch55LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch54Content ? (batch54LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch53Content ? (batch53LogoUrl ? "verified_remote_asset" : "missing_verified_asset") : batch51LogoUrl || verifiedLogoUrl || priorLogoUrl ? "verified_remote_asset" : logoUrl ? "livcheers_slug_asset_pending_verification" : "missing_verified_asset",
     image_url: VERIFIED_BRAND_VISUALS[definition.slug] ?? null,
     description: publicContent?.description ?? clean(`${definition.brandName} is an ${definition.country} ${categoryText.toLowerCase()} label. ${definition.profile}${ownerText}`),
     story: publicContent?.story ?? clean(`${definition.brandName} belongs to the ${definition.country} ${categoryText.toLowerCase()} tradition. ${definition.profile}`),
@@ -710,10 +1127,10 @@ export const buildBrandExpansionData = (definition: BrandExpansionDefinition, no
     show_in_spotlight: false,
     order_index: 0,
     official_source_page: definition.officialUrl,
-    logo_identity_verified: batch60Content ? Boolean(batch60LogoUrl) : batch59Content ? Boolean(batch59LogoUrl) : batch58Content ? Boolean(batch58LogoUrl) : batch57Content ? Boolean(batch57LogoUrl) : batch55Content ? Boolean(batch55LogoUrl) : batch54Content ? Boolean(batch54LogoUrl) : batch53Content ? Boolean(batch53LogoUrl) : Boolean(batch51LogoUrl || verifiedLogoUrl || priorLogoUrl),
-    logo_verified_at: batch60Content ? (batch60LogoUrl ? now : null) : batch59Content ? (batch59LogoUrl ? now : null) : batch58Content ? (batch58LogoUrl ? now : null) : batch57Content ? (batch57LogoUrl ? now : null) : batch55LogoUrl || batch54LogoUrl || batch53LogoUrl || (!batch53Content && !batch54Content && !batch55Content && (batch51LogoUrl || verifiedLogoUrl || priorLogoUrl)) ? now : null,
+    logo_identity_verified: batch133Content ? Boolean(batch133LogoUrl) : batch132Content ? Boolean(batch132LogoUrl) : batch131Content ? Boolean(batch131LogoUrl) : batch130Content ? Boolean(batch130LogoUrl) : batch129Content ? Boolean(batch129LogoUrl) : batch128Content ? Boolean(batch128LogoUrl) : batch127Content ? Boolean(batch127LogoUrl) : batch126Content ? Boolean(batch126LogoUrl) : batch125Content ? Boolean(batch125LogoUrl) : batch124Content ? Boolean(batch124LogoUrl) : batch123Content ? Boolean(batch123LogoUrl) : batch122Content ? Boolean(batch122LogoUrl) : batch121Content ? Boolean(batch121LogoUrl) : batch120Content ? Boolean(batch120LogoUrl) : batch119Content ? Boolean(batch119LogoUrl) : batch118Content ? Boolean(batch118LogoUrl) : batch117Content ? Boolean(batch117LogoUrl) : batch116Content ? Boolean(batch116LogoUrl) : batch115Content ? Boolean(batch115LogoUrl) : batch114Content ? Boolean(batch114LogoUrl) : batch113Content ? Boolean(batch113LogoUrl) : batch112Content ? Boolean(batch112LogoUrl) : batch111Content ? Boolean(batch111LogoUrl) : batch110Content ? Boolean(batch110LogoUrl) : batch109Content ? Boolean(batch109LogoUrl) : batch108Content ? Boolean(batch108LogoUrl) : batch107Content ? Boolean(batch107LogoUrl) : batch106Content ? Boolean(batch106LogoUrl) : batch105Content ? Boolean(batch105LogoUrl) : batch104Content ? Boolean(batch104LogoUrl) : batch103Content ? Boolean(batch103LogoUrl) : batch102Content ? Boolean(batch102LogoUrl) : batch101Content ? Boolean(batch101LogoUrl) : batch100Content ? Boolean(batch100LogoUrl) : batch99Content ? Boolean(batch99LogoUrl) : batch98Content ? Boolean(batch98LogoUrl) : batch97Content ? Boolean(batch97LogoUrl) : batch96Content ? Boolean(batch96LogoUrl) : batch95Content ? Boolean(batch95LogoUrl) : batch94Content ? Boolean(batch94LogoUrl) : batch93Content ? Boolean(batch93LogoUrl) : batch92Content ? Boolean(batch92LogoUrl) : batch91Content ? Boolean(batch91LogoUrl) : batch90Content ? Boolean(batch90LogoUrl) : batch89Content ? Boolean(batch89LogoUrl) : batch88Content ? Boolean(batch88LogoUrl) : batch87Content ? Boolean(batch87LogoUrl) : batch86Content ? Boolean(batch86LogoUrl) : batch85Content ? Boolean(batch85LogoUrl) : batch84Content ? Boolean(batch84LogoUrl) : batch83Content ? Boolean(batch83LogoUrl) : batch82Content ? Boolean(batch82LogoUrl) : batch81Content ? Boolean(batch81LogoUrl) : batch80Content ? Boolean(batch80LogoUrl) : batch79Content ? Boolean(batch79LogoUrl) : batch78Content ? Boolean(batch78LogoUrl) : batch77Content ? Boolean(batch77LogoUrl) : batch76Content ? Boolean(batch76LogoUrl) : batch75Content ? Boolean(batch75LogoUrl) : batch74Content ? Boolean(batch74LogoUrl) : batch73Content ? Boolean(batch73LogoUrl) : batch72Content ? Boolean(batch72LogoUrl) : batch71Content ? Boolean(batch71LogoUrl) : batch70Content ? Boolean(batch70LogoUrl) : batch69Content ? Boolean(batch69LogoUrl) : batch68Content ? Boolean(batch68LogoUrl) : batch67Content ? Boolean(batch67LogoUrl) : batch66Content ? Boolean(batch66LogoUrl) : batch65Content ? Boolean(batch65LogoUrl) : batch64Content ? Boolean(batch64LogoUrl) : batch63Content ? Boolean(batch63LogoUrl) : batch62Content ? Boolean(batch62LogoUrl) : batch61Content ? Boolean(batch61LogoUrl) : batch60Content ? Boolean(batch60LogoUrl) : batch59Content ? Boolean(batch59LogoUrl) : batch58Content ? Boolean(batch58LogoUrl) : batch57Content ? Boolean(batch57LogoUrl) : batch55Content ? Boolean(batch55LogoUrl) : batch54Content ? Boolean(batch54LogoUrl) : batch53Content ? Boolean(batch53LogoUrl) : Boolean(batch51LogoUrl || verifiedLogoUrl || priorLogoUrl),
+    logo_verified_at: batch133Content ? (batch133LogoUrl ? now : null) : batch132Content ? (batch132LogoUrl ? now : null) : batch131Content ? (batch131LogoUrl ? now : null) : batch130Content ? (batch130LogoUrl ? now : null) : batch129Content ? (batch129LogoUrl ? now : null) : batch128Content ? (batch128LogoUrl ? now : null) : batch127Content ? (batch127LogoUrl ? now : null) : batch126Content ? (batch126LogoUrl ? now : null) : batch125Content ? (batch125LogoUrl ? now : null) : batch124Content ? (batch124LogoUrl ? now : null) : batch123Content ? (batch123LogoUrl ? now : null) : batch122Content ? (batch122LogoUrl ? now : null) : batch121Content ? (batch121LogoUrl ? now : null) : batch120Content ? (batch120LogoUrl ? now : null) : batch119Content ? (batch119LogoUrl ? now : null) : batch118Content ? (batch118LogoUrl ? now : null) : batch117Content ? (batch117LogoUrl ? now : null) : batch116Content ? (batch116LogoUrl ? now : null) : batch115Content ? (batch115LogoUrl ? now : null) : batch114Content ? (batch114LogoUrl ? now : null) : batch113Content ? (batch113LogoUrl ? now : null) : batch112Content ? (batch112LogoUrl ? now : null) : batch111Content ? (batch111LogoUrl ? now : null) : batch110Content ? (batch110LogoUrl ? now : null) : batch109Content ? (batch109LogoUrl ? now : null) : batch108Content ? (batch108LogoUrl ? now : null) : batch107Content ? (batch107LogoUrl ? now : null) : batch106Content ? (batch106LogoUrl ? now : null) : batch105Content ? (batch105LogoUrl ? now : null) : batch104Content ? (batch104LogoUrl ? now : null) : batch103Content ? (batch103LogoUrl ? now : null) : batch102Content ? (batch102LogoUrl ? now : null) : batch101Content ? (batch101LogoUrl ? now : null) : batch100Content ? (batch100LogoUrl ? now : null) : batch99Content ? (batch99LogoUrl ? now : null) : batch98Content ? (batch98LogoUrl ? now : null) : batch97Content ? (batch97LogoUrl ? now : null) : batch96Content ? (batch96LogoUrl ? now : null) : batch95Content ? (batch95LogoUrl ? now : null) : batch94Content ? (batch94LogoUrl ? now : null) : batch93Content ? (batch93LogoUrl ? now : null) : batch92Content ? (batch92LogoUrl ? now : null) : batch91Content ? (batch91LogoUrl ? now : null) : batch90Content ? (batch90LogoUrl ? now : null) : batch89Content ? (batch89LogoUrl ? now : null) : batch88Content ? (batch88LogoUrl ? now : null) : batch87Content ? (batch87LogoUrl ? now : null) : batch86Content ? (batch86LogoUrl ? now : null) : batch85Content ? (batch85LogoUrl ? now : null) : batch84Content ? (batch84LogoUrl ? now : null) : batch83Content ? (batch83LogoUrl ? now : null) : batch82Content ? (batch82LogoUrl ? now : null) : batch81Content ? (batch81LogoUrl ? now : null) : batch80Content ? (batch80LogoUrl ? now : null) : batch79Content ? (batch79LogoUrl ? now : null) : batch78Content ? (batch78LogoUrl ? now : null) : batch77Content ? (batch77LogoUrl ? now : null) : batch76Content ? (batch76LogoUrl ? now : null) : batch75Content ? (batch75LogoUrl ? now : null) : batch74Content ? (batch74LogoUrl ? now : null) : batch73Content ? (batch73LogoUrl ? now : null) : batch72Content ? (batch72LogoUrl ? now : null) : batch71Content ? (batch71LogoUrl ? now : null) : batch70Content ? (batch70LogoUrl ? now : null) : batch69Content ? (batch69LogoUrl ? now : null) : batch68Content ? (batch68LogoUrl ? now : null) : batch67Content ? (batch67LogoUrl ? now : null) : batch66Content ? (batch66LogoUrl ? now : null) : batch65Content ? (batch65LogoUrl ? now : null) : batch64Content ? (batch64LogoUrl ? now : null) : batch63Content ? (batch63LogoUrl ? now : null) : batch62Content ? (batch62LogoUrl ? now : null) : batch61Content ? (batch61LogoUrl ? now : null) : batch60Content ? (batch60LogoUrl ? now : null) : batch59Content ? (batch59LogoUrl ? now : null) : batch58Content ? (batch58LogoUrl ? now : null) : batch57Content ? (batch57LogoUrl ? now : null) : batch55LogoUrl || batch54LogoUrl || batch53LogoUrl || (!batch53Content && !batch54Content && !batch55Content && (batch51LogoUrl || verifiedLogoUrl || priorLogoUrl)) ? now : null,
     image_license_status: "pending_rights_verification",
-    content_version: batch60Content ? "brand-public-ui-v3-batch-60" : batch59Content ? "brand-public-ui-v3-batch-59" : batch58Content ? "brand-public-ui-v3-batch-58" : batch57Content ? "brand-public-ui-v3-batch-57" : batch56Content ? "brand-public-ui-v3-batch-56" : batch55Content ? "brand-public-ui-v3-batch-55" : batch54Content ? "brand-public-ui-v3-batch-54" : batch53Content ? "brand-public-ui-v3-batch-53" : batch52Content ? "brand-public-ui-v3-batch-52" : batch51Content ? "brand-public-ui-v3-batch-51" : batch50Content ? "brand-public-ui-v3-batch-50" : batch49Content ? "brand-public-ui-v3-batch-49" : batch48Content ? "brand-public-ui-v3-batch-48" : batch47Content ? "brand-public-ui-v3-batch-47" : batch46Content ? "brand-public-ui-v3-batch-46" : batch45Content ? "brand-public-ui-v3-batch-45" : batch44Content ? "brand-public-ui-v3-batch-44" : batch43Content ? "brand-public-ui-v3-batch-43" : batch42Content ? "brand-public-ui-v3-batch-42" : batch41Content ? "brand-public-ui-v3-batch-41" : batch40Content ? "brand-public-ui-v3-batch-40" : batch39Content
+    content_version: batch133Content ? "brand-public-ui-v3-batch-133" : batch132Content ? "brand-public-ui-v3-batch-132" : batch131Content ? "brand-public-ui-v3-batch-131" : batch130Content ? "brand-public-ui-v3-batch-130" : batch129Content ? "brand-public-ui-v3-batch-129" : batch128Content ? "brand-public-ui-v3-batch-128" : batch127Content ? "brand-public-ui-v3-batch-127" : batch126Content ? "brand-public-ui-v3-batch-126" : batch125Content ? "brand-public-ui-v3-batch-125" : batch124Content ? "brand-public-ui-v3-batch-124" : batch123Content ? "brand-public-ui-v3-batch-123" : batch122Content ? "brand-public-ui-v3-batch-122" : batch121Content ? "brand-public-ui-v3-batch-121" : batch120Content ? "brand-public-ui-v3-batch-120" : batch119Content ? "brand-public-ui-v3-batch-119" : batch118Content ? "brand-public-ui-v3-batch-118" : batch117Content ? "brand-public-ui-v3-batch-117" : batch116Content ? "brand-public-ui-v3-batch-116" : batch115Content ? "brand-public-ui-v3-batch-115" : batch114Content ? "brand-public-ui-v3-batch-114" : batch113Content ? "brand-public-ui-v3-batch-113" : batch112Content ? "brand-public-ui-v3-batch-112" : batch111Content ? "brand-public-ui-v3-batch-111" : batch110Content ? "brand-public-ui-v3-batch-110" : batch109Content ? "brand-public-ui-v3-batch-109" : batch108Content ? "brand-public-ui-v3-batch-108" : batch107Content ? "brand-public-ui-v3-batch-107" : batch106Content ? "brand-public-ui-v3-batch-106" : batch105Content ? "brand-public-ui-v3-batch-105" : batch104Content ? "brand-public-ui-v3-batch-104" : batch103Content ? "brand-public-ui-v3-batch-103" : batch102Content ? "brand-public-ui-v3-batch-102" : batch101Content ? "brand-public-ui-v3-batch-101" : batch100Content ? "brand-public-ui-v3-batch-100" : batch99Content ? "brand-public-ui-v3-batch-99" : batch98Content ? "brand-public-ui-v3-batch-98" : batch97Content ? "brand-public-ui-v3-batch-97" : batch96Content ? "brand-public-ui-v3-batch-96" : batch95Content ? "brand-public-ui-v3-batch-95" : batch94Content ? "brand-public-ui-v3-batch-94" : batch93Content ? "brand-public-ui-v3-batch-93" : batch92Content ? "brand-public-ui-v3-batch-92" : batch91Content ? "brand-public-ui-v3-batch-91" : batch90Content ? "brand-public-ui-v3-batch-90" : batch89Content ? "brand-public-ui-v3-batch-89" : batch88Content ? "brand-public-ui-v3-batch-88" : batch87Content ? "brand-public-ui-v3-batch-87" : batch86Content ? "brand-public-ui-v3-batch-86" : batch85Content ? "brand-public-ui-v3-batch-85" : batch84Content ? "brand-public-ui-v3-batch-84" : batch83Content ? "brand-public-ui-v3-batch-83" : batch82Content ? "brand-public-ui-v3-batch-82" : batch81Content ? "brand-public-ui-v3-batch-81" : batch80Content ? "brand-public-ui-v3-batch-80" : batch79Content ? "brand-public-ui-v3-batch-79" : batch78Content ? "brand-public-ui-v3-batch-78" : batch77Content ? "brand-public-ui-v3-batch-77" : batch76Content ? "brand-public-ui-v3-batch-76" : batch75Content ? "brand-public-ui-v3-batch-75" : batch74Content ? "brand-public-ui-v3-batch-74" : batch73Content ? "brand-public-ui-v3-batch-73" : batch72Content ? "brand-public-ui-v3-batch-72" : batch71Content ? "brand-public-ui-v3-batch-71" : batch70Content ? "brand-public-ui-v3-batch-70" : batch69Content ? "brand-public-ui-v3-batch-69" : batch68Content ? "brand-public-ui-v3-batch-68" : batch67Content ? "brand-public-ui-v3-batch-67" : batch66Content ? "brand-public-ui-v3-batch-66" : batch65Content ? "brand-public-ui-v3-batch-65" : batch64Content ? "brand-public-ui-v3-batch-64" : batch63Content ? "brand-public-ui-v3-batch-63" : batch62Content ? "brand-public-ui-v3-batch-62" : batch61Content ? "brand-public-ui-v3-batch-61" : batch60Content ? "brand-public-ui-v3-batch-60" : batch59Content ? "brand-public-ui-v3-batch-59" : batch58Content ? "brand-public-ui-v3-batch-58" : batch57Content ? "brand-public-ui-v3-batch-57" : batch56Content ? "brand-public-ui-v3-batch-56" : batch55Content ? "brand-public-ui-v3-batch-55" : batch54Content ? "brand-public-ui-v3-batch-54" : batch53Content ? "brand-public-ui-v3-batch-53" : batch52Content ? "brand-public-ui-v3-batch-52" : batch51Content ? "brand-public-ui-v3-batch-51" : batch50Content ? "brand-public-ui-v3-batch-50" : batch49Content ? "brand-public-ui-v3-batch-49" : batch48Content ? "brand-public-ui-v3-batch-48" : batch47Content ? "brand-public-ui-v3-batch-47" : batch46Content ? "brand-public-ui-v3-batch-46" : batch45Content ? "brand-public-ui-v3-batch-45" : batch44Content ? "brand-public-ui-v3-batch-44" : batch43Content ? "brand-public-ui-v3-batch-43" : batch42Content ? "brand-public-ui-v3-batch-42" : batch41Content ? "brand-public-ui-v3-batch-41" : batch40Content ? "brand-public-ui-v3-batch-40" : batch39Content
       ? "brand-public-ui-v3-batch-39"
       : batch38Content
       ? "brand-public-ui-v3-batch-38"

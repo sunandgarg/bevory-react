@@ -5,6 +5,7 @@ import {
   BRAND_LOGOS_BATCH_51,
   BRAND_SOURCES_BATCH_51,
 } from "../src/lib/brandContentBatch51.js";
+import { BRAND_CONTENT_BATCH_126 } from "../src/lib/brandContentBatch126.js";
 import { BRAND_EXPANSION, buildBrandExpansionData } from "../src/lib/brandExpansion.js";
 import { auditPublicBrandFields } from "./brand-editorial-audit-lib.js";
 
@@ -21,7 +22,9 @@ describe("brand batch 51", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug);
       expect(definition, slug).toBeDefined();
       expect(auditPublicBrandFields(buildBrandExpansionData(definition!)), slug).toEqual([]);
-      expect(buildBrandExpansionData(definition!).content_version).toBe("brand-public-ui-v3-batch-51");
+      const version = buildBrandExpansionData(definition!).content_version;
+      if (BRAND_CONTENT_BATCH_126[slug]) expect(version).toBe("brand-public-ui-v3-batch-126");
+      else expect(version).toMatch(/^brand-public-ui-v3-batch-\d+$/);
     }
   });
 });

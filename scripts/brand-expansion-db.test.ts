@@ -98,7 +98,7 @@ describe("brand editorial refresh", () => {
     const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
     expect(updates.find((data) => data.slug === "aberlour")?.content_version).toBe("brand-public-ui-v3-batch-55");
     expect(updates.find((data) => data.slug === "aberlour")?.logo_url).toBe(stored.data.logo_url);
-    expect(updates.find((data) => data.slug === "3-kilos")?.logo_url).toBe("https://3kilos.de/wp-content/uploads/2024/04/cropped-3-KILOS-VODKA-LOGO-PRIMARY-583x1024.png");
+    expect(updates.find((data) => data.slug === "3-kilos")).toBeUndefined();
     expect(updates.find((data) => data.slug === "appleton-estate")).toBeUndefined();
   });
   it("refreshes batch 54 copy, preserves stored logos and fills only checked empty slots", async () => {
@@ -112,7 +112,7 @@ describe("brand editorial refresh", () => {
     pending.data.logo_url = null;
     await applyBrandExpansion(prisma, newDate);
     const updates = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data);
-    expect(updates.find((data) => data.slug === "remy-martin")?.content_version).toBe("brand-public-ui-v3-batch-54");
+    expect(updates.find((data) => data.slug === "remy-martin")?.content_version).toBe("brand-public-ui-v3-batch-133");
     expect(updates.find((data) => data.slug === "remy-martin")?.logo_url).toBe(stored.data.logo_url);
     expect(updates.find((data) => data.slug === "cazulo")?.logo_url).toBe("https://cazulofeni.com/images/cazulo-logo.png");
     expect(updates.find((data) => data.slug === "1800-tequila")).toBeUndefined();
@@ -124,7 +124,7 @@ describe("brand editorial refresh", () => {
     row.data.logo_url = "https://bevory.in/media/akashi-existing.webp";
     await applyBrandExpansion(prisma, newDate);
     const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "akashi");
-    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-53");
+    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-130");
     expect(updated?.description).not.toBe("Old public copy");
     expect(updated?.logo_url).toBe(row.data.logo_url);
   });
@@ -157,7 +157,7 @@ describe("brand editorial refresh", () => {
     row.data.description = "Old public copy";
     await applyBrandExpansion(prisma, newDate);
     const updated = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>).map(([call]) => call.update.data).find((data) => data.slug === "old-admiral");
-    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-51");
+    expect(updated?.content_version).toBe("brand-public-ui-v3-batch-127");
     expect(updated?.description).not.toBe("Old public copy");
     expect(updated?.logo_url).toBe(row.data.logo_url);
   });
@@ -193,14 +193,86 @@ describe("brand editorial refresh", () => {
   });
   it("refreshes batch 50 copy without changing an older brand's stored logo", async () => {
     const { prisma, rows, upsert } = database();
-    const sauza = rows.find((item) => item.data.slug === "sauza")!;
-    sauza.data.logo_url = "https://bevory.in/media/sauza-existing.webp";
-    sauza.data.logo_identity_verified = true;
-    sauza.data.description = "Old public copy";
+    const bumbu = rows.find((item) => item.data.slug === "bumbu")!;
+    bumbu.data.logo_url = "https://bevory.in/media/bumbu-existing.webp";
+    bumbu.data.logo_identity_verified = true;
+    bumbu.data.description = "Old public copy";
     await applyBrandExpansion(prisma, newDate);
     const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
-    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-50");
-    expect(call.update.data.logo_url).toBe(sauza.data.logo_url);
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-129");
+    expect(call.update.data.logo_url).toBe(bumbu.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 122 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const absolut = rows.find((item) => item.data.slug === "absolut")!;
+    absolut.data.logo_url = "https://bevory.in/media/absolut-existing.webp";
+    absolut.data.logo_identity_verified = true;
+    absolut.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-122");
+    expect(call.update.data.logo_url).toBe(absolut.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 116 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const breezer = rows.find((item) => item.data.slug === "breezer")!;
+    breezer.data.logo_url = "https://bevory.in/media/breezer-existing.webp";
+    breezer.data.logo_identity_verified = true;
+    breezer.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-121");
+    expect(call.update.data.logo_url).toBe(breezer.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 117 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const glenlivet = rows.find((item) => item.data.slug === "glenlivet")!;
+    glenlivet.data.logo_url = "https://bevory.in/media/glenlivet-existing.webp";
+    glenlivet.data.logo_identity_verified = true;
+    glenlivet.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-117");
+    expect(call.update.data.logo_url).toBe(glenlivet.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 118 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const charosa = rows.find((item) => item.data.slug === "charosa")!;
+    charosa.data.logo_url = "https://bevory.in/media/charosa-existing.webp";
+    charosa.data.logo_identity_verified = true;
+    charosa.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-125");
+    expect(call.update.data.logo_url).toBe(charosa.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 119 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const courvoisier = rows.find((item) => item.data.slug === "courvoisier")!;
+    courvoisier.data.logo_url = "https://bevory.in/media/courvoisier-existing.webp";
+    courvoisier.data.logo_identity_verified = true;
+    courvoisier.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-128");
+    expect(call.update.data.logo_url).toBe(courvoisier.data.logo_url);
+    expect(call.update.data.logo_identity_verified).toBe(true);
+  });
+  it("refreshes batch 120 copy without changing an existing verified logo", async () => {
+    const { prisma, rows, upsert } = database();
+    const grandMarnier = rows.find((item) => item.data.slug === "grand-marnier")!;
+    grandMarnier.data.logo_url = "https://bevory.in/media/grand-marnier-existing.webp";
+    grandMarnier.data.logo_identity_verified = true;
+    grandMarnier.data.description = "Old public copy";
+    await applyBrandExpansion(prisma, newDate);
+    const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-129");
+    expect(call.update.data.logo_url).toBe(grandMarnier.data.logo_url);
     expect(call.update.data.logo_identity_verified).toBe(true);
   });
   it("does not rewrite unchanged records or timestamps", async () => {
@@ -217,6 +289,7 @@ describe("brand editorial refresh", () => {
     row.data.brand_name = "Older spelling";
     row.data.logo_url = "https://bevory.in/media/verified-logo.webp";
     row.data.logo_identity_verified = true;
+    row.data.logo_verified_at = oldDate;
     const result = await applyBrandExpansion(prisma, newDate);
     expect(result.updated).toBe(1);
     expect(result.created).toBe(0);
@@ -299,7 +372,7 @@ describe("brand editorial refresh", () => {
     expect(updates.find((data) => data.slug === "satiwa")?.logo_url).toBeNull();
   });
 
-  it("refreshes batch 49 copy without changing a stored brand logo", async () => {
+  it("refreshes batch 122 copy without changing a stored brand logo", async () => {
     const { prisma, rows, upsert } = database();
     const row = rows.find((item) => item.data.slug === "absolut")!;
     row.data.logo_url = "https://bevory.in/media/absolut-existing.webp";
@@ -308,7 +381,7 @@ describe("brand editorial refresh", () => {
     const call = (upsert.mock.calls as unknown as Array<[{ update: { data: Record<string, unknown> } }]>)[0][0];
     expect(call.update.data.description).not.toBe("Old copy");
     expect(call.update.data.logo_url).toBe(row.data.logo_url);
-    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-49");
+    expect(call.update.data.content_version).toBe("brand-public-ui-v3-batch-122");
   });
 
   it("preserves batch 21 stored logos while filling only verified blank slots", async () => {

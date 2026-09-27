@@ -60,11 +60,84 @@ import { BRAND_CONTENT_BATCH_57, BRAND_LOGOS_BATCH_57 } from "../src/lib/brandCo
 import { BRAND_CONTENT_BATCH_58, BRAND_LOGOS_BATCH_58 } from "../src/lib/brandContentBatch58.js";
 import { BRAND_CONTENT_BATCH_59, BRAND_LOGOS_BATCH_59 } from "../src/lib/brandContentBatch59.js";
 import { BRAND_CONTENT_BATCH_60, BRAND_LOGOS_BATCH_60 } from "../src/lib/brandContentBatch60.js";
+import { BRAND_CONTENT_BATCH_61, BRAND_LOGOS_BATCH_61 } from "../src/lib/brandContentBatch61.js";
+import { BRAND_CONTENT_BATCH_62, BRAND_LOGOS_BATCH_62 } from "../src/lib/brandContentBatch62.js";
+import { BRAND_CONTENT_BATCH_63, BRAND_LOGOS_BATCH_63 } from "../src/lib/brandContentBatch63.js";
+import { BRAND_CONTENT_BATCH_64, BRAND_LOGOS_BATCH_64 } from "../src/lib/brandContentBatch64.js";
+import { BRAND_CONTENT_BATCH_65, BRAND_LOGOS_BATCH_65 } from "../src/lib/brandContentBatch65.js";
+import { BRAND_CONTENT_BATCH_66, BRAND_LOGOS_BATCH_66 } from "../src/lib/brandContentBatch66.js";
+import { BRAND_CONTENT_BATCH_67, BRAND_LOGOS_BATCH_67 } from "../src/lib/brandContentBatch67.js";
+import { BRAND_CONTENT_BATCH_68, BRAND_LOGOS_BATCH_68 } from "../src/lib/brandContentBatch68.js";
+import { BRAND_CONTENT_BATCH_69, BRAND_LOGOS_BATCH_69 } from "../src/lib/brandContentBatch69.js";
+import { BRAND_CONTENT_BATCH_70, BRAND_LOGOS_BATCH_70 } from "../src/lib/brandContentBatch70.js";
+import { BRAND_CONTENT_BATCH_71, BRAND_LOGOS_BATCH_71 } from "../src/lib/brandContentBatch71.js";
+import { BRAND_CONTENT_BATCH_72, BRAND_LOGOS_BATCH_72 } from "../src/lib/brandContentBatch72.js";
+import { BRAND_CONTENT_BATCH_73, BRAND_LOGOS_BATCH_73 } from "../src/lib/brandContentBatch73.js";
+import { BRAND_CONTENT_BATCH_74, BRAND_LOGOS_BATCH_74 } from "../src/lib/brandContentBatch74.js";
+import { BRAND_CONTENT_BATCH_75, BRAND_LOGOS_BATCH_75 } from "../src/lib/brandContentBatch75.js";
+import { BRAND_CONTENT_BATCH_76, BRAND_LOGOS_BATCH_76 } from "../src/lib/brandContentBatch76.js";
+import { BRAND_CONTENT_BATCH_77, BRAND_LOGOS_BATCH_77 } from "../src/lib/brandContentBatch77.js";
+import { BRAND_CONTENT_BATCH_78, BRAND_LOGOS_BATCH_78 } from "../src/lib/brandContentBatch78.js";
+import { BRAND_CONTENT_BATCH_79, BRAND_LOGOS_BATCH_79 } from "../src/lib/brandContentBatch79.js";
+import { BRAND_CONTENT_BATCH_80, BRAND_LOGOS_BATCH_80 } from "../src/lib/brandContentBatch80.js";
+import { BRAND_CONTENT_BATCH_81, BRAND_LOGOS_BATCH_81 } from "../src/lib/brandContentBatch81.js";
+import { BRAND_CONTENT_BATCH_82, BRAND_LOGOS_BATCH_82 } from "../src/lib/brandContentBatch82.js";
+import { BRAND_CONTENT_BATCH_83, BRAND_LOGOS_BATCH_83 } from "../src/lib/brandContentBatch83.js";
+import { BRAND_CONTENT_BATCH_84, BRAND_LOGOS_BATCH_84 } from "../src/lib/brandContentBatch84.js";
+import { BRAND_CONTENT_BATCH_85, BRAND_LOGOS_BATCH_85 } from "../src/lib/brandContentBatch85.js";
+import { BRAND_CONTENT_BATCH_86, BRAND_LOGOS_BATCH_86 } from "../src/lib/brandContentBatch86.js";
+import { BRAND_CONTENT_BATCH_87, BRAND_LOGOS_BATCH_87 } from "../src/lib/brandContentBatch87.js";
+import { BRAND_CONTENT_BATCH_88, BRAND_LOGOS_BATCH_88 } from "../src/lib/brandContentBatch88.js";
+import { BRAND_CONTENT_BATCH_89, BRAND_LOGOS_BATCH_89 } from "../src/lib/brandContentBatch89.js";
+import { BRAND_CONTENT_BATCH_90, BRAND_LOGOS_BATCH_90 } from "../src/lib/brandContentBatch90.js";
+import { BRAND_CONTENT_BATCH_91, BRAND_LOGOS_BATCH_91 } from "../src/lib/brandContentBatch91.js";
+import { BRAND_CONTENT_BATCH_92, BRAND_LOGOS_BATCH_92 } from "../src/lib/brandContentBatch92.js";
+import { BRAND_CONTENT_BATCH_93, BRAND_LOGOS_BATCH_93 } from "../src/lib/brandContentBatch93.js";
+import { BRAND_CONTENT_BATCH_94, BRAND_LOGOS_BATCH_94 } from "../src/lib/brandContentBatch94.js";
+import { BRAND_CONTENT_BATCH_95, BRAND_LOGOS_BATCH_95 } from "../src/lib/brandContentBatch95.js";
+import { BRAND_CONTENT_BATCH_96, BRAND_LOGOS_BATCH_96 } from "../src/lib/brandContentBatch96.js";
+import { BRAND_CONTENT_BATCH_97, BRAND_LOGOS_BATCH_97 } from "../src/lib/brandContentBatch97.js";
+import { BRAND_CONTENT_BATCH_98, BRAND_LOGOS_BATCH_98 } from "../src/lib/brandContentBatch98.js";
+import { BRAND_CONTENT_BATCH_99, BRAND_LOGOS_BATCH_99 } from "../src/lib/brandContentBatch99.js";
+import { BRAND_CONTENT_BATCH_100, BRAND_LOGOS_BATCH_100 } from "../src/lib/brandContentBatch100.js";
+import { BRAND_CONTENT_BATCH_101, BRAND_LOGOS_BATCH_101 } from "../src/lib/brandContentBatch101.js";
+import { BRAND_CONTENT_BATCH_102, BRAND_LOGOS_BATCH_102 } from "../src/lib/brandContentBatch102.js";
+import { BRAND_CONTENT_BATCH_103, BRAND_LOGOS_BATCH_103 } from "../src/lib/brandContentBatch103.js";
+import { BRAND_CONTENT_BATCH_104, BRAND_LOGOS_BATCH_104 } from "../src/lib/brandContentBatch104.js";
+import { BRAND_CONTENT_BATCH_105, BRAND_LOGOS_BATCH_105 } from "../src/lib/brandContentBatch105.js";
+import { BRAND_CONTENT_BATCH_106, BRAND_LOGOS_BATCH_106 } from "../src/lib/brandContentBatch106.js";
+import { BRAND_CONTENT_BATCH_107, BRAND_LOGOS_BATCH_107 } from "../src/lib/brandContentBatch107.js";
+import { BRAND_CONTENT_BATCH_108, BRAND_LOGOS_BATCH_108 } from "../src/lib/brandContentBatch108.js";
+import { BRAND_CONTENT_BATCH_109, BRAND_LOGOS_BATCH_109 } from "../src/lib/brandContentBatch109.js";
+import { BRAND_CONTENT_BATCH_110, BRAND_LOGOS_BATCH_110 } from "../src/lib/brandContentBatch110.js";
+import { BRAND_CONTENT_BATCH_111, BRAND_LOGOS_BATCH_111 } from "../src/lib/brandContentBatch111.js";
+import { BRAND_CONTENT_BATCH_112, BRAND_LOGOS_BATCH_112 } from "../src/lib/brandContentBatch112.js";
+import { BRAND_CONTENT_BATCH_113, BRAND_LOGOS_BATCH_113 } from "../src/lib/brandContentBatch113.js";
+import { BRAND_CONTENT_BATCH_114, BRAND_LOGOS_BATCH_114 } from "../src/lib/brandContentBatch114.js";
+import { BRAND_CONTENT_BATCH_115, BRAND_LOGOS_BATCH_115 } from "../src/lib/brandContentBatch115.js";
+import { BRAND_CONTENT_BATCH_116, BRAND_LOGOS_BATCH_116 } from "../src/lib/brandContentBatch116.js";
+import { BRAND_CONTENT_BATCH_117, BRAND_LOGOS_BATCH_117 } from "../src/lib/brandContentBatch117.js";
+import { BRAND_CONTENT_BATCH_118, BRAND_LOGOS_BATCH_118 } from "../src/lib/brandContentBatch118.js";
+import { BRAND_CONTENT_BATCH_119, BRAND_LOGOS_BATCH_119 } from "../src/lib/brandContentBatch119.js";
+import { BRAND_CONTENT_BATCH_120, BRAND_LOGOS_BATCH_120 } from "../src/lib/brandContentBatch120.js";
+import { BRAND_CONTENT_BATCH_121, BRAND_LOGOS_BATCH_121 } from "../src/lib/brandContentBatch121.js";
+import { BRAND_CONTENT_BATCH_122, BRAND_LOGOS_BATCH_122 } from "../src/lib/brandContentBatch122.js";
+import { BRAND_CONTENT_BATCH_123, BRAND_LOGOS_BATCH_123 } from "../src/lib/brandContentBatch123.js";
+import { BRAND_CONTENT_BATCH_124, BRAND_LOGOS_BATCH_124 } from "../src/lib/brandContentBatch124.js";
+import { BRAND_CONTENT_BATCH_125, BRAND_LOGOS_BATCH_125 } from "../src/lib/brandContentBatch125.js";
+import { BRAND_CONTENT_BATCH_126, BRAND_LOGOS_BATCH_126 } from "../src/lib/brandContentBatch126.js";
+import { BRAND_CONTENT_BATCH_127, BRAND_LOGOS_BATCH_127 } from "../src/lib/brandContentBatch127.js";
+import { BRAND_CONTENT_BATCH_128, BRAND_LOGOS_BATCH_128 } from "../src/lib/brandContentBatch128.js";
+import { BRAND_CONTENT_BATCH_129, BRAND_LOGOS_BATCH_129 } from "../src/lib/brandContentBatch129.js";
+import { BRAND_CONTENT_BATCH_130, BRAND_LOGOS_BATCH_130 } from "../src/lib/brandContentBatch130.js";
+import { BRAND_CONTENT_BATCH_131, BRAND_LOGOS_BATCH_131 } from "../src/lib/brandContentBatch131.js";
+import { BRAND_CONTENT_BATCH_132, BRAND_LOGOS_BATCH_132 } from "../src/lib/brandContentBatch132.js";
+import { BRAND_CONTENT_BATCH_133, BRAND_LOGOS_BATCH_133 } from "../src/lib/brandContentBatch133.js";
 import { VERIFIED_BRAND_LOGO_REPAIRS } from "../src/lib/brandLogoRepairs.js";
 
 describe("brand expansion editorial data", () => {
   it("contains the planned brands once with stable slugs", () => {
-    expect(BRAND_EXPANSION).toHaveLength(1126);
+    expect(BRAND_EXPANSION).toHaveLength(1596);
     expect(new Set(BRAND_EXPANSION.map((brand) => brand.slug)).size).toBe(BRAND_EXPANSION.length);
     expect(BRAND_EXPANSION.every((brand) => /^https:\/\//.test(brand.officialUrl))).toBe(true);
   });
@@ -86,6 +159,467 @@ describe("brand expansion editorial data", () => {
       expect(text).not.toMatch(/according to (?:the )?(?:source|references?)|sources suggest/i);
       expect(data.meta_title.length).toBeLessThanOrEqual(60);
       expect(data.meta_description.length).toBeLessThanOrEqual(160);
+      if (BRAND_CONTENT_BATCH_127[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_127[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_126[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_126[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_125[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_125[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_124[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_124[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_123[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_123[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_122[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_122[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_121[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_121[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_120[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_120[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_119[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_119[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_118[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_118[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      } else if (BRAND_CONTENT_BATCH_117[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_117[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_116[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_116[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_115[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_115[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_114[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_114[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_113[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_113[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_112[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_112[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_111[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_111[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_110[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_110[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_109[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_109[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_108[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_108[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_107[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_107[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_106[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_106[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_105[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_105[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_104[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_104[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_103[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_103[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_102[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_102[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_101[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_101[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_100[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_100[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_99[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_99[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_98[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_98[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_97[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_97[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_96[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_96[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_95[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_95[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_94[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_94[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_93[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_93[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_92[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_92[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_91[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_91[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_90[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_90[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_89[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_89[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_88[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_88[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_87[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_87[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_86[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_86[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_85[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_85[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_84[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_84[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_83[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_83[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_82[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_82[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_81[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_81[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_80[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_80[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_79[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_79[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_78[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_78[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_77[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_77[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_76[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_76[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_75[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_75[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_74[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_74[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_73[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_73[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_72[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_72[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_71[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_71[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_70[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_70[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_69[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_69[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_68[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_68[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_67[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_67[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_66[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_66[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_65[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_65[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_64[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_64[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_63[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_63[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_62[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_62[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_61[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_61[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
       if (BRAND_CONTENT_BATCH_60[definition.slug]) {
         const verifiedLogo = BRAND_LOGOS_BATCH_60[definition.slug];
         expect(data.logo_url).toBe(verifiedLogo ?? null);
@@ -130,6 +664,13 @@ describe("brand expansion editorial data", () => {
       }
       if (BRAND_CONTENT_BATCH_54[definition.slug]) {
         const verifiedLogo = BRAND_LOGOS_BATCH_54[definition.slug];
+        expect(data.logo_url).toBe(verifiedLogo ?? null);
+        expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
+        expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
+        continue;
+      }
+      if (BRAND_CONTENT_BATCH_131[definition.slug]) {
+        const verifiedLogo = BRAND_LOGOS_BATCH_131[definition.slug];
         expect(data.logo_url).toBe(verifiedLogo ?? null);
         expect(data.logo_identity_verified).toBe(Boolean(verifiedLogo));
         expect(data.logo_asset_status).toBe(verifiedLogo ? "verified_remote_asset" : "missing_verified_asset");
@@ -181,21 +722,44 @@ describe("brand expansion editorial data", () => {
           expect(data[field]).toBeTruthy();
           expect(JSON.stringify(data[field])).not.toMatch(internalLanguage);
         }
-        expect(data.content_version).toBe(BRAND_CONTENT_BATCH_55[slug] ? "brand-public-ui-v3-batch-55" : BRAND_CONTENT_BATCH_54[slug] ? "brand-public-ui-v3-batch-54" : BRAND_CONTENT_BATCH_53[slug] ? "brand-public-ui-v3-batch-53" : BRAND_CONTENT_BATCH_52[slug] ? "brand-public-ui-v3-batch-52" : BRAND_CONTENT_BATCH_51[slug] ? "brand-public-ui-v3-batch-51" : BRAND_CONTENT_BATCH_50[slug] ? "brand-public-ui-v3-batch-50" : BRAND_CONTENT_BATCH_49[slug] ? "brand-public-ui-v3-batch-49" : BRAND_CONTENT_BATCH_35[slug] ? "brand-public-ui-v3-batch-35" : version);
-        if (BRAND_CONTENT_BATCH_55[slug] && !BRAND_LOGOS_BATCH_55[slug]) expect(data.logo_url).toBeNull();
+        expect(data.content_version).toBe(BRAND_CONTENT_BATCH_133[slug] ? "brand-public-ui-v3-batch-133" : BRAND_CONTENT_BATCH_132[slug] ? "brand-public-ui-v3-batch-132" : BRAND_CONTENT_BATCH_131[slug] ? "brand-public-ui-v3-batch-131" : BRAND_CONTENT_BATCH_130[slug] ? "brand-public-ui-v3-batch-130" : BRAND_CONTENT_BATCH_129[slug] ? "brand-public-ui-v3-batch-129" : BRAND_CONTENT_BATCH_128[slug] ? "brand-public-ui-v3-batch-128" : BRAND_CONTENT_BATCH_127[slug] ? "brand-public-ui-v3-batch-127" : BRAND_CONTENT_BATCH_126[slug] ? "brand-public-ui-v3-batch-126" : BRAND_CONTENT_BATCH_125[slug] ? "brand-public-ui-v3-batch-125" : BRAND_CONTENT_BATCH_124[slug] ? "brand-public-ui-v3-batch-124" : BRAND_CONTENT_BATCH_123[slug] ? "brand-public-ui-v3-batch-123" : BRAND_CONTENT_BATCH_122[slug] ? "brand-public-ui-v3-batch-122" : BRAND_CONTENT_BATCH_121[slug] ? "brand-public-ui-v3-batch-121" : BRAND_CONTENT_BATCH_120[slug] ? "brand-public-ui-v3-batch-120" : BRAND_CONTENT_BATCH_119[slug] ? "brand-public-ui-v3-batch-119" : BRAND_CONTENT_BATCH_118[slug] ? "brand-public-ui-v3-batch-118" : BRAND_CONTENT_BATCH_117[slug] ? "brand-public-ui-v3-batch-117" : BRAND_CONTENT_BATCH_116[slug] ? "brand-public-ui-v3-batch-116" : BRAND_CONTENT_BATCH_115[slug] ? "brand-public-ui-v3-batch-115" : BRAND_CONTENT_BATCH_114[slug] ? "brand-public-ui-v3-batch-114" : BRAND_CONTENT_BATCH_113[slug] ? "brand-public-ui-v3-batch-113" : BRAND_CONTENT_BATCH_112[slug] ? "brand-public-ui-v3-batch-112" : BRAND_CONTENT_BATCH_111[slug] ? "brand-public-ui-v3-batch-111" : BRAND_CONTENT_BATCH_55[slug] ? "brand-public-ui-v3-batch-55" : BRAND_CONTENT_BATCH_54[slug] ? "brand-public-ui-v3-batch-54" : BRAND_CONTENT_BATCH_53[slug] ? "brand-public-ui-v3-batch-53" : BRAND_CONTENT_BATCH_52[slug] ? "brand-public-ui-v3-batch-52" : BRAND_CONTENT_BATCH_51[slug] ? "brand-public-ui-v3-batch-51" : BRAND_CONTENT_BATCH_50[slug] ? "brand-public-ui-v3-batch-50" : BRAND_CONTENT_BATCH_49[slug] ? "brand-public-ui-v3-batch-49" : BRAND_CONTENT_BATCH_35[slug] ? "brand-public-ui-v3-batch-35" : version);
+        if (BRAND_CONTENT_BATCH_133[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_133[slug] ?? null);
+        else if (BRAND_CONTENT_BATCH_132[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_132[slug] ?? null);
+        else if (BRAND_CONTENT_BATCH_131[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_131[slug] ?? null);
+        else if (BRAND_CONTENT_BATCH_130[slug] && !BRAND_LOGOS_BATCH_130[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_129[slug] && !BRAND_LOGOS_BATCH_129[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_128[slug] && !BRAND_LOGOS_BATCH_128[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_127[slug] && !BRAND_LOGOS_BATCH_127[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_126[slug] && !BRAND_LOGOS_BATCH_126[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_125[slug] && !BRAND_LOGOS_BATCH_125[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_124[slug] && !BRAND_LOGOS_BATCH_124[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_123[slug] && !BRAND_LOGOS_BATCH_123[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_122[slug] && !BRAND_LOGOS_BATCH_122[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_121[slug] && !BRAND_LOGOS_BATCH_121[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_120[slug] && !BRAND_LOGOS_BATCH_120[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_119[slug] && !BRAND_LOGOS_BATCH_119[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_118[slug] && !BRAND_LOGOS_BATCH_118[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_117[slug] && !BRAND_LOGOS_BATCH_117[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_116[slug] && !BRAND_LOGOS_BATCH_116[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_115[slug] && !BRAND_LOGOS_BATCH_115[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_114[slug] && !BRAND_LOGOS_BATCH_114[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_113[slug] && !BRAND_LOGOS_BATCH_113[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_112[slug] && !BRAND_LOGOS_BATCH_112[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_111[slug] && !BRAND_LOGOS_BATCH_111[slug]) expect(data.logo_url).toBeNull();
+        else if (BRAND_CONTENT_BATCH_55[slug] && !BRAND_LOGOS_BATCH_55[slug]) expect(data.logo_url).toBeNull();
         else if (BRAND_CONTENT_BATCH_54[slug] && !BRAND_LOGOS_BATCH_54[slug]) expect(data.logo_url).toBeNull();
         else if (BRAND_CONTENT_BATCH_53[slug] && !BRAND_LOGOS_BATCH_53[slug]) expect(data.logo_url).toBeNull();
         else expect(data.logo_url).toMatch(/^https:\/\//);
-        const logoVerified = BRAND_CONTENT_BATCH_55[slug] ? Boolean(BRAND_LOGOS_BATCH_55[slug]) : BRAND_CONTENT_BATCH_54[slug] ? Boolean(BRAND_LOGOS_BATCH_54[slug]) : BRAND_CONTENT_BATCH_53[slug] ? Boolean(BRAND_LOGOS_BATCH_53[slug]) : BRAND_CONTENT_BATCH_35[slug] ? Boolean(BRAND_LOGOS_BATCH_35[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]) : verifiedLogo || Boolean(BRAND_LOGOS_BATCH_51[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]);
+        const logoVerified = BRAND_CONTENT_BATCH_133[slug] ? Boolean(BRAND_LOGOS_BATCH_133[slug]) : BRAND_CONTENT_BATCH_132[slug] ? Boolean(BRAND_LOGOS_BATCH_132[slug]) : BRAND_CONTENT_BATCH_131[slug] ? Boolean(BRAND_LOGOS_BATCH_131[slug]) : BRAND_CONTENT_BATCH_130[slug] ? Boolean(BRAND_LOGOS_BATCH_130[slug]) : BRAND_CONTENT_BATCH_129[slug] ? Boolean(BRAND_LOGOS_BATCH_129[slug]) : BRAND_CONTENT_BATCH_128[slug] ? Boolean(BRAND_LOGOS_BATCH_128[slug]) : BRAND_CONTENT_BATCH_127[slug] ? Boolean(BRAND_LOGOS_BATCH_127[slug]) : BRAND_CONTENT_BATCH_126[slug] ? Boolean(BRAND_LOGOS_BATCH_126[slug]) : BRAND_CONTENT_BATCH_125[slug] ? Boolean(BRAND_LOGOS_BATCH_125[slug]) : BRAND_CONTENT_BATCH_124[slug] ? Boolean(BRAND_LOGOS_BATCH_124[slug]) : BRAND_CONTENT_BATCH_123[slug] ? Boolean(BRAND_LOGOS_BATCH_123[slug]) : BRAND_CONTENT_BATCH_122[slug] ? Boolean(BRAND_LOGOS_BATCH_122[slug]) : BRAND_CONTENT_BATCH_121[slug] ? Boolean(BRAND_LOGOS_BATCH_121[slug]) : BRAND_CONTENT_BATCH_120[slug] ? Boolean(BRAND_LOGOS_BATCH_120[slug]) : BRAND_CONTENT_BATCH_119[slug] ? Boolean(BRAND_LOGOS_BATCH_119[slug]) : BRAND_CONTENT_BATCH_118[slug] ? Boolean(BRAND_LOGOS_BATCH_118[slug]) : BRAND_CONTENT_BATCH_117[slug] ? Boolean(BRAND_LOGOS_BATCH_117[slug]) : BRAND_CONTENT_BATCH_116[slug] ? Boolean(BRAND_LOGOS_BATCH_116[slug]) : BRAND_CONTENT_BATCH_115[slug] ? Boolean(BRAND_LOGOS_BATCH_115[slug]) : BRAND_CONTENT_BATCH_114[slug] ? Boolean(BRAND_LOGOS_BATCH_114[slug]) : BRAND_CONTENT_BATCH_113[slug] ? Boolean(BRAND_LOGOS_BATCH_113[slug]) : BRAND_CONTENT_BATCH_112[slug] ? Boolean(BRAND_LOGOS_BATCH_112[slug]) : BRAND_CONTENT_BATCH_111[slug] ? Boolean(BRAND_LOGOS_BATCH_111[slug]) : BRAND_CONTENT_BATCH_55[slug] ? Boolean(BRAND_LOGOS_BATCH_55[slug]) : BRAND_CONTENT_BATCH_54[slug] ? Boolean(BRAND_LOGOS_BATCH_54[slug]) : BRAND_CONTENT_BATCH_53[slug] ? Boolean(BRAND_LOGOS_BATCH_53[slug]) : BRAND_CONTENT_BATCH_35[slug] ? Boolean(BRAND_LOGOS_BATCH_35[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]) : verifiedLogo || Boolean(BRAND_LOGOS_BATCH_51[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]);
         expect(data.logo_identity_verified).toBe(logoVerified);
-        expect(data.logo_asset_status).toBe(logoVerified ? "verified_remote_asset" : BRAND_CONTENT_BATCH_55[slug] || BRAND_CONTENT_BATCH_54[slug] || BRAND_CONTENT_BATCH_53[slug] ? "missing_verified_asset" : "livcheers_slug_asset_pending_verification");
+        expect(data.logo_asset_status).toBe(logoVerified ? "verified_remote_asset" : BRAND_CONTENT_BATCH_133[slug] || BRAND_CONTENT_BATCH_132[slug] || BRAND_CONTENT_BATCH_131[slug] || BRAND_CONTENT_BATCH_128[slug] || BRAND_CONTENT_BATCH_127[slug] || BRAND_CONTENT_BATCH_126[slug] || BRAND_CONTENT_BATCH_125[slug] || BRAND_CONTENT_BATCH_124[slug] || BRAND_CONTENT_BATCH_123[slug] || BRAND_CONTENT_BATCH_122[slug] || BRAND_CONTENT_BATCH_121[slug] || BRAND_CONTENT_BATCH_120[slug] || BRAND_CONTENT_BATCH_119[slug] || BRAND_CONTENT_BATCH_118[slug] || BRAND_CONTENT_BATCH_117[slug] || BRAND_CONTENT_BATCH_116[slug] || BRAND_CONTENT_BATCH_115[slug] || BRAND_CONTENT_BATCH_114[slug] || BRAND_CONTENT_BATCH_113[slug] || BRAND_CONTENT_BATCH_112[slug] || BRAND_CONTENT_BATCH_111[slug] || BRAND_CONTENT_BATCH_55[slug] || BRAND_CONTENT_BATCH_54[slug] || BRAND_CONTENT_BATCH_53[slug] ? "missing_verified_asset" : "livcheers_slug_asset_pending_verification");
       }
     }
   });
 
   it("keeps the latest batches free from filler and missing-data commentary", () => {
     const blocked = /symphony|testament|ultimate|nestled|delve|embark|elevate your senses|harmonious blend|perfect for any occasion|dance on the palate|rich tapestry|whether you(?:'|’)re|a brand can contain more than one style|start with the individual bottle|bevory does not fill missing technical facts|adults can compare like with like|availability is not assumed across india|read the individual label before buying|keep the exact record separate|check bevory for reviewed city-level prices|the producer does not publish|no tasting notes found in reviewed material|style label remains at whisky|does not publish|does not state|not provided|missing data|sources? suggest|according to/i;
-    for (const batch of [BRAND_CONTENT_BATCH_08, BRAND_CONTENT_BATCH_09, BRAND_CONTENT_BATCH_10, BRAND_CONTENT_BATCH_11, BRAND_CONTENT_BATCH_12, BRAND_CONTENT_BATCH_13, BRAND_CONTENT_BATCH_14, BRAND_CONTENT_BATCH_15, BRAND_CONTENT_BATCH_16]) {
+    for (const batch of [BRAND_CONTENT_BATCH_08, BRAND_CONTENT_BATCH_09, BRAND_CONTENT_BATCH_10, BRAND_CONTENT_BATCH_11, BRAND_CONTENT_BATCH_12, BRAND_CONTENT_BATCH_13, BRAND_CONTENT_BATCH_14, BRAND_CONTENT_BATCH_15, BRAND_CONTENT_BATCH_16, BRAND_CONTENT_BATCH_126, BRAND_CONTENT_BATCH_127, BRAND_CONTENT_BATCH_128, BRAND_CONTENT_BATCH_129, BRAND_CONTENT_BATCH_130, BRAND_CONTENT_BATCH_131, BRAND_CONTENT_BATCH_132, BRAND_CONTENT_BATCH_133]) {
       const contentEntries = Object.values(batch);
       expect(new Set(contentEntries.map((content) => content.metaTitle)).size).toBe(contentEntries.length);
       expect(new Set(contentEntries.map((content) => content.metaDescription)).size).toBe(contentEntries.length);
@@ -237,12 +801,12 @@ describe("brand expansion editorial data", () => {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       expect(definition.recordId).toMatch(/^lc-brand-/);
       const data = buildBrandExpansionData(definition);
-      expect(data.description).toBe(BRAND_CONTENT_BATCH_55[slug]?.description ?? content.description);
-      expect(data.tasting_notes).toEqual(BRAND_CONTENT_BATCH_55[slug]?.tastingNotes ?? content.tastingNotes);
+      expect(data.description).toBe(BRAND_CONTENT_BATCH_125[slug]?.description ?? BRAND_CONTENT_BATCH_124[slug]?.description ?? BRAND_CONTENT_BATCH_123[slug]?.description ?? BRAND_CONTENT_BATCH_110[slug]?.description ?? BRAND_CONTENT_BATCH_109[slug]?.description ?? BRAND_CONTENT_BATCH_108[slug]?.description ?? BRAND_CONTENT_BATCH_55[slug]?.description ?? content.description);
+      expect(data.tasting_notes).toEqual(BRAND_CONTENT_BATCH_125[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_124[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_123[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_110[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_109[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_108[slug]?.tastingNotes ?? BRAND_CONTENT_BATCH_55[slug]?.tastingNotes ?? content.tastingNotes);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_55[slug] ? "brand-public-ui-v3-batch-55" : "brand-public-ui-v3-batch-17");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_125[slug] ? "brand-public-ui-v3-batch-125" : BRAND_CONTENT_BATCH_124[slug] ? "brand-public-ui-v3-batch-124" : BRAND_CONTENT_BATCH_123[slug] ? "brand-public-ui-v3-batch-123" : BRAND_CONTENT_BATCH_110[slug] ? "brand-public-ui-v3-batch-110" : BRAND_CONTENT_BATCH_109[slug] ? "brand-public-ui-v3-batch-109" : BRAND_CONTENT_BATCH_108[slug] ? "brand-public-ui-v3-batch-108" : BRAND_CONTENT_BATCH_55[slug] ? "brand-public-ui-v3-batch-55" : "brand-public-ui-v3-batch-17");
       expect(BRAND_SOURCES_BATCH_17[slug].length).toBeGreaterThan(0);
-      expect(data.logo_identity_verified).toBe(Boolean(BRAND_CONTENT_BATCH_55[slug] ? BRAND_LOGOS_BATCH_55[slug] : BRAND_LOGOS_BATCH_17[slug]));
+      expect(data.logo_identity_verified).toBe(Boolean(BRAND_CONTENT_BATCH_125[slug] ? BRAND_LOGOS_BATCH_125[slug] : BRAND_CONTENT_BATCH_124[slug] ? BRAND_LOGOS_BATCH_124[slug] : BRAND_CONTENT_BATCH_123[slug] ? BRAND_LOGOS_BATCH_123[slug] : BRAND_CONTENT_BATCH_110[slug] ? BRAND_LOGOS_BATCH_110[slug] : BRAND_CONTENT_BATCH_109[slug] ? BRAND_LOGOS_BATCH_109[slug] : BRAND_CONTENT_BATCH_108[slug] ? BRAND_LOGOS_BATCH_108[slug] : BRAND_CONTENT_BATCH_55[slug] ? BRAND_LOGOS_BATCH_55[slug] : BRAND_LOGOS_BATCH_17[slug]));
       expect(JSON.stringify(content)).not.toMatch(/editorial guardrail|published profile|database|the producer does not|read the individual label|symphony|testament|delve|nestled|embark|elevate your senses|dance on the palate|rich tapestry|whether you're/i);
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }
@@ -253,17 +817,18 @@ describe("brand expansion editorial data", () => {
     for (const [slug, content] of Object.entries(BRAND_CONTENT_BATCH_18)) {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       const data = buildBrandExpansionData(definition);
+      const latestContent = BRAND_CONTENT_BATCH_125[slug] ?? BRAND_CONTENT_BATCH_124[slug] ?? BRAND_CONTENT_BATCH_123[slug] ?? BRAND_CONTENT_BATCH_110[slug] ?? BRAND_CONTENT_BATCH_58[slug] ?? BRAND_CONTENT_BATCH_57[slug] ?? content;
       expect(definition.recordId).toMatch(/^lc-brand-/);
-      expect(data.description).toBe((BRAND_CONTENT_BATCH_58[slug] ?? BRAND_CONTENT_BATCH_57[slug] ?? content).description);
-      expect(data.story).toBe(content.story);
-      expect(data.tasting_notes).toEqual(content.tastingNotes);
-      expect(data.how_to_enjoy).toEqual(content.howToEnjoy);
-      expect(data.pairing_ideas).toEqual(content.pairingIdeas);
-      expect(data.faqs).toEqual(content.faqs);
+      expect(data.description).toBe(latestContent.description);
+      expect(data.story).toBe(latestContent.story);
+      expect(data.tasting_notes).toEqual(latestContent.tastingNotes);
+      expect(data.how_to_enjoy).toEqual(latestContent.howToEnjoy);
+      expect(data.pairing_ideas).toEqual(latestContent.pairingIdeas);
+      expect(data.faqs).toEqual(latestContent.faqs);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_56[slug] ? "brand-public-ui-v3-batch-56" : "brand-public-ui-v3-batch-18");
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_125[slug] ? "brand-public-ui-v3-batch-125" : BRAND_CONTENT_BATCH_124[slug] ? "brand-public-ui-v3-batch-124" : BRAND_CONTENT_BATCH_123[slug] ? "brand-public-ui-v3-batch-123" : BRAND_CONTENT_BATCH_110[slug] ? "brand-public-ui-v3-batch-110" : BRAND_CONTENT_BATCH_56[slug] ? "brand-public-ui-v3-batch-56" : "brand-public-ui-v3-batch-18");
       expect(BRAND_SOURCES_BATCH_18[slug].length).toBeGreaterThan(0);
-      expect(data.logo_identity_verified).toBe(Boolean(BRAND_LOGOS_BATCH_18[slug]));
+      expect(data.logo_identity_verified).toBe(Boolean(BRAND_CONTENT_BATCH_125[slug] ? BRAND_LOGOS_BATCH_125[slug] : BRAND_CONTENT_BATCH_124[slug] ? BRAND_LOGOS_BATCH_124[slug] : BRAND_CONTENT_BATCH_123[slug] ? BRAND_LOGOS_BATCH_123[slug] : BRAND_CONTENT_BATCH_110[slug] ? BRAND_LOGOS_BATCH_110[slug] : BRAND_LOGOS_BATCH_18[slug]));
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }
   });
@@ -621,12 +1186,13 @@ describe("brand expansion editorial data", () => {
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toBe(slug === "sula" || slug === "svedka" ? `brand-expansion-${slug}` : `lc-brand-${id}`);
       expect(BRAND_SOURCES_BATCH_35[slug].length).toBeGreaterThan(0);
-      expect(data.description).toBe(content.description);
-      expect(data.tasting_notes).toEqual(content.tastingNotes);
+      const latestContent = BRAND_CONTENT_BATCH_126[slug] ?? content;
+      expect(data.description).toBe(latestContent.description);
+      expect(data.tasting_notes).toEqual(latestContent.tastingNotes);
       expect(data.country_flag_url).toMatch(/^https:/);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-35");
-      expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_35[slug] ?? (slug === "sula" || slug === "svedka" ? `https://static.livcheers.com/static/content/images/brand/${slug}.webp` : null));
-      expect(data.logo_identity_verified).toBe(Boolean(BRAND_LOGOS_BATCH_35[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]));
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_126[slug] ? "brand-public-ui-v3-batch-126" : "brand-public-ui-v3-batch-35");
+      expect(data.logo_url).toBe(BRAND_CONTENT_BATCH_126[slug] ? (BRAND_LOGOS_BATCH_126[slug] ?? null) : BRAND_LOGOS_BATCH_35[slug] ?? (slug === "sula" || slug === "svedka" ? `https://static.livcheers.com/static/content/images/brand/${slug}.webp` : null));
+      expect(data.logo_identity_verified).toBe(Boolean(BRAND_CONTENT_BATCH_126[slug] ? BRAND_LOGOS_BATCH_126[slug] : BRAND_LOGOS_BATCH_35[slug] || VERIFIED_BRAND_LOGO_REPAIRS[slug]));
       expect(Object.keys(content).sort()).toEqual(["description", "story", "tastingNotes", "howToEnjoy", "pairingIdeas", "whyChoose", "faqs", "finalVerdict", "metaTitle", "metaDescription"].sort());
     }
     expect(JSON.stringify(BRAND_CONTENT_BATCH_35)).not.toMatch(/editorial guardrail|database|the producer does not|no tasting notes found|read the individual label|symphony|testament|delve|nestled|embark|elevate your senses|dance on the palate|rich tapestry|whether you're/i);
@@ -1029,7 +1595,7 @@ describe("brand expansion editorial data", () => {
     expect(Object.keys(BRAND_CONTENT_BATCH_49)).toHaveLength(30);
     expect(BRAND_LOGOS_BATCH_49).toEqual({});
     for (const [slug] of BRAND_IDENTITIES_BATCH_49) {
-      const content = BRAND_CONTENT_BATCH_49[slug];
+      const content = BRAND_CONTENT_BATCH_122[slug] ?? BRAND_CONTENT_BATCH_121[slug] ?? BRAND_CONTENT_BATCH_120[slug] ?? BRAND_CONTENT_BATCH_119[slug] ?? BRAND_CONTENT_BATCH_118[slug] ?? BRAND_CONTENT_BATCH_117[slug] ?? BRAND_CONTENT_BATCH_116[slug] ?? BRAND_CONTENT_BATCH_115[slug] ?? BRAND_CONTENT_BATCH_49[slug];
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       const data = buildBrandExpansionData(definition);
       expect(definition.recordId).toBe(`brand-expansion-${slug}`);
@@ -1040,8 +1606,16 @@ describe("brand expansion editorial data", () => {
       expect(content.metaTitle.length).toBeLessThanOrEqual(60);
       expect(content.metaDescription.length).toBeLessThanOrEqual(155);
       expect(data.description).toBe(content.description);
-      expect(data.logo_url).toMatch(/^https:\/\//);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-49");
+      if (BRAND_CONTENT_BATCH_122[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_122[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_121[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_121[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_120[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_120[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_119[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_119[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_118[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_118[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_117[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_117[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_116[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_116[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_115[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_115[slug] ?? null);
+      else expect(data.logo_url).toMatch(/^https:\/\//);
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_122[slug] ? "brand-public-ui-v3-batch-122" : BRAND_CONTENT_BATCH_121[slug] ? "brand-public-ui-v3-batch-121" : BRAND_CONTENT_BATCH_120[slug] ? "brand-public-ui-v3-batch-120" : BRAND_CONTENT_BATCH_119[slug] ? "brand-public-ui-v3-batch-119" : BRAND_CONTENT_BATCH_118[slug] ? "brand-public-ui-v3-batch-118" : BRAND_CONTENT_BATCH_117[slug] ? "brand-public-ui-v3-batch-117" : BRAND_CONTENT_BATCH_116[slug] ? "brand-public-ui-v3-batch-116" : BRAND_CONTENT_BATCH_115[slug] ? "brand-public-ui-v3-batch-115" : "brand-public-ui-v3-batch-49");
     }
     expect(JSON.stringify(BRAND_CONTENT_BATCH_49)).not.toMatch(/editorial guardrail|database|the producer does not|no tasting notes found|read the individual label|symphony|testament|delve|nestled|embark|elevate your senses|dance on the palate|rich tapestry|whether you're/i);
   });
@@ -1052,11 +1626,26 @@ describe("brand expansion editorial data", () => {
     for (const [slug] of BRAND_IDENTITIES_BATCH_50) {
       const definition = BRAND_EXPANSION.find((item) => item.slug === slug)!;
       const data = buildBrandExpansionData(definition);
-      const content = BRAND_CONTENT_BATCH_50[slug];
+      const content = BRAND_CONTENT_BATCH_133[slug] ?? BRAND_CONTENT_BATCH_132[slug] ?? BRAND_CONTENT_BATCH_131[slug] ?? BRAND_CONTENT_BATCH_130[slug] ?? BRAND_CONTENT_BATCH_129[slug] ?? BRAND_CONTENT_BATCH_128[slug] ?? BRAND_CONTENT_BATCH_127[slug] ?? BRAND_CONTENT_BATCH_125[slug] ?? BRAND_CONTENT_BATCH_122[slug] ?? BRAND_CONTENT_BATCH_121[slug] ?? BRAND_CONTENT_BATCH_120[slug] ?? BRAND_CONTENT_BATCH_119[slug] ?? BRAND_CONTENT_BATCH_118[slug] ?? BRAND_CONTENT_BATCH_114[slug] ?? BRAND_CONTENT_BATCH_113[slug] ?? BRAND_CONTENT_BATCH_112[slug] ?? BRAND_CONTENT_BATCH_111[slug] ?? BRAND_CONTENT_BATCH_50[slug];
       expect(BRAND_SOURCES_BATCH_50[slug].length).toBeGreaterThan(0);
       expect(data.description).toBe(content.description);
-      expect(data.content_version).toBe("brand-public-ui-v3-batch-50");
-      expect(data.logo_url).toMatch(/^https:\/\//);
+      expect(data.content_version).toBe(BRAND_CONTENT_BATCH_133[slug] ? "brand-public-ui-v3-batch-133" : BRAND_CONTENT_BATCH_132[slug] ? "brand-public-ui-v3-batch-132" : BRAND_CONTENT_BATCH_131[slug] ? "brand-public-ui-v3-batch-131" : BRAND_CONTENT_BATCH_130[slug] ? "brand-public-ui-v3-batch-130" : BRAND_CONTENT_BATCH_129[slug] ? "brand-public-ui-v3-batch-129" : BRAND_CONTENT_BATCH_128[slug] ? "brand-public-ui-v3-batch-128" : BRAND_CONTENT_BATCH_127[slug] ? "brand-public-ui-v3-batch-127" : BRAND_CONTENT_BATCH_125[slug] ? "brand-public-ui-v3-batch-125" : BRAND_CONTENT_BATCH_122[slug] ? "brand-public-ui-v3-batch-122" : BRAND_CONTENT_BATCH_121[slug] ? "brand-public-ui-v3-batch-121" : BRAND_CONTENT_BATCH_120[slug] ? "brand-public-ui-v3-batch-120" : BRAND_CONTENT_BATCH_119[slug] ? "brand-public-ui-v3-batch-119" : BRAND_CONTENT_BATCH_118[slug] ? "brand-public-ui-v3-batch-118" : BRAND_CONTENT_BATCH_114[slug] ? "brand-public-ui-v3-batch-114" : BRAND_CONTENT_BATCH_113[slug] ? "brand-public-ui-v3-batch-113" : BRAND_CONTENT_BATCH_112[slug] ? "brand-public-ui-v3-batch-112" : BRAND_CONTENT_BATCH_111[slug] ? "brand-public-ui-v3-batch-111" : "brand-public-ui-v3-batch-50");
+      if (BRAND_CONTENT_BATCH_131[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_131[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_130[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_130[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_129[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_129[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_128[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_128[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_127[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_127[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_125[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_125[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_122[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_122[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_121[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_121[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_120[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_120[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_119[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_119[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_118[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_118[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_114[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_114[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_113[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_113[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_112[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_112[slug] ?? null);
+      else if (BRAND_CONTENT_BATCH_111[slug]) expect(data.logo_url).toBe(BRAND_LOGOS_BATCH_111[slug] ?? null);
+      else expect(data.logo_url).toMatch(/^https:\/\//);
     }
     expect(JSON.stringify(BRAND_CONTENT_BATCH_50)).not.toMatch(/editorial guardrail|database|the producer does not|no tasting notes found|read the individual label|symphony|testament|delve|nestled|embark|elevate your senses|dance on the palate|rich tapestry|whether you're/i);
   });
