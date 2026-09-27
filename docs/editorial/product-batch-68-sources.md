@@ -1,0 +1,35 @@
+# Product batch 68 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- Clarendelle AOC Bordeaux Rouge: Clarendelle official Bordeaux Red pages, Clarence Dillon Wines Clarendelle family page, Clarendelle Bordeaux Rouge technical PDF.
+  - https://www.clarendelle.com/en/the-wines/bordeaux-red/bordeaux-red-2016/
+  - https://www.clarencedillonwines.com/en/la-famille-clarendelle/
+- Single Vat Blended Indian Malt Whisky: Livcheers and DrinksBuff Telangana/product references; kept producer-specific claims out where not supported by a primary source.
+  - https://www.livcheers.com/hyderabad/liquor/single-vat-blended-indian-malt-whisky-1000ml
+  - https://drinksbuff.com/spirits/single-vat-blended-indian-malt-whisky/
+- The Kraken Black Spiced Rum: Kraken official Original/Black Spiced Rum pages and brand sheets for Caribbean black spiced rum style and spice notes.
+  - https://www.krakenrum.com/products/original/
+  - https://shop.krakenrum.com/collections/rums/products/black-spiced
+- Maharani Blue Lable Super Strong Premium Beer: Chhattisgarh excise landing-price/register material and Odisha/Madhya Pradesh excise references tying the label to M.P. Beer Products Limited.
+  - https://excise.cg.nic.in/Uploads/LandingPrice_2025-26_.pdf
+  - https://osbcl.co.in/NewIncludes/UploadFiles/ED/ed-beer-2016-2017.pdf
+- Colonsay Gin: Colonsay Gin official home, product, FAQ and distillery tour pages for Isle of Colonsay, copper-pot and G&T serve details.
+  - https://colonsaygin.com/
+  - https://colonsaygin.com/products/70colonsay
+  - https://colonsaygin.com/pages/frequently-asked-questions
+- South Bank Pink Gin: Master of Malt and Livcheers references for berry-led pink gin profile and botanicals.
+  - https://www.masterofmalt.com/gin/southbank/south-bank-pink-gin/
+  - https://www.livcheers.com/bangalore/liquor/south-bank-pink-gin-700ml
+- Stainley Reserve Whisky: Livcheers and WhiskeyPrice brand references for Indian blended whisky classification; avoided unsupported bourbon/age claims from retailer copy.
+  - https://www.livcheers.com/gurgaon/liquor/stainley-reserve-whisky-750ml
+  - https://www.whiskeyprice.in/brand/stainley
+- ZigZag Original Vodka: ZigZag official site and Livcheers references for Original Vodka identity, Indian brand context and neutral-vodka style.
+  - https://zigzaglife.in/
+  - https://www.livcheers.com/bangalore/liquor/zig-zag-original-vodka-180ml
+- Tiger World Accl. Lager Beer: Livcheers product page for Tiger World listing, country marker and strong-lager tasting profile; official Tiger Beer/APB references used only as broad lager background and not treated as the same product.
+  - https://www.livcheers.com/goa/liquor/tiger-world-accl-lager-beer-330ml
+  - https://www.apbsingapore.com.sg/products/tiger-beer/
+- Avalon Pinot Noir: Avalon Winery official product page, Avalon Pinot Noir technical sheet and Wine.com/Wine Enthusiast notes for California Pinot Noir style.
+  - https://www.avalonwinery.com/our-wines/california-pinot-noir/
+  - https://www.avalonwinery.com/wp-content/uploads/2024/03/Avalon-Pinot-Noir-TeachSheet.pdf
+  - https://www.wine.com/product/avalon-california-pinot-noir-2020/1038497

@@ -1,0 +1,34 @@
+# Product batch 69 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- No Label Original Mead: Livcheers, Mansionz, ET HospitalityWorld, Globus Spirits investor material and trade coverage for Bored Beverages, No Label, honey fermentation, carbonated 330 ml format and Indian market context.
+  - https://www.livcheers.com/faridabad/liquor/mead-no-label-330ml
+  - https://mansionz.in/products/no-label-original-mead
+  - https://hospitality.economictimes.indiatimes.com/news/operations/food-and-beverages/bored-beverages-to-take-its-no-label-original-mead-brand-to-more-places/95582902
+- Single Malts of India Marudham: Amrut official product page, Livcheers and London Spirits Competition for 46% Indian single malt identity and tropical tasting profile.
+  - https://amrutdistilleries.com/single-malts-of-india-marudham/
+  - https://www.livcheers.com/bangalore/liquor/single-malts-of-india-marudham-indian-single-malt-whisky-750ml
+  - https://londonspiritscompetition.com/en/winner-brands/spirits/2025/amrut-distilleries-6249/single-malts-of-india-marudham-11290.htm
+- Jones & Me Blended Scotch Whisky: Jones & Me official site for UK company background, Scotch sourcing, Scotland production, 43% strength and product positioning.
+  - https://jonesandme.in/
+- Portillo Sauvignon Blanc 2020: Bodegas Salentein official Sauvignon Blanc/Portillo pages for Uco Valley origin, 100% Sauvignon Blanc, winemaker and tasting notes.
+  - https://www.bodegasalentein.com/en/bodega/vino/72/sauvignon-blanc.html
+  - https://portillowines.com/
+- Desaal Sirak Select White: Talli Drinks and Vivino references for Desaal, Nashik origin and Indian white wine style.
+  - https://www.tallidrinks.com/product-page/sirak-select-white
+  - https://www.vivino.com/NL/en/desaal-sirak-select-white/w/9716848?year=2021
+- Barahsinghe Super Strong Nepali Beer: Barahsinghe official site and Nepal IP Bulletin linking Barahsinghe beer marks to Yak Brewing Company Pvt. Ltd. in Chitwan, Nepal.
+  - https://barahsinghe.com/
+  - https://doind.gov.np/uploads/buletins/Buletins-20240418211909404.pdf
+- Mooz Sparkle Vodka: Livcheers and The Adie Broswon Group public posts for Indian vodka identity, flavour profile, Punjab rice, triple distillation and filtration claims.
+  - https://www.livcheers.com/agra/liquor/mooz-sparkle-vodka-750ml
+  - https://www.linkedin.com/posts/adie-broswon-group_theadiebroswongroup-abgrainspirits-mooozsparkle-activity-7295677837766799360-_jX8
+- Cecilia Beretta Vino Spumante Rose: Cecilia Beretta official range pages, Livcheers, Vivino and Indian retailer references for Italian sparkling rose, producer story and Glera-based spumante identity.
+  - https://ceciliaberetta.it/en/wines
+  - https://www.livcheers.com/mangalore/liquor/cecilia-beretta-vino-spumante-rose-wine-750ml
+  - https://www.vivino.com/cecilia-beretta-cecilia-b-spumante-rose-vino-da-tavola/w/5175465
+- Niel Joubert Sauvignon Blanc: Niel Joubert official site and 2025 Sauvignon Blanc fact sheet for Paarl origin, family estate history, stainless-steel winemaking and tasting profile.
+  - https://nieljoubert.co.za/
+  - https://nieljoubert.co.za/wp-content/uploads/2025/05/Fact-Sheet-Estate-Sauvignon-Blanc-2025.pdf
+- Four By Four Premier Millennials Whisky: Livcheers product page for Indian blended whisky classification and citrus-spice-smoke tasting direction; no unsupported producer or age claims added.
+  - https://www.livcheers.com/hyderabad/liquor/four-by-four-premier-millennials-whisky-750ml

@@ -1,0 +1,40 @@
+# Product batch 71 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- Daily Special VSOP Bio Brandy: Bio Liquors official brand page for Daily's Special Brandy, grain spirit, matured grape spirits, Cognac, botanicals and fruity grape aroma.
+  - https://www.bioliquors.com/our-brands.php
+  - https://www.livcheers.com/hyderabad/liquor/daily-special-vsop-bio-brandy-180ml
+- Brenne Single Malt Whisky: Brenne official product and story pages for Cognac origin, Allison Parc, organic barley, alembic Charente distillation, Limousin oak, Cognac casks and tasting profile.
+  - https://brennewhisky.com/products
+  - https://brennewhisky.com/our-story
+- Cuatro Gallos Acholado De Puros Pisco: Cuatro Gallos official product-family page, Peruvian retailer references and Livcheers for acholado pisco, grape blend, Ica context, copper-still/citrus-floral tasting direction.
+  - https://www.cuatrogallos.com.pe/
+  - https://www.livcheers.com/nagpur/liquor/cuatro-gallos-acholado-de-puros-pisco-700ml
+  - https://vinosamerica.com/collections/buen-fin-2025/products/aguar-pisco-cuatro-gallos-acholado-700-ml
+- Mirabeau Dry Gin: Maison Mirabeau official product page and technical sheet for Provence origin, grape neutral spirit, rose wine, copper-pot distillation and Riviera botanicals.
+  - https://www.maisonmirabeau.com/our-range/mirabeau-dry-gin/
+  - https://www.maisonmirabeau.com/main/wp-content/uploads/2019/11/ENDryGin70cl2020MirabeauWeb.pdf
+- Bushwhacker Strong: Livcheers product listing, Kash Spirits trade profile and Untappd brewery/product context for Indian strong lager classification and Haryana/Punjab market presence.
+  - https://www.livcheers.com/faridabad/liquor/bushwhacker-strong-650ml
+  - https://kashspirits.com/Kash-Profile.pdf
+  - https://untappd.com/w/amara-breweries/444799/beer
+- Bad Boy Bordeaux Red Wine: Thunevin official online text, Thunevin Bad Boy technical sheet and Livcheers for Bordeaux origin, Jean-Luc Thunevin, Merlot-led blend and red-fruit/oak profile.
+  - https://www.thunevin-online.com/
+  - https://www.thunevin.com/upload/Bad-Boy_EN-.pdf
+  - https://www.livcheers.com/gurgaon/liquor/bad-boy-750ml
+- Lone Wolf Strong: Lone Wolf official story page, ET HospitalityWorld and Spiritz trade references for Onkara Beverages, 2022 launch, strong lager positioning and smooth premium profile.
+  - https://lonewolfbev.com/our-story/
+  - https://hospitality.economictimes.indiatimes.com/news/operations/food-and-beverages/onkara-beverages-to-launch-new-variants-of-lonewolf-beer-to-enhance-on-trade-penetration/100589501
+  - https://spiritz.in/files/spiritz/media/files/2024/10/24/final-oct-24-a.pdf
+- The Warehouse Gold Premium Tequila: Vinbros product and price-list pages, Livcheers and Kompass for Vinbros ownership, The Warehouse range, Indian gold tequila listing and citrus/caramel service profile.
+  - https://vinbros.in/products.html
+  - https://www.livcheers.com/bangalore/liquor/tequila-premium-gold-the-warehouse-750ml
+  - https://in.kompass.com/p/vinbros-and-company/in741748/the-warehouse-gold-premium-tequila/13962a0c-1373-4c8b-b6ef-68c09dc55551/
+- Tentaka Takanotsume Tokubetsu Honjozo: Tentaka official brewery page, Sakenomy and Livcheers for Otawara/Tochigi origin, Tokubetsu Honjozo style, rice polishing and clean dry tasting profile.
+  - https://www.tentaka.co.jp/
+  - https://www.sakenomy.jp/en/sake/TST0000045413/
+  - https://www.livcheers.com/listing/liquor/tokubetsu-honjozo-tentaka-takanotsume-700ml
+- Old Monk XXX Rum 375ml: Mohan Meakin official rum page, Virginia ABC and Old Monk brand history reference for Mohan Meakin, Old Monk XXX Rum, molasses-distilled dark rum and vanilla-led profile.
+  - https://mohanmeakin.com/rums/
+  - https://www.abc.virginia.gov/products/rum/old-monk-xxx-rum
+  - https://oldmonkrum.ee/en/brand/

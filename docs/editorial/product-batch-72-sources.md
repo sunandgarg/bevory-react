@@ -1,0 +1,43 @@
+# Product batch 72 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- Chateau Lamouroux Graves White: Grand Enclos de Cerons official page, Vivino and Guide Hachette references for Graves Blanc origin, Sauvignon Blanc/Semillon blend, stainless-steel fermentation, lees contact and citrus-floral profile.
+  - https://www.grandenclosdecerons.com/en/lamouroux-graves-blanc
+  - https://www.vivino.com/en/fr-lamouroux-graves-blanc/w/5269732
+  - https://www.hachette-vins.com/guide-vins/les-vins/ch-lamouroux-2015-2017/201715169/
+- Scapegrace Classic Premium Gin: Scapegrace official product page for 42.2% ABV, twelve botanicals, wheat neutral spirit, Southern Alps water and citrus-juniper tasting profile.
+  - https://scapegracedistillery.com/products/scapegrace-classic
+  - https://www.livcheers.com/gurgaon/liquor/scapegrace-classic-premium-gin-1000ml
+- Scapa The Orcadian: Pernod Ricard Scapa page and Scapa official 10-year page for Orkney location, manual distillery operation, Orquil Springs water, unpeated malt direction and honeyed coastal style.
+  - https://www.pernod-ricard.com/en/brands/scapa
+  - https://www.scapawhisky.com/en/product/10-year-old/
+- Kumeu Village Pinot Noir: Kumeu River official product page, winery page and Wilson Daniels reference for Rays Road/Hawke's Bay fruit, clay-loess over limestone, red-fruit profile and chalky tannin.
+  - https://kumeuriver.co.nz/collections/all/products/kumeu-village-pinot-noir
+  - https://kumeuriver.co.nz/
+  - https://wilsondaniels.com/wine/kumeu-river/village-pinot-noir-new-zealand/
+- Senator No1 Deluxe Malt Blended Whisky: Livcheers, Cdiscount and trade/import references for 750 ml listing, malt blended whisky identity, Mauritius link and caramel/oak/dried-fruit tasting direction.
+  - https://www.livcheers.com/hyderabad/liquor/senator-no1-deluxe-malt-blended-whisky-750ml
+  - https://www.cdiscount.com/vin-champagne/whisky-scotch-alcool-aperitif/senator-s-ndeg1-deluxe-malt-blended-whisky-ile-mau/f-1294133-auc6091315091177.html
+  - https://www.volza.com/p/alcohol-or-whisky/export-data/exports-from-mauritius/
+- Godfather The Legendary Original Strong Beer: Devans official site, Godfather Beer official site, Godfather barcode/product page and Livcheers for Devans Modern Breweries, Jammu origin, 1984 Godfather flagship history and strong lager positioning.
+  - https://devans.co.in/
+  - https://www.godfatherbeer.com/
+  - https://www.godfatherbeer.com/8902181503733-godfather-super-8-strong-beer/
+  - https://www.livcheers.com/kolkata/liquor/godfather-the-legendary-original-strong-beer-650ml
+- Espania Tempranillo Garnacha: product technical sheet, Livcheers, Vivino, Tamil Nadu retail listing and import references for Spanish origin, Tempranillo/Garnacha blend and fruit-spice profile.
+  - https://www.jiam-food.com/wp-content/uploads/2024/03/espania-red-tempranillo-garnacha-2021.pdf
+  - https://www.livcheers.com/bangalore/liquor/espania-tempranillo-garnacha-750ml
+  - https://www.vivino.com/it/espania-tempranillo-garnacha/w/11369131
+  - https://sarakku.in/price/espania-tempranillo-garnacha-wine/
+- Senorita Cabernet Sauvignon: Radelan official product page, Livcheers and Senorita trade material for Chilean origin, Villa Alegre/Maule Valley fruit, Cabernet Sauvignon identity and dark-fruit profile.
+  - https://radelan.com/product/senorita-angel-cabernet-sauvignon/
+  - https://www.livcheers.com/delhi/liquor/senorita-cabernet-sauvignon-750ml
+  - https://cdnc.heyzine.com/files/uploaded/v3/27b0e4549f2fd21cf955103785bbb1bf7abb4b6e-4.pdf
+- Cynar Spritz: Campari Group Cynar page, Campari brand reference and IBA Spritz recipe for Padua origin, Dalle Molle family, 1952 creation, 13-herb artichoke infusion and Prosecco/soda spritz serve.
+  - https://www.camparigroup.com/en/spiritheque/cynar
+  - https://www.camparigroup.com/en/pages/brands
+  - https://iba-world.com/iba-cocktail/spritz/
+- 3 Kilos Coconut Vodka: 3 Kilos official Coco Gold page, product collection and German official distributor page for Dutch vodka, Schiedam production, European wheat, five-column distillation, fresh coconut flavour and gold-bar bottle.
+  - https://3kilos.com/products/coco-gold
+  - https://3kilos.com/collections/all
+  - https://3kilos.de/

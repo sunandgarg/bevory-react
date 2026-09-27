@@ -1,0 +1,31 @@
+# Product Batch 85 Sources
+
+- Carling Strong Beer: Himachal Pradesh beer MRP notification, Molson Coors India entry, https://www.hptax.gov.in/public/notifications/174409640067f4cc90ca412.pdf
+- Carling Strong Beer: Livcheers Delhi listing, https://www.livcheers.com/delhi/liquor/carling-strong-beer-650ml
+- Carling India/Molson Coors background: SEC filing, https://www.sec.gov/Archives/edgar/data/24545/000002454516000054/tap2015123110-k.htm
+- Los Javis Espadin Joven Mezcal: official Los Javis product page, https://www.mezcallosjavis.com/espadn-joven
+- Los Javis Espadin Joven Mezcal: Mezcalistas label reference, https://www.mezcalistas.com/label/mezcal-los-javis-joven/
+- Los Javis Espadin Joven Mezcal: process reference, https://notabledistinction.com/los-javis-mezcal-espadin-joven-review/
+- 6 Furlongs Pale Ale Beer: St Andrews Beach Brewery product page, https://standrewsbeachbrewery.com.au/product/6-furlongs-pale-ale/
+- 6 Furlongs Pale Ale Beer: Untappd style/ABV reference, https://untappd.com/b/st-andrews-beach-brewery-6-furlongs-pale-ale/2448426
+- 6 Furlongs Pale Ale Beer: Livcheers Delhi listing, https://www.livcheers.com/delhi/liquor/6-furlongs-pale-ale-beer-375ml
+- Oakton Barrel Aged Rare Premium Grain Whisky: brand portfolio reference, https://stockdiscovery.s3.amazonaws.com/india/company/4898/3592/AR-25.pdf
+- Oakton Barrel Aged Rare Premium Grain Whisky: Chhattisgarh landing price listing, https://excise.cg.nic.in/Uploads/RSP_FL_2022_23.pdf
+- Oakton Barrel Aged Rare Premium Grain Whisky: Livcheers Hyderabad listing, https://www.livcheers.com/hyderabad/liquor/oakton-barrel-aged-rare-premium-grain-whisky-750ml
+- O'Be Lively Long Island Iced Tea: Livcheers Goa listing, https://www.livcheers.com/goa/liquor/obe-lively-long-island-iced-tea-330ml
+- O'Be Lively Long Island Iced Tea: ProWine Singapore O'Be media release, https://www.prowine-singapore.com/pdf/Media-Release-O-Be-Cocktails.pdf
+- O'Be Cocktails company background: IFT Trade launch note, https://www.ifttrade.com/news/O%E2%80%99Be-cocktails-launches-RTD-O%E2%80%99Besauve-gin-and-tonic-cocktail
+- Blockbuster Ultra Strong Beer: Chhattisgarh registered label listing, https://excise.cg.nic.in/Uploads/LandingPrice_2025-26_.pdf
+- Blockbuster Ultra Strong Beer: Sarakku Tamil Nadu listing, https://sarakku.in/price/blockbuster-ultra-strong-beer/
+- Blockbuster Ultra Strong Beer: Livcheers Warangal listing, https://www.livcheers.com/warangal/liquor/blockbuster-ultra-strong-beer-330ml
+- San Andre Tripple Sec Liqueur: Livcheers Goa listing, https://www.livcheers.com/goa/liquor/san-andre-triple-sec-liqueur-375ml
+- San Andre Tripple Sec Liqueur: Livcheers Mumbai listing, https://www.livcheers.com/mumbai/liquor/san-andre-tripple-sec-liqueur-750ml
+- One More Green Apple: Livcheers Agra listing, https://www.livcheers.com/agra/liquor/one-more-green-apple-750ml
+- One More Green Apple: Liquorvault Goa product reference, https://www.liquorvaultgoa.com/product/one-more-pure-green-apple-vodka-750ml/
+- One More Green Apple: DrinksBuff retail reference, https://drinksbuff.com/spirits/one-more-premium-craft-vodka-green-apple/
+- Royal Player Premium Whisky: Alco Spirits product page, https://alcogroup.in/our-product/
+- Royal Player Premium Whisky: Himachal Pradesh notification, https://www.hptax.gov.in/public/notifications/174358661167ed05335dfec.pdf
+- Royal Player Premium Whisky: Livcheers Delhi listing, https://www.livcheers.com/delhi/liquor/royal-player-premium-whisky-750ml
+- The Glenwalk Blended Scotch Whisky: official Glenwalk site, https://www.theglenwalk.com/
+- The Glenwalk Blended Scotch Whisky: official Glenwalk variants page, https://www.theglenwalk.com/glenwalk-variants
+- The Glenwalk Blended Scotch Whisky: Economic Times Cartel & Bros background, https://economictimes.indiatimes.com/industry/cons-products/liquor/sanjay-dutt-invests-in-alcobev-startup-cartel-bros/articleshow/101116286.cms

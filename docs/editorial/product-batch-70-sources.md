@@ -1,0 +1,33 @@
+# Product batch 70 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- Peter Scot Black Single Malt: House of Khodays/Khodays background, Ritz launch coverage and Whiskybase reference for Indian single malt identity and public tasting direction.
+  - https://thehouseofkhodays.com/
+  - https://www.ritzmagazine.in/house-of-khoday-launches-peter-scot-black-single-malt-whisky/?amp=1
+  - https://www.whiskybase.com/whiskies/whisky/248903/peter-scot-black
+- Toit Tint-In-Wit: Toit official beer page and Toit beer menu for Belgian witbier style, Pilsner malt, unmalted Indian wheat, coriander, orange peel and 4.6% strength.
+  - https://toit.in/beer/toit-tint-in-wit/
+  - https://toit.in/doc/BAGT_Beer_Menu.pdf
+- Poison Rose Wine: Indian retail references for Glera and Pinot Noir rose positioning, berry-led tasting style and chilled serving context; no unsupported producer claims added.
+  - https://www.livcheers.com/nagpur/liquor/poison-rose-wine-750ml
+  - https://liquorsai.com/liquor/poison-rose-wine
+- Grand Sud Syrah Vin de Pays: Grands Chais de France brand page, international retailer and Livcheers listing for Pays d'Oc origin, one-litre Grand Sud format and Syrah notes.
+  - https://www.groupegcf.fr/nos-marques/grand-sud.html
+  - https://thestore.mt/products/wgcf39d
+  - https://www.livcheers.com/listing/liquor/grand-sud-syrah-vin-de-pays-1000ml
+- Enso Reserve Japanese Whisky: Enso official range page for Nagano/Sekida positioning, Japanese blended whisky identity and caramel, vanilla, dry cask and spice notes.
+  - https://www.enso-whisky.de/en/our-range/
+- Mateus Sparkling Brut Rose: Sogrape/Mateus technical materials for Portuguese brut sparkling rose identity, pale rose-petal colour, fine bubbles and apple, pear and raspberry notes.
+  - https://eng.sograpevinhos.com/marcas/Mateus/Mateus%20Sparkling%20Brut%20Ros%C3%A9.pdf
+  - https://sograpedistribuicao.pt/en/portfolio/sparkling-rose-brut/
+- Amaris Reserve Cabernet Sauvignon: Livcheers and Drinkarto references for Chilean Cabernet Sauvignon identity, oak-aged reserve positioning and blackcurrant, plum, tobacco and oak notes.
+  - https://www.livcheers.com/pune/liquor/amaris-reserve-cabernet-sauvignon-750ml
+  - https://www.drinkarto.com/product-page/amaris-reserve-cabernet-sauvignon
+- Three Bridges Chardonnay Tumbarumba: Calabria Family Wines official technical sheet for Tumbarumba fruit, Chardonnay identity, French and Austrian oak, malolactic fermentation and lees stirring.
+  - https://www.calabriawines.com.au/pub/media/tasting_notes/3_BRIDGES_Chardonnay_2022.pdf
+- Marchesi Mazzei Badiola IGT Toscana: Demeine Estates and Mazzei references for Poggio Badiola Toscana IGT, Fonterutoli, Sangiovese and Merlot blend, high-altitude vineyards and oak maturation; the public copy avoids mixing it with Badiola Chianti Classico Gran Selezione.
+  - https://demeineestates.com/wp-content/uploads/2023/05/2020-Poggio-Badiola-Fact-Sheet.pdf
+  - https://eu.mazzei.it/it/products/poggio-badiola
+  - https://us.mazzei.it/products/badiola
+- Windsor Special Whisky: Livcheers product page for Indian blended whisky classification, grain spirit and malt spirit base and easy-service profile.
+  - https://www.livcheers.com/mangalore/liquor/windsor-special-whisky-750ml

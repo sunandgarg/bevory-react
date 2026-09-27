@@ -1,0 +1,47 @@
+# Product batch 73 sources
+
+- Image audit: all 10 batch products already have BevOry migrated product images under `https://bevory.in/media/migrated-images/products/...`; no image URL was replaced in this local batch.
+- Virto Edizione Gourmet Vino Bianco: Vivino, Gusto Imports, Livcheers and distributor visuals for Sensi/Virto, Tuscany origin, white blend classification, hay-yellow colour and floral-fruity style.
+  - https://www.vivino.com/it/sensi-virto-edizione-gourmet-bianco-tuscany/w/4420434
+  - https://gustoimports.com/product/virto-edizione-gourmet-vino-bianco/
+  - https://www.livcheers.com/pune/liquor/virto-edizione-gourmet-vino-bianco-750ml
+- Vina Temprana Old Vines Tempranillo: Wine Enthusiast, Gilbert & Gaillard, Vivino and Wine.com for Bodegas Aragonesas, Campo de Borja, Tempranillo grape, old-vine positioning and red/black fruit spice profile.
+  - https://www.wineenthusiast.com/buying-guide/bodegas-aragonesas-2016-vina-temprana-old-vines-tempranillo-campo-de-borja/
+  - https://www.gilbertgaillard.com/en/resultats/vina-temprana-old-vines-tempranillo-253351
+  - https://www.vivino.com/es/bodegas-aragonesas-vina-temprana-old-vines-tempranillo-campo-de-borja/w/5403124
+  - https://www.wine.com/product/bodegas-aragonesas-vina-temprana-old-vines-tempranillo-2014/253082
+- Amora White Wine: Livcheers, Talli Drinks and Indian excise references for 750 ml Indian white wine, light-medium body, citrus/apple/pear style and chilled white-wine service.
+  - https://www.livcheers.com/goa/liquor/amora-white-wine-750ml
+  - https://tallidrinks.in/karnataka/bangalore/wine/amora-white-wine-750ml
+  - https://excise.delhi.gov.in/sites/default/files/important-news/list_of_indian_and_foreign_brands_registered_in_nct_of_delhi_with_price_for_the_year_2020-21.pdf
+- Rebel Heart Irish Whiskey Smooth Blend: Rebel Heart official site, Livcheers and import records for Ireland origin, Bitter Imports India, minimum three-year bourbon-cask maturation and smooth blend profile.
+  - https://rebelheartwhiskey.com/
+  - https://www.livcheers.com/hyderabad/liquor/rebel-heart-irish-whiskey-smooth-blend-750ml
+  - https://en.nbd.ltd/trader/info/I7NBD199516792
+- Gold Riband Deluxe Whisky: trademark records, United Spirits/Diageo material, Rajasthan approved supplier listings and Livcheers for United Spirits connection, Indian blended whisky positioning and local bottle formats.
+  - https://www.quickcompany.in/trademarks/2799617-gold-riband-deluxe-whisky
+  - https://www.quickcompany.in/trademarks/228099-gold-riband
+  - https://iems.rajasthan.gov.in/ApprovedSuppliersBrands/ApprovedSuppliersBrands/ApprovedSuppliersBrands
+  - https://www.livcheers.com/jaipur/brand/gold-riband
+- Ballantine's Glenburgie 15 Year Old: Ballantine's official product page, Pernod Ricard release references and Livcheers brand listing for Glenburgie 15, 40% ABV, Speyside identity and apple/honey/orange profile.
+  - https://www.ballantines.com/en/range/glenburgie-15-year-old/
+  - https://www.pernod-ricard.com/fr/media/premiere-serie-de-single-malts-ballantine-s
+  - https://www.livcheers.com/faridabad/brand/ballantines
+- Lift Up Green Apple Vodka: Modi Illva official portfolio statement, Livcheers, Delhi/UP price references and public price listings for Lift Up Vodka and Green Apple flavoured vodka classification.
+  - https://www.modiillva.com/
+  - https://www.livcheers.com/faridabad/liquor/lift-up-green-apple-750ml
+  - https://www.delhicapital.com/wp-content/uploads/2023/02/Liquor-price-in-Delhi.pdf
+- Great Indian Shimla Green Apple Gin Native Dry: Livcheers, Talli and Restaurant India coverage for Great Indian Gin, July 2022 launch, Shimla Green Apple variant and apple/juniper/botanical tasting profile.
+  - https://www.livcheers.com/hyderabad/liquor/great-indian-shimla-green-apple-gin-native-dry-750ml
+  - https://tallidrinks.in/products/great-indian-shimla-green-apple-gin-native-dry-750ml
+  - https://www.restaurantindia.in/article/young-crowd-single-living-socio-cultural-acceptance-to-fuel-growth-in-alcohol-segment.11457
+- Haart To Heart Mosel Riesling Dry: Weingut Haart official wine page, VDP catalogues, Mosel Fine Wines and Livcheers for Piesport/Mosel origin, Riesling identity, VDP.Gutswein context and green apple/slate profile.
+  - https://haart.de/weine/
+  - https://www.vdp.de/fileadmin/user_upload/Downloads/user_upload/2025_Weinboerse_Weinkatalog.pdf
+  - https://wijn.sm-ict.com/2017/08/Mosel_Fine_Wines_No36.pdf
+  - https://www.livcheers.com/liquor/haart-to-heart-mosel-riesling-dry-750ml
+- Veranza Tinto Wine: 15 Bodegas, Alcampo, Vintnerize and India launch coverage for Bodegas Nuviana, Aragon/Valle del Cinca, red blend composition, stainless-steel vinification and soft medium-bodied profile.
+  - https://www.15bodegas.com/es_en/veranza-tinto-rosca
+  - https://www.compraonline.alcampo.es/products/veranza-vino-tinto-con-igp-vinos-de-la-tierra-de-arag%C3%B3n-veranza-botella-de-75-cl/35828
+  - https://products.vintnerize.com/wine/nuviana-veranza-vino-tinto-de-la-tierra-del-cinca
+  - https://highonwines.com/2019/03/07/codorniu-raventos-debuts-in-india-with-vbev/

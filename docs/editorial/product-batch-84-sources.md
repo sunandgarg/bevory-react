@@ -1,0 +1,21 @@
+# Product Batch 84 Sources
+
+- William Lawsons Scotch: official William Lawson's whisky page, https://www.williamlawsons.com/our-whisky/
+- William Lawsons ownership/portfolio reference: Bacardi portfolio, https://www.bacardilimited.com/our-brands/portfolio/
+- Blue Spirits Ghost Gin: official Blue Spirits gin page, https://www.bluespiritsdistilling.com/spirits/gin/
+- Kati Patang Snappy Wheat Beer: official Kati Patang craft beer background, https://katipatang.com/
+- Kati Patang Snappy Wheat ingredients: Kati Patang brewing process guide, https://katipatang.com/blog/how-kati-patang-brews-indian-craft-beer-ingredients-brewing-process-and-craftsmanship
+- Kati Patang Snappy Wheat ABV/style cross-check: Untappd listing, https://untappd.com/b/kati-patang-snappy-wheat/3333929
+- Ron Zacapa Centenario Rum: official Zacapa Sistema Solera page, https://www.zacaparum.com/en/our-story/sistema-solera
+- Ron Zacapa brand distribution reference: Diageo Zacapa page, https://www.diageo.com/en/our-brands/brand-explorer/ron-zacapa
+- Chantilli Chenin Blanc: Chateau Indage product page, https://www.chateauindage.in/chantilli-chenin-blanc.html
+- Virgin Hills Red: Livcheers listing, https://www.livcheers.com/nashik/liquor/virgin-hills-red-750ml
+- Virgin Hills company background: Virgin Hills Vineyards LinkedIn, https://in.linkedin.com/company/virginhillswines
+- Edinburgh Gin Pomegranate And Rose: The Spirits Business launch article, https://www.thespiritsbusiness.com/2018/02/edinburgh-gin-launches-pomegranate-rose-gin-liqueur/
+- Edinburgh Gin Pomegranate And Rose trade listing: Harvey Nichols listing, https://www.harveynichols.com/edinburgh-gin/pomegranate-and-rose-liqueur-500ml-674318-na-76599/
+- Saint Louis Pure Grape VSOP Brandy: Livcheers listing, https://www.livcheers.com/goa/liquor/saint-louis-pure-grape-vsop-brandy-700ml
+- Saint Louis Pure Grape VSOP Brandy state listing cross-check: Sarakku TASMAC brand page, https://sarakku.in/price/brand/saint-louis/
+- Sauvignon La Tete Dans Les Cepages Pays D'Oc: Livcheers listing, https://www.livcheers.com/gwalior/liquor/sauvignon-la-tete-dans-les-cepages-pays-d-oc-750ml
+- Sauvignon La Tete Dans Les Cepages Pays D'Oc trade movement reference: Volza entry, https://www.volza.com/hs-codes/search/white-wine-sauvignon-blanc/france/
+- Luxardo Maraschino Liqueur: official Luxardo Maraschino Originale page, https://www.luxardo.it/liqueurs-and-distillates/maraschino-originale/
+- Luxardo Maraschino cocktail reference: Luxardo USA Modern Maraschino, https://www.luxardousa.com/modern-maraschino

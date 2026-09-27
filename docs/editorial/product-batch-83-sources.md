@@ -1,0 +1,21 @@
+# Product Batch 83 Sources
+
+- Soci The Indian Gin Story: Conde Nast Traveller India SOCI Gin entry, https://www.cntraveller.in/story/10-made-in-india-gins-driving-indian-gin-revolution-alcohol/
+- Soci The Indian Gin Story identity and packaging background: RGD Soci portfolio, https://designrgd.com/portfolio/soci/
+- Soci launch background: FoodTechBiz SOCI Gin launches in India, https://www.foodtechbiz.com/amp/story/product-launches/soci-gin-launches-in-india
+- Virgin Hills Shiraz: official Virgin Hills product page, https://www.virginhillswines.com/product-page/shiraz
+- Virgin Hills company background: Virgin Hills Vineyards LinkedIn, https://in.linkedin.com/company/virginhillswines
+- Butlers Espresso: official Butlers Liqueurs site, https://butlerscocktails.co.za/
+- Butlers Espresso cocktail use: Butlers cocktail book, https://butlerscocktails.co.za/wp-content/uploads/2021/06/DGB_Butlers_Cocktail_Book_2011-2.pdf
+- Ti Connie Peachy Liqueur: Drinkarto listing, https://www.drinkarto.com/product-page/ti-connie-peachy-liqueur
+- Zignum Mezcal Zignum Anejo Cristalino: official Zignum product page, https://www.zignummezcal.com/es/nuestros-productos/
+- Maison Bel Air Margaux 2016: Livcheers listing, https://www.livcheers.com/liquor/maison-bel-air-margaux-2016-750ml
+- Maison Bel Air Margaux 2016 appellation reference: Clos des Millesimes Margaux Bel Air reference, https://www.closdesmillesimes.com/chateau-bel-air-marquis-aligre-2016-en.html
+- Lemount Premium Super Strong Beer: Mount Everest Breweries site, https://mounteverestbreweries.com/
+- Lemount beer facts: Mount Everest Breweries beer brands guide, https://mounteverestbreweries.com/blog/best-beer-brands-in-india/
+- Yamazaki Single Malt: House of Suntory Yamazaki page, https://house.suntory.com/yamazaki-whisky
+- Yamazaki Distillery background: Suntory Yamazaki Distillery page, https://www.suntory.com/factory/yamazaki/
+- Mr Jerrys Very Merry Toddy: Livcheers listing, https://www.livcheers.com/goa/liquor/mr-jerrys-very-merry-toddy-500ml
+- Mr Jerrys Very Merry Toddy award and technical reference: IWSC result, https://iwsc.net/results/detail/153655/mr-jerrys-very-merry-toddy
+- Finlandia Black Current Vodka: official Finlandia Blackcurrant page, https://www.finlandia.com/en/vodka-flavours/finlandia-blackcurrant
+- Finlandia Blackcurrant flavour and cocktail reference: official Finlandia Blackcurrant cocktails page, https://www.finlandia.com/en/product/finlandia-blackcurrant-cocktails
