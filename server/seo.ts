@@ -507,6 +507,9 @@ export const rewriteSeoDocument = (template: string, route: SeoRoute) => {
   html = setAttribute(html, /<meta\s+name=["']twitter:description["'][^>]*>/i, "content", seo.description);
   html = setAttribute(html, /<meta\s+name=["']twitter:image["'][^>]*>/i, "content", shareImage);
   html = setAttribute(html, /<link\s+rel=["']canonical["'][^>]*>/i, "href", canonical);
+  // Each page is its own English/India version, not an alternate of the homepage.
+  html = html.replace(/<link\b[^>]*\bhreflang=["'](?:en-in|x-default)["'][^>]*>/gi,
+    (tag) => setAttribute(tag, /<link\b[^>]*>/i, "href", canonical));
   html = html.replace(
     /<\/head>/i,
     `  <script id="bevory-route-schema" type="application/ld+json">${schema}</script>\n</head>`,
@@ -516,6 +519,8 @@ export const rewriteSeoDocument = (template: string, route: SeoRoute) => {
 };
 
 const legacyProductTargets = new Map([
+  // Retired 750ml listing: retain the liquid identity without inventing a current size.
+  ["glenfiddich-ipa-750ml-t1", "/gurgaon/product/glenfiddich-ipa-1c62014"],
   ["all-seasons-reserve-whisky-750ml", "/gurgaon/brand/all-season"],
   ["johnnie-walker-gold-label-reserve-375ml", "/gurgaon/product/johnnie-walker-gold-reserve-abc15db"],
   ["royal-challenge-select-premium-750ml", "/gurgaon/brand/royal-challenge"],

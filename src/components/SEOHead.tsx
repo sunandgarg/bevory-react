@@ -162,6 +162,14 @@ const SEOHead = ({
     }
     link.setAttribute("href", canonicalUrl);
 
+    // Keep language alternates aligned after client-side navigation as well.
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((alternate) => {
+      const language = alternate.getAttribute("hreflang")?.toLowerCase();
+      if (language === "en-in" || language === "x-default") {
+        alternate.setAttribute("href", canonicalUrl);
+      }
+    });
+
     // Also set og:url
     updateMeta("og:url", canonicalUrl, true);
 

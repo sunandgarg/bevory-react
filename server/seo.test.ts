@@ -13,6 +13,8 @@ import {
 
 const template = `<!doctype html><html><head>
 <link rel="canonical" href="https://bevory.in/" />
+<link rel="alternate" href="https://bevory.in/" hreflang="en-in" />
+<link rel="alternate" hreflang="x-default" href="https://bevory.in/" />
 <title>Default</title>
 <meta name="description" content="Default">
 <meta name="robots" content="index, follow">
@@ -26,6 +28,16 @@ const template = `<!doctype html><html><head>
 </head><body><div id="root"><h1>Default</h1></div><script type="module" src="/app.js"></script></body></html>`;
 
 describe("origin SEO rendering", () => {
+  it.each(["/", "/pune/product/johnnie-walker-red-label/750ml", "/brands"])("aligns language alternates with the unchanged canonical for %s", (path) => {
+    const seo = resolveSeo(path, {});
+    const html = rewriteSeoDocument(template, seo);
+    const canonical = `https://bevory.in${seo.canonicalPath}`;
+    expect(html).toContain(`<link rel="canonical" href="${canonical}" />`);
+    expect(html).toContain(`<link rel="alternate" href="${canonical}" hreflang="en-in" />`);
+    expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="${canonical}" />`);
+    expect(html).toContain(`<meta name="robots" content="${seo.robots}">`);
+  });
+
   it.each([{ breadcrumbs: [] }, { breadcrumbs: [{ name: "Home", path: "/" }] }])("omits insufficient breadcrumb trails without changing homepage SEO", ({ breadcrumbs }) => {
     const seo = { ...resolveSeo("/", {}), breadcrumbs };
     const html = rewriteSeoDocument(template, seo);
@@ -183,6 +195,8 @@ describe("origin SEO rendering", () => {
     })).toBe("/gurgaon/brand/peter-scot");
     expect(legacyRedirectPath("/product/johnnie-walker-blonde"))
       .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
+    expect(legacyRedirectPath("/product/glenfiddich-ipa-750ml-t1"))
+      .toBe("/gurgaon/product/glenfiddich-ipa-1c62014");
     expect(legacyRedirectPath("/gurgaon/")).toBe("/");
     expect(legacyRedirectPath("/product/not-a-real-product")).toBeNull();
     expect(legacyRedirectPath("/delhi/product/old-black-label/750ml", {

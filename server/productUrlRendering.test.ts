@@ -10,6 +10,20 @@ afterEach(async () => {
 });
 
 describe("product URL compatibility at the origin", () => {
+  it("recovers the retired Glenfiddich listing in one hop without claiming a 750ml price", async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), "bevory-legacy-ipa-test-"));
+    directories.push(directory);
+    await mkdir(path.join(directory, "seo-routes"));
+    await writeFile(path.join(directory, "seo-routes/product-index.json"), JSON.stringify({
+      products: { "glenfiddich-ipa-1c62014": { name: "IPA", brand: "Glenfiddich", volumes: ["700ml"], prices: { gurgaon: { "700ml": 7500 } } } }, brandsById: {},
+    }));
+    const redirect = createLegacyRedirectResolver(directory);
+    expect(await redirect("/product/glenfiddich-ipa-750ml-t1")).toBe("/gurgaon/product/glenfiddich-ipa");
+    expect(await redirect("/gurgaon/product/glenfiddich-ipa")).toBeNull();
+    expect(await redirect("/product/unrecognised-retired-listing")).toBeNull();
+    expect(await redirect("/brand/f616ef19-1dbb-40ef-ba21-dbe8c7908dd6")).toBeNull();
+  });
+
   it("redirects old links once and renders the clean 750ml URL with identical price and editorial", async () => {
     const directory = await mkdtemp(path.join(tmpdir(), "bevory-product-url-test-"));
     directories.push(directory);
