@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
@@ -45,10 +45,6 @@ const Footer = () => {
             <li className="flex items-center gap-1.5">
               <Mail className="h-3 w-3 text-primary-foreground/50" />
               <a href="mailto:bevory.main@gmail.com" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">bevory.main@gmail.com</a>
-            </li>
-            <li className="flex items-center gap-1.5">
-              <Phone className="h-3 w-3 text-primary-foreground/50" />
-              <a href="tel:+918010321712" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">+91 8010321712</a>
             </li>
             <li className="flex items-center gap-1.5">
               <MapPin className="h-3 w-3 text-primary-foreground/50" />

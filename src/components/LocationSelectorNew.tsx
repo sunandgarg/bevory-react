@@ -11,7 +11,8 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocation } from "@/hooks/useLocation";
 import { cn } from "@/lib/utils";
-import { POPULAR_CITIES, STATE_ORDER, cityHomePath } from "@/lib/locations";
+import { POPULAR_CITIES, STATE_ORDER, citySlugFromName } from "@/lib/locations";
+import { pathForCity } from "@/lib/pageNavigation";
 import { useNavigate, useLocation as useRouterLocation } from "react-router-dom";
 
 interface City {
@@ -54,10 +55,6 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
     state_name: city.state?.name,
   })), [locationCities]);
 
-  const getCitySlug = useCallback((cityName: string) => {
-    return cityName.toLowerCase().trim().replace(/\s+/g, "-");
-  }, []);
-
   const handleCitySelect = useCallback((city: City) => {
     // Find and set state first
     const state = states.find((s) => s.id === city.state_id);
@@ -69,15 +66,14 @@ const LocationSelectorNew = ({ variant = "default", className, onCitySelect }: L
     // Save to cookie
     document.cookie = `bevory_city=${encodeURIComponent(city.name)}; max-age=31536000; path=/`;
     
-    // Navigate to the city route if on homepage
-    const citySlug = getCitySlug(city.name);
-    if (routerLocation.pathname === '/' || routerLocation.pathname.match(/^\/[a-z-]+$/)) {
-      navigate(cityHomePath(citySlug), { replace: true });
-    }
+    const citySlug = citySlugFromName(city.name) || "gurgaon";
+    const currentPath = `${routerLocation.pathname}${routerLocation.search}${routerLocation.hash}`;
+    const nextPath = pathForCity(currentPath, citySlug);
+    if (nextPath !== currentPath) navigate(nextPath, { replace: true, state: routerLocation.state });
     
     setOpen(false);
     onCitySelect?.();
-  }, [states, setSelectedState, setSelectedCity, getCitySlug, navigate, routerLocation.pathname, onCitySelect]);
+  }, [states, setSelectedState, setSelectedCity, navigate, routerLocation, onCitySelect]);
 
   // Filter and group cities
   const popularCities = allCities.filter((c) =>

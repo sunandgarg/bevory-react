@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fullProductName } from "../src/lib/productName.js";
 import { PRODUCT_BATCH_CONTENT } from "../src/lib/productContentBatches.js";
+import { buildProductRoutes, mapProductUrls, publicProductPath } from "../src/lib/productRoutes.js";
 
 const SITE_ORIGIN = "https://bevory.in";
 
@@ -429,7 +430,8 @@ const routeSchema = (seo: SeoRoute) => {
         isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
         inLanguage: "en-IN",
       },
-      {
+      // Google requires at least two entries; the homepage has no breadcrumb trail.
+      ...(seo.breadcrumbs.length >= 2 ? [{
         "@type": "BreadcrumbList",
         itemListElement: seo.breadcrumbs.map((item, index) => ({
           "@type": "ListItem",
@@ -437,7 +439,7 @@ const routeSchema = (seo: SeoRoute) => {
           name: item.name,
           item: `${SITE_ORIGIN}${item.path}`,
         })),
-      },
+      }] : []),
       ...(seo.structuredData ? [seo.structuredData] : []),
       ...(seo.faqs?.length ? [{
         "@type": "FAQPage",
@@ -505,6 +507,9 @@ export const rewriteSeoDocument = (template: string, route: SeoRoute) => {
   html = setAttribute(html, /<meta\s+name=["']twitter:description["'][^>]*>/i, "content", seo.description);
   html = setAttribute(html, /<meta\s+name=["']twitter:image["'][^>]*>/i, "content", shareImage);
   html = setAttribute(html, /<link\s+rel=["']canonical["'][^>]*>/i, "href", canonical);
+  // Each page is its own English/India version, not an alternate of the homepage.
+  html = html.replace(/<link\b[^>]*\bhreflang=["'](?:en-in|x-default)["'][^>]*>/gi,
+    (tag) => setAttribute(tag, /<link\b[^>]*>/i, "href", canonical));
   html = html.replace(
     /<\/head>/i,
     `  <script id="bevory-route-schema" type="application/ld+json">${schema}</script>\n</head>`,
@@ -514,6 +519,8 @@ export const rewriteSeoDocument = (template: string, route: SeoRoute) => {
 };
 
 const legacyProductTargets = new Map([
+  // Retired 750ml listing: retain the liquid identity without inventing a current size.
+  ["glenfiddich-ipa-750ml-t1", "/gurgaon/product/glenfiddich-ipa-1c62014"],
   ["all-seasons-reserve-whisky-750ml", "/gurgaon/brand/all-season"],
   ["johnnie-walker-gold-label-reserve-375ml", "/gurgaon/product/johnnie-walker-gold-reserve-abc15db"],
   ["royal-challenge-select-premium-750ml", "/gurgaon/brand/royal-challenge"],
@@ -528,6 +535,11 @@ const legacyProductTargets = new Map([
 ]);
 
 const emptyProductIndex: ProductSeoIndex = { products: {}, brandsById: {} };
+
+const routesForSeoIndex = (index: ProductSeoIndex) => buildProductRoutes([
+  ...Object.keys(index.products).map(slug => ({ slug })),
+  ...Object.entries(index.aliases || {}).map(([slug, canonical_slug]) => ({ slug, canonical_slug, is_active: false })),
+]);
 
 export const legacyRedirectPath = (
   pathname: string,
@@ -591,6 +603,7 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => emptyProductIndex);
+  const publicRoutes = productIndex.then(routesForSeoIndex);
   const aliasCache = new Map<string, Promise<Record<string, string>>>();
   const maxCacheEntries = seoRouteCacheEntries();
 
@@ -614,7 +627,9 @@ export const createLegacyRedirectResolver = (clientDist: string) => {
     const aliases = productAliasBucketForPath(pathname)
       ? await loadAliases(pathname)
       : baseIndex.aliases;
-    return legacyRedirectPath(pathname, { ...baseIndex, ...(aliases ? { aliases } : {}) });
+    const legacy = legacyRedirectPath(pathname, { ...baseIndex, ...(aliases ? { aliases } : {}) });
+    const target = publicProductPath(legacy || pathname, await publicRoutes);
+    return target !== pathname ? target : null;
   };
 };
 
@@ -626,6 +641,7 @@ export const createSeoRenderer = (clientDist: string) => {
   const productIndex = readFile(path.join(clientDist, "seo-routes", "product-index.json"), "utf8")
     .then((value) => JSON.parse(value) as ProductSeoIndex)
     .catch(() => ({ products: {}, brandsById: {} }));
+  const publicRoutes = productIndex.then(routesForSeoIndex);
 
   const loadSeoRoutes = (pathname: string) => {
     const bucket = seoBucketForPath(pathname);
@@ -651,11 +667,18 @@ export const createSeoRenderer = (clientDist: string) => {
   };
 
   return async (pathname: string) => {
+    const routes = await publicRoutes;
+    const parts = pathname.split("/").filter(Boolean);
+    // SEO/editorial files retain stable catalogue slugs; the public URL need not.
+    if (parts[1] === "product" && routes.storedByUrl.has(parts[2])) {
+      parts[2] = routes.storedByUrl.get(parts[2])!;
+      pathname = `/${parts.join("/")}`;
+    }
     const generated = resolveSeo(pathname, await loadSeoRoutes(pathname));
     const dynamic = generated.robots.startsWith("noindex")
       ? resolveDynamicProductSeo(pathname, await productIndex)
       : null;
-    const route = enrichProductSeo(pathname, dynamic || generated, await loadProductEditorial(pathname));
+    const route = mapProductUrls(enrichProductSeo(pathname, dynamic || generated, await loadProductEditorial(pathname)), routes);
     return {
       html: rewriteSeoDocument(await template, route),
       statusCode: route.statusCode || 200,

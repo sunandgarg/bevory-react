@@ -6,6 +6,7 @@ import { userIsAdmin } from "./auth.js";
 import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 import { invalidateCatalogCache } from "./catalog.js";
 import { applyProductContentOverlay } from "../src/lib/productContentOverlay.js";
+import { getProductRoutes, invalidateProductRoutes } from "./productRoutes.js";
 
 const TABLES = new Set([
   "announcements", "app_settings", "blog_posts", "brand_spotlights", "categories",
@@ -637,8 +638,15 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
 
   try {
     if (payload.operation === "select") {
-      let rows = applyUserScope(req, payload, await readTable(payload.table, payload.filters), isAdmin);
-      rows = rows.filter((row) => (payload.filters ?? []).every((filter) => matchesFilter(row, filter)));
+      const productRoutes = payload.table === "products" ? await getProductRoutes() : null;
+      const filters = (payload.filters ?? []).map(filter => (
+        productRoutes && filter.column === "slug" && filter.operator === "eq" && typeof filter.value === "string"
+          ? { ...filter, value: productRoutes.storedByUrl.get(filter.value) || filter.value }
+          : filter
+      ));
+      let rows = applyUserScope(req, payload, await readTable(payload.table, filters), isAdmin);
+      rows = rows.filter((row) => filters.every((filter) => matchesFilter(row, filter)));
+      if (productRoutes) rows = rows.map(row => ({ ...row, public_slug: productRoutes.publicByStored.get(String(row.slug)) || row.slug }));
       const count = rows.length;
       for (const order of [...(payload.orders ?? [])].reverse()) {
         rows.sort((left, right) => {
@@ -683,6 +691,7 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
         result.push(data as Record<string, unknown>);
       }
       if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
+      if (payload.table === "products") invalidateProductRoutes();
       return res.json({ data: result, error: null, count: result.length });
     }
 
@@ -707,11 +716,13 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
         updated.push(data as Record<string, unknown>);
       }
       if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
+      if (payload.table === "products") invalidateProductRoutes();
       return res.json({ data: updated, error: null, count: updated.length });
     }
 
     await prisma.contentRecord.deleteMany({ where: { key: { in: matches.map((record) => record.key) } } });
     if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
+    if (payload.table === "products") invalidateProductRoutes();
     return res.json({ data: matches.map(({ data }) => toRecordData(data)), error: null, count: matches.length });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Database query failed";

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-card border-t border-border/50">
       <div className="px-4 py-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Explore</h2>
             <ul className="space-y-2">
@@ -37,14 +37,6 @@ const Footer = () => {
               <li><Link to="/source-disclosure" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Source & Ranking Disclosure</Link></li>
               <li><Link to="/grievance-redressal" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Grievance Redressal</Link></li>
               <li><Link to="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Reach Us</h2>
-            <ul className="space-y-2">
-              <li><a href="mailto:bevory.main@gmail.com" className="text-xs text-muted-foreground hover:text-foreground transition-colors">bevory.main@gmail.com</a></li>
-              <li><a href="tel:+918010321712" className="text-xs text-muted-foreground hover:text-foreground transition-colors">+91 8010321712</a></li>
-              <li><span className="text-xs text-muted-foreground">Dwarka, Delhi</span></li>
             </ul>
           </div>
         </div>

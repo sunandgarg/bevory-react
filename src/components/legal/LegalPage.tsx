@@ -6,8 +6,6 @@ import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 export const LEGAL_LAST_UPDATED = "23 September 2026";
 export const LEGAL_EMAIL = "bevory.main@gmail.com";
-export const LEGAL_PHONE_DISPLAY = "+91 8010321712";
-export const LEGAL_PHONE_HREF = "+918010321712";
 
 const legalLinks = [
   ["Terms & Conditions", "/terms"],
@@ -31,7 +29,6 @@ export const LegalContact = ({ purpose = "questions or notices" }: { purpose?: s
   <address className="not-italic rounded-xl border border-border/70 bg-muted/35 p-4">
     <strong>BevOry Grievance Desk</strong><br />
     Email: <a href={`mailto:${LEGAL_EMAIL}`}>{LEGAL_EMAIL}</a><br />
-    Phone: <a href={`tel:${LEGAL_PHONE_HREF}`}>{LEGAL_PHONE_DISPLAY}</a><br />
     Location: Dwarka, Delhi
     <p className="mb-0 mt-3 text-xs text-muted-foreground">
       These are BevOry's current published operator-contact details for {purpose}. No separate legal-entity name or

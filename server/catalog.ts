@@ -1,6 +1,8 @@
 import type { Request, Response } from "express";
 import type { Prisma } from "@prisma/client";
 import { findIndexedContentData, prisma, toRecordData } from "./db.js";
+import { buildProductRoutes } from "../src/lib/productRoutes.js";
+import { getProductRoutes } from "./productRoutes.js";
 
 type CatalogRow = Record<string, unknown>;
 
@@ -45,6 +47,7 @@ export const buildCityCatalog = (
   products: CatalogRow[],
   categories: CatalogRow[],
   subcategories: CatalogRow[],
+  productRoutes = buildProductRoutes(products),
 ) => {
   const variantsByProduct = new Map<string, CatalogVariant[]>();
   for (const row of prices) {
@@ -74,7 +77,7 @@ export const buildCityCatalog = (
       return {
         id: row.id,
         name: row.name,
-        slug: row.slug,
+        slug: productRoutes.publicByStored.get(String(row.slug)) || row.slug,
         brand: row.brand,
         brand_id: row.brand_id ?? null,
         category_id: row.category_id ?? null,
@@ -294,7 +297,7 @@ const buildFullCatalogPayload = async (cityId: string) => {
   const prices = jsonRows(priceRecords);
   const productIds = [...new Set(prices.map((row) => String(row.product_id ?? "")).filter(Boolean))];
 
-  const [productRecords, categoryRecords, subcategoryRecords] = await Promise.all([
+  const [productRecords, categoryRecords, subcategoryRecords, productRoutes] = await Promise.all([
     productIds.length
       ? prisma.contentRecord.findMany({
           where: { tableName: "products", recordId: { in: productIds } },
@@ -303,6 +306,7 @@ const buildFullCatalogPayload = async (cityId: string) => {
       : Promise.resolve([]),
     prisma.contentRecord.findMany({ where: { tableName: "categories" }, select: { data: true } }),
     prisma.contentRecord.findMany({ where: { tableName: "sub_categories" }, select: { data: true } }),
+    getProductRoutes(),
   ]);
 
   return buildCityCatalog(
@@ -310,6 +314,7 @@ const buildFullCatalogPayload = async (cityId: string) => {
     jsonRows(productRecords),
     jsonRows(categoryRecords),
     jsonRows(subcategoryRecords),
+    productRoutes,
   );
 };
 

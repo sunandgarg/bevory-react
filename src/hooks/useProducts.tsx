@@ -60,14 +60,14 @@ const EMPTY_PRODUCTS: Product[] = [];
 
 /* ===================== FETCHERS ===================== */
 
-const fetchCategories = async (): Promise<Category[]> => {
+export const fetchActiveCategories = async (): Promise<Category[]> => {
   const { data, error } = await apiClient
     .from("categories")
     .select("id, name, slug, emoji, image_url, description")
     .eq("is_active", true)
     .order("order_index");
   if (error) throw error;
-  return data as Category[];
+  return ((data ?? []) as Category[]).map(canonicalCategory);
 };
 
 type CatalogView = "full" | "home" | "category";
@@ -123,7 +123,7 @@ export const useProducts = (
 
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
-    queryFn: fetchCategories,
+    queryFn: fetchActiveCategories,
     staleTime: 10 * 60 * 1000, // categories rarely change
     enabled: enabled && !selectedCity?.id,
   });

@@ -7,6 +7,7 @@ import { fetchGoogleAnalytics, gaConfigured } from "./integrations/googleAnalyti
 import { generateGeminiJson, generateGeminiText, geminiConfigured } from "./integrations/gemini.js";
 import { importCityPrices, priceProviderConfigured } from "./integrations/priceProvider.js";
 import { INFORMATIONAL_PRICE_NOTICE } from "../src/lib/informationNotice.js";
+import { getProductRoutes } from "./productRoutes.js";
 
 type Row = Record<string, unknown>;
 
@@ -248,9 +249,10 @@ const partyPlanner = async (body: Record<string, unknown>) => {
   };
 };
 
-const recordBySlug = async (tableName: string, slug: string) => (
-  (await filteredRows(tableName, { slug }))[0] || null
-);
+const recordBySlug = async (tableName: string, slug: string) => {
+  if (tableName === "products") slug = (await getProductRoutes()).storedByUrl.get(slug) || slug;
+  return (await filteredRows(tableName, { slug }))[0] || null;
+};
 
 const pageContext = async (pathname: string, cityName: string) => {
   const segments = pathname.split("/").filter(Boolean).map((part) => decodeURIComponent(part));

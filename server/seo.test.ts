@@ -15,6 +15,8 @@ import {
 
 const template = `<!doctype html><html><head>
 <link rel="canonical" href="https://bevory.in/" />
+<link rel="alternate" href="https://bevory.in/" hreflang="en-in" />
+<link rel="alternate" hreflang="x-default" href="https://bevory.in/" />
 <title>Default</title>
 <meta name="description" content="Default">
 <meta name="robots" content="index, follow">
@@ -39,6 +41,45 @@ describe("origin SEO rendering", () => {
       expect(sitemap, path).toContain(`<loc>https://bevory.in${path}</loc>`);
     }
   });
+
+  it.each(["/", "/pune/product/johnnie-walker-red-label/750ml", "/brands"])("aligns language alternates with the unchanged canonical for %s", (path) => {
+    const seo = resolveSeo(path, {});
+    const html = rewriteSeoDocument(template, seo);
+    const canonical = `https://bevory.in${seo.canonicalPath}`;
+    expect(html).toContain(`<link rel="canonical" href="${canonical}" />`);
+    expect(html).toContain(`<link rel="alternate" href="${canonical}" hreflang="en-in" />`);
+    expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="${canonical}" />`);
+    expect(html).toContain(`<meta name="robots" content="${seo.robots}">`);
+  });
+
+  it.each([{ breadcrumbs: [] }, { breadcrumbs: [{ name: "Home", path: "/" }] }])("omits insufficient breadcrumb trails without changing homepage SEO", ({ breadcrumbs }) => {
+    const seo = { ...resolveSeo("/", {}), breadcrumbs };
+    const html = rewriteSeoDocument(template, seo);
+    expect(html).not.toContain('"@type":"BreadcrumbList"');
+    expect(html).toContain('"@type":"WebPage"');
+    expect(html).toContain('href="https://bevory.in/"');
+    expect(html).toContain(`<meta name="robots" content="${seo.robots}">`);
+    expect(html).toContain('<script type="module" src="/app.js"></script>');
+    expect(html).toContain(seo.heading);
+  });
+
+  it("retains complete inner-page breadcrumb trails and product schema", () => {
+    const path = "/pune/product/johnnie-walker-red-label/750ml";
+    const breadcrumbs = [{ name: "Home", path: "/" }, { name: "Pune", path: "/pune" }, { name: "Johnnie Walker Red Label", path }];
+    const product = { "@type": "Product", name: "Johnnie Walker Red Label", sku: "stable-product-id" };
+    const seo = { ...resolveSeo(path, {}), breadcrumbs, structuredData: product, robots: "index, follow" };
+    const html = rewriteSeoDocument(template, seo);
+    expect(html).toContain(JSON.stringify({
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem", position: index + 1, name: item.name, item: `https://bevory.in${item.path}`,
+      })),
+    }));
+    expect(html).toContain(JSON.stringify(product));
+    expect(html).toContain(`href="https://bevory.in${path}"`);
+    expect(html).toContain('<meta name="robots" content="index, follow">');
+  });
+
   it("overlays researched bottle copy on the origin SEO shell", () => {
     const seo = enrichProductSeo("/gurgaon/product/johnnie-walker-black-label-6e8300f", {
       title: "Black Label price in Gurgaon", description: "Old summary", heading: "Black Label",
@@ -168,6 +209,8 @@ describe("origin SEO rendering", () => {
     })).toBe("/gurgaon/brand/peter-scot");
     expect(legacyRedirectPath("/product/johnnie-walker-blonde"))
       .toBe("/gurgaon/product/johnnie-walker-blonde-f5823b7");
+    expect(legacyRedirectPath("/product/glenfiddich-ipa-750ml-t1"))
+      .toBe("/gurgaon/product/glenfiddich-ipa-1c62014");
     expect(legacyRedirectPath("/gurgaon/")).toBe("/");
     expect(legacyRedirectPath("/product/not-a-real-product")).toBeNull();
     expect(legacyRedirectPath("/delhi/product/old-black-label/750ml", {
