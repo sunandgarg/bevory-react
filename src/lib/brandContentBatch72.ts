@@ -254,7 +254,7 @@ export const BRAND_CONTENT_BATCH_72: Record<string, BrandPublicContent> = {
     metaDescription: "Explore CDL India No 1 whisky notes, highball serves, snack pairings and city prices on BevOry.",
   },
   chabchhu: {
-    description: "Chabchhu is listed on BevOry through Chabchhu Strong Beer, a Nepal strong lager sold in 650 ml format. Livcheers identifies it as a strong lager with a robust malt profile and warming finish.",
+    description: "Chabchhu is listed on BevOry through Chabchhu Strong Beer, a Nepal strong lager sold in 650 ml format. Market listings identify it as a strong lager with a robust malt profile and warming finish.",
     story: "Chabchhu sits in the Himalayan strong-beer lane, where malt weight and chill factor matter more than craft complexity. The beer is built for cold service, salty snacks and larger-format sharing.",
     tastingNotes: [
       { title: "Strong Lager Malt", description: "Rich malt, grain sweetness and a fuller body give the beer its strong-lager character." },
@@ -267,7 +267,7 @@ export const BRAND_CONTENT_BATCH_72: Record<string, BrandPublicContent> = {
     pairingIdeas: [{ title: "Pairings", items: ["wai wai sadeko", "chicken momos", "chilli pork", "aloo sadeko", "masala peanuts"] }],
     whyChoose: "Chabchhu is a robust Nepal strong lager for drinkers who want malt body and a cold, snack-friendly beer.",
     faqs: [
-      { question: "Where is Chabchhu Strong Beer from?", answer: "Chabchhu Strong Beer is listed on Livcheers as a strong beer from Nepal." },
+      { question: "Where is Chabchhu Strong Beer from?", answer: "Chabchhu Strong Beer is listed in market listings as a strong beer from Nepal." },
       { question: "How should Chabchhu be served?", answer: "Serve it very cold with salty, spicy snacks such as momos, chilli pork or masala peanuts." },
     ],
     finalVerdict: "Chabchhu is best treated as a cold, full-bodied strong lager for spicy snacks and casual sharing.",

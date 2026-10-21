@@ -173,7 +173,7 @@ export const BRAND_CONTENT_BATCH_86: Record<string, BrandPublicContent> = {
   },
   "gr-genius": {
     description: "GR Genius is an Indian spirits label listed on BevOry through GR Genius XXX Rum and GS Genius Deluxe Whisky. The page spans dark rum and blended Indian whisky routes in multiple bottle sizes.",
-    story: "GR Genius has a practical local-shelf identity: rum for cola and lime, whisky for soda and snacks. Livcheers listings surface GR Genius rum, while BevOry also shows GS Genius Deluxe Whisky routes.",
+    story: "GR Genius has a practical local-shelf identity: rum for cola and lime, whisky for soda and snacks. Market listings surface GR Genius rum, while BevOry also shows GS Genius Deluxe Whisky routes.",
     tastingNotes: [
       { title: "XXX Rum", description: "Molasses, caramel, cola spice and vanilla give the rum side a warm profile." },
       { title: "Deluxe Whisky", description: "Grain sweetness, light oak, honey and pepper shape the whisky side." },

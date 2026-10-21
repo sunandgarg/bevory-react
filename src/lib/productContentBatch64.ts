@@ -114,7 +114,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Belgica Blonde",
     c: "Belgian-Style Blonde Ale",
     o: "Belgica Blonde is a Belgian-style blonde ale with a golden colour and crisp, refreshing character. It leans on pale malt, citrus-herbal aroma and gentle hop bitterness.",
-    craft: "Livcheers describes Belgica Blonde as a blonde ale brewed with pale malts and noble hops. The style typically combines bready malt, floral lift, citrus peel and a dry, balanced finish.",
+    craft: "Retail tasting notes describe Belgica Blonde as a blonde ale brewed with pale malts and noble hops. The style typically combines bready malt, floral lift, citrus peel and a dry, balanced finish.",
     nose: "Citrus, herbs, floral malt, bread and light honey.",
     palate: "Effervescent and crisp, with bready malt, honey, light fruit and subtle hop bitterness.",
     finish: "Clean, dry and gently bitter.",

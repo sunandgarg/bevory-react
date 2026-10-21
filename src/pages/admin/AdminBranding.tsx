@@ -204,7 +204,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={favicon.lightImageUrl || ""}
                     onChange={(e) => onFaviconChange({ ...favicon, lightImageUrl: e.target.value })}
-                    placeholder="https://example.com/favicon-light.png"
+                    placeholder="https://bevory.in/media/branding/favicon-light.png"
                   />
                 </div>
                 <div>
@@ -214,7 +214,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={favicon.darkImageUrl || ""}
                     onChange={(e) => onFaviconChange({ ...favicon, darkImageUrl: e.target.value })}
-                    placeholder="https://example.com/favicon-dark.png"
+                    placeholder="https://bevory.in/media/branding/favicon-dark.png"
                   />
                 </div>
                 <div>
@@ -222,7 +222,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={favicon.imageUrl || ""}
                     onChange={(e) => onFaviconChange({ ...favicon, imageUrl: e.target.value })}
-                    placeholder="https://example.com/favicon.png"
+                    placeholder="https://bevory.in/media/branding/favicon.png"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
                     Used when theme-specific images aren't set
@@ -294,7 +294,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={logo.lightImageUrl || ""}
                     onChange={(e) => onLogoChange({ ...logo, lightImageUrl: e.target.value })}
-                    placeholder="https://example.com/logo-light.png"
+                    placeholder="https://bevory.in/media/branding/logo-light.png"
                   />
                 </div>
                 <div>
@@ -304,7 +304,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={logo.darkImageUrl || ""}
                     onChange={(e) => onLogoChange({ ...logo, darkImageUrl: e.target.value })}
-                    placeholder="https://example.com/logo-dark.png"
+                    placeholder="https://bevory.in/media/branding/logo-dark.png"
                   />
                 </div>
                 <div>
@@ -312,7 +312,7 @@ const BrandingSection = ({ title, description, favicon, logo, onFaviconChange, o
                   <Input
                     value={logo.imageUrl || ""}
                     onChange={(e) => onLogoChange({ ...logo, imageUrl: e.target.value })}
-                    placeholder="https://example.com/logo.png"
+                    placeholder="https://bevory.in/media/branding/logo.png"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
                     Used when theme-specific logos aren't set

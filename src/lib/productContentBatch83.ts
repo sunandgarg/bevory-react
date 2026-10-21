@@ -162,7 +162,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Mr Jerrys Very Merry Toddy",
     c: "Ready-to-Serve Whisky Cocktail",
     o: "Mr Jerrys Very Merry Toddy is a ready-to-serve cocktail from Blue Ocean Beverages in Goa. It is inspired by the hot toddy and brings whisky, honey, citrus and warming spice into a 500 ml bottled serve.",
-    craft: "Livcheers identifies Mr Jerrys as an Indian RTD brand, while IWSC lists Very Merry Toddy under RTD drinks and pre-mixed cocktails from India. The 24% ABV glass-bottle format is designed for quick serving without a bar kit.",
+    craft: "Market listings identify Mr Jerrys as an Indian RTD brand, while IWSC lists Very Merry Toddy under RTD drinks and pre-mixed cocktails from India. The 24% ABV glass-bottle format is designed for quick serving without a bar kit.",
     nose: "Honeyed whisky, lemon peel, clove-like spice and warm citrus.",
     palate: "Smooth and comforting, with honey sweetness, tangy citrus, whisky warmth and soft spice.",
     finish: "Weighty and warming with lingering honey and spice.",

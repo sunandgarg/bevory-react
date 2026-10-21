@@ -151,7 +151,7 @@ export const BRAND_CONTENT_BATCH_76: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Dabang Premium Strong Beer notes, serving style, snack pairings and city prices on BevOry.",
   },
   "daily-special": {
-    description: "Daily Special is an Indian brandy label listed on BevOry through Daily Special VSOP Bio Brandy. Livcheers product data places it under brandy, with 180 ml, 375 ml and 750 ml formats visible.",
+    description: "Daily Special is an Indian brandy label listed on BevOry through Daily Special VSOP Bio Brandy. Market product data places it under brandy, with 180 ml, 375 ml and 750 ml formats visible.",
     story: "Daily Special uses VSOP and Bio cues to frame the bottle as a fruit-led, softer brandy option. The BevOry listing keeps the page focused on its everyday brandy role: simple service, dessert pairing and local price comparison.",
     tastingNotes: [
       { title: "Fruit-Led Brandy", description: "Green apple, pear, citrus and light floral notes make the style fresher than heavier oak-led brandies." },

@@ -1,0 +1,82 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-12T12:34:45.266Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI could not connect to the ap-south-1 sign-in token endpoint, so AWS authentication is unavailable.",
+    "The configured database at 127.0.0.1:3308 refused the connection; no database write was attempted."
+  ],
+  "duplicate_check": {
+    "public_api": "Refreshed the published-post API on 2026-10-12: 22 published posts checked; no matching Rémy Martin, Diwali XO, Fine Champagne, or Cognac Fine Champagne titles/slugs were found.",
+    "local_files": "Searched today's saved editorial drafts. An earlier Cognac VS/VSOP/XO age-label guide exists, so this batch uses the distinct Fine Champagne terminology question instead; no matching XO Diwali release or Fine Champagne explainer was found.",
+    "private_database": "Unavailable; unpublished production records could not be checked."
+  },
+  "posts": [
+    {
+      "id": "news-remy-martin-xo-diwali-limited-edition-2026",
+      "title": "Rémy Martin Introduces XO Diwali Limited Edition For 2026",
+      "slug": "remy-martin-xo-diwali-limited-edition-2026",
+      "excerpt": "Announced on October 6, Rémy Martin’s XO Diwali release pairs the house’s Cognac Fine Champagne blend with a coffret inspired by rangoli and the diya. The release note gives U.S. sizing and suggested pricing.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Rémy Martin XO",
+        "Diwali 2026",
+        "Cognac Fine Champagne",
+        "limited edition spirits",
+        "spirits industry news"
+      ],
+      "meta_title": "Rémy Martin XO Diwali Edition 2026 | BevOry",
+      "meta_description": "Rémy Martin unveils an XO Diwali coffret inspired by rangoli and the diya. See the blend details and U.S. release information.",
+      "selection_note": "A timely, brand-announced festive release with clear packaging and blend details. The copy keeps the $199.99 suggested retail price and nationwide availability explicitly U.S.-specific rather than presenting them as Indian market facts.",
+      "source_links": [
+        "https://www.prnewswire.com/news-releases/remy-martin-unveils-a-new-limited-edition-xo-in-honor-of-diwali-302899127.html",
+        "https://www.remymartin.com/en-us/collection/xo-diwali/"
+      ],
+      "content": "<p><strong>Rémy Martin has introduced an XO Diwali Limited Edition for the 2026 festive season, pairing its Cognac Fine Champagne with a gift coffret decorated in gold and rangoli-inspired artwork.</strong> The House announced the release on October 6, describing the diya as a central design reference and the pack as a celebration of Diwali’s themes of light and renewal.</p>\n\n<h2>What Is Different About The Edition?</h2>\n<p>The limited-edition presentation does not describe a new Cognac recipe. At its centre is Rémy Martin XO, the house’s existing XO expression. The announcement says the blend draws on hundreds of eaux-de-vie from the Grande Champagne and Petite Champagne crus, with notes including plum, dried fig, candied orange and passion fruit.</p>\n<p>The visual update is the main seasonal distinction: a gold-toned coffret with illustrations inspired by rangoli and the diya. Rémy Martin’s <a href=\"https://www.prnewswire.com/news-releases/remy-martin-unveils-a-new-limited-edition-xo-in-honor-of-diwali-302899127.html\" target=\"_blank\" rel=\"noopener noreferrer\">October 6 announcement</a> also frames the bottle for gifting and Diwali hosting. The <a href=\"https://www.remymartin.com/en-us/collection/xo-diwali/\" target=\"_blank\" rel=\"noopener noreferrer\">official product page</a> lists a 750 ml size and describes the XO’s profile with plum, candied orange, fig, honey and spice.</p>\n\n<h2>Release Details, With The Market Made Clear</h2>\n<p>The company’s announcement states that the 750 ml edition is available nationwide in the United States at a suggested retail price of $199.99. That is U.S. launch information, not an Indian price quotation. The announcement does not provide a Delhi, Mumbai, Bengaluru or other India price, so those should not be inferred from the U.S. figure.</p>\n<p>This distinction matters for imported spirits: a suggested retail price in one market does not translate directly into another country’s shelf price. Currency conversion alone leaves out local taxes, duties, distribution and retailer pricing.</p>\n\n<h2>What The Label Says About The Cognac</h2>\n<p>Rémy Martin identifies the XO as Cognac Fine Champagne, a blend sourced from the Grande Champagne and Petite Champagne crus within the Cognac appellation. “Champagne” here names Cognac-growing areas; it does not mean the bottle is sparkling wine from the Champagne region. That geographic distinction is useful when reading the release alongside other festive wine and spirits announcements.</p>\n<p>For drinkers already familiar with the XO expression, the 2026 story is primarily about a seasonal presentation tied to Diwali. For gift shoppers, compare the exact edition, bottle size and local listing before treating it as a market-specific offer.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": "Rémy Martin",
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": true,
+      "published_at": "2026-10-12T12:34:45.266Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    },
+    {
+      "id": "guide-fine-champagne-cognac-meaning-vs-champagne-wine",
+      "title": "Fine Champagne Cognac: What The Label Really Means",
+      "slug": "fine-champagne-cognac-label-meaning",
+      "excerpt": "Fine Champagne Cognac is not Champagne sparkling wine. Learn why the term refers to two Cognac crus, and what the minimum Grande Champagne share means on a bottle.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Fine Champagne Cognac meaning",
+        "Cognac crus",
+        "Grande Champagne Cognac",
+        "Champagne wine label",
+        "how to read Cognac labels"
+      ],
+      "meta_title": "Fine Champagne Cognac: Label Meaning | BevOry",
+      "meta_description": "Fine Champagne on a Cognac label means a blend from two Cognac crus, not Champagne wine. Learn the 50% Grande Champagne rule.",
+      "selection_note": "A focused, distinct label-reading guide prompted by the current Diwali Cognac release. It resolves a frequent name confusion using the Cognac trade body and the Champagne authority; it does not repeat the saved VS/VSOP/XO age guide.",
+      "source_links": [
+        "https://www.cognac.fr/en/discover/a-unique-spirit/a-protected-origin/",
+        "https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609"
+      ],
+      "content": "<p><strong>“Fine Champagne” on a Cognac bottle does not mean the spirit is Champagne sparkling wine.</strong> It is a Cognac designation for a blend made exclusively from eaux-de-vie from the Grande Champagne and Petite Champagne crus, with at least 50% from Grande Champagne. The name is easy to misread because both Cognac and Champagne use the word “Champagne” for different places.</p>\n\n<h2>Two Different French Regions, Two Different Drinks</h2>\n<p>Cognac is a grape spirit made in its own defined production area, centred on the Charente and Charente-Maritime departments. Within the Cognac area, Grande Champagne and Petite Champagne are two of the named crus. Champagne, by contrast, is the northeastern French wine region whose name is protected for wine made in that defined area. The Comité Champagne’s <a href=\"https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609\" target=\"_blank\" rel=\"noopener noreferrer\">official FAQ</a> identifies Champagne as a type of sparkling wine produced in the region of the same name.</p>\n<p>So the shared word refers to different geographic contexts. A bottle labelled Cognac Fine Champagne is a Cognac blend; it is not a bottle of Champagne wine and it is not a sparkling spirit.</p>\n\n<h2>What Fine Champagne Means On Cognac</h2>\n<p>The Bureau National Interprofessionnel du Cognac (BNIC) states that the Fine Champagne designation is reserved for blends of eaux-de-vie from Grande Champagne and Petite Champagne, with Grande Champagne making up at least half. The <a href=\"https://www.cognac.fr/en/discover/a-unique-spirit/a-protected-origin/\" target=\"_blank\" rel=\"noopener noreferrer\">Cognac authority’s protected-origin guide</a> sets out that definition. The official French appellation text also specifies the origin composition for Cognacs presented under the Fine Champagne name.</p>\n<p>The words do not describe sweetness, bubbles or an age category. They tell you something specific about the source crus in the blend. They also do not mean that all Fine Champagne Cognacs taste alike: the house’s selection and blending decisions still shape the finished spirit.</p>\n\n<h2>How To Read A Bottle Example</h2>\n<p>Rémy Martin XO is one example: its product page describes the blend as drawing on eaux-de-vie from Grande Champagne and Petite Champagne. If a label says “Cognac Fine Champagne,” read it as geographic information within the Cognac appellation, not as a Champagne wine style.</p>\n<p>When comparing bottles, keep the category and producer separate. Cognac identifies the protected spirit; Fine Champagne points to the two Cognac crus; XO, VSOP or VS communicates a separate ageing designation. Each phrase answers a different question about the bottle.</p>\n\n<h2>A Quick Shopping Check</h2>\n<p>Look for the full product name and the word Cognac before interpreting “Champagne.” For a sparkling wine, the protected designation is Champagne and the bottle is wine; for Cognac Fine Champagne, the words refer to Cognac’s Grande and Petite Champagne crus. This distinction is useful when checking product descriptions and comparing like-for-like bottles in India.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": false,
+      "published_at": "2026-10-12T12:34:45.266Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    }
+  ]
+}

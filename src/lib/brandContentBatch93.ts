@@ -237,7 +237,7 @@ export const BRAND_CONTENT_BATCH_93: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Jyosen Namazake notes, Sawanotsuru context, serving tips and city prices on BevOry.",
   },
   "k-and-b": {
-    description: "K And B is a whisky brand represented on BevOry by K And B Royal Club Whisky in a 1 litre bottle format. Livcheers places the bottle in the blended Scotch category, while Indian retail records list Sunlight Spirits as the supplier.",
+    description: "K And B is a whisky brand represented on BevOry by K And B Royal Club Whisky in a 1 litre bottle format. Market listings place the bottle in the blended Scotch category, while Indian retail records list Sunlight Spirits as the supplier.",
     story: "K And B Royal Club is built for drinkers comparing larger-format whisky bottles for home bars and group occasions. Its style leans on the familiar blended-whisky cues of malt, caramel, oak and soft spice.",
     tastingNotes: [
       { title: "Malt And Caramel", description: "Malt, caramel, honey and vanilla create a rounded whisky aroma." },

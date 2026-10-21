@@ -1,0 +1,84 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-12T10:33:13.965Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI could not reach the ap-south-1 sign-in token endpoint, so AWS authentication is unverified.",
+    "The configured database at 127.0.0.1:3308 refused the connection; no database write was attempted."
+  ],
+  "duplicate_check": {
+    "public_api": "Refreshed the published-post API on 2026-10-12: 22 published posts checked, with no title or slug matching red-blotch research funding or the Napa/AVA/appellation guide.",
+    "local_files": "Searched repository editorial posts and today's saved drafts; no matching red-blotch initiative or AVA/appellation explainer was found. The existing wine-vintage guide is a separate topic.",
+    "private_database": "Unavailable; unpublished production records could not be checked."
+  },
+  "posts": [
+    {
+      "id": "news-napa-red-blotch-research-fund-2026",
+      "title": "Napa Wine Community Pledges $2.5 Million For Red Blotch Research",
+      "slug": "napa-wine-community-red-blotch-research-fund-2026",
+      "excerpt": "Napa Valley growers and wineries have pledged $2.5 million for a three-year Grapevine Red Blotch Virus research programme, with its first calls for proposals expected in January 2027.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Napa Valley wine",
+        "Grapevine Red Blotch Virus",
+        "viticulture research",
+        "wine industry",
+        "vineyard health"
+      ],
+      "meta_title": "Napa Wine Funds $2.5M Red Blotch Research | BevOry",
+      "meta_description": "Napa winegrowers pledged $2.5 million for red-blotch research. See the research priorities and timeline for practical vineyard solutions.",
+      "selection_note": "A recent, consequential vineyard-health initiative with a specific funding figure, defined research priorities and a published next-step timeline. The article distinguishes pledged programme funding from completed research findings.",
+      "source_links": [
+        "https://www.prnewswire.com/news-releases/napa-valley-wine-community-pledges-2-5-million-to-red-blotch-research-302896785.html",
+        "https://wineindustryadvisor.com/2026/10/06/napa-valley-wine-community-pledges-2-5-million-to-red-blotch-research/",
+        "https://ucanr.edu/county/uc-cooperative-extension-napa-county/grapevine-red-blotch-disease"
+      ],
+      "content": "<p><strong>Napa Valley winegrowers and wineries have pledged $2.5 million to launch the first phase of a Grapevine Red Blotch Virus research initiative.</strong> The three-year programme is intended to fund research that can translate into practical vineyard tools; it is not a report that a cure or control method has already been found.</p>\n\n<h2>What The Funding Is For</h2>\n<p>The <a href=\"https://www.prnewswire.com/news-releases/napa-valley-wine-community-pledges-2-5-million-to-red-blotch-research-302896785.html\" target=\"_blank\" rel=\"noopener noreferrer\">initiative’s announcement</a> names early detection and diagnostics, virus and vector biology, vineyard mitigation, and nursery testing among its first research priorities. It says the programme will support multiple projects at research institutions and use competitive proposals with independent scientific review.</p>\n<p>The <a href=\"https://wineindustryadvisor.com/2026/10/06/napa-valley-wine-community-pledges-2-5-million-to-red-blotch-research/\" target=\"_blank\" rel=\"noopener noreferrer\">industry release</a> says the first calls for proposals are expected in January 2027, with initial funding decisions anticipated in spring. Those are planned milestones, not results already delivered.</p>\n\n<h2>Why Red Blotch Matters To Wine</h2>\n<p>Grapevine red blotch disease is linked to changes in grape ripening and composition. The University of California Cooperative Extension’s <a href=\"https://ucanr.edu/county/uc-cooperative-extension-napa-county/grapevine-red-blotch-disease\" target=\"_blank\" rel=\"noopener noreferrer\">Napa County disease guidance</a> describes effects on sugar, acidity and phenolic accumulation, with consequences for wine quality. That makes detection and vineyard management relevant well before a finished bottle reaches a shelf.</p>\n<p>Leaf symptoms alone can resemble other vine problems, so diagnosis matters. The goal of better testing is to give growers firmer evidence for decisions about affected vines, planting material and potential spread, rather than relying on appearance alone.</p>\n\n<h2>A Collaborative Research Model</h2>\n<p>The initiative brings wine businesses, growers, researchers and public institutions into one programme. Its announcement names the American Vineyard Foundation as the intended fiscal agent and programme administrator, while a proposed committee and technical review panel would oversee priorities and evaluate projects.</p>\n<p>For wine drinkers, the immediate news is not a change in taste or availability. It is a coordinated attempt to address a vineyard disease that can affect the raw material behind wine. The useful measure of progress will be whether later studies produce reliable diagnostics and management approaches that growers can apply in the field.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": true,
+      "published_at": "2026-10-12T10:33:13.965Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    },
+    {
+      "id": "guide-us-wine-label-ava-appellation-explainer",
+      "title": "Napa Valley On A Wine Label: What An AVA Really Means",
+      "slug": "napa-valley-wine-label-ava-appellation-meaning",
+      "excerpt": "An American Viticultural Area is a defined grape-growing region, not a flavour guarantee. Learn what a U.S. appellation tells you and how it differs from a brand or grape name.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Napa Valley wine guide",
+        "American Viticultural Area",
+        "AVA wine label",
+        "wine appellation",
+        "how to read wine labels"
+      ],
+      "meta_title": "Napa Valley Wine Labels: What AVA Means | BevOry",
+      "meta_description": "Learn what Napa Valley and other AVAs mean on U.S. wine labels, including the 85% origin rule and what geography cannot promise.",
+      "selection_note": "A practical wine-label explainer grounded in current U.S. TTB guidance, distinct from the existing vintage-date guide. It answers an origin question without treating U.S. rules as universal to imported wines.",
+      "source_links": [
+        "https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/american-viticultural-area-ava",
+        "https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/established-avas",
+        "https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/labeling-wine/wine-labeling-appellation-of-origin"
+      ],
+      "content": "<p><strong>On a U.S. wine label, “Napa Valley” points to a regulated grape-growing area; it is not a grape variety, producer name or promise that every wine from the area tastes alike.</strong> The term belongs to the wine’s appellation of origin, which tells you where the grapes came from under specified rules.</p>\n\n<h2>What Is An AVA?</h2>\n<p>An American Viticultural Area, or AVA, is a defined grape-growing region with a name, boundary and distinguishing geographic or climatic features. The U.S. Alcohol and Tobacco Tax and Trade Bureau (TTB) explains that AVAs are a specific kind of appellation used for grape wine. Napa Valley is one example of this place-based designation.</p>\n<p>Think of the label as answering different questions: a brand identifies the maker or brand line; Cabernet Sauvignon names a grape variety; an AVA names a growing area. One bottle can carry all three, each giving a different piece of context.</p>\n\n<h2>The 85% Rule In The United States</h2>\n<p>For a U.S. wine to use an approved AVA as its appellation, at least 85% of the wine must come from grapes grown within that named area. The wine must also be fully finished in the state or one of the states where that AVA is located. These are U.S. federal labeling rules, not a global standard.</p>\n<p>Other U.S. appellations have different thresholds. For example, labels using “American” or the name of a state generally require at least 75% of the wine to come from grapes grown in that area, alongside finishing and other conditions.</p>\n\n<h2>What Place Does Not Tell You</h2>\n<p>An AVA does not, by itself, specify the grape blend, sweetness, oak treatment, alcohol level or tasting profile. Those depend on the wine and producer. The TTB also lists 280 established AVAs in its current directory, so the region name can be more precise than a broad state or country reference.</p>\n<p>When comparing U.S. bottles, use the AVA to understand origin, then check the grape, vintage, producer details and style information for the choices that shape the wine in your glass. Imported wines follow the applicable rules of their country of origin; do not assume the U.S. 85% rule applies to every bottle labelled with a European or other foreign region.</p>\n\n<h2>A Quick Label-Reading Habit</h2>\n<p>Start with the origin phrase, then separate it from the brand and grape. If a U.S. label says “Napa Valley Cabernet Sauvignon,” the place and variety are useful clues, but they do not make every bottle identical. That distinction helps when browsing wine lists or comparing bottles in Delhi, Mumbai or Bengaluru, where the same grape may come from several different regions.</p>\n<p>For further detail, consult the TTB’s <a href=\"https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/american-viticultural-area-ava\" target=\"_blank\" rel=\"noopener noreferrer\">AVA overview</a> and its <a href=\"https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/established-avas\" target=\"_blank\" rel=\"noopener noreferrer\">current list of established AVAs</a>.</p>\n<p>The percentages and placement requirements come from the TTB’s <a href=\"https://www.ttb.gov/regulated-commodities/beverage-alcohol/wine/labeling-wine/wine-labeling-appellation-of-origin\" target=\"_blank\" rel=\"noopener noreferrer\">appellation-of-origin guidance</a>.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": false,
+      "published_at": "2026-10-12T10:33:13.965Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    }
+  ]
+}

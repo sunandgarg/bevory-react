@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { DEMAND_GUIDES } from "../src/lib/demandGuides.js";
 import {
   enrichProductSeo,
   legacyRedirectPath,
@@ -26,6 +28,17 @@ const template = `<!doctype html><html><head>
 </head><body><div id="root"><h1>Default</h1></div><script type="module" src="/app.js"></script></body></html>`;
 
 describe("origin SEO rendering", () => {
+  it("keeps guide articles readable in crawler routes and the sitemap", () => {
+    const routes = JSON.parse(readFileSync("public/seo-routes/content.json", "utf8")) as Record<string, { body?: string[] }>;
+    const sitemap = readFileSync("public/sitemaps/catalog-45.xml", "utf8");
+    const guidePaths = Object.keys(routes).filter((path) => path.startsWith("/guide/"));
+
+    expect(guidePaths.length).toBeGreaterThanOrEqual(DEMAND_GUIDES.length);
+    for (const path of guidePaths) {
+      expect(routes[path].body?.join(" ").trim().split(/\s+/).length, path).toBeGreaterThanOrEqual(300);
+      expect(sitemap, path).toContain(`<loc>https://bevory.in${path}</loc>`);
+    }
+  });
   it("overlays researched bottle copy on the origin SEO shell", () => {
     const seo = enrichProductSeo("/gurgaon/product/johnnie-walker-black-label-6e8300f", {
       title: "Black Label price in Gurgaon", description: "Old summary", heading: "Black Label",

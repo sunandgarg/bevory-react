@@ -1,0 +1,83 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-12T11:35:15.742Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI could not connect to the ap-south-1 sign-in token endpoint, so AWS authentication is unavailable.",
+    "The configured local database endpoint could not be reached from this session; no database write was attempted."
+  ],
+  "duplicate_check": {
+    "public_api": "Refreshed the published-post API on 2026-10-12: 22 published posts checked; no matching titles or slugs for the first-half 2026 wine-trade report or dry-versus-fruity wine guide.",
+    "local_files": "Searched today's saved editorial drafts for wine-trade contraction, dry wine, fruity-versus-sweet, Extra Dry and residual-sugar topics; no matching draft was found. Existing Champagne-versus-Prosecco and rosé guides cover different questions.",
+    "private_database": "Unavailable; unpublished production records could not be checked."
+  },
+  "posts": [
+    {
+      "id": "news-global-wine-trade-first-half-2026",
+      "title": "Global Wine And Grape Must Trade Fell 8.3% By Volume In H1 2026",
+      "slug": "global-wine-grape-must-trade-fell-h1-2026",
+      "excerpt": "Del Rey AWM’s analysis of S&P Global data records an 8.3% fall in global wine-and-must trade volume and a 5.2% drop in value in January–June 2026, with bulk shipments under the sharpest pressure.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "global wine trade",
+        "wine industry news",
+        "wine exports 2026",
+        "bulk wine",
+        "sparkling wine"
+      ],
+      "meta_title": "Global Wine Trade Falls In H1 2026 | BevOry",
+      "meta_description": "Global wine-and-must trade fell in H1 2026, while sparkling held up better than bulk. Read the figures and category split on BevOry.",
+      "selection_note": "A recent, data-led view of global wine commerce, with a clear split between total wine-and-must figures and wine-category shipment trends. It offers industry context without implying a direct change to Indian retail prices or availability.",
+      "source_links": [
+        "https://www.delreyawm.com/wp-content/uploads/go-x/u/974bc965-9844-461c-a91a-fac141b056a4/26-09-29b-EU-Observatory-Sep-29-Del-Rey-AWM-International-Wine-Markets.pdf",
+        "https://www.vinetur.com/en/20261002108115/global-wine-trade-fell-83-by-volume-in-the-first-half-of-2026.html"
+      ],
+      "content": "<p><strong>Global trade in wine and grape must contracted in the first half of 2026: volume was down 8.3% year on year and value fell 5.2%.</strong> Those figures come from Del Rey Analysts of Wine Markets’ September presentation to the EU Wine Observatory, based on S&P Global data. They describe cross-border trade, not wine sales in Indian shops.</p>\n\n<h2>Volume Fell Faster Than Value</h2>\n<p>The gap between the two measures matters. Fewer hectolitres moved, but the value of trade did not fall as quickly, a pattern the analysis links to firmer average prices. The report notes that world wine-and-must prices were around €3.60–€3.70 per litre in the period. That is a trade-level average, not a retail price or a forecast for any particular country.</p>\n<p>The figures were presented by Del Rey AWM at the EU Wine Observatory’s September 2026 meeting. <a href=\"https://www.delreyawm.com/wp-content/uploads/go-x/u/974bc965-9844-461c-a91a-fac141b056a4/26-09-29b-EU-Observatory-Sep-29-Del-Rey-AWM-International-Wine-Markets.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">The underlying presentation</a> separates wine-and-must totals from wine-only category data. <a href=\"https://www.vinetur.com/en/20261002108115/global-wine-trade-fell-83-by-volume-in-the-first-half-of-2026.html\" target=\"_blank\" rel=\"noopener noreferrer\">Vinetur’s report on the figures</a> also describes the 8.3% and 5.2% declines.</p>\n\n<h2>Bulk Shipments Were Under Greater Pressure</h2>\n<p>Within wine exports, the report’s January-to-June category comparison shows bulk wine volume down 14.5% and value down 12.5%. Bottled still wine volume fell 5.3%, while sparkling wine volume declined 1.2%; sparkling was the only category shown with a small value increase, at 0.3%. These are distinct category measures and should not be confused with the broader wine-and-must total.</p>\n<p>The presentation attributes pressure on trade to weaker demand, higher prices and lower crops in many producing countries. It also says the decline affected intra-EU trade, Canadian shipments to the United States, and long-distance exports from producers such as Chile and New Zealand. The report describes the first half as a period of stabilisation after the sharper disruptions of 2025, rather than evidence that every market or wine style moved in the same direction.</p>\n\n<h2>What This Means For Wine Drinkers</h2>\n<p>Trade figures can help explain why producers and exporters are watching format, destination and price closely. They do not establish that a particular bottle will become more expensive in Mumbai, Delhi, Bengaluru or another Indian city. Local prices also reflect import duties, state taxes, distribution and retailer decisions; this report does not quantify those factors.</p>\n<p>For consumers, the useful takeaway is the contrast: bulk shipments faced a steeper decline, while sparkling wine held up better in value during this half-year comparison. It is a snapshot of international commerce, not a ranking of quality or a prediction of what to buy. As later customs data arrives, the next comparison will show whether these category differences persisted beyond June.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": true,
+      "published_at": "2026-10-12T11:35:15.742Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    },
+    {
+      "id": "guide-dry-wine-fruity-wine-sweetness-labels",
+      "title": "Dry Wine Vs Fruity Wine: How To Read Sweetness",
+      "slug": "dry-wine-vs-fruity-wine-sweetness-labels",
+      "excerpt": "A wine can smell of ripe fruit and still taste dry. Learn the difference between aroma and residual sugar, plus why Champagne Extra Dry is sweeter than Brut.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "dry wine meaning",
+        "fruity wine versus sweet wine",
+        "residual sugar in wine",
+        "Champagne sweetness labels",
+        "wine guide India"
+      ],
+      "meta_title": "Dry Wine Vs Fruity Wine: Sweetness Guide | BevOry",
+      "meta_description": "Learn why fruity aromas do not always mean sweet wine, and why Champagne Extra Dry is sweeter than Brut. A clear BevOry wine guide.",
+      "selection_note": "A high-intent, evergreen wine-shopping question that corrects two common label misunderstandings using WSET, Wine Australia and Comité Champagne references. It is distinct from the existing rosé and Champagne-versus-Prosecco guides.",
+      "source_links": [
+        "https://www.wineaustralia.com/getmedia/d1a144eb-4d48-480c-b908-d68620dd5b6b/Introduction-to-Wine-Educator-Guide.pdf",
+        "https://www.wsetglobal.com/knowledge-centre/blog/2025/how-to-find-a-wine-youll-like",
+        "https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609"
+      ],
+      "content": "<p><strong>“Dry” describes a wine’s lack of noticeable sweetness; “fruity” describes aromas or flavours.</strong> A wine can smell of peach, berries or citrus and still taste dry. Separating those ideas makes wine lists and bottle labels easier to navigate, whether you are choosing a glass in Mumbai or comparing bottles at home.</p>\n\n<h2>Dry Is About Sweetness, Not Fruit Aroma</h2>\n<p>During fermentation, yeast converts grape sugars into alcohol. The sugar that remains is called residual sugar, and it contributes to how sweet a wine tastes. The Wine &amp; Spirit Education Trust’s <a href=\"https://www.wsetglobal.com/knowledge-centre/blog/2025/how-to-find-a-wine-youll-like\" target=\"_blank\" rel=\"noopener noreferrer\">guide to finding a wine you like</a> explains dryness through the sugar left after fermentation. Wine Australia’s <a href=\"https://www.wineaustralia.com/getmedia/d1a144eb-4d48-480c-b908-d68620dd5b6b/Introduction-to-Wine-Educator-Guide.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">educator guide</a> makes the key distinction: fruit can still be perceptible in a dry wine.</p>\n<p>That is why a glass with ripe-fruit aromas does not automatically belong in the sweet-wine category. Acidity, alcohol, tannin and serving temperature can also change the impression of balance. For a specific bottle, use the producer’s description or technical sheet when available; a grape name or aroma list alone does not provide a reliable sugar measurement.</p>\n\n<h2>A Label Surprise: Champagne Extra Dry Is Sweeter Than Brut</h2>\n<p>Champagne has its own regulated sweetness terms. Comité Champagne explains that Brut contains less than 12 grams of sugar per litre, while Extra Dry contains 12–17 grams per litre. Sec is 17–32 g/L, Demi-Sec 32–50 g/L and Doux more than 50 g/L. Brut Nature is below 3 g/L with no sugar added at dosage. The <a href=\"https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609\" target=\"_blank\" rel=\"noopener noreferrer\">Champagne FAQ</a> sets out these category definitions.</p>\n<p>So in Champagne terminology, “Extra Dry” is sweeter than “Brut,” despite how the English words may sound. These numbers apply to Champagne’s dosage categories; do not assume every still wine or sparkling wine uses the same label scale.</p>\n\n<h2>How To Choose A Style You’ll Enjoy</h2>\n<p>If you prefer little perceived sweetness, start with a bottle described as dry or with a Champagne Brut or Extra Brut label. If you enjoy a softer, sweeter finish, look at an off-dry or sweeter style and check its specific designation. German Riesling labels such as Trocken can also communicate dryness under their own rules, so read the full origin and category rather than relying on one familiar word.</p>\n<p>Food can shift the experience. As an editorial pairing suggestion, a dry, bright white can be a good match for tandoori prawns or malai paneer tikka; an off-dry Riesling can temper chilli heat in a spicy dish. The Wine &amp; Spirit Education Trust discusses sweetness as one way to soften perceived spice in its <a href=\"https://www.wsetglobal.com/knowledge-centre/blog/2026/how-to-pair-drinks-with-spice\" target=\"_blank\" rel=\"noopener noreferrer\">guide to pairing drinks with spice</a>.</p>\n\n<h2>A Quick Buying Check</h2>\n<p>Look for the named style first, then compare producer, region, vintage and bottle size. “Fruity” is a flavour clue, not a synonym for sweet; “Extra Dry” is not the driest Champagne category. That small label check can help you choose more confidently and compare like-for-like city prices on BevOry.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": false,
+      "published_at": "2026-10-12T11:35:15.742Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    }
+  ]
+}

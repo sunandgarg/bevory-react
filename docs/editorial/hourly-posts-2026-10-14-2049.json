@@ -1,0 +1,87 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-14T15:19:16.949Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "The configured MySQL tunnel at 127.0.0.1:3308 is unavailable (connection attempt was blocked with Operation not permitted); no database upsert was attempted.",
+    "AWS CLI identity check could not reach https://ap-south-1.signin.aws.amazon.com/v1/token; production access is unavailable in this run."
+  ],
+  "duplicate_check": {
+    "public_blog": "Searched BevOry's indexed blog and guide pages for the Russian restriction and Georgian wine/qvevri topics. No matching story or dedicated Georgian wine guide surfaced.",
+    "local_files": "Reviewed all hourly draft titles and searched matching terms. A general orange-wine skin-contact guide exists; this proposed guide is focused on Georgian grapes, Kakheti and qvevri, and is not a duplicate. No Russia-Georgia restriction story was found.",
+    "private_database": "Not checked; no production database query has been run in this cycle."
+  },
+  "posts": [
+    {
+      "id": "news-russia-restricts-selected-georgian-drinks-oct-2026",
+      "title": "Russia Suspends Selected Georgian Wine, Cognac And Beer Lines",
+      "slug": "russia-suspends-selected-georgian-wine-cognac-beer-october-2026",
+      "excerpt": "Russia's consumer regulator introduced a temporary measure affecting listed drinks from several Georgian producers. Georgia says the action is not a blanket restriction on its wine exports.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Georgian wine",
+        "Russia alcohol imports",
+        "wine trade",
+        "Rospotrebnadzor",
+        "Georgian beer",
+        "alcohol regulation"
+      ],
+      "meta_title": "Russia Restricts Selected Georgian Drinks | BevOry",
+      "meta_description": "Russia suspends selected Georgian wine, cognac and beer products. See which producers are named and why this is not a blanket wine ban.",
+      "selection_note": "Selected for an active cross-border regulatory development affecting named wine, cognac and beer producers. Reporting is attributed, the scope is carefully limited to the listed products, and the Georgian government's stated uncertainty is included.",
+      "source_links": [
+        "https://1tv.ge/lang/en/news/rospotrebnadzor-bans-import-of-some-sorts-of-georgian-wines-mineral-water-cola-produced-in-georgia/",
+        "https://1tv.ge/lang/en/news/speaker-basis-for-rospotrebnadzor-decision-unclear-government-investigating-ban-on-select-georgian-drinks/",
+        "https://amp.dw.com/ru/rospotrebnadzor-zapretil-vvozit-v-rf-mineralku-nabeglavi-i-cocacola-iz-gruzii/a-79628604"
+      ],
+      "content": "<p><strong>Russia's consumer regulator has introduced a temporary measure suspending the import and circulation of selected drinks made by several Georgian producers.</strong> The measure, reported on October 10, names certain wines, cognac and beer; it is not a restriction on every Georgian wine or every product from Georgia.</p>\n\n<h2>Which Producers Are Named</h2>\n<p>Georgia's public broadcaster <a href=\"https://1tv.ge/lang/en/news/rospotrebnadzor-bans-import-of-some-sorts-of-georgian-wines-mineral-water-cola-produced-in-georgia/\" target=\"_blank\" rel=\"noopener noreferrer\">1TV reported the listed products</a> as wines from Teliani Veli, Tbilvino and Wineman; wine and cognac from Askaneli Brothers; and beer from Georgian Beer Company. The same notice also included non-alcoholic drinks, which are outside the focus of this BevOry article.</p>\n<p>In its Russian-language report, <a href=\"https://amp.dw.com/ru/rospotrebnadzor-zapretil-vvozit-v-rf-mineralku-nabeglavi-i-cocacola-iz-gruzii/a-79628604\" target=\"_blank\" rel=\"noopener noreferrer\">Deutsche Welle summarized the measure</a> as a temporary sanitary suspension, citing the regulator's notice and reporting that Russian retail networks had begun removing the listed products. Rospotrebnadzor's stated rationale was that the products did not meet organoleptic, physicochemical and safety requirements. The public reporting does not identify the specific test results for each named item.</p>\n\n<h2>Georgia Says The Measure Is Targeted</h2>\n<p>On October 12, 1TV <a href=\"https://1tv.ge/lang/en/news/speaker-basis-for-rospotrebnadzor-decision-unclear-government-investigating-ban-on-select-georgian-drinks/\" target=\"_blank\" rel=\"noopener noreferrer\">quoted Georgian Parliament Speaker Shalva Papuashvili</a> saying the action concerns specific companies rather than Georgian wine exports as a whole. He said Georgian authorities were investigating because the official grounds had not been made clear to them.</p>\n<p>That distinction matters for readers and trade businesses: this is a targeted measure reported against products from named producers, not evidence that all Georgian wine has been barred from Russia. The reporting available at the time of this update does not specify how long the suspension will remain in force, the volumes affected, or whether the named producers' other products are included.</p>\n\n<h2>What To Watch</h2>\n<p>The next developments to follow are any detailed notice from the Russian regulator, an explanation from Georgian authorities, and any change to the listed products or enforcement status. Until those details are public, avoid treating the measure as a general ban on Georgian wine, cognac or beer. It is also a Russia-specific trade action: it does not establish a change to Indian import rules or retail availability.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-14T15:19:16.949Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "guide-georgian-wine-saperavi-rkatsiteli-qvevri",
+      "title": "Georgian Wine Guide: Saperavi, Rkatsiteli And Qvevri",
+      "slug": "georgian-wine-guide-saperavi-rkatsiteli-qvevri",
+      "excerpt": "A first look at Georgia's leading red and white grapes, Kakheti's qvevri tradition and the label clues that help explain the style in your glass.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Georgian wine guide",
+        "Saperavi",
+        "Rkatsiteli",
+        "Kakheti wine",
+        "qvevri wine",
+        "wine regions"
+      ],
+      "meta_title": "Georgian Wine: Saperavi, Rkatsiteli & Qvevri | BevOry",
+      "meta_description": "Meet Georgia's Saperavi and Rkatsiteli grapes, learn what qvevri means and see how Kakheti's winemaking choices shape wine style.",
+      "selection_note": "Chosen as a consumer-facing regional guide alongside the trade story. It develops a distinct search topic from the archive's general orange-wine explainer by focusing on Georgian grapes, Kakheti and the qvevri method.",
+      "source_links": [
+        "https://www.wine.gov.ge/En/VarietyRed",
+        "https://www.wine.gov.ge/En/VarietyWhite",
+        "https://wine.gov.ge/En/WineMakingRegions",
+        "https://wine.gov.ge/En/KvevriWine"
+      ],
+      "content": "<p><strong>Two names make a useful starting point for Georgian wine: Saperavi, the country's leading red grape, and Rkatsiteli, a leading white grape from eastern Georgia.</strong> A third word, qvevri, describes a traditional clay vessel used in fermentation and ageing. Together, grape, place and method help explain why Georgian wines can range from fresh, conventional-style whites to structured amber wines and deep-coloured reds.</p>\n\n<h2>Saperavi: Georgia's Deep-Coloured Red</h2>\n<p>The <a href=\"https://www.wine.gov.ge/En/VarietyRed\" target=\"_blank\" rel=\"noopener noreferrer\">National Wine Agency of Georgia describes Saperavi</a> as a teinturier grape, meaning the flesh as well as the skin is coloured. It can be made dry, semi-sweet, sweet or fortified, and in both traditional and European-style methods. The agency describes typical wines as deeply coloured, with dark-berry, spice and savoury notes, firm tannin and lively acidity. The bottle's sweetness term and production notes matter: the grape name alone does not tell you whether the wine is dry or sweet.</p>\n<p>Kakheti, in eastern Georgia, is a key Saperavi region. The country's <a href=\"https://wine.gov.ge/En/WineMakingRegions\" target=\"_blank\" rel=\"noopener noreferrer\">regional guide</a> notes that Saperavi is made in both qvevri and European styles there. Names such as Mukuzani and Kindzmarauli point to different protected designations and styles; they are not interchangeable with the grape name.</p>\n\n<h2>Rkatsiteli: White, Amber And More</h2>\n<p>Rkatsiteli is a major white grape native to Kakheti. The agency's <a href=\"https://www.wine.gov.ge/En/VarietyWhite\" target=\"_blank\" rel=\"noopener noreferrer\">grape-variety notes</a> describe European-style examples as subtle and floral, with citrus, quince and apple. When made in qvevri, the agency describes a more powerful, moderately tannic wine, with crisp acidity and possible notes of honey, dried orange peel, spice and stone fruit. That contrast is a helpful example of how the same grape can produce different expressions.</p>\n\n<h2>What Qvevri Tells You</h2>\n<p>A qvevri is a large clay vessel used to ferment, make and age wine. The <a href=\"https://wine.gov.ge/En/KvevriWine\" target=\"_blank\" rel=\"noopener noreferrer\">National Wine Agency's method overview</a> explains that grape skins, stalks and pips may remain with the juice during and after fermentation; the duration and technique vary across Georgia. Longer skin contact can give white-grape wines a deeper amber or tea-like colour and more tannin. Qvevri does not identify one grape, sweetness level or guaranteed flavour, so read it alongside the grape and region on the label.</p>\n<p>For a first comparison, try a European-style Rkatsiteli beside a qvevri version, or a dry Saperavi beside a semi-sweet example. Serve the white or amber wine cool and the red slightly below warm room temperature. For food, consider grilled lamb, mutton seekh or aged cheddar with Saperavi; try Rkatsiteli with tandoori fish, herb-led dishes or roasted vegetables. These are pairing ideas, not fixed rules. Product availability and local pricing vary, so check the exact bottle and city listing before buying.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-14T15:19:16.949Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-14"
+    }
+  ]
+}

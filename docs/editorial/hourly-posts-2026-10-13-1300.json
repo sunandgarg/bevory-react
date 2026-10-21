@@ -1,0 +1,83 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T07:26:49.173Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI session remains expired and requires reauthentication with aws login.",
+    "Configured local database tunnel 127.0.0.1:3308 is refusing connections; the existing contentRecord upsert workflow cannot reach the database."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only query of BevOry's public blog API returned 22 published posts; no matching Marchesi Antinori theft or rare-wine provenance guide titles or slugs were found.",
+    "local_files": "Searched the saved hourly editorial drafts; no matching Antinori theft or rare-wine provenance guide was found.",
+    "private_database": "Unavailable because the local database tunnel is refusing connections."
+  },
+  "posts": [
+    {
+      "id": "news-marchesi-antinori-cortona-wine-theft-30000-bottles-2026",
+      "title": "Antinori Theft: 30,000 Bottles Stolen In Tuscany",
+      "slug": "marchesi-antinori-cortona-wine-theft-tuscany-2026",
+      "excerpt": "About 30,000 bottles of Marchesi Antinori wine, including Solaia, Tignanello and Guado al Tasso, were stolen from a logistics site near Cortona. Investigators are examining evidence as the winery warns buyers about unofficial offers.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Marchesi Antinori",
+        "Tuscany wine theft",
+        "Solaia",
+        "Tignanello",
+        "fine wine provenance"
+      ],
+      "meta_title": "Antinori Wine Theft: 30,000 Bottles Stolen | BevOry",
+      "meta_description": "About 30,000 Antinori bottles were stolen in Tuscany. See which wines were targeted and why buyers should be cautious of unofficial offers.",
+      "selection_note": "Selected for a major wine-industry crime with an investigation update dated October 12. The copy attributes the estimated value and winery warning to reporting, avoids speculation about suspects or resale, and clearly identifies the theft as an ongoing investigation.",
+      "source_links": [
+        "https://apnews.com/article/da00ac413ddcd06419eb4bedcad56170",
+        "https://corrierefiorentino.corriere.it/notizie/cronaca/26_ottobre_12/furto-di-30-mila-bottiglie-antinori-al-setaccio-le-telecamere-si-indaga-su-un-colpo-su-commissione-296f7ea0-8c4a-4600-8b30-5a90c5600xlk_amp.shtml"
+      ],
+      "content": "<p><strong>About 30,000 bottles of wine from Marchesi Antinori were stolen from a logistics site near Cortona in Tuscany, in a theft the winery described as Italy’s largest wine heist on record.</strong> The bottles were reported to include Solaia, Tignanello and Guado al Tasso, all from the 2023 vintage. The estimated value reported by the Associated Press was about €5 million.</p>\n\n<h2>What Was Taken</h2>\n<p>The theft involved two truckloads of prepared wine at Antinori’s facility in the province of Arezzo. The <a href=\"https://apnews.com/article/da00ac413ddcd06419eb4bedcad56170\" target=\"_blank\" rel=\"noopener noreferrer\">Associated Press report</a> says the company discovered the loss on Monday and later alerted customers around the world to be wary of offers outside official sales channels. The named wines include three of the producer’s prominent labels: Solaia, Tignanello and Guado al Tasso.</p>\n\n<h2>Investigation Continues</h2>\n<p>Reporting published by Italian newspaper <a href=\"https://corrierefiorentino.corriere.it/notizie/cronaca/26_ottobre_12/furto-di-30-mila-bottiglie-antinori-al-setaccio-le-telecamere-si-indaga-su-un-colpo-su-commissione-296f7ea0-8c4a-4600-8b30-5a90c5600xlk_amp.shtml\" target=\"_blank\" rel=\"noopener noreferrer\">Corriere Fiorentino</a> on October 12 says Carabinieri investigators are reviewing camera footage along several possible routes. Authorities have not publicly confirmed who carried out the theft or where the wine may have gone. The investigation remains ongoing.</p>\n\n<h2>A Warning For Buyers</h2>\n<p>Antinori has asked customers to pay attention to offers outside official channels. That is especially relevant when a seller claims to have a large quantity of a sought-after vintage at an unusually attractive price. A listing or photograph is not evidence that a bottle came through an authorized route, and an apparent bargain should not replace questions about its ownership history and storage.</p>\n\n<h2>What Is Known And What Is Not</h2>\n<p>The producer’s public warning and the police investigation do not establish that any specific bottle currently offered for sale is stolen. Buyers should avoid circulating unverified claims about individual sellers or bottles. Anyone offered one of the named wines can ask the seller for written provenance and purchase documentation, then check with the producer or an established specialist before proceeding.</p>\n<p>The heist is a serious loss for the winery and a reminder that rare-wine transactions depend on trust, records and credible channels. Until investigators establish more, the key facts are the reported quantity, the affected estate and the continuing investigation.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": "Marchesi Antinori",
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": true,
+      "published_at": "2026-10-13T07:26:49.173Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-how-to-check-provenance-before-buying-rare-wine",
+      "title": "How To Check Provenance Before Buying Rare Wine",
+      "slug": "how-to-check-provenance-before-buying-rare-wine",
+      "excerpt": "A rare wine’s label is only one part of its story. Learn what provenance records, storage history, producer authentication tools and seller documentation can—and cannot—tell you.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "rare wine buying guide",
+        "wine provenance explained",
+        "how to check wine authenticity",
+        "fine wine collecting",
+        "wine storage history"
+      ],
+      "meta_title": "How To Check Rare Wine Provenance | BevOry",
+      "meta_description": "Before buying rare wine, check its documented history, storage and seller records. Learn why labels and security features alone are not enough.",
+      "selection_note": "Chosen as a directly useful companion to the Antinori theft story. It gives buyers practical checks, distinguishes bottle authentication from provenance, and avoids presenting visual inspection or an app scan as a guarantee.",
+      "source_links": [
+        "https://winefraud.com/wine-authentication-101/wine-authentication/",
+        "https://play.google.com/store/apps/details?hl=en_US&id=com.tracetoo.vericode.st",
+        "https://apnews.com/article/da00ac413ddcd06419eb4bedcad56170"
+      ],
+      "content": "<p><strong>Before buying a rare wine, ask for its provenance: the documented history of how the bottle moved from its original source to the current seller.</strong> A convincing label or an intact capsule is not, by itself, a complete ownership or storage record. For collectible bottles, paperwork, seller credibility and the wine’s condition should be considered together.</p>\n\n<h2>Ask For The Bottle’s History</h2>\n<p>Request invoices, auction records or other documents that explain when and where the bottle was acquired and how it changed hands. For a bottle that has been stored professionally, ask for records from the storage facility and details of any transfers. A well-documented chain does not guarantee perfect condition, but it gives you more context than a seller’s description alone.</p>\n\n<h2>Check Storage And Condition Separately</h2>\n<p>Provenance and condition answer different questions. Provenance concerns the bottle’s history; condition concerns how it appears and may have been stored. Ask for clear photographs of the label, capsule, fill level and bottle, and ask how the wine was kept. A mark or worn label does not prove fraud, and a pristine-looking bottle does not prove authenticity. Wine authentication specialists describe assessment as a combination of records, packaging and other evidence rather than a single visual test. See the specialist overview from <a href=\"https://winefraud.com/wine-authentication-101/wine-authentication/\" target=\"_blank\" rel=\"noopener noreferrer\">WineFraud.com</a>.</p>\n\n<h2>Use Producer Tools When They Apply</h2>\n<p>Some producers offer bottle-specific codes or apps. Marchesi Antinori’s <a href=\"https://play.google.com/store/apps/details?hl=en_US&id=com.tracetoo.vericode.st\" target=\"_blank\" rel=\"noopener noreferrer\">officially listed app</a> says its authenticity feature works with a QR code on the neck of eligible bottles. A scan is useful only when that feature is present and supported; it does not establish every part of a bottle’s later storage or ownership history. If a bottle has no such feature, do not assume that absence alone means it is counterfeit.</p>\n\n<h2>Be Cautious With Unusual Offers</h2>\n<p>After the reported theft of about 30,000 bottles from Marchesi Antinori’s site in Tuscany, the company warned customers to be wary of offers outside official sales channels, according to the <a href=\"https://apnews.com/article/da00ac413ddcd06419eb4bedcad56170\" target=\"_blank\" rel=\"noopener noreferrer\">Associated Press</a>. This is not evidence that any particular listing is stolen. It is a sensible reason to ask more questions if a seller claims to have multiple bottles of a scarce wine or cannot explain where they came from.</p>\n\n<h2>When To Walk Away</h2>\n<p>Pause if the seller will not provide basic purchase records, gives inconsistent answers about storage, or pressures you to pay before questions are resolved. For a high-value bottle, seek advice from the producer, a reputable auction house or an independent wine-authentication specialist. No single label detail, photograph or digital scan can replace a credible history for a rare wine.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T07:26:49.173Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

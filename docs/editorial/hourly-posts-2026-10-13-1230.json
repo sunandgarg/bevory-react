@@ -1,0 +1,82 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T06:59:48.935Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI session remains expired and requires reauthentication with aws login.",
+    "Configured local database tunnel 127.0.0.1:3308 is refusing connections; the existing contentRecord upsert workflow cannot reach the database."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only query of BevOry's public blog API returned 22 published posts; no matching Treasury Wine Estates/Rosemount sale or Australian wine label explainer titles or slugs were found.",
+    "local_files": "Searched the saved hourly editorial drafts; no matching Rosemount sale or Australian wine label guide was found.",
+    "private_database": "Unavailable because the local database tunnel is refusing connections."
+  },
+  "posts": [
+    {
+      "id": "news-twe-rosemount-ingoldby-secret-stone-oatley-sale-2026",
+      "title": "TWE Agrees To Return Rosemount To The Oatley Family",
+      "slug": "twe-rosemount-ingoldby-secret-stone-oatley-sale",
+      "excerpt": "Treasury Wine Estates has agreed to sell Rosemount, Ingoldby and Secret Stone to A.G. Oatley Wines. Rosemount is set to return to its founding family when the transaction completes.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Treasury Wine Estates",
+        "Rosemount wine",
+        "A.G. Oatley Wines",
+        "Australian wine business",
+        "wine brand acquisitions"
+      ],
+      "meta_title": "TWE Agrees To Sell Rosemount To Oatley | BevOry",
+      "meta_description": "TWE has agreed to sell Rosemount, Ingoldby and Secret Stone to A.G. Oatley Wines. The deal is expected to complete on October 23.",
+      "selection_note": "Selected for a fresh October 12 Australian wine business announcement. The copy keeps the transfer in the future tense, names all three brands and inventory, and distinguishes the expected completion date from a completed sale.",
+      "source_links": [
+        "https://www.oatleywines.com.au/blogs/news/a-g-oatley-wines-brings-rosemount-home",
+        "https://winetitles.com.au/twe-announces-sale-of-rosemount-ingoldby-and-secret-stone-to-oatley-family/"
+      ],
+      "content": "<p><strong>Treasury Wine Estates (TWE) has agreed to sell Rosemount, Ingoldby and Secret Stone, together with associated inventory, to A.G. Oatley Wines.</strong> Announced on October 12, the transaction is expected to complete on October 23, 2026. Once completed, Rosemount will return to the family that founded the Australian wine brand.</p>\n\n<h2>Three Brands, One Portfolio Transfer</h2>\n<p>The agreement covers Rosemount, Ingoldby and Secret Stone. The buyer’s <a href=\"https://www.oatleywines.com.au/blogs/news/a-g-oatley-wines-brings-rosemount-home\" target=\"_blank\" rel=\"noopener noreferrer\">announcement from A.G. Oatley Wines</a> says Rosemount is returning to the Oatley family and that the transition of all three portfolio additions is planned for this month. Australian wine publication <a href=\"https://winetitles.com.au/twe-announces-sale-of-rosemount-ingoldby-and-secret-stone-to-oatley-family/\" target=\"_blank\" rel=\"noopener noreferrer\">Winetitles</a> reports that associated inventory is included and that completion is expected on October 23.</p>\n\n<h2>Rosemount’s Family Connection</h2>\n<p>Rosemount was established by Bob Oatley in 1969 in the Upper Hunter region of New South Wales. Its return is a notable heritage moment for the family’s wine business, while the wider handover also brings Ingoldby and New Zealand’s Secret Stone into the A.G. Oatley Wines portfolio. Sandy Oatley described the move as a chance to work on Rosemount with his daughter, Nicky, after previously building the brand with his father.</p>\n\n<h2>Part Of TWE’s Portfolio Focus</h2>\n<p>For TWE, the sale is part of a wider effort to concentrate resources on a smaller group of priority global and regional brands. Winetitles reports that the company has described a plan to reduce a 76-brand portfolio to around 30 priority brands. The agreement follows other portfolio divestments and shifts ownership of three established labels to a family-owned wine business.</p>\n\n<h2>What Happens Next</h2>\n<p>The ownership change is not yet complete. The reported completion date is October 23, 2026, and A.G. Oatley Wines says it expects to distribute Rosemount, Ingoldby and Secret Stone from that date. TWE is also reported to retain royalty-free rights to distribute Rosemount in Europe for up to three years. That arrangement means the brand’s ownership and its distribution in one market can change on different timelines.</p>\n<p>For shoppers, this is a company and portfolio transition rather than an announced new wine release. The reported transaction does not itself signal a change to the wines currently in market; the immediate story is who will own the brands and manage their next phase.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": "Rosemount",
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": true,
+      "published_at": "2026-10-13T06:59:48.935Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-read-australian-wine-label-origin-variety-vintage",
+      "title": "How To Read An Australian Wine Label",
+      "slug": "how-to-read-australian-wine-label-origin-variety-vintage",
+      "excerpt": "Australian wine labels may name a grape variety, vintage or region, but those claims are optional. Learn what each one tells you and how to interpret a regional indication.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Australian wine labels",
+        "Australian wine regions",
+        "wine vintage meaning",
+        "grape variety labels",
+        "how to choose Australian wine"
+      ],
+      "meta_title": "How To Read An Australian Wine Label | BevOry",
+      "meta_description": "Learn how Australian wine labels use grape variety, vintage and region claims, and what a geographical indication tells you about origin.",
+      "selection_note": "A practical, search-led guide tied to current Australian wine coverage without repeating the brand-sale story. Wine Australia’s label and GI pages support the distinctions and regulatory context.",
+      "source_links": [
+        "https://www.wineaustralia.com/labelling/label-integrity-program",
+        "https://www.wineaustralia.com/labelling/register-of-protected-gis-and-other-terms/australian-wine-geographical-indications"
+      ],
+      "content": "<p><strong>Australian wine labels can tell you about a wine’s grape variety, vintage and geographic origin, but those claims are not compulsory.</strong> If a producer chooses to state them, Australia’s Label Integrity Program requires substantiation through records. For a shopper, that makes the grape name, year and region useful clues, each answering a different question about the bottle.</p>\n\n<h2>Grape Variety: What Is In The Wine</h2>\n<p>A variety name such as Shiraz or Chardonnay points to the grape variety claimed for the wine. It is not the same as a region, producer or quality grade. Some wines use a single variety name; others are blends. Wine Australia says variety claims are optional, but any claim made on an Australian wine label must be supported under the country’s blending and record-keeping rules. The label’s wording is therefore more informative than assuming every wine from a familiar brand uses the same grape mix.</p>\n\n<h2>Vintage: The Harvest Year</h2>\n<p>A vintage year refers to the year associated with the grapes used to make the wine. A vintage statement is optional, and it is separate from a bottling date or the year a label design was introduced. When comparing bottles, check that you are comparing the same vintage if the year matters to your choice. A non-vintage wine can still be a deliberate blend; the absence of a year is not, by itself, a quality judgment.</p>\n\n<h2>Region: Where The Grapes Were Grown</h2>\n<p>A named Geographical Indication (GI), such as Barossa Valley or Margaret River, identifies a defined origin for the winegrapes under Australian rules. Wine Australia explains that only wine made from grapes grown within the relevant boundaries may use that GI, subject to the blending rules. Its <a href=\"https://www.wineaustralia.com/labelling/register-of-protected-gis-and-other-terms/australian-wine-geographical-indications\" target=\"_blank\" rel=\"noopener noreferrer\">Australian GI guide</a> describes zones, regions and sub-regions; a region name is not simply a flavour descriptor.</p>\n\n<h2>Why The Claims Matter</h2>\n<p>The <a href=\"https://www.wineaustralia.com/labelling/label-integrity-program\" target=\"_blank\" rel=\"noopener noreferrer\">Label Integrity Program</a> covers vintage, variety and origin statements on Australian wine, with records kept through the supply chain to substantiate them. The rules do not guarantee that two wines with the same grape or region will taste alike. Winemaking choices, blend composition and vintage conditions can still make the finished bottles quite different.</p>\n\n<h2>A Simple Way To Compare Bottles</h2>\n<p>Start with the producer and wine name, then look for the grape variety, vintage and GI if listed. Read each as a separate piece of information: grape points to the variety claim, vintage to the year, and GI to geographic origin. Use the back label for additional context about style and serving. This approach works especially well when comparing Australian wines from different regions or checking whether two similarly named bottles are actually the same release.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T06:59:48.935Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

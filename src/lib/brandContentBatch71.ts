@@ -171,7 +171,7 @@ export const BRAND_CONTENT_BATCH_71: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Caracteres M Margaux AOC notes, serving style, pairings and city prices on BevOry.",
   },
   caribay: {
-    description: "Caribay is an Indian rum label listed on BevOry through Caribay XXX Rum in 750 ml format. Livcheers lists the bottle as a dark rum, while older Indian rum label archives connect Caribay Deluxe XXX Rum with Narang Distilleries in Uttar Pradesh.",
+    description: "Caribay is an Indian rum label listed on BevOry through Caribay XXX Rum in 750 ml format. Retail listings describe the bottle as a dark rum, while older Indian rum label archives connect Caribay Deluxe XXX Rum with Narang Distilleries in Uttar Pradesh.",
     story: "Caribay belongs to the Indian XXX rum tradition, a style commonly poured with cola, soda or lime-led mixers. Its identity is built around dark-rum warmth, caramel sweetness and easy snack pairing.",
     tastingNotes: [
       { title: "Dark Rum Notes", description: "Caramel, vanilla, oak, toffee and warm spice give the rum its rounded profile." },
@@ -184,7 +184,7 @@ export const BRAND_CONTENT_BATCH_71: Record<string, BrandPublicContent> = {
     pairingIdeas: [{ title: "Pairings", items: ["Koliwada prawns", "chilli paneer", "barbecue wings", "pork vindaloo", "dark chocolate"] }],
     whyChoose: "Caribay is a dark Indian rum for cola serves, lime highballs and spicy food.",
     faqs: [
-      { question: "What type of rum is Caribay?", answer: "Caribay is listed on BevOry as XXX rum and appears as a dark rum on Livcheers." },
+      { question: "What type of rum is Caribay?", answer: "Caribay is listed on BevOry as XXX rum and appears as a dark rum in market listings." },
       { question: "What mixer suits Caribay XXX Rum?", answer: "Cola, soda, lime and simple rum punch builds suit its caramel and spice profile." },
     ],
     finalVerdict: "Caribay is a casual dark-rum pick for mixers, fried snacks and bold Indian flavours.",
@@ -256,7 +256,7 @@ export const BRAND_CONTENT_BATCH_71: Record<string, BrandPublicContent> = {
   },
   casablanca: {
     description: "Casablanca is an Indian sparkling wine label listed on BevOry through Sparkling Rose, Sparkling Frizzano and Sparkling Vino. The range is associated with Good Drop Wine's fruit-forward, approachable sparkling style.",
-    story: "Good Drop presents Casablanca Vino Spumante as India's first Prosecco-style sparkling wine, built around freshness and easy celebration. Livcheers lists Casablanca Sparkling Frizzano as light-bodied, fruity and effervescent.",
+    story: "Good Drop presents Casablanca Vino Spumante as India's first Prosecco-style sparkling wine, built around freshness and easy celebration. Retail listings describe Casablanca Sparkling Frizzano as light-bodied, fruity and effervescent.",
     tastingNotes: [
       { title: "Sparkling Vino", description: "Pear, peach, apple and gentle sweetness give the white sparkler its easy appeal." },
       { title: "Rose And Frizzano", description: "Strawberry, cherry, peach, apricot and white flowers keep the range bright and bubbly." },

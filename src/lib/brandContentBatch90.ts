@@ -170,7 +170,7 @@ export const BRAND_CONTENT_BATCH_90: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Indian Honey notes, Hermes Distillery origin, serving ideas, pairings and city prices.",
   },
   indiosa: {
-    description: "Indiosa is an Indian wine brand listed on BevOry through Indi Osa Chenin Blanc Wine. Livcheers and Vivino place the wine in Nashik, Maharashtra, with Chenin Blanc as the grape.",
+    description: "Indiosa is an Indian wine brand listed on BevOry through Indi Osa Chenin Blanc Wine. retail references and Vivino place the wine in Nashik, Maharashtra, with Chenin Blanc as the grape.",
     story: "Nashik's high-altitude vineyard belt has become India's most visible wine region, especially for fresh white varieties. Indiosa fits that shelf with a 750 ml Chenin Blanc aimed at crisp, tropical-fruited drinking.",
     tastingNotes: [
       { title: "Nashik Chenin", description: "Floral notes, honey, citrus blossom and tropical fruit lead the aroma." },
@@ -233,7 +233,7 @@ export const BRAND_CONTENT_BATCH_90: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Innate Reserve whisky notes, bottle formats, mixers, pairings and city prices.",
   },
   "ipl-tango": {
-    description: "IPL Tango is an Indian gin brand listed on BevOry through Indian Premium Liquor and Orange Flavoured Gin routes. Livcheers identifies the orange expression as a flavoured gin with juniper, orange and spices.",
+    description: "IPL Tango is an Indian gin brand listed on BevOry through Indian Premium Liquor and Orange Flavoured Gin routes. Market listings identify the orange expression as a flavoured gin with juniper, orange and spices.",
     story: "IPL Tango sits in the accessible Indian gin shelf, covering both a London Dry-style route and a citrus-led orange gin route. The brand works for shoppers who want a simple G&T bottle or a brighter orange highball.",
     tastingNotes: [
       { title: "Orange Gin", description: "Orange peel, sweet citrus, juniper and light spice give the flavoured expression its lift." },
@@ -247,7 +247,7 @@ export const BRAND_CONTENT_BATCH_90: Record<string, BrandPublicContent> = {
     whyChoose: "IPL Tango is useful when you want Indian gin with both classic tonic and orange-flavoured options.",
     faqs: [
       { question: "What IPL Tango products are listed on BevOry?", answer: "BevOry shows a standard Indian Premium Liquor gin route and an orange flavoured gin route." },
-      { question: "What botanicals are noted for IPL Tango Orange Gin?", answer: "Livcheers lists juniper, orange and spices for the orange flavoured gin." },
+      { question: "What botanicals are noted for IPL Tango Orange Gin?", answer: "Retail listings describe juniper, orange and spices for the orange flavoured gin." },
     ],
     finalVerdict: "IPL Tango is an easy Indian gin page for orange highballs, G&Ts and spicy party snacks.",
     metaTitle: "IPL Tango Gin Guide | BevOry",

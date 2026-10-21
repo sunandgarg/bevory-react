@@ -162,7 +162,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Sauvignon La Tete Dans Les Cepages Pays D'Oc",
     c: "Pays d'Oc Sauvignon Blanc",
     o: "Sauvignon La Tete Dans Les Cepages Pays D'Oc is a French white wine from the Pays d'Oc IGP. It is made from Sauvignon Blanc and focuses on citrus, green apple, fresh herbs and crisp acidity.",
-    craft: "Pays d'Oc covers a large stretch of southern France where varietal wines are bottled under the IGP system. Livcheers lists this bottle as a light-bodied Sauvignon Blanc from France, while trade references point to a 750 ml Pays d'Oc white-wine format.",
+    craft: "Pays d'Oc covers a large stretch of southern France where varietal wines are bottled under the IGP system. Retail listings describe this bottle as a light-bodied Sauvignon Blanc from France, while trade references point to a 750 ml Pays d'Oc white-wine format.",
     nose: "Grapefruit, lemon zest, green apple, cut grass and a light mineral note.",
     palate: "Light and zesty, with citrus, green apple, herbal freshness and sharp Sauvignon Blanc acidity.",
     finish: "Clean and crisp with grapefruit peel and green herb notes.",

@@ -128,7 +128,7 @@ const OryAssistant = () => {
         onClick={() => setOpen(true)}
         aria-label="Open oRy AI assistant"
         aria-expanded={open}
-        className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1 text-foreground transition-transform hover:scale-105 active:scale-95 md:bottom-6"
+        className={`fixed bottom-20 right-4 z-40 flex-col items-center gap-1 text-foreground transition-transform hover:scale-105 active:scale-95 md:bottom-6 md:flex ${pathname.startsWith("/guide/") ? "hidden" : "flex"}`}
       >
         <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-white p-1 shadow-lg">
           <img src="/ory-ai-logo.png" alt="" width={148} height={148} className="h-full w-full rounded-full object-contain" />

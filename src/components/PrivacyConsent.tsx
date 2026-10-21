@@ -4,6 +4,7 @@ import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
+const ADS_CONSENT_KEY = "bevory-ads-consent-v1";
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const MEASUREMENT_ID = "G-QPBTP7TCDV";
 
@@ -16,17 +17,16 @@ declare global {
   }
 }
 
-const updateGoogleConsent = (choice: ConsentChoice) => {
+const updateGoogleConsent = (analytics: ConsentChoice, ads: ConsentChoice) => {
   window.gtag?.("consent", "update", {
-    analytics_storage: choice,
-    ad_storage: "denied",
+    analytics_storage: analytics,
+    ad_storage: ads,
     ad_user_data: "denied",
     ad_personalization: "denied",
   });
 };
 
 const enableAnalytics = () => {
-  updateGoogleConsent("granted");
   if (document.getElementById("bevory-google-tag")) return;
 
   window.gtag("js", new Date());
@@ -45,13 +45,18 @@ const enableAnalytics = () => {
 
 const PrivacyConsent = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
+  const [adsAllowed, setAdsAllowed] = useState(false);
 
   useEffect(() => {
     const applySavedChoice = () => {
-      const saved = localStorage.getItem(CONSENT_KEY) as ConsentChoice | null;
-      if (saved === "granted") enableAnalytics();
-      else if (saved === "denied") updateGoogleConsent("denied");
-      else setIsOpen(true);
+      const analytics = localStorage.getItem(CONSENT_KEY) as ConsentChoice | null;
+      const ads = localStorage.getItem(ADS_CONSENT_KEY) as ConsentChoice | null;
+      setAnalyticsAllowed(analytics === "granted");
+      setAdsAllowed(ads === "granted");
+      updateGoogleConsent(analytics === "granted" ? "granted" : "denied", ads === "granted" ? "granted" : "denied");
+      if (analytics === "granted") enableAnalytics();
+      if (!analytics || !ads) setIsOpen(true);
     };
 
     if (localStorage.getItem(AGE_VERIFIED_KEY)) applySavedChoice();
@@ -65,10 +70,12 @@ const PrivacyConsent = () => {
     };
   }, []);
 
-  const choose = (choice: ConsentChoice) => {
-    localStorage.setItem(CONSENT_KEY, choice);
-    if (choice === "granted") enableAnalytics();
-    else updateGoogleConsent("denied");
+  const choose = (analytics: ConsentChoice, ads: ConsentChoice) => {
+    localStorage.setItem(CONSENT_KEY, analytics);
+    localStorage.setItem(ADS_CONSENT_KEY, ads);
+    updateGoogleConsent(analytics, ads);
+    if (analytics === "granted") enableAnalytics();
+    window.dispatchEvent(new Event("bevory:ad-consent-changed"));
     setIsOpen(false);
   };
 
@@ -89,7 +96,7 @@ const PrivacyConsent = () => {
             Your privacy choices
           </h2>
           <p id="privacy-consent-description" className="mt-1 text-xs text-muted-foreground">
-            BevOry uses necessary storage for age and city preferences. Optional Google Analytics helps us improve the site and stays off unless you allow it.
+            BevOry uses necessary storage for age and city preferences. Analytics and guide-page ads are separate, optional choices. Ads stay off unless you allow them.
           </p>
           <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
             <Link to="/privacy-policy" className="text-xs text-foreground underline underline-offset-2">
@@ -101,12 +108,16 @@ const PrivacyConsent = () => {
           </div>
         </div>
       </div>
+      <div className="mt-4 space-y-2 text-sm">
+        <label className="flex items-center gap-2"><input type="checkbox" checked={analyticsAllowed} onChange={(event) => setAnalyticsAllowed(event.target.checked)} /> Allow analytics</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={adsAllowed} onChange={(event) => setAdsAllowed(event.target.checked)} /> Allow guide-page ads</label>
+      </div>
       <div className="mt-4 grid grid-cols-2 gap-2">
-        <Button type="button" variant="outline" onClick={() => choose("denied")}>
+        <Button type="button" variant="outline" onClick={() => choose("denied", "denied")}>
           Necessary only
         </Button>
-        <Button type="button" onClick={() => choose("granted")}>
-          Allow analytics
+        <Button type="button" onClick={() => choose(analyticsAllowed ? "granted" : "denied", adsAllowed ? "granted" : "denied")}>
+          Save choices
         </Button>
       </div>
     </section>

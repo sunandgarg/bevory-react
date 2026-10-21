@@ -130,7 +130,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Hopper Blonde Can",
     c: "Belgian-Style Blonde Ale",
     o: "Hopper Blonde Can is a canned Belgian-style blonde ale sold in India. It is crisp, golden and more malt-and-yeast driven than a standard light lager.",
-    craft: "Livcheers lists Hopper Blonde Can as a blonde ale in a 500 ml can. The style leans on pale malt, gentle sweetness, citrus brightness and a clean dry finish.",
+    craft: "Retail listings describe Hopper Blonde Can as a blonde ale in a 500 ml can. The style leans on pale malt, gentle sweetness, citrus brightness and a clean dry finish.",
     nose: "Biscuit malt, honey, citrus and light yeast spice.",
     palate: "Smooth and refreshing, with pale malt, honeyed sweetness and a crisp citrus edge.",
     finish: "Clean, dry and lightly bitter.",

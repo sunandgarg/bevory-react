@@ -1,0 +1,85 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T10:39:23.762Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI session is expired and needs reauthentication before production-side work.",
+    "The configured MySQL tunnel at 127.0.0.1:3308 was not reachable during the previous cycle; no database upsert has been attempted in this cycle."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only query of BevOry's public blog API returned 22 published posts. None had titles or slugs matching dealcoholized wine, alcohol-free wine, or FSSAI's non-alcoholic-counterpart definition.",
+    "local_files": "Searched hourly-post JSON drafts for dealcoholized, de-alcoholized, non-alcoholic counterpart, alcohol-free wine and No/Low wine; no matching editorial draft was found.",
+    "private_database": "Not checked: AWS credentials require login and the database tunnel was unavailable in the previous cycle."
+  },
+  "posts": [
+    {
+      "id": "news-henkell-freixenet-solos-aroma-recovery-wiesbaden-2026",
+      "title": "Henkell Freixenet Installs Aroma-Recovery System For Alcohol-Free Sparkling Wine",
+      "slug": "henkell-freixenet-solos-aroma-recovery-wiesbaden-2026",
+      "excerpt": "Henkell Freixenet says it has installed Solos Technology's Aroma Recovery System at its Wiesbaden site, expanding its dealcoholized sparkling-wine production capabilities.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Henkell Freixenet",
+        "Solos Technology",
+        "dealcoholized wine",
+        "sparkling wine",
+        "no and low alcohol",
+        "wine technology"
+      ],
+      "meta_title": "Henkell Dealcoholized Wine Investment | BevOry",
+      "meta_description": "Henkell Freixenet installs Solos aroma-recovery technology at its Wiesbaden site as it expands dealcoholized sparkling-wine production.",
+      "selection_note": "Selected for a verified October 5 company announcement about production technology in the growing dealcoholized wine segment. The story distinguishes an equipment installation from a new consumer product and attributes sensory-performance claims to the companies.",
+      "source_links": [
+        "https://www.henkell-freixenet.com/en/news/newsroom/detail/henkell-freixenet-strengthens-premium-dealcoholized-sparkling-wine-production-with-solos-patented-aroma-recovery-system.html",
+        "https://www.solos-technology.com/news/henkell-freixenet-solos-technology-partnership",
+        "https://www.vinetur.com/en/20261005108303/henkell-freixenet-installs-aroma-recovery-system-for-alcohol-free-sparkling-wine.html"
+      ],
+      "content": "<p><strong>Henkell Freixenet has installed Solos Technology's Aroma Recovery System at its Wiesbaden production site as it expands its dealcoholized sparkling-wine capabilities.</strong> The companies announced the project on October 5, describing aroma retention as a key technical focus when producing wine after alcohol removal.</p>\n\n<h2>What Was Installed</h2>\n<p>The <a href=\"https://www.henkell-freixenet.com/en/news/newsroom/detail/henkell-freixenet-strengthens-premium-dealcoholized-sparkling-wine-production-with-solos-patented-aroma-recovery-system.html\" target=\"_blank\" rel=\"noopener noreferrer\">Henkell Freixenet announcement</a> identifies Wiesbaden as the group's expertise centre for alcohol-free production. It says Solos Technology's patented Aroma Recovery System (ARS) captures natural aroma compounds after alcohol removal and reintegrates them into the finished wine. The <a href=\"https://www.solos-technology.com/news/henkell-freixenet-solos-technology-partnership\" target=\"_blank\" rel=\"noopener noreferrer\">technology provider's account of the partnership</a> describes ARS as solid-phase extraction technology.</p>\n\n<h2>Why Aroma Recovery Matters</h2>\n<p>Removing alcohol can also change a wine's aromatic profile. The companies say their approach is intended to recover some of those original wine aromas and add them back after dealcoholization. That is the stated purpose of the installation; the announcement does not give production volumes, a launch date for a new wine, or independent tasting results from the Wiesbaden system.</p>\n<p>The release names Fürst von Metternich Riesling Alcohol-free as one of the first products in Henkell Freixenet's portfolio developed in collaboration with Solos Technology. It does not say the October installation represents a new product launch. Keeping that distinction clear matters: this is a production-capability update, not an announcement that a new bottle has reached retail.</p>\n\n<h2>A Wider No/Low Wine Development</h2>\n<p>The news reflects how producers are investing in the sensory side of dealcoholized wine, alongside the process of removing alcohol. The German Wine Institute also listed the installation in its <a href=\"https://www.winesofgermany.com/news-media/press\" target=\"_blank\" rel=\"noopener noreferrer\">October press coverage</a>, while specialist wine publication <a href=\"https://www.vinetur.com/en/20261005108303/henkell-freixenet-installs-aroma-recovery-system-for-alcohol-free-sparkling-wine.html\" target=\"_blank\" rel=\"noopener noreferrer\">Vinetur reported on the Wiesbaden equipment investment</a>.</p>\n<p>For wine businesses, the relevant questions now include how aroma-recovery systems perform across grape varieties, how consistently they can be used at scale, and how consumers respond to the finished wines. Henkell Freixenet's announcement does not answer those questions yet, but it documents a concrete investment aimed at improving the production process.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T10:39:23.762Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-alcohol-free-wine-india-fssai-05-abv",
+      "title": "Alcohol-Free Wine In India: What Does 0.5% ABV Mean?",
+      "slug": "alcohol-free-wine-india-fssai-05-abv",
+      "excerpt": "FSSAI defines a non-alcoholic counterpart of an alcoholic beverage as having no more than 0.5% ABV and says the original beverage must be fermented before its alcohol is removed.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "alcohol-free wine India",
+        "dealcoholized wine",
+        "FSSAI alcohol rules",
+        "non-alcoholic wine",
+        "ABV explained",
+        "Indian wine guide"
+      ],
+      "meta_title": "Alcohol-Free Wine In India: 0.5% ABV | BevOry",
+      "meta_description": "See how FSSAI defines a non-alcoholic counterpart, what up to 0.5% ABV means, and how dealcoholized wine differs from wine never fermented.",
+      "selection_note": "Chosen as a high-intent Indian label-reading guide directly connected to the news cycle but distinct from the equipment story. It follows the current FSSAI compendium and avoids treating the Indian definition as a universal global rule.",
+      "source_links": [
+        "https://fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_V_04_12_2025.pdf",
+        "https://fssai.gov.in/food-law/regulations/amendments/alcoholic-beverages"
+      ],
+      "content": "<p><strong>In India's current FSSAI standard, a “non-alcoholic counterpart of an alcoholic beverage” may contain up to 0.5% alcohol by volume (ABV).</strong> The definition also says the original beverage must first undergo fermentation, after which the alcohol produced is removed. That distinction helps explain what “dealcoholized” means and why an alcohol-free claim should be read alongside the stated ABV.</p>\n\n<h2>What The FSSAI Definition Says</h2>\n<p>The <a href=\"https://fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_V_04_12_2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">FSSAI alcoholic-beverage compendium, Version V dated December 4, 2025</a>, defines the non-alcoholic counterpart as a beverage containing no more than 0.5% ABV. It further specifies that the beverage of origin must undergo fermentation and that the alcohol produced is removed afterwards. This is the Indian food-standard definition; label terminology and thresholds can differ in other countries.</p>\n<p>FSSAI separately defines an alcoholic beverage as containing more than 0.5% ABV, with a specific zero-alcohol proviso for alcohol-free beer. That beer exception is not the same as the definition for a non-alcoholic counterpart of wine or another fermented alcoholic beverage. The <a href=\"https://fssai.gov.in/food-law/regulations/amendments/alcoholic-beverages\" target=\"_blank\" rel=\"noopener noreferrer\">official amendments page</a> lists the current changes to the 2018 alcoholic-beverage regulations.</p>\n\n<h2>Dealcoholized Is Not The Same Production Route As Never Fermented</h2>\n<p>A dealcoholized wine starts with fermented wine and then has alcohol removed. A grape drink made without fermenting the base is a different product route, even if both bottles use similar alcohol-free language on the front label. The production distinction in the FSSAI definition is useful when comparing products, because the starting point affects what the producer is trying to retain from the original wine.</p>\n\n<h2>How To Read A Bottle</h2>\n<p>Check the full product name, the ABV declaration and the back label rather than relying only on a front-of-pack phrase. Under this definition, “non-alcoholic counterpart” does not necessarily mean 0.0% ABV: the threshold can include a small amount up to 0.5%. If a bottle gives a precise ABV, use that figure for the product in hand instead of assuming all alcohol-free wines have the same amount.</p>\n<p>Also separate alcohol content from taste. A dealcoholized sparkling wine may still have acidity, bubbles and grape aromas, but flavour and texture depend on its original wine and the producer's process. Avoid assuming it will taste exactly like the alcoholic version or that one tasting profile applies to every producer.</p>\n\n<h2>Serving And Shopping In India</h2>\n<p>Chill sparkling wine well and pour it into a flute or white-wine glass, depending on whether you want to emphasise bubbles or aroma. As pairing ideas, try it with tandoori prawns, lightly spiced paneer tikka or salted almonds; these are serving suggestions, not fixed rules. Availability and retail prices can differ by city, so compare the exact product and bottle size when checking listings on BevOry.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T10:39:23.762Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

@@ -82,7 +82,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Sartori Vino Spumante Rose Tiamo",
     c: "Italian Sparkling Rose Wine",
     o: "Sartori Vino Spumante Rose Tiamo is an Italian sparkling rose wine linked with Tiamo and Sartori di Verona. Indian retail listings place it in the sparkling wine category with a 750 ml bottle format.",
-    craft: "Tiamo sparkling rose references point to Veneto-region fruit, steel-tank handling and a bright rose style. Livcheers lists Pinot Noir for the India bottle, while trade material for Tiamo Prosecco Rose notes a Glera and Pinot Noir blend made by the Charmat method.",
+    craft: "Tiamo sparkling rose references point to Veneto-region fruit, steel-tank handling and a bright rose style. Retail listings describe Pinot Noir for the India bottle, while trade material for Tiamo Prosecco Rose notes a Glera and Pinot Noir blend made by the Charmat method.",
     nose: "Strawberry, raspberry, rose petal, red apple and light citrus.",
     palate: "Medium-light and lively, with red-berry fruit, soft bubbles, citrus brightness and a crisp pink-wine line.",
     finish: "Medium-short, fresh and berry-led.",
@@ -97,7 +97,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
   "orange-hill-vodka-602ec9d": detail({
     n: "Orange Hill Vodka",
     c: "Indian Orange Flavoured Vodka",
-    o: "Orange Hill Vodka is an Indian flavoured vodka associated with Agribiotech Industries in Rajasthan trademark records. Livcheers lists it as an orange-flavoured vodka sold in 180 ml and 750 ml formats.",
+    o: "Orange Hill Vodka is an Indian flavoured vodka associated with Agribiotech Industries in Rajasthan trademark records. Retail listings describe it as an orange-flavoured vodka sold in 180 ml and 750 ml formats.",
     craft: "The Orange Hill Vodka mark is registered in class 33 for alcoholic beverages, including vodka and flavoured liquors. Retail tasting notes describe a fresh-orange aroma, citrus sweetness and a clean vodka finish.",
     nose: "Ripe orange, citrus oil, light grain spirit and candy peel.",
     palate: "Bright and citrusy, with orange sweetness, clean spirit texture and a simple refreshing line.",

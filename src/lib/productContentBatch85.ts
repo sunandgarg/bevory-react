@@ -97,7 +97,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
   "o-be-lively-long-island-iced-tea-8e3a7fa": detail({
     n: "O'Be Lively Long Island Iced Tea",
     c: "Ready-to-Drink Long Island Iced Tea",
-    o: "O'Be Lively Long Island Iced Tea is a 330 ml ready-to-drink cocktail from O'Be Cocktails. Livcheers and trade material list it at 8% ABV, with vodka, rum, gin, tequila and triple sec layered with lemon and cola.",
+    o: "O'Be Lively Long Island Iced Tea is a 330 ml ready-to-drink cocktail from O'Be Cocktails. retail references and trade material list it at 8% ABV, with vodka, rum, gin, tequila and triple sec layered with lemon and cola.",
     craft: "O'Be Cocktails is operated by Euphoric Beverages Private Limited, an Indian RTD cocktail company founded in 2019 by Nitesh Prakash. Lively is the brand's Long Island Iced Tea serve, bottled for quick pouring over ice without mixing five spirits at home.",
     nose: "Cola, lemon peel, mixed spirits, orange liqueur and light spice.",
     palate: "Bold and sweet-tart, with cola, lemon, vodka, rum warmth, gin botanicals and triple sec orange.",
@@ -113,7 +113,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
   "blockbuster-blockbuster-ultra-strong-beer-debfdb5": detail({
     n: "Blockbuster Ultra Strong Beer",
     c: "Indian Ultra Strong Lager",
-    o: "Blockbuster Ultra Strong Beer is an Indian ultra strong lager sold in multiple bottle and can formats. Livcheers describes it as a strong lager with a robust malt backbone, full body and warming finish.",
+    o: "Blockbuster Ultra Strong Beer is an Indian ultra strong lager sold in multiple bottle and can formats. Retail tasting notes describe it as a strong lager with a robust malt backbone, full body and warming finish.",
     craft: "Indian state beer listings connect Blockbuster Ultra Strong Beer with regional brewing operations such as Arthos Breweries and Lilasons Alco Bev in different markets. The beer is made for the high-strength lager segment, where malt sweetness and alcohol warmth sit ahead of hop complexity.",
     nose: "Sweet malt, grain, light hops and a clear strong-lager warmth.",
     palate: "Full-bodied and malty, with cereal sweetness, low bitterness, smooth carbonation and a warm finish.",
@@ -129,7 +129,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
   "san-andre-tripple-sec-liqueur-41caa6e": detail({
     n: "San Andre Tripple Sec Liqueur",
     c: "Indian Triple Sec Liqueur",
-    o: "San Andre Tripple Sec Liqueur is a Goa-made orange liqueur from San Andre. Livcheers describes it as a curacao-type triple sec from Tonia Liquor Industries, made with sweet and bitter Indian orange peels.",
+    o: "San Andre Tripple Sec Liqueur is a Goa-made orange liqueur from San Andre. Retail tasting notes describe it as a curacao-type triple sec from Tonia Liquor Industries, made with sweet and bitter Indian orange peels.",
     craft: "San Andre is known in Goa for approachable local liqueurs including coffee, chocolate, paan and triple sec expressions. This bottle is designed as a cocktail mixer, bringing orange-peel sweetness and bitterness into Margaritas, Cosmopolitans and Sidecars.",
     nose: "Sweet orange peel, bitter orange, candied citrus and light syrup.",
     palate: "Bright and sweet, with orange oil, curacao-style bitterness, soft sugar and a clean citrus body.",
@@ -140,7 +140,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     pairs: ["tandoori prawns", "orange chicken", "fruit chaat", "dark chocolate tart"],
     why: "It is a practical Indian triple sec for citrus-led cocktails and easy home-bar mixing.",
     q: "Who makes San Andre Tripple Sec Liqueur?",
-    a: "Livcheers identifies San Andre Triple Sec as a Tonia Liquor Industries product from Goa.",
+    a: "Market listings identify San Andre Triple Sec as a Tonia Liquor Industries product from Goa.",
   }),
   "one-more-green-apple-74af637": detail({
     n: "One More Green Apple",

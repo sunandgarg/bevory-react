@@ -21,6 +21,13 @@ const args = new Set(process.argv.slice(2));
 const apply = args.has("--apply");
 const uploadOnly = args.has("--upload-only");
 const shouldUpload = apply || uploadOnly;
+const argValues = (prefix: string) => process.argv.slice(2)
+  .filter((arg) => arg.startsWith(`${prefix}=`))
+  .flatMap((arg) => arg.slice(prefix.length + 1).split(","))
+  .map((value) => value.trim().toLowerCase())
+  .filter(Boolean);
+const tableFilters = new Set(argValues("--table"));
+const hostFilters = argValues("--host");
 const targetLongEdge = 3840;
 const quality = Number(process.env.IMAGE_MIGRATION_QUALITY || 95);
 const concurrency = Number(process.env.IMAGE_MIGRATION_CONCURRENCY || 4);
@@ -108,6 +115,12 @@ const addYouTubeFallback = (tableName: string, row: JsonObject, targets: ImageTa
     ? { kind: "field", path: ["thumbnail_url"], sourceUrl }
     : null;
   return fallback ? [...targets, fallback] : targets;
+};
+
+const targetMatchesHostFilter = (target: ImageTarget) => {
+  if (!hostFilters.length) return true;
+  const host = new URL(target.sourceUrl).hostname.toLowerCase();
+  return hostFilters.some((filter) => host.includes(filter));
 };
 
 const downloadImage = async (sourceUrl: string) => {
@@ -313,13 +326,15 @@ const uploadManifest = async (manifest: JsonObject) => {
 
 try {
   const records = await prisma.contentRecord.findMany({ orderBy: [{ tableName: "asc" }, { recordId: "asc" }] });
-  const plans: RecordPlan[] = records.map((record) => {
+  const plans: RecordPlan[] = records
+  .filter((record) => !tableFilters.size || tableFilters.has(record.tableName.toLowerCase()))
+  .map((record) => {
     const original = jsonObject(record.data);
     const targets = addYouTubeFallback(
       record.tableName,
       original,
       collectImageTargets(original, publicBaseUrl),
-    );
+    ).filter(targetMatchesHostFilter);
     return { key: record.key, tableName: record.tableName, recordId: record.recordId, targets };
   }).filter((plan) => plan.targets.length > 0);
 
@@ -351,6 +366,8 @@ try {
     resizeKernel: "lanczos3",
     outputFormats: ["lossless-png-for-alpha", "progressive-jpeg-4:4:4"],
     publicBaseUrl,
+    tableFilters: [...tableFilters],
+    hostFilters,
     domains,
   }, null, 2));
 
@@ -366,6 +383,8 @@ try {
       resizeKernel: "lanczos3",
       outputFormats: ["lossless-png-for-alpha", "progressive-jpeg-4:4:4"],
       publicBaseUrl,
+      tableFilters: [...tableFilters],
+      hostFilters,
       records: plans.length,
       references: plans.reduce((sum, plan) => sum + plan.targets.length, 0),
       uniqueImages: results.length,

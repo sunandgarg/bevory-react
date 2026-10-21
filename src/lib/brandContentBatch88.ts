@@ -91,7 +91,7 @@ export const BRAND_CONTENT_BATCH_88: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Henri Bardouin pastis and Henri Bourgeois wine notes, serving ideas, pairings and city prices.",
   },
   hermosa: {
-    description: "Hermosa is a wine brand listed on BevOry through Merlot, Chardonnay and Sauvignon Blanc routes. Livcheers places Hermosa Chardonnay under Argentina, with medium-full body and classic ripe-fruit Chardonnay cues.",
+    description: "Hermosa is a wine brand listed on BevOry through Merlot, Chardonnay and Sauvignon Blanc routes. Market listings place Hermosa Chardonnay under Argentina, with medium-full body and classic ripe-fruit Chardonnay cues.",
     story: "Hermosa works as a simple varietal-led wine page for shoppers comparing red and white styles by grape. The range covers soft Merlot, richer Chardonnay and brighter Sauvignon Blanc, making it easy to choose by meal rather than label detail.",
     tastingNotes: [
       { title: "Chardonnay", description: "Ripe apple, pear, pineapple, vanilla and a creamy texture carry the white-wine side." },
@@ -175,7 +175,7 @@ export const BRAND_CONTENT_BATCH_88: Record<string, BrandPublicContent> = {
     metaDescription: "Explore High Blend Premium Whisky notes, serving ideas, pairings and city prices on BevOry.",
   },
   highbury: {
-    description: "Highbury is an Indian whisky brand listed through Highbury Classic Superior Grain Whisky. Livcheers identifies the 750 ml expression as a blended Indian whisky, while whisky catalogues describe it as superior grain whisky blended with imported malts.",
+    description: "Highbury is an Indian whisky brand listed through Highbury Classic Superior Grain Whisky. Market listings identify the 750 ml expression as a blended Indian whisky, while whisky catalogues describe it as superior grain whisky blended with imported malts.",
     story: "Highbury sits in the modern Indian grain-whisky lane, where smoother grain spirit and malt influence are positioned above basic party whisky. BevOry routes show 180 ml, 750 ml and 1 litre formats across the Highbury Classic listings.",
     tastingNotes: [
       { title: "Superior Grain", description: "Toffee, honey, cereal grain and vanilla create a soft, polished profile." },
@@ -196,7 +196,7 @@ export const BRAND_CONTENT_BATCH_88: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Highbury Classic whisky notes, superior grain style, pairings and city prices on BevOry.",
   },
   "highbury-classic": {
-    description: "Highbury Classic is an Indian whisky label centred on Superior Grain Whisky and Classic Whisky routes. Livcheers lists Highbury Classic Superior Grain Whisky as blended Indian whisky with 180 ml, 375 ml and 750 ml formats.",
+    description: "Highbury Classic is an Indian whisky label centred on Superior Grain Whisky and Classic Whisky routes. Retail listings describe Highbury Classic Superior Grain Whisky as blended Indian whisky with 180 ml, 375 ml and 750 ml formats.",
     story: "Highbury Classic's name points to an accessible premium style rather than a heavy single-malt profile. Its grain-whisky base and imported-malt cue make it a practical bottle for people moving up from regular mixer whisky.",
     tastingNotes: [
       { title: "Classic Sweetness", description: "Toffee, honey, vanilla and toasted grain give the whisky a rounded opening." },
@@ -259,7 +259,7 @@ export const BRAND_CONTENT_BATCH_88: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Hillfort Premium Blended Malt Whisky notes, AABL origin, pairings and city prices.",
   },
   hobsons: {
-    description: "Hobsons is an Indian brandy label listed on BevOry through Hobsons XR Pure French Grape Brandy. Livcheers describes the 750 ml bottle as a premium French-grape brandy with ripe grape, floral, caramel and oak notes.",
+    description: "Hobsons is an Indian brandy label listed on BevOry through Hobsons XR Pure French Grape Brandy. Retail tasting notes describe the 750 ml bottle as a premium French-grape brandy with ripe grape, floral, caramel and oak notes.",
     story: "Hobsons XR sits in India's upgraded brandy space, where grape-brandy language and French cues separate it from everyday deluxe brandy. Telangana retail listings also show Hobsons XR Pure French Grape Brandy across multiple bottle sizes.",
     tastingNotes: [
       { title: "French Grape Style", description: "Ripe grape, floral lift, caramel and toffee give the brandy a smooth centre." },

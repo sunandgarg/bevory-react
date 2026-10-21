@@ -1,0 +1,82 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T08:29:19.108Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI authentication is unavailable: sts get-caller-identity could not reach the AWS sign-in token endpoint.",
+    "The configured database tunnel at 127.0.0.1:3308 is not accepting connections, so the existing blog_posts contentRecord upsert cannot be completed."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only query of BevOry's public blog API returned 22 published posts; no matching Llano Uplift/Hickory Sands or India-specific single malt explainer titles or slugs were found.",
+    "local_files": "Today's saved drafts were reviewed. The Texas AVA news was not present; the separate India-specific single malt guide is not a repeat of the existing Scotch single-grain guide or the U.S. AVA/appellation guide.",
+    "private_database": "Unavailable because the local database tunnel is not accepting connections."
+  },
+  "posts": [
+    {
+      "id": "news-ttb-llano-uplift-hickory-sands-comment-deadline-2026",
+      "title": "TTB Comments Close Today On Two Proposed Texas Wine Areas",
+      "slug": "ttb-comments-close-llano-uplift-hickory-sands-texas-avas",
+      "excerpt": "The US Alcohol and Tobacco Tax and Trade Bureau is accepting comments through October 13 on proposed Llano Uplift and Hickory Sands District AVAs in central Texas. Neither designation is final.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Texas wine",
+        "Llano Uplift AVA",
+        "Hickory Sands District AVA",
+        "TTB wine rules",
+        "American Viticultural Areas"
+      ],
+      "meta_title": "TTB Texas Wine Area Comments Close Today | BevOry",
+      "meta_description": "TTB comments close October 13 on proposed Llano Uplift and Hickory Sands wine areas in Texas. Neither AVA is approved yet.",
+      "selection_note": "Selected for the official October 13 deadline on a live TTB proposal. The article clearly distinguishes the comment period from final approval and explains the proposed areas' nesting without implying new labels are already authorized.",
+      "source_links": [
+        "https://www.ttb.gov/laws-regulations-and-public-guidance/laws-and-regulations/all-rulemaking",
+        "https://www.govinfo.gov/content/pkg/FR-2026-08-14/pdf/2026-16670.pdf"
+      ],
+      "content": "<p><strong>Public comments on two proposed central Texas wine-growing areas are due to the US Alcohol and Tobacco Tax and Trade Bureau (TTB) today, October 13, 2026.</strong> The proposal would establish the Llano Uplift and Hickory Sands District American Viticultural Areas (AVAs). They are proposals, not approved designations: TTB says it is still inviting comment on the boundaries and names.</p>\n\n<h2>What TTB Has Proposed</h2>\n<p>In Notice No. 243, published in the Federal Register on August 14, TTB proposed a 2,096-square-mile Llano Uplift AVA across portions of seven Texas counties. It also proposed a 193-square-mile Hickory Sands District AVA within parts of four counties. If both were established, Hickory Sands District would sit entirely inside Llano Uplift; both proposed areas are also within the existing Texas Hill Country AVA. The notice says Llano Uplift would encompass the established Bell Mountain AVA.</p>\n\n<h2>Why Two Proposals Are Being Considered Together</h2>\n<p>The relationship between the boundaries is central to the proposal. TTB describes the smaller Hickory Sands District as entirely within the proposed Llano Uplift area, which itself lies within Texas Hill Country. The agency is asking for public comment on the proposed names and the evidence distinguishing these places, rather than announcing that the districts already have final regulatory status.</p>\n<p>The published <a href=\"https://www.govinfo.gov/content/pkg/FR-2026-08-14/pdf/2026-16670.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Federal Register notice</a> discusses geology, soils, climate, elevation and groundwater among the features in the petitions. It also addresses possible effects on existing wine labels that use the proposed names. Those questions matter to growers and producers because an AVA name can be used as an origin claim only under applicable labeling rules.</p>\n\n<h2>Today Is The Comment Deadline</h2>\n<p>TTB's <a href=\"https://www.ttb.gov/laws-regulations-and-public-guidance/laws-and-regulations/all-rulemaking\" target=\"_blank\" rel=\"noopener noreferrer\">official rulemaking page</a> lists October 13, 2026 as the final day for comments on Notice No. 243, docket TTB-2026-0005. Interested parties should use that page and the notice's instructions to find the current Regulations.gov submission route and requirements. This article is an update for wine readers, not a substitute for the agency's filing instructions.</p>\n\n<h2>What Wine Buyers Should Know</h2>\n<p>An AVA name describes a defined grape-growing origin; it does not by itself promise a particular flavour or quality level. Until TTB completes the rulemaking, Llano Uplift and Hickory Sands District should be described as proposed AVAs. The current development is the public-comment deadline, not a new Texas label designation or a confirmed change to bottles already on shelves.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T08:29:19.108Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-single-malt-whisky-definition-india-fssai",
+      "title": "What Does Single Malt Mean On An Indian Whisky Label?",
+      "slug": "single-malt-whisky-meaning-india-fssai",
+      "excerpt": "In India, single malt has a defined production meaning: malted barley, pot-still distillation and one distillery. Here is how that differs from single grain and what the term does not tell you.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "single malt whisky India",
+        "FSSAI whisky standards",
+        "single malt meaning",
+        "single grain vs single malt",
+        "Indian whisky guide"
+      ],
+      "meta_title": "Single Malt Whisky Meaning In India | BevOry",
+      "meta_description": "Learn what single malt means under India's FSSAI standard, how it differs from single grain and what to check before buying a bottle.",
+      "selection_note": "Chosen for a high-intent Indian whisky question, distinct from the earlier Scotch single-grain guide. The explanation follows the FSSAI consolidated standard and separates production category from age, cask and taste claims.",
+      "source_links": [
+        "https://fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_01_12_2025.pdf",
+        "https://www.fssai.gov.in/food-law/regulations/amendments/alcoholic-beverages"
+      ],
+      "content": "<p><strong>In India, “single malt” does not mean one barrel or one year of whisky.</strong> Under the Food Safety and Standards Authority of India's alcoholic-beverage standard, it describes whisky made from fermented mash using malted barley without another grain, distilled only in pot stills and produced at a single distillery. The definition helps separate how a whisky is made from how it tastes.</p>\n\n<h2>Three Parts Of The Indian Definition</h2>\n<p>The current FSSAI compendium sets out three essential points: the mash uses malted barley without adding another grain; distillation is in pot stills only; and production takes place at one distillery. Read together, these requirements explain why “single” refers to the distillery, while “malt” identifies the barley-based mash. It does not mean the bottle contains whisky from only one cask.</p>\n<p>The definition appears in section 2.8.1(i) of FSSAI's <a href=\"https://fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_01_12_2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">consolidated alcoholic-beverage compendium</a>. FSSAI's <a href=\"https://www.fssai.gov.in/food-law/regulations/amendments/alcoholic-beverages\" target=\"_blank\" rel=\"noopener noreferrer\">amendments page</a> lists the notified changes for the 2018 regulation, so the compendium is useful as a current reading copy while the Gazette notifications remain the legal instruments.</p>\n\n<h2>Single Malt And Single Grain Are Different</h2>\n<p>Single grain whisky also comes from one distillery, but the Indian standard allows its fermented mash to use malted or unmalted grain. It is not the same category as single malt. In practical terms, the word “single” alone is not enough to tell you what grains were used; look at the complete category name and the producer's information.</p>\n\n<h2>What The Term Does Not Tell You</h2>\n<p>“Single malt” is a production-category description, not a tasting note. By itself it does not specify the whisky's age, whether it was peated, the type of cask used, or whether the final profile leans toward fruit, spice, smoke or sweetness. Those details vary by bottle and should be checked on the producer's own product information rather than guessed from the category.</p>\n<p>Nor does the term automatically mean that the whisky is older or better than a blend. It tells you about grain, distillation and distillery origin; personal preference still decides which style suits your glass.</p>\n\n<h2>A Useful Bottle-Comparison Checklist</h2>\n<p>When comparing Indian single malts in Delhi, Mumbai, Bengaluru or another city, first match the exact expression and bottle size. Then check the stated age, alcohol strength, cask information and tasting description if those details are provided. Compare prices only after confirming that the products are actually alike. A single-malt label is a helpful starting point, not a complete sensory profile.</p>\n<p>For a first pour, use a tulip-shaped whisky glass and try a small neat measure before adding a few drops of water. Let the specific bottle guide any pairing: a lightly seasoned snack can be a better first match than a heavily spiced dish that masks its aromas.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T08:29:19.108Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

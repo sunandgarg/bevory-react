@@ -1,15 +1,14 @@
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, BookOpen, Calendar, User, ChevronRight, X, Clock, TrendingUp, Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { BookOpen, CalendarDays, Clock3, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import MobileLayout from "@/components/layout/MobileLayout";
-import { apiClient } from "@/integrations/api/client";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
 import SEOHead from "@/components/SEOHead";
+import { Input } from "@/components/ui/input";
+import { apiClient } from "@/integrations/api/client";
 import { DEMAND_GUIDES } from "@/lib/demandGuides";
+import { guideImage } from "@/lib/guideImages";
 
 interface BlogPost {
   id: string;
@@ -18,32 +17,24 @@ interface BlogPost {
   excerpt: string | null;
   content: string | null;
   cover_image_url: string | null;
-  cover_emoji: string | null;
   author: string | null;
   category: string | null;
   tags: string[] | null;
   published_at: string | null;
   is_featured: boolean | null;
-  meta_title: string | null;
-  meta_description: string | null;
 }
 
-const CATEGORY_FILTERS = ["All", "Whiskey", "Rum", "Vodka", "Gin", "Wine", "Beer", "Cocktails", "Guides", "News"];
+const categories = ["All", "Whiskey", "Rum", "Vodka", "Gin", "Wine", "Beer", "Cocktails", "Guides", "News"];
+const readTime = (content: string | null) => Math.max(1, Math.ceil((content || "").replace(/<[^>]+>/g, " ").trim().split(/\s+/).length / 200));
+const postDate = (post: BlogPost) => post.published_at ? format(new Date(post.published_at), "d MMM yyyy") : null;
 
 const Guide = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-
   const { data: databasePosts = [], isLoading } = useQuery({
     queryKey: ["guide-posts"],
     queryFn: async () => {
-      const { data, error } = await apiClient
-        .from("blog_posts")
-        .select("*")
-        .eq("is_published", true)
-        .order("is_featured", { ascending: false })
-        .order("published_at", { ascending: false });
-
+      const { data, error } = await apiClient.from("blog_posts").select("*").eq("is_published", true).order("published_at", { ascending: false });
       if (error) throw error;
       return data as BlogPost[];
     },
@@ -51,277 +42,114 @@ const Guide = () => {
 
   const posts = useMemo(() => {
     const databaseSlugs = new Set(databasePosts.map((post) => post.slug));
-    return [
-      ...DEMAND_GUIDES.filter((guide) => !databaseSlugs.has(guide.slug)),
-      ...databasePosts,
-    ] as BlogPost[];
+    return [...databasePosts, ...DEMAND_GUIDES.filter((guide) => !databaseSlugs.has(guide.slug))]
+      .sort((a, b) => (b.published_at || "").localeCompare(a.published_at || "")) as BlogPost[];
   }, [databasePosts]);
 
   const filteredPosts = posts.filter((post) => {
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags?.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-
-    const matchesCategory =
-      selectedCategory === "All" || post.category === selectedCategory;
-
-    return matchesSearch && matchesCategory;
+    const query = searchQuery.trim().toLowerCase();
+    return (selectedCategory === "All" || post.category === selectedCategory)
+      && (!query || [post.title, post.excerpt, ...(post.tags || [])].some((value) => value?.toLowerCase().includes(query)));
   });
-
-  const featuredPosts = filteredPosts.filter((p) => p.is_featured);
-  const regularPosts = filteredPosts.filter((p) => !p.is_featured);
-
-  // Calculate read time
-  const getReadTime = (content: string | null) => {
-    if (!content) return 3;
-    return Math.max(1, Math.ceil(content.split(/\s+/).length / 200));
-  };
+  const lead = filteredPosts.find((post) => post.is_featured) || filteredPosts[0];
+  const latestPosts = filteredPosts.filter((post) => post.slug !== lead?.slug);
 
   return (
     <>
-      <SEOHead
-        title="BevOry Guide - Expert Spirits & Cocktails Knowledge"
-        description="Discover expert insights on whiskey, rum, vodka, gin, wine, beer, and cocktails. Learn about tasting notes, pairing ideas, and drinking culture."
-        keywords="spirits guide, cocktail recipes, whiskey guide, rum guide, vodka guide, wine tips, beer guide"
-      />
+      <SEOHead title="BevOry Guide | Drink News, Prices & Buying Advice" description="Read BevOry guides on bottle prices, whisky, wine, beer, dry days and beverage news across India." canonical="/guide" />
       <MobileLayout showSearch={false} showCheersGuide={false}>
-        {/* Hero Header */}
-        <header className="border-b border-border bg-secondary/30">
-          <div className="relative px-4 pt-6 pb-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-6"
-            >
-              <div className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-3">
-                <BookOpen className="w-4 h-4" />
-                <span>Price guides and practical knowledge</span>
-              </div>
-              <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
-                BevOry Guide
-              </h1>
-              <p className="text-muted-foreground">
-                Master the art of spirits, cocktails & drinking culture
-              </p>
-            </motion.div>
+        <div className="bg-background text-foreground">
+          <header className="border-b border-border px-4 pb-7 pt-9 sm:px-6 md:pt-12">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="mb-3 text-xs font-semibold uppercase text-accent">The BevOry Journal</p>
+              <h1 className="font-serif text-4xl font-bold leading-tight md:text-5xl">BevOry Guide</h1>
+              <p className="mt-3 text-base leading-7 text-muted-foreground">Drinks news, city price guides and useful answers for choosing a bottle in India.</p>
+            </div>
+            <div className="relative mx-auto mt-7 max-w-2xl">
+              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input aria-label="Search BevOry guides" placeholder="Search guides, prices and news" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} className="h-12 rounded-lg border-border bg-card pl-11 pr-11 text-base" />
+              {searchQuery && (
+                <button type="button" onClick={() => setSearchQuery("")} aria-label="Clear search" className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md hover:bg-secondary">
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+          </header>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="relative"
-            >
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  placeholder="Search articles, topics, recipes..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-10 h-12 bg-card border-border rounded-xl text-base"
-                />
-                <AnimatePresence>
-                  {searchQuery && (
-                    <motion.button
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full bg-muted hover:bg-muted/80"
-                    >
-                      <X className="w-4 h-4 text-muted-foreground" />
-                    </motion.button>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Category Pills */}
-          <nav className="px-4 pb-4" aria-label="Article categories">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"
-            >
-              {CATEGORY_FILTERS.map((category, index) => (
-                <motion.button
-                  key={category}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * index }}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                    selectedCategory === category
-                      ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25 scale-105"
-                      : "bg-secondary/80 text-foreground hover:bg-secondary hover:scale-102"
-                  }`}
-                >
-                  {category}
-                </motion.button>
-              ))}
-            </motion.div>
-          </nav>
-        </header>
-
-        <main className="px-4 pb-8">
-          {isLoading ? (
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-40 bg-secondary/50 rounded-2xl animate-pulse" />
+          <nav className="border-b border-border px-4 sm:px-6" aria-label="Guide categories">
+            <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto py-3 scrollbar-hide">
+              {categories.map((category) => (
+                <button key={category} type="button" onClick={() => setSelectedCategory(category)} aria-pressed={selectedCategory === category}
+                  className={`h-10 shrink-0 rounded-lg border px-4 text-sm font-medium transition-colors ${selectedCategory === category ? "border-accent bg-accent text-accent-foreground" : "border-border bg-card hover:border-accent/50 hover:bg-secondary"}`}>
+                  {category === "All" ? "All Articles" : category}
+                </button>
               ))}
             </div>
-          ) : (
-            <>
-              {/* Featured Articles - Hero Cards */}
-              {featuredPosts.length > 0 && (
-                <section className="mb-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                    <h2 className="text-lg font-bold">Featured Stories</h2>
-                  </div>
-                  <div className="grid grid-cols-1 gap-2.5">
-                    {featuredPosts.map((post, index) => (
-                      <FeaturedArticleCard key={post.id} post={post} index={index} getReadTime={getReadTime} />
-                    ))}
+          </nav>
+
+          <main className="mx-auto max-w-6xl px-4 pb-12 pt-7 sm:px-6">
+            {isLoading ? (
+              <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_250px]"><div className="h-72 animate-pulse rounded-lg bg-secondary" /><div className="h-72 animate-pulse rounded-lg bg-secondary" /></div>
+            ) : lead ? (
+              <>
+                <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_250px]">
+                  <section aria-labelledby="featured-guide-heading">
+                    <h2 id="featured-guide-heading" className="mb-4 text-xl font-bold">Featured Story</h2>
+                    <Link to={`/guide/${lead.slug}`} className="group block overflow-hidden rounded-lg border border-border bg-secondary">
+                      <div className="flex min-h-72 items-center justify-center sm:min-h-96">
+                        <img src={guideImage(lead.cover_image_url, lead.category)} alt={lead.cover_image_url ? lead.title : `${lead.category || "Drinks"} guide illustration`} width="800" height="450"
+                          className={`h-72 w-full sm:h-96 ${lead.cover_image_url ? "object-cover" : "object-contain p-12"}`} fetchPriority="high" />
+                      </div>
+                      <div className="border-t border-border bg-card p-5 sm:p-6">
+                        <div className="mb-2 flex flex-wrap items-center gap-3 text-xs font-medium text-muted-foreground"><span className="text-accent">{lead.category || "Guide"}</span>{postDate(lead) && <span>{postDate(lead)}</span>}</div>
+                        <h3 className="font-serif text-2xl font-bold leading-tight group-hover:text-accent sm:text-3xl">{lead.title}</h3>
+                        {lead.excerpt && <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">{lead.excerpt}</p>}
+                      </div>
+                    </Link>
+                  </section>
+                  <aside className="hidden lg:block" aria-label="Recent guides">
+                    <h2 className="mb-4 text-xl font-bold">Recent Guides</h2>
+                    <div className="divide-y divide-border rounded-lg border border-border bg-card px-4">
+                      {latestPosts.slice(0, 5).map((post) => (
+                        <Link key={post.id} to={`/guide/${post.slug}`} className="block py-4 hover:text-accent">
+                          <span className="text-xs font-medium text-accent">{post.category || "Guide"}</span><span className="mt-1 block text-sm font-semibold leading-5">{post.title}</span>
+                          {postDate(post) && <span className="mt-1 block text-xs text-muted-foreground">{postDate(post)}</span>}
+                        </Link>
+                      ))}
+                    </div>
+                  </aside>
+                </div>
+                <section className="mt-9" aria-labelledby="latest-guides-heading">
+                  <h2 id="latest-guides-heading" className="mb-4 border-b border-border pb-3 text-xl font-bold">Latest Articles</h2>
+                  <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_250px]">
+                    <div className="space-y-3">
+                      {latestPosts.map((post) => (
+                        <article key={post.id} className="overflow-hidden rounded-lg border border-border bg-card">
+                          <Link to={`/guide/${post.slug}`} className="group flex min-h-32 items-center gap-4 p-3 sm:gap-5 sm:p-4">
+                            <div className="flex h-24 w-28 shrink-0 items-center justify-center overflow-hidden rounded-md bg-secondary sm:h-28 sm:w-40">
+                              <img src={guideImage(post.cover_image_url, post.category)} alt={post.cover_image_url ? post.title : `${post.category || "Drinks"} guide illustration`} width="320" height="224" loading="lazy" className={`h-full w-full ${post.cover_image_url ? "object-cover" : "object-contain p-3"}`} />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold text-accent">{post.category || "Guide"}</span>{postDate(post) && <span className="inline-flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" />{postDate(post)}</span>}</div>
+                              <h3 className="mt-2 line-clamp-2 text-base font-semibold leading-6 group-hover:text-accent sm:text-lg">{post.title}</h3>
+                              {post.excerpt && <p className="mt-1 hidden line-clamp-2 text-sm leading-5 text-muted-foreground sm:block">{post.excerpt}</p>}
+                              <span className="mt-2 inline-flex items-center gap-1 text-xs text-muted-foreground"><Clock3 className="h-3.5 w-3.5" />{readTime(post.content)} min read</span>
+                            </div>
+                          </Link>
+                        </article>
+                      ))}
+                    </div>
                   </div>
                 </section>
-              )}
-
-              {/* Trending Section */}
-              {regularPosts.length > 0 && (
-                <section className="mb-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp className="w-5 h-5 text-accent" />
-                    <h2 className="text-lg font-bold">Latest Articles</h2>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 gap-2.5">
-                    {regularPosts.map((post, index) => (
-                      <ArticleCard key={post.id} post={post} index={index} getReadTime={getReadTime} />
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {filteredPosts.length === 0 && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="py-16 text-center"
-                >
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-secondary flex items-center justify-center">
-                    <BookOpen className="w-10 h-10 text-muted-foreground" />
-                  </div>
-                  <p className="text-lg font-medium text-foreground mb-1">No articles found</p>
-                  <p className="text-muted-foreground text-sm">Try adjusting your search or filters</p>
-                </motion.div>
-              )}
-            </>
-          )}
-        </main>
+              </>
+            ) : (
+              <div className="py-20 text-center"><BookOpen className="mx-auto h-9 w-9 text-muted-foreground" aria-hidden="true" /><h2 className="mt-3 text-lg font-semibold">No articles found</h2><p className="mt-1 text-sm text-muted-foreground">Try another search or category.</p></div>
+            )}
+          </main>
+        </div>
       </MobileLayout>
     </>
   );
 };
-
-const FeaturedArticleCard = ({
-  post,
-  index,
-  getReadTime,
-}: {
-  post: BlogPost;
-  index: number;
-  getReadTime: (content: string | null) => number;
-}) => (
-  <motion.article
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.1 }}
-    className="group overflow-hidden rounded-2xl border border-accent/20 bg-card transition-all hover:border-accent/45 hover:shadow-sm"
-  >
-    <Link to={`/guide/${post.slug}`} className="flex min-h-[112px] items-center gap-3 p-3 sm:gap-4">
-      <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl bg-secondary sm:w-36">
-        {post.cover_image_url ? (
-          <img
-            src={post.cover_image_url}
-            alt={post.title}
-            width={288}
-            height={192}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/15 to-secondary">
-            <BookOpen className="h-8 w-8 text-accent" aria-hidden="true" />
-          </div>
-        )}
-      </div>
-      <div className="min-w-0 flex-1 py-0.5">
-        <div className="mb-2 flex flex-wrap items-center gap-2">
-          {post.category && <Badge variant="secondary" className="h-6 rounded-full px-2.5 text-[11px]">{post.category}</Badge>}
-          {post.published_at && <span className="flex items-center gap-1 text-[11px] text-muted-foreground"><Calendar className="h-3 w-3" />{format(new Date(post.published_at), "d MMM yyyy")}</span>}
-        </div>
-        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-foreground transition-colors group-hover:text-accent sm:text-base">{post.title}</h3>
-        <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground line-clamp-1 sm:block">{post.excerpt}</p>
-        <div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground">
-          <span className="flex items-center gap-1"><User className="h-3 w-3" />{post.author || "BevOry Team"}</span>
-          <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{getReadTime(post.content)} min read</span>
-        </div>
-      </div>
-      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
-    </Link>
-  </motion.article>
-);
-
-// Regular Article Card
-const ArticleCard = ({
-  post,
-  index,
-  getReadTime,
-}: {
-  post: BlogPost;
-  index: number;
-  getReadTime: (content: string | null) => number;
-}) => (
-  <motion.article
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.05 }}
-    className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:border-accent/40 hover:shadow-sm"
-  >
-    <Link to={`/guide/${post.slug}`} className="flex min-h-[100px] items-center gap-3 p-3 sm:gap-4">
-      <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-secondary sm:h-24 sm:w-32">
-        {post.cover_image_url ? (
-          <img
-            src={post.cover_image_url}
-            alt={post.title}
-            width={256}
-            height={192}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/10 to-secondary">
-            <BookOpen className="h-7 w-7 text-accent" aria-hidden="true" />
-          </div>
-        )}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
-          {post.category && <Badge variant="secondary" className="h-6 rounded-full px-2.5 text-[11px]">{post.category}</Badge>}
-          {post.published_at && <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{format(new Date(post.published_at), "d MMM yyyy")}</span>}
-        </div>
-        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-foreground transition-colors group-hover:text-accent sm:text-base">{post.title}</h3>
-        <p className="mt-1 hidden text-xs text-muted-foreground line-clamp-1 sm:block">{post.excerpt}</p>
-        <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-muted-foreground"><Clock className="h-3 w-3" />{getReadTime(post.content)} min read</span>
-      </div>
-      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
-    </Link>
-  </motion.article>
-);
 
 export default Guide;

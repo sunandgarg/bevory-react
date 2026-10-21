@@ -76,9 +76,13 @@ const PrivacyPolicy = () => (
         Policy</Link>.
       </li>
       <li>
-        <strong>Optional analytics:</strong> if you select "Allow analytics", Google Analytics may receive page views,
-        interactions, device/browser data, approximate location, and pseudonymous identifiers. Advertising storage,
-        ad user data, ad personalisation, and Google signals are configured as denied or disabled by BevOry.
+        <strong>Optional analytics:</strong> if you allow analytics, Google Analytics may receive page views,
+        interactions, device/browser data, approximate location, and pseudonymous identifiers.
+      </li>
+      <li>
+        <strong>Optional advertising:</strong> if you separately allow guide-page ads, Google AdSense may receive
+        device and request data and use cookies or similar technologies to deliver and measure ads and prevent fraud.
+        BevOry keeps ad user data, ad personalisation, and Google signals disabled or denied.
       </li>
       <li>
         <strong>Media interactions:</strong> when you choose to play or open YouTube content, YouTube may receive your

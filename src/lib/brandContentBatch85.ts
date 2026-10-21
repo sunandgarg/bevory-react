@@ -234,7 +234,7 @@ export const BRAND_CONTENT_BATCH_85: Record<string, BrandPublicContent> = {
   },
   "golden-river": {
     description: "Golden River is an Indian VSOP brandy label listed on BevOry in 750 ml and 180 ml routes. The brand page is useful for drinkers comparing warm, oak-sweet brandy serves by bottle size.",
-    story: "Golden River belongs to the Indian VSOP brandy shelf where fruit, caramel and spice are the expected cues. Livcheers and BevOry listings both surface the label as a brandy route rather than a wine or whisky page.",
+    story: "Golden River belongs to the Indian VSOP brandy shelf where fruit, caramel and spice are the expected cues. retail references and BevOry listings both surface the label as a brandy route rather than a wine or whisky page.",
     tastingNotes: [
       { title: "Golden Fruit", description: "Raisin, apricot, caramel and honeyed sweetness form the core." },
       { title: "Oak Warmth", description: "Vanilla, clove and mild wood spice carry into a rounded finish." },

@@ -34,6 +34,7 @@ const PublicShell = () => {
   })();
 
   const compactHeader = !isHome;
+  const HeaderTitle = pathname === "/guide" || pathname.startsWith("/guide/") ? "span" : "h1";
 
   return (
     <>
@@ -41,9 +42,9 @@ const PublicShell = () => {
         <div className="mx-auto flex h-14 max-w-[1120px] items-center gap-2 px-4 md:h-[72px] md:gap-4">
           <BrandingDisplay variant={compactHeader ? "mark" : "header"} className="shrink-0" />
           {compactHeader && (
-            <h1 className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground md:text-base">
+            <HeaderTitle className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground md:text-base">
               {pageHeading}
-            </h1>
+            </HeaderTitle>
           )}
           <div className={`${compactHeader ? "ml-auto" : "ml-auto md:ml-0"} shrink-0`}>
             <LocationSelectorNew variant={compactHeader ? "compact" : "default"} />

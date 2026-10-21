@@ -1,0 +1,200 @@
+import "dotenv/config";
+import assert from "node:assert/strict";
+import { writeFile } from "node:fs/promises";
+import { PrismaClient } from "@prisma/client";
+
+const publishedAt = "2026-10-11T12:30:48.160Z";
+
+export const posts = [
+  {
+    id: "news-seven-daughters-sparkling-brut-veneto-launch-october-2026",
+    title: "Seven Daughters Adds A Veneto Sparkling Brut To Its Wine Range",
+    slug: "seven-daughters-sparkling-brut-veneto-launch-october-2026",
+    excerpt:
+      "Terlato's 8 October announcement introduces an 11% ABV Sparkling Brut from Veneto, joining Seven Daughters Moscato and Red Blend.",
+    cover_emoji: "news",
+    category: "News",
+    tags: ["Seven Daughters", "Terlato Wine Group", "sparkling wine news", "Veneto", "Taraji P. Henson"],
+    meta_title: "Seven Daughters Sparkling Brut Launch | BevOry",
+    meta_description:
+      "Seven Daughters launches a Veneto Sparkling Brut with Glera, Chardonnay and Pinot Noir. Explore the blend, producer tasting notes and US launch.",
+    selection_note:
+      "A producer announcement dated 8 October adds a dry sparkling wine to an established portfolio; the story distinguishes the US launch price from Indian retail pricing.",
+    source_links: [
+      "https://www.bevnet.com/pr/2026/10/08/terlato-expands-seven-daughters-portfolio-with-sparkling-brut",
+      "https://sevendaughters.com/",
+    ],
+    content: String.raw`
+<p><strong>Seven Daughters has added a Sparkling Brut from Veneto, northern Italy, to its range.</strong> Terlato Wine Group announced the release on 8 October 2026. It is the third wine introduced since the brand's 2024 relaunch, alongside Moscato and Red Blend. The <a href="https://www.bevnet.com/pr/2026/10/08/terlato-expands-seven-daughters-portfolio-with-sparkling-brut" target="_blank" rel="noopener noreferrer">producer announcement</a> names Taraji P. Henson as strategic advisor and creative collaborator.</p>
+
+<h2>What Is In The Bottle?</h2>
+<p>The <a href="https://sevendaughters.com/" target="_blank" rel="noopener noreferrer">Seven Daughters wine page</a> specifies 50% Glera, 40% Chardonnay and 10% Pinot Noir, with an alcohol strength of 11% ABV. It describes a Charmat-method sparkling wine with floral aromas, green apple, pear and citrus, followed by orchard fruit, creamy bubbles and a dry finish. These are the producer's tasting notes, not the findings of an independent BevOry tasting.</p>
+
+<h2>A Different Pour From The Existing Moscato</h2>
+<p>The same wine page describes the Moscato as 100% Moscato from Veneto, at 7.5% ABV, with peach and citrus flavours. The Red Blend uses Marzemino, Corvina and Merlot. The newcomer gives the range a dry sparkling option rather than another version of its Moscato.</p>
+
+<h2>The Launch Price Is A US Price</h2>
+<p>Terlato gives a suggested retail price of US$15.99 and says the wine is available through selected retailers nationwide in the United States and the brand's website. That figure is a US launch price, not an Indian MRP. A rupee conversion would not account for the costs and taxes attached to an Indian retail bottle.</p>
+
+<h2>Why The Addition Matters</h2>
+<p>Our reading is that Seven Daughters is widening the occasions its range can cover: Moscato, a red blend and now dry sparkling wine offer distinct choices at the table. For drinkers following the launch, the useful distinction is the wine's style, not simply the celebrity collaboration. The producer recommends serving the Brut chilled; its dry, orchard-fruit profile is the central change in the line-up.</p>
+`.trim(),
+  },
+  {
+    id: "guide-syrah-vs-shiraz-same-grape-taste-food-india",
+    title: "Syrah Vs Shiraz: The Same Grape, But Not The Same Experience",
+    slug: "syrah-vs-shiraz-same-grape-taste-food-india",
+    excerpt:
+      "Syrah and Shiraz are two names for one grape. Climate, vineyard and winemaking explain the contrast between peppery reds and richer fruit-led bottles.",
+    cover_emoji: "guide",
+    category: "Guides",
+    tags: ["Syrah vs Shiraz", "red wine guide", "Shiraz food pairings", "wine serving temperature", "wine guide India"],
+    meta_title: "Syrah vs Shiraz: Taste & Indian Pairings | BevOry",
+    meta_description:
+      "Syrah and Shiraz are the same grape. Learn how region shapes pepper and fruit, serve at 16-18 degrees Celsius and check city prices on BevOry.",
+    selection_note:
+      "An evergreen label-confusion query with practical regional, serving and food guidance; no search-volume estimate or Indian bottle availability is asserted.",
+    source_links: [
+      "https://boschkloofwines.com/syrah-vs-shiraz/",
+      "https://www.wsetglobal.com/knowledge-centre/blog/2025/what-gives-syrahshiraz-its-peppery-spice/",
+      "https://www.wsetglobal.com/knowledge-centre/blog/2022/april/26/ideal-serving-temperatures-and-top-tips-for-wine-storage",
+    ],
+    content: String.raw`
+<p><strong>Syrah and Shiraz are the same grape variety.</strong> Seeing different spellings on two bottles does not mean you are comparing different grapes. The contrast comes from where the fruit grows and the wine the producer wants to make.</p>
+
+<h2>The Name Is A Clue, Not A Flavour Guarantee</h2>
+<p>Stellenbosch producer <a href="https://boschkloofwines.com/syrah-vs-shiraz/" target="_blank" rel="noopener noreferrer">Boschkloof explains</a> that Syrah often signals a savourier, cooler-climate approach, while Shiraz often points towards riper, fuller fruit. Northern Rhone wines and Australian Barossa wines are useful reference points, but the spelling alone cannot settle how a bottle will taste.</p>
+<p>Boschkloof's own Polkadraai Road site in Stellenbosch has granite-rich soils and Atlantic influence. The producer describes earlier picking and older oak as part of its savoury, pepper-led Syrah approach. That is a more useful picture of a wine than assuming every South African red fits one national style.</p>
+
+<h2>Where The Pepper Comes From</h2>
+<p><a href="https://www.wsetglobal.com/knowledge-centre/blog/2025/what-gives-syrahshiraz-its-peppery-spice/" target="_blank" rel="noopener noreferrer">WSET identifies rotundone</a>, a compound also found in black pepper, as a source of Syrah's peppery aroma. It is concentrated in grape skins and is often more noticeable in cooler-climate wines. Warmer Barossa examples can lean towards richer fruit, while Australian Shiraz from places such as Geelong can still show pronounced pepper.</p>
+<p>Oak brings another kind of spice: vanilla, clove or cinnamon can sit beside the grape's peppery character. A wine can therefore be both fruit-rich and spicy. Those traits are not competing definitions of Syrah and Shiraz.</p>
+
+<h2>Serve It Cool Enough To Stay Fresh</h2>
+<p>For a full-bodied example, aim for 16-18 degrees Celsius in a stemmed red-wine glass. <a href="https://www.wsetglobal.com/knowledge-centre/blog/2022/april/26/ideal-serving-temperatures-and-top-tips-for-wine-storage" target="_blank" rel="noopener noreferrer">WSET's service guidance</a> places full-bodied reds at 15-18 degrees Celsius and warns that higher temperatures can blur freshness. An uncooled dining room in Mumbai or Hyderabad need not be the right serving temperature.</p>
+
+<h2>Choose The Bottle Around Dinner</h2>
+<p>Our pairing suggestions for a savoury, pepper-led wine are mutton seekh, black-pepper mushrooms or lamb chops with rosemary. For a richer, fruit-led red, try tandoori chicken, moderately spiced lamb rogan josh or aged cheddar. Keep the chilli gentle for the first comparison so you can notice the wine's fruit and tannins.</p>
+<p>Choose by region and producer description, then compare the exact bottle and vintage when checking city prices on BevOry. The practical answer is not that one spelling is better: it is which expression suits your taste and meal.</p>
+`.trim(),
+  },
+  {
+    id: "guide-blanco-reposado-anejo-tequila-ageing-differences-india",
+    title: "Blanco, Reposado And Anejo: What Tequila Ageing Changes",
+    slug: "blanco-reposado-anejo-tequila-ageing-differences-india",
+    excerpt:
+      "Tequila's ageing classes describe time in wood, not a quality ranking. Learn the official minimums and see how Herradura's bottles illustrate them.",
+    cover_emoji: "guide",
+    category: "Guides",
+    tags: ["blanco vs reposado", "anejo tequila", "extra anejo ageing", "tequila guide India", "tequila food pairings"],
+    meta_title: "Blanco vs Reposado vs Anejo Tequila | BevOry",
+    meta_description:
+      "Understand blanco, reposado, anejo and extra anejo tequila ageing, with Herradura examples, Indian food pairings and city prices on BevOry.",
+    selection_note:
+      "A tequila buying-intent comparison anchored in Mexico's official standard and named producer examples; avoids treating ageing as proof of higher ABV or guaranteed quality.",
+    source_links: [
+      "https://sidof.segob.gob.mx/notas/docFuente/5282165",
+      "https://www.crt.org.mx/en/our-tequila/",
+      "https://www.herradura.com/product-comparison/",
+    ],
+    content: String.raw`
+<p><strong>Blanco, reposado and anejo describe tequila's treatment after distillation, especially its time in wood.</strong> They are not a podium with the oldest bottle automatically taking first place. A fresh agave-led pour and an oak-rich sipping tequila answer different tastes.</p>
+
+<h2>The Official Ageing Minimums</h2>
+<p>Mexico's <a href="https://sidof.segob.gob.mx/notas/docFuente/5282165" target="_blank" rel="noopener noreferrer">NOM-006-SCFI-2012 standard</a> defines blanco, also called plata, as a transparent tequila that may have spent less than two months in oak or holm oak. Reposado requires at least two months in direct contact with that wood. Anejo requires at least one year, and extra anejo at least three years; for the latter two classes, the wood containers cannot exceed 600 litres.</p>
+<p>These are minimum requirements, not the precise age of every bottle bearing the name. Blanco is also not necessarily completely colourless. A short rest in wood can still fit the blanco definition.</p>
+
+<h2>Ageing And Agave Content Are Different Questions</h2>
+<p>The <a href="https://www.crt.org.mx/en/our-tequila/" target="_blank" rel="noopener noreferrer">Consejo Regulador del Tequila</a> distinguishes the category made entirely from blue-agave sugars from tequila made with at least 51% blue-agave sugars. The agave is Agave tequilana Weber, blue variety. An ageing class does not, by itself, tell you which sugar category the bottle belongs to.</p>
+
+<h2>Herradura Shows Why The Exact Bottle Matters</h2>
+<p><a href="https://www.herradura.com/product-comparison/" target="_blank" rel="noopener noreferrer">Herradura's product comparison</a> lists Silver at 45 days, Reposado at 11 months, Anejo at 25 months and Seleccion Suprema at 49 months. Its Silver notes include roasted agave and mild oak; Reposado brings anise, dried fruit and a butterscotch finish. The Anejo description adds toasted oak, candied nuts and cinnamon.</p>
+<p>These are producer descriptions of named expressions, not promised flavours for every tequila in each class. They show how a range can move from agave towards wood-derived flavours without making the younger bottle redundant.</p>
+
+<h2>Pick A Serve And A Meal You Will Enjoy</h2>
+<p>For a first tasting, our suggestion is a small neat pour in a tulip-shaped spirits glass. Compare the aroma before adding ice. For an accessible blanco or reposado chosen for mixing, a Margarita offers a familiar starting point; reserve a collector extra anejo for a neat pour rather than a sweet mixer.</p>
+<p>Our food suggestions are malai paneer tikka or tandoori prawns with a brighter agave-led tequila, and lightly spiced mutton seekh or roasted mushrooms with an oak-led expression. Pair by the flavour in the glass, not age alone. Compare the exact expression, bottle size and ABV when checking city prices on BevOry.</p>
+`.trim(),
+  },
+].map((post) => ({
+  ...post,
+  author: "BevOry Editorial Team",
+  cover_image_url: null,
+  linked_product_id: null,
+  linked_brand: null,
+  notify_users: false,
+  is_published: true,
+  is_featured: post.category === "News",
+  published_at: publishedAt,
+  reviewed_by: "BevOry Editorial Team",
+  facts_last_reviewed: "2026-10-11",
+}));
+
+const banned = /\b(?:symphony|testament|delve|nestled|embark|liquid gold|rich tapestry)\b|elevate your senses|dance on the palate|whether you['\u2019]re|information pending verification|BevOry has not assigned|verified ingredient statement is not stored|availability is not assumed|adults can compare like with like|editorial guardrail|no tasting notes found|the producer does not publish/i;
+assert.equal(posts.length, 3);
+assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length);
+assert.equal(new Set(posts.map((post) => post.id)).size, posts.length);
+assert.equal(posts.filter((post) => post.category === "News").length, 1);
+for (const post of posts) {
+  for (const key of ["id", "title", "slug", "excerpt", "meta_title", "meta_description", "category", "author", "selection_note", "content"]) {
+    assert.ok(typeof post[key] === "string" && post[key].trim(), `${post.slug}: empty ${key}`);
+  }
+  assert.ok(post.meta_title.length <= 60, `${post.slug}: meta title exceeds 60 characters`);
+  assert.ok(post.meta_description.length <= 155, `${post.slug}: meta description exceeds 155 characters`);
+  assert.ok(!banned.test([post.title, post.excerpt, post.meta_title, post.meta_description, post.content].join(" ")), `${post.slug}: prohibited public wording`);
+  assert.ok(post.tags.length && post.tags.every((tag) => tag.trim()), `${post.slug}: missing tags`);
+  assert.ok(post.source_links.length, `${post.slug}: missing sources`);
+  assert.ok(post.content.includes("<h2>"), `${post.slug}: no article sections`);
+  assert.ok(post.content.replace(/<[^>]*>/g, " ").trim().split(/\s+/).length >= 200, `${post.slug}: incomplete body`);
+  assert.ok(Number.isFinite(Date.parse(post.published_at)), `${post.slug}: invalid publication date`);
+  for (const source of post.source_links) {
+    assert.equal(new URL(source).protocol, "https:");
+    assert.ok(post.content.includes(`href="${source}"`), `${post.slug}: source not cited in body`);
+  }
+}
+
+if (process.argv.includes("--export")) {
+  const path = new URL("../docs/editorial/hourly-posts-2026-10-11-1800.json", import.meta.url);
+  await writeFile(path, JSON.stringify({
+    automation_id: "bevory-hourly-alcohol-content-engine",
+    cycle_at: publishedAt,
+    publication_status: "prepared",
+    posts,
+  }, null, 2) + "\n");
+  console.log(`Exported ${posts.length} complete posts to ${path.pathname}`);
+} else if (process.argv.includes("--check")) {
+  console.log(JSON.stringify({ validated: posts.length, posts: posts.map(({ title, slug }) => ({ title, slug })) }, null, 2));
+} else {
+  const prisma = new PrismaClient();
+  try {
+    const keys = posts.map((post) => `blog_posts:${post.id}`);
+    const previous = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    const now = new Date().toISOString();
+    await prisma.$transaction(posts.map((post) => {
+      const data = {
+        ...post,
+        created_at: previous.find((record) => record.recordId === post.id)?.data?.created_at ?? now,
+        updated_at: now,
+      };
+      return prisma.contentRecord.upsert({
+        where: { key: `blog_posts:${post.id}` },
+        update: { data },
+        create: { key: `blog_posts:${post.id}`, tableName: "blog_posts", recordId: post.id, data },
+      });
+    }));
+    const saved = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    assert.equal(saved.length, posts.length, "Not every post was saved");
+    for (const post of posts) {
+      const data = saved.find((record) => record.recordId === post.id)?.data;
+      for (const [key, value] of Object.entries(post)) {
+        assert.deepEqual(data?.[key], value, `${post.slug}: saved ${key} differs`);
+      }
+    }
+    console.log(JSON.stringify({ saved: saved.length, verified: saved.length, slugs: posts.map((post) => post.slug) }, null, 2));
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  } finally {
+    await prisma.$disconnect();
+  }
+}

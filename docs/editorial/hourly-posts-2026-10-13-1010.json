@@ -1,0 +1,82 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T04:39:00.951Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI session expired; aws sts get-caller-identity reports that reauthentication with aws login is required.",
+    "Configured local database tunnel 127.0.0.1:3308 is refusing connections. The existing contentRecord upsert workflow could not reach the database."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only query of the public BevOry blog API returned 22 published posts; no matching titles or slugs for RNDC Michigan distribution transaction or Michigan control-state spirits explainer were found.",
+    "local_files": "Searched the saved hourly editorial drafts; no prior RNDC Michigan transaction or Michigan control-state explainer was found.",
+    "private_database": "Unavailable because the local database tunnel is refusing connections."
+  },
+  "posts": [
+    {
+      "id": "news-great-lakes-rndc-michigan-operations-pending-deal-2026",
+      "title": "Great Lakes Leads RNDC Michigan Deal as Wine Assets Split",
+      "slug": "great-lakes-rndc-michigan-operations-pending-deal",
+      "excerpt": "A proposed RNDC Michigan transaction would transfer its spirits delivery-agent operation to Great Lakes Wine & Spirits, while three distributors would share the wine business. Court and regulatory approvals are still required.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "RNDC Michigan",
+        "Great Lakes Wine & Spirits",
+        "U.S. alcohol distribution",
+        "Michigan spirits market",
+        "beverage alcohol acquisitions"
+      ],
+      "meta_title": "RNDC Michigan Deal: Great Lakes and Wine Assets | BevOry",
+      "meta_description": "A proposed RNDC Michigan deal splits spirits delivery and wine operations among distributors. See what is agreed and what remains pending.",
+      "selection_note": "Selected for a newly reported, industry-level distribution transaction dated October 12. Copy distinguishes signed purchase agreements from a completed acquisition and explains the required approvals.",
+      "source_links": [
+        "https://bevnews.net/2-firms-agree-to-acquire-rndc-michigan-business/",
+        "https://www.dbusiness.com/daily-news/great-lakes-wine-and-others-seek-purchase-of-rndcs-michigan-operations/"
+      ],
+      "content": "<p><strong>Several Michigan beverage distributors have agreed to pursue separate parts of Republic National Distributing Company’s Michigan operations, in a proposed transaction that remains subject to approvals.</strong> Great Lakes Wine & Spirits (GLWAS) has entered an agreement with RNDC Michigan for its Authorized Distribution Agent (ADA) business. Great Lakes, Imperial Beverage and Vintage Wine Co. are also involved in a proposed purchase of RNDC Michigan’s wine business.</p>\n\n<h2>How The Proposed Deal Is Divided</h2>\n<p>Great Lakes is separately partnering with National Wine and Spirits (NWS) on a prospective purchase of RNDC’s Livonia building. The parties have not disclosed financial terms. The industry report from <a href=\"https://bevnews.net/2-firms-agree-to-acquire-rndc-michigan-business/\" target=\"_blank\" rel=\"noopener noreferrer\">Kane’s Beverage News Daily</a> describes the agreement for the ADA operation and the planned division of the wine business. <a href=\"https://www.dbusiness.com/daily-news/great-lakes-wine-and-others-seek-purchase-of-rndcs-michigan-operations/\" target=\"_blank\" rel=\"noopener noreferrer\">DBusiness</a> also reports the proposed building transaction and quotes RNDC and Great Lakes executives on the transition.</p>\n\n<h2>Why Michigan’s Spirits Route Is Different</h2>\n<p>Michigan’s spirits distribution structure helps explain why the ADA operation is a distinct asset. The Michigan Liquor Control Commission (MLCC) says it acts as the wholesaler for spirits. Authorized Distribution Agents warehouse and deliver commission-ordered spirits to licensed retailers. The state’s <a href=\"https://www.michigan.gov/lara/bureau-list/lcc/faq/financial-management-information/authorized-distribution-agent-ada-information\" target=\"_blank\" rel=\"noopener noreferrer\">ADA information page</a> describes the agent’s logistics role, while the commission’s <a href=\"https://www.michigan.gov/lara/bureau-list/lcc/faq/manufacturer-wholesaler-faq/distiller-or-small-distiller-license\" target=\"_blank\" rel=\"noopener noreferrer\">distiller guidance</a> outlines the state’s control-state model. Wine follows a different route, which is why the reported agreements describe separate spirits-delivery and wine operations.</p>\n\n<h2>Not Closed Yet</h2>\n<p>The agreements are not the same as a completed sale. The reported transactions require approval by the U.S. Bankruptcy Court for the Southern District of Texas, as well as customary regulatory approvals and other closing conditions. The parties were reported to be working toward closings between October 30 and November 15, 2026; that is a target window, not confirmation that any transfer has closed.</p>\n<p>For Michigan suppliers and retailers, the eventual allocation of delivery and wine-distribution responsibilities will matter more than the headline buyer list. Until approvals and closings are confirmed, the practical operating arrangements should be treated as pending rather than changed.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": true,
+      "published_at": "2026-10-13T04:39:00.951Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-how-michigan-control-state-spirits-distribution-works",
+      "title": "How Michigan’s Control-State Spirits System Works",
+      "slug": "michigan-control-state-spirits-distribution-explained",
+      "excerpt": "Michigan’s Liquor Control Commission wholesales spirits, while certified Authorized Distribution Agents handle warehousing and delivery. Here is how the state-specific route from supplier to retailer works.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Michigan liquor distribution",
+        "control state explained",
+        "Michigan Liquor Control Commission",
+        "authorized distribution agent",
+        "how spirits reach retailers"
+      ],
+      "meta_title": "Michigan Control-State Spirits System | BevOry",
+      "meta_description": "Learn how Michigan’s Liquor Control Commission and authorized agents move spirits from vendors to retailers, and what a control state means.",
+      "selection_note": "An educational companion to the current Michigan distribution news. It answers a specific industry and consumer search question using Michigan government sources and labels the system as state-specific rather than universal.",
+      "source_links": [
+        "https://www.michigan.gov/lara/bureau-list/lcc/faq/manufacturer-wholesaler-faq/distiller-or-small-distiller-license",
+        "https://www.michigan.gov/lara/bureau-list/lcc/faq/financial-management-information/authorized-distribution-agent-ada-information"
+      ],
+      "content": "<p><strong>Michigan is a control state for spirits: the Michigan Liquor Control Commission (MLCC) acts as the wholesaler, while certified Authorized Distribution Agents (ADAs) provide warehousing and delivery.</strong> Put simply, a spirits producer sells through the Commission’s system, and contracted agents handle the physical movement of products to licensed retailers. This arrangement applies to Michigan spirits and should not be treated as a description of every U.S. state or every alcohol category.</p>\n\n<h2>The Route From Producer To Retailer</h2>\n<p>The MLCC’s <a href=\"https://www.michigan.gov/lara/bureau-list/lcc/faq/manufacturer-wholesaler-faq/distiller-or-small-distiller-license\" target=\"_blank\" rel=\"noopener noreferrer\">distiller and small-distiller guidance</a> says a licensed producer sells spirits to the Commission for sale and distribution through ADAs to retailer licensees. The supplier is responsible for registering its spirits and filing quotations with the Commission. The state then sells the spirits to licensed retailers, subject to the rules and pricing structure set by Michigan law.</p>\n\n<h2>What An Authorized Distribution Agent Does</h2>\n<p>An ADA is a Commission-certified company that warehouses and delivers spirits on the Commission’s behalf. It needs a written agreement with the spirits vendors it represents and an adequate Michigan warehouse capable of serving retailer licensees around the state. The MLCC’s <a href=\"https://www.michigan.gov/lara/bureau-list/lcc/faq/financial-management-information/authorized-distribution-agent-ada-information\" target=\"_blank\" rel=\"noopener noreferrer\">official ADA information page</a> explains that the agent delivers products ordered from the Commission and collects payment for it.</p>\n<p>That means an ADA is not simply a conventional wholesaler purchasing stock and reselling it on its own account. Its role is logistical within the state’s spirits system. Michigan does allow limited producer self-distribution in specified circumstances, so the standard route has exceptions under state law.</p>\n\n<h2>How This Differs From Wine Distribution</h2>\n<p>Michigan’s state-wholesaler description here concerns spirits, including brandy. The Commission’s guidance treats wine and beer under separate licensing and distribution rules. That distinction matters when a transaction or distributor announcement mentions both spirits delivery and wine sales: the operational assets and legal routes are not necessarily the same.</p>\n\n<h2>Why The Model Matters</h2>\n<p>For suppliers, retailers and consumers, a control-state system shapes who lists products, how orders flow and which companies warehouse and deliver bottles. It also helps explain why changes to an ADA contract can affect retailers even when the state remains the formal spirits wholesaler. Michigan’s model is specific to its laws; other states use different combinations of state-run wholesale, private distribution and retail control.</p>\n<p>When reading a Michigan spirits listing or distribution announcement, separate the Commission’s wholesale role from the ADA’s delivery role. That distinction makes the route from distillery to shop easier to follow without confusing a logistics provider with the legal seller.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T04:39:00.951Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

@@ -85,6 +85,17 @@ const validImageUrl = (value: unknown): string | null => (
   validSitemapImageUrl(value, publicMediaBase, origin)
 );
 
+const validFirstPartyImageUrl = (value: unknown): string | null => {
+  const image = validImageUrl(value);
+  if (!image) return null;
+  try {
+    const host = new URL(image).hostname.toLowerCase();
+    return host === "bevory.in" || host === "www.bevory.in" || host === "api.bevory.in" ? image : null;
+  } catch {
+    return image.startsWith("/") ? image : null;
+  }
+};
+
 const latestTimestamp = (...values: unknown[]) => {
   const dates = values
     .flat()
@@ -381,7 +392,8 @@ try {
       const brandProducts = cityProducts.filter((product) => String(product.data.brand_id ?? "") === brandId);
       const brandName = String(brand.data.brand_name || "Brand");
       const path = `${cityPath}/brand/${brand.data.slug}`;
-      const image = validImageUrl(brand.data.image_url || brand.data.logo_url);
+      const image = validFirstPartyImageUrl(brand.data.image_url || brand.data.logo_url);
+      const logo = validFirstPartyImageUrl(brand.data.logo_url);
       const brandDescription = shortText(brand.data.description || `Compare ${brandName} products with reviewed local prices in ${city.name}.`, 400);
       addRoute({
         path,
@@ -403,7 +415,7 @@ try {
           name: brandName,
           description: brandDescription,
           url: `${origin}${path}`,
-          ...(brand.data.logo_url ? { logo: brand.data.logo_url } : {}),
+          ...(logo ? { logo } : {}),
           ...(image ? { image } : {}),
         },
       });
@@ -632,7 +644,7 @@ try {
       title,
       description,
       heading: String(post.data.title),
-      body: [description],
+      body: [description, plainText(post.data.content)].filter(Boolean),
       ...(image ? { image } : {}),
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Guide", path: "/guide" }, { name: String(post.data.title), path }],
       structuredData: {

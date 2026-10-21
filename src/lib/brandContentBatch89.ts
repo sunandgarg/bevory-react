@@ -238,7 +238,7 @@ export const BRAND_CONTENT_BATCH_89: Record<string, BrandPublicContent> = {
     metaDescription: "Explore IGP French wine notes, Merlot, Sauvignon Blanc, rosé pairings and city prices.",
   },
   iice: {
-    description: "Iice is an Indian vodka brand listed through Iice Undress The Orange Vodka Platinum. Livcheers describes it as orange-flavoured vodka, while excise listings connect Iice vodka labels with Jagatjit Industries Limited.",
+    description: "Iice is an Indian vodka brand listed through Iice Undress The Orange Vodka Platinum. Retail tasting notes describe it as orange-flavoured vodka, while excise listings connect Iice vodka labels with Jagatjit Industries Limited.",
     story: "Iice belongs to India's flavoured-vodka shelf, where citrus flavour, cold service and quick cocktails matter most. The orange expression is built for soda, cranberry, grapefruit and party-style highballs.",
     tastingNotes: [
       { title: "Orange Vodka", description: "Fresh orange peel, sweet citrus, light grain spirit and a clean aroma lead the profile." },

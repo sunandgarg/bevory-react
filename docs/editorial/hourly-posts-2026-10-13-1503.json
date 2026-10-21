@@ -1,0 +1,84 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T09:33:49.171Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "The public blog API is reachable for duplicate checking, but the configured private database tunnel at 127.0.0.1:3308 is not accepting connections; the database upsert was not attempted.",
+    "AWS CLI authentication has not been verified during this cycle; no AWS or production action was attempted."
+  ],
+  "duplicate_check": {
+    "public_blog": "Read-only BevOry blog API query returned 22 published posts; none matched Elijah Craig, Old Fashioned Week, a Tavern Trail, or an Old Fashioned recipe guide.",
+    "local_files": "Searched local hourly-post JSON files. No Elijah Craig or Old Fashioned feature was found; existing whiskey cocktail material covers other drinks and does not duplicate this recipe guide.",
+    "private_database": "Not checked: the local MySQL tunnel is unavailable."
+  },
+  "posts": [
+    {
+      "id": "news-elijah-craig-old-fashioned-week-tavern-trail-2026",
+      "title": "Elijah Craig Adds 70 Stops To Old Fashioned Week Trail",
+      "slug": "elijah-craig-old-fashioned-week-tavern-trail-2026",
+      "excerpt": "Elijah Craig's new 70-stop U.S. Tavern Trail is part of Old Fashioned Week, running October 9–18, with participating cocktail sales supporting Southern Smoke Foundation.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "Elijah Craig",
+        "Old Fashioned Week 2026",
+        "bourbon",
+        "American whiskey",
+        "Southern Smoke Foundation",
+        "US spirits industry"
+      ],
+      "meta_title": "Elijah Craig Old Fashioned Tavern Trail | BevOry",
+      "meta_description": "Elijah Craig's 70-stop US Tavern Trail joins Old Fashioned Week, October 9–18, with participating sales supporting hospitality workers.",
+      "selection_note": "Selected because the campaign is live this week and the new trail is a distinct spirits-industry activation. The article separates the 70 featured trail destinations from the wider Old Fashioned Week participation and states the donation terms without implying the event is available in India.",
+      "source_links": [
+        "https://heavenhill.com/news-and-notes/elijah-craig-debuts-history-steeped-tavern-trail-in-celebration-of-the-seventh-annual-old-fashioned-week/",
+        "https://oldfashionedweek.com/faqs",
+        "https://oldfashionedweek.com/find-bars"
+      ],
+      "content": "<p><strong>Elijah Craig has added a 70-destination Tavern Trail to its 2026 Old Fashioned Week, a U.S. campaign running October 9–18.</strong> The brand says the featured stops range from historic taverns to newer gathering places. The activation links a classic bourbon cocktail with a discovery trail and a fundraising effort for hospitality workers.</p>\n\n<h2>What The Tavern Trail Includes</h2>\n<p><a href=\"https://heavenhill.com/news-and-notes/elijah-craig-debuts-history-steeped-tavern-trail-in-celebration-of-the-seventh-annual-old-fashioned-week/\" target=\"_blank\" rel=\"noopener noreferrer\">Heaven Hill's October 6 announcement</a> describes the Tavern Trail as a selection of 70 destinations drawn from Old Fashioned Week's participating bars and restaurants. The wider event includes more than 12,000 participating accounts, according to the company; that is a separate figure from the 70 featured trail stops. The <a href=\"https://oldfashionedweek.com/find-bars\" target=\"_blank\" rel=\"noopener noreferrer\">official Find a Bar tool</a> lists venues and allows visitors to search by city or ZIP code. Its listings are U.S.-based, so they are not a directory of venues in India.</p>\n\n<h2>How The Fundraising Works</h2>\n<p>Elijah Craig says one dollar from each Old Fashioned sold at participating establishments will benefit the <a href=\"https://southernsmoke.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Southern Smoke Foundation</a>, which supports food and beverage workers. The campaign's <a href=\"https://oldfashionedweek.com/faqs\" target=\"_blank\" rel=\"noopener noreferrer\">official FAQ</a> gives a contribution cap of $100,000 and notes that the promotion is not available in California, Georgia or New York. The donation applies to qualifying sales at participating venues, not every Old Fashioned ordered anywhere during those dates.</p>\n\n<h2>A Familiar Cocktail, A New Discovery Format</h2>\n<p>The Old Fashioned is a whiskey drink built around a small set of ingredients. The campaign's own guide describes bourbon, bitters and simple syrup, while the Tavern Trail adds a place-based element: visitors can explore participating addresses rather than follow a single festival site. That pairing of a well-known serve with local hospitality venues is the most notable part of this year's announcement.</p>\n\n<p>For readers following international spirits marketing, the activation is a useful example of a producer connecting cocktail education, on-premise discovery and hospitality-worker support. The event is specific to participating North American locations; its importance for Indian readers is the campaign format, not local availability or pricing.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T09:33:49.171Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    },
+    {
+      "id": "guide-how-to-make-old-fashioned-bourbon-recipe",
+      "title": "How To Make An Old Fashioned With Bourbon",
+      "slug": "how-to-make-old-fashioned-bourbon-recipe",
+      "excerpt": "A measured bourbon Old Fashioned needs whiskey, bitters, sweetness, ice and a citrus garnish. Follow a clear recipe, then adjust the balance one small step at a time.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Old Fashioned recipe",
+        "bourbon cocktails",
+        "whiskey cocktails",
+        "cocktail guide",
+        "bitters"
+      ],
+      "meta_title": "How To Make A Bourbon Old Fashioned | BevOry",
+      "meta_description": "Make a bourbon Old Fashioned with bitters, measured sweetness and a large ice cube, with easy ways to adjust the balance and garnish.",
+      "selection_note": "Selected as a practical, high-intent cocktail guide that pairs naturally with this week's Old Fashioned Week news but remains useful year-round. Recipe quantities are attributed to Elijah Craig's published variation, with the IBA recipe presented separately as a reference rather than falsely treated as identical.",
+      "source_links": [
+        "https://elijahcraig.com/oldfashioned",
+        "https://iba-world.com/iba-cocktail/old-fashioned/"
+      ],
+      "content": "<p><strong>A bourbon Old Fashioned is a spirit-forward drink where small amounts of bitters and sweetness frame the whiskey rather than hide it.</strong> Elijah Craig's published version measures 2 ounces of Small Batch Bourbon, ¼ ounce of simple syrup and three dashes of bitters, finished with an orange swath and an optional brandied cherry. It is one producer's recipe, not the only valid specification.</p>\n\n<h2>What You Need</h2>\n<ul>\n<li>2 ounces bourbon</li>\n<li>¼ ounce simple syrup</li>\n<li>3 dashes aromatic bitters</li>\n<li>Ice, preferably one large cube for serving</li>\n<li>An orange peel; a brandied cherry is optional</li>\n</ul>\n<p>These quantities follow the <a href=\"https://elijahcraig.com/oldfashioned\" target=\"_blank\" rel=\"noopener noreferrer\">Elijah Craig Old Fashioned recipe</a>. Its method is to combine the bitters, syrup, bourbon and ice in a mixing glass; stir until chilled; then strain over a large cube into a double Old Fashioned glass. Express the orange peel over the drink and use it as the garnish.</p>\n\n<h2>Stir For Chill And Balance</h2>\n<p>Use a rocks or double Old Fashioned glass with a broad opening. Stirring in a separate glass helps chill the mixture before it reaches the serving ice. If the first sip tastes too sweet, reduce the syrup slightly next time; if the whiskey feels too sharp, add a little sweetness rather than pouring in a large amount at once. Small changes make it easier to find a balance that suits the bourbon.</p>\n\n<h2>There Is More Than One Classic Specification</h2>\n<p>The <a href=\"https://iba-world.com/iba-cocktail/old-fashioned/\" target=\"_blank\" rel=\"noopener noreferrer\">International Bartenders Association's listed recipe</a> uses 45 ml bourbon or rye whiskey, a sugar cube, Angostura bitters and a few dashes of plain water. It dissolves the sugar with bitters and water in the serving glass before adding ice and whiskey. That differs from the simple-syrup method above; both show why a recipe should name its source instead of presenting one ratio as universal. The IBA describes its cocktail list as an international reference for bartenders and hospitality students.</p>\n\n<h2>Garnish And Pairings</h2>\n<p>An orange peel adds a fresh citrus aroma, while a brandied cherry contributes a softer fruit note. For food, try the drink with smoked paneer tikka, chicken seekh kebab, salted almonds or aged cheddar. These are pairing suggestions rather than fixed rules: a sweeter build may sit more comfortably with salty snacks, while a less sweet version can work alongside richer grilled flavours.</p>\n\n<p>Measure the ingredients, taste before adjusting and keep the garnish simple. For anyone comparing bourbon bottles in India, remember that the cocktail's sweetness and dilution will shape what you notice; a neat tasting and a mixed drink answer different questions about the whiskey.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T09:33:49.171Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-13"
+    }
+  ]
+}

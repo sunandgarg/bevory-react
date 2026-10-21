@@ -110,7 +110,7 @@ export const BRAND_CONTENT_BATCH_77: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Desaal Chenin Blanc, Sirak Select and Sangiovese notes, pairings and city prices on BevOry.",
   },
   diamond: {
-    description: "Diamond is a brandy label listed on BevOry through Diamond Brandy in 1 litre format. Tamil Nadu retail data and Livcheers listings both show Diamond Brandy as a standalone brandy entry.",
+    description: "Diamond is a brandy label listed on BevOry through Diamond Brandy in 1 litre format. Tamil Nadu retail data and Market listings both show Diamond Brandy as a standalone brandy entry.",
     story: "Diamond Brandy is a direct, bottle-led brandy listing rather than a broad heritage portfolio. Its useful buying context is format, brandy style and whether the drinker wants a neat pour or a longer soda serve.",
     tastingNotes: [
       { title: "Brandy Fruit", description: "Ripe fruit, caramel, fig and vanilla give the brandy a sweet, rounded profile." },
@@ -152,7 +152,7 @@ export const BRAND_CONTENT_BATCH_77: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Dignity Superior Grain Whisky notes, serving ideas, snack pairings and city prices on BevOry.",
   },
   directors: {
-    description: "Directors is listed on BevOry through Directors Special Director Special Gold Whisky. Livcheers identifies Director Special Gold Whisky as an Indian blended whisky made from malt and grain whiskies.",
+    description: "Directors is listed on BevOry through Directors Special Director Special Gold Whisky. Market listings identify Director Special Gold Whisky as an Indian blended whisky made from malt and grain whiskies.",
     story: "Director Special Gold Whisky is a long-running Indian whisky name seen across state price lists. The Gold style is positioned around smoothness, caramel sweetness and easy mixed-drink service.",
     tastingNotes: [
       { title: "Blended Indian", description: "Caramel, oak, grain sweetness and mellow malt notes form the centre of the whisky." },
@@ -166,7 +166,7 @@ export const BRAND_CONTENT_BATCH_77: Record<string, BrandPublicContent> = {
     whyChoose: "Directors is a familiar Indian blended whisky pick for smooth highballs and snack plates.",
     faqs: [
       { question: "What Directors bottle is listed on BevOry?", answer: "BevOry lists Directors Special Director Special Gold Whisky." },
-      { question: "Is Director Special Gold a blended whisky?", answer: "Livcheers lists Director Special Gold Whisky as a blended Indian whisky." },
+      { question: "Is Director Special Gold a blended whisky?", answer: "Retail listings describe Director Special Gold Whisky as a blended Indian whisky." },
     ],
     finalVerdict: "Directors is a steady Indian whisky choice for soda, ice and spicy party snacks.",
     metaTitle: "Directors Whisky Guide | BevOry",
@@ -215,7 +215,7 @@ export const BRAND_CONTENT_BATCH_77: Record<string, BrandPublicContent> = {
     metaDescription: "Explore Disco Panda Hoppy Magic notes, chilled serving ideas, snack pairings and city prices on BevOry.",
   },
   discovery: {
-    description: "Discovery is an Indian whisky label listed on BevOry through Discovery Whisky in 180 ml, 375 ml and 750 ml formats. Livcheers lists Discovery Whisky under Indian whisky-style discovery pages, while NV Group references connect Discovery labels with NV Distilleries.",
+    description: "Discovery is an Indian whisky label listed on BevOry through Discovery Whisky in 180 ml, 375 ml and 750 ml formats. Retail listings describe Discovery Whisky under Indian whisky-style discovery pages, while NV Group references connect Discovery labels with NV Distilleries.",
     story: "Discovery sits in the Indian blended-whisky market, where value, familiar bottle sizes and mixer-friendly service are key. The BevOry listing gives shoppers a clean entry point for checking Discovery Whisky by city and bottle size.",
     tastingNotes: [
       { title: "Indian Whisky", description: "Grain, caramel, light citrus, vanilla and mild oak make the whisky easy to mix." },

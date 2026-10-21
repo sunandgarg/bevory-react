@@ -178,7 +178,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "James Mc Gill Whisky",
     c: "Indian Blended Whisky",
     o: "James Mc Gill Whisky is an Indian blended whisky from Associated Alcohols & Breweries Limited. It is a light, smooth whisky made for neat pours, soda highballs and simple cocktails.",
-    craft: "Livcheers describes James Mc Gill as a blended whisky made with malt and grain whiskies. Company and trademark references connect James McGill with India's IMFL whisky market and the Associated Alcohols portfolio.",
+    craft: "Retail tasting notes describe James Mc Gill as a blended whisky made with malt and grain whiskies. Company and trademark references connect James McGill with India's IMFL whisky market and the Associated Alcohols portfolio.",
     nose: "Caramel, oak, light citrus, grain and vanilla.",
     palate: "Light-bodied and easy-drinking, with caramel sweetness, soft oak, clean grain and mild spice.",
     finish: "Short, clean and crisp.",

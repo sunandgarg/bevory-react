@@ -114,7 +114,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Old Castle Premium Whisky",
     c: "Indian Blended Whisky",
     o: "Old Castle Premium Whisky is an Indian blended whisky associated with The Ugar Sugar Works Limited's potable alcohol portfolio. It is positioned as an affordable, smooth whisky for simple pours and mixed serves.",
-    craft: "Company material and market references list Old Castle Premium Whisky among Ugar's Indian Made Liquor brands. Livcheers describes the style as grain spirit and select malt, with light grain, caramel, toffee, oak and gentle spice.",
+    craft: "Company material and market references list Old Castle Premium Whisky among Ugar's Indian Made Liquor brands. Retail tasting notes describe the style as grain spirit and select malt, with light grain, caramel, toffee, oak and gentle spice.",
     nose: "Light grain, caramel, mild malt, toffee, vanilla and soft oak.",
     palate: "Smooth and mild, with cereal sweetness, caramel, toffee, light oak and gentle spice.",
     finish: "Short, clean and softly warming.",

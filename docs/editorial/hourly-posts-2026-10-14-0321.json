@@ -1,0 +1,85 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-13T21:51:46.701Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "The configured MySQL tunnel at 127.0.0.1:3308 is unavailable (connection attempt was blocked with Operation not permitted); no database upsert was attempted.",
+    "AWS CLI identity check could not reach https://ap-south-1.signin.aws.amazon.com/v1/token; production access is unavailable in this run."
+  ],
+  "duplicate_check": {
+    "public_blog": "Searched BevOry's indexed Guide/blog pages for LVMH Q3 2026/Wines & Spirits and Champagne dosage/sweetness; no matching guide or story surfaced.",
+    "local_files": "Reviewed all hourly draft titles and searched draft bodies for Champagne dosage/Brut sweetness. Champagne vs Prosecco exists, but no dosage-focused explainer; the already-covered cask-vs-keg story was excluded.",
+    "private_database": "Not checked; this cycle saved editorial drafts locally and did not query the production database."
+  },
+  "posts": [
+    {
+      "id": "news-lvmh-wines-spirits-q3-growth-2026",
+      "title": "LVMH Wines & Spirits Posts 6% Organic Growth In Q3",
+      "slug": "lvmh-wines-spirits-q3-organic-growth-2026",
+      "excerpt": "LVMH reported 6% organic growth for its Wines & Spirits business in Q3 2026, with Champagne, Hennessy and Provence rosé among the areas highlighted.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": [
+        "LVMH",
+        "wine and spirits industry",
+        "Champagne",
+        "Hennessy",
+        "Provence rosé",
+        "Q3 2026 results"
+      ],
+      "meta_title": "LVMH Wines & Spirits Q3 Growth | BevOry",
+      "meta_description": "LVMH says Wines & Spirits grew 6% organically in Q3 2026. See what the company reported on Champagne, Hennessy and Provence rosé.",
+      "selection_note": "Selected for a fresh, company-reported quarterly update with concrete category-level figures and distinct regional signals. Copy separates organic growth from reported revenue and attributes market commentary to LVMH or Reuters.",
+      "source_links": [
+        "https://www.lvmh.com/en/publications/continued-growth-in-the-third-quarter-of-2026",
+        "https://www.investing.com/news/stock-market-news/lvmh-thirdquarter-sales-below-expectations-as-fashion-and-leather-division-shrinks-4944915"
+      ],
+      "content": "<p><strong>LVMH reported 6% organic revenue growth for its Wines &amp; Spirits business group in the third quarter of 2026, while the wider luxury group posted 1% organic growth for the quarter.</strong> The result offers a useful category-level signal from a portfolio spanning Champagne, cognac, wines and other spirits, though it is not a measure of bottle volumes or retail sales in India.</p>\n\n<h2>What The Company Reported</h2>\n<p>In its <a href=\"https://www.lvmh.com/en/publications/continued-growth-in-the-third-quarter-of-2026\" target=\"_blank\" rel=\"noopener noreferrer\">October 12 trading update</a>, LVMH said Wines &amp; Spirits revenue for the first nine months reached €4.027 billion, up 3% on a reported basis and 5% organically year on year. For Q3 alone, the segment's organic growth was 6%. LVMH defines organic comparison on a constant consolidation-scope and currency basis, so it should not be read as the same thing as reported revenue growth.</p>\n<p>The company said Champagne showed further recovery signs, particularly in Europe. It also cited Hennessy cognac momentum in Asia, a contribution in the United States from its new VS ready-to-serve cocktail range, and continued progress for Provence rosé wines. These are management's comments on its own business, not a category-wide sales ranking.</p>\n\n<h2>A Mixed Picture Across The Group</h2>\n<p>The Wines &amp; Spirits figure stood out against LVMH's fashion and leather goods business, which recorded a 5% organic decline in Q3. Reuters' <a href=\"https://www.investing.com/news/stock-market-news/lvmh-thirdquarter-sales-below-expectations-as-fashion-and-leather-division-shrinks-4944915\" target=\"_blank\" rel=\"noopener noreferrer\">coverage of the results</a> noted weaker-than-expected group sales and pressure from Chinese consumer demand, while the company described the United States, Europe and Japan as stronger regions in the quarter.</p>\n<p>For drinks businesses, the update points to different trajectories within one large portfolio: Champagne's reported recovery, Asian momentum for Hennessy and rosé progress do not necessarily move in step. LVMH's release does not provide country-level shipments, brand-by-brand revenue or Indian market figures, so the percentages should be kept within the scope the company actually disclosed.</p>\n\n<h2>What To Watch Next</h2>\n<p>The next useful comparison will be whether the segment sustains its organic growth and whether the company gives more detail on demand by category and market in its next results. For now, the key takeaway is precise: LVMH's Wines &amp; Spirits unit grew organically in Q3, even as conditions varied by region and the broader group delivered a more modest increase.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T21:51:46.701Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "guide-champagne-dosage-sweetness-label-india",
+      "title": "Brut, Extra Brut Or Demi-Sec? Read Champagne Sweetness Labels",
+      "slug": "champagne-brut-extra-brut-demi-sec-sweetness-guide",
+      "excerpt": "Champagne's Brut, Extra Brut and Demi-Sec terms refer to residual sugar bands. Here is how to use the label when choosing a bottle for a meal.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": [
+        "Champagne guide",
+        "Brut Champagne",
+        "Extra Brut",
+        "Demi-Sec",
+        "sparkling wine sweetness",
+        "wine labels India"
+      ],
+      "meta_title": "Champagne Brut vs Extra Brut Sweetness Guide | BevOry",
+      "meta_description": "Decode Champagne sweetness terms from Brut Nature to Demi-Sec, learn what dosage means and choose a style for your food pairing.",
+      "selection_note": "Chosen as a practical, high-intent label-reading guide linked to the Champagne segment's fresh quarterly news. It adds a focused explanation not present in the archived Champagne-vs-Prosecco comparison.",
+      "source_links": [
+        "https://www.champagne.fr/en/about-champagne/how-champagne-is-made/dosage",
+        "https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609",
+        "https://www.champagne.fr/en/champagne-tasting/the-tasting-experience"
+      ],
+      "content": "<p><strong>On a Champagne label, Brut, Extra Brut and Demi-Sec describe sweetness categories based on sugar per litre, not the grape variety or the wine's age.</strong> The terms can help you select a style, but they do not by themselves describe every part of the wine's flavour.</p>\n\n<h2>What Dosage Means</h2>\n<p>After the wine has been made and disgorged, the producer may add a small amount of dosage, a mixture of sugar and wine, before the bottle is corked. The <a href=\"https://www.champagne.fr/en/about-champagne/how-champagne-is-made/dosage\" target=\"_blank\" rel=\"noopener noreferrer\">Comité Champagne guide to dosage</a> explains that the amount helps determine the final sugar category. It is a finishing step, not a flavouring syrup poured into a glass.</p>\n<p>The Comité's <a href=\"https://www.champagne.fr/en/champagne-frequently-asked-questions?nid=609\" target=\"_blank\" rel=\"noopener noreferrer\">label and sweetness FAQ</a> lists the bands: Brut Nature is below 3 grams per litre with no dosage added; Extra Brut is 0 to 6 g/L; Brut is below 12 g/L; Extra-Dry is 12 to 17 g/L; Sec is 17 to 32 g/L; Demi-Sec is 32 to 50 g/L; and Doux is above 50 g/L. The names can mislead: Extra-Dry is sweeter by this scale than Brut.</p>\n\n<h2>Use The Label As A Starting Point</h2>\n<p>If you prefer a drier finish, begin with Brut Nature, Extra Brut or Brut. For a rounder, noticeably sweeter style, Sec or Demi-Sec may be a better fit. Sugar category is only one part of the experience: acidity, fruit, temperature and the producer's blend also shape how a Champagne tastes. A Brut bottle can still feel generous or fruity without changing its label category.</p>\n<p>Pairing can help guide the choice. Brut and Extra Brut are flexible with salted snacks, fried starters and tandoori prawns; Demi-Sec can work with fruit tart or a mildly sweet dessert. Treat these as suggestions rather than strict rules, and match the dish's sweetness and spice to the wine.</p>\n\n<h2>Serving And Buying</h2>\n<p>The Comité Champagne recommends serving Champagne at 8–10°C and using a tulip-shaped glass that opens enough to show aroma while narrowing near the rim. Its <a href=\"https://www.champagne.fr/en/champagne-tasting/the-tasting-experience\" target=\"_blank\" rel=\"noopener noreferrer\">tasting guidance</a> explains the temperature and glass choice. When comparing bottles in India, check the exact label term, bottle size and local price listing; Champagne sweetness categories should not be confused with sparkling wines from other regions, which can use different label conventions.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": "2026-10-13T21:51:46.701Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-14"
+    }
+  ]
+}

@@ -98,7 +98,7 @@ export const PRODUCT_BATCH_CONTENT: Record<string, ProductPublicDetail> = {
     n: "Jhumroo The Himalayan Strong Beer",
     c: "Indian Strong Beer",
     o: "Jhumroo The Himalayan Strong Beer is an Indian strong beer linked with Skuas Brewing Co in Sitarganj, Uttarakhand. BevOry lists it in a 500 ml can format for Delhi.",
-    craft: "Skuas material calls Jhumroo a local premium strong beer crafted from Himalayan water. Livcheers and Talli listings describe a deep amber beer with citrus, piney hops, earthy malt and an 8% ABV style in Delhi retail.",
+    craft: "Skuas material calls Jhumroo a local premium strong beer crafted from Himalayan water. Market listings describe a deep amber beer with citrus, piney hops, earthy malt and an 8% ABV style in Delhi retail.",
     nose: "Grapefruit peel, orange zest, piney hops, caramel malt and toasted bread.",
     palate: "Bold and malty, with citrus-hop bitterness, caramel sweetness, firm carbonation and strong-beer warmth.",
     finish: "Medium, bitter, piney and warming.",

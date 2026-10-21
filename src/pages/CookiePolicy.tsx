@@ -17,12 +17,12 @@ const CookiePolicy = () => (
       Necessary technologies support the age gate, privacy preference, city selection, authentication, security, and
       interface operation. They are used when needed to provide a feature you request and are not switched off by the
       Analytics choice. Optional Google Analytics is configured with analytics storage denied by default and is loaded
-      only after you choose <strong>"Allow analytics"</strong>. BevOry configures advertising storage, advertising user
-      data, ad personalisation, and Google signals as denied or disabled.
+      only after you allow analytics. A separate opt-in controls Google AdSense ads on eligible guide pages. Advertising
+      user data, ad personalisation, and Google signals remain denied or disabled.
     </p>
     <p>
       You can reopen the consent panel at any time by selecting <strong>"Privacy choices"</strong> in either website
-      footer. Choosing "Necessary only" tells our Google consent controls to deny Analytics going forward. It does not
+      footer. Choosing "Necessary only" tells our Google consent controls to deny Analytics and ads going forward. It does not
       necessarily delete identifiers already stored during an earlier grant; use your browser's site-data controls to
       remove those from the device.
     </p>
@@ -51,6 +51,13 @@ const CookiePolicy = () => (
             <td><code>bevory-analytics-consent-v1</code></td>
             <td>Local storage</td>
             <td>Records "granted" or "denied" so the site can honour your Analytics choice.</td>
+            <td>Until you change it, clear site data, or the key version is retired.</td>
+            <td>Necessary preference record</td>
+          </tr>
+          <tr>
+            <td><code>bevory-ads-consent-v1</code></td>
+            <td>Local storage</td>
+            <td>Records "granted" or "denied" for optional guide-page ads.</td>
             <td>Until you change it, clear site data, or the key version is retired.</td>
             <td>Necessary preference record</td>
           </tr>
@@ -116,9 +123,10 @@ const CookiePolicy = () => (
       identifiers can persist for months or longer unless they expire or are cleared.
     </p>
     <p>
-      BevOry does not intentionally enable Google advertising cookies through its consent panel. Browser privacy tools,
-      extensions, network filtering, or Google account settings may further limit measurement. Google acts under its
-      own service and data-processing terms for the parts it controls.
+      If you separately allow guide-page ads, Google AdSense may receive request and device data and use cookies or
+      similar technologies for ad delivery, measurement, and fraud prevention. Personalised advertising remains off in
+      BevOry's Google consent settings. Browser privacy tools, extensions, network filtering, or Google account settings
+      may further limit these technologies. Google acts under its own service and data-processing terms for the parts it controls.
     </p>
 
     <h2>4. YouTube and external content</h2>
@@ -142,7 +150,7 @@ const CookiePolicy = () => (
 
     <h2>6. How to control or delete storage</h2>
     <ul>
-      <li>Use "Privacy choices" in the footer to grant or deny optional Analytics.</li>
+      <li>Use "Privacy choices" in the footer to grant or deny optional Analytics and guide-page ads separately.</li>
       <li>Use your browser settings to inspect, block, or delete cookies and local storage for <code>bevory.in</code>.</li>
       <li>Use private-browsing or browser tracking controls where appropriate.</li>
       <li>Sign out before clearing a session on a shared device.</li>

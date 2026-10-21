@@ -509,9 +509,9 @@ const AdminProductPrices = () => {
         <Dialog open={showScrapeDialog} onOpenChange={setShowScrapeDialog}>
           <DialogContent className="max-w-lg">
             <DialogHeader>
-              <DialogTitle>Scrape Prices from Livcheers</DialogTitle>
+              <DialogTitle>Scrape Prices from Approved Provider</DialogTitle>
               <DialogDescription>
-                Scrape authentic prices from livcheers.com for {SCRAPE_CITIES.length} cities. This will match products by name/slug and update existing prices.
+                Import reviewed prices from the configured provider for {SCRAPE_CITIES.length} cities. This will match products by name/slug and update existing prices.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-3">

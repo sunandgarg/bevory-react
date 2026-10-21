@@ -1,0 +1,209 @@
+import "dotenv/config";
+import assert from "node:assert/strict";
+import { writeFile } from "node:fs/promises";
+import { PrismaClient } from "@prisma/client";
+
+const publishedAt = "2026-10-08T11:35:58.171Z";
+
+export const posts = [
+  {
+    id: "news-yamaga-2026-edition-october-8-release",
+    title: "Yamaga Lists October 8 Release For Its 2026 Single Malt",
+    slug: "yamaga-2026-edition-october-8-release",
+    excerpt:
+      "Yamaga's non-peated 2026 Edition is on the distillery's October 8 release calendar, with bourbon-cask sweetness and apple-led tasting notes.",
+    cover_emoji: "news",
+    category: "News",
+    tags: ["Yamaga 2026 Edition", "Japanese single malt", "Kumamoto whisky", "whisky releases"],
+    meta_title: "Yamaga 2026 Edition: October 8 Release | BevOry",
+    meta_description:
+      "Yamaga lists an October 8 release for its non-peated 2026 single malt. Explore bourbon-cask character and apple-led notes on BevOry.",
+    selection_note:
+      "Today's scheduled Japanese release provides a timely bottle-specific news item. The copy dates the August announcement and does not claim Indian retail stock.",
+    source_links: [
+      "https://yamagadistillery.co.jp/product/",
+      "https://yamagadistillery.co.jp/blog/942/",
+    ],
+    content: String.raw`
+<p><strong>Yamaga Distillery lists 8 October 2026 as the release date for Single Malt Japanese Whisky YAMAGA 2026 Edition.</strong> The northern Kumamoto producer's <a href="https://yamagadistillery.co.jp/product/" target="_blank" rel="noopener noreferrer">official product page</a> describes bourbon-cask sweetness with apple, vanilla and pastry-like flavours.</p>
+
+<h2>An August Announcement, An October Release Date</h2>
+<p>The distillery announced this release on <a href="https://yamagadistillery.co.jp/blog/942/" target="_blank" rel="noopener noreferrer">12 August 2026</a>, identifying it as a non-peated single malt. Today's date marks its scheduled release, not the date of that original announcement.</p>
+<p>It follows YAMAGA The First, launched in October 2025. Yamaga says the new edition retains that whisky's bourbon-cask confectionery character while pursuing greater depth and smoothness through further maturation.</p>
+
+<h2>Apple Pie, Custard And A Sweet Finish</h2>
+<p>The producer's notes describe apple-pie and fresh-apple aromas with vanilla. Fruit-tart sweetness and custard-like richness follow on the palate; the finish brings caramel's gentle bitterness and lingering apple-compote sweetness.</p>
+
+<h2>Keep The Two 2026 Editions Distinct</h2>
+<p>Yamaga also lists a separate Peated 2026 Edition, released on 3 July. That bottle has its own smoky character. It is not the non-peated October release, despite sharing the year in its name.</p>
+
+<h2>A First Pour</h2>
+<p>Our suggestion is a small neat pour in a tulip-shaped whisky glass, followed by a few drops of water if you prefer. Try roasted almonds or a modest slice of apple tart alongside it. For drinkers following Japan's smaller distilleries, the useful detail is the expression's fruit-and-pastry profile, rather than the release year alone.</p>
+`.trim(),
+  },
+  {
+    id: "guide-white-rum-vs-dark-rum-colour-age-india",
+    title: "White Rum Vs Dark Rum: What Colour Really Tells You",
+    slug: "white-rum-vs-dark-rum-colour-age-india",
+    excerpt:
+      "Clear rum can be aged, and dark rum is not automatically older. Compare production, flavour and the drink you want to make before choosing.",
+    cover_emoji: "guide",
+    category: "Guides",
+    tags: ["white rum vs dark rum", "rum colour", "Bacardi Superior", "Diplomatico Planas", "rum cocktails India"],
+    meta_title: "White Rum vs Dark Rum: Colour & Taste Guide | BevOry",
+    meta_description:
+      "Is dark rum older than white rum? Learn how ageing and filtration affect colour, explore cocktails and Indian pairings, and check city prices on BevOry.",
+    selection_note:
+      "A practical rum comparison not covered by the existing hourly posts; producer examples correct the common assumption that clear rum must be unaged.",
+    source_links: [
+      "https://www.wsetglobal.com/knowledge-centre/blog/2026/light-rum-vs-dark-rum-is-there-a-difference",
+      "https://www.bacardi.com/us/en/our-rums/superior-rum/",
+      "https://www.rondiplomatico.com/product/planas/",
+      "https://www.rondiplomatico.com/product/mantuano/",
+    ],
+    content: String.raw`
+<p><strong>White and dark rum describe appearance, not a dependable age ranking.</strong> A clear rum may have spent time in oak, while a darker colour can reflect cask influence, colouring or other production choices. The <a href="https://www.wsetglobal.com/knowledge-centre/blog/2026/light-rum-vs-dark-rum-is-there-a-difference" target="_blank" rel="noopener noreferrer">WSET rum explainer</a> makes colour a starting clue, not a verdict on quality.</p>
+
+<h2>Clear Does Not Mean Unaged</h2>
+<p><a href="https://www.bacardi.com/us/en/our-rums/superior-rum/" target="_blank" rel="noopener noreferrer">Bacardi describes Superior</a> as aged in American white oak and charcoal-filtered. Its producer notes include almond, lime and vanilla, with a dry, clean finish.</p>
+<p><a href="https://www.rondiplomatico.com/product/planas/" target="_blank" rel="noopener noreferrer">Diplomatico Planas</a> offers another clear example: an aged rum filtered through charcoal to remove colour. The producer describes coffee and coconut aromas, fruity flavours and a silky texture. Looking at those two liquids alone would tell you much less than their production and flavour descriptions.</p>
+
+<h2>Darker Rum Does Not Have One Flavour</h2>
+<p>Oak maturation can contribute dried-fruit, nut and spice notes. WSET also explains that caramel colouring can influence appearance, so a darker shade is not proof of extra years in a barrel. Nor should you assume every dark rum is sweetened or spiced.</p>
+<p>For a named example, <a href="https://www.rondiplomatico.com/product/mantuano/" target="_blank" rel="noopener noreferrer">Diplomatico Mantuano</a> has producer-described dried-fruit and oak aromas, vanilla and gentle spice, ending slightly dry. That profile belongs to Mantuano; it is not a tasting note for the entire dark-rum shelf.</p>
+
+<h2>Choose For The Drink, Not Just The Shade</h2>
+<p>A Daiquiri combines rum, lime and sugar; both Bacardi Superior and Planas are presented by their producers as cocktail options. Our suggestion is to choose a lighter, dry profile when you want the citrus to stay prominent, then measure the lime and sweetness rather than pouring by eye.</p>
+<p>For a rum-led drink, taste a small neat pour first. A fruit-and-oak profile can be enjoyable with one large ice cube, while a richer aged rum can suit an Old Fashioned variation. Neither colour requires cola, and neither rules out neat drinking.</p>
+
+<h2>Indian Food Pairings To Try</h2>
+<p>With a citrus-led Daiquiri, our pairing suggestions are malai paneer tikka, tandoori prawns or coastal rava-fried fish. For dried-fruit and vanilla flavours, try roasted almonds, lightly spiced mutton seekh or 70% dark chocolate. The finished cocktail matters too: lime, sugar and ice change the balance at the table.</p>
+
+<h2>Compare City Prices Like For Like</h2>
+<p>On BevOry, compare the same expression and bottle size in your selected city. Decide on the intended serve first, then the budget. Paying more for a darker colour alone is a poor substitute for choosing flavours you enjoy.</p>
+`.trim(),
+  },
+  {
+    id: "guide-ipa-vs-wheat-beer-taste-pairings-india",
+    title: "IPA Vs Wheat Beer: Bitterness, Aroma And Indian Pairings",
+    slug: "ipa-vs-wheat-beer-taste-pairings-india",
+    excerpt:
+      "IPA usually puts hops first; wheat beer spans several grain-and-yeast-led styles. Learn what to expect beyond bitterness, haze and the label.",
+    cover_emoji: "guide",
+    category: "Guides",
+    tags: ["IPA vs wheat beer", "hazy IPA", "hefeweizen", "Belgian witbier", "beer food pairings India"],
+    meta_title: "IPA vs Wheat Beer: Taste & Indian Pairings | BevOry",
+    meta_description:
+      "Compare IPA and wheat beer flavours, from hoppy citrus to banana and clove. Find Indian food pairings and compare city prices on BevOry.",
+    selection_note:
+      "A style-choice query separate from the earlier lager-versus-ale guide, with specific IPA substyles and German and Belgian wheat-beer distinctions.",
+    source_links: [
+      "https://www.wsetglobal.com/knowledge-centre/blog/2026/ipa-styles-explained-what-neipa-wcipa-and-dipa-actually-mean",
+      "https://www.wsetglobal.com/knowledge-centre/blog/2026/wheat-beer-explained",
+      "https://brewdog.com/pages/punk-ipa",
+    ],
+    content: String.raw`
+<p><strong>Choose an IPA for prominent hop character; consider a German hefeweizen or Belgian witbier for a different mix of texture, yeast aromas and spice.</strong> That is a useful starting point, not a promise that every IPA is bitter or every wheat beer tastes alike.</p>
+
+<h2>IPA Is A Family, Not One Level Of Bitterness</h2>
+<p><a href="https://www.wsetglobal.com/knowledge-centre/blog/2026/ipa-styles-explained-what-neipa-wcipa-and-dipa-actually-mean" target="_blank" rel="noopener noreferrer">WSET's IPA guide</a> distinguishes dry, firmly bitter West Coast IPA from softer hazy or New England IPA, whose hop aromas often lean towards tropical and citrus fruit. Double IPA generally increases strength and hop intensity; session IPA takes a lower-alcohol approach.</p>
+<p>Hazy IPA can include wheat or oats for texture. So the comparison is not simply wheat grain on one side and no wheat on the other. Haze alone cannot tell you which style is in the glass.</p>
+
+<h2>Wheat Beer Has Several Distinct Styles</h2>
+<p><a href="https://www.wsetglobal.com/knowledge-centre/blog/2026/wheat-beer-explained" target="_blank" rel="noopener noreferrer">WSET's wheat-beer explainer</a> describes wheat used alongside barley across a broad family. German hefeweizen commonly has banana and clove aromas produced by yeast, with lively carbonation and little bitterness.</p>
+<p>Belgian witbier often uses coriander and orange peel, giving a more citrus-and-spice-led impression. Tart Berliner Weisse and stronger weizenbock show why wheat beer cannot be treated as one mild, sweet style. Many examples have a soft texture, but grain alone does not supply every aroma.</p>
+
+<h2>A Concrete IPA Example</h2>
+<p><a href="https://brewdog.com/pages/punk-ipa" target="_blank" rel="noopener noreferrer">BrewDog describes Punk IPA</a> with grapefruit, pineapple and lychee notes alongside caramel and a bitter finish. That is the brewer's description of one beer, rather than a flavour checklist for every IPA. A hazy IPA or a different brewery's West Coast release may make a different impression.</p>
+
+<h2>Try These Indian Food Matches</h2>
+<p>Our suggestions for a citrus-led witbier are malai paneer tikka, tandoori prawns and lemon-seasoned grilled fish. With a banana-and-clove hefeweizen, try chicken reshmi kebabs or a lightly spiced potato cutlet.</p>
+<p>For a hop-forward IPA, start with grilled chicken, mushroom tikka or an aged-cheddar toastie. Taste the pairing before adding a very hot chutney; a beer you enjoy by itself may feel less balanced with your particular dish.</p>
+
+<h2>Make Your First Comparison Simple</h2>
+<p>Use clean glasses and taste the chilled beers before adding food. Compare aroma, texture and the aftertaste separately. If sharp bitterness is not your preference, try a witbier or a softer hazy IPA before ruling out a whole category.</p>
+<p>For city prices on BevOry, compare the named beer, pack size and bottle or can format. Neither the word craft nor a cloudy appearance tells you what a serving should cost.</p>
+`.trim(),
+  },
+].map((post) => ({
+  ...post,
+  author: "BevOry Editorial Team",
+  cover_image_url: null,
+  linked_product_id: null,
+  linked_brand: null,
+  notify_users: false,
+  is_published: true,
+  is_featured: post.category === "News",
+  published_at: publishedAt,
+  reviewed_by: "BevOry Editorial Team",
+  facts_last_reviewed: "2026-10-08",
+}));
+
+const banned = /\b(?:symphony|testament|delve|nestled|embark|liquid gold|rich tapestry)\b|elevate your senses|dance on the palate|whether you['\u2019]re|information pending verification|BevOry has not assigned|verified ingredient statement is not stored|availability is not assumed|adults can compare like with like/i;
+assert.equal(posts.length, 3);
+assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length);
+assert.equal(new Set(posts.map((post) => post.id)).size, posts.length);
+assert.equal(posts.filter((post) => post.category === "News").length, 1);
+for (const post of posts) {
+  for (const key of ["id", "title", "slug", "excerpt", "meta_title", "meta_description", "category", "author", "selection_note", "content"]) {
+    assert.ok(typeof post[key] === "string" && post[key].trim(), `${post.slug}: empty ${key}`);
+  }
+  assert.ok(post.meta_title.length <= 60, `${post.slug}: meta title exceeds 60 characters`);
+  assert.ok(post.meta_description.length <= 155, `${post.slug}: meta description exceeds 155 characters`);
+  assert.ok(!banned.test([post.title, post.excerpt, post.meta_title, post.meta_description, post.content].join(" ")), `${post.slug}: prohibited public wording`);
+  assert.ok(post.tags.length && post.tags.every((tag) => tag.trim()), `${post.slug}: missing tags`);
+  assert.ok(post.source_links.length, `${post.slug}: missing sources`);
+  assert.ok(post.content.includes("<h2>"), `${post.slug}: no article sections`);
+  assert.ok(post.content.replace(/<[^>]*>/g, " ").trim().split(/\s+/).length >= 200, `${post.slug}: incomplete body`);
+  assert.ok(Number.isFinite(Date.parse(post.published_at)), `${post.slug}: invalid publication date`);
+  for (const source of post.source_links) {
+    assert.equal(new URL(source).protocol, "https:");
+    assert.ok(post.content.includes(`href="${source}"`), `${post.slug}: source not cited in body`);
+  }
+}
+
+if (process.argv.includes("--export")) {
+  const path = new URL("../docs/editorial/hourly-posts-2026-10-08-1705.json", import.meta.url);
+  await writeFile(path, JSON.stringify({
+    automation_id: "bevory-hourly-alcohol-content-engine",
+    cycle_at: publishedAt,
+    publication_status: "prepared",
+    posts,
+  }, null, 2) + "\n");
+  console.log(`Exported ${posts.length} complete posts to ${path.pathname}`);
+} else if (process.argv.includes("--check")) {
+  console.log(JSON.stringify({ validated: posts.length, posts: posts.map(({ title, slug }) => ({ title, slug })) }, null, 2));
+} else {
+  const prisma = new PrismaClient();
+  try {
+    const keys = posts.map((post) => `blog_posts:${post.id}`);
+    const previous = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    const now = new Date().toISOString();
+    await prisma.$transaction(posts.map((post) => {
+      const data = {
+        ...post,
+        created_at: previous.find((record) => record.recordId === post.id)?.data?.created_at ?? now,
+        updated_at: now,
+      };
+      return prisma.contentRecord.upsert({
+        where: { key: `blog_posts:${post.id}` },
+        update: { data },
+        create: { key: `blog_posts:${post.id}`, tableName: "blog_posts", recordId: post.id, data },
+      });
+    }));
+    const saved = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    assert.equal(saved.length, posts.length, "Not every post was saved");
+    for (const post of posts) {
+      const data = saved.find((record) => record.recordId === post.id)?.data;
+      for (const [key, value] of Object.entries(post)) {
+        assert.deepEqual(data?.[key], value, `${post.slug}: saved ${key} differs`);
+      }
+    }
+    console.log(JSON.stringify({ saved: saved.length, verified: saved.length, slugs: posts.map((post) => post.slug) }, null, 2));
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  } finally {
+    await prisma.$disconnect();
+  }
+}

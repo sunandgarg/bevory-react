@@ -1,0 +1,73 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-12T09:32:45.421Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "AWS CLI authentication check failed: session expired; reauthenticate using aws login.",
+    "The configured Prisma database is unreachable at 127.0.0.1:3308. No database write was attempted."
+  ],
+  "duplicate_check": {
+    "public_api": "22 published blog posts checked on 2026-10-12; no matching OIV/Ningxia congress or ruby-versus-tawny Port title or slug.",
+    "local_files": "Existing hourly publishers, repository drafts and today's /tmp batches searched; no matching congress story or Port comparison found.",
+    "private_database": "Unavailable; unpublished production records could not be checked."
+  },
+  "posts": [
+    {
+      "id": "news-oiv-2026-ningxia-wine-congress-programme",
+      "title": "Ningxia's 2026 Wine Congress Puts Vineyard Resilience On The Agenda",
+      "slug": "oiv-2026-ningxia-wine-congress-programme",
+      "excerpt": "The OIV's 47th World Congress is scheduled for 12-16 October in Yinchuan. Its programme spans grape growing, winemaking, economics and safety.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": ["OIV wine congress 2026", "Ningxia", "Yinchuan", "global wine industry", "viticulture"],
+      "meta_title": "OIV Wine Congress 2026: Ningxia Programme | BevOry",
+      "meta_description": "Explore the OIV's 12-16 October wine congress programme in Ningxia, covering vineyard resilience, winemaking, economics and consumer safety.",
+      "selection_note": "A date-relevant global wine-sector story for the congress's scheduled opening day. The organiser's current programme and OIV announcements support an agenda preview, not claims about completed sessions or new rules.",
+      "source_links": [
+        "https://chinawine.agri.cn/oiv2026/program/congress/",
+        "https://www.oiv.int/press/registration-opens-47th-world-congress-vine-and-wine",
+        "https://www.oiv.int/what-we-do/oiv-congress",
+        "https://chinawine.agri.cn/oiv2026/"
+      ],
+      "content": "<p><strong>The 47th World Congress of Vine and Wine is scheduled for 12-16 October 2026 in Yinchuan, Ningxia, China.</strong> The <a href=\"https://chinawine.agri.cn/oiv2026/program/congress/\" target=\"_blank\" rel=\"noopener noreferrer\">organiser's published programme</a> lists an opening ceremony on 12 October, scientific sessions through 14 October, technical visits on 15 October and the OIV General Assembly and closing ceremony on 16 October.</p>\n\n<h2>What Is On The Agenda?</h2>\n<p>The International Organisation of Vine and Wine's <a href=\"https://www.oiv.int/press/registration-opens-47th-world-congress-vine-and-wine\" target=\"_blank\" rel=\"noopener noreferrer\">programme announcement</a> sets out four areas: resilient grape production, innovation in winemaking, legal and economic models, and safety and health. Its announced scientific programme comprises 271 oral presentations and 149 posters from 35 countries.</p>\n<p>Viticulture means growing grapes; oenology covers winemaking. The distinction matters here because the agenda follows wine from the vineyard through production and into the market, rather than concentrating only on what happens in the cellar.</p>\n\n<h2>Why Ningxia?</h2>\n<p>The <a href=\"https://www.oiv.int/what-we-do/oiv-congress\" target=\"_blank\" rel=\"noopener noreferrer\">OIV's congress overview</a> places the gathering in a country that joined the organisation in 2024. The <a href=\"https://chinawine.agri.cn/oiv2026/\" target=\"_blank\" rel=\"noopener noreferrer\">host's welcome message</a> highlights Ningxia's wine region along the eastern foothills of the Helan Mountains. That gives the meeting a specific wine-growing setting, not just a conference-city address.</p>\n\n<h2>Research Beyond The Meeting</h2>\n<p>The OIV explains that congress presentations are based on scientific or academic papers selected for their relevance and quality, with the work subsequently published in open access. That publication process is worth following alongside the event itself: it lets readers examine the research behind a headline.</p>\n<p>For BevOry readers, the useful angle is how growers and winemakers are approaching resilience and changing markets. Our reading of the agenda is that these questions sit together, rather than treating vineyard decisions, production techniques and consumer concerns as separate subjects. The papers and proceedings will be the place to look for the detailed findings.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": true,
+      "published_at": "2026-10-12T09:32:45.421Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    },
+    {
+      "id": "guide-ruby-vs-tawny-port-wine",
+      "title": "Ruby Vs Tawny Port: Fruit, Oak And What To Serve With Dessert",
+      "slug": "ruby-vs-tawny-port-wine",
+      "excerpt": "Ruby Port keeps a youthful fruit character; tawny develops through wood ageing. Compare their flavours, serving temperatures and Indian dessert pairings.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": ["ruby vs tawny Port", "Port wine guide India", "Douro Valley", "Taylor's Port", "wine dessert pairings"],
+      "meta_title": "Ruby vs Tawny Port: Taste, Serving & Food | BevOry",
+      "meta_description": "Compare ruby and tawny Port by fruit, oak ageing and serving temperature. Try Indian dessert pairings and check city prices on BevOry.",
+      "selection_note": "A practical fortified-wine buying question with a food-led answer, using the Douro and Port Wine Institute and named producer examples. It avoids invented Indian prices or search volumes.",
+      "source_links": [
+        "https://www.ivdp.pt/en/wines/port-wines/introduction",
+        "https://www.taylor.pt/en/port-wine/select-ruby",
+        "https://www.taylor.pt/en/port-wine/10-year-old-tawny"
+      ],
+      "content": "<p><strong>For a fruit-led dessert wine, ruby Port is a useful starting point. For a more mature profile with nuts, dried fruit and wood, explore tawny.</strong> The difference is an ageing style, not simply a dark bottle versus a pale one.</p>\n\n<h2>Two Styles From The Douro</h2>\n<p>The <a href=\"https://www.ivdp.pt/en/wines/port-wines/introduction\" target=\"_blank\" rel=\"noopener noreferrer\">Douro and Port Wine Institute</a>, or IVDP, identifies Port as fortified wine from Portugal's demarcated Douro region. Adding grape brandy stops fermentation; subsequent blending and ageing help shape the wine.</p>\n<p>Ruby-style production aims to retain deep red colour and youthful fruit. Tawny-style wines develop through time in wood, gaining dried-fruit and woody aromas as their colour changes. Tawny belongs to the red Port family; its amber appearance does not make it a white wine.</p>\n\n<h2>A Bottle Of Each</h2>\n<p><a href=\"https://www.taylor.pt/en/port-wine/select-ruby\" target=\"_blank\" rel=\"noopener noreferrer\">Taylor's Select Ruby</a> makes the fruit-led idea concrete. The producer describes dark-fruit aromas, a firm, full-bodied palate and a persistent finish.</p>\n<p><a href=\"https://www.taylor.pt/en/port-wine/10-year-old-tawny\" target=\"_blank\" rel=\"noopener noreferrer\">Taylor's 10 Year Old Tawny</a> matures in seasoned oak casks of about 630 litres. Its producer notes describe nuttiness, chocolate, butterscotch and oak alongside ripe fruit, with a silky palate and lingering fig-like flavours. This example also shows why tawny is not a fruit-free style.</p>\n\n<h2>Build A Dessert Pairing</h2>\n<p>Our ruby suggestions are a dark-chocolate brownie or a berry cheesecake. For an Indian dessert table, try a lightly sweetened cocoa barfi rather than an intensely sugary mithai.</p>\n<p>With a nutty tawny, our starting points are badam phirni with restrained sweetness, roasted almonds or an almond tart. Taylor's recommends walnuts and roasted almonds with its 10 Year Old Tawny. Let the wine's particular flavour guide the match, rather than assuming every Port needs the same dessert.</p>\n\n<h2>Serve The Named Bottles</h2>\n<p>Taylor's recommends 16-18 degrees C for Select Ruby and 12-16 degrees C for its 10 Year Old Tawny. A small stemmed wine glass with space above the pour gives you room to appreciate the aromas. Both of these expressions are ready to drink and do not require decanting, according to the producer.</p>\n<p>Ruby, Reserve Ruby, LBV and Vintage are separate labels within the wider ruby family. When comparing city prices on BevOry, match the actual category and bottle size. A basic ruby and a Vintage Port are not interchangeable purchases just because both retain a red colour.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": true,
+      "is_featured": false,
+      "published_at": "2026-10-12T09:32:45.421Z",
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-12"
+    }
+  ]
+}
