@@ -22,6 +22,73 @@ const publishedAt = "2026-09-20T00:00:00.000Z";
 
 export const DEMAND_GUIDES: DemandGuide[] = [
   {
+    id: "demand-single-malt-hyderabad-2026",
+    title: "Single Malt Whisky Price in Hyderabad 2026: Bottle Size Guide",
+    slug: "single-malt-whisky-price-in-hyderabad-2026",
+    excerpt: "Compare Hyderabad single malts by exact expression and bottle size, then check the live local listings before choosing a bottle.",
+    content: `<p><strong>Looking for single malt whisky prices in Hyderabad in 2026?</strong> Compare the complete expression name and pack size first. A brand's entry-level bottling, older age statement and special release are different whiskies; a price for one cannot stand in for another. Browse <a href="/hyderabad/category/single-malts">Hyderabad single malt listings</a> and open the product you actually want to see its locally listed sizes.</p>
+<h2>How to compare Hyderabad single malt prices</h2><p>Start with three details: producer, expression and volume. A 750ml bottle is not directly comparable with a 1 litre bottle, and a smaller pack may have a different price per millilitre. For a quick check, divide the listed price by the pack's millilitres and multiply by 100. That gives an approximate price per 100ml. It measures pack value, not whisky quality.</p><p>Read the full label before comparing two products from the same distillery. An age statement describes the youngest whisky in that bottling, not every release from the brand. Also check whether the label actually says single malt. The <a href="https://www.scotch-whisky.org.uk/discover-scotch/enjoying-scotch/scotch-whisky-categories/" target="_blank" rel="noopener noreferrer">Scotch Whisky Association</a> defines single malt Scotch as whisky distilled at one distillery from malted barley in copper pot stills; blended Scotch combines malt and grain whiskies. Those are category definitions, not a promise that either style will taste better to you.</p>
+<h2>Why does the shelf price vary?</h2><p>Hyderabad sits within Telangana's excise system. Imported and domestic bottles, pack size and the exact registered label all matter. Retail stock can also change which expressions are available. Telangana Excise lists penalties for <a href="https://excise.telangana.gov.in/Service_Chart" target="_blank" rel="noopener noreferrer">retail MRP violations</a>, so check the printed local label and the current amount at a licensed shop. An online listing is a useful comparison point, not a guaranteed shelf quotation.</p>
+<h2>Choose by flavour, then budget</h2><p>If you like fresh fruit and cereal notes, start with a lighter malt; if you enjoy dried fruit and baking spice, look for a sherry-cask-led expression. Smoke is a separate preference, not a feature of every single malt. A product's own tasting notes and cask information are more useful than assuming that a higher price means a richer or smokier drink.</p><p>Serve a small measure neat in a tulip-shaped whisky glass at room temperature. A few drops of water can help you explore the aroma. Try an unsmoked, fruit-led malt with malai paneer tikka or grilled chicken; a robust, smoky malt can stand up to galouti kebabs or mutton seekh. Keep the food seasoning and whisky intensity in balance.</p>
+<h2>Frequently asked questions</h2><h3>Is single malt always more expensive than blended Scotch in Hyderabad?</h3><p>No. Compare the exact expressions and bottle sizes in the Hyderabad listings; category names alone do not determine the local price.</p><h3>Does 750ml mean a stronger whisky?</h3><p>No. Millilitres describe bottle volume. Read the ABV percentage on the specific label for strength.</p><p><strong>Planning note:</strong> Prices and stock can change. Confirm the current pack, printed MRP and local rules before buying; never drink and drive.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🥃",
+    author: "BevOry Editorial",
+    category: "Whiskey",
+    tags: ["single malt whisky price Hyderabad", "Hyderabad whisky 750ml", "single malt bottle sizes"],
+    published_at: "2026-10-21T18:15:00+05:30",
+    is_featured: true,
+    meta_title: "Single Malt Whisky Price in Hyderabad 2026 | BevOry",
+    meta_description: "Compare Hyderabad single malt prices by expression and bottle size. Read label, serving and pairing tips; check live city listings on BevOry.",
+    citySlug: "hyderabad",
+    categorySlug: "single-malts",
+  },
+  {
+    id: "demand-beer-bangalore-2026",
+    title: "Beer Price in Bengaluru 2026: Can, Bottle and Style Guide",
+    slug: "beer-price-in-bengaluru-2026-cans-bottles",
+    excerpt: "Compare Bengaluru beer cans and bottles fairly, from crisp lager to hop-forward IPA, using the exact pack and local listing.",
+    content: `<p><strong>Beer prices in Bengaluru in 2026 depend on the beer and the pack in your hand.</strong> A can, a small bottle and a larger bottle may carry very different headline prices. Start with the exact beer in <a href="/bangalore/category/beers">Bengaluru's local beer listings</a>, then check its volume, container and current label before comparing it with another product.</p>
+<h2>Compare cans and bottles by volume</h2><p>For a fair comparison, note the millilitres printed on each pack. Divide the listed price by that volume and multiply by 100 to estimate price per 100ml. For example, this method compares a 330ml can with a 500ml can without pretending they are the same size. It does not account for taste, freshness or whether one format suits your gathering better.</p><p>Do not confuse volume with alcohol strength. The number marked ml tells you how much beer is in the pack; ABV tells you the proportion of alcohol. Read the actual package because strength varies by product and variant. Likewise, the words "strong" and "premium" on packaging are not substitutes for the ABV figure.</p>
+<h2>Which beer style suits the occasion?</h2><p>A pale lager is usually a straightforward choice with a clean, refreshing impression; an IPA tends to foreground hops and bitterness. Wheat beer may bring a softer texture and fruit or spice notes, depending on the recipe. These are style tendencies, not tasting claims about every bottle. The <a href="https://www.brewersassociation.org/edu/brewers-association-beer-style-guidelines/" target="_blank" rel="noopener noreferrer">Brewers Association 2026 Beer Style Guidelines</a> distinguish styles by factors including aroma, flavour and fermentation character. Read the named product's own description before deciding.</p>
+<h2>Why can Bengaluru beer prices differ?</h2><p>Beer sold in Bengaluru falls under Karnataka's excise and retail framework. The <a href="https://stateexcise.karnataka.gov.in/storage/pdf-files/AnnualReport2022-23%28English%29.pdf" target="_blank" rel="noopener noreferrer">Karnataka State Excise annual report</a> discusses beer duty and over-MRP retail sales, which is why the printed local price matters. Packaging, producer, style and stock also affect what you see in a store. Compare like with like and confirm the final shelf price at a licensed retailer rather than relying on an older screenshot.</p>
+<h2>Serving and food</h2><p>Chill a crisp lager and serve it in a clean glass; a hop-forward ale can reveal more aroma when it is cool but not icy. Pour gently so you can judge the beer's colour, aroma and carbonation. In Bengaluru, a crisp lager can work with pepper chicken, masala peanuts or coastal rava-fried fish. A hoppy beer can balance fried paneer or tandoori chicken, though very hot chilli can make bitterness feel sharper.</p>
+<h2>Frequently asked questions</h2><h3>Is a 650ml bottle always cheaper than two cans?</h3><p>No. Calculate price per 100ml from the actual local listings, then check the printed pack prices. Promotions and formats can change the result.</p><h3>Are Bangalore and Bengaluru beer prices different?</h3><p>They are two names for the same city. Compare the same product and pack, not two search results with different spelling.</p><p><strong>Planning note:</strong> Availability and prices can change. Follow local law, buy from licensed sellers and never drink and drive.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🍺",
+    author: "BevOry Editorial",
+    category: "Beer",
+    tags: ["beer price Bangalore", "beer price Bengaluru 2026", "beer can vs bottle"],
+    published_at: "2026-10-21T18:10:00+05:30",
+    is_featured: false,
+    meta_title: "Beer Price in Bengaluru 2026: Cans & Bottles | BevOry",
+    meta_description: "Compare Bengaluru beer prices by pack size and style. Check cans, bottles, ABV and local listings on BevOry before buying.",
+    citySlug: "bangalore",
+    categorySlug: "beers",
+  },
+  {
+    id: "demand-red-wine-mumbai-2026",
+    title: "Red Wine Price in Mumbai 2026: Grapes, Sizes and MRP",
+    slug: "red-wine-price-in-mumbai-2026-grapes-sizes",
+    excerpt: "Find a Mumbai red wine by grape, bottle size and label, with a practical way to compare prices and pair it with food.",
+    content: `<p><strong>There is no single red wine price for Mumbai in 2026.</strong> A Cabernet Sauvignon, Merlot, Shiraz and Pinot Noir are different wines, and a producer can bottle more than one of them. Use <a href="/mumbai/category/red-wine">Mumbai's red-wine listings</a> to find the full wine name, then compare the same vintage and bottle size where those details are given.</p>
+<h2>Read the wine label before comparing prices</h2><p>Start with producer, wine name, grape or blend, vintage and volume. Two bottles carrying the same producer name may differ in fruit character, oak treatment and price. A vintage is the harvest year on the label; a newer vintage is not automatically better or cheaper. If one listing lacks the vintage, avoid treating it as an exact match with a dated bottle until you check the label at the shop.</p><p>For size comparisons, divide the listed price by millilitres and multiply by 100. That gives an approximate cost per 100ml. It is useful for comparing a half bottle with a 750ml bottle, but it does not tell you whether the wine suits your meal. Also check the printed Maharashtra MRP. The <a href="https://stateexcise.maharashtra.gov.in/Pdf/Maharashtra_Excise_Manual_Vol-I.pdf" target="_blank" rel="noopener noreferrer">Maharashtra State Excise manual</a> requires wine labels sold in the state to show the maximum retail price, among other particulars.</p>
+<h2>Choose a red by style</h2><p>Cabernet Sauvignon often brings firmer tannins and dark-fruit structure; Merlot can feel rounder and softer. Shiraz may show ripe fruit and peppery spice, while Pinot Noir is often lighter-bodied and more delicate. These are starting points, not promises about a specific label. Climate, ripeness, winemaking and blending all change the result, so use the bottle's own description where available.</p><p>For Indian food, try a fruit-forward Shiraz with mutton ghee roast or lamb chops. A supple Merlot can work with tandoori chicken; a lighter Pinot Noir can sit beside mushroom kebabs. Strong chilli heat can accentuate alcohol and tannin, so a softer red or a less fiery dish may be a better match.</p>
+<h2>Serve red wine without overheating it</h2><p>A full-bodied red generally shows well around 16-18°C in a medium or large wine glass. Mumbai room temperature can be much warmer, so a short spell in the fridge may help. The <a href="https://www.wsetglobal.com/knowledge-centre/blog/2022/april/26/ideal-serving-temperatures-and-top-tips-for-wine-storage" target="_blank" rel="noopener noreferrer">Wine &amp; Spirit Education Trust</a> explains why modern room temperature is often above a useful red-wine serving range. Let a recently chilled bottle warm slightly in the glass rather than serving it hot.</p>
+<h2>Frequently asked questions</h2><h3>Is a 750ml red wine always better value?</h3><p>No. Compare price per 100ml for the exact wine and pack, then consider how much you will actually serve.</p><h3>Does the MRP stay the same across Indian cities?</h3><p>No. Check the state-specific bottle label and current local listing; a Mumbai price is not a nationwide quotation.</p><p><strong>Planning note:</strong> Prices and stock can change. Confirm the printed label at a licensed shop and follow local law.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🍷",
+    author: "BevOry Editorial",
+    category: "Wine",
+    tags: ["red wine price Mumbai", "Mumbai wine 750ml", "Cabernet Merlot Shiraz price"],
+    published_at: "2026-10-21T18:05:00+05:30",
+    is_featured: false,
+    meta_title: "Red Wine Price in Mumbai 2026: Grapes & MRP | BevOry",
+    meta_description: "Compare Mumbai red-wine prices by grape, vintage and bottle size. Read MRP, serving and food-pairing tips on BevOry.",
+    citySlug: "mumbai",
+    categorySlug: "red-wine",
+  },
+  {
     id: "demand-whisky-gurgaon-2026",
     title: "Whisky Price in Gurgaon 2026",
     slug: "whisky-price-in-gurgaon-2026",
