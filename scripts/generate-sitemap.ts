@@ -295,9 +295,9 @@ try {
     staticRoutes.map(({ path, seo }) => [path, seo]),
   );
 
-  const addRoute = (entry: SitemapEntry, seo: SeoRoute) => {
+  const addRoute = (entry: SitemapEntry, seo: SeoRoute, includeInSitemap = true) => {
     const publicPath = publicProductPath(entry.path, publicProductRoutes);
-    if (!entryPaths.has(publicPath)) {
+    if (includeInSitemap && !entryPaths.has(publicPath)) {
       entries.push({ ...entry, path: publicPath });
       entryPaths.add(publicPath);
     }
@@ -421,7 +421,7 @@ try {
           ...(logo ? { logo } : {}),
           ...(image ? { image } : {}),
         },
-      });
+      }, brandProducts.length > 0);
     }
   }
 
