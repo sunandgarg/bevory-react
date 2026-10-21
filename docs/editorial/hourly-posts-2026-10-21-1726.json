@@ -1,0 +1,68 @@
+{
+  "automation_id": "bevory-hourly-alcohol-content-engine",
+  "cycle_at": "2026-10-21T11:56:17.194Z",
+  "publication_status": "prepared_not_published",
+  "publication_blockers": [
+    "The configured local MySQL tunnel at 127.0.0.1:3308 is closed; no database upsert was attempted.",
+    "The AWS CLI session expired earlier today, so production deployment access is unavailable."
+  ],
+  "posts": [
+    {
+      "id": "news-bandero-first-reposado-three-oak-oct-2026",
+      "title": "Bandero Introduces Its First Reposado Tequila, Aged in Three Oak Types",
+      "slug": "bandero-first-reposado-three-oak-october-2026",
+      "excerpt": "Bandero has announced its first aged tequila, blending separately matured Hungarian, French and American-oak lots. The release is currently described for US markets.",
+      "cover_emoji": "news",
+      "category": "News",
+      "tags": ["Bandero Reposado", "tequila news", "Jalisco agave", "reposado tequila", "oak ageing"],
+      "meta_title": "Bandero Debuts Three-Oak Reposado Tequila | BevOry",
+      "meta_description": "Bandero's first reposado blends Hungarian, French and American-oak lots. See the production details, tasting profile and US rollout.",
+      "selection_note": "A producer-issued release dated 20 October 2026 provides a timely, bottle-specific development. The story distinguishes the brand's US rollout and suggested US prices from any unconfirmed Indian availability.",
+      "source_links": [
+        "https://www.bevnet.com/pr/2026/10/20/bandero-premium-tequila-debuts-first-reposado-aged-in-three-types-of-oak",
+        "https://bandero.com/",
+        "https://platiica.economia.gob.mx/normalizacion/nom-006-scfi-2012/"
+      ],
+      "content": "<p><strong>Bandero Premium Tequila announced its first aged expression, Bandero Reposado, on 20 October 2026.</strong> According to the brand's <a href=\"https://www.bevnet.com/pr/2026/10/20/bandero-premium-tequila-debuts-first-reposado-aged-in-three-types-of-oak\" target=\"_blank\" rel=\"noopener noreferrer\">producer-issued release</a>, the tequila is made from 100% Blue Weber agave and blends lots matured separately in Hungarian, French and American white oak. This is a US launch announcement, not confirmation of an Indian release.</p>\n\n<h2>Three Oaks, Selected Barrel by Barrel</h2>\n<p>Bandero says the spirit rests for just under 12 months. Master distiller Lee Palleschi evaluates individual barrels during the eleventh month before deciding what enters the final blend. The release says the barrels previously held wine or bourbon; it does not specify a fixed proportion for each wood type in every batch. Approximately 26 barrels are selected for a small-batch run.</p>\n<p>The company attributes savoury spice to the Hungarian and French oak and vanilla-and-caramel notes to the American oak. Those are the producer's intended flavour contributions, not a guarantee that every drinker will identify each barrel separately. Bandero's <a href=\"https://bandero.com/\" target=\"_blank\" rel=\"noopener noreferrer\">own production overview</a> describes slow-cooked agave, fermentation and triple distillation across its tequila range; the announcement places this new expression at NOM 1627.</p>\n\n<h2>What The Brand Says It Tastes Like</h2>\n<p>Bandero describes sweet oak and roasted agave on the nose. Its palate notes move from dark caramel to earthy agave, dried fruit and vanilla, with a clean, bright finish. The producer recommends a neat pour at room temperature in a wide glass. A small tasting pour beside malai paneer tikka or roasted nuts would let the agave and oak remain easy to notice; that food match is BevOry's suggestion, not a claim from the producer.</p>\n\n<h2>US Rollout, Not An India Price</h2>\n<p>The 750ml bottle is stated to be 40% ABV. Bandero lists suggested US retail prices of $29.99 in California and $39.99 in other US markets, with wider US distribution expected in late November and December. Those figures are not Indian MRPs, and the announcement does not establish when or whether the bottle will reach India.</p>\n<p>Under <a href=\"https://platiica.economia.gob.mx/normalizacion/nom-006-scfi-2012/\" target=\"_blank\" rel=\"noopener noreferrer\">Mexico's tequila standard</a>, reposado is a defined maturation class rather than a general promise of premium quality. The practical takeaway is to read Bandero Reposado as a specific, near-year-long three-oak blend, distinct from the brand's Blanco and coffee-infused Café expressions.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": null,
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-21"
+    },
+    {
+      "id": "guide-tequila-vs-mezcal-agave-smoke-india",
+      "title": "Tequila vs Mezcal: Agave, Production, Smoke and Indian Food Pairings",
+      "slug": "tequila-vs-mezcal-agave-smoke-food-pairings-india",
+      "excerpt": "Both are Mexican agave spirits, but their protected origins, permitted agaves and production methods differ. Smoke is a clue, not a definition.",
+      "cover_emoji": "guide",
+      "category": "Guides",
+      "tags": ["tequila vs mezcal", "agave spirits guide", "mezcal smoke", "blue agave tequila", "Indian food pairings"],
+      "meta_title": "Tequila vs Mezcal: Agave, Smoke & Food | BevOry",
+      "meta_description": "Tequila and mezcal differ in agave rules, origin and production. Learn why not every mezcal is smoky and what to pair with each in India.",
+      "selection_note": "A high-intent spirits comparison that does not duplicate the existing blanco-versus-reposado guide. Mexico's active tequila and mezcal standards support the distinctions and correct the common smoke misconception.",
+      "source_links": [
+        "https://www.crt.org.mx/en/appellation-of-origin/",
+        "https://platiica.economia.gob.mx/normalizacion/nom-006-scfi-2012/",
+        "https://platiica.economia.gob.mx/normalizacion/NOM-070-SCFI-2016/",
+        "https://platiica.economia.gob.mx/normalizacion/wp-content/uploads/sites/2/PDF_Normas_Publicas/070scfi2017.pdf"
+      ],
+      "content": "<p><strong>Tequila and mezcal are both Mexican agave spirits, but their names are governed by different rules.</strong> Tequila uses Blue Weber agave from its designated production area; mezcal's standard accommodates several agave or maguey varieties and multiple production categories. Neither bottle can be understood from the word 'smoky' alone.</p>\n\n<h2>Start With Agave And Place</h2>\n<p>The <a href=\"https://www.crt.org.mx/en/appellation-of-origin/\" target=\"_blank\" rel=\"noopener noreferrer\">Tequila Regulatory Council</a> says only Agave tequilana Weber, the blue variety, is permitted for tequila. Its denomination of origin covers authorised areas in Jalisco, Nayarit, Guanajuato, Michoacán and Tamaulipas, not all of Mexico. A label saying '100% agave' concerns the tequila's sugar source; it is not the same information as its blanco or reposado maturation class.</p>\n<p>Mexico's <a href=\"https://platiica.economia.gob.mx/normalizacion/NOM-070-SCFI-2016/\" target=\"_blank\" rel=\"noopener noreferrer\">active mezcal standard</a> governs a separate protected category. Mezcal labels can identify an agave variety, producing region and production class. Two mezcals from different agaves or methods may taste further apart than a blanco tequila and a gently made mezcal. Read the full label before assuming a single house style.</p>\n\n<h2>Why Some Mezcal Tastes Smoky</h2>\n<p>The <a href=\"https://platiica.economia.gob.mx/normalizacion/wp-content/uploads/sites/2/PDF_Normas_Publicas/070scfi2017.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">mezcal production standard</a> distinguishes Mezcal, Mezcal Artesanal and Mezcal Ancestral by permitted cooking, milling, fermentation and distillation equipment. Pit ovens are one permitted approach and can impart smoke; the standard also permits masonry ovens or autoclaves for the general Mezcal category. Smoke therefore depends on the actual production choices and is not a legal requirement that every mezcal must taste like a campfire.</p>\n<p>Tequila production has its own <a href=\"https://platiica.economia.gob.mx/normalizacion/nom-006-scfi-2012/\" target=\"_blank\" rel=\"noopener noreferrer\">official standard</a>. Its ageing terms, including blanco, reposado and añejo, describe time and conditions in oak; they do not turn tequila into mezcal. Distillation equipment, agave cooking and barrel use all affect flavour, so judge a named bottle on its producer information rather than a category stereotype.</p>\n\n<h2>What To Pour And Pair</h2>\n<p>For a first comparison, taste a small pour of blanco tequila beside an unaged mezcal at a comfortable room temperature in separate tulip-shaped glasses. Notice cooked agave, fruit, herbal notes, spice and any smoke before adding citrus or ice. If a bottle is heavily smoky, a few drops of water may make other aromas easier to find. No category guarantees a particular flavour intensity.</p>\n<p>Our Indian pairing suggestions are malai paneer tikka, cucumber chaat or tandoori prawns with a fresh, citrus-led blanco tequila. For a mezcal that actually shows roasted or smoky notes, try mushroom tikka, coastal rava-fried fish or mutton seekh. Match the bottle in your glass, not a generic expectation of the category.</p>\n\n<h2>How To Compare City Listings</h2>\n<p>On BevOry, compare the exact expression and bottle size in your chosen city; a tequila reposado is not a price substitute for an unaged mezcal. Check the label's agave, region and style, then verify the local shelf price. Imported-spirit availability and prices differ by city, so an overseas listing or producer announcement should never be treated as an Indian retail quote.</p>",
+      "author": "BevOry Editorial Team",
+      "cover_image_url": null,
+      "linked_product_id": null,
+      "linked_brand": null,
+      "notify_users": false,
+      "is_published": false,
+      "is_featured": false,
+      "published_at": null,
+      "reviewed_by": "BevOry Editorial Team",
+      "facts_last_reviewed": "2026-10-21"
+    }
+  ]
+}
