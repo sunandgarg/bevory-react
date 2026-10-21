@@ -224,7 +224,7 @@ const staticRoutes: Array<SitemapEntry & { seo: SeoRoute }> = [
   ["/", "BevOry: Compare Drink Prices, Brands & Bottle Sizes", "Explore beverage brands, bottle sizes, local price guides, cocktails and planning tools across India. BevOry is informational and does not sell alcohol.", "Compare prices. Browse drinks. Discover brands."],
   ["/categories", "Drink Categories & Prices | BevOry", "Browse spirits, wine, beer and ready-to-drink categories with local prices.", "Drink categories"],
   ["/brands", "Beverage Brands & Products | BevOry", "Explore beverage brands, products and locally available bottle prices.", "Beverage brands"],
-  ["/guide", "BevOry Guide | Drinks & Serving Advice", "Read practical beverage guides, tasting notes and responsible serving advice.", "BevOry Guide"],
+  ["/guide", "BevOry Guide | Drink News, Prices & Buying Advice", "Read BevOry guides on city prices, MRP checks, whisky, beer, gin and beverage news across India.", "BevOry Guide"],
   ["/cocktails", "Cocktail Recipes & Drink Ideas | BevOry", "Discover cocktail recipes, ingredients and serving ideas.", "Cocktail recipes"],
   ["/party-planner", "Drinks Party Planner | BevOry", "Estimate drinks and compare locally priced products for a guest count and budget.", "Drinks party planner"],
   ["/masterclass", "Beverage Masterclasses | BevOry", "Watch beverage reviews, explainers and creator masterclasses.", "Beverage masterclasses"],

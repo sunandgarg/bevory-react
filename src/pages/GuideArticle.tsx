@@ -301,7 +301,7 @@ const GuideArticle = () => {
       <MobileLayout showSearch={false} showCheersGuide={false} showBottomNav={false}>
         <article className="bg-background pb-10">
           <header className="border-b border-border/70 bg-background">
-            <div className="mx-auto max-w-6xl px-4 py-6 md:px-8 md:py-9">
+            <div className="mx-auto max-w-5xl px-4 py-6 md:px-8 md:py-9">
               <nav className="mb-5 flex items-center gap-2 overflow-hidden text-xs font-medium text-muted-foreground" aria-label="Breadcrumb">
                 <Link to="/guide" className="inline-flex items-center gap-1 hover:text-foreground">
                   <ArrowLeft className="h-3.5 w-3.5" />
@@ -311,9 +311,11 @@ const GuideArticle = () => {
                 <span className="truncate text-foreground">{post.title}</span>
               </nav>
 
-              <div className="max-w-[800px]">
-                <Badge className="mb-4 rounded-md bg-accent/10 text-accent hover:bg-accent/10">{heroLabel}</Badge>
-                <div className="mb-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-border pb-4 text-sm text-muted-foreground">
+              <div className="max-w-[68ch]">
+                <p className="mb-3 text-xs font-semibold uppercase text-accent">{heroLabel}</p>
+                <h1 className="text-[1.85rem] font-bold leading-tight text-foreground md:text-[2.35rem]">{post.title}</h1>
+                {post.excerpt && <p className="mt-3 text-base leading-7 text-muted-foreground">{post.excerpt}</p>}
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground sm:text-sm">
                     <span className="inline-flex items-center gap-2">
                       <User className="h-4 w-4" />
                       <span className="font-medium text-foreground">{post.author || "BevOry Editorial"}</span>
@@ -329,28 +331,34 @@ const GuideArticle = () => {
                       {readTime} min read
                     </span>
                 </div>
-                <h1 className="text-[2rem] font-extrabold leading-[1.16] text-foreground md:text-[2.375rem]">{post.title}</h1>
-                {post.excerpt && <p className="mt-4 text-base leading-7 text-muted-foreground md:text-lg">{post.excerpt}</p>}
               </div>
             </div>
           </header>
 
-          <main className="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:px-8 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <main className="mx-auto grid max-w-5xl gap-8 px-4 py-7 md:px-8 lg:grid-cols-[minmax(0,1fr)_240px]">
             <div className="min-w-0">
-              <figure className="mb-8 flex aspect-[16/9] items-center justify-center overflow-hidden rounded-lg bg-secondary">
+              <figure className="mb-8 flex h-44 items-center justify-center overflow-hidden rounded-md bg-secondary sm:h-64">
                 <img src={coverImage} alt={post.cover_image_url ? post.title : `${heroLabel} guide illustration`} width="960" height="540"
                   className={`h-full w-full ${post.cover_image_url ? "object-cover" : "object-contain p-3"}`} fetchPriority="high" />
               </figure>
+              {articleSections.length > 2 && (
+                <details className="mb-7 border-y border-border py-3 lg:hidden">
+                  <summary className="cursor-pointer text-sm font-semibold">In this article</summary>
+                  <nav className="mt-3 grid gap-2" aria-label="Article sections">
+                    {articleSections.map((section) => <a key={section.id} href={`#${section.id}`} className="text-sm leading-6 text-accent">{section.title}</a>)}
+                  </nav>
+                </details>
+              )}
               <div
-                className="prose max-w-[800px] text-foreground
+                className="prose max-w-[68ch] text-foreground
                   prose-headings:font-sans prose-headings:tracking-normal prose-headings:text-foreground prose-headings:scroll-mt-36
-                  prose-h2:mt-10 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h2:text-2xl prose-h2:font-extrabold prose-h2:leading-tight md:prose-h2:text-[1.75rem]
-                  prose-h3:mt-7 prose-h3:text-xl prose-h3:font-bold
-                  prose-p:my-5 prose-p:text-base prose-p:leading-[1.75] prose-p:text-foreground/85 md:prose-p:text-[17px]
+                  prose-h2:mt-10 prose-h2:border-b prose-h2:border-border prose-h2:pb-2 prose-h2:text-xl prose-h2:font-bold prose-h2:leading-snug md:prose-h2:text-2xl
+                  prose-h3:mt-7 prose-h3:text-lg prose-h3:font-semibold
+                  prose-p:my-4 prose-p:text-base prose-p:leading-7 prose-p:text-foreground/85
                   prose-a:font-medium prose-a:text-accent prose-a:no-underline hover:prose-a:underline
                   prose-strong:font-semibold prose-strong:text-foreground
                   prose-ul:my-5 prose-ul:pl-5 prose-ol:my-5 prose-ol:pl-5
-                  prose-li:my-2 prose-li:pl-1 prose-li:text-base prose-li:leading-[1.75] prose-li:text-foreground/85 prose-li:marker:text-accent
+                  prose-li:my-2 prose-li:pl-1 prose-li:text-base prose-li:leading-7 prose-li:text-foreground/85 prose-li:marker:text-accent
                   prose-blockquote:my-7 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-secondary/35 prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:not-italic prose-blockquote:text-foreground
                   prose-hr:my-8 prose-hr:border-border
                   prose-img:my-7 prose-img:rounded-lg prose-img:border prose-img:border-border
@@ -379,6 +387,7 @@ const GuideArticle = () => {
                         <span className="min-w-0">
                           <span className="block text-xs text-muted-foreground truncate">{product.brand}</span>
                           <span className="block text-sm font-medium truncate">{product.name}</span>
+                          {product.volume && <span className="block text-xs text-muted-foreground">{product.volume}</span>}
                         </span>
                         <span className="text-sm font-semibold text-accent whitespace-nowrap">
                           {product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price unavailable"}

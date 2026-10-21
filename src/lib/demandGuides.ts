@@ -22,6 +22,72 @@ const publishedAt = "2026-09-20T00:00:00.000Z";
 
 export const DEMAND_GUIDES: DemandGuide[] = [
   {
+    id: "demand-indian-whisky-delhi-2026",
+    title: "Indian Whisky Price in Delhi 2026: Bottle Sizes and MRP",
+    slug: "indian-whisky-price-in-delhi-2026-bottle-sizes-mrp",
+    excerpt: "Compare the exact Indian whisky and pack size in Delhi, then check the registered price and bottle label before buying.",
+    content: `<p><strong>What is the price of Indian whisky in Delhi in 2026?</strong> There is no useful single figure: the expression, pack size and Delhi-approved price all matter. Start with <a href="/delhi/category/made-in-india-whisky">Delhi's Indian whisky listings</a>, open the bottle you mean, and check the size shown. A 750ml listing cannot answer the price of a 375ml pack or a different release from the same brand.</p>
+<h2>Check the Delhi price, not a nationwide estimate</h2><p>The <a href="https://excise.delhi.gov.in/excise/imfl-branch-or-licences-liquor" target="_blank" rel="noopener noreferrer">Delhi Excise Department</a> explains that brands and prices are approved within its licensing process and links to a price list for the excise year. It also advises shoppers not to pay above the listed price and to insist on a cash memo. Use that official list and the label or shelf information at a licensed shop when you need a final purchase figure.</p><p>Do not copy a number from a Gurgaon, Noida or Mumbai search result into a Delhi budget. Those cities do not all sit under the same excise administration. Even inside Delhi, check the complete label name: a regular blend, a premium expression and an age-stated bottle can share a producer but have different prices. Our <a href="/guide/whisky-price-in-gurgaon-2026">Gurgaon whisky guide</a> is useful for understanding that comparison, but it is not a Delhi price list.</p>
+<h2>Compare 180ml, 375ml and 750ml fairly</h2><p>First confirm that the same expression appears in both sizes. Divide each listed pack price by its volume in millilitres, then multiply by 100. The result is an approximate price per 100ml; the smaller number indicates a lower unit cost. This calculation does not account for taste, occasion or how much you actually plan to serve.</p><p>Millilitres measure liquid volume, not strength. ABV is the percentage of alcohol by volume printed on the bottle. A larger pack of the same whisky contains more liquid, but it does not automatically have a higher ABV. Check both details on the exact pack rather than assuming that an online result describes every variant.</p>
+<h2>Pick the right style for your serve</h2><p>For a long drink, an accessible Indian blend works with chilled soda and ice. A more oak-led expression may be better sampled neat in a small whisky glass before adding water. Read the producer's tasting notes for the exact bottle: fruit, vanilla, spice and smoke are possibilities across whisky, not promises about every Indian label.</p><p>With food, try a lighter blend alongside tandoori chicken or paneer tikka. A richer, spice-led whisky can work with mutton seekh or galouti kebabs. Keep the pour moderate and serve water alongside; a higher sticker price is not a reason to drink more.</p>
+<h2>Frequently asked questions</h2><h3>Is a 750ml Indian whisky always better value in Delhi?</h3><p>No. Compare the same expression's price per 100ml across available packs, then consider the amount you need.</p><h3>Where should I verify the final Delhi whisky MRP?</h3><p>Check the Delhi Excise price list for the relevant excise year, the bottle label and the retailer's cash memo. A catalogue listing is a comparison aid, not a final receipt.</p><p><strong>Before buying:</strong> Prices and stock can change. Buy only where lawful, follow local rules and never drink and drive.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🥃",
+    author: "BevOry Editorial",
+    category: "Whiskey",
+    tags: ["Indian whisky price Delhi", "Delhi whisky 750ml", "Delhi whisky MRP"],
+    published_at: "2026-10-22T00:15:00+05:30",
+    is_featured: true,
+    meta_title: "Indian Whisky Price in Delhi 2026 | BevOry",
+    meta_description: "Compare Indian whisky prices in Delhi by expression and size. Check the MRP, serving tips and live city listings on BevOry.",
+    citySlug: "delhi",
+    categorySlug: "made-in-india-whisky",
+  },
+  {
+    id: "demand-beer-mumbai-2026",
+    title: "Beer Price in Mumbai 2026: Cans, Bottles and MRP",
+    slug: "beer-price-in-mumbai-2026-cans-bottles-mrp",
+    excerpt: "Compare Mumbai beer by exact brand, style and pack size, with a practical check for Maharashtra MRP and ABV.",
+    content: `<p><strong>Beer price in Mumbai in 2026 depends on the exact beer and pack.</strong> A small can, larger can and glass bottle should not be compared by the headline number alone. Browse <a href="/mumbai/category/beers">Mumbai beer listings</a>, select the named beer, and note the millilitres on the pack before deciding which format suits you.</p>
+<h2>Use the Maharashtra label as your price check</h2><p>The <a href="https://stateexcise.maharashtra.gov.in/Pdf/Maharashtra_Excise_Manual_Vol-I.pdf" target="_blank" rel="noopener noreferrer">Maharashtra State Excise manual</a> says beer packages sold in the state must show the manufacturer, beer name, alcoholic percentage, batch and manufacture details, and maximum retail price. That makes the actual Maharashtra pack label more useful than an old image of a bottle sold elsewhere. Check the current shelf amount at a licensed seller as well.</p><p>A listing may describe a 330ml can while the shop has a 500ml can or a larger bottle. These are not interchangeable price quotes. Imported and Indian-made beers can also appear in different formats. If the product name is shortened online, look for the full variant and pack before assuming two listings match.</p>
+<h2>Find the better pack value</h2><p>Divide the price of each available pack by its millilitres and multiply by 100. This gives an approximate price per 100ml, which helps compare different sizes without treating them as the same purchase. A lower unit price does not make a pack the better choice if you only want one serving or prefer a different style. Do not use bottle size to guess strength: ABV is the separate percentage on the label.</p><p>Keep packaging and freshness in mind. A can blocks light, while a bottle lets you see the beer's colour; neither format alone tells you how fresh the beer is. Check the date and storage condition of the actual pack. A chilled product from a well-kept retailer is a better starting point than an attractive but warm, tired-looking bottle.</p>
+<h2>Choose a style, then a serve</h2><p>A lager tends to be crisp and straightforward; an IPA places more emphasis on hops and bitterness; a wheat beer can feel softer and more aromatic. The <a href="https://www.brewersassociation.org/edu/brewers-association-beer-style-guidelines/" target="_blank" rel="noopener noreferrer">Brewers Association beer style guidelines</a> explain the range within these categories, so style names are useful starting points rather than guarantees about one brand.</p><p>Serve a pale lager cool in a clean glass with coastal rava-fried fish, masala peanuts or tandoori prawns. A hoppy ale can work with tandoori chicken or paneer tikka, although very hot chilli may make bitterness seem sharper. Pour gently to preserve a head and make aroma easier to notice.</p>
+<h2>Frequently asked questions</h2><h3>Is a large beer bottle always cheaper than two cans in Mumbai?</h3><p>No. Compare the same beer's actual pack prices per 100ml and check the printed Maharashtra MRP.</p><h3>Does the beer price in Mumbai apply in Bengaluru?</h3><p>No. Pack and state matter. See our <a href="/guide/beer-price-in-bengaluru-2026-cans-bottles">Bengaluru beer guide</a> for that city's listings.</p><p><strong>Before buying:</strong> Listed prices and stock can change. Check the pack at a licensed shop and never drink and drive.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🍺",
+    author: "BevOry Editorial",
+    category: "Beer",
+    tags: ["beer price Mumbai 2026", "Mumbai beer MRP", "beer can bottle price"],
+    published_at: "2026-10-22T00:10:00+05:30",
+    is_featured: false,
+    meta_title: "Beer Price in Mumbai 2026: Cans & MRP | BevOry",
+    meta_description: "Compare Mumbai beer prices by can, bottle and style. Check Maharashtra MRP, ABV and local listings on BevOry before buying.",
+    citySlug: "mumbai",
+    categorySlug: "beers",
+  },
+  {
+    id: "demand-gin-bangalore-2026",
+    title: "Gin Price in Bengaluru 2026: Botanicals, Sizes and Serves",
+    slug: "gin-price-in-bengaluru-2026-botanicals-sizes",
+    excerpt: "Find a Bengaluru gin by its full expression and bottle size, then choose the botanical style that suits your drink.",
+    content: `<p><strong>Looking for gin prices in Bengaluru in 2026?</strong> Begin with the full bottle name, not only the brand. London Dry, citrus-led, floral and flavoured expressions can sit under one producer while tasting and pricing differently. Open the exact gin in <a href="/bangalore/category/gin">Bengaluru gin listings</a> and check its pack size before comparing it with another bottle.</p>
+<h2>Compare the same gin and bottle size</h2><p>A 700ml imported bottle and a 750ml Indian bottle are different pack sizes, even if their headline prices look close. Divide each listed price by its millilitres and multiply by 100 for an approximate price per 100ml. This is only a pack-value measure; it cannot tell you which botanical profile you will enjoy more. Check the bottle's ABV separately, because strength is not the same as volume.</p><p>Bengaluru is covered by Karnataka's excise system. The <a href="https://stateexcise.karnataka.gov.in/storage/pdf-files/AnnualReport2022-23%28English%29.pdf" target="_blank" rel="noopener noreferrer">Karnataka State Excise annual report</a> describes measures aimed at curbing over-MRP retail sales. For a current purchase, use the local label and licensed retailer's price rather than a national price snippet or an old receipt. Do not assume a Goa or Mumbai figure applies in Bengaluru.</p>
+<h2>What do the botanicals change?</h2><p>Juniper gives gin its defining character. The <a href="https://www.wsetglobal.com/knowledge-centre/blog/2026/gins-botanical-blueprint" target="_blank" rel="noopener noreferrer">Wine &amp; Spirit Education Trust's botanical guide</a> describes coriander seed, angelica root, citrus peel, cardamom and other ingredients used to shape a gin's aroma. A juniper-forward gin may feel piney and dry; a citrus-led recipe can seem brighter; a floral style may be more delicate. Those are style cues, not tasting notes for every product in the category.</p><p>Read the producer's ingredient or tasting information for the bottle you want. A pink or fruit-flavoured label does not by itself tell you how sweet the drink will be. Also avoid treating "London Dry" as a statement that the bottle was made in London: it is a style term. The exact production and origin details belong to the individual gin.</p>
+<h2>Make a serve that suits the gin</h2><p>For a first comparison, pour a small measure over ice with plain tonic and taste before adding garnish. Use lime with a citrus-forward gin, or a restrained cucumber slice with a softer botanical profile. A juniper-led London Dry also works in a Martini, where the spirit remains easy to taste. Very sweet tonic can hide the differences between bottles.</p><p>Pair a crisp gin and tonic with malai paneer tikka, cucumber chaat or tandoori prawns. A citrus-led gin works with coastal rava-fried fish. Serve water alongside and keep the pour moderate.</p>
+<h2>Frequently asked questions</h2><h3>Is gin cheaper in Bangalore than Bengaluru?</h3><p>Bangalore and Bengaluru are two names for the same city. Compare the same expression and pack, then confirm the shop's current price.</p><h3>Does a higher gin price mean more botanicals?</h3><p>No. Price does not reveal the number of botanicals or guarantee a better match for your preferred serve.</p><p><strong>Before buying:</strong> Prices and stock can change. Check the local label, follow Karnataka's rules and never drink and drive.</p>`,
+    cover_image_url: null,
+    cover_emoji: "🍸",
+    author: "BevOry Editorial",
+    category: "Gin",
+    tags: ["gin price Bangalore", "gin price Bengaluru 2026", "London Dry gin price"],
+    published_at: "2026-10-22T00:05:00+05:30",
+    is_featured: false,
+    meta_title: "Gin Price in Bengaluru 2026 | Botanicals & Sizes",
+    meta_description: "Compare Bengaluru gin prices by expression and bottle size. Explore juniper, citrus and floral styles with local listings on BevOry.",
+    citySlug: "bangalore",
+    categorySlug: "gin",
+  },
+  {
     id: "demand-single-malt-hyderabad-2026",
     title: "Single Malt Whisky Price in Hyderabad 2026: Bottle Size Guide",
     slug: "single-malt-whisky-price-in-hyderabad-2026",
