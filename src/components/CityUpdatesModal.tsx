@@ -98,7 +98,7 @@ const CityUpdatesModal = () => {
         <DialogHeader className="gap-0 pr-5 text-left">
           <span className="inline-flex w-fit items-center gap-1 text-[11px] font-semibold text-[#8f5700]"><MapPin className="h-3 w-3" />{city || selectedCity?.name || "Your city"}</span>
           <DialogTitle className="pt-1 text-lg font-bold leading-tight">Get exciting offers in {city || selectedCity?.name || "your city"}</DialogTitle>
-          <DialogDescription className="text-[11px] leading-4">City updates from BevOry. No alcohol sales.</DialogDescription>
+          <DialogDescription className="text-[11px] leading-4">City updates from BevOry. <span className="font-medium text-red-600">BevOry does not sell alcohol of any kind.</span></DialogDescription>
         </DialogHeader>
         <form onSubmit={submit} autoComplete="on" className="space-y-2.5">
           <div className="grid grid-cols-2 gap-2">
