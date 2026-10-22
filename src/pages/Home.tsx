@@ -1,23 +1,14 @@
-import { memo, lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
-import {
-  PartyPopper,
-  ArrowLeftRight,
-  ArrowRight,
-  TrendingUp,
-  BookOpen,
-  Flame,
-  Wine,
-  MapPin,
-  ShieldCheck,
-} from "lucide-react";
+import { lazy, memo, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowLeftRight, ArrowRight, ArrowUpRight, BookOpen, MapPin, Martini, PartyPopper, Search, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import MobileLayout from "@/components/layout/MobileLayout";
-import { useProducts } from "@/hooks/useProducts";
-import { useLocation } from "@/hooks/useLocation";
-import TrendingProducts from "@/components/home/TrendingProducts";
-import Footer from "@/components/layout/Footer";
 import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
+import ProductImage from "@/components/product/ProductImage";
+import Footer from "@/components/layout/Footer";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useProducts, type Product } from "@/hooks/useProducts";
+import { useLocation } from "@/hooks/useLocation";
+import { useProductUrl } from "@/hooks/useProductUrl";
 import { citySlugFromName } from "@/lib/locations";
 
 const BrandSpotlight = lazy(() => import("@/components/home/BrandSpotlight"));
@@ -27,18 +18,24 @@ const BevoryGuide = lazy(() => import("@/components/home/BevoryGuide"));
 const ProductReviews = lazy(() => import("@/components/home/ProductReviews"));
 const VideoReviews = lazy(() => import("@/components/home/VideoReviews"));
 
-const SectionSkeleton = () => (
-  <div className="px-4 space-y-3">
-    <Skeleton className="h-5 w-32" />
-    <div className="flex gap-3 overflow-x-auto">
-      {[1, 2, 3].map((i) => (
-        <Skeleton key={i} className="w-40 h-48 rounded-xl flex-shrink-0" />
-      ))}
-    </div>
-  </div>
-);
+const QUICK_LINKS = [
+  { title: "Explore drinks", detail: "Whisky, wine, beer and more", to: "/categories", icon: Search, tone: "bg-[#d9ece7]" },
+  { title: "Party planner", detail: "For the next get-together", to: "/party-planner", icon: PartyPopper, tone: "bg-[#f6dfcf]" },
+  { title: "Cocktails", detail: "Classics and fresh ideas", to: "/cocktails", icon: Martini, tone: "bg-[#dce7f6]" },
+  { title: "The guide", detail: "Stories, prices and know-how", to: "/guide", icon: BookOpen, tone: "bg-[#f4e9bb]" },
+] as const;
 
-const DeferredSection = ({ children, minHeight = 180 }: { children: ReactNode; minHeight?: number }) => {
+const CATEGORY_TILES = [
+  { slug: "vodka", title: "Vodka", tone: "bg-[#f8e9ed]" },
+  { slug: "gin", title: "Gin", tone: "bg-[#e3eef7]" },
+  { slug: "made-in-india-whisky", title: "Whisky", tone: "bg-[#faede6]" },
+  { slug: "beers", title: "Beer", tone: "bg-[#f7e8e8]" },
+  { slug: "tequila", title: "Tequila", tone: "bg-[#f5e9ee]" },
+  { slug: "red-wine", title: "Wine", tone: "bg-[#eee5ec]" },
+  { slug: "rum", title: "Rum", tone: "bg-[#e8efe9]" },
+] as const;
+
+const DeferredSection = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -55,258 +52,144 @@ const DeferredSection = ({ children, minHeight = 180 }: { children: ReactNode; m
     return () => observer.disconnect();
   }, [visible]);
 
-  return (
-    <div ref={ref} style={visible ? undefined : { minHeight }}>
-      {visible ? children : null}
+  return <div ref={ref} className={visible ? undefined : "min-h-40"}>{visible ? children : null}</div>;
+};
+
+const SectionHeading = ({ title, detail, to, linkLabel = "View all" }: {
+  title: string;
+  detail?: string;
+  to?: string;
+  linkLabel?: string;
+}) => (
+  <div className="mb-5 flex items-end justify-between gap-4">
+    <div>
+      <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
+      {detail && <p className="mt-1 text-sm text-muted-foreground">{detail}</p>}
     </div>
+    {to && <Link to={to} className="inline-flex shrink-0 items-center gap-1 pb-0.5 text-sm font-semibold hover:text-accent">{linkLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
+  </div>
+);
+
+const ProductShelf = ({ title, detail, products, to }: {
+  title: string;
+  detail: string;
+  products: Product[];
+  to: string;
+}) => {
+  const { getProductUrlSafe } = useProductUrl();
+  if (!products.length) return null;
+
+  return (
+    <section aria-label={title}>
+      <SectionHeading title={title} detail={detail} to={to} />
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide sm:gap-4">
+        {products.map((product, index) => (
+          <Link key={product.id} to={getProductUrlSafe(product)} className="group w-[158px] shrink-0 snap-start sm:w-[188px]">
+            <article className="h-full overflow-hidden rounded-md border border-border bg-card transition-colors hover:border-foreground/40">
+              <ProductImage src={product.image_url ?? null} alt={`${product.brand} ${product.name}`} fallbackEmoji={product.image_emoji} priority={index < 2} className="h-[170px] w-full rounded-none bg-[#f5f6f4] sm:h-[200px]" width={376} height={400} />
+              <div className="p-3">
+                <p className="truncate text-xs text-muted-foreground">{product.brand}</p>
+                <h3 className="mt-1 line-clamp-2 min-h-10 text-sm font-semibold leading-5 group-hover:text-accent">{product.name}</h3>
+                <div className="mt-3 flex items-end justify-between gap-2 border-t border-border pt-2">
+                  <span className="truncate text-xs text-muted-foreground">{product.volume || "Bottle"}</span>
+                  <span className="shrink-0 text-sm font-bold">₹{Number(product.price).toLocaleString("en-IN")}</span>
+                </div>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 };
 
-const QUICK_ACTIONS = [
-  { icon: TrendingUp, label: "Trending", hint: "What's hot now", to: "trending", color: "text-primary" },
-  { icon: Wine, label: "Cocktails", hint: "Recipes to try", to: "/cocktails", color: "text-accent" },
-  { icon: BookOpen, label: "Guide", hint: "Know before you sip", to: "/guide", color: "text-success" },
-] as const;
-
-const serifStyle = { fontFamily: "'Instrument Serif', Georgia, serif" } as const;
-
-// India is a whisky-led market, with beer the next broad demand group. Keep
-// high-intent local price categories first, then faster-growing white spirits.
-const CATEGORY_DEMAND_ORDER = [
-  "made-in-india-whisky",
-  "beers",
-  "world-whisky",
-  "single-malts",
-  "rum",
-  "brandy",
-  "vodka",
-  "gin",
-  "red-wine",
-  "white-wine",
-  "ready-to-drink",
-  "champagne",
-] as const;
-
-const formatCount = (count: number) => {
-  if (count >= 1000) {
-    const compact = count >= 10000 ? Math.floor(count / 1000) : Math.floor(count / 100) / 10;
-    return `${compact}K`;
-  }
-
-  return count.toLocaleString("en-IN");
-};
-
 const Home = () => {
-  const { categories, products } = useProducts(true, "home");
-  const { selectedCity, allCities } = useLocation();
+  const { categories, products, loading } = useProducts(true, "home");
+  const { selectedCity } = useLocation();
   const cityName = selectedCity?.name || "your city";
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
-  const cityCount = Math.max(allCities.length, selectedCity ? 1 : 0);
-  const ratedProducts = products.filter((product) => Number(product.rating) > 0);
-  const averageRating = ratedProducts.length
-    ? ratedProducts.reduce((total, product) => total + Number(product.rating), 0) / ratedProducts.length
-    : null;
-  const demandOrderedCategories = [...categories].sort((left, right) => {
-    const leftRank = CATEGORY_DEMAND_ORDER.indexOf(left.slug as typeof CATEGORY_DEMAND_ORDER[number]);
-    const rightRank = CATEGORY_DEMAND_ORDER.indexOf(right.slug as typeof CATEGORY_DEMAND_ORDER[number]);
-    return (leftRank < 0 ? Number.MAX_SAFE_INTEGER : leftRank)
-      - (rightRank < 0 ? Number.MAX_SAFE_INTEGER : rightRank);
-  });
-  const trustStats = [
-    { value: formatCount(cityCount), label: cityCount === 1 ? "City" : "Cities" },
-    {
-      value: categories.length > 0 ? formatCount(categories.length) : "Explore",
-      label: categories.length === 1 ? "Category" : "Categories",
-    },
-    averageRating
-      ? { value: `${averageRating.toFixed(1)}★`, label: "Community" }
-      : { value: "Local", label: "Price guide" },
-  ];
+  const visibleCategories = CATEGORY_TILES.filter((item) => categories.some((category) => category.slug === item.slug));
+  const pricedProducts = products.filter((product) => Number(product.price) > 0 && (product.image_url || product.image_emoji));
+  const trending = pricedProducts.filter((product) => product.is_trending);
+  const popularProducts = [...trending, ...pricedProducts.filter((product) => !product.is_trending)].slice(0, 10);
+  const wineProducts = pricedProducts.filter((product) => product.category?.slug?.includes("wine")).slice(0, 10);
+  const beerProducts = pricedProducts.filter((product) => product.category?.slug === "beers").slice(0, 10);
 
   return (
-    <MobileLayout showSearch={true} showCheersGuide={true}>
-      <div className="space-y-6 pb-6">
-        {/* ─── Personalized greeting (anchoring + trust signal) ─── */}
-        <div className="px-4 pt-2 flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground animate-in fade-in duration-500">
-          <MapPin className="w-3 h-3 text-accent" />
-          <span>Tonight in</span>
-          <span className="text-foreground font-semibold">{cityName}</span>
-          <span className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground">
-            <ShieldCheck className="w-3 h-3 text-success" />
-            Local price guide
-          </span>
+    <MobileLayout showSearch={false} showCheersGuide>
+      <div className="bg-background text-foreground">
+        <div className="mx-auto max-w-5xl px-4 pt-2 sm:px-8">
+          <div className="flex items-center justify-between gap-3 py-3 text-xs font-medium text-muted-foreground sm:text-sm">
+            <p className="inline-flex min-w-0 items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-[#e58c1b]" aria-hidden="true" />Tonight in <strong className="truncate text-foreground">{cityName}</strong></p>
+            <p className="inline-flex shrink-0 items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[#249966]" aria-hidden="true" />Local price guide</p>
+          </div>
+          <section className="relative isolate overflow-hidden rounded-md bg-[#101a2b] text-white" aria-labelledby="home-title">
+            <img src="/bevory-home-hero-2026.webp" alt="" width="2048" height="683" className="absolute inset-0 h-full w-full object-cover object-[68%_center] opacity-20 sm:object-center sm:opacity-30" />
+            <div className="absolute inset-0 bg-[#101a2b]/55" aria-hidden="true" />
+            <div className="relative z-10 px-6 pb-7 pt-9 sm:px-10 sm:pb-8 sm:pt-11 md:px-14">
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase text-white/85"><ShieldCheck className="h-4 w-4 text-[#f5a21b]" aria-hidden="true" />Know before you drink</p>
+              <h1 id="home-title" className="mt-5 text-4xl font-bold leading-tight text-white sm:text-5xl">BevOry<span className="sr-only">: Every pour, perfectly priced.</span></h1>
+              <p className="mt-1 text-2xl font-semibold leading-tight text-white sm:text-3xl">Every pour, <em className="font-serif font-normal text-[#f5a21b]">perfectly</em> priced.</p>
+              <p className="mt-5 max-w-[430px] text-sm leading-6 text-white/75 sm:text-base sm:leading-7">Explore drinks and brands across India, compare locally listed prices in <strong className="text-white">{cityName}</strong>, and plan every gathering with confidence.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link to="/party-planner" className="inline-flex min-h-11 items-center gap-2 rounded-md bg-[#f5a21b] px-5 text-sm font-bold text-[#132034] transition-colors hover:bg-[#ffc04f]"><PartyPopper className="h-4 w-4" aria-hidden="true" />Plan a party</Link>
+                <Link to="/categories" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/40 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20"><ArrowLeftRight className="h-4 w-4" aria-hidden="true" />Compare drinks</Link>
+              </div>
+              <div className="mt-8 grid grid-cols-3 gap-3 border-t border-white/20 pt-5 text-center sm:mt-10">
+                <div><p className="text-sm font-bold sm:text-lg">Local</p><p className="mt-1 text-[10px] uppercase text-white/55 sm:text-xs">price guide</p></div>
+                <div><p className="text-sm font-bold sm:text-lg">{categories.length || "Many"}</p><p className="mt-1 text-[10px] uppercase text-white/55 sm:text-xs">categories</p></div>
+                <div><p className="text-sm font-bold sm:text-lg">Your city</p><p className="mt-1 text-[10px] uppercase text-white/55 sm:text-xs">your prices</p></div>
+              </div>
+            </div>
+          </section>
         </div>
 
-        {/* ─── Hero Banner ─── */}
-        <div className="px-4">
-          <div className="relative overflow-hidden rounded-2xl bg-foreground border border-foreground px-6 pt-7 pb-6 text-background animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-1.5 text-[10px] font-medium mb-4 uppercase tracking-[0.12em]">
-                <ShieldCheck className="w-3 h-3 text-accent" />
-                Know Before You Drink
-              </div>
+        <div className="mx-auto max-w-5xl space-y-12 px-4 pb-14 pt-6 sm:space-y-16 sm:px-8 sm:pt-9">
+          <nav className="grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Explore BevOry">
+            {QUICK_LINKS.map((item) => (
+              <Link key={item.title} to={item.to} className={`group flex min-h-[158px] flex-col justify-between rounded-md p-4 text-[#172221] transition-transform hover:-translate-y-0.5 sm:min-h-[174px] sm:p-5 ${item.tone}`}>
+                <div className="flex items-start justify-between"><item.icon className="h-6 w-6" strokeWidth={1.8} aria-hidden="true" /><ArrowUpRight className="h-4 w-4 opacity-70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" /></div>
+                <div><h2 className="text-lg font-bold leading-tight">{item.title}</h2><p className="mt-1 text-xs leading-5 text-[#34413e] sm:text-sm">{item.detail}</p></div>
+              </Link>
+            ))}
+          </nav>
 
-              <h1 className="text-[30px] leading-[1.05] mb-2.5 tracking-tight font-bold">
-                Every pour,{" "}
-                <span style={serifStyle} className="italic font-normal text-accent">
-                  perfectly
-                </span>{" "}
-                priced.
-              </h1>
-              <p className="text-[13px] leading-relaxed text-background/75 mb-5 max-w-[290px]">
-                Explore drinks and brands across India, compare local prices in <span className="text-background font-semibold">{cityName}</span>, and plan every gathering with confidence.
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  to="/party-planner"
-                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-semibold hover:brightness-110 transition-all duration-200 active:scale-[0.97]"
-                >
-                  <PartyPopper className="w-4 h-4" />
-                  Plan a Party
-                </Link>
-                <Link
-                  to="/search"
-                  className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-background/10 text-background text-sm font-medium hover:bg-background/20 transition-all duration-200 active:scale-[0.97] border border-background/20"
-                >
-                  <ArrowLeftRight className="w-4 h-4" />
-                  Compare
-                </Link>
-              </div>
-
-              {/* Social-proof trust strip inside hero */}
-              <div className="mt-6 pt-5 border-t border-background/10 grid grid-cols-3 gap-2">
-                {trustStats.map((s) => (
-                  <div key={s.label} className="text-center">
-                    <div className="text-base font-bold text-background tracking-tight">{s.value}</div>
-                    <div className="text-[10px] text-background/60 uppercase tracking-wider mt-0.5">{s.label}</div>
-                  </div>
+          <section aria-labelledby="home-categories-heading">
+            <div className="mb-5 flex items-center justify-between gap-2 sm:gap-4"><h2 id="home-categories-heading" className="flex min-w-0 items-baseline gap-2 whitespace-nowrap text-base font-bold leading-tight sm:gap-4 sm:text-2xl"><span>Browse <em className="font-serif font-normal">by mood</em></span><span className="text-xs font-normal text-muted-foreground sm:text-sm">Find your perfect pour</span></h2><Link to="/categories" aria-label="All categories" title="All categories" className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold hover:text-accent"><span className="hidden sm:inline">All categories</span><ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
+            {visibleCategories.length ? (
+              <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scrollbar-hide sm:mx-0 sm:gap-5 sm:px-0">
+                {visibleCategories.map((item, index) => (
+                  <Link key={item.slug} to={`/${citySlug}/category/${item.slug}`} className="group w-[112px] shrink-0 snap-start rounded-md text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-[150px] lg:w-[176px]">
+                    <div className={`aspect-square overflow-hidden rounded-full ${item.tone}`}><CategoryBottleVisual slug={item.slug} categoryName={item.title} priority={index < 3} className="h-full w-full p-2.5 transition-transform duration-200 group-hover:scale-105 sm:p-3" /></div>
+                    <h3 className="mt-3 text-base font-bold lowercase text-foreground group-hover:text-accent sm:text-lg">{item.title}</h3>
+                  </Link>
                 ))}
               </div>
-            </div>
-          </div>
+            ) : <div className="flex gap-4 overflow-hidden">{CATEGORY_TILES.map((item) => <Skeleton key={item.slug} className="aspect-square w-[112px] shrink-0 rounded-full sm:w-[150px]" />)}</div>}
+          </section>
+
+          {loading && <div className="space-y-4"><Skeleton className="h-8 w-56" /><div className="flex gap-3 overflow-hidden">{[1, 2, 3, 4].map((item) => <Skeleton key={item} className="h-64 w-40 shrink-0 rounded-md" />)}</div></div>}
+          <ProductShelf title={`Popular drinks in ${cityName}`} detail={`Listed bottle prices for ${cityName}`} products={popularProducts} to={`/${citySlug}/collections/trending`} />
+          <ProductShelf title="Beer for the table" detail={`Explore beer listings in ${cityName}`} products={beerProducts} to={`/${citySlug}/category/beers`} />
+          <ProductShelf title="Wine worth exploring" detail={`Red, white and sparkling wine in ${cityName}`} products={wineProducts} to={`/${citySlug}/wine-universe`} />
+          {popularProducts.length > 0 && <p className="-mt-8 text-xs text-muted-foreground">Prices are indicative and can change by bottle size or retailer. Check the current label and local rules before buying.</p>}
         </div>
 
-        {/* ─── Quick Actions ─── */}
-        <div className="px-4">
-          <div className="grid grid-cols-3 gap-2.5">
-            {QUICK_ACTIONS.map((item) => (
-              <Link
-                key={item.label}
-                to={item.to === "trending" ? `/${citySlug}/collections/trending` : item.to}
-                className="group flex flex-col items-start gap-1 p-3 rounded-2xl bg-card border border-border/60 hover:border-accent/40 hover:shadow-[var(--shadow-sm)] transition-all duration-200 active:scale-[0.97]"
-              >
-                <div className="w-8 h-8 rounded-xl bg-secondary/70 flex items-center justify-center mb-1 group-hover:bg-accent/10 transition-colors">
-                  <item.icon className={`w-4 h-4 ${item.color}`} />
-                </div>
-                <span className="text-[13px] font-semibold text-foreground leading-tight">{item.label}</span>
-                <span className="text-[10px] text-muted-foreground leading-tight">{item.hint}</span>
-              </Link>
-            ))}
+        <section className="bg-[#dfeae7] px-4 py-11 sm:px-8 sm:py-14" aria-labelledby="home-party-heading">
+          <div className="mx-auto flex max-w-5xl flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div><p className="text-xs font-semibold uppercase text-[#2b6f69]">The next gathering</p><h2 id="home-party-heading" className="mt-2 max-w-xl text-3xl font-bold leading-tight text-[#182827] sm:text-4xl">Good company. Better drinks.</h2><p className="mt-2 max-w-lg text-sm leading-6 text-[#445d59]">Build a drinks list around your guests, tastes and budget.</p></div>
+            <Link to="/party-planner" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-md bg-[#173f3a] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#215a52]">Open party planner<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
+        </section>
+
+        <div className="mx-auto max-w-5xl space-y-12 px-4 py-12 sm:space-y-16 sm:px-8 sm:py-16">
+          <Suspense fallback={<Skeleton className="h-72 rounded-md" />}><WineCollection categories={categories} /></Suspense>
+          <Suspense fallback={<Skeleton className="h-36 rounded-md" />}><BrandSpotlight variant="carousel" limit={16} /></Suspense>
+          <DeferredSection><Suspense fallback={<Skeleton className="h-48 rounded-md" />}><HomeCocktails /></Suspense></DeferredSection>
+          <DeferredSection><Suspense fallback={<Skeleton className="h-48 rounded-md" />}><BevoryGuide /></Suspense></DeferredSection>
+          <DeferredSection><Suspense fallback={<Skeleton className="h-48 rounded-md" />}><ProductReviews /></Suspense></DeferredSection>
+          <DeferredSection><Suspense fallback={<Skeleton className="h-48 rounded-md" />}><VideoReviews /></Suspense></DeferredSection>
         </div>
-
-        {/* ─── Categories ─── */}
-        <div>
-          <div className="flex items-end justify-between mb-3 px-4">
-            <div>
-              <h2 className="text-[17px] font-bold tracking-tight">
-                Browse{" "}
-                <span style={serifStyle} className="italic font-normal text-muted-foreground">
-                  by mood
-                </span>
-              </h2>
-              <p className="text-[11px] text-muted-foreground mt-0.5">Find your perfect pour</p>
-            </div>
-            <Link
-              to="/categories"
-              className="text-[11px] text-muted-foreground hover:text-foreground flex items-center gap-0.5 transition-colors"
-            >
-              View all <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
-          <div className="flex gap-3 overflow-x-auto pb-1 px-4 scrollbar-hide snap-x snap-mandatory">
-            {demandOrderedCategories.slice(0, 8).map((cat, index) => (
-              <Link key={cat.id} to={`/${citySlug}/category/${cat.slug}`} className="group block w-[76px] flex-shrink-0 snap-start">
-                <div className="w-[76px] h-[76px] rounded-2xl bg-secondary/80 border border-border/40 flex items-center justify-center mb-1.5 overflow-hidden group-hover:border-accent/40 group-hover:shadow-[var(--shadow-sm)] transition-all duration-200">
-                  <CategoryBottleVisual
-                    slug={cat.slug}
-                    categoryName={cat.name}
-                    priority={index < 2}
-                    className="h-full w-full transition-transform duration-200 group-hover:scale-105"
-                  />
-                </div>
-                <p className="text-[11px] font-medium text-center text-muted-foreground group-hover:text-foreground truncate transition-colors">
-                  {cat.name}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── Favourites and Trending ─── */}
-        <TrendingProducts />
-
-        {/* ─── Wine Collection ─── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <WineCollection categories={categories} />
-        </Suspense>
-
-        {/* ─── Brand Spotlight ─── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <BrandSpotlight />
-        </Suspense>
-
-        {/* ─── Promotional Card ─── */}
-        <div className="px-4">
-          <Link
-            to="/party-planner"
-            className="block rounded-xl bg-secondary/60 border border-accent/25 p-5 hover:border-accent/40 transition-all active:scale-[0.99]"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <Flame className="w-3.5 h-3.5 text-accent" />
-                  <span className="text-xs font-bold text-foreground uppercase tracking-wider">
-                    Party Planner
-                  </span>
-                </div>
-                <p className="text-[15px] font-bold text-foreground mb-0.5 tracking-tight">
-                  Planning a get-together?
-                </p>
-                <p className="text-[12px] text-muted-foreground">
-                  Personalized drink picks for your budget
-                </p>
-              </div>
-              <div className="w-11 h-11 rounded-xl bg-accent text-accent-foreground flex items-center justify-center flex-shrink-0">
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </div>
-          </Link>
-        </div>
-
-        {/* ─── Lazy Loaded Sections ─── */}
-        <DeferredSection>
-          <Suspense fallback={<SectionSkeleton />}>
-            <HomeCocktails />
-          </Suspense>
-        </DeferredSection>
-        <DeferredSection>
-          <Suspense fallback={<SectionSkeleton />}>
-            <BevoryGuide />
-          </Suspense>
-        </DeferredSection>
-        <DeferredSection minHeight={220}>
-          <Suspense fallback={<SectionSkeleton />}>
-            <ProductReviews />
-          </Suspense>
-        </DeferredSection>
-        <DeferredSection minHeight={260}>
-          <Suspense fallback={<SectionSkeleton />}>
-            <VideoReviews />
-          </Suspense>
-        </DeferredSection>
-
         <Footer />
       </div>
     </MobileLayout>

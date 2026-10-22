@@ -223,17 +223,17 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
   return (
     <>
       <div className={className}>
-        <div className="flex gap-3.5 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory scroll-smooth">
+        <div className="flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory scroll-smooth sm:gap-4 sm:px-8" aria-label="Drink stories">
           {guides.map((guide, index) => (
             <button
               key={guide.id}
               onClick={() => handleClick(index)}
               type="button"
-              className="group flex w-[74px] flex-shrink-0 snap-start flex-col items-center"
+              className="group flex w-[82px] flex-shrink-0 snap-start flex-col items-center sm:w-[108px]"
               aria-label={`Watch ${guide.title} short`}
             >
               <div className="relative rounded-full bg-gradient-to-tr from-amber-300 via-orange-500 to-fuchsia-600 p-[3px] shadow-[0_6px_20px_rgba(249,115,22,0.22)] transition-transform duration-200 group-hover:-translate-y-0.5">
-                <div className="h-[68px] w-[68px] rounded-full bg-background p-[2px]">
+                <div className="h-[76px] w-[76px] rounded-full bg-background p-[2px] sm:h-[102px] sm:w-[102px]">
                     <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-secondary transition-transform duration-200 group-hover:scale-[1.03]">
                       {guide.image_url ? (
                         <img
@@ -259,7 +259,7 @@ const CheersGuide = memo(({ className = "" }: CheersGuideProps) => {
                   </div>
                 )}
               </div>
-              <p className="mt-1.5 w-[74px] truncate text-center text-[10px] font-semibold text-muted-foreground transition-colors group-hover:text-foreground">
+              <p className="mt-2 w-full truncate text-center text-[11px] font-semibold text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
                 {guide.title}
               </p>
             </button>

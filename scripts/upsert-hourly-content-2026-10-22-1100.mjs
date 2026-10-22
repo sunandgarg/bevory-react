@@ -1,0 +1,150 @@
+import "dotenv/config";
+import assert from "node:assert/strict";
+import { writeFile } from "node:fs/promises";
+import { PrismaClient } from "@prisma/client";
+
+const cycleAt = "2026-10-22T05:30:45.499Z";
+const reviewedAt = "2026-10-22";
+
+export const posts = [
+  {
+    id: "news-old-elk-folds-of-honor-american-whiskey-oct-2026",
+    title: "Old Elk Launches Folds of Honor Blended American Whiskey",
+    slug: "old-elk-folds-of-honor-american-whiskey-october-2026",
+    excerpt: "Old Elk's new 94-proof blended whiskey combines American whiskey, High Malt Bourbon and rye in a US release supporting Folds of Honor.",
+    cover_emoji: "news",
+    category: "News",
+    tags: ["Old Elk", "Folds of Honor", "American whiskey", "whiskey launch", "Middle West Spirits"],
+    meta_title: "Old Elk Folds of Honor Whiskey Launch | BevOry",
+    meta_description: "Old Elk debuts a 94-proof blended American whiskey supporting Folds of Honor. Read the blend, producer tasting notes and US release details.",
+    selection_note: "A producer-issued 20 October release and the live Old Elk product page provide specific, verifiable bottle details; US pricing is not presented as Indian MRP.",
+    source_links: [
+      "https://www.prnewswire.com/news-releases/middle-west-spirits-owned-old-elk-distillery-announces-nationwide-launch-of-folds-of-honor-american-whiskey-to-support-military-heroes-and-first-responders-302912862.html",
+      "https://www.oldelk.com/folds-of-honor-american-whiskey",
+    ],
+    content: String.raw`
+<p><strong>Old Elk has announced Folds of Honor Blended American Whiskey, a new US release tied to an educational-scholarship charity.</strong> Its owner, Middle West Spirits, announced the launch on 20 October 2026. The <a href="https://www.prnewswire.com/news-releases/middle-west-spirits-owned-old-elk-distillery-announces-nationwide-launch-of-folds-of-honor-american-whiskey-to-support-military-heroes-and-first-responders-302912862.html" target="_blank" rel="noopener noreferrer">producer-issued release</a> describes a blend of American whiskey, Old Elk High Malt Bourbon and Old Elk Rye.</p>
+
+<h2>What Is In The Bottle?</h2>
+<p>The blend combines three named whiskey components rather than presenting itself as a single-barrel bourbon. On <a href="https://www.oldelk.com/folds-of-honor-american-whiskey" target="_blank" rel="noopener noreferrer">Old Elk's product page</a>, the bottle is labelled blended whiskey at 94 US proof, or 47% alcohol by volume. That is a strength statement, not an age claim or a score. The announcement does not provide a cask-by-cask breakdown, so the useful production detail for a buyer is the composition of the blend.</p>
+<p>Old Elk's current product page gives caramel and vanilla for the aroma, toasted grain and warm spice for the taste, and a long, delicately sweet finish. These are the producer's notes for this expression. They should not be read as tasting notes for every Old Elk bourbon or rye bottle.</p>
+
+<h2>What Does The Charity Partnership Support?</h2>
+<p>Folds of Honor provides educational scholarships to spouses and children of fallen or disabled US service members and first responders. Old Elk says this limited release supports that mission. The producer material does not state a fixed donation per bottle, so buyers should not assume that a particular share of the shelf price goes to the charity.</p>
+
+<h2>US Launch Details, Not An Indian Price</h2>
+<p>Middle West Spirits gives a suggested US retail price of $49.99 and says the whiskey is available for preorder. The release also names the Middle West Spirits distillery bottle store in Columbus, Ohio, and Old Elk's online bottle shop as sales channels. That is a US launch price, not an Indian MRP, and the announcement does not establish an Indian release.</p>
+
+<h2>How To Approach A First Pour</h2>
+<p>For an adult tasting the bottle, a small neat pour in a tulip-shaped glass keeps the grain, spice and sweetness easy to assess. A little water can be tried after the first sip. Our food suggestions are mutton seekh kebabs, roasted mushrooms or moderately spiced paneer tikka; these are pairing ideas, not producer claims. The practical buying distinction is the named three-part blend and its 47% ABV, not the partnership artwork alone.</p>
+`.trim(),
+  },
+  {
+    id: "guide-whisky-proof-vs-abv-india-80-94-100-proof-2026",
+    title: "Whisky Proof vs ABV: What 80, 94 and 100 Proof Mean",
+    slug: "whisky-proof-vs-abv-india-80-94-100-proof-2026",
+    excerpt: "On US whiskey labels, proof is twice ABV. Learn the conversion, why flavour does not follow the number alone and what to check on Indian bottles.",
+    cover_emoji: "guide",
+    category: "Guides",
+    tags: ["whisky proof vs ABV", "80 proof", "94 proof", "100 proof", "whisky guide India"],
+    meta_title: "Whisky Proof vs ABV: 80, 94, 100 | BevOry",
+    meta_description: "80 proof is 40% ABV under the US system. Convert 94 and 100 proof, compare whisky labels and check exact bottle sizes and city prices on BevOry.",
+    selection_note: "A distinct, high-intent label-reading guide linked to a current 94-proof whiskey launch; conversion rules come from the US TTB and Indian labelling context from FSSAI.",
+    source_links: [
+      "https://www.ttb.gov/scientific-services-division/dbmenu1sub1",
+      "https://www.fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_IV_27_08_2025.pdf",
+      "https://www.oldelk.com/folds-of-honor-american-whiskey",
+    ],
+    content: String.raw`
+<p><strong>On a US whiskey label, proof is twice the alcohol-by-volume percentage.</strong> That makes 80 proof equal to 40% ABV, 94 proof equal to 47% ABV and 100 proof equal to 50% ABV. Proof is a strength measure, not a rating for taste or quality.</p>
+
+<h2>How The US Calculation Works</h2>
+<p>The <a href="https://www.ttb.gov/scientific-services-division/dbmenu1sub1" target="_blank" rel="noopener noreferrer">US Alcohol and Tobacco Tax and Trade Bureau</a> defines proof as twice the percentage of ethanol by volume. Divide the proof number by two to get ABV: 80 ÷ 2 = 40, 94 ÷ 2 = 47 and 100 ÷ 2 = 50. To work the other way, multiply ABV by two. The 94-proof and 47%-ABV declarations shown together on <a href="https://www.oldelk.com/folds-of-honor-american-whiskey" target="_blank" rel="noopener noreferrer">Old Elk's Folds of Honor bottle page</a> are a real product example.</p>
+
+<h2>What Should An Indian Shopper Read?</h2>
+<p>India's <a href="https://www.fssai.gov.in/upload/uploadfiles/files/Comp_Alcoholic_Beverages_IV_27_08_2025.pdf" target="_blank" rel="noopener noreferrer">FSSAI alcoholic-beverage standards</a> define ABV as ethanol expressed as a percentage of the total beverage volume. Their labelling section permits alcohol content to be expressed as percent ABV or as proof. When an imported bottle displays both, the ABV is the clearest figure to use for comparison. Do not apply the US conversion to an unexplained proof figure without checking which convention the label uses.</p>
+<p>The size of the pour matters as well as the percentage. A 30 ml measure at 40% ABV contains 12 ml of ethanol; the same-sized measure at 47% ABV contains 14.1 ml. Those are arithmetic examples, not specifications for every whisky sold in India.</p>
+
+<h2>Does Higher Proof Mean Better Whisky?</h2>
+<p>No. A higher-proof whisky may feel more intense, but flavour also depends on its grains, distillation, maturation and blending. Adding water changes concentration and can change what you notice in the glass. A 47% blend is not automatically preferable to a 40% single malt, and two 100-proof bottles need not taste alike.</p>
+
+<h2>How To Compare Bottles And Prices</h2>
+<p>Start with the exact expression and its ABV. Then match bottle volumes: a 700 ml import and a 750 ml bottle are different quantities even if the labels look similar. For Delhi, Mumbai, Gurgaon, Bengaluru or another city, compare the same product and pack size when checking BevOry's local listings. Proof alone cannot tell you the shelf price.</p>
+<p>For a first taste, take a small neat pour in a tulip-shaped glass before deciding whether a few drops of water improve it for you. A spice-led whiskey can work with mutton seekh or roasted mushrooms; a softer, sweeter one may suit paneer tikka or dark chocolate. Use the label for strength and the glass for flavour.</p>
+`.trim(),
+  },
+].map((post) => ({
+  ...post,
+  author: "BevOry Editorial Team",
+  cover_image_url: null,
+  linked_product_id: null,
+  linked_brand: null,
+  notify_users: false,
+  is_published: false,
+  is_featured: false,
+  published_at: null,
+  reviewed_by: "BevOry Editorial Team",
+  facts_last_reviewed: reviewedAt,
+}));
+
+const banned = /\b(?:symphony|testament|delve|nestled|embark|liquid gold|rich tapestry)\b|elevate your senses|dance on the palate|whether you['\u2019]re/i;
+assert.equal(posts.length, 2);
+assert.equal(posts.filter((post) => post.category === "News").length, 1);
+assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length);
+for (const post of posts) {
+  for (const key of ["id", "title", "slug", "excerpt", "meta_title", "meta_description", "category", "author", "selection_note", "content"]) {
+    assert.ok(typeof post[key] === "string" && post[key].trim(), `${post.slug}: empty ${key}`);
+  }
+  assert.ok(post.meta_title.length <= 60, `${post.slug}: meta title too long`);
+  assert.ok(post.meta_description.length <= 155, `${post.slug}: meta description too long`);
+  assert.ok(post.tags.length && post.tags.every(Boolean), `${post.slug}: missing tags`);
+  assert.ok(post.content.includes("<h2>"), `${post.slug}: missing sections`);
+  assert.ok(post.content.replace(/<[^>]*>/g, " ").trim().split(/\s+/).length >= 300, `${post.slug}: body under 300 words`);
+  assert.ok(!banned.test([post.title, post.excerpt, post.meta_title, post.meta_description, post.content].join(" ")), `${post.slug}: banned wording`);
+  for (const source of post.source_links) {
+    assert.equal(new URL(source).protocol, "https:");
+    assert.ok(post.content.includes(`href="${source}"`), `${post.slug}: source not cited in body`);
+  }
+}
+
+if (process.argv.includes("--export")) {
+  const path = new URL("../docs/editorial/hourly-posts-2026-10-22-1100.json", import.meta.url);
+  await writeFile(path, JSON.stringify({
+    automation_id: "bevory-hourly-alcohol-content-engine",
+    cycle_at: cycleAt,
+    publication_status: "prepared_not_published",
+    publication_blockers: ["The configured local MySQL tunnel at 127.0.0.1:3308 is closed."],
+    posts,
+  }, null, 2) + "\n");
+  console.log(`Exported ${posts.length} validated drafts to ${path.pathname}`);
+} else if (process.argv.includes("--check")) {
+  console.log(JSON.stringify({ validated: posts.length, slugs: posts.map((post) => post.slug) }));
+} else {
+  const prisma = new PrismaClient();
+  try {
+    const publishPosts = posts.map((post) => ({ ...post, is_published: true, is_featured: post.category === "News", published_at: cycleAt }));
+    const keys = publishPosts.map((post) => `blog_posts:${post.id}`);
+    const previous = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    const now = new Date().toISOString();
+    await prisma.$transaction(publishPosts.map((post) => {
+      const data = { ...post, created_at: previous.find((record) => record.recordId === post.id)?.data?.created_at ?? now, updated_at: now };
+      return prisma.contentRecord.upsert({
+        where: { key: `blog_posts:${post.id}` },
+        update: { data },
+        create: { key: `blog_posts:${post.id}`, tableName: "blog_posts", recordId: post.id, data },
+      });
+    }));
+    const saved = await prisma.contentRecord.findMany({ where: { key: { in: keys } } });
+    assert.equal(saved.length, publishPosts.length);
+    for (const post of publishPosts) {
+      const data = saved.find((record) => record.recordId === post.id)?.data;
+      for (const [key, value] of Object.entries(post)) assert.deepEqual(data?.[key], value, `${post.slug}: saved ${key} differs`);
+    }
+    console.log(JSON.stringify({ saved: saved.length, verified: saved.length, slugs: publishPosts.map((post) => post.slug) }));
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  } finally {
+    await prisma.$disconnect();
+  }
+}

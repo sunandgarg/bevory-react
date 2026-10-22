@@ -23,21 +23,21 @@ const WineCollection = memo(({ categories }: WineCollectionProps) => {
   const categoryBySlug = new Map(categories.map((category) => [category.slug, category]));
 
   return (
-    <section className="px-4" aria-labelledby="wine-collection-heading">
-      <div className="mb-3 flex items-center gap-3">
-        <h2 id="wine-collection-heading" className="shrink-0 text-[20px] tracking-tight text-foreground">
-          Wine <span className="font-bold">Collection</span>
+    <section aria-labelledby="wine-collection-heading">
+      <div className="mb-5 flex items-center gap-3">
+        <h2 id="wine-collection-heading" className="shrink-0 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+          Wine Collection
         </h2>
         <div className="h-px flex-1 bg-border" aria-hidden="true" />
         <Link
           to={`/${citySlug}/wine-universe`}
-          className="inline-flex shrink-0 items-center gap-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground sm:text-sm"
         >
-          Wine Universe <ArrowRight className="h-3 w-3" />
+          Wine Universe <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
 
-      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide">
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:gap-4 sm:px-0">
         {WINE_COLLECTION.map((item, index) => {
           const category = categoryBySlug.get(item.slug);
           const name = category?.name || item.name;
@@ -47,9 +47,9 @@ const WineCollection = memo(({ categories }: WineCollectionProps) => {
             <Link
               key={item.slug}
               to={`/${citySlug}/category/${item.slug}`}
-              className="group w-[136px] shrink-0 snap-start sm:w-[168px]"
+              className="group w-[168px] shrink-0 snap-start sm:w-[210px] md:w-[220px]"
             >
-              <div className="relative aspect-square overflow-hidden rounded-2xl border border-border/60 bg-secondary shadow-[var(--shadow-sm)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent/40 group-hover:shadow-[var(--shadow-md)]">
+              <div className="relative aspect-square overflow-hidden rounded-md border border-border/60 bg-[#f1f3f4] shadow-[var(--shadow-sm)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent/40 group-hover:shadow-[var(--shadow-md)]">
                 <CategoryBottleVisual
                   slug={item.slug}
                   categoryName={name}
@@ -62,8 +62,8 @@ const WineCollection = memo(({ categories }: WineCollectionProps) => {
                   </span>
                 </div>
               </div>
-              <h3 className="mt-2 truncate text-[13px] font-semibold text-foreground">{name}</h3>
-              <p className="mt-0.5 truncate text-[11px] text-muted-foreground">{description}</p>
+              <h3 className="mt-2 truncate text-sm font-semibold text-foreground sm:text-base">{name}</h3>
+              <p className="mt-0.5 truncate text-xs text-muted-foreground sm:text-sm">{description}</p>
             </Link>
           );
         })}

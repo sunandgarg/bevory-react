@@ -73,7 +73,7 @@ const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
     .eq("is_active", true)
     .order("order_index");
   if (error) throw error;
-  return (data || []).filter((brand) => brand.show_in_spotlight || priorityRank(brand.brand_name) >= 0).sort((left, right) => {
+  const sorted = (data || []).filter((brand) => brand.show_in_spotlight || priorityRank(brand.brand_name) >= 0).sort((left, right) => {
     const leftName = normalizeBrandName(left.brand_name);
     const rightName = normalizeBrandName(right.brand_name);
     const leftRank = priorityRank(leftName);
@@ -84,6 +84,15 @@ const fetchBrands = async (): Promise<BrandSpotlightItem[]> => {
       || Number(left.order_index ?? 0) - Number(right.order_index ?? 0)
       || leftName.localeCompare(rightName);
   });
+  const unique = new Map<string, BrandSpotlightItem>();
+  for (const brand of sorted) {
+    const key = normalizeBrandName(brand.brand_name);
+    const current = unique.get(key);
+    if (!current || (brand.slug?.length ?? Infinity) < (current.slug?.length ?? Infinity)) {
+      unique.set(key, brand);
+    }
+  }
+  return [...unique.values()];
 };
 
 const BrandSpotlight = memo(({ variant = "carousel", limit }: BrandSpotlightProps) => {
@@ -118,14 +127,14 @@ const BrandSpotlight = memo(({ variant = "carousel", limit }: BrandSpotlightProp
     <section className={variant === "carousel" ? "px-4" : ""} aria-label="Featured Brand Spotlight">
       <div className="flex items-center justify-between mb-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          <h2 className="shrink-0 text-[20px] tracking-tight text-foreground">
+          <h2 className="shrink-0 text-xl font-bold text-foreground sm:text-2xl">
             Brand <span className="font-bold">Spotlight</span>
           </h2>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
         </div>
         <Link
           to="/brands"
-          className="ml-3 flex shrink-0 items-center gap-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+          className="ml-3 flex shrink-0 items-center gap-0.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           View all <ArrowRight className="w-3 h-3" />
         </Link>
@@ -156,24 +165,28 @@ const BrandSpotlight = memo(({ variant = "carousel", limit }: BrandSpotlightProp
           ))}
         </div>
       ) : (
-      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide sm:gap-4">
         {visibleBrands.map((brand) => {
           const hasStory = Boolean(youtubeEmbedUrl(brand.youtube_url));
           const visual = (
             <>
-              <div className={`relative mx-auto h-[78px] w-[78px] rounded-full p-[3px] transition-transform duration-200 group-hover:-translate-y-0.5 ${hasStory ? "bg-gradient-to-br from-accent via-primary to-accent" : "bg-border"}`}>
+              <div className={`relative mx-auto h-[88px] w-[88px] rounded-full p-[3px] transition-transform duration-200 group-hover:-translate-y-0.5 sm:h-[104px] sm:w-[104px] ${hasStory ? "bg-gradient-to-br from-accent via-primary to-accent" : "bg-border"}`}>
                 <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-card p-1.5">
                   {brand.story_image_url ? (
                     <img src={brand.story_image_url} alt={`${brand.brand_name} spotlight`} width={144} height={144} loading="lazy" decoding="async" className="h-full w-full rounded-full object-cover" />
-                  ) : (
+                  ) : brand.logo_url ? (
                     <BrandLogo
                       brandName={brand.brand_name}
                       slug={brand.slug}
                       logoUrl={brand.logo_url}
-                      emoji={brand.logo_emoji}
-                      className="h-full w-full rounded-full"
+                      emoji={brand.brand_name.split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase()}
+                      className="h-full w-full rounded-full bg-[#e9efee] font-serif text-2xl font-bold text-[#24403b]"
                       imgClassName="h-full w-full rounded-full"
                     />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center rounded-full bg-[#e9efee] font-serif text-2xl font-bold text-[#24403b]" aria-label={`${brand.brand_name} mark`}>
+                      {brand.brand_name.split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase()}
+                    </span>
                   )}
                 </div>
                 {hasStory && (
@@ -182,18 +195,18 @@ const BrandSpotlight = memo(({ variant = "carousel", limit }: BrandSpotlightProp
                   </span>
                 )}
               </div>
-              <p className="mt-1.5 w-[86px] truncate text-center text-[11px] font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+              <p className="mt-2 w-full truncate text-center text-xs font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:text-sm">
                 {brand.brand_name}
               </p>
             </>
           );
 
           return hasStory ? (
-            <button key={brand.id} type="button" onClick={() => setSelectedStory(brand)} className="group w-[86px] shrink-0 snap-start" aria-label={`Watch ${brand.brand_name} ${brand.video_format === "short" ? "short" : "video"}`}>
+            <button key={brand.id} type="button" onClick={() => setSelectedStory(brand)} className="group w-[94px] shrink-0 snap-start sm:w-[108px]" aria-label={`Watch ${brand.brand_name} ${brand.video_format === "short" ? "short" : "video"}`}>
               {visual}
             </button>
           ) : (
-            <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group w-[86px] shrink-0 snap-start">
+            <Link key={brand.id} to={`/${citySlug}/brand/${brand.slug || brand.id}`} className="group w-[94px] shrink-0 snap-start sm:w-[108px]">
               {visual}
             </Link>
           );
