@@ -58,6 +58,10 @@ const PrivacyPolicy = () => (
         records, attachments, and records needed to investigate or respond.
       </li>
       <li>
+        <strong>City updates:</strong> if you opt in, the name, email, mobile number, selected city, age confirmation,
+        and time of consent you submit. Contact details are not treated as verified merely because the form was sent.
+      </li>
+      <li>
         <strong>Phone verification:</strong> phone number, one-time-code request and verification status, timestamps,
         and anti-abuse signals. Do not send us an OTP issued to you except through the designated verification field.
       </li>
@@ -115,6 +119,7 @@ const PrivacyPolicy = () => (
       <li>moderate User Content, resolve disputes, enforce agreements, and protect users or third-party rights;</li>
       <li>comply with valid legal duties, court orders, and lawful government requests;</li>
       <li>send service messages and, only where lawfully permitted, communications you requested; and</li>
+      <li>manage requested city updates until you withdraw consent or the information is no longer needed;</li>
       <li>produce aggregated or de-identified statistics that are not intended to identify an individual.</li>
     </ul>
     <p>
@@ -200,6 +205,10 @@ const PrivacyPolicy = () => (
         the matter was handled and meet limitation, audit, or legal requirements; and
       </li>
       <li>
+        city-update signups are kept until consent is withdrawn or the contact details are no longer needed;
+        request withdrawal or deletion through the BevOry Grievance Desk;
+      </li>
+      <li>
         optional Analytics data is retained under BevOry's Google Analytics configuration and Google's processing
         terms; aggregated reports may outlast the underlying event-level retention.
       </li>
@@ -217,6 +226,7 @@ const PrivacyPolicy = () => (
       <li>ask us to correct inaccurate data, complete incomplete data, or update outdated data;</li>
       <li>request erasure where retention is no longer required or another legal exception does not apply;</li>
       <li>withdraw consent and change optional Analytics through the "Privacy choices" link in either footer;</li>
+      <li>withdraw city-update consent by contacting the BevOry Grievance Desk;</li>
       <li>object or complain about a specific use where applicable law gives you that right;</li>
       <li>seek grievance redressal and, where legally available, nominate another individual to exercise rights; and</li>
       <li>appeal or approach the relevant authority or grievance appellate mechanism where applicable.</li>

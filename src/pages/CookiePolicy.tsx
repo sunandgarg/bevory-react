@@ -69,6 +69,20 @@ const CookiePolicy = () => (
             <td>Necessary / requested preference</td>
           </tr>
           <tr>
+            <td><code>bevory-city-updates-dismissals</code></td>
+            <td>Session storage</td>
+            <td>Remembers when the city-updates prompt was dismissed, so it retries only once and stops after a second dismissal.</td>
+            <td>Until the browser session ends.</td>
+            <td>Interface preference</td>
+          </tr>
+          <tr>
+            <td><code>bevory-city-updates-submitted</code></td>
+            <td>Local storage</td>
+            <td>Prevents the city-updates prompt from returning in a browser after signup. Contact details are not stored in this key.</td>
+            <td>Until cleared.</td>
+            <td>Interface preference</td>
+          </tr>
+          <tr>
             <td><code>bevory-session</code></td>
             <td>Local storage</td>
             <td>Stores the signed-in session token and basic account response needed to keep you authenticated.</td>

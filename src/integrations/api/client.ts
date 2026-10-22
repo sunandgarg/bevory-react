@@ -408,4 +408,8 @@ export const apiClient: any = {
   functions,
   catalog,
   admin,
+  marketing: {
+    subscribe: (details: { name: string; email: string; mobile: string; city: string; adult: boolean; consent: boolean }) =>
+      request<{ received: boolean }>("/marketing-leads", { method: "POST", body: JSON.stringify(details) }),
+  },
 };

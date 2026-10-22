@@ -69,6 +69,7 @@ const AdminBulkUpload = lazy(() => import("./pages/admin/AdminBulkUpload"));
 const AdminDatabaseTools = lazy(() => import("./pages/admin/AdminDatabaseTools"));
 const AdminAISettings = lazy(() => import("./pages/admin/AdminAISettings"));
 const AdminPerformanceReport = lazy(() => import("./pages/admin/AdminPerformanceReport"));
+const AdminMarketingLeads = lazy(() => import("./pages/admin/AdminMarketingLeads"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Disclaimer = lazy(() => import("./pages/Disclaimer"));
@@ -183,6 +184,7 @@ const App = () => (
                     <Route path="locations" element={<AdminLocations />} />
                     <Route path="party" element={<AdminParty />} />
                     <Route path="users" element={<AdminUsers />} />
+                    <Route path="marketing-leads" element={<AdminMarketingLeads />} />
                     <Route path="brands" element={<AdminBrands />} />
                     <Route path="cocktails" element={<AdminCocktails />} />
                     <Route path="magazine" element={<AdminMagazine />} />

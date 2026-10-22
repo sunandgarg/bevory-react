@@ -41,6 +41,8 @@ interface Product {
   image_emoji: string | null;
   image_url: string | null;
   rating: number | null;
+  bevory_rating: number | null;
+  bevory_rating_note: string | null;
   abv: number | null;
   volume: string | null;
   age: string | null;
@@ -332,7 +334,8 @@ const AdminProducts = () => {
       sub_category_id: editProduct.sub_category_id,
       image_emoji: editProduct.image_emoji,
       image_url: editProduct.image_url,
-      rating: editProduct.rating ? Number(editProduct.rating) : null,
+      bevory_rating: editProduct.bevory_rating ? Number(editProduct.bevory_rating) : null,
+      bevory_rating_note: editProduct.bevory_rating ? editProduct.bevory_rating_note?.trim() || null : null,
       abv: editProduct.abv ? Number(editProduct.abv) : null,
       volume: editProduct.volume,
       age: editProduct.age,
@@ -623,7 +626,9 @@ const AdminProducts = () => {
     sub_category_id: null,
     image_emoji: "🥃",
     image_url: null,
-    rating: 4.0,
+    rating: null,
+    bevory_rating: null,
+    bevory_rating_note: null,
     abv: 40,
     volume: "750ml",
     age: null,
@@ -1010,7 +1015,7 @@ const AdminProducts = () => {
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
                   <span className="flex items-center gap-1">
-                    <Star className="w-3 h-3" /> {p.rating}
+                    <Star className="w-3 h-3" /> {p.bevory_rating && p.bevory_rating_note ? `BevOry ${p.bevory_rating.toFixed(2)}` : "Not scored"}
                   </span>
                   <span>•</span>
                   <span>{p.volume}</span>
@@ -1236,17 +1241,24 @@ const AdminProducts = () => {
                   }
                 />
               </FormField>
-              <FormField label="Admin Rating" hint="Default rating if no user reviews">
+              <FormField label="BevOry Rating" hint="Editorial score out of 5. Leave blank until an editor has evaluated this product. Never use customer-review scores here.">
                 <Input
                   type="number"
-                  step="0.1"
-                  min="0"
+                  step="0.01"
+                  min="1"
                   max="5"
-                  placeholder="4.5"
-                  value={editProduct?.rating || ""}
+                  placeholder="Not scored"
+                  value={editProduct?.bevory_rating || ""}
                   onChange={(e) =>
-                    setEditProduct((p) => (p ? { ...p, rating: Number(e.target.value) || null } : p))
+                    setEditProduct((p) => (p ? { ...p, bevory_rating: Number(e.target.value) || null } : p))
                   }
+                />
+              </FormField>
+              <FormField label="Evaluation note" hint="Required for a BevOry Rating: explain the product-specific basis in at least 20 characters.">
+                <Textarea
+                  value={editProduct?.bevory_rating_note || ""}
+                  onChange={(e) => setEditProduct((p) => (p ? { ...p, bevory_rating_note: e.target.value || null } : p))}
+                  placeholder="Why this score was assigned"
                 />
               </FormField>
             </div>

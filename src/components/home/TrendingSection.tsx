@@ -173,9 +173,9 @@ const TrendingSection = () => {
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-border">
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1" title="BevOry editorial rating">
                         <Star className="w-4 h-4 fill-accent text-accent" />
-                        <span className="font-semibold text-sm">{drink.rating}</span>
+                        <span className="font-semibold text-sm">{drink.rating ? Number(drink.rating).toFixed(2) : "N/A"}</span>
                       </div>
                       <div className="text-right">
                         <p className="text-lg font-bold text-foreground">

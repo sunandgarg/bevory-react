@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import multer from "multer";
 import path from "node:path";
-import { randomUUID, timingSafeEqual } from "node:crypto";
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { Prisma } from "@prisma/client";
 import {
   createOAuthState,
@@ -42,6 +42,7 @@ import {
 import { objectStorageConfigured, storedImagePathMatchesType, storeUpload } from "./storage.js";
 import { createRateLimit } from "./rateLimit.js";
 import { createMediaHandler } from "./media.js";
+import { marketingLeadSchema } from "./marketingLead.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
@@ -337,6 +338,29 @@ app.post("/api/query", (req, res, next) => {
   }
   return next();
 }, queryHandler);
+app.post("/api/marketing-leads", noStore, rateLimit(5, 60 * 60 * 1000), async (req, res) => {
+  const parsed = marketingLeadSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ data: null, error: { message: "Check your details and consent, then try again." } });
+  const { name, email, mobile, city } = parsed.data;
+  const recordId = createHash("sha256").update(`${email}\0${city.toLowerCase()}`).digest("hex");
+  try {
+    await prisma.contentRecord.create({
+      data: {
+        key: `marketing_leads:${recordId}`,
+        tableName: "marketing_leads",
+        recordId,
+        data: { id: recordId, name, email, mobile, city, consented_at: new Date().toISOString(), age_confirmed: true, contact_verified: false },
+      },
+    });
+    return res.json({ data: { received: true }, error: null });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      return res.json({ data: { received: true }, error: null });
+    }
+    console.error("Marketing lead storage failed", error);
+    return res.status(503).json({ data: null, error: { message: "We could not save your details right now. Please try again." } });
+  }
+});
 app.get("/api/catalog/:cityId", cityCatalogHandler);
 app.get("/api/catalog/:cityId/search", cityCatalogSearchHandler);
 app.get("/api/catalog/:cityId/collections/:collection", cityCatalogCollectionHandler);

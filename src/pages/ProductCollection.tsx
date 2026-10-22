@@ -129,9 +129,9 @@ const ProductCollection = () => {
                     <h2 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug group-hover:text-accent">{product.name}</h2>
                     <p className="mt-1 text-xs text-muted-foreground">{product.volume || "See sizes"}{product.category?.name ? ` · ${product.category.name}` : ""}</p>
                     <div className="mt-auto flex items-center justify-between gap-2 pt-2">
-                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground" title="BevOry editorial rating">
                         <Star className="h-3 w-3 text-accent" />
-                        {Number(product.rating) > 0 ? Number(product.rating).toFixed(1) : "New"}
+                        {Number(product.rating) > 0 ? Number(product.rating).toFixed(2) : "N/A"}
                       </span>
                       <span className="text-sm font-semibold">{product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price pending"}</span>
                     </div>

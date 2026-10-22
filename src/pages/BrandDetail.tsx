@@ -767,10 +767,7 @@ const BrandDetail = () => {
                               {product.rating && (
                                 <>
                                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                  <span className="text-xs font-medium">{product.rating}</span>
-                                  {product.review_count && (
-                                    <span className="text-xs text-muted-foreground">({product.review_count})</span>
-                                  )}
+                                  <span className="text-xs font-medium" title="BevOry editorial rating, not customer reviews">BevOry {product.rating.toFixed(2)}</span>
                                 </>
                               )}
                             </div>

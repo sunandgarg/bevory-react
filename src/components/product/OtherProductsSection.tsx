@@ -50,9 +50,9 @@ const OtherProductsSection = ({ products, title = "Other Products" }: OtherProdu
                 <p className="text-xs text-muted-foreground line-clamp-1">{product.brand}</p>
                 <p className="font-medium text-sm line-clamp-1">{product.name}</p>
                 <div className="flex items-end justify-between gap-1 mt-1">
-                  <div className="flex items-center gap-0.5">
+                  <div className="flex items-center gap-0.5" title="BevOry editorial rating">
                     <Star className="w-3 h-3 fill-accent text-accent" />
-                    <span className="text-xs">{product.rating || "—"}</span>
+                    <span className="text-xs">{product.rating ? Number(product.rating).toFixed(2) : "—"}</span>
                   </div>
                   {Number(product.price) > 0 && (
                     <div className="text-right leading-tight">

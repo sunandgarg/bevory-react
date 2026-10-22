@@ -7,11 +7,13 @@ import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 import { invalidateCatalogCache } from "./catalog.js";
 import { applyProductContentOverlay } from "../src/lib/productContentOverlay.js";
 import { getProductRoutes, invalidateProductRoutes } from "./productRoutes.js";
+import { bevoryRating } from "../src/lib/bevoryRating.js";
 
 const TABLES = new Set([
   "announcements", "app_settings", "blog_posts", "brand_spotlights", "categories",
   "cheers_guides", "cities", "cocktails", "comparisons", "content_drafts", "countries",
   "help_support_items", "notifications", "party_recommendations", "preferred_brands",
+  "marketing_leads",
   "product_prices", "product_reviews", "product_types", "products", "profiles",
   "recent_searches", "saved_locations", "spiritz_magazine", "states", "sub_categories",
   "user_favorites", "user_permissions", "user_preferences", "user_roles", "video_categories",
@@ -24,7 +26,7 @@ const USER_TABLES = new Set([
 ]);
 
 const CATALOG_TABLES = new Set(["categories", "product_prices", "products", "sub_categories"]);
-const ADMIN_READ_TABLES = new Set(["content_drafts", "party_recommendations"]);
+const ADMIN_READ_TABLES = new Set(["content_drafts", "party_recommendations", "marketing_leads"]);
 const OPERATIONS = new Set(["select", "insert", "update", "delete", "upsert"]);
 
 const UNIQUE_COLUMNS: Record<string, string> = {
@@ -645,6 +647,9 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
           : filter
       ));
       let rows = applyUserScope(req, payload, await readTable(payload.table, filters), isAdmin);
+      if (payload.table === "products" && !isAdmin) {
+        rows = rows.map((row) => ({ ...row, rating: bevoryRating(row) }));
+      }
       rows = rows.filter((row) => filters.every((filter) => matchesFilter(row, filter)));
       if (productRoutes) rows = rows.map(row => ({ ...row, public_slug: productRoutes.publicByStored.get(String(row.slug)) || row.slug }));
       const count = rows.length;
@@ -682,6 +687,9 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
           created_at: previous.created_at ?? scoped.created_at ?? now,
           updated_at: scoped.updated_at ?? now,
         });
+        if (payload.table === "products" && data.bevory_rating != null && bevoryRating(data) === null) {
+          throw new Error("BevOry Rating needs a score from 1 to 5 (up to two decimals) and an evaluation note of at least 20 characters");
+        }
         validateFirstPartyImages(data);
         await prisma.contentRecord.upsert({
           where: { key: `${payload.table}:${recordId}` },
@@ -711,6 +719,9 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
       const updated: Array<Record<string, unknown>> = [];
       for (const record of matches) {
         const data = jsonSafe({ ...toRecordData(record.data), ...changes, updated_at: new Date().toISOString() });
+        if (payload.table === "products" && data.bevory_rating != null && bevoryRating(data) === null) {
+          throw new Error("BevOry Rating needs a score from 1 to 5 (up to two decimals) and an evaluation note of at least 20 characters");
+        }
         validateFirstPartyImages(data);
         await prisma.contentRecord.update({ where: { key: record.key }, data: { data } });
         updated.push(data as Record<string, unknown>);

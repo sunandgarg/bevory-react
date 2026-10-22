@@ -375,7 +375,7 @@ const WineUniverse = () => {
                     <h3 className="truncate text-[13px] font-semibold">{product.name}</h3>
                     <div className="mt-1 flex items-center justify-between gap-2 text-[10px] text-muted-foreground">
                       <span>{product.volume || "Size pending"}</span>
-                      <span className="inline-flex items-center gap-0.5"><Star className="h-3 w-3 fill-accent text-accent" />{Number(product.rating || 0) > 0 ? Number(product.rating).toFixed(1) : "New"}</span>
+                      <span className="inline-flex items-center gap-0.5" title="BevOry editorial rating"><Star className="h-3 w-3 fill-accent text-accent" />{Number(product.rating || 0) > 0 ? Number(product.rating).toFixed(2) : "N/A"}</span>
                     </div>
                     <div className="mt-2 flex items-center justify-between border-t border-border/50 pt-2">
                       <span className="text-[11px] font-semibold">{product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price pending"}</span>

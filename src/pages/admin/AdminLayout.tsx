@@ -4,7 +4,7 @@ import {
   Package, MapPin, Tag, PartyPopper, Users, LayoutDashboard,
   ArrowLeft, Sparkles, Wine, BookOpen, CircleDot, Megaphone,
   HelpCircle, Palette, Star, Flag, FileText, Settings, PlayCircle, Layers, DollarSign, Upload,
-  Database, Brain, Activity
+  Database, Brain, Activity, Mail
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -48,6 +48,7 @@ const navGroups = [
       { icon: Megaphone, label: "Announce", path: "/admin/announcements" },
       { icon: Flag, label: "Reports", path: "/admin/reports" },
       { icon: Users, label: "Users", path: "/admin/users" },
+      { icon: Mail, label: "City signups", path: "/admin/marketing-leads" },
       { icon: HelpCircle, label: "Help", path: "/admin/help-support" },
     ],
   },

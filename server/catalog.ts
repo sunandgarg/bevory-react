@@ -3,6 +3,7 @@ import type { Prisma } from "@prisma/client";
 import { findIndexedContentData, prisma, toRecordData } from "./db.js";
 import { buildProductRoutes } from "../src/lib/productRoutes.js";
 import { getProductRoutes } from "./productRoutes.js";
+import { bevoryRating } from "../src/lib/bevoryRating.js";
 
 type CatalogRow = Record<string, unknown>;
 
@@ -85,7 +86,7 @@ export const buildCityCatalog = (
         price: preferred?.price ?? null,
         mrp: preferred?.mrp ?? null,
         volume: preferred?.volume ?? row.volume ?? null,
-        rating: row.rating ?? null,
+        rating: bevoryRating(row),
         review_count: row.review_count ?? null,
         image_emoji: row.image_emoji ?? null,
         image_url: row.image_url ?? null,

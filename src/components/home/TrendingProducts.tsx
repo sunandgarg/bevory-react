@@ -73,9 +73,9 @@ const TrendingProducts = memo(({ defaultCategory = "whisky" }: TrendingProductsP
                   <span>{product.volume}</span><span title={product.origin || "Origin"}>{product.origin_flag}</span>
                 </div>
                 <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
-                  <div className="flex items-center gap-0.5">
+                  <div className="flex items-center gap-0.5" title="BevOry editorial rating">
                     <Star className={`w-3 h-3 ${Number(product.rating) > 0 ? "fill-accent text-accent" : "text-muted-foreground/50"}`} />
-                    <span className="text-[10px] font-medium">{Number(product.rating) > 0 ? Number(product.rating).toFixed(1) : "New"}</span>
+                    <span className="text-[10px] font-medium">{Number(product.rating) > 0 ? Number(product.rating).toFixed(2) : "N/A"}</span>
                   </div>
                   <p className={`font-semibold ${product.price ? "text-xs" : "text-[10px] text-muted-foreground"}`}>
                     {product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price pending"}

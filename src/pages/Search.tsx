@@ -601,7 +601,7 @@ const Search = () => {
                             
                             {/* Rating & Price */}
                             <div className="flex items-center justify-between mt-2.5">
-                              <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-1" title="BevOry editorial rating">
                                 <Star
                                   className={`w-3.5 h-3.5 ${
                                     Number(product.rating) > 0
@@ -610,7 +610,7 @@ const Search = () => {
                                   }`}
                                 />
                                 <span className={`text-xs font-medium ${Number(product.rating) > 0 ? "" : "text-muted-foreground"}`}>
-                                  {Number(product.rating) > 0 ? Number(product.rating).toFixed(1) : "New"}
+                                  {Number(product.rating) > 0 ? Number(product.rating).toFixed(2) : "N/A"}
                                 </span>
                               </div>
                               <p className={`font-bold ${product.price ? "text-sm text-accent" : "text-[10px] text-muted-foreground"}`}>

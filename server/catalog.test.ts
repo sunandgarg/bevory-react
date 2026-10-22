@@ -45,6 +45,21 @@ describe("buildCityCatalog", () => {
     expect(category.categories).toHaveLength(1);
   });
 
+  it("does not reuse old admin defaults as public ratings", () => {
+    const catalog = buildCityCatalog(
+      ["legacy", "editorial"].map((product_id) => ({ product_id, price: 900, volume: "750ml", price_available: true })),
+      [
+        { id: "legacy", name: "Legacy", is_active: true, rating: 4.9 },
+        { id: "editorial", name: "Reviewed", is_active: true, rating: 4, bevory_rating: 4.85, bevory_rating_note: "Editor evaluated quality and value for this bottle." },
+      ],
+      [],
+      [],
+    );
+
+    expect(catalog.products.find(({ id }) => id === "legacy")?.rating).toBeNull();
+    expect(catalog.products.find(({ id }) => id === "editorial")?.rating).toBe(4.85);
+  });
+
   it("uses Beer as the display name for the canonical beers slug", () => {
     const catalog = buildCityCatalog(
       [{ product_id: "beer-1", price: 180, volume_ml: 650, price_available: true }],

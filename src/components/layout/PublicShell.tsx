@@ -9,6 +9,7 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
 import { PublicNavigationProvider, usePublicNavigation } from "@/hooks/usePublicNavigation";
 import { productHeadingFromSlug } from "@/lib/pageNavigation";
+import CityUpdatesModal from "@/components/CityUpdatesModal";
 
 const OryAssistant = lazy(() => import("@/components/ai/OryAssistant"));
 
@@ -79,6 +80,7 @@ const PublicShellContent = () => {
       <Suspense fallback={null}>
         <OryAssistant />
       </Suspense>
+      <CityUpdatesModal />
     </>
   );
 };

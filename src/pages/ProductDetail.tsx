@@ -26,6 +26,7 @@ import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productS
 import { fullProductName } from "@/lib/productName";
 import { cityRecordIdFromSlug } from "@/lib/locations";
 import { foodPairingPosition } from "@/lib/foodPairingVisual";
+import { bevoryRating } from "@/lib/bevoryRating";
 
 interface FAQ {
   question: string;
@@ -70,6 +71,8 @@ interface Product {
   image_url: string | null;
   rating: number | null;
   review_count: number | null;
+  bevory_rating?: number | null;
+  bevory_rating_note?: string | null;
   type_tag: string | null;
   type_description: string | null;
   is_trending: boolean | null;
@@ -404,10 +407,8 @@ const ProductDetail = () => {
     }
   }, [product?.resolvedFrom, effectiveSlug, canonicalPath, routerLocation.pathname, routerLocation.search, routerLocation.hash, navigate]);
 
-  const displayRating = product?.rating && product.rating > 0
-    ? Number(product.rating).toFixed(1)
-    : null;
-  const displayReviewCount = product?.review_count || 0;
+  const editorialScore = product ? bevoryRating(product) : null;
+  const displayRating = editorialScore?.toFixed(2) ?? null;
   const productLabel = product ? fullProductName(product.brand, product.name) : "";
   usePublicPageTitle(productLabel);
   const hasResearchedEditorial = product?.product_content_version?.startsWith("researched-product-batch-") ?? false;
@@ -558,16 +559,6 @@ const ProductDetail = () => {
           hasVariant: volumePrices.map(variantSchema),
         };
 
-      if (displayRating && displayReviewCount > 0) {
-        productSchema.aggregateRating = {
-          "@type": "AggregateRating",
-          ratingValue: displayRating,
-          reviewCount: displayReviewCount,
-          bestRating: "5",
-          worstRating: "1",
-        };
-      }
-
       jsonLd.textContent = JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
@@ -616,8 +607,6 @@ const ProductDetail = () => {
   }, [
     canonicalCitySlug,
     canonicalPath,
-    displayRating,
-    displayReviewCount,
     price,
     product,
     productLabel,
@@ -782,7 +771,7 @@ const ProductDetail = () => {
             <h1 className="mt-2 text-2xl font-bold leading-tight text-foreground sm:text-3xl">{pageHeading}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
               {product.category?.name && <span>{product.category.name}</span>}
-              {displayRating && <span className="inline-flex items-center gap-1 text-foreground"><Star className="h-4 w-4 fill-[#f3a322] text-[#f3a322]" />{displayRating} ({displayReviewCount})</span>}
+              {displayRating && <details className="text-foreground"><summary className="inline-flex cursor-pointer items-center gap-1"><Star className="h-4 w-4 fill-[#f3a322] text-[#f3a322]" />BevOry Rating {displayRating}/5</summary><p className="mt-1 max-w-md text-xs leading-5 text-muted-foreground">{product.bevory_rating_note} Editorial assessment, not customer reviews.</p></details>}
             </div>
 
             <div className="mt-5 border-t border-[#e8d9d7] pt-4">
