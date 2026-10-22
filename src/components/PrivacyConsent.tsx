@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck } from "lucide-react";
+import { Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
@@ -45,6 +45,8 @@ const enableAnalytics = () => {
 
 const PrivacyConsent = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [leadOpen, setLeadOpen] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
   const [adsAllowed, setAdsAllowed] = useState(false);
 
@@ -62,64 +64,54 @@ const PrivacyConsent = () => {
     if (localStorage.getItem(AGE_VERIFIED_KEY)) applySavedChoice();
 
     const openChoices = () => setIsOpen(true);
+    const onLeadModal = (event: Event) => setLeadOpen((event as CustomEvent<boolean>).detail);
     window.addEventListener("bevory:age-verified", applySavedChoice);
     window.addEventListener("bevory:open-privacy-choices", openChoices);
+    window.addEventListener("bevory:lead-modal", onLeadModal);
     return () => {
       window.removeEventListener("bevory:age-verified", applySavedChoice);
       window.removeEventListener("bevory:open-privacy-choices", openChoices);
+      window.removeEventListener("bevory:lead-modal", onLeadModal);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("bevory-consent-open", isOpen && !leadOpen);
+    return () => document.body.classList.remove("bevory-consent-open");
+  }, [isOpen, leadOpen]);
 
   const choose = (analytics: ConsentChoice, ads: ConsentChoice) => {
     localStorage.setItem(CONSENT_KEY, analytics);
     localStorage.setItem(ADS_CONSENT_KEY, ads);
+    setAnalyticsAllowed(analytics === "granted");
+    setAdsAllowed(ads === "granted");
     updateGoogleConsent(analytics, ads);
     if (analytics === "granted") enableAnalytics();
     window.dispatchEvent(new Event("bevory:ad-consent-changed"));
+    setShowDetails(false);
     setIsOpen(false);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || leadOpen) return null;
 
   return (
-    <section
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="privacy-consent-title"
-      aria-describedby="privacy-consent-description"
-      className="fixed inset-x-3 bottom-16 z-[90] mx-auto max-w-xl border border-border bg-card p-4 shadow-lg sm:bottom-4"
-    >
-      <div className="flex items-start gap-3">
-        <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-foreground" aria-hidden="true" />
-        <div className="min-w-0 flex-1">
-          <h2 id="privacy-consent-title" className="text-sm font-semibold">
-            Your privacy choices
-          </h2>
-          <p id="privacy-consent-description" className="mt-1 text-xs text-muted-foreground">
-            BevOry uses necessary storage for age and city preferences. Analytics and guide-page ads are separate, optional choices. Ads stay off unless you allow them.
-          </p>
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
-            <Link to="/privacy-policy" className="text-xs text-foreground underline underline-offset-2">
-              Privacy policy
-            </Link>
-            <Link to="/cookie-policy" className="text-xs text-foreground underline underline-offset-2">
-              Cookie & local storage policy
-            </Link>
-          </div>
+    <section role="dialog" aria-modal="false" aria-label="Privacy choices" className="fixed inset-x-0 top-0 z-[90] border-b border-border bg-card px-2 py-1.5 shadow-sm sm:px-4">
+      <div className="mx-auto flex max-w-7xl items-center gap-1.5 text-xs sm:gap-3">
+        <span className="min-w-0 flex-1 truncate text-foreground">Essential on; extras optional</span>
+        <Button type="button" size="sm" variant="outline" className="h-7 shrink-0 px-2 text-[11px]" onClick={() => choose("denied", "denied")}>Essential only</Button>
+        <Button type="button" size="sm" className="h-7 shrink-0 px-2 text-[11px]" onClick={() => choose("granted", "granted")}>Allow all</Button>
+        <Button type="button" size="icon" variant="ghost" className="h-7 w-7 shrink-0" title="Privacy settings" aria-label="Privacy settings" aria-expanded={showDetails} onClick={() => setShowDetails(!showDetails)}><Settings2 className="h-4 w-4" /></Button>
+      </div>
+      {showDetails && <div className="mx-auto max-w-7xl border-t border-border pt-2 text-xs">
+        <p className="text-muted-foreground">Essential storage keeps age and city preferences. Analytics and guide-page ads are optional.</p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <label className="flex items-center gap-1.5"><input type="checkbox" checked={analyticsAllowed} onChange={(event) => setAnalyticsAllowed(event.target.checked)} />Analytics</label>
+          <label className="flex items-center gap-1.5"><input type="checkbox" checked={adsAllowed} onChange={(event) => setAdsAllowed(event.target.checked)} />Guide-page ads</label>
+          <Button type="button" size="sm" className="h-7 px-2 text-[11px]" onClick={() => choose(analyticsAllowed ? "granted" : "denied", adsAllowed ? "granted" : "denied")}>Save choices</Button>
+          <Link to="/privacy-policy" className="underline underline-offset-2">Privacy</Link>
+          <Link to="/cookie-policy" className="underline underline-offset-2">Cookie policy</Link>
         </div>
-      </div>
-      <div className="mt-4 space-y-2 text-sm">
-        <label className="flex items-center gap-2"><input type="checkbox" checked={analyticsAllowed} onChange={(event) => setAnalyticsAllowed(event.target.checked)} /> Allow analytics</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={adsAllowed} onChange={(event) => setAdsAllowed(event.target.checked)} /> Allow guide-page ads</label>
-      </div>
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <Button type="button" variant="outline" onClick={() => choose("denied", "denied")}>
-          Necessary only
-        </Button>
-        <Button type="button" onClick={() => choose(analyticsAllowed ? "granted" : "denied", adsAllowed ? "granted" : "denied")}>
-          Save choices
-        </Button>
-      </div>
+      </div>}
     </section>
   );
 };

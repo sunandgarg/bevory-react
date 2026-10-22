@@ -34,11 +34,15 @@ const CityUpdatesModal = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [adult, setAdult] = useState(false);
   const [consent, setConsent] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const eligiblePage = !/^\/(auth|privacy-policy|terms|cookie-policy|responsible-drinking|disclaimer|contact|grievance-redressal)(\/|$)/.test(pathname);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: open && eligiblePage }));
+    return () => window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: false }));
+  }, [open, eligiblePage]);
 
   useEffect(() => {
     const onVerified = () => setAgeVerified(true);
@@ -67,7 +71,7 @@ const CityUpdatesModal = () => {
     event.preventDefault();
     setPending(true);
     setError("");
-    const result = await apiClient.marketing.subscribe({ name, email, mobile, city, adult, consent });
+    const result = await apiClient.marketing.subscribe({ name, email, mobile, city, adult: consent, consent });
     setPending(false);
     if (result.error) {
       setError(result.error.message);
@@ -80,29 +84,30 @@ const CityUpdatesModal = () => {
 
   return (
     <Dialog open={open && eligiblePage} onOpenChange={(next) => { if (!next && !pending) dismiss(); }}>
-      <DialogContent className="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[430px] overflow-y-auto rounded-md border-[#e6e4df] p-5 sm:p-7">
-        <DialogHeader className="pr-5 text-left">
-          <span className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#a53c4a]"><MapPin className="h-3.5 w-3.5" />{selectedCity?.name || "Your city"}</span>
-          <DialogTitle className="pt-1 text-xl font-bold leading-tight">Stay in the know</DialogTitle>
-          <DialogDescription className="text-xs leading-5">Get updates regarding the latest offers in your city.</DialogDescription>
+      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[calc(100%-1.5rem)] max-w-[370px] overflow-y-auto rounded-md border-[#e6e4df] p-4 sm:p-5">
+        <DialogHeader className="gap-0 pr-5 text-left">
+          <span className="inline-flex w-fit items-center gap-1 text-[11px] font-semibold text-[#a53c4a]"><MapPin className="h-3 w-3" />{city || selectedCity?.name || "Your city"}</span>
+          <DialogTitle className="pt-1 text-lg font-bold leading-tight">Get exciting offers in {city || selectedCity?.name || "your city"}</DialogTitle>
+          <DialogDescription className="text-[11px] leading-4">City updates from BevOry. No alcohol sales.</DialogDescription>
         </DialogHeader>
-        <form onSubmit={submit} className="space-y-3">
-          <label className="block text-xs font-semibold" htmlFor="updates-name">Name</label>
-          <Input id="updates-name" autoComplete="name" required minLength={2} maxLength={100} value={name} onChange={(event) => setName(event.target.value)} />
-          <label className="block text-xs font-semibold" htmlFor="updates-email">Email</label>
-          <Input id="updates-email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={(event) => setEmail(event.target.value)} />
-          <label className="block text-xs font-semibold" htmlFor="updates-mobile">Mobile</label>
-          <Input id="updates-mobile" type="tel" inputMode="tel" autoComplete="tel-national" required pattern="([+]91[- ]?)?[6-9][0-9]{9}" title="Enter a 10-digit Indian mobile number" value={mobile} onChange={(event) => setMobile(event.target.value)} />
-          <label className="block text-xs font-semibold" htmlFor="updates-city">City</label>
-          <select id="updates-city" required value={city} onChange={(event) => setCity(event.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <form onSubmit={submit} className="space-y-2.5">
+          <div className="grid grid-cols-2 gap-2">
+            <label className="sr-only" htmlFor="updates-name">Name</label>
+            <Input id="updates-name" className="h-9" placeholder="Name" autoComplete="name" required minLength={2} maxLength={100} value={name} onChange={(event) => setName(event.target.value)} />
+            <label className="sr-only" htmlFor="updates-city">City</label>
+            <select id="updates-city" aria-label="City" required value={city} onChange={(event) => setCity(event.target.value)} className="flex h-9 min-w-0 w-full rounded-md border border-input bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <option value="">Choose a city</option>
             {allCities.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
-          </select>
-          <label className="flex items-start gap-2 pt-1 text-xs leading-5"><input type="checkbox" className="mt-1 accent-[#a53c4a]" checked={adult} onChange={(event) => setAdult(event.target.checked)} required />I confirm I am at least 25 years old.</label>
-          <label className="flex items-start gap-2 text-xs leading-5"><input type="checkbox" className="mt-1 accent-[#a53c4a]" checked={consent} onChange={(event) => setConsent(event.target.checked)} required />I agree to receive BevOry city updates by email or mobile. I can withdraw consent at any time.</label>
-          <p className="text-[11px] leading-4 text-muted-foreground">See our <Link to="/privacy-policy" className="underline underline-offset-2">Privacy Policy</Link>. BevOry does not sell alcohol.</p>
+            </select>
+          </div>
+          <label className="sr-only" htmlFor="updates-email">Email</label>
+          <Input id="updates-email" className="h-9" type="email" placeholder="Email" autoComplete="email" required maxLength={254} value={email} onChange={(event) => setEmail(event.target.value)} />
+          <label className="sr-only" htmlFor="updates-mobile">Mobile</label>
+          <Input id="updates-mobile" className="h-9" type="tel" placeholder="Mobile number" inputMode="tel" autoComplete="tel-national" required pattern="([+]91[- ]?)?[6-9][0-9]{9}" title="Enter a 10-digit Indian mobile number" value={mobile} onChange={(event) => setMobile(event.target.value)} />
+          <label className="flex items-start gap-2 text-[11px] leading-4"><input type="checkbox" className="mt-0.5 shrink-0 accent-[#a53c4a]" checked={consent} onChange={(event) => setConsent(event.target.checked)} required />I confirm I am 25+ and agree to receive BevOry city-offer updates by email and mobile. I can withdraw consent at any time.</label>
+          <p className="text-[10px] leading-4 text-muted-foreground">By subscribing, I accept the <Link to="/terms" className="underline underline-offset-2">Terms</Link>, <Link to="/privacy-policy" className="underline underline-offset-2">Privacy Policy</Link> and <Link to="/disclaimer" className="underline underline-offset-2">Disclaimer</Link>.</p>
           {error && <p role="alert" className="text-xs text-destructive">{error}</p>}
-          <Button type="submit" disabled={pending} className="w-full bg-[#a53c4a] text-white hover:bg-[#8f3340]">{pending ? "Saving..." : "Keep me updated"}</Button>
+          <Button type="submit" disabled={pending} className="h-9 w-full bg-[#a53c4a] text-white hover:bg-[#8f3340]">{pending ? "Saving..." : "Get city updates"}</Button>
         </form>
       </DialogContent>
     </Dialog>

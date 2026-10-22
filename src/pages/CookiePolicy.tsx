@@ -22,7 +22,7 @@ const CookiePolicy = () => (
     </p>
     <p>
       You can reopen the consent panel at any time by selecting <strong>"Privacy choices"</strong> in either website
-      footer. Choosing "Necessary only" tells our Google consent controls to deny Analytics and ads going forward. It does not
+      footer. Choosing "Essential only" tells our Google consent controls to deny Analytics and ads going forward. It does not
       necessarily delete identifiers already stored during an earlier grant; use your browser's site-data controls to
       remove those from the device.
     </p>
