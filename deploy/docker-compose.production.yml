@@ -15,6 +15,7 @@ services:
     expose:
       - "3001"
     volumes:
+      - asset-history:/app/asset-history
       - ../public/seo-routes:/app/dist/seo-routes:ro
       - ../public/sitemaps:/app/dist/sitemaps:ro
       - ../public/sitemap.xml:/app/dist/sitemap.xml:ro
@@ -44,5 +45,6 @@ services:
       - caddy-config:/config
 
 volumes:
+  asset-history:
   caddy-data:
   caddy-config:

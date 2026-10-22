@@ -23,7 +23,7 @@ COPY --chown=node:node --from=build /app/dist-server ./dist-server
 COPY --chown=node:node --from=build /app/prisma ./prisma
 COPY --chown=node:node --from=build /app/scripts ./scripts
 COPY --chown=node:node --from=build /app/src/lib ./src/lib
-RUN mkdir -p uploads && chown node:node uploads
+RUN mkdir -p uploads asset-history && chown node:node uploads asset-history
 USER node
 EXPOSE 3001
-CMD ["pnpm", "start"]
+CMD ["sh", "-c", "cp -an /app/dist/assets/. /app/asset-history/ && exec pnpm start"]

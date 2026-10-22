@@ -419,6 +419,10 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
   const clientDist = path.join(projectRoot, "dist");
   const renderSeo = createSeoRenderer(clientDist);
   const resolveLegacyRedirect = createLegacyRedirectResolver(clientDist);
+  app.use("/assets", express.static(path.join(projectRoot, "asset-history"), {
+    immutable: true,
+    maxAge: "1y",
+  }));
   app.use(express.static(clientDist, {
     index: false,
     setHeaders: (res, filePath) => {
@@ -446,8 +450,7 @@ if (process.env.NODE_ENV === "production" && process.env.SERVE_FRONTEND !== "fal
       if (rendered.statusCode === 404) {
         res.setHeader("Cache-Control", "private, no-store");
       } else {
-        res.setHeader("Cache-Control", "public, max-age=60, s-maxage=600, stale-while-revalidate=86400");
-        res.setHeader("Cloudflare-CDN-Cache-Control", "public, s-maxage=600, stale-while-revalidate=86400");
+        res.setHeader("Cache-Control", "private, no-store");
       }
       return res.status(rendered.statusCode).type("html").send(rendered.html);
     } catch (error) {
