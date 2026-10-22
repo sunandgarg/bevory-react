@@ -35,6 +35,12 @@ const CATEGORY_TILES = [
   { slug: "rum", title: "Rum", tone: "bg-[#e8efe9]" },
 ] as const;
 
+const MOOD_MATCHES = [
+  { title: "Easy night", detail: "Bright, botanical picks", slug: "gin", tone: "bg-[#e6f0f2]" },
+  { title: "Celebration", detail: "Something for a shared toast", slug: "sparkling-wine", tone: "bg-[#f6eadf]" },
+  { title: "Dinner", detail: "Browse reds for the table", slug: "red-wine", tone: "bg-[#eee7ed]" },
+] as const;
+
 const DeferredSection = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -166,6 +172,25 @@ const Home = () => {
                 ))}
               </div>
             ) : <div className="flex gap-4 overflow-hidden">{CATEGORY_TILES.map((item) => <Skeleton key={item.slug} className="aspect-square w-[112px] shrink-0 rounded-full sm:w-[150px]" />)}</div>}
+          </section>
+
+          <section aria-labelledby="home-mood-match-heading">
+            <div className="mb-5">
+              <h2 id="home-mood-match-heading" className="text-2xl font-bold leading-tight sm:text-3xl">Your Mood's Got a Match</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Find a drink style for the moment.</p>
+            </div>
+            <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide sm:mx-0 sm:gap-4 sm:px-0">
+              {MOOD_MATCHES.map((item) => (
+                <Link key={item.slug} to={`/${citySlug}/category/${item.slug}`} className={`group relative flex h-[190px] w-[280px] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-md border border-border/60 p-5 text-[#16282c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:h-[205px] sm:w-[300px] ${item.tone}`}>
+                  <div className="relative z-10 max-w-[145px]">
+                    <h3 className="text-xl font-bold leading-tight sm:text-2xl">{item.title}</h3>
+                    <p className="mt-2 text-xs leading-5 text-[#445b60] sm:text-sm">{item.detail}</p>
+                  </div>
+                  <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#9bb3b9] text-[#245f73] transition-colors group-hover:bg-white/70" aria-hidden="true"><ArrowUpRight className="h-5 w-5" /></span>
+                  <CategoryBottleVisual slug={item.slug} categoryName={item.title} className="pointer-events-none absolute -bottom-3 -right-2 h-[175px] w-[175px] p-2 transition-transform duration-200 group-hover:scale-105 sm:h-[195px] sm:w-[195px]" />
+                </Link>
+              ))}
+            </div>
           </section>
 
           {loading && <div className="space-y-4"><Skeleton className="h-8 w-56" /><div className="flex gap-3 overflow-hidden">{[1, 2, 3, 4].map((item) => <Skeleton key={item} className="h-64 w-40 shrink-0 rounded-md" />)}</div></div>}
