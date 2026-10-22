@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Star, ArrowLeft, Package } from "lucide-react";
+import { ArrowLeft, Package } from "lucide-react";
 import MobileLayout from "@/components/layout/MobileLayout";
 import { useProducts } from "@/hooks/useProducts";
 import { useRouteCity } from "@/hooks/useRouteCity";
@@ -9,14 +8,12 @@ import { useProductUrl } from "@/hooks/useProductUrl";
 import CompareButton from "@/components/product/CompareButton";
 import FavoriteButton from "@/components/FavoriteButton";
 import SEOHead from "@/components/SEOHead";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { apiClient } from "@/integrations/api/client";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { citySlugFromName } from "@/lib/locations";
-import CategoryBottleVisual from "@/components/category/CategoryBottleVisual";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
 
 interface SubCategory {
   id: string;
@@ -36,6 +33,7 @@ const CategoryDetail = () => {
   const {
     categories,
     getProductsByCategory,
+    totalProducts,
     loading,
     hasNextPage,
     fetchNextPage,
@@ -126,13 +124,13 @@ const CategoryDetail = () => {
 
   if (loading || !routeCityReady) {
     return (
-      <MobileLayout showBack>
-        <div className="p-4">
-          <div className="h-10 w-48 bg-muted rounded-lg animate-pulse mb-4" />
-          <div className="h-52 bg-muted rounded-2xl animate-pulse mb-6" />
-          <div className="grid grid-cols-2 gap-3">
+      <MobileLayout showHeader={false}>
+        <div className="px-4 pb-8 pt-16 sm:px-6">
+          <div className="mb-3 h-9 w-64 animate-pulse rounded-md bg-muted" />
+          <div className="mb-8 h-5 w-36 animate-pulse rounded-md bg-muted" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-[3/4] bg-muted rounded-xl animate-pulse" />
+              <div key={i} className="aspect-[4/5] animate-pulse rounded-md bg-muted" />
             ))}
           </div>
         </div>
@@ -175,100 +173,39 @@ const CategoryDetail = () => {
           ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
           : "noindex, follow, max-image-preview:large"}
       />
-      <MobileLayout showBack title={category.name}>
-        <div className="pb-6">
-          {/* Hero Section */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="relative"
-          >
-            <div className="p-5 bg-gradient-to-br from-accent/10 to-background">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="flex items-center gap-4"
-              >
-                <div className="w-24 h-24 rounded-2xl bg-secondary/80 flex items-center justify-center flex-shrink-0 shadow-lg border border-border overflow-hidden">
-                  <CategoryBottleVisual
-                    slug={category.slug}
-                    categoryName={category.name}
-                    priority
-                    className="h-full w-full"
-                  />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-serif font-bold mb-1">{category.name}</h1>
-                  <p className="text-muted-foreground text-sm">
-                    {products.length} products
-                    {selectedCity && <span className="text-accent"> • {selectedCity.name}</span>}
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </motion.section>
+      <MobileLayout showHeader={false}>
+        <div className="px-4 pb-8 pt-5 sm:px-6">
+          <Link to="/categories" className="mb-5 inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" /> All categories
+          </Link>
+          <header className="mb-6 border-b border-border pb-5">
+            <h1 className="text-3xl font-semibold text-foreground sm:text-4xl">
+              {category.name} in {selectedCity?.name || "India"}
+            </h1>
+            {category.description && (
+              <p className="mt-2 text-sm text-muted-foreground">{category.description}</p>
+            )}
+            <p className="mt-3 text-sm font-medium text-foreground">
+              {selectedSubCategory ? `${products.length} shown` : `${totalProducts.toLocaleString("en-IN")} products`}
+            </p>
+          </header>
 
-          {/* Description */}
-          {category.description && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="px-4 mt-4"
-            >
-              <p className="text-muted-foreground leading-relaxed text-sm p-4 rounded-xl bg-secondary/50 border border-border/50">
-                {category.description}
-              </p>
-            </motion.div>
-          )}
-
-          {/* Sub-category Filter */}
           {subCategories.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="px-4 mt-4"
-            >
-              <ScrollArea className="w-full whitespace-nowrap">
-                <div className="flex gap-2 pb-2">
-                  <Button
-                    asChild
-                    variant={selectedSubCategory === null ? "default" : "outline"}
-                    size="sm"
-                    className="rounded-full flex-shrink-0"
-                  >
-                    <Link to={categoryPath}>All ({allProducts.length})</Link>
-                  </Button>
-                  {subCategories.map((sub) => {
-                    const count = allProducts.filter((p: any) => p.sub_category_id === sub.id).length;
-                    return (
-                      <Button
-                        asChild
-                        key={sub.id}
-                        variant={selectedSubCategory?.id === sub.id ? "default" : "outline"}
-                        size="sm"
-                        className="rounded-full flex-shrink-0 gap-1.5"
-                      >
-                        <Link to={`${categoryPath}/${sub.slug}`}>{sub.name} ({count})</Link>
-                      </Button>
-                    );
-                  })}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </motion.div>
+            <nav aria-label="Filter by type" className="mb-6 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              <Link to={categoryPath} aria-current={!selectedSubCategory ? "page" : undefined} className={`flex min-h-10 shrink-0 items-center rounded-md border px-4 text-sm font-medium ${!selectedSubCategory ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground"}`}>
+                All
+              </Link>
+              {subCategories.filter((sub) => sub.slug).map((sub) => (
+                <Link key={sub.id} to={`${categoryPath}/${sub.slug}`} aria-current={selectedSubCategory?.id === sub.id ? "page" : undefined} className={`flex min-h-10 shrink-0 items-center rounded-md border px-4 text-sm font-medium ${selectedSubCategory?.id === sub.id ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground"}`}>
+                  {sub.name}
+                </Link>
+              ))}
+            </nav>
           )}
 
-          {/* Products */}
-          <main className="px-4 mt-6">
+          <section aria-label={`${selectedSubCategory?.name || category.name} products`}>
             {products.length === 0 ? (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-16"
-              >
+              <div className="py-16 text-center">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-secondary flex items-center justify-center">
                   <Package className="w-10 h-10 text-muted-foreground" />
                 </div>
@@ -288,92 +225,66 @@ const CategoryDetail = () => {
                     <Link to={categoryPath}>Clear Filter</Link>
                   </Button>
                 )}
-              </motion.div>
+              </div>
             ) : (
               <>
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-serif font-semibold">
-                    {selectedSubCategory
-                      ? selectedSubCategory.name
-                      : `All ${category.name}`}
-                  </h2>
-                  <Badge variant="secondary" className="text-xs">
-                    {products.length} items
-                  </Badge>
-                </div>
-                
-                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-4 lg:grid-cols-4">
                   {products.map((product, index) => (
                     <article
                       key={product.id}
-                      ref={index === products.length - 5 ? loadMoreRef : undefined}
+                      ref={index === Math.max(0, products.length - 5) ? loadMoreRef : undefined}
+                      className="relative min-w-0"
                     >
                       <Link
                         to={getProductUrlSafe(product)}
-                        className="group flex min-h-[208px] gap-3 rounded-2xl border border-border/60 bg-card p-2.5 transition-all hover:border-accent/40 hover:shadow-md"
+                        className="group block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                       >
-                        <div className="relative w-[138px] shrink-0">
-                          {/* Action Buttons */}
-                          <div className="absolute left-1.5 right-1.5 top-1.5 z-10 flex justify-between">
-                            <CompareButton productId={product.id} size="sm" />
-                            <FavoriteButton productId={product.id} size="sm" />
-                          </div>
-                          
-                          {/* Product Image */}
+                        <div className="aspect-[4/5] overflow-hidden rounded-md border border-border/50 bg-[#f4f5f6] transition-colors group-hover:border-foreground/35">
                           <ProductImage
                             src={product.image_url}
                             alt={`${product.brand} ${product.name} bottle`}
                             fallbackEmoji={product.image_emoji}
                             priority={index < 4}
-                            className="h-[190px] w-[138px] rounded-xl border border-border/70 bg-background"
+                            className="h-full w-full rounded-none bg-[#f4f5f6]"
                           />
                         </div>
-
-                        {/* Product Info */}
-                        <div className="min-w-0 flex-1 py-1 pr-1">
-                          <p className="mb-1 text-xs font-medium text-accent">{product.brand}</p>
-                          <h3 className="min-h-10 text-[15px] font-medium leading-snug text-foreground group-hover:text-accent transition-colors">
-                              {product.name}
-                          </h3>
-                          <p className="mt-1 text-sm uppercase tracking-wide text-muted-foreground">
-                            {product.volume || "See label"}
+                        <div className="pt-3">
+                          <p className="truncate text-xs text-muted-foreground">{product.brand}</p>
+                          <h2 className="mt-1 line-clamp-2 min-h-10 text-sm font-semibold leading-5 text-foreground group-hover:text-accent">
+                            {product.name}
+                          </h2>
+                          <p className="mt-1 truncate text-xs text-muted-foreground">
+                            {product.sub_category?.name || category.name} · {product.volume || "See sizes"}
                           </p>
-
-                          {/* Rating & Price */}
-                          <div className="mt-7 flex items-center gap-3">
-                            {product.rating ? (
-                              <span className="inline-flex items-center gap-1 rounded-md bg-[#ed5f9e] px-1.5 py-0.5 text-xs font-semibold text-white">
-                                <Star className="h-3 w-3 fill-current" />
-                                {Number(product.rating).toFixed(1)}
-                              </span>
-                            ) : <span className="text-xs text-muted-foreground">Not rated</span>}
-                            <p className="text-sm font-semibold text-foreground">
-                              {product.price ? `₹${Number(product.price).toLocaleString('en-IN')}` : "Price unavailable"}
-                            </p>
-                          </div>
-
-                          <div className="mt-7 flex min-w-0 items-center gap-2">
-                            {product.sub_category && !selectedSubCategory && (
-                              <Badge variant="secondary" className="max-w-[150px] truncate rounded-full px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-                                {product.sub_category.name}
-                              </Badge>
-                            )}
-                            {product.origin_flag && <span className="text-base" title={product.origin || "Origin"}>{product.origin_flag}</span>}
-                          </div>
+                          <p className="mt-3 text-base font-semibold text-foreground">
+                            {product.price ? `₹${Number(product.price).toLocaleString("en-IN")}` : "Price unavailable"}
+                          </p>
                         </div>
                       </Link>
+                      <div className="absolute left-2 top-2 z-10">
+                        <CompareButton productId={product.id} variant="icon" className="border border-border/70 shadow-sm" />
+                      </div>
+                      <div className="absolute right-2 top-2 z-10">
+                        <FavoriteButton productId={product.id} size="sm" variant="overlay" className="border border-border/70 shadow-sm" />
+                      </div>
                     </article>
                   ))}
                 </div>
                 {isFetchingNextPage && (
-                  <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2" aria-label="Loading more products">
-                    <div className="h-52 animate-pulse rounded-2xl bg-muted" />
-                    <div className="h-52 animate-pulse rounded-2xl bg-muted" />
+                  <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" aria-label="Loading more products">
+                    <div className="aspect-[4/5] animate-pulse rounded-md bg-muted" />
+                    <div className="aspect-[4/5] animate-pulse rounded-md bg-muted" />
                   </div>
+                )}
+                {hasNextPage && !isFetchingNextPage && (
+                  <Button variant="outline" className="mx-auto mt-8 flex min-h-11" onClick={() => void fetchNextPage()}>
+                    Load more products
+                  </Button>
                 )}
               </>
             )}
-          </main>
+          </section>
+          <p className="mt-8 border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">{INFORMATIONAL_PRICE_NOTICE}</p>
         </div>
       </MobileLayout>
     </>

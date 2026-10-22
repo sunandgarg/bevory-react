@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useParams, Link, useNavigate, useLocation as useRouterLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Star, Heart, Share2, MapPin, ChevronDown, ArrowLeftRight, Check, Info, RefreshCw } from "lucide-react";
+import { Star, Share2, MapPin, ChevronDown, ChevronRight, ArrowLeftRight, Check, Info, RefreshCw, Wine, Globe2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import MobileLayout from "@/components/layout/MobileLayout";
@@ -22,9 +21,11 @@ import RelatedArticles from "@/components/product/RelatedArticles";
 import OtherProductsSection from "@/components/product/OtherProductsSection";
 import ExploreCategories from "@/components/product/ExploreCategories";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import FavoriteButton from "@/components/FavoriteButton";
 import { generateProductUrl, generateProductUrlWithVolume } from "@/lib/productSlug";
 import { fullProductName } from "@/lib/productName";
 import { cityRecordIdFromSlug } from "@/lib/locations";
+import { foodPairingPosition } from "@/lib/foodPairingVisual";
 
 interface FAQ {
   question: string;
@@ -163,7 +164,6 @@ const ProductDetail = () => {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [unavailableVariant, setUnavailableVariant] = useState(false);
-  const [liked, setLiked] = useState(false);
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [reviewRefresh, setReviewRefresh] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([]);
@@ -734,227 +734,165 @@ const ProductDetail = () => {
   }
 
   return (
-    <MobileLayout showBack showLocation={false} showBottomNav={false}>
-      <div className="pb-24">
-        {/* Product Image */}
-        <div
-          key="product-hero"
-          className="relative flex h-[350px] items-center justify-center overflow-hidden bg-white"
-        >
-          {product.image_url ? (
-            <div className="h-full w-full p-8 sm:p-12">
-              <OptimizedImage
-                src={product.image_url}
-                alt={`${product.brand} ${product.name}${selectedVolume ? ` ${selectedVolume}` : ""} bottle`}
-                width={1080}
-                height={1080}
-                sizes="100vw"
-                className="w-full h-full"
-                objectFit="contain"
-                priority
-              />
-            </div>
-          ) : (
-            <motion.span initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-9xl">
-              {product.image_emoji || "🥃"}
-            </motion.span>
-          )}
+    <MobileLayout showBack={false} showLocation={false} showBottomNav={false}>
+      <div className="pb-16">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 overflow-hidden px-5 py-4 text-xs text-muted-foreground sm:px-10">
+          <Link to="/" className="shrink-0 hover:text-foreground">Home</Link>
+          <ChevronRight className="h-3 w-3 shrink-0" />
+          {product.category ? (
+            <>
+              <Link to={`/${canonicalCitySlug}/category/${product.category.slug}`} className="shrink-0 hover:text-foreground">{product.category.name}</Link>
+              <ChevronRight className="h-3 w-3 shrink-0" />
+            </>
+          ) : null}
+          <span className="truncate text-foreground">{productLabel}</span>
+        </nav>
 
-          {/* Origin badge */}
-          {(product.origin || product.origin_flag) && (
-            <div className="absolute right-4 top-10 flex flex-col items-center gap-1 bg-transparent text-sm text-muted-foreground [writing-mode:vertical-rl]">
-              <span className="[writing-mode:initial]">{product.origin_flag}</span>
-              {product.origin && <span className="text-muted-foreground">{product.origin}</span>}
+        <div className="grid min-w-0 grid-cols-1 md:grid-cols-2">
+          <div key="product-hero" className="relative flex aspect-[4/3] min-w-0 items-center justify-center overflow-hidden bg-white md:aspect-auto md:h-[520px]">
+            {product.image_url ? (
+              <div className="h-full w-full p-9 sm:p-14 md:p-16">
+                <OptimizedImage
+                  src={product.image_url}
+                  alt={`${productLabel}${selectedVolume ? ` ${selectedVolume}` : ""} bottle`}
+                  width={1080}
+                  height={1080}
+                  sizes="(min-width: 768px) 560px, 100vw"
+                  className="h-full w-full !bg-white"
+                  objectFit="contain"
+                  priority
+                />
+              </div>
+            ) : (
+              <span className="text-8xl" role="img" aria-label="Beverage bottle">{product.image_emoji || "🥃"}</span>
+            )}
+            {product.is_trending && <span className="absolute bottom-5 left-5 rounded bg-white px-3 py-1 text-xs font-medium text-foreground">Trending</span>}
+            <div className="absolute right-4 top-4 flex gap-2">
+              <FavoriteButton productId={product.id} size="lg" variant="overlay" className="rounded-full bg-white shadow-sm" />
+              <button type="button" onClick={handleShare} aria-label={`Share ${productLabel}`} title="Share product" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-foreground shadow-sm hover:bg-secondary">
+                <Share2 className="h-5 w-5" />
+              </button>
             </div>
-          )}
+          </div>
 
-          {/* Trending badge */}
-          {product.is_trending && (
-            <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-accent/90 backdrop-blur-sm text-xs font-medium text-accent-foreground">
-              Trending
+          <div className="flex min-w-0 flex-col justify-center bg-[#fff4f2] px-5 py-6 sm:px-8 md:px-10 md:py-10">
+            <Link to={`/${canonicalCitySlug}/brand/${product.brand.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="w-fit text-sm font-semibold text-[#a53c4a] hover:underline">
+              {product.brand}
+            </Link>
+            <h1 className="mt-2 text-2xl font-bold leading-tight text-foreground sm:text-3xl">{pageHeading}</h1>
+            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+              {product.category?.name && <span>{product.category.name}</span>}
+              {displayRating && <span className="inline-flex items-center gap-1 text-foreground"><Star className="h-4 w-4 fill-[#f3a322] text-[#f3a322]" />{displayRating} ({displayReviewCount})</span>}
             </div>
-          )}
 
-          {/* Actions */}
-          <div className="absolute top-4 right-4 flex gap-2">
-            <button
-              onClick={() => setLiked(!liked)}
-              className={`p-2 rounded-full bg-card/90 backdrop-blur-sm ${
-                liked ? "text-red-500" : "text-muted-foreground"
-              }`}
-            >
-              <Heart className={`w-5 h-5 ${liked ? "fill-current" : ""}`} />
-            </button>
-            <button
-              onClick={handleShare}
-              className="p-2 rounded-full bg-card/90 backdrop-blur-sm text-muted-foreground"
-            >
-              <Share2 className="w-5 h-5" />
-            </button>
+            <div className="mt-5 border-t border-[#e8d9d7] pt-4">
+              <button type="button" onClick={() => setShowCitySelector(true)} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground hover:text-[#a53c4a]">
+                <MapPin className="h-4 w-4 text-[#d76543]" />
+                {displayCityName ? `Price in ${displayCityName}` : "Select city for price"}
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className={price ? "text-3xl font-bold text-foreground sm:text-4xl" : "text-xl font-semibold text-foreground"}>
+                  {price ? `₹${price.toLocaleString("en-IN")}` : "Price not available"}
+                </span>
+                {price && mrp && Number(mrp) > Number(price) && <span className="text-sm text-muted-foreground line-through">₹{mrp.toLocaleString("en-IN")}</span>}
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground">{price ? `Listed for ${selectedVolume || product.volume || "this bottle"} in ${displayCityName || "your city"}` : `No local price is listed for ${displayCityName || "your city"} yet.`}</p>
+            </div>
+
+            {displayVolumes.length > 0 && (
+              <div className="mt-4">
+                <p className="mb-2 text-xs font-semibold text-foreground">Bottle size</p>
+                <div className="flex flex-wrap gap-2" aria-label="Bottle size">
+                  {displayVolumes.map((variant) => (
+                    <Link
+                      key={variant.volume}
+                      to={generateProductUrlWithVolume({ citySlug: canonicalCitySlug, productSlug: product.slug || product.id }, variant.volume)}
+                      aria-current={normalizeVolume(selectedVolume) === normalizeVolume(variant.volume) ? "page" : undefined}
+                      className={`inline-flex min-h-10 items-center rounded-full border px-4 text-sm font-medium transition-colors ${normalizeVolume(selectedVolume) === normalizeVolume(variant.volume) ? "border-[#b74755] bg-white text-[#a53c4a]" : "border-[#e1cfcd] bg-transparent text-foreground hover:border-[#b74755]"}`}
+                    >
+                      {variant.volume}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="-mx-5 -mb-6 mt-5 border-t border-[#e8d9d7] bg-white px-5 py-4 sm:-mx-8 sm:px-8 md:mx-0 md:mb-0 md:mt-4 md:border-0 md:bg-transparent md:p-0">
+              <p className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"><Info className="mt-0.5 h-4 w-4 shrink-0" />Prices are indicative. Confirm the current price and stock with a licensed retailer; BevOry does not sell alcohol.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Button variant="outline" className="min-h-11 gap-2 border-[#e1cfcd] bg-white" onClick={handleCompare}><ArrowLeftRight className="h-4 w-4" />{isInCompare(product.id) ? "View compare" : "Compare"}</Button>
+                <Button variant="outline" className="min-h-11 border-[#e1cfcd] bg-white" onClick={() => navigate("/party-planner")}>Plan a party</Button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-4 space-y-6">
-          {/* Header */}
-          <div>
-            <div className="flex items-end justify-between gap-3">
-              <div className="min-w-0">
-                <Link
-                  to={`/${canonicalCitySlug}/brand/${product.brand.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="inline-flex items-center text-xl font-semibold text-accent underline decoration-accent/60 underline-offset-4"
-                >
-                  Brand: {product.brand} <span aria-hidden="true" className="ml-1">›</span>
-                </Link>
-                <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground">{productLabel}</h1>
+        <nav aria-label="On this page" className="flex gap-7 overflow-x-auto border-b border-border px-5 text-sm font-medium sm:px-10">
+          <a href="#facts" className="shrink-0 py-4 hover:text-[#a53c4a]">Quick facts</a>
+          {product.description && <a href="#about" className="shrink-0 py-4 hover:text-[#a53c4a]">About</a>}
+          {(product.taste_profile || product.tasting_notes || sensoryDetails.length > 0) && <a href="#taste" className="shrink-0 py-4 hover:text-[#a53c4a]">Taste</a>}
+          {Array.isArray(product.food_pairings) && product.food_pairings.length > 0 && <a href="#pairing" className="shrink-0 py-4 hover:text-[#a53c4a]">Food pairing</a>}
+        </nav>
+
+        <div className="space-y-10 px-5 py-10 sm:px-10 md:py-12">
+          <section id="facts" aria-labelledby="facts-heading" className="scroll-mt-32">
+            <h2 id="facts-heading" className="text-2xl font-bold">Quick Facts</h2>
+            <p className="mt-1 text-sm text-muted-foreground">At-a-glance details</p>
+            <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+              <div className="relative row-span-2 flex min-h-[224px] flex-col overflow-hidden rounded-lg bg-[#fcf0d9] p-5 md:row-span-1 md:min-h-[188px]">
+                <dt className="text-sm font-medium text-[#5e5040]">{product.abv != null ? "Alcohol (ABV)" : "Bottle size"}</dt>
+                <dd className="mt-6 max-w-full break-words text-3xl font-bold text-[#875017] md:text-4xl">{product.abv != null ? `${product.abv}%` : selectedVolume || product.volume || "See label"}</dd>
+                <Wine aria-hidden="true" className="absolute -bottom-3 -right-1 h-24 w-24 rotate-[-22deg] text-[#e3bf87]/55" strokeWidth={1} />
               </div>
-              {displayRating ? (
-                <span className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-[#ed5f9e] px-3 py-2 text-lg font-semibold text-white">
-                  <Star className="h-5 w-5 fill-current" /> {displayRating}
-                </span>
-              ) : (
-                <span className="shrink-0 text-xs text-muted-foreground">Not rated</span>
-              )}
-            </div>
-            <p className="mt-2 text-sm uppercase tracking-wide text-muted-foreground">{selectedVolume || product.volume || "See label"}</p>
-            {(product.author_line || editorialDate) && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                {product.author_line ? `Editorial: ${product.author_line}` : ""}
-                {product.author_line && editorialDate ? " · " : ""}
-                {editorialDate ? `Updated ${editorialDate}` : ""}
-              </p>
-            )}
-          </div>
-
-          {/* Price with Volume & City Selector */}
-          <div className="space-y-4 border-y border-border py-5">
-            {/* City Selector */}
-            <button
-              onClick={() => setShowCitySelector(true)}
-              className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <MapPin className="w-3 h-3" />
-              {displayCityName ? `Price in ${displayCityName}` : "Select city for price"}
-              <ChevronDown className="w-3 h-3" />
-            </button>
-
-            {/* Volume Options */}
-            {displayVolumes.length > 0 && (
-              <div className="flex flex-wrap justify-end gap-2">
-                {displayVolumes.map((variant) => (
-                  <Link
-                    key={variant.volume}
-                    to={generateProductUrlWithVolume({
-                      citySlug: canonicalCitySlug,
-                      productSlug: product.slug || product.id,
-                    }, variant.volume)}
-                    className={`rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-all ${
-                      normalizeVolume(selectedVolume) === normalizeVolume(variant.volume)
-                        ? "border-accent bg-accent/5 text-accent"
-                        : "border-border bg-background text-foreground hover:border-accent/50"
-                    }`}
-                  >
-                    <span className="block uppercase">{variant.volume}</span>
-                  </Link>
-                ))}
+              <div className="flex min-h-[106px] flex-col justify-end rounded-lg bg-[#e5eefc] p-4 text-[#25518d] md:min-h-[188px] md:p-5">
+                <Wine aria-hidden="true" className="mb-auto ml-auto h-7 w-7" strokeWidth={1.6} />
+                <dt className="order-2 mt-0.5 text-sm">Type</dt>
+                <dd className="order-1 break-words text-lg font-bold md:text-xl">{product.category?.name || "Beverage"}</dd>
               </div>
-            )}
-
-            {/* Price Display */}
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <div className="flex items-baseline gap-2">
-                  <span className={price ? "text-4xl font-bold tracking-tight" : "text-lg font-semibold text-muted-foreground"}>
-                    {price ? `₹${price.toLocaleString("en-IN")}` : "Price not available"}
-                  </span>
-                  {price && mrp && Number(mrp) > Number(price) && (
-                    <span className="text-sm text-muted-foreground line-through">₹{mrp.toLocaleString()}</span>
-                  )}
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">* This is the MRP set by the state government</p>
+              <div className="flex min-h-[106px] flex-col justify-end rounded-lg bg-[#fae5ec] p-4 text-[#a23b59] md:min-h-[188px] md:p-5">
+                {product.origin ? <Globe2 aria-hidden="true" className="mb-auto ml-auto h-7 w-7" strokeWidth={1.6} /> : <MapPin aria-hidden="true" className="mb-auto ml-auto h-7 w-7" strokeWidth={1.6} />}
+                <dt className="order-2 mt-0.5 text-sm">{product.origin ? "Origin" : "Price location"}</dt>
+                <dd className="order-1 break-words text-lg font-bold md:text-xl">{product.origin_flag && product.origin && <span className="mr-1">{product.origin_flag}</span>}{product.origin || displayCityName || "Choose a city"}</dd>
               </div>
-            </div>
-            <p className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground">
-              <Info className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-              {price
-                ? `Indicative price for ${displayCityName || "your selected city"}. Local retail prices may vary.`
-                : `No local price is listed for ${displayCityName || "your selected city"} yet.`}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2">
-            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={() => setLiked(!liked)}>
-              <Heart className={`h-5 w-5 text-accent ${liked ? "fill-current" : ""}`} /> Wishlist
-            </Button>
-            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={handleCompare}>
-              <ArrowLeftRight className="h-5 w-5 text-accent" /> Compare
-            </Button>
-            <Button variant="secondary" className="h-14 rounded-xl gap-2 text-sm" onClick={() => navigate("/party-planner")}>
-              <span className="text-lg text-accent" aria-hidden="true">✣</span> Party
-            </Button>
-          </div>
-
-          {/* Quick Info */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3 rounded-xl bg-secondary text-center">
-              <p className="text-xs text-muted-foreground mb-1">Selected</p>
-              <p className="font-semibold">{selectedVolume || product.volume || "See label"}</p>
-            </div>
-            <div className="p-3 rounded-xl bg-secondary text-center">
-              <p className="text-xs text-muted-foreground mb-1">ABV</p>
-              <p className="font-semibold">{product.abv ? `${product.abv}%` : "See label"}</p>
-            </div>
-            <div className="p-3 rounded-xl bg-secondary text-center">
-              <p className="text-xs text-muted-foreground mb-1">Age</p>
-              <p className="font-semibold">{product.age || "Not verified"}</p>
-            </div>
-            <div className="p-3 rounded-xl bg-secondary text-center">
-              <p className="text-xs text-muted-foreground mb-1">Origin</p>
-              <p className="font-semibold">{product.origin_flag && <span className="mr-1">{product.origin_flag}</span>}{product.origin || "Not verified"}</p>
-            </div>
-          </div>
+            </dl>
+            {(product.abv != null || product.age) && <p className="mt-3 text-sm text-muted-foreground">{product.abv != null && `Bottle: ${selectedVolume || product.volume || "See label"}`}{product.abv != null && product.age && " · "}{product.age && `Age: ${product.age}`}</p>}
+          </section>
 
           {/* Description */}
           {product.description && (
-            <section>
-              <h2 className="font-semibold mb-2">About {productLabel}</h2>
-              <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+            <section id="about" className="scroll-mt-32 border-t border-border pt-8">
+              <h2 className="mb-3 text-xl font-bold">About {productLabel}</h2>
+              <p className="max-w-3xl leading-7 text-muted-foreground">{product.description}</p>
+              {(product.author_line || editorialDate) && (
+                <p className="mt-4 text-xs text-muted-foreground">
+                  {product.author_line || "BevOry Editorial"}{editorialDate ? ` · Updated ${editorialDate}` : ""}
+                </p>
+              )}
             </section>
           )}
 
-          {/* Taste Profile */}
-          {product.taste_profile && (
-            <section>
-              <h2 className="font-semibold mb-2">General taste profile</h2>
-              <p className="text-muted-foreground">{product.taste_profile}</p>
-            </section>
-          )}
-
-          {/* Tasting Notes */}
-          {product.tasting_notes && (
-            <section>
-              <h2 className="font-semibold mb-2">How to assess this product</h2>
-              <p className="text-muted-foreground leading-relaxed">{product.tasting_notes}</p>
-            </section>
-          )}
-
-          {sensoryDetails.length > 0 && (
-            <section aria-labelledby="sensory-guide-heading">
-              <h2 id="sensory-guide-heading" className="font-semibold mb-3">{hasResearchedEditorial ? "Tasting notes" : "Sensory guide"}</h2>
-              <dl className="divide-y divide-border border-y border-border">
-                {sensoryDetails.map(([label, value]) => (
-                  <div key={label} className="py-3 grid grid-cols-[72px_1fr] gap-3 text-sm">
-                    <dt className="font-medium text-foreground">{label}</dt>
-                    <dd className="text-muted-foreground leading-relaxed">{value}</dd>
-                  </div>
-                ))}
-              </dl>
+          {(product.taste_profile || product.tasting_notes || sensoryDetails.length > 0) && (
+            <section id="taste" className="scroll-mt-32 border-t border-border pt-8">
+              <h2 className="mb-3 text-xl font-bold">{hasResearchedEditorial ? "Taste & aroma" : "Taste guide"}</h2>
+              {product.taste_profile && <p className="max-w-3xl leading-7 text-muted-foreground">{product.taste_profile}</p>}
+              {product.tasting_notes && <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{product.tasting_notes}</p>}
+              {sensoryDetails.length > 0 && (
+                <dl className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                  {sensoryDetails.map(([label, value]) => (
+                    <div key={label} className="border-t border-border pt-3 text-sm">
+                      <dt className="font-semibold text-foreground">{label}</dt>
+                      <dd className="mt-1 leading-relaxed text-muted-foreground">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </section>
           )}
 
           {/* Product Type */}
           {(product.type_tag || product.product_type) && (
-            <div className="p-4 rounded-xl bg-secondary/50 border border-border">
+            <div className="border-l-2 border-[#c85864] pl-4">
               <div className="flex items-center gap-2 mb-2">
                 <Badge variant="secondary" className="font-medium">
                   {product.type_tag || product.product_type?.name}
@@ -984,8 +922,24 @@ const ProductDetail = () => {
             </div>
           )}
 
+          {Array.isArray(product.food_pairings) && product.food_pairings.length > 0 && (
+            <section id="pairing" aria-labelledby="pairing-heading" className="scroll-mt-32 border-t border-border pt-8">
+              <h2 id="pairing-heading" className="text-2xl font-bold">Food Pairing</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Foods that complement this bottle</p>
+              <ul className="mt-6 flex gap-3 overflow-x-auto pb-3 sm:gap-5" aria-label="Suggested food pairings">
+                {product.food_pairings.map((pairing) => (
+                  <li key={pairing} className="w-20 shrink-0 text-center sm:w-28">
+                    <span aria-hidden="true" className="mx-auto block aspect-square w-full rounded-full border border-border bg-[#f7f3f0]" style={{ backgroundImage: "url('/food-pairing-contact-sheet.webp')", backgroundSize: "400% 300%", backgroundPosition: foodPairingPosition(pairing) }} />
+                    <span className="mt-3 block text-xs font-medium leading-snug text-foreground sm:text-sm">{pairing}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-1 text-xs text-muted-foreground">Images illustrate food styles; preparation may vary.</p>
+            </section>
+          )}
+
           <DeferredProductContent>
-            <div className="space-y-6">
+            <div className="space-y-10 border-t border-border pt-8">
               {(product.serving_guide || product.serving_temperature || product.glassware) && (
                 <section aria-labelledby="serving-guide-heading">
                   <h2 id="serving-guide-heading" className="font-semibold mb-2">Serving guide</h2>
@@ -1002,15 +956,6 @@ const ProductDetail = () => {
                       <dd className="mt-1 text-muted-foreground">{product.glassware || "Clean glassware suited to the style"}</dd>
                     </div>
                   </dl>
-                </section>
-              )}
-
-              {Array.isArray(product.food_pairings) && product.food_pairings.length > 0 && (
-                <section aria-labelledby="pairing-heading">
-                  <h2 id="pairing-heading" className="font-semibold mb-2">Food pairing ideas</h2>
-                  <ul className="grid grid-cols-2 gap-x-5 gap-y-2 text-sm text-muted-foreground list-disc pl-5">
-                    {product.food_pairings.map((pairing) => <li key={pairing}>{pairing}</li>)}
-                  </ul>
                 </section>
               )}
 
@@ -1068,13 +1013,12 @@ const ProductDetail = () => {
             </div>
           </DeferredProductContent>
 
-          {/* Footer */}
-          <Footer />
         </div>
+        <Footer />
       </div>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-xl border-t border-border">
+      <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-border bg-background/95 p-3 backdrop-blur-xl md:hidden">
         <div className="flex gap-3 max-w-lg mx-auto">
           <Button variant="outline" className="flex-1 gap-2" onClick={handleCompare}>
             <ArrowLeftRight className="w-4 h-4" />
