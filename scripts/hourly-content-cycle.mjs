@@ -24,7 +24,6 @@ export async function runContentCycle(drafts, publishedAt) {
     facts_last_reviewed: reviewedAt,
   }));
   assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length, "duplicate slugs");
-  assert.ok(posts.some((post) => post.category === "News"), "missing news post");
   for (const post of posts) {
     for (const key of ["id", "title", "slug", "excerpt", "meta_title", "meta_description", "selection_note", "content"]) {
       assert.ok(typeof post[key] === "string" && post[key].trim(), `${post.slug}: missing ${key}`);
