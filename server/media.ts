@@ -1,4 +1,3 @@
-import { timingSafeEqual } from "node:crypto";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import {
@@ -84,13 +83,6 @@ const requestConditions = (getHeader: (name: string) => string | undefined): Med
   ifModifiedSince: httpDate(getHeader("if-modified-since")),
   ifUnmodifiedSince: httpDate(getHeader("if-unmodified-since")),
 });
-
-const matchesSecret = (supplied: string, expected: string) => {
-  const suppliedBuffer = Buffer.from(supplied);
-  const expectedBuffer = Buffer.from(expected);
-  return suppliedBuffer.length === expectedBuffer.length
-    && timingSafeEqual(suppliedBuffer, expectedBuffer);
-};
 
 let memoizedS3Client: S3Client | undefined;
 
@@ -195,12 +187,8 @@ const upstreamErrorStatus = (error: unknown) => {
 
 export const createMediaHandler = (options: {
   store?: MediaObjectStore;
-  production?: boolean;
-  originVerifySecret?: string;
 } = {}): RequestHandler => {
   const store = options.store || defaultMediaStore;
-  const production = options.production ?? process.env.NODE_ENV === "production";
-  const originVerifySecret = options.originVerifySecret ?? process.env.ORIGIN_VERIFY_SECRET?.trim();
 
   return async (req, res) => {
     if (req.method !== "GET" && req.method !== "HEAD") {
@@ -208,19 +196,6 @@ export const createMediaHandler = (options: {
       res.setHeader("Allow", "GET, HEAD");
       res.status(405).end();
       return;
-    }
-
-    if (production) {
-      if (!originVerifySecret) {
-        applyErrorHeaders(res);
-        res.status(503).end();
-        return;
-      }
-      if (!matchesSecret(req.get("x-bevory-origin-verify") || "", originVerifySecret)) {
-        applyErrorHeaders(res);
-        res.status(404).end();
-        return;
-      }
     }
 
     const key = mediaKeyFromRequestUrl(req.originalUrl);

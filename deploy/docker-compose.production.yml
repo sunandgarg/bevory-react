@@ -20,6 +20,7 @@ services:
       - ../public/sitemaps:/app/dist/sitemaps:ro
       - ../public/sitemap.xml:/app/dist/sitemap.xml:ro
       - ../public/BingSiteAuth.xml:/app/dist/BingSiteAuth.xml:ro
+      - ../public/robots.txt:/app/dist/robots.txt:ro
     healthcheck:
       test:
         - CMD-SHELL

@@ -160,7 +160,7 @@ describe("media byte ranges", () => {
 describe("media handler", () => {
   it("streams a full GET with immutable image headers", async () => {
     const store = createStore();
-    const response = await invokeHandler(createMediaHandler({ store, production: false }));
+    const response = await invokeHandler(createMediaHandler({ store }));
     expect(response.statusCode).toBe(200);
     expect(response.text()).toBe("test");
     expect(response.getHeader("content-type")).toBe("image/jpeg");
@@ -184,7 +184,7 @@ describe("media handler", () => {
     }, {
       contentType: "text/html",
     }));
-    const response = await invokeHandler(createMediaHandler({ store, production: false }));
+    const response = await invokeHandler(createMediaHandler({ store }));
     expect(response.statusCode).toBe(200);
     expect(response.getHeader("content-type")).toBe("image/jpeg");
     expect(response.getHeader("x-content-type-options")).toBe("nosniff");
@@ -192,7 +192,7 @@ describe("media handler", () => {
 
   it("uses HeadObject and sends no body for HEAD", async () => {
     const store = createStore();
-    const response = await invokeHandler(createMediaHandler({ store, production: false }), {
+    const response = await invokeHandler(createMediaHandler({ store }), {
       method: "HEAD",
       url: `/media/${uploadKey}`,
     });
@@ -213,7 +213,7 @@ describe("media handler", () => {
       contentRange: "bytes 0-3/10",
       statusCode: 206,
     });
-    const response = await invokeHandler(createMediaHandler({ store, production: false }), {
+    const response = await invokeHandler(createMediaHandler({ store }), {
       headers: { Range: "bytes=0-3" },
     });
     expect(response.statusCode).toBe(206);
@@ -225,7 +225,7 @@ describe("media handler", () => {
 
   it("returns the complete object when If-Range cannot be evaluated safely", async () => {
     const store = createStore();
-    const response = await invokeHandler(createMediaHandler({ store, production: false }), {
+    const response = await invokeHandler(createMediaHandler({ store }), {
       headers: { Range: "bytes=0-3", "If-Range": '"stale-etag"' },
     });
     expect(response.statusCode).toBe(200);
@@ -235,7 +235,7 @@ describe("media handler", () => {
 
   it("rejects invalid or multiple ranges before S3", async () => {
     const store = createStore();
-    const response = await invokeHandler(createMediaHandler({ store, production: false }), {
+    const response = await invokeHandler(createMediaHandler({ store }), {
       headers: { Range: "bytes=0-1,4-5" },
     });
     expect(response.statusCode).toBe(416);
@@ -246,7 +246,7 @@ describe("media handler", () => {
 
   it("returns 405 for methods other than GET and HEAD", async () => {
     const store = createStore();
-    const response = await invokeHandler(createMediaHandler({ store, production: false }), { method: "POST" });
+    const response = await invokeHandler(createMediaHandler({ store }), { method: "POST" });
     expect(response.statusCode).toBe(405);
     expect(response.getHeader("allow")).toBe("GET, HEAD");
     expect(store.getObject).not.toHaveBeenCalled();
@@ -255,7 +255,7 @@ describe("media handler", () => {
 
   it("rejects disallowed prefixes before S3", async () => {
     const store = createStore();
-    const handler = createMediaHandler({ store, production: false });
+    const handler = createMediaHandler({ store });
     for (const url of [
       "/media/backups/private.jpg",
       "/media/manifests/private.jpg",
@@ -281,19 +281,16 @@ describe("media handler", () => {
     vi.mocked(store.getObject).mockRejectedValueOnce(Object.assign(new Error("S3 error"), {
       $metadata: { httpStatusCode: upstream },
     }));
-    const response = await invokeHandler(createMediaHandler({ store, production: false }));
+    const response = await invokeHandler(createMediaHandler({ store }));
     expect(response.statusCode).toBe(expected);
     expect(response.getHeader("cache-control")).toBe("private, no-store");
   });
 
-  it("requires the timing-safe origin secret in production", async () => {
+  it("serves only allowlisted public images without an origin secret", async () => {
     const store = createStore();
-    const handler = createMediaHandler({ store, production: true, originVerifySecret: "edge-secret" });
-    expect((await invokeHandler(handler)).statusCode).toBe(404);
-    const response = await invokeHandler(handler, {
-      headers: { "x-bevory-origin-verify": "edge-secret" },
-    });
-    expect(response.statusCode).toBe(200);
+    const handler = createMediaHandler({ store });
+    expect((await invokeHandler(handler)).statusCode).toBe(200);
+    expect((await invokeHandler(handler, { url: "/media/backups/private.jpg" })).statusCode).toBe(404);
     expect(store.getObject).toHaveBeenCalledOnce();
   });
 });

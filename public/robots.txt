@@ -1,50 +1,3 @@
-User-agent: Googlebot
-Allow: /
-Disallow: /admin
-Disallow: /auth
-Disallow: /profile
-Disallow: /settings
-Disallow: /notifications
-Disallow: /recent
-Disallow: /locations
-
-User-agent: Bingbot
-Allow: /
-Disallow: /admin
-Disallow: /auth
-Disallow: /profile
-Disallow: /settings
-
-User-agent: OAI-SearchBot
-Allow: /
-Disallow: /admin
-Disallow: /auth
-Disallow: /profile
-Disallow: /settings
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-Disallow: /admin
-Disallow: /auth
-Disallow: /profile
-Disallow: /settings
-
-User-agent: PerplexityBot
-Allow: /
-Disallow: /admin
-Disallow: /auth
-Disallow: /profile
-Disallow: /settings
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
 Disallow: /admin
@@ -55,8 +8,4 @@ Disallow: /notifications
 Disallow: /recent
 Disallow: /locations
 
-# Primary domain
-Host: bevory.in
-
-# Sitemaps
 Sitemap: https://bevory.in/sitemap.xml

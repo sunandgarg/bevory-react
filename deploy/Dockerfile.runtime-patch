@@ -6,3 +6,4 @@ LABEL bevory.revision=${REVISION}
 
 COPY --chown=node:node dist-server/server/catalog.js /app/dist-server/server/catalog.js
 COPY --chown=node:node dist-server/server/index.js /app/dist-server/server/index.js
+COPY --chown=node:node dist-server/server/media.js /app/dist-server/server/media.js
