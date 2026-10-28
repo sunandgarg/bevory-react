@@ -19,6 +19,7 @@ services:
       - ../public/seo-routes:/app/dist/seo-routes:ro
       - ../public/sitemaps:/app/dist/sitemaps:ro
       - ../public/sitemap.xml:/app/dist/sitemap.xml:ro
+      - ../public/BingSiteAuth.xml:/app/dist/BingSiteAuth.xml:ro
     healthcheck:
       test:
         - CMD-SHELL
