@@ -7,7 +7,7 @@ const banned = /\b(?:symphony|testament|delve|nestled|embark|liquid gold|rich ta
 
 export async function runContentCycle(drafts, publishedAt) {
   assert.ok(!Number.isNaN(Date.parse(publishedAt)), "invalid publication time");
-  assert.ok(drafts.length >= 2 && drafts.length <= 3, "cycle needs 2 or 3 posts");
+  assert.ok(drafts.length >= 2 && drafts.length <= 50, "cycle needs 2 to 50 posts");
   const reviewedAt = publishedAt.slice(0, 10);
   const posts = drafts.map((post) => ({
     ...post,
@@ -24,6 +24,7 @@ export async function runContentCycle(drafts, publishedAt) {
     facts_last_reviewed: reviewedAt,
   }));
   assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length, "duplicate slugs");
+  assert.equal(new Set(posts.map((post) => post.id)).size, posts.length, "duplicate ids");
   for (const post of posts) {
     for (const key of ["id", "title", "slug", "excerpt", "meta_title", "meta_description", "selection_note", "content"]) {
       assert.ok(typeof post[key] === "string" && post[key].trim(), `${post.slug}: missing ${key}`);
