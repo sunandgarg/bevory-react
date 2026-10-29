@@ -13,7 +13,7 @@ export async function runContentCycle(drafts, publishedAt) {
     ...post,
     cover_emoji: post.category === "News" ? "news" : "guide",
     author: "BevOry Editorial Team",
-    cover_image_url: null,
+    cover_image_url: post.cover_image_url ?? null,
     linked_product_id: null,
     linked_brand: null,
     notify_users: false,

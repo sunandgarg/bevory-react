@@ -9,6 +9,7 @@ const blackBarrel = "https://www.jamesonwhiskey.com/en-us/our-whiskey/jameson-bl
 await runContentCycle([
   {
     id: "guide-johnnie-walker-black-label-vs-double-black-india-2026",
+    cover_image_url: "/category-cutouts/world-whisky.png",
     title: "Johnnie Walker Black Label vs Double Black: Which Bottle Is Which?",
     slug: "johnnie-walker-black-label-vs-double-black-india-2026",
     excerpt: "Black Label and Double Black are separate Johnnie Walker blends. The key differences are the stated age and the more smoke-forward style of Double Black.",
@@ -32,6 +33,7 @@ await runContentCycle([
   },
   {
     id: "guide-jameson-original-vs-black-barrel-india-2026",
+    cover_image_url: "/category-cutouts/world-whisky.png",
     title: "Jameson Original vs Black Barrel: What Changes in the Bottle?",
     slug: "jameson-original-vs-black-barrel-india-2026",
     excerpt: "Jameson Original and Black Barrel are separate Irish whiskey expressions. Compare the blend and barrel treatment before searching for a city-specific price.",

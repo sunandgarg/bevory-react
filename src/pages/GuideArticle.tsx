@@ -352,8 +352,8 @@ const GuideArticle = () => {
           <main className="mx-auto grid max-w-5xl gap-8 px-4 py-7 md:px-8 lg:grid-cols-[minmax(0,1fr)_240px]">
             <div className="min-w-0">
               <figure className="mb-8 flex h-44 items-center justify-center overflow-hidden rounded-md bg-secondary sm:h-64">
-                <img src={coverImage} alt={post.cover_image_url ? post.title : `${heroLabel} guide illustration`} width="960" height="540"
-                  className={`h-full w-full ${post.cover_image_url ? "object-cover" : "object-contain p-3"}`} fetchPriority="high" />
+                <img src={coverImage} alt={post.cover_image_url && !post.cover_image_url.startsWith("/category-cutouts/") ? post.title : `${heroLabel} guide illustration`} width="960" height="540"
+                  className={`h-full w-full ${post.cover_image_url && !post.cover_image_url.startsWith("/category-cutouts/") ? "object-cover" : "object-contain p-3"}`} fetchPriority="high" />
               </figure>
               {articleSections.length > 2 && (
                 <details className="mb-7 border-y border-border py-3 lg:hidden">
