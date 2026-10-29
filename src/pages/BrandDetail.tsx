@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useRouteCity } from "@/hooks/useRouteCity";
 import { generateProductUrlStatic } from "@/hooks/useProductUrl";
 import SEOHead from "@/components/SEOHead";
+import GuideAd from "@/components/GuideAd";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import {
   Accordion,
@@ -615,6 +616,7 @@ const BrandDetail = () => {
           )}
 
           {/* Why Choose */}
+          {(brand.description || tastingNotes.length > 0 || howToEnjoy.length > 0) && <GuideAd placement="middle" />}
           {brand.why_choose && (
             <motion.section
               initial={{ opacity: 0, y: 20 }}

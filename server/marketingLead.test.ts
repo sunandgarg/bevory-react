@@ -14,6 +14,7 @@ const valid = {
 describe("marketing lead boundaries", () => {
   it("normalizes a valid, consented signup", () => {
     expect(marketingLeadSchema.parse(valid)).toMatchObject({ email: "ada@example.com", mobile: "9876543210" });
+    expect(marketingLeadSchema.parse({ ...valid, mobile: "09876543210" }).mobile).toBe("9876543210");
   });
 
   it.each([

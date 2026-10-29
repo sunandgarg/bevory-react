@@ -47,14 +47,18 @@ export async function runContentCycle(drafts, publishedAt) {
   if (process.argv.includes("--seo-only")) {
     const publicDir = process.env.SEO_PUBLIC_DIR || path.resolve("public");
     const contentFile = path.join(publicDir, "seo-routes/content.json");
-    const shardFile = path.join(publicDir, "sitemaps/catalog-32.xml");
     const indexFile = path.join(publicDir, "sitemap.xml");
-    const [contentRaw, shardRaw, indexRaw] = await Promise.all([contentFile, shardFile, indexFile].map((file) => readFile(file, "utf8")));
+    const [contentRaw, indexRaw] = await Promise.all([contentFile, indexFile].map((file) => readFile(file, "utf8")));
+    const shards = [...indexRaw.matchAll(/<loc>https:\/\/bevory\.in\/sitemaps\/(catalog-(\d+)\.xml)<\/loc>/g)];
+    assert.ok(shards.length, "no catalog sitemap shard in index");
+    const shardName = shards.at(-1)[1];
+    const shardFile = path.join(publicDir, "sitemaps", shardName);
+    const shardRaw = await readFile(shardFile, "utf8");
     const routes = JSON.parse(contentRaw);
     assert.ok(routes && typeof routes === "object" && !Array.isArray(routes));
     assert.ok((shardRaw.match(/<url>/g) || []).length + posts.length <= 3000, "sitemap shard is full");
     assert.ok(shardRaw.endsWith("</urlset>\n"), "unexpected sitemap format");
-    assert.equal((indexRaw.match(/<loc>https:\/\/bevory\.in\/sitemaps\/catalog-32\.xml<\/loc>/g) || []).length, 1);
+    assert.equal((indexRaw.match(new RegExp(`<loc>https://bevory\\.in/sitemaps/${shardName.replace(".", "\\.")}<\\/loc>`, "g")) || []).length, 1);
     const plainText = (html) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
     const entries = [];
     for (const post of posts) {
@@ -84,7 +88,7 @@ export async function runContentCycle(drafts, publishedAt) {
     if (entries.length) {
       const backup = path.join(process.env.SEO_BACKUP_DIR || path.dirname(publicDir), `seo-backup-${Date.now()}`);
       await Promise.all([contentFile, shardFile, indexFile].map((file, i) => copyFile(file, `${backup}-${i}`)));
-      const nextIndex = indexRaw.replace(/(<loc>https:\/\/bevory\.in\/sitemaps\/catalog-32\.xml<\/loc>\s*<lastmod>)[^<]+(<\/lastmod>)/, `$1${publishedAt}$2`);
+      const nextIndex = indexRaw.replace(new RegExp(`(<loc>https://bevory\\.in/sitemaps/${shardName.replace(".", "\\.")}<\\/loc>\\s*<lastmod>)[^<]+(<\\/lastmod>)`), `$1${publishedAt}$2`);
       assert.notEqual(nextIndex, indexRaw, "sitemap index was not updated");
       await writeFile(`${contentFile}.next`, `${JSON.stringify(routes)}\n`);
       await writeFile(`${shardFile}.next`, shardRaw.replace("</urlset>\n", `${entries.join("")}</urlset>\n`));

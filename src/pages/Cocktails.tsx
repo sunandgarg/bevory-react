@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import SEOHead from "@/components/SEOHead";
+import GuideAd from "@/components/GuideAd";
 
 interface Cocktail {
   id: string;
@@ -350,6 +351,8 @@ const Cocktails = () => {
                     </div>
                   </section>
                 )}
+
+                {filteredCocktails.length >= 8 && <GuideAd placement="middle" />}
 
                 {/* All Cocktails */}
                 {otherCocktails.length > 0 && (

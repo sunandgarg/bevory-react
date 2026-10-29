@@ -125,6 +125,19 @@ const buildArticleHtml = (content: string | null) => {
   });
 };
 
+const splitArticleForAd = (html: string): [string, string] => {
+  if (html.length < 1400 || typeof document === "undefined") return [html, ""];
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = html;
+  const blocks = Array.from(wrapper.childNodes);
+  if (blocks.length < 6) return [html, ""];
+  const first = document.createElement("div");
+  const second = document.createElement("div");
+  const midpoint = Math.floor(blocks.length / 2);
+  blocks.forEach((block, index) => (index < midpoint ? first : second).appendChild(block));
+  return [first.innerHTML, second.innerHTML];
+};
+
 const GuideArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const demandGuide = demandGuideBySlug(slug);
@@ -188,6 +201,7 @@ const GuideArticle = () => {
 
   const articleSections = useMemo(() => extractSections(post?.content ?? null), [post?.content]);
   const articleHtml = useMemo(() => buildArticleHtml(post?.content ?? null), [post?.content]);
+  const [articleStart, articleEnd] = useMemo(() => splitArticleForAd(articleHtml), [articleHtml]);
 
   const handleShare = async () => {
     if (!post) return;
@@ -364,10 +378,11 @@ const GuideArticle = () => {
                   prose-img:my-7 prose-img:rounded-lg prose-img:border prose-img:border-border
                   prose-code:rounded prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm
                   prose-table:my-7 prose-table:text-sm prose-th:border prose-th:border-border prose-th:bg-secondary prose-th:px-3 prose-th:py-2 prose-td:border prose-td:border-border prose-td:px-3 prose-td:py-2"
-                dangerouslySetInnerHTML={{ __html: articleHtml }}
-              />
-
-              {!demandGuide && <GuideAd />}
+              >
+                <div dangerouslySetInnerHTML={{ __html: articleStart }} />
+                {articleEnd && <GuideAd placement="middle" />}
+                {articleEnd && <div dangerouslySetInnerHTML={{ __html: articleEnd }} />}
+              </div>
 
               {guideProducts.length > 0 && demandGuide?.citySlug && (
                 <section className="mt-10 border-t border-border pt-7" aria-labelledby="live-price-list">

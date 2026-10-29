@@ -14,6 +14,7 @@ import { citySlugFromName } from "@/lib/locations";
 import ProductImage from "@/components/product/ProductImage";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { INFORMATIONAL_PRICE_NOTICE } from "@/lib/informationNotice";
+import GuideAd from "@/components/GuideAd";
 
 interface SubCategory {
   id: string;
@@ -270,6 +271,7 @@ const CategoryDetail = () => {
                     </article>
                   ))}
                 </div>
+                {products.length >= 8 && <GuideAd placement="middle" />}
                 {isFetchingNextPage && (
                   <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" aria-label="Loading more products">
                     <div className="aspect-[4/5] animate-pulse rounded-md bg-muted" />

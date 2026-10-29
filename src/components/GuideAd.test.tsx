@@ -10,10 +10,13 @@ describe("guide ad consent", () => {
     expect(renderToStaticMarkup(<GuideAd />)).toBe("");
   });
 
-  it("renders only the BevOry unit after explicit consent", () => {
-    vi.stubGlobal("localStorage", { getItem: (key: string) => key === "bevory-ads-consent-v1" ? "granted" : "verified" });
-    const html = renderToStaticMarkup(<GuideAd />);
-    expect(html).toContain('data-ad-client="ca-pub-4858806955717066"');
-    expect(html).toContain('data-ad-slot="7233877704"');
+  it("renders the requested BevOry units after explicit consent", () => {
+    vi.stubGlobal("window", {});
+    vi.stubGlobal("localStorage", { getItem: (key: string) => key === "bevory-ads-consent-v2" ? "granted" : "verified" });
+    for (const [placement, slot] of [["top", "3094605531"], ["middle", "5618816199"], ["bottom", "7907948513"]] as const) {
+      const html = renderToStaticMarkup(<GuideAd placement={placement} />);
+      expect(html).toContain('data-ad-client="ca-pub-4858806955717066"');
+      expect(html).toContain(`data-ad-slot="${slot}"`);
+    }
   });
 });

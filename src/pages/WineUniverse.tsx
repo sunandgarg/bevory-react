@@ -14,6 +14,7 @@ import { useLocation } from "@/hooks/useLocation";
 import { useProducts, type Product } from "@/hooks/useProducts";
 import { useProductUrl } from "@/hooks/useProductUrl";
 import { citySlugFromName } from "@/lib/locations";
+import GuideAd from "@/components/GuideAd";
 
 type ViewMode = "explore" | "taste" | "price" | "value";
 type StyleFilter = "all" | "red-wine" | "white-wine" | "rose-wine" | "sparkling-wine" | "dessert-wine";
@@ -392,6 +393,7 @@ const WineUniverse = () => {
             )}
           </section>
 
+          {filteredWines.length >= 8 && <GuideAd placement="middle" />}
           <section aria-labelledby="wine-style-directory">
             <div className="mb-3 flex items-center justify-between">
               <div>

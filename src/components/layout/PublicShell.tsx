@@ -10,6 +10,8 @@ import { CITY_SLUGS, citySlugFromName } from "@/lib/locations";
 import { PublicNavigationProvider, usePublicNavigation } from "@/hooks/usePublicNavigation";
 import { productHeadingFromSlug } from "@/lib/pageNavigation";
 import CityUpdatesModal from "@/components/CityUpdatesModal";
+import GuideAd from "@/components/GuideAd";
+import { hasContentAds } from "@/lib/contentAdRoute";
 
 const OryAssistant = lazy(() => import("@/components/ai/OryAssistant"));
 
@@ -21,6 +23,7 @@ const PublicShellContent = () => {
   const citySlug = citySlugFromName(selectedCity?.name) || "gurgaon";
   const isHome = pathname === "/" || CITY_SLUGS.includes(pathname.slice(1));
   const isSearchPage = pathname === "/search";
+  const showAds = hasContentAds(pathname);
 
   const pageHeading = (() => {
     if (isHome) return "";
@@ -74,7 +77,9 @@ const PublicShellContent = () => {
       </header>
 
       <div className={isSearchPage ? "pt-14 md:pt-[72px]" : "pt-[126px] md:pt-[136px]"}>
+        {showAds && <GuideAd key={`${pathname}-top`} placement="top" />}
         <Outlet />
+        {showAds && <GuideAd key={`${pathname}-bottom`} placement="bottom" />}
       </div>
 
       <Suspense fallback={null}>

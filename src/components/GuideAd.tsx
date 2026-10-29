@@ -1,14 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 
 const CLIENT = "ca-pub-4858806955717066";
-const SLOT = "7233877704";
-const ADS_CONSENT_KEY = "bevory-ads-consent-v1";
+const SLOTS = {
+  top: "3094605531",
+  middle: "5618816199",
+  bottom: "7907948513",
+} as const;
+const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 
 const canShowAds = () =>
-  localStorage.getItem(AGE_VERIFIED_KEY) !== null && localStorage.getItem(ADS_CONSENT_KEY) === "granted";
+  typeof window !== "undefined" &&
+  localStorage.getItem(AGE_VERIFIED_KEY) !== null &&
+  localStorage.getItem(ADS_CONSENT_KEY) === "granted";
 
-const GuideAd = () => {
+const GuideAd = ({ placement = "middle" }: { placement?: keyof typeof SLOTS }) => {
   const [allowed, setAllowed] = useState(canShowAds);
   const slot = useRef<HTMLModElement>(null);
 
@@ -40,14 +46,14 @@ const GuideAd = () => {
   if (!allowed) return null;
 
   return (
-    <aside aria-label="Advertisement" className="my-10 border-y border-border py-5">
+    <aside aria-label="Advertisement" data-ad-placement={placement} className="mx-auto my-8 w-full max-w-[1120px] overflow-hidden border-y border-border px-4 py-4 sm:px-6">
       <p className="mb-2 text-center text-[11px] text-muted-foreground">Advertisement</p>
       <ins
         ref={slot}
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{ display: "block", minHeight: placement === "top" ? 90 : 120 }}
         data-ad-client={CLIENT}
-        data-ad-slot={SLOT}
+        data-ad-slot={SLOTS[placement]}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />

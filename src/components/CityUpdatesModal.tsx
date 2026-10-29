@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useLocation } from "@/hooks/useLocation";
 import { useAuth } from "@/hooks/useAuth";
 import { apiClient } from "@/integrations/api/client";
+import { normalizeIndianMobile } from "@/lib/indianMobile";
 
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const DISMISS_KEY = "bevory-city-updates-dismissals";
@@ -43,7 +44,7 @@ const CityUpdatesModal = () => {
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: open && eligiblePage }));
-    return () => window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: false }));
+    return () => { window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: false })); };
   }, [open, eligiblePage]);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ const CityUpdatesModal = () => {
     const profileName = user.user_metadata?.full_name ?? user.user_metadata?.name;
     if (typeof profileName === "string") setName((current) => current || profileName);
     if (user.email) setEmail((current) => current || user.email || "");
-    if (user.phone) setMobile((current) => current || user.phone || "");
+    if (user.phone) setMobile((current) => current || normalizeIndianMobile(user.phone || "").slice(0, 10));
   }, [user]);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const CityUpdatesModal = () => {
     event.preventDefault();
     setPending(true);
     setError("");
-    const result = await apiClient.marketing.subscribe({ name, email, mobile, city, adult: consent, consent });
+    const result = await apiClient.marketing.subscribe({ name, email, mobile: normalizeIndianMobile(mobile), city, adult: consent, consent });
     setPending(false);
     if (result.error) {
       setError(result.error.message);
@@ -113,7 +114,7 @@ const CityUpdatesModal = () => {
           <label className="sr-only" htmlFor="updates-email">Email</label>
           <Input id="updates-email" name="email" className="h-9 focus-visible:ring-accent" type="email" placeholder="Email" autoComplete="email" required maxLength={254} value={email} onChange={(event) => setEmail(event.target.value)} />
           <label className="sr-only" htmlFor="updates-mobile">Mobile</label>
-          <Input id="updates-mobile" name="tel" className="h-9 focus-visible:ring-accent" type="tel" placeholder="Mobile number" inputMode="tel" autoComplete="tel" required pattern="(?:[+]91[ -]?)?[6-9](?:[ -]?[0-9]){9}" title="Enter a 10-digit Indian mobile number" value={mobile} onChange={(event) => setMobile(event.target.value)} />
+          <Input id="updates-mobile" name="tel" className="h-9 focus-visible:ring-accent" type="tel" placeholder="10-digit mobile number" inputMode="numeric" autoComplete="tel" required pattern="[6-9][0-9]{9}" title="Enter a 10-digit Indian mobile number" value={mobile} onChange={(event) => setMobile(normalizeIndianMobile(event.target.value).slice(0, 10))} onBlur={(event) => setMobile(normalizeIndianMobile(event.target.value).slice(0, 10))} />
           <label className="flex items-start gap-2 text-[11px] leading-4"><input type="checkbox" className="mt-0.5 shrink-0 accent-accent" checked={consent} onChange={(event) => setConsent(event.target.checked)} required />I confirm I am 25+ and agree to receive BevOry city-offer updates by email and mobile. I can withdraw consent at any time.</label>
           <p className="text-[10px] leading-4 text-muted-foreground">By subscribing, I accept the <Link to="/terms" className="underline underline-offset-2">Terms</Link>, <Link to="/privacy-policy" className="underline underline-offset-2">Privacy Policy</Link> and <Link to="/disclaimer" className="underline underline-offset-2">Disclaimer</Link>.</p>
           {error && <p role="alert" className="text-xs text-destructive">{error}</p>}

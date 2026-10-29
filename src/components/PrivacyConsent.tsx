@@ -4,7 +4,7 @@ import { Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
-const ADS_CONSENT_KEY = "bevory-ads-consent-v1";
+const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const MEASUREMENT_ID = "G-QPBTP7TCDV";
 
@@ -103,10 +103,10 @@ const PrivacyConsent = () => {
         <Button type="button" size="icon" variant="ghost" className="h-7 w-7 shrink-0" title="Privacy settings" aria-label="Privacy settings" aria-expanded={showDetails} onClick={() => setShowDetails(!showDetails)}><Settings2 className="h-4 w-4" /></Button>
       </div>
       {showDetails && <div className="mx-auto max-w-7xl border-t border-border pt-2 text-xs">
-        <p className="text-muted-foreground">Essential storage keeps age and city preferences. Analytics and guide-page ads are optional.</p>
+        <p className="text-muted-foreground">Essential storage keeps age and city preferences. Analytics and ads on public content pages are optional.</p>
         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
           <label className="flex items-center gap-1.5"><input type="checkbox" checked={analyticsAllowed} onChange={(event) => setAnalyticsAllowed(event.target.checked)} />Analytics</label>
-          <label className="flex items-center gap-1.5"><input type="checkbox" checked={adsAllowed} onChange={(event) => setAdsAllowed(event.target.checked)} />Guide-page ads</label>
+          <label className="flex items-center gap-1.5"><input type="checkbox" checked={adsAllowed} onChange={(event) => setAdsAllowed(event.target.checked)} />Ads on public content pages</label>
           <Button type="button" size="sm" className="h-7 px-2 text-[11px]" onClick={() => choose(analyticsAllowed ? "granted" : "denied", adsAllowed ? "granted" : "denied")}>Save choices</Button>
           <Link to="/privacy-policy" className="underline underline-offset-2">Privacy</Link>
           <Link to="/cookie-policy" className="underline underline-offset-2">Cookie policy</Link>

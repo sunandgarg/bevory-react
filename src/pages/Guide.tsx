@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { apiClient } from "@/integrations/api/client";
 import { DEMAND_GUIDES } from "@/lib/demandGuides";
 import { guideImage } from "@/lib/guideImages";
+import GuideAd from "@/components/GuideAd";
 
 interface BlogPost {
   id: string;
@@ -106,6 +107,7 @@ const Guide = () => {
                     </div>
                   </Link>
                 </section>
+                {latestPosts.length >= 5 && <GuideAd placement="middle" />}
                 <section className="pt-7" aria-labelledby="latest-guides-heading">
                   <h2 id="latest-guides-heading" className="text-xl font-semibold">Latest articles</h2>
                   <div className="mt-3 divide-y divide-border">

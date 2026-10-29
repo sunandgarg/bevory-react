@@ -27,6 +27,7 @@ import { fullProductName } from "@/lib/productName";
 import { cityRecordIdFromSlug } from "@/lib/locations";
 import { foodPairingPosition } from "@/lib/foodPairingVisual";
 import { bevoryRating } from "@/lib/bevoryRating";
+import GuideAd from "@/components/GuideAd";
 
 interface FAQ {
   question: string;
@@ -849,6 +850,7 @@ const ProductDetail = () => {
           </section>
 
           {/* Description */}
+          {(product.description || product.taste_profile || product.tasting_notes) && <GuideAd placement="middle" />}
           {product.description && (
             <section id="about" className="scroll-mt-32 border-t border-border pt-8">
               <h2 className="mb-3 text-xl font-bold">About {productLabel}</h2>

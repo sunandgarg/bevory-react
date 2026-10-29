@@ -84,7 +84,7 @@ const PrivacyPolicy = () => (
         interactions, device/browser data, approximate location, and pseudonymous identifiers.
       </li>
       <li>
-        <strong>Optional advertising:</strong> if you separately allow guide-page ads, Google AdSense may receive
+        <strong>Optional advertising:</strong> if you separately allow ads on public content pages, Google AdSense may receive
         device and request data and use cookies or similar technologies to deliver and measure ads and prevent fraud.
         BevOry keeps ad user data, ad personalisation, and Google signals disabled or denied.
       </li>

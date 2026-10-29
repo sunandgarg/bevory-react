@@ -55,9 +55,9 @@ const CookiePolicy = () => (
             <td>Necessary preference record</td>
           </tr>
           <tr>
-            <td><code>bevory-ads-consent-v1</code></td>
+            <td><code>bevory-ads-consent-v2</code></td>
             <td>Local storage</td>
-            <td>Records "granted" or "denied" for optional guide-page ads.</td>
+            <td>Records "granted" or "denied" for optional ads on public content pages.</td>
             <td>Until you change it, clear site data, or the key version is retired.</td>
             <td>Necessary preference record</td>
           </tr>
@@ -137,7 +137,7 @@ const CookiePolicy = () => (
       identifiers can persist for months or longer unless they expire or are cleared.
     </p>
     <p>
-      If you separately allow guide-page ads, Google AdSense may receive request and device data and use cookies or
+      If you separately allow ads on public content pages, Google AdSense may receive request and device data and use cookies or
       similar technologies for ad delivery, measurement, and fraud prevention. Personalised advertising remains off in
       BevOry's Google consent settings. Browser privacy tools, extensions, network filtering, or Google account settings
       may further limit these technologies. Google acts under its own service and data-processing terms for the parts it controls.
@@ -164,7 +164,7 @@ const CookiePolicy = () => (
 
     <h2>6. How to control or delete storage</h2>
     <ul>
-      <li>Use "Privacy choices" in the footer to grant or deny optional Analytics and guide-page ads separately.</li>
+      <li>Use "Privacy choices" in the footer to grant or deny optional Analytics and ads on public content pages separately.</li>
       <li>Use your browser settings to inspect, block, or delete cookies and local storage for <code>bevory.in</code>.</li>
       <li>Use private-browsing or browser tracking controls where appropriate.</li>
       <li>Sign out before clearing a session on a shared device.</li>
