@@ -22,7 +22,7 @@
     <!-- Canonical URL - bevory.in is the primary domain -->
     <link rel="canonical" href="https://bevory.in/" />
 
-    <!-- Consent defaults run before any optional analytics tag. -->
+    <!-- Consent defaults and saved choices run before the Google tag. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -36,7 +36,25 @@
       });
       gtag('set', 'ads_data_redaction', true);
       gtag('set', 'url_passthrough', false);
+      try {
+        if (localStorage.getItem('bevory-age-policy-2026-09-20')) {
+          gtag('consent', 'update', {
+            analytics_storage: localStorage.getItem('bevory-analytics-consent-v1') === 'granted' ? 'granted' : 'denied',
+            ad_storage: localStorage.getItem('bevory-ads-consent-v2') === 'granted' ? 'granted' : 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
+      } catch (_) { /* Storage can be unavailable in a private browsing context. */ }
+      gtag('js', new Date());
+      gtag('config', 'G-QPBTP7TCDV', {
+        send_page_view: true,
+        page_location: location.origin + location.pathname,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false
+      });
     </script>
+    <script id="bevory-google-tag" async src="https://www.googletagmanager.com/gtag/js?id=G-QPBTP7TCDV"></script>
 
     <title>BevOry: Compare Drink Prices, Brands &amp; Bottle Sizes</title>
     <meta name="description" content="Explore beverage brands, bottle sizes, local price guides, cocktails and planning tools across India. BevOry is informational and does not sell alcohol.">

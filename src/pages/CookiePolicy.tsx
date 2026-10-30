@@ -4,6 +4,7 @@ const CookiePolicy = () => (
   <LegalPage
     title="Cookie & Local Storage Policy"
     description="Details of the cookies, local-storage keys, consent controls, and third-party browser technologies used by BevOry."
+    lastUpdated="30 October 2026"
   >
     <p>
       This policy explains the browser technologies used by BevOry. "Cookies" are small values stored by a browser and
@@ -16,15 +17,17 @@ const CookiePolicy = () => (
     <p>
       Necessary technologies support the age gate, privacy preference, city selection, authentication, security, and
       interface operation. They are used when needed to provide a feature you request and are not switched off by the
-      Analytics choice. Optional Google Analytics is configured with analytics storage denied by default and is loaded
-      only after you allow analytics. A separate opt-in controls Google AdSense ads on eligible guide pages. Advertising
-      user data, ad personalisation, and Google signals remain denied or disabled.
+      Analytics choice. The Google tag loads when a page opens, with analytics storage denied by default. Before you
+      choose, and if you keep analytics cookies off, it can send cookieless page, interaction, and consent signals to Google without
+      setting analytics cookies. Allowing analytics enables identifier-based measurement. A separate opt-in controls
+      Google AdSense ads on eligible guide pages. Advertising user data, ad personalisation, and Google signals remain
+      denied or disabled.
     </p>
     <p>
       You can reopen the consent panel at any time by selecting <strong>"Privacy choices"</strong> in either website
-      footer. Choosing "Essential only" tells our Google consent controls to deny Analytics and ads going forward. It does not
-      necessarily delete identifiers already stored during an earlier grant; use your browser's site-data controls to
-      remove those from the device.
+      footer. Choosing "No optional cookies" denies analytics and ad storage and keeps AdSense off, but cookieless Google
+      page and interaction signals continue. It does not necessarily delete identifiers already stored during an earlier grant; use
+      your browser's site-data controls to remove those from the device.
     </p>
 
     <h2>2. Current BevOry storage</h2>
@@ -50,7 +53,7 @@ const CookiePolicy = () => (
           <tr>
             <td><code>bevory-analytics-consent-v1</code></td>
             <td>Local storage</td>
-            <td>Records "granted" or "denied" so the site can honour your Analytics choice.</td>
+            <td>Records "granted" or "denied" for identifier-based analytics and its cookies.</td>
             <td>Until you change it, clear site data, or the key version is retired.</td>
             <td>Necessary preference record</td>
           </tr>
@@ -128,9 +131,9 @@ const CookiePolicy = () => (
       versions change or when browser site data is cleared.
     </p>
 
-    <h2>3. Optional Google Analytics technologies</h2>
+    <h2>3. Google Analytics technologies</h2>
     <p>
-      After consent, Google Analytics may set or read identifiers commonly named <code>_ga</code> and
+      If you allow analytics, Google Analytics may set or read identifiers commonly named <code>_ga</code> and
       <code>_ga_&lt;container-id&gt;</code>, together with other keys Google may introduce for measurement. They help
       distinguish browsers, maintain a session, count visits and interactions, and produce aggregate reports. Exact
       names, duration, and behaviour can vary by browser, Google configuration, consent mode, and product update; some
@@ -164,7 +167,7 @@ const CookiePolicy = () => (
 
     <h2>6. How to control or delete storage</h2>
     <ul>
-      <li>Use "Privacy choices" in the footer to grant or deny optional Analytics and ads on public content pages separately.</li>
+      <li>Use "Privacy choices" in the footer to control analytics cookies and ads on public content pages separately.</li>
       <li>Use your browser settings to inspect, block, or delete cookies and local storage for <code>bevory.in</code>.</li>
       <li>Use private-browsing or browser tracking controls where appropriate.</li>
       <li>Sign out before clearing a session on a shared device.</li>

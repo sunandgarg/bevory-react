@@ -23,6 +23,7 @@ type LegalPageProps = {
   title: string;
   description: string;
   children: ReactNode;
+  lastUpdated?: string;
 };
 
 export const LegalContact = ({ purpose = "questions or notices" }: { purpose?: string }) => (
@@ -37,14 +38,14 @@ export const LegalContact = ({ purpose = "questions or notices" }: { purpose?: s
   </address>
 );
 
-const LegalPage = ({ title, description, children }: LegalPageProps) => (
+const LegalPage = ({ title, description, children, lastUpdated = LEGAL_LAST_UPDATED }: LegalPageProps) => (
   <div className="min-h-screen bg-background">
     <SEOHead title={`${title} | BevOry`} description={description} />
     <main className="mx-auto max-w-4xl px-4 py-8">
       <article className="prose prose-sm max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-primary">
         <h1 className="mb-2 text-2xl font-bold">{title}</h1>
         <p className="mt-0 text-xs text-muted-foreground">
-          Effective and last updated: {LEGAL_LAST_UPDATED}
+          Effective and last updated: {lastUpdated}
         </p>
         <div className="my-6 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm">
           <strong>Important:</strong> {INFORMATIONAL_PRICE_NOTICE}

@@ -5,6 +5,7 @@ const PrivacyPolicy = () => (
   <LegalPage
     title="Privacy Policy"
     description="How BevOry collects, uses, discloses, retains, and protects personal data, and the choices available to users."
+    lastUpdated="30 October 2026"
   >
     <p>
       This Privacy Policy explains how the operator of BevOry handles personal data when you visit or use
@@ -80,8 +81,10 @@ const PrivacyPolicy = () => (
         Policy</Link>.
       </li>
       <li>
-        <strong>Optional analytics:</strong> if you allow analytics, Google Analytics may receive page views,
-        interactions, device/browser data, approximate location, and pseudonymous identifiers.
+        <strong>Page measurement and optional analytics cookies:</strong> the Google tag sends cookieless page, interaction, and
+        consent signals when a page loads, including before you choose and after you decline analytics cookies.
+        If you allow analytics, Google Analytics may also receive interactions, device/browser data, approximate
+        location, and pseudonymous identifiers for identifier-based measurement.
       </li>
       <li>
         <strong>Optional advertising:</strong> if you separately allow ads on public content pages, Google AdSense may receive
@@ -123,7 +126,7 @@ const PrivacyPolicy = () => (
       <li>produce aggregated or de-identified statistics that are not intended to identify an individual.</li>
     </ul>
     <p>
-      We rely on your consent where consent is required, including for optional Google Analytics. We also process data
+      We rely on your consent where consent is required, including for identifier-based Google Analytics. We also process data
       where necessary to provide a feature you request, comply with law, respond to emergencies, or for another lawful
       basis or legitimate use recognised by applicable law. You may withdraw consent, but withdrawal does not make
       earlier lawful processing invalid and may prevent us from providing a consent-dependent feature.
@@ -137,7 +140,7 @@ const PrivacyPolicy = () => (
         backups, and object storage) and Cloudflare (DNS, content delivery, caching, traffic management, and security).
       </li>
       <li>
-        <strong>To feature providers you use:</strong> Google for optional Analytics, Google OAuth sign-in, and Gemini
+        <strong>To feature providers you use:</strong> Google for cookieless page measurement, optional identifier-based Analytics, Google OAuth sign-in, and Gemini
         processing when you submit an oRy AI or Smart Party Planner request; Twilio for phone OTP messaging; and
         YouTube/Google for videos you choose to load or open. AI requests can include your question, selected city,
         current BevOry page context, limited conversation history, and planning inputs needed to answer.
@@ -209,7 +212,7 @@ const PrivacyPolicy = () => (
         request withdrawal or deletion through the BevOry Grievance Desk;
       </li>
       <li>
-        optional Analytics data is retained under BevOry's Google Analytics configuration and Google's processing
+        Google Analytics measurement data is retained under BevOry's Google Analytics configuration and Google's processing
         terms; aggregated reports may outlast the underlying event-level retention.
       </li>
     </ul>
@@ -225,7 +228,7 @@ const PrivacyPolicy = () => (
       <li>request a summary of personal data being processed and information about its processing;</li>
       <li>ask us to correct inaccurate data, complete incomplete data, or update outdated data;</li>
       <li>request erasure where retention is no longer required or another legal exception does not apply;</li>
-      <li>withdraw consent and change optional Analytics through the "Privacy choices" link in either footer;</li>
+      <li>withdraw consent and change identifier-based Analytics through the "Privacy choices" link in either footer; cookieless measurement continues as described above;</li>
       <li>withdraw city-update consent by contacting the BevOry Grievance Desk;</li>
       <li>object or complain about a specific use where applicable law gives you that right;</li>
       <li>seek grievance redressal and, where legally available, nominate another individual to exercise rights; and</li>
