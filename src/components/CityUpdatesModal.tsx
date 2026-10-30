@@ -88,6 +88,9 @@ const CityUpdatesModal = () => {
       setError(result.error.message);
       return;
     }
+    if (localStorage.getItem("bevory-analytics-consent-v1") === "granted") {
+      window.gtag?.("event", "generate_lead", { method: "city_updates" });
+    }
     try { localStorage.setItem(SUBMITTED_KEY, "yes"); } catch { /* Keep the current visit suppressed. */ }
     setSubmitted(true);
     setOpen(false);
