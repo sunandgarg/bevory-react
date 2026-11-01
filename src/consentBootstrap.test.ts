@@ -21,6 +21,8 @@ describe("page-load analytics consent", () => {
     expect(commands[0]).toMatchObject(["consent", "default", { analytics_storage: "denied", ad_storage: "denied" }]);
     expect(commands.find(([command]) => command === "config")?.[2]).toMatchObject({ page_location: "https://bevory.in/auth" });
     expect(html).toContain('id="bevory-google-tag" async');
+    expect(html.match(/gtm\.js\?id=GTM-WZMQX2NW/g)).toHaveLength(1);
+    expect(html.indexOf("gtag('consent', 'default'")).toBeLessThan(html.indexOf("gtm.js?id=GTM-WZMQX2NW"));
   });
 
   it("restores only a previously granted choice before the GA4 config", () => {
