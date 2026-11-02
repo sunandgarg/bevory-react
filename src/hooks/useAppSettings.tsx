@@ -14,7 +14,7 @@ export interface AgeVerificationSettings {
 }
 
 const DEFAULT_AGE_SETTINGS: AgeVerificationSettings = {
-  enabled: true,
+  enabled: false,
   cityUpdatesPopupEnabled: false,
   defaultCity: "Gurgaon",
   title: "Are you 25 or older?",

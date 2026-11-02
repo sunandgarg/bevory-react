@@ -5,6 +5,15 @@ import { useAppSettings } from "./useAppSettings";
 vi.mock("@/integrations/api/client", () => ({ apiClient: {} }));
 
 describe("popup settings", () => {
+  it("keeps the paused age gate off when settings cannot load", () => {
+    const Settings = () => {
+      const { ageSettings } = useAppSettings();
+      return <span>{ageSettings.enabled ? "on" : "off"}</span>;
+    };
+
+    expect(renderToStaticMarkup(<Settings />)).toBe("<span>off</span>");
+  });
+
   it("keeps the city-offers prompt off unless an admin enables it", () => {
     const Settings = () => {
       const { ageSettings } = useAppSettings();

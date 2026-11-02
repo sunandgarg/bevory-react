@@ -98,7 +98,7 @@ const AgeVerificationModal = () => {
   };
 
   const normalizedPathname = pathname.replace(/\/+$/, "");
-  if (isVerified || !isOpen || PUBLIC_LEGAL_PATHS.has(normalizedPathname)) return null;
+  if (settingsLoading || !ageSettings.enabled || isVerified || !isOpen || PUBLIC_LEGAL_PATHS.has(normalizedPathname)) return null;
 
   const filteredCities = getFilteredCities();
 
