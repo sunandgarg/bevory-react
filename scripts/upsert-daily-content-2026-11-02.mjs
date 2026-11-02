@@ -18,7 +18,7 @@ await runContentCycle([
     tags: ["McDowell's No.1", "Royal Stag Deluxe", "Indian whisky", "whisky comparison"],
     meta_title: "McDowell's No.1 vs Royal Stag Deluxe | BevOry",
     meta_description: "Compare McDowell's No.1 and Royal Stag Deluxe using current maker descriptions. Learn what the 2026 McDowell's refresh changes and how to check a bottle.",
-    selection_note: "A distinct cross-brand decision not covered by existing exact-product and McDowell's relaunch guides. Live query volume was not available; no demand figure is asserted.",
+    selection_note: "Search Console's 25-31 October sample favored exact Indian bottle pages; this separate cross-brand decision was not covered by an existing comparison. No direct query count for this pairing is asserted.",
     source_links: [mcdowell, royalStag],
     content: String.raw`
 <p><strong>McDowell's No.1 and Royal Stag Deluxe are different Indian whiskies from different makers.</strong> Diageo India produces McDowell's No.1; Royal Stag is a Pernod Ricard brand. That distinction matters more than an online headline that calls both simply "whisky." For a useful comparison, identify the exact expression, the bottle size and the city before looking at a price.</p>
@@ -42,7 +42,7 @@ await runContentCycle([
     tags: ["Kingfisher Premium", "Kingfisher Strong", "Indian beer", "beer comparison"],
     meta_title: "Kingfisher Premium vs Strong Beer | BevOry",
     meta_description: "Kingfisher Premium and Strong are distinct beers. Check the full label, local ABV, can or bottle volume, and current retailer price before comparing.",
-    selection_note: "The existing Kingfisher guide compares Premium with Ultra Max, not Strong. This answers the separate mild-versus-strong label question without creating another city-price page. Live query counts were unavailable.",
+    selection_note: "The 25-31 October Search Console top-query sample did not show this beer pairing. The existing Kingfisher guide compares Premium with Ultra Max, not Strong; this covers a separate expression-choice question without another city-price page.",
     source_links: [beerReport, beerPortfolio],
     content: String.raw`
 <p><strong>Kingfisher Premium and Kingfisher Strong are not two names for the same beer.</strong> United Breweries lists them as separate products under the Kingfisher family. A result headed only "Kingfisher beer price" does not identify which one it means, and a photograph of a can is not enough if the listing title and pack size disagree.</p>
@@ -65,7 +65,7 @@ await runContentCycle([
     tags: ["Godawan 01", "Godawan 02", "Indian single malt", "whisky comparison"],
     meta_title: "Godawan 01 vs 02 Indian Single Malt | BevOry",
     meta_description: "Compare Godawan 01 Rich and Rounded with 02 Fruit and Spice using Diageo India's cask and tasting descriptions. Check the exact bottle before buying.",
-    selection_note: "BevOry has individual Godawan 01 and 02 product pages; no exact comparison guide was found in the source inventory. This targets expression-choice intent, not duplicate city-price intent. Query volume was unavailable.",
+    selection_note: "The 25-31 October Search Console top-query sample did not show this pairing. BevOry has individual Godawan 01 and 02 pages but no exact comparison guide; this targets expression-choice intent rather than another city-price page.",
     source_links: [godawan, godawanReport],
     content: String.raw`
 <p><strong>Godawan 01 Rich and Rounded and Godawan 02 Fruit and Spice are two named Indian single malts, not an age sequence.</strong> The numbers identify expressions in the range. If a search result says only "Godawan single malt," check whether its bottle is marked 01 or 02 before relying on a tasting note, image or city listing.</p>
