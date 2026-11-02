@@ -4,6 +4,7 @@ import type { Json } from "@/types/json";
 
 export interface AgeVerificationSettings {
   enabled: boolean;
+  cityUpdatesPopupEnabled: boolean;
   defaultCity: string;
   title: string;
   description: string;
@@ -14,6 +15,7 @@ export interface AgeVerificationSettings {
 
 const DEFAULT_AGE_SETTINGS: AgeVerificationSettings = {
   enabled: true,
+  cityUpdatesPopupEnabled: false,
   defaultCity: "Gurgaon",
   title: "Are you 25 or older?",
   description: "You must be 25 or older to access BevOry.",

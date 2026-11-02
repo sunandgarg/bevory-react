@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Save, Loader2, ShieldCheck, MapPin } from "lucide-react";
+import { Save, Loader2, ShieldCheck, MapPin, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,7 +41,7 @@ const AdminSettings = () => {
     if (success) {
       toast({
         title: "Settings Saved",
-        description: "Age verification settings have been updated.",
+        description: "Popup settings have been updated.",
       });
     } else {
       toast({
@@ -170,6 +170,26 @@ const AdminSettings = () => {
               onChange={(e) => setFormData({ ...formData, termsText: e.target.value })}
               placeholder="By entering this website, you agree to..."
               rows={2}
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Megaphone className="h-5 w-5 text-accent" />
+            City-offers popup
+          </CardTitle>
+          <CardDescription>Control the optional city-updates signup prompt.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-between gap-4 rounded-lg bg-muted/50 p-4">
+            <Label htmlFor="city-updates-popup" className="font-medium">Show city-offers popup</Label>
+            <Switch
+              id="city-updates-popup"
+              checked={formData.cityUpdatesPopupEnabled}
+              onCheckedChange={(checked) => setFormData({ ...formData, cityUpdatesPopupEnabled: checked })}
             />
           </div>
         </CardContent>

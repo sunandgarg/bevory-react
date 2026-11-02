@@ -8,6 +8,7 @@ import { useLocation } from "@/hooks/useLocation";
 import { useAuth } from "@/hooks/useAuth";
 import { apiClient } from "@/integrations/api/client";
 import { normalizeIndianMobile } from "@/lib/indianMobile";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const DISMISS_KEY = "bevory-city-updates-dismissals";
@@ -27,6 +28,7 @@ const savedPrompt = (): PromptState => {
 
 const CityUpdatesModal = () => {
   const { selectedCity, allCities } = useLocation();
+  const { ageSettings, loading: settingsLoading } = useAppSettings();
   const { user } = useAuth();
   const { pathname } = useRouterLocation();
   const [prompt, setPrompt] = useState(savedPrompt);
@@ -40,12 +42,13 @@ const CityUpdatesModal = () => {
   const [consent, setConsent] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const popupEnabled = !settingsLoading && ageSettings.cityUpdatesPopupEnabled;
   const eligiblePage = !/^\/(auth|privacy-policy|terms|cookie-policy|responsible-drinking|disclaimer|contact|grievance-redressal)(\/|$)/.test(pathname);
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: open && eligiblePage }));
+    window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: popupEnabled && open && eligiblePage }));
     return () => { window.dispatchEvent(new CustomEvent("bevory:lead-modal", { detail: false })); };
-  }, [open, eligiblePage]);
+  }, [popupEnabled, open, eligiblePage]);
 
   useEffect(() => {
     const onVerified = () => setAgeVerified(true);
@@ -66,10 +69,10 @@ const CityUpdatesModal = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!ageVerified || !eligiblePage || submitted || prompt.dismissals >= 2) return;
+    if (!popupEnabled || !ageVerified || !eligiblePage || submitted || prompt.dismissals >= 2) return;
     const timer = window.setTimeout(() => setOpen(true), Math.max(0, prompt.nextAt - Date.now()));
     return () => window.clearTimeout(timer);
-  }, [ageVerified, eligiblePage, submitted, prompt]);
+  }, [popupEnabled, ageVerified, eligiblePage, submitted, prompt]);
 
   const dismiss = () => {
     setOpen(false);
@@ -97,7 +100,7 @@ const CityUpdatesModal = () => {
   };
 
   return (
-    <Dialog open={open && eligiblePage} onOpenChange={(next) => { if (!next && !pending) dismiss(); }}>
+    <Dialog open={popupEnabled && open && eligiblePage} onOpenChange={(next) => { if (!next && !pending) dismiss(); }}>
       <DialogContent className="max-h-[calc(100dvh-1rem)] w-[calc(100%-1.5rem)] max-w-[370px] overflow-y-auto rounded-md border border-accent/40 border-t-4 border-t-accent bg-[#fff9e9] p-4 sm:p-5">
         <DialogHeader className="gap-0 pr-5 text-left">
           <span className="inline-flex w-fit items-center gap-1 text-[11px] font-semibold text-[#8f5700]"><MapPin className="h-3 w-3" />{city || selectedCity?.name || "Your city"}</span>
