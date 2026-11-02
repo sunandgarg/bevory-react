@@ -5,12 +5,12 @@ import { useAppSettings } from "./useAppSettings";
 vi.mock("@/integrations/api/client", () => ({ apiClient: {} }));
 
 describe("popup settings", () => {
-  it("keeps the city-offers prompt on unless an admin disables it", () => {
+  it("keeps the city-offers prompt off unless an admin enables it", () => {
     const Settings = () => {
       const { ageSettings } = useAppSettings();
       return <span>{ageSettings.cityUpdatesPopupEnabled ? "on" : "off"}</span>;
     };
 
-    expect(renderToStaticMarkup(<Settings />)).toBe("<span>on</span>");
+    expect(renderToStaticMarkup(<Settings />)).toBe("<span>off</span>");
   });
 });

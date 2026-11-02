@@ -15,7 +15,7 @@ export interface AgeVerificationSettings {
 
 const DEFAULT_AGE_SETTINGS: AgeVerificationSettings = {
   enabled: true,
-  cityUpdatesPopupEnabled: true,
+  cityUpdatesPopupEnabled: false,
   defaultCity: "Gurgaon",
   title: "Are you 25 or older?",
   description: "You must be 25 or older to access BevOry.",
