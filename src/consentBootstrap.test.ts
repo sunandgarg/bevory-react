@@ -25,9 +25,8 @@ describe("page-load analytics consent", () => {
     expect(html.indexOf("gtag('consent', 'default'")).toBeLessThan(html.indexOf("gtm.js?id=GTM-WZMQX2NW"));
   });
 
-  it("restores only a previously granted choice before the GA4 config", () => {
+  it("restores a previously granted choice before GA4 config when the age gate is disabled", () => {
     const commands = commandsFor({
-      "bevory-age-policy-2026-09-20": "verified",
       "bevory-analytics-consent-v1": "granted",
       "bevory-ads-consent-v2": "denied",
     });

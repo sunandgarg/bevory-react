@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
 const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
-const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 
 type ConsentChoice = "granted" | "denied";
 
@@ -42,7 +41,7 @@ const PrivacyConsent = () => {
       if (!analytics || !ads) setIsOpen(true);
     };
 
-    if (localStorage.getItem(AGE_VERIFIED_KEY)) applySavedChoice();
+    applySavedChoice();
 
     const openChoices = () => setIsOpen(true);
     const onLeadModal = (event: Event) => setLeadOpen((event as CustomEvent<boolean>).detail);

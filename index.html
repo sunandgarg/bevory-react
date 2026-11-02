@@ -37,14 +37,12 @@
       gtag('set', 'ads_data_redaction', true);
       gtag('set', 'url_passthrough', false);
       try {
-        if (localStorage.getItem('bevory-age-policy-2026-09-20')) {
-          gtag('consent', 'update', {
-            analytics_storage: localStorage.getItem('bevory-analytics-consent-v1') === 'granted' ? 'granted' : 'denied',
-            ad_storage: localStorage.getItem('bevory-ads-consent-v2') === 'granted' ? 'granted' : 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
-          });
-        }
+        gtag('consent', 'update', {
+          analytics_storage: localStorage.getItem('bevory-analytics-consent-v1') === 'granted' ? 'granted' : 'denied',
+          ad_storage: localStorage.getItem('bevory-ads-consent-v2') === 'granted' ? 'granted' : 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
       } catch (_) { /* Storage can be unavailable in a private browsing context. */ }
       gtag('js', new Date());
       gtag('config', 'G-QPBTP7TCDV', {
