@@ -1,0 +1,2 @@
+export const GA4_MEASUREMENT_ID = "G-QPBTP7TCDV";
+export const GA4_PROPERTY_ID = "527631762";

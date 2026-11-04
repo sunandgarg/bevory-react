@@ -1,4 +1,5 @@
 import { createSign } from "node:crypto";
+import { GA4_PROPERTY_ID } from "../../src/lib/googleAnalyticsConfig.js";
 
 type ServiceAccount = { client_email?: string; private_key?: string; token_uri?: string };
 type ReportRow = { dimensionValues?: Array<{ value?: string }>; metricValues?: Array<{ value?: string }> };
@@ -63,12 +64,11 @@ const runReport = async (
 
 const numberAt = (row: ReportRow | undefined, index: number) => Number(row?.metricValues?.[index]?.value || 0);
 
-export const fetchGoogleAnalytics = async (propertyId: string, startDate: string, endDate: string) => {
-  if (!/^\d+$/.test(propertyId)) throw new Error("A numeric GA4 property ID is required");
+export const fetchGoogleAnalytics = async (startDate: string, endDate: string) => {
   const token = await getAccessToken();
   const dateRanges = [{ startDate, endDate }];
   const [daily, pages, sources] = await Promise.all([
-    runReport(token, propertyId, {
+    runReport(token, GA4_PROPERTY_ID, {
       dateRanges,
       dimensions: [{ name: "date" }],
       metrics: [
@@ -80,14 +80,14 @@ export const fetchGoogleAnalytics = async (propertyId: string, startDate: string
       ],
       orderBys: [{ dimension: { dimensionName: "date" } }],
     }),
-    runReport(token, propertyId, {
+    runReport(token, GA4_PROPERTY_ID, {
       dateRanges,
       dimensions: [{ name: "pagePath" }],
       metrics: [{ name: "screenPageViews" }],
       orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
       limit: 10,
     }),
-    runReport(token, propertyId, {
+    runReport(token, GA4_PROPERTY_ID, {
       dateRanges,
       dimensions: [{ name: "sessionSource" }],
       metrics: [{ name: "sessions" }],

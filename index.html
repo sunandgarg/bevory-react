@@ -44,6 +44,7 @@
           ad_personalization: 'denied'
         });
       } catch (_) { /* Storage can be unavailable in a private browsing context. */ }
+      dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
       gtag('js', new Date());
       gtag('config', 'G-QPBTP7TCDV', {
         send_page_view: true,

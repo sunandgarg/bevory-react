@@ -439,7 +439,6 @@ export const functionsHandler = async (req: AuthenticatedRequest, res: Response)
       if (body.action === "status") return res.json({ configured: gaConfigured() });
       if (!gaConfigured()) return res.status(503).json({ error: "Google Analytics credentials are not configured" });
       return res.json(await fetchGoogleAnalytics(
-        String(body.propertyId ?? ""),
         String(body.startDate ?? "30daysAgo"),
         String(body.endDate ?? "today"),
       ));
