@@ -9,9 +9,15 @@ const SLOTS = {
 const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 
+declare global {
+  interface Window {
+    bevoryAgeGateDisabled?: boolean;
+  }
+}
+
 const canShowAds = () =>
   typeof window !== "undefined" &&
-  localStorage.getItem(AGE_VERIFIED_KEY) !== null &&
+  (window.bevoryAgeGateDisabled || localStorage.getItem(AGE_VERIFIED_KEY) !== null) &&
   localStorage.getItem(ADS_CONSENT_KEY) === "granted";
 
 const GuideAd = ({ placement = "middle" }: { placement?: keyof typeof SLOTS }) => {

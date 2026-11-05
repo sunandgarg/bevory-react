@@ -22,6 +22,7 @@ describe("page-load analytics consent", () => {
   it("loads GA4 after denied defaults without exposing sign-in query data", () => {
     const commands = commandsFor();
     expect(commands[0]).toMatchObject(["consent", "default", { analytics_storage: "denied", ad_storage: "denied" }]);
+    expect(commands[0][2]).not.toHaveProperty("wait_for_update");
     expect(commands.find(([command]) => command === "config")?.[2]).toMatchObject({ page_location: "https://bevory.in/auth" });
     expect(html).toContain(`gtag('config', '${GA4_MEASUREMENT_ID}'`);
     expect(html).toContain(`gtag/js?id=${GA4_MEASUREMENT_ID}`);

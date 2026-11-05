@@ -19,4 +19,16 @@ describe("guide ad consent", () => {
       expect(html).toContain(`data-ad-slot="${slot}"`);
     }
   });
+
+  it("renders consented ads when the age gate is disabled", () => {
+    vi.stubGlobal("window", { bevoryAgeGateDisabled: true });
+    vi.stubGlobal("localStorage", { getItem: (key: string) => key === "bevory-ads-consent-v2" ? "granted" : null });
+    expect(renderToStaticMarkup(<GuideAd />)).toContain('data-ad-placement="middle"');
+  });
+
+  it("keeps ads off without ad consent even when the age gate is disabled", () => {
+    vi.stubGlobal("window", { bevoryAgeGateDisabled: true });
+    vi.stubGlobal("localStorage", { getItem: () => null });
+    expect(renderToStaticMarkup(<GuideAd />)).toBe("");
+  });
 });

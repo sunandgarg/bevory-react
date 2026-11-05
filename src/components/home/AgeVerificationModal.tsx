@@ -35,6 +35,7 @@ const AgeVerificationModal = () => {
 
   useEffect(() => {
     if (settingsLoading) return;
+    window.bevoryAgeGateDisabled = !ageSettings.enabled;
 
     // If popup is disabled, mark as verified immediately
     if (!ageSettings.enabled) {
