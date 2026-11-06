@@ -26,6 +26,8 @@ const USER_TABLES = new Set([
 ]);
 
 const CATALOG_TABLES = new Set(["categories", "product_prices", "products", "sub_categories"]);
+let productReadCache: { expiresAt: number; rows: Promise<Array<Record<string, unknown>>> } | undefined;
+export const invalidateProductReadCache = () => { productReadCache = undefined; };
 const ADMIN_READ_TABLES = new Set(["content_drafts", "party_recommendations", "marketing_leads"]);
 const OPERATIONS = new Set(["select", "insert", "update", "delete", "upsert"]);
 
@@ -494,7 +496,21 @@ export const matchesFilter = (row: Record<string, unknown>, filter: Filter): boo
   }
 };
 
-const readTable = async (tableName: string, filters: Filter[] = []) => {
+export const readTable = async (tableName: string, filters: Filter[] = []) => {
+  if (tableName === "products") {
+    if (!productReadCache || productReadCache.expiresAt <= Date.now()) {
+      const rows = prisma.contentRecord.findMany({
+        where: { tableName: "products" },
+        select: { data: true },
+      }).then((records) => records.map(({ data }) => applyProductContentOverlay(toRecordData(data))))
+        .catch((error) => {
+          if (productReadCache?.rows === rows) productReadCache = undefined;
+          throw error;
+        });
+      productReadCache = { expiresAt: Date.now() + 5 * 60_000, rows };
+    }
+    return productReadCache.rows;
+  }
   const indexedFilters = Object.fromEntries(filters.flatMap((filter) => (
     filter.operator === "eq" && filter.column && isJsonScalar(filter.value)
       ? [[filter.column, filter.value]]
@@ -505,10 +521,7 @@ const readTable = async (tableName: string, filters: Filter[] = []) => {
       where: databaseWhereForFilters(tableName, filters),
       select: { data: true },
     });
-  return records.map(({ data }) => {
-    const row = toRecordData(data);
-    return tableName === "products" ? applyProductContentOverlay(row) : row;
-  });
+  return records.map(({ data }) => toRecordData(data));
 };
 
 const attachRelationships = async (
@@ -699,7 +712,7 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
         result.push(data as Record<string, unknown>);
       }
       if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
-      if (payload.table === "products") invalidateProductRoutes();
+      if (payload.table === "products") { invalidateProductRoutes(); invalidateProductReadCache(); }
       return res.json({ data: result, error: null, count: result.length });
     }
 
@@ -727,13 +740,13 @@ export const queryHandler = async (req: AuthenticatedRequest, res: Response) => 
         updated.push(data as Record<string, unknown>);
       }
       if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
-      if (payload.table === "products") invalidateProductRoutes();
+      if (payload.table === "products") { invalidateProductRoutes(); invalidateProductReadCache(); }
       return res.json({ data: updated, error: null, count: updated.length });
     }
 
     await prisma.contentRecord.deleteMany({ where: { key: { in: matches.map((record) => record.key) } } });
     if (CATALOG_TABLES.has(payload.table)) invalidateCatalogCache();
-    if (payload.table === "products") invalidateProductRoutes();
+    if (payload.table === "products") { invalidateProductRoutes(); invalidateProductReadCache(); }
     return res.json({ data: matches.map(({ data }) => toRecordData(data)), error: null, count: matches.length });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Database query failed";
