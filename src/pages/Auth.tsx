@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { CURRENT_POLICY_VERSION } from "@/integrations/api/client";
 import { z } from "zod";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 
@@ -171,9 +170,7 @@ const Auth = () => {
             I confirm that I am 25 or older, meet the legal drinking age in my location, and accept BevOry&apos;s current{" "}
           </label>
           <Link to="/terms" className="underline underline-offset-2 hover:text-foreground">Terms</Link>{" "}
-          and <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-foreground">Privacy Policy</Link>{" "}
-          (version {CURRENT_POLICY_VERSION}).
-          {isLogin && authMode === "email" ? " This is required for Google or phone, but not for email sign-in." : ""}
+          and <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-foreground">Privacy Policy</Link>.
         </div>
       </div>
       {errors.policy && <p className="text-sm text-destructive" role="alert">{errors.policy}</p>}

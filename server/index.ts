@@ -24,7 +24,7 @@ import {
 } from "./auth.js";
 import { ADMIN_SUMMARY_TABLES, buildAdminSummary } from "./adminSummary.js";
 import { queryHandler } from "./data.js";
-import { cityCatalogCollectionHandler, cityCatalogHandler, cityCatalogSearchHandler, prewarmCityHomeCatalogs } from "./catalog.js";
+import { cityCatalogCollectionHandler, cityCatalogHandler, cityCatalogSearchHandler } from "./catalog.js";
 import { functionsHandler } from "./functions.js";
 import { prisma } from "./db.js";
 import {
@@ -152,12 +152,10 @@ app.use("/api", (req, res, next) => {
 app.get("/api/health", async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
-    const records = await prisma.contentRecord.count();
     res.json({
       status: "ok",
       database: "mysql",
       orm: "prisma",
-      records,
       integrations: {
         googleOAuth: googleOAuthConfigured(),
         phoneOtp: phoneOtpConfigured(),
@@ -200,7 +198,11 @@ app.post("/api/auth/signin", signInRateLimit, async (req, res) => {
     const user = await signIn(String(req.body?.email ?? ""), String(req.body?.password ?? ""));
     res.json({ data: { user, session: createSession(user) }, error: null });
   } catch (error) {
-    res.status(401).json({ data: null, error: { message: error instanceof Error ? error.message : "Sign-in failed" } });
+    if (error instanceof Error && error.message === "Invalid email or password") {
+      return res.status(401).json({ data: null, error: { message: error.message } });
+    }
+    console.error("Sign-in unavailable", error);
+    res.status(503).json({ data: null, error: { message: "Sign-in is temporarily unavailable. Please try again shortly." } });
   }
 });
 
@@ -469,11 +471,6 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
 
 const server = app.listen(port, "0.0.0.0", () => {
   console.log(`BevOry API listening on http://localhost:${port}`);
-  if (process.env.NODE_ENV === "production") {
-    void prewarmCityHomeCatalogs()
-      .then((count) => console.log(`Prewarmed ${count} city home catalogues`))
-      .catch((error) => console.error("City catalogue prewarm failed", error));
-  }
 });
 
 const shutdown = async () => {
