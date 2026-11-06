@@ -52,16 +52,14 @@ const GuideAd = ({ placement = "middle" }: { placement?: keyof typeof SLOTS }) =
   if (!allowed) return null;
 
   return (
-    <aside aria-label="Advertisement" data-ad-placement={placement} className="mx-auto my-8 w-full max-w-[1120px] overflow-hidden border-y border-border px-4 py-4 sm:px-6">
-      <p className="mb-2 text-center text-[11px] text-muted-foreground">Advertisement</p>
+    <aside aria-label="Advertisement" data-ad-placement={placement} className="mx-auto my-2 w-full max-w-[1120px] border-y border-border px-4 py-2 sm:px-6">
+      <p className="mb-1 text-center text-[11px] leading-4 text-muted-foreground">Advertisement</p>
       <ins
         ref={slot}
         className="adsbygoogle"
-        style={{ display: "block", minHeight: placement === "top" ? 90 : 120 }}
+        style={{ display: "block", width: "100%", maxWidth: 970, height: 90, margin: "0 auto" }}
         data-ad-client={CLIENT}
         data-ad-slot={SLOTS[placement]}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
       />
     </aside>
   );

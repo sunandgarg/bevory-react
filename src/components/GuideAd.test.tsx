@@ -17,6 +17,11 @@ describe("guide ad consent", () => {
       const html = renderToStaticMarkup(<GuideAd placement={placement} />);
       expect(html).toContain('data-ad-client="ca-pub-4858806955717066"');
       expect(html).toContain(`data-ad-slot="${slot}"`);
+      expect(html).toContain('height:90px');
+      expect(html).toContain('width:100%');
+      expect(html).not.toContain('data-ad-format=');
+      expect(html).not.toContain('data-full-width-responsive=');
+      expect(html).not.toContain('overflow-hidden');
     }
   });
 
