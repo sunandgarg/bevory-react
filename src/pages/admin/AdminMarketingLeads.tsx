@@ -7,15 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useCsvOperations } from "@/hooks/useCsvOperations";
-import { DEFAULT_LEAD_FILTERS, filterMarketingLeads, LEAD_CSV_COLUMNS, marketingLeadCsvRow, summarizeMarketingLeads, type LeadFilters, type MarketingLead } from "@/lib/marketingLeads";
+import { DEFAULT_LEAD_FILTERS, filterMarketingLeads, LEAD_CSV_COLUMNS, leadConsent, leadDateTime, leadState, marketingLeadCsvRow, summarizeMarketingLeads, type LeadFilters, type MarketingLead } from "@/lib/marketingLeads";
 
 const formatDate = (value: string, time = false) => {
-  const date = new Date(value);
-  return Number.isFinite(date.getTime()) ? date.toLocaleString("en-IN", {
-    timeZone: "Asia/Kolkata", day: "2-digit", month: "short", year: "numeric",
-    ...(time ? { hour: "2-digit", minute: "2-digit" } as const : {}),
-  }) : "Not recorded";
+  const parts = leadDateTime(value);
+  return time && parts.date !== "Not recorded" ? `${parts.date}, ${parts.time}` : parts.date;
 };
+
+const TABLE_HEADERS = ["Date (IST)", "Time (IST)", "Name", "Email", "Mobile", "City", "State / UT", "Offer consent", "Age declaration", "Contact status", ""];
 
 const Verification = ({ verified }: { verified?: boolean }) => (
   <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ${verified === true ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200" : "bg-amber-50 text-amber-900 dark:bg-amber-950 dark:text-amber-200"}`}>
@@ -121,7 +120,7 @@ const AdminMarketingLeads = () => {
           <label className="relative sm:col-span-2">
             <span className="sr-only">Search leads</span>
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input value={filters.search} onChange={event => changeFilters({ search: event.target.value })} placeholder="Search name, email, mobile or city" className="bg-background pl-9" />
+            <Input value={filters.search} onChange={event => changeFilters({ search: event.target.value })} placeholder="Search name, email, mobile, city or state" className="bg-background pl-9" />
           </label>
           <Select value={filters.city} onValueChange={city => changeFilters({ city })}>
             <SelectTrigger aria-label="Filter by city" className="bg-background"><SelectValue placeholder="All cities" /></SelectTrigger>
@@ -158,18 +157,23 @@ const AdminMarketingLeads = () => {
           <p className="text-muted-foreground">{updatedAt ? `Updated ${formatDate(updatedAt, true)} IST` : "All dates in India time"}</p>
         </div>
         <div className="relative overflow-x-auto">
-          <table className="w-full min-w-[880px] text-left text-sm">
-            <caption className="sr-only">City offer signups, contact verification and signup times. All dates use Asia/Kolkata.</caption>
+          <table className="w-full min-w-[1540px] text-left text-sm">
+            <caption className="sr-only">City offer signups with separate date, time, name, email, mobile, city, state, consent, age and contact verification columns. Dates and times use Asia/Kolkata; state is based on the selected city.</caption>
             <thead className="border-b border-border bg-muted/40 text-xs text-muted-foreground"><tr>
-              {["Lead", "Contact details", "City", "Signed up (IST)", "Contact status", ""].map((heading, index) => <th key={index} scope="col" className="px-4 py-3 font-medium">{heading || <span className="sr-only">Details</span>}</th>)}
+              {TABLE_HEADERS.map((heading, index) => <th key={index} scope="col" title={heading === "State / UT" ? "Based on the selected city, not device location" : heading === "Offer consent" ? "Consent recorded at signup; not proof of current permission after a withdrawal" : undefined} className="whitespace-nowrap px-4 py-3 font-medium">{heading || <span className="sr-only">Details</span>}</th>)}
             </tr></thead>
             <tbody>
-              {initialLoading ? Array.from({ length: 5 }, (_, index) => <tr key={index} aria-hidden="true" className="border-b border-border/60">{Array.from({ length: 6 }, (_, column) => <td key={column} className="px-4 py-5"><div className="h-4 w-3/4 animate-pulse rounded bg-muted" /></td>)}</tr>) : visible.map(lead => (
+              {initialLoading ? Array.from({ length: 5 }, (_, index) => <tr key={index} aria-hidden="true" className="border-b border-border/60">{TABLE_HEADERS.map((_, column) => <td key={column} className="px-4 py-5"><div className="h-4 w-3/4 animate-pulse rounded bg-muted" /></td>)}</tr>) : visible.map(lead => (
                 <tr key={lead.id} className="border-b border-border/60 last:border-0 hover:bg-muted/25">
-                  <td className="max-w-[230px] px-4 py-4"><button className="block max-w-full break-words text-left font-semibold underline-offset-4 hover:underline focus-visible:underline" onClick={() => setSelected(lead)}>{lead.name || "Unnamed signup"}</button><p className="mt-1 text-xs text-muted-foreground">City offers form</p></td>
-                  <td className="max-w-[280px] px-4 py-4"><p className="break-all">{lead.email || "Not recorded"}</p><p className="mt-1 text-xs tabular-nums text-muted-foreground">{lead.mobile || "Not recorded"}</p></td>
-                  <td className="px-4 py-4">{lead.city || "Not recorded"}</td>
-                  <td className="whitespace-nowrap px-4 py-4 text-xs">{formatDate(lead.consented_at, true)}</td>
+                  <td className="whitespace-nowrap px-4 py-4 text-xs tabular-nums">{leadDateTime(lead.consented_at).date}</td>
+                  <td className="whitespace-nowrap px-4 py-4 text-xs tabular-nums">{leadDateTime(lead.consented_at).time}</td>
+                  <td className="min-w-[160px] max-w-[230px] px-4 py-4"><button className="block max-w-full break-words text-left font-semibold underline-offset-4 hover:underline focus-visible:underline" onClick={() => setSelected(lead)}>{lead.name || "Unnamed signup"}</button></td>
+                  <td className="min-w-[210px] max-w-[280px] break-all px-4 py-4">{lead.email || "Not recorded"}</td>
+                  <td className="whitespace-nowrap px-4 py-4 tabular-nums">{lead.mobile || "Not recorded"}</td>
+                  <td className="whitespace-nowrap px-4 py-4">{lead.city || "Not recorded"}</td>
+                  <td className="whitespace-nowrap px-4 py-4">{leadState(lead.city)}</td>
+                  <td className="px-4 py-4"><span className={`inline-flex whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ${leadConsent(lead) === "Recorded" ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200" : "bg-muted text-muted-foreground"}`}>{leadConsent(lead)}</span></td>
+                  <td className="whitespace-nowrap px-4 py-4 text-xs">{lead.age_confirmed === true ? "Self-confirmed 25+" : "Not recorded"}</td>
                   <td className="px-4 py-4"><Verification verified={lead.contact_verified} /></td>
                   <td className="px-3 py-4"><Tooltip><TooltipTrigger asChild><Button size="icon" variant="ghost" className="h-8 w-8" aria-label={`View ${lead.name || "signup"} details`} onClick={() => setSelected(lead)}><ArrowUpRight className="h-4 w-4" /></Button></TooltipTrigger><TooltipContent>View lead details</TooltipContent></Tooltip></td>
                 </tr>
@@ -197,8 +201,8 @@ const AdminMarketingLeads = () => {
             <Verification verified={selected.contact_verified} />
             <dl className="space-y-4 text-sm">{[
               ["Email", selected.email || "Not recorded"], ["Mobile", selected.mobile || "Not recorded"],
-              ["City", selected.city || "Not recorded"], ["Source", "City offers form"],
-              ["Signed up", `${formatDate(selected.consented_at, true)} IST`],
+              ["City", selected.city || "Not recorded"], ["State / UT (from city)", leadState(selected.city)], ["Source", "City offers form"],
+              ["Signup date (IST)", leadDateTime(selected.consented_at).date], ["Signup time (IST)", leadDateTime(selected.consented_at).time],
             ].map(([label, value]) => <div key={label}><dt className="text-xs text-muted-foreground">{label}</dt><dd className="mt-1 break-words font-medium">{value}</dd></div>)}</dl>
             <section className="border-y border-border py-5"><h3 className="flex items-center gap-2 text-sm font-semibold"><CheckCircle2 className="h-4 w-4 text-emerald-700" />Signup declarations</h3><dl className="mt-4 space-y-4 text-sm"><div><dt className="text-xs text-muted-foreground">Offer consent recorded</dt><dd className="mt-1">{formatDate(selected.consented_at, true)}{Number.isFinite(new Date(selected.consented_at).getTime()) ? " IST" : ""}</dd></div><div><dt className="text-xs text-muted-foreground">Age declaration</dt><dd className="mt-1">{selected.age_confirmed === true ? "Self-confirmed 25 or older" : "Not recorded"}</dd></div></dl><p className="mt-4 text-xs leading-5 text-muted-foreground">A submitted declaration is not identity or contact verification. This record does not establish current permission after a withdrawal.</p></section>
             <div><p className="text-xs text-muted-foreground">Lead ID</p><p className="mt-1 break-all font-mono text-xs">{selected.id}</p></div>

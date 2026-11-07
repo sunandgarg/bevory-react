@@ -1,3 +1,5 @@
+import { BEVORY_CITIES } from "./locations";
+
 export type MarketingLead = {
   id: string;
   name: string;
@@ -26,16 +28,38 @@ const indiaDateFormatter = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Kolkata", year: "numeric", month: "2-digit", day: "2-digit",
 });
 
+const displayDateFormatter = new Intl.DateTimeFormat("en-IN", {
+  timeZone: "Asia/Kolkata", year: "numeric", month: "short", day: "2-digit",
+});
+const displayTimeFormatter = new Intl.DateTimeFormat("en-IN", {
+  timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true,
+});
+
+export const leadDateTime = (value: string) => {
+  if (!value) return { date: "Not recorded", time: "Not recorded" };
+  const date = new Date(value);
+  return Number.isFinite(date.getTime())
+    ? { date: displayDateFormatter.format(date), time: displayTimeFormatter.format(date) }
+    : { date: "Not recorded", time: "Not recorded" };
+};
+
+export const leadState = (city: string): string => BEVORY_CITIES.find(location => (
+  location.name.toLowerCase() === (city || "").trim().toLowerCase()
+))?.state || "Not recorded";
+
 export const indiaDateKey = (value: string | Date): string => {
+  if (!value) return "";
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) return "";
   return indiaDateFormatter.format(date);
 };
 
+export const leadConsent = (lead: MarketingLead): string => indiaDateKey(lead.consented_at) ? "Recorded" : "Not recorded";
+
 export const filterMarketingLeads = (leads: MarketingLead[], filters: LeadFilters): MarketingLead[] => {
   const search = filters.search.trim().toLowerCase();
   return leads.filter((lead) => {
-    if (search && ![lead.name, lead.email, lead.mobile, lead.city].some(value => (value || "").toLowerCase().includes(search))) return false;
+    if (search && ![lead.name, lead.email, lead.mobile, lead.city, leadState(lead.city)].some(value => (value || "").toLowerCase().includes(search))) return false;
     if (filters.city !== "all" && lead.city !== filters.city) return false;
     if (filters.verification === "verified" && lead.contact_verified !== true) return false;
     if (filters.verification === "unverified" && lead.contact_verified === true) return false;
@@ -76,10 +100,15 @@ const spreadsheetText = (value: string) => {
 
 export const marketingLeadCsvRow = (lead: MarketingLead): Record<string, string> => Object.fromEntries(
   Object.entries({
-    "Lead ID": lead.id, Name: lead.name, Email: lead.email, Mobile: lead.mobile, City: lead.city,
+    "Lead ID": lead.id,
+    "Signup date (IST)": leadDateTime(lead.consented_at).date,
+    "Signup time (IST)": leadDateTime(lead.consented_at).time,
+    Name: lead.name, Email: lead.email, Mobile: lead.mobile, City: lead.city,
+    "State / UT (from city)": leadState(lead.city), "Offer consent": leadConsent(lead),
     "Consent recorded (UTC)": lead.consented_at,
     "Contact verification": lead.contact_verified === true ? "Verified" : "Unverified",
     "Age confirmation": lead.age_confirmed === true ? "Self-confirmed 25+" : "Not recorded",
+    Source: "City offers form",
   }).map(([key, value]) => [key, spreadsheetText(value)]),
 );
 

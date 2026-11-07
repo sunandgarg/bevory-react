@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_LEAD_FILTERS, filterMarketingLeads, indiaDateKey, LEAD_CSV_COLUMNS, marketingLeadCsvRow, summarizeMarketingLeads, type MarketingLead } from "./marketingLeads";
+import { DEFAULT_LEAD_FILTERS, filterMarketingLeads, indiaDateKey, LEAD_CSV_COLUMNS, leadConsent, leadDateTime, leadState, marketingLeadCsvRow, summarizeMarketingLeads, type MarketingLead } from "./marketingLeads";
 
 const makeLead = (values: Partial<MarketingLead> = {}): MarketingLead => ({
   id: "one", name: "Sample Person", email: "sample@example.invalid", mobile: "9000000000",
@@ -43,6 +43,42 @@ describe("city lead filters", () => {
 });
 
 describe("city lead summaries and exports", () => {
+  it("shows separate date and time in IST regardless of the browser timezone", () => {
+    const parts = leadDateTime("2026-11-06T18:45:09Z");
+    expect(parts.date).toBe("07 Nov 2026");
+    expect(parts.time).toMatch(/^12:15:09\s?am$/i);
+    expect(leadDateTime("invalid")).toEqual({ date: "Not recorded", time: "Not recorded" });
+    expect(leadDateTime(null)).toEqual({ date: "Not recorded", time: "Not recorded" });
+  });
+
+  it("looks up state from the selected city without guessing unknown locations", () => {
+    expect(leadState("Mumbai")).toBe("Maharashtra");
+    expect(leadState(" noida ")).toBe("Uttar Pradesh");
+    expect(leadState("Delhi")).toBe("Delhi");
+    expect(leadState("Unknown city")).toBe("Not recorded");
+    expect(leadState("")).toBe("Not recorded");
+    expect(filterMarketingLeads(leads, { ...DEFAULT_LEAD_FILTERS, search: "maharashtra" }).map(lead => lead.id)).toEqual(["two"]);
+  });
+
+  it("shows recorded consent only when its timestamp is available", () => {
+    expect(leadConsent(makeLead())).toBe("Recorded");
+    expect(leadConsent(makeLead({ consented_at: "" }))).toBe("Not recorded");
+    expect(leadConsent(makeLead({ consented_at: "invalid" }))).toBe("Not recorded");
+    expect(leadConsent(makeLead({ consented_at: null }))).toBe("Not recorded");
+  });
+
+  it("exports separate contact, date, time, state and consent fields", () => {
+    const row = marketingLeadCsvRow(makeLead());
+    expect(row.Name).toBe("Sample Person");
+    expect(row.Email).toBe("sample@example.invalid");
+    expect(row.Mobile).toBe("9000000000");
+    expect(row["Signup date (IST)"]).toBe("07 Nov 2026");
+    expect(row["Signup time (IST)"]).toMatch(/^12:15:00\s?am$/i);
+    expect(row["State / UT (from city)"]).toBe("Delhi");
+    expect(row["Offer consent"]).toBe("Recorded");
+    expect(row.Source).toBe("City offers form");
+  });
+
   it("counts today's signups in India time and the last seven calendar days", () => {
     expect(summarizeMarketingLeads(leads, new Date("2026-11-07T00:00:00Z"))).toEqual({
       total: 3, todayCount: 1, weekCount: 2, verifiedCount: 1, cities: [["Delhi", 2], ["Mumbai", 1]],
