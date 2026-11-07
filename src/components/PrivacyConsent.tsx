@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { browserStorage } from "@/lib/browserStorage";
+import { GA4_MEASUREMENT_ID } from "@/lib/googleAnalyticsConfig";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
 const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
@@ -26,6 +27,19 @@ const updateGoogleConsent = (analytics: ConsentChoice, ads: ConsentChoice) => {
   });
 };
 
+export const savePrivacyChoice = (analytics: ConsentChoice, ads: ConsentChoice) => {
+  browserStorage.set(CONSENT_KEY, analytics);
+  browserStorage.set(ADS_CONSENT_KEY, ads);
+  updateGoogleConsent(analytics, ads);
+  window.gtag?.("event", "privacy_choice", {
+    send_to: GA4_MEASUREMENT_ID,
+    analytics_choice: analytics,
+    ads_choice: ads,
+    page_location: `${window.location.origin}${window.location.pathname}`,
+  });
+  window.dispatchEvent(new Event("bevory:ad-consent-changed"));
+};
+
 const PrivacyConsent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
@@ -47,11 +61,9 @@ const PrivacyConsent = () => {
 
     const openChoices = () => setIsOpen(true);
     const onLeadModal = (event: Event) => setLeadOpen((event as CustomEvent<boolean>).detail);
-    window.addEventListener("bevory:age-verified", applySavedChoice);
     window.addEventListener("bevory:open-privacy-choices", openChoices);
     window.addEventListener("bevory:lead-modal", onLeadModal);
     return () => {
-      window.removeEventListener("bevory:age-verified", applySavedChoice);
       window.removeEventListener("bevory:open-privacy-choices", openChoices);
       window.removeEventListener("bevory:lead-modal", onLeadModal);
     };
@@ -63,12 +75,9 @@ const PrivacyConsent = () => {
   }, [isOpen, leadOpen]);
 
   const choose = (analytics: ConsentChoice, ads: ConsentChoice) => {
-    browserStorage.set(CONSENT_KEY, analytics);
-    browserStorage.set(ADS_CONSENT_KEY, ads);
+    savePrivacyChoice(analytics, ads);
     setAnalyticsAllowed(analytics === "granted");
     setAdsAllowed(ads === "granted");
-    updateGoogleConsent(analytics, ads);
-    window.dispatchEvent(new Event("bevory:ad-consent-changed"));
     setShowDetails(false);
     setIsOpen(false);
   };
