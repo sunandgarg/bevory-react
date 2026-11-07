@@ -8,6 +8,7 @@ const CONSENT_KEY = "bevory-analytics-consent-v1";
 const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
 
 type ConsentChoice = "granted" | "denied";
+export const parseConsentChoice = (value: string | null): ConsentChoice | null => value === "granted" || value === "denied" ? value : null;
 
 declare global {
   interface Window {
@@ -34,8 +35,8 @@ const PrivacyConsent = () => {
 
   useEffect(() => {
     const applySavedChoice = () => {
-      const analytics = browserStorage.get(CONSENT_KEY) as ConsentChoice | null;
-      const ads = browserStorage.get(ADS_CONSENT_KEY) as ConsentChoice | null;
+      const analytics = parseConsentChoice(browserStorage.get(CONSENT_KEY));
+      const ads = parseConsentChoice(browserStorage.get(ADS_CONSENT_KEY));
       setAnalyticsAllowed(analytics === "granted");
       setAdsAllowed(ads === "granted");
       updateGoogleConsent(analytics === "granted" ? "granted" : "denied", ads === "granted" ? "granted" : "denied");

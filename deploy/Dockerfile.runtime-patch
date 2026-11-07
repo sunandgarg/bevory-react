@@ -5,6 +5,4 @@ ARG REVISION=unknown
 LABEL bevory.revision=${REVISION}
 
 COPY --chown=node:node dist /app/dist
-COPY --chown=node:node dist-server/server/index.js /app/dist-server/server/index.js
-COPY --chown=node:node dist-server/server/rateLimit.js /app/dist-server/server/rateLimit.js
-COPY --chown=node:node dist-server/server/crawlerPolicy.js /app/dist-server/server/crawlerPolicy.js
+COPY --chown=node:node dist-server/server/index.js dist-server/server/rateLimit.js dist-server/server/crawlerPolicy.js /app/dist-server/server/
