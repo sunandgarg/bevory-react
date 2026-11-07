@@ -48,7 +48,7 @@ const navGroups = [
       { icon: Megaphone, label: "Announce", path: "/admin/announcements" },
       { icon: Flag, label: "Reports", path: "/admin/reports" },
       { icon: Users, label: "Users", path: "/admin/users" },
-      { icon: Mail, label: "City signups", path: "/admin/marketing-leads" },
+      { icon: Mail, label: "City leads", path: "/admin/marketing-leads" },
       { icon: HelpCircle, label: "Help", path: "/admin/help-support" },
     ],
   },
