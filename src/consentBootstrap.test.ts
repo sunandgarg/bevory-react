@@ -48,4 +48,14 @@ describe("page-load analytics consent", () => {
     expect(update).toBeLessThan(config);
     expect(commands[update][2]).toMatchObject({ analytics_storage: "granted", ad_storage: "denied" });
   });
+
+  it("still configures the page-load tag when browser storage is blocked", () => {
+    const context: Record<string, unknown> = {
+      localStorage: { getItem() { throw new Error("Storage blocked"); } },
+      location: { origin: "https://bevory.in", pathname: "/guide" },
+    };
+    context.window = context;
+    expect(() => runInNewContext(bootstrap!, context)).not.toThrow();
+    expect(JSON.stringify(context.dataLayer)).toContain(GA4_MEASUREMENT_ID);
+  });
 });

@@ -7,6 +7,7 @@ import { useLocation, POPULAR_CITIES, CITIES_BY_STATE } from "@/hooks/useLocatio
 import { useAppSettings } from "@/hooks/useAppSettings";
 import BrandingDisplay from "@/components/layout/BrandingDisplay";
 import { Link, useLocation as useRouterLocation } from "react-router-dom";
+import { browserStorage } from "@/lib/browserStorage";
 
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const AGE_POLICY_VERSION = "2026-09-20";
@@ -24,8 +25,8 @@ const PUBLIC_LEGAL_PATHS = new Set([
 ]);
 
 const AgeVerificationModal = () => {
-  const [isOpen, setIsOpen] = useState(() => !localStorage.getItem(AGE_VERIFIED_KEY));
-  const [isVerified, setIsVerified] = useState(() => Boolean(localStorage.getItem(AGE_VERIFIED_KEY)));
+  const [isOpen, setIsOpen] = useState(() => !browserStorage.get(AGE_VERIFIED_KEY));
+  const [isVerified, setIsVerified] = useState(() => Boolean(browserStorage.get(AGE_VERIFIED_KEY)));
   const [showCitySelector, setShowCitySelector] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCityName, setSelectedCityName] = useState<string>("Gurgaon");
@@ -45,7 +46,7 @@ const AgeVerificationModal = () => {
       return;
     }
 
-    const verified = localStorage.getItem(AGE_VERIFIED_KEY);
+    const verified = browserStorage.get(AGE_VERIFIED_KEY);
     if (!verified) {
       setIsOpen(true);
       setSelectedCityName(ageSettings.defaultCity || "Gurgaon");
@@ -56,7 +57,7 @@ const AgeVerificationModal = () => {
 
   const handleVerify = async () => {
     await setCityByName(selectedCityName);
-    localStorage.setItem(AGE_VERIFIED_KEY, JSON.stringify({
+    browserStorage.set(AGE_VERIFIED_KEY, JSON.stringify({
       confirmedAt: new Date().toISOString(),
       policyVersion: AGE_POLICY_VERSION,
       minimumAge: 25,

@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { createRateLimit } from "./rateLimit.js";
 
 describe("rate limiting", () => {
@@ -33,5 +33,18 @@ describe("rate limiting", () => {
     expect(headers.get("ratelimit-limit")).toBe("2");
     expect(headers.get("ratelimit-remaining")).toBe("0");
     expect(payload).toMatchObject({ error: { message: "Slow down" } });
+  });
+
+  it("separates verified visitor keys behind a shared reverse proxy", () => {
+    const middleware = createRateLimit({ windowMs: 60_000, max: 1, message: "Slow down", key: (req) => req.header("cf-connecting-ip") || "proxy" });
+    const next = vi.fn();
+    const response = { setHeader: vi.fn(), status: vi.fn().mockReturnThis(), json: vi.fn() } as unknown as Response;
+    const request = (ip: string) => ({ ip: "proxy", socket: {}, header: () => ip }) as unknown as Request;
+    middleware(request("1.1.1.1"), response, next);
+    middleware(request("2.2.2.2"), response, next);
+    middleware(request("1.1.1.1"), response, next);
+    expect(next).toHaveBeenCalledTimes(2);
+    expect(response.status).toHaveBeenCalledWith(429);
+    expect(response.setHeader).toHaveBeenCalledWith("Cache-Control", "private, no-store");
   });
 });

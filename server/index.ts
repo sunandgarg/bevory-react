@@ -41,6 +41,8 @@ import {
 } from "./seo.js";
 import { objectStorageConfigured, storedImagePathMatchesType, storeUpload } from "./storage.js";
 import { createRateLimit } from "./rateLimit.js";
+import { isIP } from "node:net";
+import { denyUnlicensedCrawler } from "./crawlerPolicy.js";
 import { createMediaHandler } from "./media.js";
 import { marketingLeadSchema } from "./marketingLead.js";
 
@@ -81,6 +83,7 @@ const publicReviewRateLimit = createRateLimit({ windowMs: 60 * 60_000, max: 5, m
 
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
+app.use(denyUnlicensedCrawler);
 app.use("/media", createMediaHandler());
 app.use(cors({ origin: process.env.APP_URL || "http://localhost:8080", credentials: true }));
 app.use(express.json({ limit: "25mb" }));
@@ -168,6 +171,19 @@ app.get("/api/health", async (_req, res) => {
     res.status(503).json({ status: "error", error: "Database unavailable" });
   }
 });
+
+// Only trust Cloudflare's client header after the verified Worker-to-origin check above.
+const publicReadRateLimit = createRateLimit({
+  windowMs: 60_000,
+  max: 240,
+  message: "Too many content requests. Stop automated extraction and retry after the indicated delay.",
+  key: (req) => {
+    const client = req.header("cf-connecting-ip") || "";
+    return isIP(client) ? client : req.ip || req.socket.remoteAddress || "unknown";
+  },
+});
+app.use("/api/query", (req, res, next) => req.body?.operation === "select" ? publicReadRateLimit(req, res, next) : next());
+app.use("/api/catalog", publicReadRateLimit);
 
 app.get("/api/admin/summary", noStore, requireAdmin, async (_req, res) => {
   const groups = await prisma.contentRecord.groupBy({

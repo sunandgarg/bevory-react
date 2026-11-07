@@ -9,3 +9,13 @@ Disallow: /recent
 Disallow: /locations
 
 Sitemap: https://bevory.in/sitemap.xml
+
+# Automated extraction and model training require written permission. See /terms.
+# Search indexing remains allowed under the public-page rules above.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: AhrefsBot
+Disallow: /

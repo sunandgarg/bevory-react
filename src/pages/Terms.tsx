@@ -4,6 +4,7 @@ import LegalPage, { LegalContact } from "@/components/legal/LegalPage";
 const Terms = () => (
   <LegalPage
     title="Terms & Conditions"
+    lastUpdated="7 November 2026"
     description="The terms governing access to BevOry's adult beverage information, discovery, comparison, community, and planning features."
   >
     <p>
@@ -11,6 +12,12 @@ const Terms = () => (
       BevOry for your use of <strong>bevory.in</strong>, its related pages, accounts, content, tools, and services
       (together, the <strong>"Service"</strong>). In these Terms, "BevOry", "we", "us", and "our" refer to the
       operator publishing the Service under the BevOry name; "you" means each visitor, account holder, or contributor.
+    </p>
+
+    <p>
+      BevOry operates as one independent service through bevory.in. No third party is authorised to represent BevOry,
+      license its database, or grant scraping permissions unless BevOry confirms that authority in writing.
+      This does not claim ownership of third-party brands, public facts, or material belonging to others.
     </p>
 
     <h2>1. Acceptance and incorporated policies</h2>
@@ -150,6 +157,24 @@ const Terms = () => (
     <p>
       Rights holders can use our <Link to="/intellectual-property">notice-and-takedown process</Link>. We may preserve
       disputed material and notices where reasonably needed to evaluate claims or comply with law.
+    </p>
+
+    <h3>Automated extraction and AI use</h3>
+    <p>
+      Except where applicable law expressly permits, prior written permission from BevOry is required to scrape,
+      harvest, bulk-download, mirror, or systematically extract the Service or use its content or compiled data to
+      train, fine-tune, evaluate, or build AI models or competing datasets. This restriction applies to individuals,
+      organisations, AI systems, agents, scrapers, and automated services. Public reading access is not a data licence.
+      Ordinary search-engine indexing that links users back to BevOry is permitted subject to our robots.txt and
+      reasonable request limits; it does not permit bulk reuse, republication, or AI training.
+    </p>
+    <p>
+      Stop unauthorised automated access immediately upon notice, denial, or a blocking or rate-limit response.
+      Do not evade controls by rotating accounts, addresses, proxies, user agents, or identities, solving challenges
+      through automation, or accessing alternate endpoints. BevOry may restrict requests, suspend access, preserve
+      relevant security evidence, and seek available injunctions, compensation, or other remedies under applicable
+      Indian law, including the Information Technology Act, 2000 and Copyright Act, 1957 where applicable.
+      Liability and remedies depend on the facts and law; these Terms do not make every act of scraping a criminal offence.
     </p>
 
     <h2>8. Prohibited conduct</h2>

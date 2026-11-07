@@ -4,12 +4,21 @@ import LegalPage, { LegalContact } from "@/components/legal/LegalPage";
 const Disclaimer = () => (
   <LegalPage
     title="Disclaimer"
+    lastUpdated="7 November 2026"
     description="Important limits and qualifications for BevOry's alcohol product, price, review, planning, health, and third-party information."
   >
     <p>
       Please read this Disclaimer before relying on any content on BevOry. It supplements the
       <Link to="/terms"> Terms & Conditions</Link>. Nothing here excludes a warranty, duty, remedy, or liability that
       applicable law does not permit us to exclude.
+    </p>
+
+    <p>
+      BevOry is one independent service, not a network of authorised data-reselling agents. Public access does not
+      authorise scraping, bulk extraction, mirroring, or AI training. Our <Link to="/terms">Terms</Link> set out the
+      written-permission requirement and prohibition on bypassing controls. Unauthorised access must stop on notice
+      or denial. We reserve available remedies under applicable Indian law; technical controls cannot guarantee that
+      every unauthorised scraper will be detected or stopped.
     </p>
 
     <h2>1. Information service only—no alcohol transaction</h2>

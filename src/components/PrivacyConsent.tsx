@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { browserStorage } from "@/lib/browserStorage";
 
 const CONSENT_KEY = "bevory-analytics-consent-v1";
 const ADS_CONSENT_KEY = "bevory-ads-consent-v2";
@@ -33,8 +34,8 @@ const PrivacyConsent = () => {
 
   useEffect(() => {
     const applySavedChoice = () => {
-      const analytics = localStorage.getItem(CONSENT_KEY) as ConsentChoice | null;
-      const ads = localStorage.getItem(ADS_CONSENT_KEY) as ConsentChoice | null;
+      const analytics = browserStorage.get(CONSENT_KEY) as ConsentChoice | null;
+      const ads = browserStorage.get(ADS_CONSENT_KEY) as ConsentChoice | null;
       setAnalyticsAllowed(analytics === "granted");
       setAdsAllowed(ads === "granted");
       updateGoogleConsent(analytics === "granted" ? "granted" : "denied", ads === "granted" ? "granted" : "denied");
@@ -61,8 +62,8 @@ const PrivacyConsent = () => {
   }, [isOpen, leadOpen]);
 
   const choose = (analytics: ConsentChoice, ads: ConsentChoice) => {
-    localStorage.setItem(CONSENT_KEY, analytics);
-    localStorage.setItem(ADS_CONSENT_KEY, ads);
+    browserStorage.set(CONSENT_KEY, analytics);
+    browserStorage.set(ADS_CONSENT_KEY, ads);
     setAnalyticsAllowed(analytics === "granted");
     setAdsAllowed(ads === "granted");
     updateGoogleConsent(analytics, ads);

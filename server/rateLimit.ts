@@ -4,23 +4,25 @@ type RateLimitOptions = {
   windowMs: number;
   max: number;
   message: string;
+  key?: (req: Parameters<RequestHandler>[0]) => string;
 };
 
 type Bucket = { count: number; resetAt: number };
 
-export const createRateLimit = ({ windowMs, max, message }: RateLimitOptions): RequestHandler => {
+export const createRateLimit = ({ windowMs, max, message, key: requestKey }: RateLimitOptions): RequestHandler => {
   const buckets = new Map<string, Bucket>();
   let calls = 0;
 
   return (req, res, next) => {
     const now = Date.now();
-    const key = req.ip || req.socket.remoteAddress || "unknown";
+    const key = requestKey?.(req) || req.ip || req.socket.remoteAddress || "unknown";
     const current = buckets.get(key);
     const bucket = !current || current.resetAt <= now
       ? { count: 0, resetAt: now + windowMs }
       : current;
 
     if (bucket.count >= max) {
+      res.setHeader("Cache-Control", "private, no-store");
       res.setHeader("Retry-After", String(Math.max(1, Math.ceil((bucket.resetAt - now) / 1000))));
       res.setHeader("RateLimit-Limit", String(max));
       res.setHeader("RateLimit-Remaining", "0");

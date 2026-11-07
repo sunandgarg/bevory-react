@@ -9,6 +9,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { apiClient } from "@/integrations/api/client";
 import { normalizeIndianMobile } from "@/lib/indianMobile";
 import { useAppSettings } from "@/hooks/useAppSettings";
+import { browserStorage } from "@/lib/browserStorage";
+import { GA4_MEASUREMENT_ID } from "@/lib/googleAnalyticsConfig";
 
 const AGE_VERIFIED_KEY = "bevory-age-policy-2026-09-20";
 const DISMISS_KEY = "bevory-city-updates-dismissals";
@@ -32,9 +34,9 @@ const CityUpdatesModal = () => {
   const { user } = useAuth();
   const { pathname } = useRouterLocation();
   const [prompt, setPrompt] = useState(savedPrompt);
-  const [ageVerified, setAgeVerified] = useState(() => Boolean(localStorage.getItem(AGE_VERIFIED_KEY)));
+  const [ageVerified, setAgeVerified] = useState(() => Boolean(browserStorage.get(AGE_VERIFIED_KEY)));
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(() => localStorage.getItem(SUBMITTED_KEY) === "yes");
+  const [submitted, setSubmitted] = useState(() => browserStorage.get(SUBMITTED_KEY) === "yes");
   const [city, setCity] = useState(selectedCity?.name || "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,10 +71,10 @@ const CityUpdatesModal = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!popupEnabled || !ageVerified || !eligiblePage || submitted || prompt.dismissals >= 2) return;
+    if (!popupEnabled || (ageSettings.enabled && !ageVerified) || !eligiblePage || submitted || prompt.dismissals >= 2) return;
     const timer = window.setTimeout(() => setOpen(true), Math.max(0, prompt.nextAt - Date.now()));
     return () => window.clearTimeout(timer);
-  }, [popupEnabled, ageVerified, eligiblePage, submitted, prompt]);
+  }, [popupEnabled, ageSettings.enabled, ageVerified, eligiblePage, submitted, prompt]);
 
   const dismiss = () => {
     setOpen(false);
@@ -91,10 +93,8 @@ const CityUpdatesModal = () => {
       setError(result.error.message);
       return;
     }
-    if (localStorage.getItem("bevory-analytics-consent-v1") === "granted") {
-      window.gtag?.("event", "generate_lead", { method: "city_updates" });
-    }
-    try { localStorage.setItem(SUBMITTED_KEY, "yes"); } catch { /* Keep the current visit suppressed. */ }
+    window.gtag?.("event", "generate_lead", { send_to: GA4_MEASUREMENT_ID, method: "city_updates" });
+    browserStorage.set(SUBMITTED_KEY, "yes");
     setSubmitted(true);
     setOpen(false);
   };

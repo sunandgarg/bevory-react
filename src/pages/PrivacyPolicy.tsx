@@ -4,8 +4,8 @@ import LegalPage, { LegalContact } from "@/components/legal/LegalPage";
 const PrivacyPolicy = () => (
   <LegalPage
     title="Privacy Policy"
+    lastUpdated="7 November 2026"
     description="How BevOry collects, uses, discloses, retains, and protects personal data, and the choices available to users."
-    lastUpdated="30 October 2026"
   >
     <p>
       This Privacy Policy explains how the operator of BevOry handles personal data when you visit or use
@@ -244,6 +244,13 @@ const PrivacyPolicy = () => (
     </p>
 
     <h2>8. Security and personal-data breaches</h2>
+    <p>
+      Scraping and automated harvesting of personal data are not authorised. To investigate and restrict abusive
+      extraction or attempts to bypass controls, we may use request counts, IP addresses, timestamps, user-agent
+      information, response codes, and security logs. Access to that evidence is restricted and retention follows
+      the security, legal-hold, and retention rules above. Any disclosure to authorities or advisers must have a
+      lawful basis. See the <Link to="/terms">Terms</Link> for automated-access restrictions.
+    </p>
     <p>
       We use measures appropriate to the nature and risk of the data, including encrypted transport, restricted
       production access, authentication controls, network protection, managed infrastructure, logging, backups, and

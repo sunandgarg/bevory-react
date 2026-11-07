@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { browserStorage } from "@/lib/browserStorage";
 import {
   BEVORY_CITIES,
   cityFromSlug,
@@ -82,11 +83,11 @@ const initialCity = () => {
   if (routeCity) return cityByName(routeCity.name) ?? null;
 
   try {
-    const cached = JSON.parse(localStorage.getItem(LOCATION_CACHE_KEY) || "null") as { city?: City } | null;
+    const cached = JSON.parse(browserStorage.get(LOCATION_CACHE_KEY) || "null") as { city?: City } | null;
     const cachedCity = cityByName(cached?.city?.name);
     if (cachedCity) return cachedCity;
   } catch {
-    localStorage.removeItem(LOCATION_CACHE_KEY);
+    browserStorage.remove(LOCATION_CACHE_KEY);
   }
 
   return cityByName(DEFAULT_CITY) ?? null;
@@ -105,7 +106,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    localStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify({
+    browserStorage.set(LOCATION_CACHE_KEY, JSON.stringify({
       country: selectedCountry,
       state: selectedState,
       city: selectedCity,

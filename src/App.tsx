@@ -8,6 +8,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { CompareProvider, CompareFloatingBar, CompareSheet } from "@/components/home/CompareProducts";
 import AgeVerificationModal from "@/components/home/AgeVerificationModal";
 import PrivacyConsent from "@/components/PrivacyConsent";
+import ContentAnalytics from "@/components/ContentAnalytics";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CITY_SLUGS } from "@/lib/locations";
@@ -112,6 +113,7 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <ContentAnalytics />
               <AgeVerificationModal />
               <PrivacyConsent />
               <Suspense fallback={<PageFallback />}>

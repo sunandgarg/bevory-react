@@ -1,6 +1,7 @@
 /** First-party client for the BevOry Node.js/Prisma/MySQL API. */
 
 import { parseFilterScalar } from "./filterParser";
+import { browserStorage } from "../../lib/browserStorage";
 
 export type User = {
   id: string;
@@ -44,15 +45,15 @@ const listeners = new Set<(event: string, session: Session | null) => void>();
 let currentSession: Session | null = null;
 const uploadedPublicUrls = new Map<string, string>();
 try {
-  currentSession = JSON.parse(localStorage.getItem(SESSION_KEY) || "null") as Session | null;
+  currentSession = JSON.parse(browserStorage.get(SESSION_KEY) || "null") as Session | null;
 } catch {
-  localStorage.removeItem(SESSION_KEY);
+  browserStorage.remove(SESSION_KEY);
 }
 
 const setSession = (session: Session | null, event: string) => {
   currentSession = session;
-  if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-  else localStorage.removeItem(SESSION_KEY);
+  if (session) browserStorage.set(SESSION_KEY, JSON.stringify(session));
+  else browserStorage.remove(SESSION_KEY);
   listeners.forEach((listener) => listener(event, session));
 };
 
