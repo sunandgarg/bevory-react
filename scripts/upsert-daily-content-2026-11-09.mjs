@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { pathToFileURL } from "node:url";
 import { runContentCycle } from "./hourly-content-cycle.mjs";
 
 const source = {
@@ -15,7 +16,7 @@ const source = {
   finest: "https://www.ballantines.com/en/range/ballantines-finest/",
   original: "https://www.glenmorangie.com/en-us/products/the-original-12-years-old",
   quinta: "https://www.glenmorangie.com/en-us/products/the-quinta-ruban",
-  solera: "https://www.glenfiddich.com/assets/Uploads/Shared/OnlineMentoring/pdfs/Online-MentoringDownload15.pdf",
+  solera: "https://shop.us.glenfiddich.com/products/glenfiddich-15-year-old",
   glenlivet12: "https://www.theglenlivet.com/en/whisky/12-year-old-single-malt-scotch/",
   glenlivet15: "https://www.theglenlivet.com/en/whisky/15-year-old-single-malt-scotch/",
   laphroaig: "https://www.laphroaig.com/whiskies/10-year-old",
@@ -167,7 +168,7 @@ export const posts = [
   post("glenfiddich-15-solera-vat-explained", "Glenfiddich 15 Solera: What Happens After the Casks?", "Glenfiddich 15 Solera Vat Explained | BevOry", "Understand Glenfiddich 15's cask and Solera-vat process without treating Solera as a higher age statement or a different whisky category.", "Solera describes a production step for Glenfiddich 15; the bottle remains a fifteen-year-old single malt.", ["Glenfiddich 15", "Solera vat", "single malt", "cask maturation"], [source.solera], gap, `
 <p><strong>Glenfiddich 15 uses a Solera vat as part of the process that brings its matured whiskies together.</strong> Solera is not a second age statement, and the name does not turn the expression into a blended Scotch from several distilleries. It is a useful production detail for someone wondering why this fifteen-year-old bottling has a different identity from the other ages in the range.</p>
 <h2>The maker's explanation of the process</h2>
-<p>Glenfiddich's <a href="${source.solera}">official mentoring notes</a> describe sherry and bourbon casks, new American oak and a final Solera-vat stage. The same notes place honey, dark fruit, oak and warm spice within the intended flavour profile. Read this as an explanation of how the expression is assembled, not a guarantee that a single glass must reveal every word on the sheet.</p>
+<p>Glenfiddich's <a href="${source.solera}">official 15 Year Old page</a> describes sherry and bourbon casks, new oak and a final Solera-vat stage. Its published notes place honey, dark fruit, oak and warm spice within the intended flavour profile. Read this as an explanation of how the expression is assembled, not a guarantee that a single glass must reveal every word in the description.</p>
 <h2>Why it can still be a single malt</h2>
 <p>A single malt is not necessarily whisky from one individual cask. Bringing casks from the same distillery together is different from combining malt whiskies from several distilleries. This distinction is particularly helpful when a description uses words such as marrying, vatting or blending in a production discussion. The verb alone does not tell you the category printed on the bottle.</p>
 <p>For a practical tasting, use a modest pour with water available and give it a little time in the glass. If comparing it with another Glenfiddich expression, keep the serving conditions similar. You are looking for a personal preference in texture, fruit and oak character, not trying to prove that every additional year must win a competition.</p>
@@ -368,4 +369,6 @@ export const posts = [
 <p>Read <a href="https://bevory.in/guide/how-to-read-wine-label-india-2026">our wine-label guide</a> for vintage and varietal wording, <a href="https://bevory.in/guide/shiraz-vs-cabernet-sauvignon-india-2026">Shiraz versus Cabernet Sauvignon</a> for a broader grape comparison and <a href="https://bevory.in/guide/red-vs-white-wine-india-2026">red versus white wine</a> for another dinner decision. Keep volume and vintage consistent when comparing local quotes. BevOry does not sell alcohol. Never drink and drive.</p>`),
 ];
 
-await runContentCycle(posts, "2026-11-09T07:30:00.000Z");
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await runContentCycle(posts, "2026-11-09T07:30:00.000Z");
+}
